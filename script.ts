@@ -1,5 +1,6 @@
 import { JavaScriptSerializer, domainmodels } from "mendixmodelsdk";
 import { MendixPlatformClient, OnlineWorkingCopy } from "mendixplatformsdk";
+import { batchGenAttribue } from "./batchGenAttribue";
 
 // https://sprintr.home.mendix.com/link/teamserver/89a91e35-0f4f-4e27-81d9-d34ca76e31b9
 const APP_ID = "89a91e35-0f4f-4e27-81d9-d34ca76e31b9";
@@ -11,16 +12,7 @@ async function main() {
   const client = new MendixPlatformClient();
 
   const workingCopy = await getApp();
-  const model = await workingCopy.openModel();
-
-  const domainModelInterface = model
-    .allDomainModels()
-    .filter((dm) => dm.containerAsModule.name === "MyFirstModule")[0];
-  const domainModel = await domainModelInterface.load();
-
-  const entity = domainmodels.Entity.createIn(domainModel);
-  entity.name = `NewEntity_${Date.now()}`;
-  entity.location = { x: 100, y: 100 };
+  const model = await batchGenAttribue(workingCopy);
 
   await model.flushChanges();
 
@@ -29,9 +21,7 @@ async function main() {
   async function getApp() {
     const app = await client.getApp(APP_ID);
 
-    const workingCopy = await app.createTemporaryWorkingCopy(
-      "main"
-    );
+    const workingCopy = await app.createTemporaryWorkingCopy("main");
     return workingCopy;
   }
   async function newApp() {
