@@ -52,5 +52,6 @@ export async function batchGenAttribue(workingCopy: OnlineWorkingCopy) {
     attribute.name = name;
   });
 
-  return model;
+  await model.flushChanges();
+  await workingCopy.commitToRepository("main");
 }
