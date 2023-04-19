@@ -1,0 +1,7 @@
+{
+  "compilerOptions": {
+    "outDir": "out",
+    "skipLibCheck": true,
+    "sourceMap": true
+  }
+}

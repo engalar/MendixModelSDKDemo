@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "mendixmodelsdk": "^4.73.0",
     "mendixplatformsdk": "^5.1.1"
   }
 }
