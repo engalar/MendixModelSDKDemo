@@ -1,22 +1,18 @@
-import {
-  IModel,
-  JavaScriptSerializer,
-  domainmodels,
-  microflows,
-} from "mendixmodelsdk";
-import { StructureType } from "mendixmodelsdk/src/sdk/internal";
+import { IModel, microflows } from "mendixmodelsdk";
 import { OnlineWorkingCopy } from "mendixplatformsdk";
 
-export async function batchGenMicroflow(workingCopy: OnlineWorkingCopy) {
+export async function batchGenMicroflow(
+  workingCopy: OnlineWorkingCopy,
+  qMicroflowName: string,
+  qEntityName: string
+) {
   const model = await workingCopy.openModel();
 
-  const mf = await model
-    .findMicroflowByQualifiedName("MyFirstModule.Microflow")
-    .load();
+  const mf = await model.findMicroflowByQualifiedName(qMicroflowName).load();
 
   // console.log(JavaScriptSerializer.serializeToJs(mf));
   const attributes = [
-    // "OpportunityId",
+    "OpportunityId",
     "AccountName",
     "AccountNameLocal",
     "OpportunityName",
@@ -33,7 +29,6 @@ export async function batchGenMicroflow(workingCopy: OnlineWorkingCopy) {
     "TotalLicenseMargin",
     "TotalHwMaintenanceMargin",
     "CloseDate",
-    "CreatedDate",
     "NextStep",
     "GscsNamedAccount",
     "LastActivity",
@@ -49,40 +44,48 @@ export async function batchGenMicroflow(workingCopy: OnlineWorkingCopy) {
     "TotalOpportunity",
   ];
 
-  console.assert(
-    mf.objectCollection.objects[6].structureTypeName ==
-      "Microflows$ActionActivity"
-  );
-  console.assert(
-    (mf.objectCollection.objects[6] as microflows.ActionActivity).action
-      .structureTypeName == "Microflows$ChangeObjectAction"
-  );
-  console.assert(
-    (mf.objectCollection.objects[6] as microflows.ActionActivity).caption == "S"
-  );
-
-  // type decision
-  const changeObjectAction1 = (
-    mf.objectCollection.objects[6] as microflows.ActionActivity
-  ).action as microflows.ChangeObjectAction;
+  // activity change object
+  const changeObjectAction1 = microflows.ChangeObjectAction.create(model);
 
   attributes.forEach((name, i) => {
-    newActivity(name, i + 1, model, mf);
+    addActivityInMicroflow(name, i, model, mf);
 
-    var memberChange1 = microflows.MemberChange.create(model);
-    memberChange1.attribute = model.findAttributeByQualifiedName(
-      `MyFirstModule.Opportunity.${name}`
-    );
-    memberChange1.value = "$" + name;
-
-    changeObjectAction1.items.push(memberChange1);
+    addMemberChange(model, name, qEntityName, changeObjectAction1);
   });
+
+  const changeObjectActivity = microflows.ActionActivity.create(model);
+  changeObjectActivity.action = changeObjectAction1;
+
+  // collect activity
+  mf.objectCollection.objects.push(changeObjectActivity);
 
   await model.flushChanges();
   await workingCopy.commitToRepository("main");
 }
 
-function newActivity(
+function addMemberChange(
+  model: IModel,
+  attributeName: string,
+  qEntityName: string,
+  changeObjectAction1: microflows.ChangeObjectAction
+) {
+  var memberChange1 = microflows.MemberChange.create(model);
+  memberChange1.attribute = model.findAttributeByQualifiedName(
+    `${qEntityName}.${attributeName}`
+  );
+  memberChange1.value = "$" + attributeName;
+
+  changeObjectAction1.items.push(memberChange1);
+}
+
+/**
+ * Advanced_Excel.Cell_ReadString
+ * @param name
+ * @param index
+ * @param model
+ * @param mf
+ */
+function addActivityInMicroflow(
   name: string,
   index: number,
   model: IModel,

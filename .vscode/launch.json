@@ -7,8 +7,18 @@
     {
       "type": "node",
       "request": "launch",
-      "name": "Launch Program",
-      "program": "${workspaceFolder}/out/script.js",
+      "name": "Launch Program main",
+      "program": "${workspaceFolder}/out/main.js",
+      "preLaunchTask": "tsc: build - tsconfig.json",
+      "outFiles": [
+        "${workspaceFolder}/out/**/*.js"
+      ]
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Launch Program test",
+      "program": "${workspaceFolder}/out/test.js",
       "preLaunchTask": "tsc: build - tsconfig.json",
       "outFiles": [
         "${workspaceFolder}/out/**/*.js"

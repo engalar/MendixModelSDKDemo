@@ -1,17 +1,17 @@
-import { domainmodels } from "mendixmodelsdk";
 import { OnlineWorkingCopy } from "mendixplatformsdk";
+import { addEnity } from "./DomainModel";
 
-export async function batchGenAttribue(workingCopy: OnlineWorkingCopy) {
+export async function batchGenAttribue(
+  workingCopy: OnlineWorkingCopy,
+  moduleName: string,
+  entityName: string,
+) {
   const model = await workingCopy.openModel();
 
   const domainModelInterface = model
     .allDomainModels()
-    .filter((dm) => dm.containerAsModule.name === "MyFirstModule")[0];
+    .filter((dm) => dm.containerAsModule.name === moduleName)[0];
   const domainModel = await domainModelInterface.load();
-
-  const entity = domainmodels.Entity.createIn(domainModel);
-  entity.name = `Opportunity`;
-  entity.location = { x: 500, y: 100 };
 
   const attributes = [
     "OpportunityId",
@@ -31,7 +31,6 @@ export async function batchGenAttribue(workingCopy: OnlineWorkingCopy) {
     "TotalLicenseMargin",
     "TotalHwMaintenanceMargin",
     "CloseDate",
-    "CreatedDate",
     "NextStep",
     "GscsNamedAccount",
     "LastActivity",
@@ -47,10 +46,7 @@ export async function batchGenAttribue(workingCopy: OnlineWorkingCopy) {
     "TotalOpportunity",
   ];
 
-  attributes.forEach((name) => {
-    const attribute = domainmodels.Attribute.createIn(entity);
-    attribute.name = name;
-  });
+  addEnity(domainModel, entityName, attributes);
 
   await model.flushChanges();
   await workingCopy.commitToRepository("main");
