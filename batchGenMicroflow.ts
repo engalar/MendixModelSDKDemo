@@ -63,7 +63,7 @@ export async function batchGenMicroflow(
   await workingCopy.commitToRepository("main");
 }
 
-function addMemberChange(
+export function addMemberChange(
   model: IModel,
   attributeName: string,
   qEntityName: string,
@@ -85,7 +85,7 @@ function addMemberChange(
  * @param model
  * @param mf
  */
-function addActivityInMicroflow(
+export function addActivityInMicroflow(
   name: string,
   index: number,
   model: IModel,
@@ -142,4 +142,6 @@ function addActivityInMicroflow(
   actionActivity1.action = javaActionCallAction1;
 
   mf.objectCollection.objects.push(actionActivity1);
+
+  return actionActivity1;
 }
