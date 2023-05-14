@@ -3,7 +3,7 @@ import { datatypes, domainmodels, microflows } from "mendixmodelsdk";
 import { IModel } from "mendixmodelsdk/src/gen/base-model";
 import { readData } from "./t";
 import { addActivityInMicroflow, addMemberChange } from "./batchGenMicroflow";
-import { newRandomModule } from "./newRandomModule";
+import { newRandomModule } from "./moduleUtil";
 
 //https://sprintr.home.mendix.com/link/teamserver/4160aabf-9ee0-44ce-aa1f-ec4cf6a4243c
 // main("4160aabf-9ee0-44ce-aa1f-ec4cf6a4243c", cb);

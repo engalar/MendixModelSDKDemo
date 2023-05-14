@@ -1,6 +1,6 @@
 import { IModel, JavaScriptSerializer, domainmodels } from "mendixmodelsdk";
 import { main } from "./test";
-import { newRandomModule } from "./newRandomModule";
+import { newRandomModule } from "./moduleUtil";
 
 //Model sdk demo
 //https://sprintr.home.mendix.com/link/teamserver/89a91e35-0f4f-4e27-81d9-d34ca76e31b9
