@@ -1,0 +1,1 @@
+export { addEnity } from "./addEnity";
