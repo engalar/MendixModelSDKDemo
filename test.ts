@@ -1,22 +1,15 @@
 import { MendixPlatformClient } from "mendixplatformsdk";
-import { datatypes, domainmodels, microflows, projects } from "mendixmodelsdk";
+import { datatypes, domainmodels, microflows } from "mendixmodelsdk";
 import { IModel } from "mendixmodelsdk/src/gen/base-model";
 import { readData } from "./t";
 import { addActivityInMicroflow, addMemberChange } from "./batchGenMicroflow";
+import { newRandomModule } from "./newRandomModule";
 
-main("4160aabf-9ee0-44ce-aa1f-ec4cf6a4243c", cb);
+//https://sprintr.home.mendix.com/link/teamserver/4160aabf-9ee0-44ce-aa1f-ec4cf6a4243c
+// main("4160aabf-9ee0-44ce-aa1f-ec4cf6a4243c", cb);
 
 export async function cb(model: IModel) {
-  const project = model.allProjects()[0];
-
-  // module
-  const module = projects.Module.createIn(project);
-  module.name =
-    "AutoGen_" +
-    new Date()
-      .toISOString()
-      .replace(/[-:T.]/g, "")
-      .slice(8, 12);
+  const module = newRandomModule(model);
 
   // entity
   const newDomainModel = domainmodels.DomainModel.createIn(module);
@@ -124,7 +117,7 @@ export async function cb(model: IModel) {
   return true;
 }
 
-async function main(appID: string, cb: (model: IModel) => Promise<boolean>) {
+export async function main(appID: string, cb: (model: IModel) => Promise<boolean>) {
   const client = new MendixPlatformClient();
   const app = await client.getApp(appID);
 
