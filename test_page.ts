@@ -34,6 +34,7 @@ async function cb(model: IModel) {
 
   // div
   const myDiv = pages.DivContainer.create(model);
+  myDiv.name = "aaa";
   layoutCallArgument1.widgets.push(myDiv);
 
   // label
