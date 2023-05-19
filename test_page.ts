@@ -4,7 +4,7 @@ import { IModel, pages, texts } from "mendixmodelsdk";
 import { main } from "./test";
 
 //https://sprintr.home.mendix.com/link/teamserver/89a91e35-0f4f-4e27-81d9-d34ca76e31b9
-main("89a91e35-0f4f-4e27-81d9-d34ca76e31b9", cb);
+// main("89a91e35-0f4f-4e27-81d9-d34ca76e31b9", cb);
 
 /**
  * 在模块AutoGen_1047创建一个简单页面
@@ -66,6 +66,4 @@ async function cb(model: IModel) {
   label2_1.appearance = appearance4; // Note: for this property a default value is defined.
   label2_1.content = clientTemplate2; // Note: for this property a default value is defined.
   label2_1.renderMode = pages.TextRenderMode.H4;
-
-  return true;
 }

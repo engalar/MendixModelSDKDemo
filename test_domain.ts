@@ -4,7 +4,7 @@ import { newRandomModule } from "./moduleUtil";
 
 //Model sdk demo
 //https://sprintr.home.mendix.com/link/teamserver/89a91e35-0f4f-4e27-81d9-d34ca76e31b9
-main("89a91e35-0f4f-4e27-81d9-d34ca76e31b9", cb);
+// main("89a91e35-0f4f-4e27-81d9-d34ca76e31b9", cb);
 
 async function cb(model: IModel) {
   const randomeModule = newRandomModule(model);
@@ -38,8 +38,6 @@ async function cb(model: IModel) {
   association.name = "Customer_Order";
   association.parent = customerEntity;
   association.child = orderEntity;
-
-  return true;
 }
 
 async function cb2(model: IModel) {
@@ -56,6 +54,4 @@ async function cb2(model: IModel) {
     .load();
   const js2 = JavaScriptSerializer.serializeToJs(page);
   console.log(js2);
-
-  return false;
 }
