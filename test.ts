@@ -117,16 +117,25 @@ export async function cb(model: IModel) {
   return true;
 }
 
-export async function main(appID: string, cb: (model: IModel) => Promise<boolean>) {
+/**
+ *
+ * @param appID 应用id
+ * @param cb 回调
+ */
+export async function main(
+  appID: string,
+  cb: (model: IModel) => Promise<string | void>
+) {
   const client = new MendixPlatformClient();
   const app = await client.getApp(appID);
 
   const workingCopy = await app.createTemporaryWorkingCopy("main");
   const model = await workingCopy.openModel();
 
-  if (await cb(model)) {
+  const commitMessage = await cb(model);
+  if (commitMessage) {
     await model.flushChanges();
-    await workingCopy.commitToRepository("main");
+    await workingCopy.commitToRepository("main", { commitMessage });
   }
 }
 function connectBySequenceFlow(

@@ -1,6 +1,6 @@
 import { OnlineWorkingCopy } from "mendixplatformsdk";
 import { addEnity } from "./DomainModel";
-import { findModule } from "./moduleUtil";
+import { findDomainModule } from "./moduleUtil";
 
 export async function batchGenAttribue(
   workingCopy: OnlineWorkingCopy,
@@ -9,7 +9,7 @@ export async function batchGenAttribue(
 ) {
   const model = await workingCopy.openModel();
 
-  const domainModel = await findModule(model, moduleName);
+  const domainModel = await findDomainModule(model, moduleName);
 
   const attributes = [
     "OpportunityId",

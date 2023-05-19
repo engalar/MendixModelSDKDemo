@@ -1,7 +1,6 @@
 import { projects } from "mendixmodelsdk";
 import { IModel } from "mendixmodelsdk/src/gen/base-model";
 
-
 export function newRandomModule(model: IModel) {
   const project = model.allProjects()[0];
 
@@ -16,7 +15,7 @@ export function newRandomModule(model: IModel) {
   return module;
 }
 
-export async function findModule(model, moduleName: string) {
+export async function findDomainModule(model: IModel, moduleName: string) {
   const domainModelInterface = model
     .allDomainModels()
     .filter((dm) => dm.containerAsModule.name === moduleName)[0];
