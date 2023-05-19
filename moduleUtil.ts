@@ -15,3 +15,11 @@ export function newRandomModule(model: IModel) {
       .slice(8, 12);
   return module;
 }
+
+export async function findModule(model, moduleName: string) {
+  const domainModelInterface = model
+    .allDomainModels()
+    .filter((dm) => dm.containerAsModule.name === moduleName)[0];
+  const domainModel = await domainModelInterface.load();
+  return domainModel;
+}
