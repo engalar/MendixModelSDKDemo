@@ -2,12 +2,10 @@ import { IModel, microflows } from "mendixmodelsdk";
 import { OnlineWorkingCopy } from "mendixplatformsdk";
 
 export async function batchGenMicroflow(
-    workingCopy: OnlineWorkingCopy,
+    model: IModel,
     qMicroflowName: string,
     qEntityName: string,
 ) {
-    const model = await workingCopy.openModel();
-
     const mf = await model.findMicroflowByQualifiedName(qMicroflowName).load();
 
     // console.log(JavaScriptSerializer.serializeToJs(mf));
@@ -58,9 +56,6 @@ export async function batchGenMicroflow(
 
     // collect activity
     mf.objectCollection.objects.push(changeObjectActivity);
-
-    await model.flushChanges();
-    await workingCopy.commitToRepository("main");
 }
 
 export function addMemberChange(

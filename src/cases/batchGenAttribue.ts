@@ -1,5 +1,5 @@
 import { OnlineWorkingCopy } from "mendixplatformsdk";
-import { addEnity } from "./DomainModel";
+import { addEnity } from "../DomainModel";
 
 export async function batchGenAttribue(
     workingCopy: OnlineWorkingCopy,

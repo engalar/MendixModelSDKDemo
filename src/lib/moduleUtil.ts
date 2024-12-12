@@ -1,7 +1,7 @@
 import { projects } from "mendixmodelsdk";
 import { IModel } from "mendixmodelsdk/src/gen/base-model";
 
-export function newRandomModule(model: IModel) {
+export function newRandomModule(model: IModel): projects.Module {
     const project = model.allProjects()[0];
 
     // module

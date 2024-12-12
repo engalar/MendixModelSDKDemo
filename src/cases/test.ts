@@ -1,12 +1,9 @@
 import { MendixPlatformClient } from "mendixplatformsdk";
 import { datatypes, domainmodels, microflows } from "mendixmodelsdk";
 import { IModel } from "mendixmodelsdk/src/gen/base-model";
-import { readData } from "./src/lib/excel";
-import {
-    addActivityInMicroflow,
-    addMemberChange,
-} from "./src/batchGenMicroflow";
-import { newRandomModule } from "./src/moduleUtil";
+import { readData } from "../lib/excel";
+import { addActivityInMicroflow, addMemberChange } from "./batchGenMicroflow";
+import { newRandomModule } from "../lib/moduleUtil";
 
 //DiscountAutomation
 //https://sprintr.home.mendix.com/link/teamserver/4160aabf-9ee0-44ce-aa1f-ec4cf6a4243c
@@ -125,21 +122,6 @@ export async function cb(model: IModel) {
     return true;
 }
 
-export async function main(
-    appID: string,
-    cb: (model: IModel) => Promise<boolean>,
-) {
-    const client = new MendixPlatformClient();
-    const app = await client.getApp(appID);
-
-    const workingCopy = await app.createTemporaryWorkingCopy("main");
-    const model = await workingCopy.openModel();
-
-    if (await cb(model)) {
-        await model.flushChanges();
-        await workingCopy.commitToRepository("main");
-    }
-}
 function connectBySequenceFlow(
     startEvent1: microflows.MicroflowObject,
     createObjectActivity: microflows.MicroflowObject,
