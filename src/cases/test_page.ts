@@ -1,10 +1,9 @@
 //Model sdk demo
 
 import { IModel, pages, texts } from "mendixmodelsdk";
-import { main } from "../test";
+import { boot } from "../lib/bootstrap";
 
-//https://sprintr.home.mendix.com/link/teamserver/89a91e35-0f4f-4e27-81d9-d34ca76e31b9
-main("89a91e35-0f4f-4e27-81d9-d34ca76e31b9", cb);
+boot(cb);
 
 /**
  * 在模块AutoGen_1047创建一个简单页面

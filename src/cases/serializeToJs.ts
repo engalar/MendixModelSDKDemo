@@ -10,14 +10,14 @@ async function testSerializeToJs_Page(model: IModel) {
         .findModuleByQualifiedName("MendixSSO")
         .domainModel.load();
 
-    const js = JavaScriptSerializer.serializeToJs(systemModel);
-    console.log(js);
+    const domainScriptString = JavaScriptSerializer.serializeToJs(systemModel);
+    _saveToDumyFile(domainScriptString, "domain.js");
 
     const page = await model
         .findPageByQualifiedName("MyFirstModule.Home_Web")
         .load();
-    const js2 = JavaScriptSerializer.serializeToJs(page);
-    console.log(js2);
+    const homePageScriptString = JavaScriptSerializer.serializeToJs(page);
+    _saveToDumyFile(homePageScriptString, "homePage.js");
 
     return false;
 }
