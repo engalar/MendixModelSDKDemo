@@ -2,62 +2,65 @@
     "$schema": "http://json-schema.org/draft-07/schema#",
     "type": "object",
     "properties": {
-        "page": {
+        "type": { "type": "string", "enum": ["Page"] },
+        "description": { "type": "string" },
+        "name": { "type": "string" },
+        "canvasWidth": { "type": "integer" },
+        "title": {
             "type": "object",
             "properties": {
-                "name": { "type": "string" },
-                "canvasWidth": { "type": "integer" },
-                "title": {
-                    "type": "object",
-                    "properties": {
-                        "languageCode": { "type": "string" },
-                        "text": { "type": "string" }
-                    },
-                    "required": ["languageCode", "text"]
-                },
-                "layout": {
-                    "type": "object",
-                    "properties": {
-                        "name": { "type": "string" },
-                        "arguments": {
-                            "type": "array",
-                            "items": {
-                                "type": "object",
-                                "properties": {
-                                    "parameter": { "type": "string" },
-                                    "widgets": {
-                                        "type": "array",
-                                        "items": {
-                                            "$ref": "#/definitions/widget"
-                                        }
-                                    }
-                                },
-                                "required": ["parameter", "widgets"]
-                            }
-                        }
-                    },
-                    "required": ["name", "arguments"]
-                },
-                "allowedRoles": {
-                    "type": "array",
-                    "items": { "type": "string" }
-                }
+                "languageCode": { "type": "string" },
+                "text": { "type": "string" }
             },
-            "required": [
-                "name",
-                "canvasWidth",
-                "title",
-                "layout",
-                "allowedRoles"
-            ]
+            "required": ["languageCode", "text"]
+        },
+        "layout": { "$ref": "#/definitions/layout" },
+        "allowedRoles": {
+            "type": "array",
+            "items": { "type": "string" }
+        },
+        "include": {
+            "type": "array",
+            "items": { "type": "string" }
         }
     },
-    "required": ["page"],
+    "required": [
+        "type",
+        "name",
+        "canvasWidth",
+        "title",
+        "layout",
+        "allowedRoles"
+    ],
     "definitions": {
+        "layout": {
+            "type": "object",
+            "properties": {
+                "type": { "type": "string", "enum": ["Layout"] },
+                "description": { "type": "string" },
+                "name": { "type": "string" },
+                "arguments": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "parameter": { "type": "string" },
+                            "widgets": {
+                                "type": "array",
+                                "items": { "$ref": "#/definitions/widget" }
+                            }
+                        },
+                        "required": ["parameter", "widgets"]
+                    }
+                }
+            },
+            "required": ["type", "name", "arguments"]
+        },
         "widget": {
             "type": "object",
             "properties": {
                 "type": { "type": "string" },
+                "description": { "type": "string" },
                 "name": { "type": "string" },
                 "appearance": {
                     "type": "object",
@@ -92,9 +95,38 @@
                         }
                     }
                 },
-                "renderMode": { "type": "string" }
+                "renderMode": { "type": "string" },
+                "rows": {
+                    "type": "array",
+                    "items": { "$ref": "#/definitions/row" }
+                }
             },
             "required": ["type", "name"]
+        },
+        "row": {
+            "type": "object",
+            "properties": {
+                "type": { "type": "string", "enum": ["Row"] },
+                "description": { "type": "string" },
+                "columns": {
+                    "type": "array",
+                    "items": { "$ref": "#/definitions/column" }
+                }
+            },
+            "required": ["type", "columns"]
+        },
+        "column": {
+            "type": "object",
+            "properties": {
+                "type": { "type": "string", "enum": ["Column"] },
+                "description": { "type": "string" },
+                "weight": { "type": "integer" },
+                "widgets": {
+                    "type": "array",
+                    "items": { "$ref": "#/definitions/widget" }
+                }
+            },
+            "required": ["type", "weight", "widgets"]
         }
     }
 }
