@@ -1,0 +1,93 @@
+{
+    "$schema": "../schemas/page.schema.json",
+    "type": "Page",
+    "name": "Home_Web",
+    "canvasWidth": 1200,
+    "title": {
+        "languageCode": "en_US",
+        "text": "Homepage"
+    },
+    "layout": {
+        "type": "Layout",
+        "name": "Atlas_Core.Atlas_Default",
+        "arguments": [
+            {
+                "parameter": "Atlas_Core.Atlas_Default.Main",
+                "widgets": [
+                    {
+                        "type": "LayoutGrid",
+                        "name": "layoutGrid1",
+                        "appearance": {},
+                        "rows": [
+                            {
+                                "type": "Row",
+                                "columns": [
+                                    {
+                                        "type": "Column",
+                                        "weight": -1,
+                                        "widgets": [
+                                            {
+                                                "type": "DivContainer",
+                                                "name": "container1",
+                                                "appearance": {
+                                                    "class": "pageheader"
+                                                },
+                                                "widgets": [
+                                                    {
+                                                        "type": "LayoutGrid",
+                                                        "name": "layoutGrid2",
+                                                        "appearance": {},
+                                                        "rows": [
+                                                            {
+                                                                "type": "Row",
+                                                                "columns": [
+                                                                    {
+                                                                        "type": "Column",
+                                                                        "weight": -1,
+                                                                        "widgets": [
+                                                                            {
+                                                                                "type": "DynamicText",
+                                                                                "name": "text1",
+                                                                                "appearance": {
+                                                                                    "class": "pageheader-title",
+                                                                                    "designProperties": [
+                                                                                        {
+                                                                                            "key": "Spacing bottom",
+                                                                                            "value": "Outer small"
+                                                                                        }
+                                                                                    ]
+                                                                                },
+                                                                                "content": {
+                                                                                    "translations": [
+                                                                                        {
+                                                                                            "languageCode": "nl_NL",
+                                                                                            "text": "Tekst"
+                                                                                        },
+                                                                                        {
+                                                                                            "languageCode": "en_US",
+                                                                                            "text": "Home"
+                                                                                        }
+                                                                                    ]
+                                                                                },
+                                                                                "renderMode": "H3"
+                                                                            }
+                                                                        ]
+                                                                    }
+                                                                ]
+                                                            }
+                                                        ]
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    "allowedRoles": ["MyFirstModule.User"]
+}
