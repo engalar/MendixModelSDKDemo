@@ -1,13 +1,11 @@
-import { OnlineWorkingCopy } from "mendixplatformsdk";
 import { addEnity } from "../DomainModel";
+import { IModel } from "mendixmodelsdk";
 
 export async function batchGenAttribue(
-    workingCopy: OnlineWorkingCopy,
+    model: IModel,
     moduleName: string,
     entityName: string,
 ) {
-    const model = await workingCopy.openModel();
-
     const domainModelInterface = model
         .allDomainModels()
         .filter((dm) => dm.containerAsModule.name === moduleName)[0];
@@ -47,7 +45,4 @@ export async function batchGenAttribue(
     ];
 
     addEnity(domainModel, entityName, attributes);
-
-    await model.flushChanges();
-    await workingCopy.commitToRepository("main");
 }

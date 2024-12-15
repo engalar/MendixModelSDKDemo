@@ -1,5 +1,4 @@
 import { IModel, microflows } from "mendixmodelsdk";
-import { OnlineWorkingCopy } from "mendixplatformsdk";
 
 export async function batchGenMicroflow(
     model: IModel,

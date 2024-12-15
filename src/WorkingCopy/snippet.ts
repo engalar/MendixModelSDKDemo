@@ -39,14 +39,6 @@ async function demo2(workingCopy: OnlineWorkingCopy) {
 
     const attributeName = customerEntity.attributes[0].name;
 }
-async function demo3(workingCopy: OnlineWorkingCopy) {
-    const model = await workingCopy.openModel();
-    const customerEntity =
-        model.findEntityByQualifiedName("Customers.Customer");
-    if (customerEntity) {
-        const attributeName = customerEntity.attributes[0].name;
-    }
-}
 
 async function demo4(workingCopy: OnlineWorkingCopy) {
     const model = await workingCopy.openModel();

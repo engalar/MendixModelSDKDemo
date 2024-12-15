@@ -5,10 +5,6 @@ import { readData } from "../lib/excel";
 import { addActivityInMicroflow, addMemberChange } from "./batchGenMicroflow";
 import { newRandomModule } from "../lib/moduleUtil";
 
-//DiscountAutomation
-//https://sprintr.home.mendix.com/link/teamserver/4160aabf-9ee0-44ce-aa1f-ec4cf6a4243c
-// main("4160aabf-9ee0-44ce-aa1f-ec4cf6a4243c", cb);
-
 export async function cb(model: IModel) {
     const module = newRandomModule(model);
 
