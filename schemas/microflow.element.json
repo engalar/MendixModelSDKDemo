@@ -1,0 +1,147 @@
+{
+    "$schema": "microflow.schema.json",
+    "$ID": "3341527f-4d4b-483f-8b7b-f1c1f77e67cc",
+    "$Type": "Microflows$Microflow",
+    "name": "DS_GetUser",
+    "documentation": "",
+    "excluded": false,
+    "exportLevel": "Hidden",
+    "objectCollection": {
+        "$ID": "17bbf1de-0b7f-4cfd-ad0e-127730aef415",
+        "$Type": "Microflows$MicroflowObjectCollection",
+        "objects": [
+            {
+                "$ID": "23c9a821-0d9b-4d1e-86ec-a79fae6a5c80",
+                "$Type": "Microflows$StartEvent",
+                "relativeMiddlePoint": {
+                    "x": 100,
+                    "y": 200
+                },
+                "size": {
+                    "width": 20,
+                    "height": 20
+                }
+            },
+            {
+                "$ID": "8f1fa1c1-54e9-4d2a-800e-de2d88940d5a",
+                "$Type": "Microflows$EndEvent",
+                "relativeMiddlePoint": {
+                    "x": 700,
+                    "y": 200
+                },
+                "size": {
+                    "width": 20,
+                    "height": 20
+                },
+                "returnValue": "$Account",
+                "documentation": ""
+            },
+            {
+                "$ID": "8dde5093-12ce-450f-8453-4fa767b14d7a",
+                "$Type": "Microflows$ActionActivity",
+                "relativeMiddlePoint": {
+                    "x": 381,
+                    "y": 200
+                },
+                "size": {
+                    "width": 120,
+                    "height": 60
+                },
+                "action": {
+                    "$ID": "fa888b97-bb98-4a62-b3dc-6cde07f53c6a",
+                    "$Type": "Microflows$RetrieveAction",
+                    "errorHandlingType": "Rollback",
+                    "retrieveSource": {
+                        "$ID": "861137b9-738f-4022-baf9-c543c9bbbe57",
+                        "$Type": "Microflows$DatabaseRetrieveSource",
+                        "entity": "Administration.Account",
+                        "range": {
+                            "$ID": "1c8a0337-c38c-4ac2-b607-1206d45e67f3",
+                            "$Type": "Microflows$ConstantRange",
+                            "singleObject": true
+                        },
+                        "xPathConstraint": "[id='[%CurrentUser%]']\n",
+                        "sortItemList": {
+                            "$ID": "bef4cf66-099d-4069-b307-942931e092a2",
+                            "$Type": "Microflows$SortItemList",
+                            "items": []
+                        }
+                    },
+                    "outputVariableName": "Account"
+                },
+                "disabled": false,
+                "caption": "Activity",
+                "autoGenerateCaption": true,
+                "backgroundColor": "Default",
+                "documentation": ""
+            }
+        ]
+    },
+    "flows": [
+        {
+            "$ID": "f7a82a28-0aca-4bb5-95a4-8a13ff97db0f",
+            "$Type": "Microflows$SequenceFlow",
+            "origin": "23c9a821-0d9b-4d1e-86ec-a79fae6a5c80",
+            "destination": "8dde5093-12ce-450f-8453-4fa767b14d7a",
+            "originConnectionIndex": 1,
+            "destinationConnectionIndex": 3,
+            "originBezierVector": {
+                "width": 0,
+                "height": 0
+            },
+            "destinationBezierVector": {
+                "width": -30,
+                "height": 0
+            },
+            "lineType": "BezierCurve",
+            "caseValue": {
+                "$ID": "fe84ca0f-c3bc-4e05-9281-b4a8aa476cdc",
+                "$Type": "Microflows$NoCase"
+            },
+            "isErrorHandler": false
+        },
+        {
+            "$ID": "72661c66-93a4-4344-8b36-720f75f688c4",
+            "$Type": "Microflows$SequenceFlow",
+            "origin": "8dde5093-12ce-450f-8453-4fa767b14d7a",
+            "destination": "8f1fa1c1-54e9-4d2a-800e-de2d88940d5a",
+            "originConnectionIndex": 1,
+            "destinationConnectionIndex": 3,
+            "originBezierVector": {
+                "width": 30,
+                "height": 0
+            },
+            "destinationBezierVector": {
+                "width": -15,
+                "height": 0
+            },
+            "lineType": "BezierCurve",
+            "caseValue": {
+                "$ID": "fbc5a7cb-71c6-4f1b-9c58-ab1986ba849f",
+                "$Type": "Microflows$NoCase"
+            },
+            "isErrorHandler": false
+        }
+    ],
+    "microflowReturnType": {
+        "$ID": "51d853b0-ce71-42e7-a24a-49cc0d7dc39f",
+        "$Type": "DataTypes$ObjectType",
+        "entity": "Administration.Account"
+    },
+    "markAsUsed": false,
+    "returnVariableName": "",
+    "applyEntityAccess": false,
+    "allowedModuleRoles": [],
+    "microflowActionInfo": null,
+    "workflowActionInfo": null,
+    "allowConcurrentExecution": true,
+    "concurrencyErrorMessage": {
+        "$ID": "ffed606f-76fa-4f28-baa7-bc77bd9ff9e1",
+        "$Type": "Texts$Text",
+        "translations": []
+    },
+    "concurrencyErrorMicroflow": null,
+    "url": "",
+    "urlSearchParameters": [],
+    "stableId": "36b379fc-8478-4eb9-a7c1-4df68888e07c"
+}
