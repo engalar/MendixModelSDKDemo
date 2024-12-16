@@ -1,0 +1,581 @@
+{
+    "$schema": "domain.schema.json",
+    "$ID": "84776610-13b2-48cb-a265-d5e984d63129",
+    "$Type": "DomainModels$DomainModel",
+    "documentation": "",
+    "entities": [
+        {
+            "$ID": "237dd3c5-ac04-4b11-81c3-fa66bdad8e9d",
+            "$Type": "DomainModels$Entity",
+            "name": "Opportunity",
+            "dataStorageGuid": "927d1d92-2a87-4f0a-9a7b-8478dbebf844",
+            "location": {
+                "x": 370,
+                "y": 110
+            },
+            "documentation": "",
+            "generalization": {
+                "$ID": "7b7e2479-3cc8-48d7-a852-279b9620a906",
+                "$Type": "DomainModels$NoGeneralization",
+                "hasChangedDate": false,
+                "hasCreatedDate": true,
+                "hasOwner": false,
+                "hasChangedBy": false,
+                "persistable": true
+            },
+            "attributes": [
+                {
+                    "$ID": "cb59029b-98aa-435a-85e7-27b794d57b67",
+                    "$Type": "DomainModels$Attribute",
+                    "name": "OpportunityId",
+                    "dataStorageGuid": "fd18c9da-90cd-40bc-893e-9489a433840b",
+                    "type": {
+                        "$ID": "1766691f-612f-4563-8fd2-2c663e735e26",
+                        "$Type": "DomainModels$StringAttributeType",
+                        "length": 200
+                    },
+                    "documentation": "",
+                    "value": {
+                        "$ID": "14d363d2-dd09-46e3-8e8e-560bb3b2c14b",
+                        "$Type": "DomainModels$StoredValue",
+                        "defaultValue": ""
+                    },
+                    "exportLevel": "Hidden"
+                },
+                {
+                    "$ID": "7d86d314-005a-41d4-a5c0-d2f41d9f4d62",
+                    "$Type": "DomainModels$Attribute",
+                    "name": "AccountName",
+                    "dataStorageGuid": "b82ca04a-3fcc-4f8b-8176-784406eb9d01",
+                    "type": {
+                        "$ID": "fdd12a05-6023-404f-80b1-246945f155c6",
+                        "$Type": "DomainModels$StringAttributeType",
+                        "length": 200
+                    },
+                    "documentation": "",
+                    "value": {
+                        "$ID": "67fcfe4a-081e-4f02-9340-bd8a08822e1e",
+                        "$Type": "DomainModels$StoredValue",
+                        "defaultValue": ""
+                    },
+                    "exportLevel": "Hidden"
+                },
+                {
+                    "$ID": "c28496fa-52a3-4ae4-a9d3-ff8e75bdc4c2",
+                    "$Type": "DomainModels$Attribute",
+                    "name": "AccountNameLocal",
+                    "dataStorageGuid": "c3e99580-67cb-4b76-b46c-f9cced90c51b",
+                    "type": {
+                        "$ID": "6067993f-a945-4782-88ed-41193136a074",
+                        "$Type": "DomainModels$StringAttributeType",
+                        "length": 200
+                    },
+                    "documentation": "",
+                    "value": {
+                        "$ID": "60e258da-4f2b-4300-9d2d-0e8f63e2a8ce",
+                        "$Type": "DomainModels$StoredValue",
+                        "defaultValue": ""
+                    },
+                    "exportLevel": "Hidden"
+                },
+                {
+                    "$ID": "81f88451-f3fa-4005-8bf5-7c3cf4f17a89",
+                    "$Type": "DomainModels$Attribute",
+                    "name": "OpportunityName",
+                    "dataStorageGuid": "afb74a33-1172-4cb2-9d97-f56429c3fecd",
+                    "type": {
+                        "$ID": "62ec44c3-fac0-4020-aa1b-bebd0c4857e5",
+                        "$Type": "DomainModels$StringAttributeType",
+                        "length": 200
+                    },
+                    "documentation": "",
+                    "value": {
+                        "$ID": "b023eccd-5379-4396-8d1c-9e34868ac1c4",
+                        "$Type": "DomainModels$StoredValue",
+                        "defaultValue": ""
+                    },
+                    "exportLevel": "Hidden"
+                },
+                {
+                    "$ID": "7879572b-ea24-494b-bb7c-1e90165ae26b",
+                    "$Type": "DomainModels$Attribute",
+                    "name": "PartnerAccount",
+                    "dataStorageGuid": "c8133387-3053-4231-8589-45c9b1253cc1",
+                    "type": {
+                        "$ID": "ddb407ff-c7d3-4c23-8aa3-14c5f0da3fc8",
+                        "$Type": "DomainModels$StringAttributeType",
+                        "length": 200
+                    },
+                    "documentation": "",
+                    "value": {
+                        "$ID": "4991e762-a239-4fef-b1b0-1098f0a0aed3",
+                        "$Type": "DomainModels$StoredValue",
+                        "defaultValue": ""
+                    },
+                    "exportLevel": "Hidden"
+                },
+                {
+                    "$ID": "eb4ff72c-f322-44bd-bd92-8029f9413b82",
+                    "$Type": "DomainModels$Attribute",
+                    "name": "Tier2PartnerAccount",
+                    "dataStorageGuid": "92ff85d9-0052-4d06-85b2-02140544c681",
+                    "type": {
+                        "$ID": "11649f38-0563-4e4c-ada5-6b1697cab315",
+                        "$Type": "DomainModels$StringAttributeType",
+                        "length": 200
+                    },
+                    "documentation": "",
+                    "value": {
+                        "$ID": "5fa92075-15c0-47ca-a562-6489901658d5",
+                        "$Type": "DomainModels$StoredValue",
+                        "defaultValue": ""
+                    },
+                    "exportLevel": "Hidden"
+                },
+                {
+                    "$ID": "1067995d-0d98-4d49-895c-a3b5ee6b222f",
+                    "$Type": "DomainModels$Attribute",
+                    "name": "PartnerRegistrationType",
+                    "dataStorageGuid": "d2728b77-3d3b-4184-8076-5cc827013515",
+                    "type": {
+                        "$ID": "290b27b8-1c36-4747-ac8f-59071ab7a8cf",
+                        "$Type": "DomainModels$StringAttributeType",
+                        "length": 200
+                    },
+                    "documentation": "",
+                    "value": {
+                        "$ID": "5a84826a-7fa7-4354-96e6-5258c86f870e",
+                        "$Type": "DomainModels$StoredValue",
+                        "defaultValue": ""
+                    },
+                    "exportLevel": "Hidden"
+                },
+                {
+                    "$ID": "02cb4fcb-e7d4-429e-b585-b18c48fc5c66",
+                    "$Type": "DomainModels$Attribute",
+                    "name": "OpportunityRecordType",
+                    "dataStorageGuid": "4d59b64e-fa1f-4bf3-aaad-7c052a560b09",
+                    "type": {
+                        "$ID": "3425ed54-29b3-44e0-a37c-d5bd917a290b",
+                        "$Type": "DomainModels$StringAttributeType",
+                        "length": 200
+                    },
+                    "documentation": "",
+                    "value": {
+                        "$ID": "cec8b408-f900-4b74-ab5d-82dcff8aad4d",
+                        "$Type": "DomainModels$StoredValue",
+                        "defaultValue": ""
+                    },
+                    "exportLevel": "Hidden"
+                },
+                {
+                    "$ID": "4f588868-55f1-4c89-b9df-f1f8784e2043",
+                    "$Type": "DomainModels$Attribute",
+                    "name": "OwnerRole",
+                    "dataStorageGuid": "436d9d8e-0aa1-4621-bae8-5b8592abdfa6",
+                    "type": {
+                        "$ID": "74555740-352c-45d5-b2cc-f6c04d34cca2",
+                        "$Type": "DomainModels$StringAttributeType",
+                        "length": 200
+                    },
+                    "documentation": "",
+                    "value": {
+                        "$ID": "f5a459a0-bb8e-495e-afd3-84a8f35e292f",
+                        "$Type": "DomainModels$StoredValue",
+                        "defaultValue": ""
+                    },
+                    "exportLevel": "Hidden"
+                },
+                {
+                    "$ID": "1e7e0d72-62fa-4d1b-93fa-094ce776bdb7",
+                    "$Type": "DomainModels$Attribute",
+                    "name": "OpportunityOwner",
+                    "dataStorageGuid": "ce7bd118-6259-4534-b17e-1bc8a9297ec3",
+                    "type": {
+                        "$ID": "0720610a-f0d1-421f-8339-0b750ef395cd",
+                        "$Type": "DomainModels$StringAttributeType",
+                        "length": 200
+                    },
+                    "documentation": "",
+                    "value": {
+                        "$ID": "64ddab12-0c46-4dff-a41f-aaaef0c1f0cf",
+                        "$Type": "DomainModels$StoredValue",
+                        "defaultValue": ""
+                    },
+                    "exportLevel": "Hidden"
+                },
+                {
+                    "$ID": "a97ec137-5b37-480e-9e1e-3d6d7d5bcbc9",
+                    "$Type": "DomainModels$Attribute",
+                    "name": "Stage",
+                    "dataStorageGuid": "a655d2fb-18d1-42fb-a298-85bcb814e120",
+                    "type": {
+                        "$ID": "b1110bc1-4d9a-421e-9737-2e455805a6c2",
+                        "$Type": "DomainModels$StringAttributeType",
+                        "length": 200
+                    },
+                    "documentation": "",
+                    "value": {
+                        "$ID": "c7fa29b0-b7d8-4312-bb77-e51814971d39",
+                        "$Type": "DomainModels$StoredValue",
+                        "defaultValue": ""
+                    },
+                    "exportLevel": "Hidden"
+                },
+                {
+                    "$ID": "5246af9e-583b-42ab-ab66-54ab1fa17aec",
+                    "$Type": "DomainModels$Attribute",
+                    "name": "FiscalPeriod",
+                    "dataStorageGuid": "c7e22c48-ddc6-49b5-a6bf-a7155c7609e2",
+                    "type": {
+                        "$ID": "f0502418-c33e-4c2b-b241-28f2d3632194",
+                        "$Type": "DomainModels$StringAttributeType",
+                        "length": 200
+                    },
+                    "documentation": "",
+                    "value": {
+                        "$ID": "77cb6db8-8a12-4be7-b7e3-e9dae00a811e",
+                        "$Type": "DomainModels$StoredValue",
+                        "defaultValue": ""
+                    },
+                    "exportLevel": "Hidden"
+                },
+                {
+                    "$ID": "9e55d72b-4cc9-4e57-8983-e7945e00094f",
+                    "$Type": "DomainModels$Attribute",
+                    "name": "Probability",
+                    "dataStorageGuid": "dd44978a-e229-4328-9eed-2ae43d061dc0",
+                    "type": {
+                        "$ID": "95151a11-8cc6-4908-8dfc-bd278f2ff86a",
+                        "$Type": "DomainModels$StringAttributeType",
+                        "length": 200
+                    },
+                    "documentation": "",
+                    "value": {
+                        "$ID": "9986728f-ce62-4e9b-818b-c24c8eede667",
+                        "$Type": "DomainModels$StoredValue",
+                        "defaultValue": ""
+                    },
+                    "exportLevel": "Hidden"
+                },
+                {
+                    "$ID": "a1027a7c-ac57-4088-bddf-678de59ec4e9",
+                    "$Type": "DomainModels$Attribute",
+                    "name": "Age",
+                    "dataStorageGuid": "5e732108-f9a6-444b-92a1-e15182c28d36",
+                    "type": {
+                        "$ID": "5ee0c6ee-b58a-40cb-a923-b67e7ca5332c",
+                        "$Type": "DomainModels$StringAttributeType",
+                        "length": 200
+                    },
+                    "documentation": "",
+                    "value": {
+                        "$ID": "1e327219-0061-4d8e-afb2-30b7a9826b93",
+                        "$Type": "DomainModels$StoredValue",
+                        "defaultValue": ""
+                    },
+                    "exportLevel": "Hidden"
+                },
+                {
+                    "$ID": "14d73714-3b0d-4f51-9d84-556664b3cbcc",
+                    "$Type": "DomainModels$Attribute",
+                    "name": "TotalLicenseMargin",
+                    "dataStorageGuid": "0f071d72-d483-414b-a347-838b4e159f4e",
+                    "type": {
+                        "$ID": "abf02997-ec09-4880-9a4f-ab1936033af1",
+                        "$Type": "DomainModels$StringAttributeType",
+                        "length": 200
+                    },
+                    "documentation": "",
+                    "value": {
+                        "$ID": "e4d3c8da-0915-4021-a5a1-4b3d1c240bc5",
+                        "$Type": "DomainModels$StoredValue",
+                        "defaultValue": ""
+                    },
+                    "exportLevel": "Hidden"
+                },
+                {
+                    "$ID": "5be2df82-9647-4fba-a094-29b6c2e46816",
+                    "$Type": "DomainModels$Attribute",
+                    "name": "TotalHwMaintenanceMargin",
+                    "dataStorageGuid": "b5188ace-c100-4cff-809a-87abbcafbc03",
+                    "type": {
+                        "$ID": "b218eb89-42dd-4fef-abf3-6c1fb90c09e4",
+                        "$Type": "DomainModels$StringAttributeType",
+                        "length": 200
+                    },
+                    "documentation": "",
+                    "value": {
+                        "$ID": "5d62772d-513e-4199-a731-04caeb2e6c47",
+                        "$Type": "DomainModels$StoredValue",
+                        "defaultValue": ""
+                    },
+                    "exportLevel": "Hidden"
+                },
+                {
+                    "$ID": "03f1e3f5-694e-4416-bda3-fc97e02ba32b",
+                    "$Type": "DomainModels$Attribute",
+                    "name": "CloseDate",
+                    "dataStorageGuid": "3a3616ed-3ec2-4489-9d61-4eecc0e56e8b",
+                    "type": {
+                        "$ID": "3baeaa7e-f840-4e99-9ba7-e8bd9acc8e58",
+                        "$Type": "DomainModels$StringAttributeType",
+                        "length": 200
+                    },
+                    "documentation": "",
+                    "value": {
+                        "$ID": "c8495ca2-be3d-44db-98ba-632d9e7e1702",
+                        "$Type": "DomainModels$StoredValue",
+                        "defaultValue": ""
+                    },
+                    "exportLevel": "Hidden"
+                },
+                {
+                    "$ID": "96b052e0-793d-434b-8dea-0b1049dbbda9",
+                    "$Type": "DomainModels$Attribute",
+                    "name": "NextStep",
+                    "dataStorageGuid": "331102e0-f650-4995-a99b-af04a820989d",
+                    "type": {
+                        "$ID": "b9f3f5b4-40e0-4a91-8704-56ee90cde714",
+                        "$Type": "DomainModels$StringAttributeType",
+                        "length": 200
+                    },
+                    "documentation": "",
+                    "value": {
+                        "$ID": "c38ed978-bd32-42c3-b6ba-2c09d89e7b4a",
+                        "$Type": "DomainModels$StoredValue",
+                        "defaultValue": ""
+                    },
+                    "exportLevel": "Hidden"
+                },
+                {
+                    "$ID": "f7453cd1-4d15-42b0-9997-f4522a90b73e",
+                    "$Type": "DomainModels$Attribute",
+                    "name": "GscsNamedAccount",
+                    "dataStorageGuid": "98d42b6f-818c-48a2-9be8-e9903e3c673f",
+                    "type": {
+                        "$ID": "9d783636-e9f2-4603-96ac-54e78f5d3f39",
+                        "$Type": "DomainModels$StringAttributeType",
+                        "length": 200
+                    },
+                    "documentation": "",
+                    "value": {
+                        "$ID": "c3cf80c9-2d6b-4b0f-ba2f-f3979f6c5f0f",
+                        "$Type": "DomainModels$StoredValue",
+                        "defaultValue": ""
+                    },
+                    "exportLevel": "Hidden"
+                },
+                {
+                    "$ID": "ebf35484-217a-44eb-92f6-ea88834fb10b",
+                    "$Type": "DomainModels$Attribute",
+                    "name": "LastActivity",
+                    "dataStorageGuid": "4eedb719-7697-4548-8ad0-98e286fc452c",
+                    "type": {
+                        "$ID": "bcfe40a7-cba3-4370-b62a-4ad93ec9c7eb",
+                        "$Type": "DomainModels$StringAttributeType",
+                        "length": 200
+                    },
+                    "documentation": "",
+                    "value": {
+                        "$ID": "eb16aad7-5888-4d5e-a0e1-d8b2c55061db",
+                        "$Type": "DomainModels$StoredValue",
+                        "defaultValue": ""
+                    },
+                    "exportLevel": "Hidden"
+                },
+                {
+                    "$ID": "a5134167-fc62-4ca9-a02f-2e8f31479393",
+                    "$Type": "DomainModels$Attribute",
+                    "name": "TotalPerpetualCurrency",
+                    "dataStorageGuid": "923a94f6-45f5-40d4-9e0b-52703ceaf56f",
+                    "type": {
+                        "$ID": "9194c6ab-e724-4d12-9bb6-532c4d2c142f",
+                        "$Type": "DomainModels$StringAttributeType",
+                        "length": 200
+                    },
+                    "documentation": "",
+                    "value": {
+                        "$ID": "61675731-21ff-45e1-9f98-459114139fd4",
+                        "$Type": "DomainModels$StoredValue",
+                        "defaultValue": ""
+                    },
+                    "exportLevel": "Hidden"
+                },
+                {
+                    "$ID": "bf2eb81e-8cb4-4d5e-9f0c-e3a334f40a71",
+                    "$Type": "DomainModels$Attribute",
+                    "name": "TotalPerpetual",
+                    "dataStorageGuid": "8b327cf9-d118-4e79-bbca-df1562e429d0",
+                    "type": {
+                        "$ID": "a0869270-cdec-4625-9362-cf20809b6bdc",
+                        "$Type": "DomainModels$StringAttributeType",
+                        "length": 200
+                    },
+                    "documentation": "",
+                    "value": {
+                        "$ID": "bc0a5e4f-1c33-487b-ab3e-16329d422ad9",
+                        "$Type": "DomainModels$StoredValue",
+                        "defaultValue": ""
+                    },
+                    "exportLevel": "Hidden"
+                },
+                {
+                    "$ID": "9ac03ec7-07de-4422-847d-47ad1e1873af",
+                    "$Type": "DomainModels$Attribute",
+                    "name": "TotalHardwareCurrency",
+                    "dataStorageGuid": "4777c1fa-a5bb-498d-b572-18c117923ffd",
+                    "type": {
+                        "$ID": "8e1a4af7-2fa6-4640-9e30-275aa39d591e",
+                        "$Type": "DomainModels$StringAttributeType",
+                        "length": 200
+                    },
+                    "documentation": "",
+                    "value": {
+                        "$ID": "aa6ec26e-ae9e-4944-abab-414fd34a8146",
+                        "$Type": "DomainModels$StoredValue",
+                        "defaultValue": ""
+                    },
+                    "exportLevel": "Hidden"
+                },
+                {
+                    "$ID": "c0c6c1bd-267c-4fb0-9252-948c4009eee7",
+                    "$Type": "DomainModels$Attribute",
+                    "name": "TotalHardware",
+                    "dataStorageGuid": "4907c5c7-ebe0-4897-80da-358b33191ad7",
+                    "type": {
+                        "$ID": "4eed36f4-5268-4834-be04-d6b57985697a",
+                        "$Type": "DomainModels$StringAttributeType",
+                        "length": 200
+                    },
+                    "documentation": "",
+                    "value": {
+                        "$ID": "3073fe57-2805-471e-b316-060e4ac9cb33",
+                        "$Type": "DomainModels$StoredValue",
+                        "defaultValue": ""
+                    },
+                    "exportLevel": "Hidden"
+                },
+                {
+                    "$ID": "efe3d9b6-f75f-409f-965b-91296464e5d4",
+                    "$Type": "DomainModels$Attribute",
+                    "name": "TotalLicenseCurrency",
+                    "dataStorageGuid": "79930499-babe-421d-85d4-b6feea91dd74",
+                    "type": {
+                        "$ID": "7f68eb31-a5e5-47e4-98fe-7a7611335f15",
+                        "$Type": "DomainModels$StringAttributeType",
+                        "length": 200
+                    },
+                    "documentation": "",
+                    "value": {
+                        "$ID": "c15d8f20-5553-4fe4-a8ae-115c9cadc69e",
+                        "$Type": "DomainModels$StoredValue",
+                        "defaultValue": ""
+                    },
+                    "exportLevel": "Hidden"
+                },
+                {
+                    "$ID": "3cd2a56a-999c-4b7c-aebb-ec7084518d54",
+                    "$Type": "DomainModels$Attribute",
+                    "name": "TotalLicense",
+                    "dataStorageGuid": "943d4322-5d9b-4049-bfe1-f70e64040ede",
+                    "type": {
+                        "$ID": "80d84f17-57c6-417f-9e02-02f844283aeb",
+                        "$Type": "DomainModels$StringAttributeType",
+                        "length": 200
+                    },
+                    "documentation": "",
+                    "value": {
+                        "$ID": "5fbac82d-2ddd-47a7-9e14-51458a82a06f",
+                        "$Type": "DomainModels$StoredValue",
+                        "defaultValue": ""
+                    },
+                    "exportLevel": "Hidden"
+                },
+                {
+                    "$ID": "f4604632-25b4-42b1-839b-c50a2a2ffcde",
+                    "$Type": "DomainModels$Attribute",
+                    "name": "TotalSubscriptionsCurrency",
+                    "dataStorageGuid": "8a99f1af-9420-4d6f-b2b1-f3091937320a",
+                    "type": {
+                        "$ID": "0a8df93e-57a3-4240-8776-4af6f0a6362d",
+                        "$Type": "DomainModels$StringAttributeType",
+                        "length": 200
+                    },
+                    "documentation": "",
+                    "value": {
+                        "$ID": "4a8628b4-89a2-45f9-8003-b7e677aceb8b",
+                        "$Type": "DomainModels$StoredValue",
+                        "defaultValue": ""
+                    },
+                    "exportLevel": "Hidden"
+                },
+                {
+                    "$ID": "8453f22e-4c92-4fb3-8977-3331ce240a99",
+                    "$Type": "DomainModels$Attribute",
+                    "name": "TotalSubscriptions",
+                    "dataStorageGuid": "48a90ed7-a0a6-4e89-b6ed-448030341f30",
+                    "type": {
+                        "$ID": "21430fc9-e025-4294-b3cb-73e7aac1ea36",
+                        "$Type": "DomainModels$StringAttributeType",
+                        "length": 200
+                    },
+                    "documentation": "",
+                    "value": {
+                        "$ID": "bbfb2f71-a675-4d00-a075-9296e509a704",
+                        "$Type": "DomainModels$StoredValue",
+                        "defaultValue": ""
+                    },
+                    "exportLevel": "Hidden"
+                },
+                {
+                    "$ID": "a899a061-9cb8-4e06-bd1a-3fd02167d03f",
+                    "$Type": "DomainModels$Attribute",
+                    "name": "TotalOpportunityCurrency",
+                    "dataStorageGuid": "23883206-dd25-4345-bb55-fbb4d2f413aa",
+                    "type": {
+                        "$ID": "915e59e2-13a9-4ccc-b9fd-488ce6996389",
+                        "$Type": "DomainModels$StringAttributeType",
+                        "length": 200
+                    },
+                    "documentation": "",
+                    "value": {
+                        "$ID": "ed760ee8-3f4a-4d11-b79e-b1d618b4077a",
+                        "$Type": "DomainModels$StoredValue",
+                        "defaultValue": ""
+                    },
+                    "exportLevel": "Hidden"
+                },
+                {
+                    "$ID": "4f8cd503-3dbf-412d-b06e-490cb0498ce6",
+                    "$Type": "DomainModels$Attribute",
+                    "name": "TotalOpportunity",
+                    "dataStorageGuid": "600c6412-4c2f-41aa-9feb-80481824e07a",
+                    "type": {
+                        "$ID": "60375ecc-e4ec-4b8c-8733-04c215db9b22",
+                        "$Type": "DomainModels$StringAttributeType",
+                        "length": 200
+                    },
+                    "documentation": "",
+                    "value": {
+                        "$ID": "3cef8ed4-5c25-457b-8d33-02ff0ad8e53f",
+                        "$Type": "DomainModels$StoredValue",
+                        "defaultValue": ""
+                    },
+                    "exportLevel": "Hidden"
+                }
+            ],
+            "validationRules": [],
+            "eventHandlers": [],
+            "indexes": [],
+            "accessRules": [],
+            "image": null,
+            "imageData": "",
+            "source": null,
+            "exportLevel": "Hidden"
+        }
+    ],
+    "annotations": [],
+    "associations": [],
+    "crossAssociations": []
+}

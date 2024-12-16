@@ -1,0 +1,257 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "definitions": {
+        "GUID": {
+            "type": "string",
+            "format": "uuid"
+        },
+        "Location": {
+            "type": "object",
+            "properties": {
+                "x": {
+                    "type": "integer"
+                },
+                "y": {
+                    "type": "integer"
+                }
+            },
+            "required": [
+                "x",
+                "y"
+            ]
+        },
+        "AttributeType": {
+            "type": "object",
+            "properties": {
+                "$ID": {
+                    "$ref": "#/definitions/GUID"
+                },
+                "length": {
+                    "type": "integer"
+                }
+            },
+            "required": [
+                "$ID",
+                "$Type"
+            ]
+        },
+        "Value": {
+            "type": "object",
+            "properties": {
+                "$ID": {
+                    "$ref": "#/definitions/GUID"
+                },
+                "defaultValue": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "$ID",
+                "$Type"
+            ]
+        },
+        "Generalization": {
+            "type": "object",
+            "properties": {
+                "$ID": {
+                    "$ref": "#/definitions/GUID"
+                },
+                "hasChangedDate": {
+                    "type": "boolean"
+                },
+                "hasCreatedDate": {
+                    "type": "boolean"
+                },
+                "hasOwner": {
+                    "type": "boolean"
+                },
+                "hasChangedBy": {
+                    "type": "boolean"
+                },
+                "persistable": {
+                    "type": "boolean"
+                }
+            },
+            "required": [
+                "$ID",
+                "$Type",
+                "hasChangedDate",
+                "hasCreatedDate",
+                "hasOwner",
+                "hasChangedBy",
+                "persistable"
+            ]
+        }
+    },
+    "type": "object",
+    "properties": {
+        "$ID": {
+            "$ref": "#/definitions/GUID"
+        },
+        "$Type": {
+            "type": "string",
+            "enum": [
+                "DomainModels$DomainModel"
+            ]
+        },
+        "documentation": {
+            "type": "string"
+        },
+        "entities": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "$ID": {
+                        "$ref": "#/definitions/GUID"
+                    },
+                    "$Type": {
+                        "type": "string",
+                        "enum": [
+                            "DomainModels$Entity"
+                        ]
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "dataStorageGuid": {
+                        "$ref": "#/definitions/GUID"
+                    },
+                    "location": {
+                        "$ref": "#/definitions/Location"
+                    },
+                    "documentation": {
+                        "type": "string"
+                    },
+                    "generalization": {
+                        "$ref": "#/definitions/Generalization"
+                    },
+                    "attributes": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "$ID": {
+                                    "$ref": "#/definitions/GUID"
+                                },
+                                "$Type": {
+                                    "type": "string",
+                                    "enum": [
+                                        "DomainModels$Attribute"
+                                    ]
+                                },
+                                "name": {
+                                    "type": "string"
+                                },
+                                "dataStorageGuid": {
+                                    "$ref": "#/definitions/GUID"
+                                },
+                                "type": {
+                                    "$ref": "#/definitions/AttributeType"
+                                },
+                                "documentation": {
+                                    "type": "string"
+                                },
+                                "value": {
+                                    "$ref": "#/definitions/Value"
+                                },
+                                "exportLevel": {
+                                    "type": "string",
+                                    "enum": [
+                                        "Hidden"
+                                    ]
+                                }
+                            },
+                            "required": [
+                                "$ID",
+                                "$Type",
+                                "name",
+                                "dataStorageGuid",
+                                "type",
+                                "documentation",
+                                "value",
+                                "exportLevel"
+                            ]
+                        }
+                    },
+                    "validationRules": {
+                        "type": "array",
+                        "items": []
+                    },
+                    "eventHandlers": {
+                        "type": "array",
+                        "items": []
+                    },
+                    "indexes": {
+                        "type": "array",
+                        "items": []
+                    },
+                    "accessRules": {
+                        "type": "array",
+                        "items": []
+                    },
+                    "image": {
+                        "type": [
+                            "null",
+                            "string"
+                        ]
+                    },
+                    "imageData": {
+                        "type": "string"
+                    },
+                    "source": {
+                        "type": [
+                            "null",
+                            "string"
+                        ]
+                    },
+                    "exportLevel": {
+                        "type": "string",
+                        "enum": [
+                            "Hidden"
+                        ]
+                    }
+                },
+                "required": [
+                    "$ID",
+                    "$Type",
+                    "name",
+                    "dataStorageGuid",
+                    "location",
+                    "documentation",
+                    "generalization",
+                    "attributes",
+                    "validationRules",
+                    "eventHandlers",
+                    "indexes",
+                    "accessRules",
+                    "image",
+                    "imageData",
+                    "source",
+                    "exportLevel"
+                ]
+            }
+        },
+        "annotations": {
+            "type": "array",
+            "items": {}
+        },
+        "associations": {
+            "type": "array",
+            "items": {}
+        },
+        "crossAssociations": {
+            "type": "array",
+            "items": {}
+        }
+    },
+    "required": [
+        "$ID",
+        "$Type",
+        "documentation",
+        "entities",
+        "annotations",
+        "associations",
+        "crossAssociations"
+    ]
+}

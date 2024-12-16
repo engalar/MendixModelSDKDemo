@@ -1,5 +1,5 @@
 {
-    "$schema": "page.json",
+    "$schema": "page.schema.json",
     "$ID": "7b22940f-b2dd-43e1-9a0b-25011a7e1b33",
     "$Type": "Pages$Page",
     "name": "Home_Web",
