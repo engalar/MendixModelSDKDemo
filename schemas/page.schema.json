@@ -22,6 +22,570 @@
                 }
             ]
         },
+        "GridColumn": {
+            "type": "object",
+            "description": "Datagrid column.",
+            "properties": {
+                "$ID": {
+                    "type": "string",
+                    "description": "Unique identifier of the datagrid column"
+                },
+                "$Type": {
+                    "type": "string",
+                    "description": "Type of the object, should be 'Pages$GridColumn'.",
+                    "const": "Pages$GridColumn"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "Name of the column."
+                },
+                "caption": {
+                    "$ref": "#/definitions/Text"
+                },
+                "attributeRef": {
+                    "type": "object",
+                    "description": "Reference to the attribute.",
+                    "properties": {
+                        "$ID": {
+                            "type": "string",
+                            "description": "Unique identifier of the AttributeRef"
+                        },
+                        "$Type": {
+                            "type": "string",
+                            "description": "Type of the object, should be 'DomainModels$AttributeRef'.",
+                            "const": "DomainModels$AttributeRef"
+                        },
+                        "entityRef": {
+                            "type": [
+                                "object",
+                                "null"
+                            ],
+                            "description": "Entity Reference"
+                        },
+                        "attribute": {
+                            "type": "string",
+                            "description": "Reference to the attribute."
+                        }
+                    },
+                    "required": [
+                        "$ID",
+                        "$Type",
+                        "attribute"
+                    ]
+                },
+                "formattingInfo": {
+                    "type": "object",
+                    "description": "Formatting rules of the column",
+                    "properties": {
+                        "$ID": {
+                            "type": "string",
+                            "description": "Unique identifier of the formatting information."
+                        },
+                        "$Type": {
+                            "type": "string",
+                            "description": "Type of the object, should be 'Pages$FormattingInfo'.",
+                            "const": "Pages$FormattingInfo"
+                        },
+                        "decimalPrecision": {
+                            "type": "integer",
+                            "description": "Decimal precision to use."
+                        },
+                        "groupDigits": {
+                            "type": "boolean",
+                            "description": "Indicates if numbers should be grouped"
+                        },
+                        "enumFormat": {
+                            "type": "string",
+                            "description": "Enum format.",
+                            "enum": [
+                                "Text",
+                                "Key",
+                                "Value"
+                            ]
+                        },
+                        "dateFormat": {
+                            "type": "string",
+                            "description": "Date format to be used.",
+                            "enum": [
+                                "Date",
+                                "DateTime",
+                                "Time"
+                            ]
+                        },
+                        "customDateFormat": {
+                            "type": "string",
+                            "description": "Custom date format to be used if applicable."
+                        }
+                    },
+                    "required": [
+                        "$ID",
+                        "$Type",
+                        "decimalPrecision",
+                        "groupDigits",
+                        "enumFormat",
+                        "dateFormat",
+                        "customDateFormat"
+                    ]
+                },
+                "showTooltip": {
+                    "type": "boolean",
+                    "description": "Boolean to indicate if tooltip should be shown."
+                },
+                "aggregateCaption": {
+                    "$ref": "#/definitions/Text"
+                },
+                "aggregateFunction": {
+                    "type": "string",
+                    "description": "Aggregation function to use for the column.",
+                    "enum": [
+                        "None",
+                        "Sum",
+                        "Average",
+                        "Min",
+                        "Max",
+                        "Count"
+                    ]
+                },
+                "editable": {
+                    "type": "boolean",
+                    "description": "Boolean to indicate if column is editable."
+                },
+                "width": {
+                    "type": "integer",
+                    "description": "Width of the column."
+                },
+                "appearance": {
+                    "$ref": "#/definitions/Appearance"
+                }
+            },
+            "required": [
+                "$ID",
+                "$Type",
+                "name",
+                "caption",
+                "attributeRef",
+                "formattingInfo",
+                "showTooltip",
+                "aggregateCaption",
+                "aggregateFunction",
+                "editable",
+                "width",
+                "appearance"
+            ]
+        },
+        "GridControlBar": {
+            "type": "object",
+            "description": "Settings for the control bar.",
+            "properties": {
+                "$ID": {
+                    "type": "string",
+                    "description": "Unique identifier of the control bar"
+                },
+                "$Type": {
+                    "type": "string",
+                    "description": "Type of the object, should be 'Pages$GridControlBar'.",
+                    "const": "Pages$GridControlBar"
+                },
+                "items": {
+                    "type": "array",
+                    "description": "List of items in the control bar.",
+                    "items": {
+                        "oneOf": [
+                            {
+                                "type": "object",
+                                "description": "Grid search button.",
+                                "properties": {
+                                    "$ID": {
+                                        "type": "string",
+                                        "description": "Unique identifier of the search button."
+                                    },
+                                    "$Type": {
+                                        "type": "string",
+                                        "description": "Type of the object, should be 'Pages$GridSearchButton'.",
+                                        "const": "Pages$GridSearchButton"
+                                    },
+                                    "name": {
+                                        "type": "string",
+                                        "description": "Name of the widget"
+                                    },
+                                    "caption": {
+                                        "$ref": "#/definitions/ClientTemplate"
+                                    },
+                                    "tooltip": {
+                                        "$ref": "#/definitions/Text"
+                                    },
+                                    "icon": {
+                                        "type": [
+                                            "object",
+                                            "null"
+                                        ],
+                                        "description": "Icon to be displayed on the button",
+                                        "properties": {
+                                            "$ID": {
+                                                "type": "string",
+                                                "description": "Unique identifier of the Icon"
+                                            },
+                                            "$Type": {
+                                                "type": "string",
+                                                "description": "Type of the object, should be 'Pages$ImageIcon' or 'Pages$GlyphIcon'",
+                                                "enum": [
+                                                    "Pages$ImageIcon",
+                                                    "Pages$GlyphIcon"
+                                                ]
+                                            }
+                                        }
+                                    },
+                                    "appearance": {
+                                        "$ref": "#/definitions/Appearance"
+                                    },
+                                    "conditionalVisibilitySettings": {
+                                        "type": [
+                                            "object",
+                                            "null"
+                                        ],
+                                        "description": "Settings for conditional visibility"
+                                    },
+                                    "buttonStyle": {
+                                        "type": "string",
+                                        "description": "Style of the button.",
+                                        "enum": [
+                                            "Default",
+                                            "Primary",
+                                            "Success",
+                                            "Info",
+                                            "Warning",
+                                            "Danger",
+                                            "Link"
+                                        ]
+                                    }
+                                },
+                                "required": [
+                                    "$ID",
+                                    "$Type",
+                                    "name",
+                                    "caption",
+                                    "tooltip",
+                                    "appearance",
+                                    "conditionalVisibilitySettings",
+                                    "buttonStyle"
+                                ]
+                            },
+                            {
+                                "type": "object",
+                                "description": "Grid select button",
+                                "properties": {
+                                    "$ID": {
+                                        "type": "string",
+                                        "description": "Unique identifier of the select button."
+                                    },
+                                    "$Type": {
+                                        "type": "string",
+                                        "description": "Type of the object, should be 'Pages$SelectButton'.",
+                                        "const": "Pages$SelectButton"
+                                    },
+                                    "name": {
+                                        "type": "string",
+                                        "description": "Name of the widget"
+                                    },
+                                    "caption": {
+                                        "$ref": "#/definitions/ClientTemplate"
+                                    },
+                                    "tooltip": {
+                                        "$ref": "#/definitions/Text"
+                                    },
+                                    "icon": {
+                                        "type": [
+                                            "object",
+                                            "null"
+                                        ],
+                                        "description": "Icon to be displayed on the button",
+                                        "properties": {
+                                            "$ID": {
+                                                "type": "string",
+                                                "description": "Unique identifier of the Icon"
+                                            },
+                                            "$Type": {
+                                                "type": "string",
+                                                "description": "Type of the object, should be 'Pages$ImageIcon' or 'Pages$GlyphIcon'",
+                                                "enum": [
+                                                    "Pages$ImageIcon",
+                                                    "Pages$GlyphIcon"
+                                                ]
+                                            }
+                                        }
+                                    },
+                                    "appearance": {
+                                        "$ref": "#/definitions/Appearance"
+                                    },
+                                    "conditionalVisibilitySettings": {
+                                        "type": [
+                                            "object",
+                                            "null"
+                                        ],
+                                        "description": "Settings for conditional visibility."
+                                    },
+                                    "buttonStyle": {
+                                        "type": "string",
+                                        "description": "Style of the button.",
+                                        "enum": [
+                                            "Default",
+                                            "Primary",
+                                            "Success",
+                                            "Info",
+                                            "Warning",
+                                            "Danger",
+                                            "Link"
+                                        ]
+                                    }
+                                },
+                                "required": [
+                                    "$ID",
+                                    "$Type",
+                                    "name",
+                                    "caption",
+                                    "tooltip",
+                                    "appearance",
+                                    "conditionalVisibilitySettings",
+                                    "buttonStyle"
+                                ]
+                            }
+                        ]
+                    }
+                },
+                "defaultButton": {
+                    "type": "string",
+                    "description": "Reference to the default button."
+                }
+            },
+            "required": [
+                "$ID",
+                "$Type",
+                "items"
+            ]
+        },
+        "SearchBar": {
+            "type": "object",
+            "description": "Settings for the search bar.",
+            "properties": {
+                "$ID": {
+                    "type": "string",
+                    "description": "Unique identifier of the search bar."
+                },
+                "$Type": {
+                    "type": "string",
+                    "description": "Type of the object, should be 'Pages$SearchBar'.",
+                    "const": "Pages$SearchBar"
+                },
+                "items": {
+                    "type": "array",
+                    "description": "List of search fields.",
+                    "items": {
+                        "type": "object",
+                        "description": "Placeholder for search fields.",
+                        "properties": {
+                            "$ID": {
+                                "type": "string",
+                                "description": "Unique identifier of the search field."
+                            },
+                            "$Type": {
+                                "type": "string",
+                                "description": "Type of the object, should be 'Pages$ComparisonSearchField'.",
+                                "const": "Pages$ComparisonSearchField"
+                            },
+                            "name": {
+                                "type": "string",
+                                "description": "Name of the search field"
+                            },
+                            "caption": {
+                                "$ref": "#/definitions/Text"
+                            },
+                            "placeholder": {
+                                "$ref": "#/definitions/Text"
+                            },
+                            "customDateFormat": {
+                                "type": "string",
+                                "description": "Custom date format."
+                            },
+                            "type": {
+                                "type": "string",
+                                "description": "Type of the search field",
+                                "enum": [
+                                    "Normal",
+                                    "Date",
+                                    "Enum"
+                                ]
+                            },
+                            "defaultValue": {
+                                "type": "string",
+                                "description": "Default value for the search field."
+                            },
+                            "attributeRef": {
+                                "type": "object",
+                                "description": "Reference to the attribute.",
+                                "properties": {
+                                    "$ID": {
+                                        "type": "string",
+                                        "description": "Unique identifier of the AttributeRef."
+                                    },
+                                    "$Type": {
+                                        "type": "string",
+                                        "description": "Type of the object, should be 'DomainModels$AttributeRef'.",
+                                        "const": "DomainModels$AttributeRef"
+                                    },
+                                    "entityRef": {
+                                        "type": [
+                                            "object",
+                                            "null"
+                                        ],
+                                        "description": "Entity Reference"
+                                    },
+                                    "attribute": {
+                                        "type": "string",
+                                        "description": "Reference to the attribute"
+                                    }
+                                },
+                                "required": [
+                                    "$ID",
+                                    "$Type",
+                                    "attribute"
+                                ]
+                            },
+                            "operator": {
+                                "type": "string",
+                                "description": "Operator to be used for the comparison.",
+                                "enum": [
+                                    "Equals",
+                                    "NotEquals",
+                                    "Greater",
+                                    "GreaterOrEquals",
+                                    "Smaller",
+                                    "SmallerOrEquals",
+                                    "Contains",
+                                    "StartsWith",
+                                    "EndsWith"
+                                ]
+                            }
+                        },
+                        "required": [
+                            "$ID",
+                            "$Type",
+                            "name",
+                            "caption",
+                            "placeholder",
+                            "customDateFormat",
+                            "type",
+                            "defaultValue",
+                            "attributeRef",
+                            "operator"
+                        ]
+                    }
+                },
+                "type": {
+                    "type": "string",
+                    "description": "Type of the search bar.",
+                    "enum": [
+                        "FoldableOpen",
+                        "FoldableClosed",
+                        "AlwaysVisible"
+                    ]
+                },
+                "waitForSearch": {
+                    "type": "boolean",
+                    "description": "Boolean to indicate whether the grid should wait for search"
+                }
+            },
+            "required": [
+                "$ID",
+                "$Type",
+                "items",
+                "type",
+                "waitForSearch"
+            ]
+        },
+        "GridSortBar": {
+            "type": "object",
+            "description": "Settings for the sort bar.",
+            "properties": {
+                "$ID": {
+                    "type": "string",
+                    "description": "Unique identifier of the sort bar"
+                },
+                "$Type": {
+                    "type": "string",
+                    "description": "Type of the object, should be 'Pages$GridSortBar'.",
+                    "const": "Pages$GridSortBar"
+                },
+                "sortItems": {
+                    "type": "array",
+                    "description": "List of sort items.",
+                    "items": {
+                        "type": "object",
+                        "description": "Placeholder for sort item.",
+                        "properties": {
+                            "$ID": {
+                                "type": "string",
+                                "description": "Unique identifier of the sort item"
+                            },
+                            "$Type": {
+                                "type": "string",
+                                "description": "Type of the object, should be 'Pages$GridSortItem'.",
+                                "const": "Pages$GridSortItem"
+                            },
+                            "attributeRef": {
+                                "type": "object",
+                                "description": "Reference to the attribute",
+                                "properties": {
+                                    "$ID": {
+                                        "type": "string",
+                                        "description": "Unique identifier of the AttributeRef."
+                                    },
+                                    "$Type": {
+                                        "type": "string",
+                                        "description": "Type of the object, should be 'DomainModels$AttributeRef'.",
+                                        "const": "DomainModels$AttributeRef"
+                                    },
+                                    "entityRef": {
+                                        "type": [
+                                            "object",
+                                            "null"
+                                        ],
+                                        "description": "Entity reference"
+                                    },
+                                    "attribute": {
+                                        "type": "string",
+                                        "description": "Reference to the attribute"
+                                    }
+                                },
+                                "required": [
+                                    "$ID",
+                                    "$Type",
+                                    "attribute"
+                                ]
+                            },
+                            "sortDirection": {
+                                "type": "string",
+                                "description": "Direction of sort.",
+                                "enum": [
+                                    "Ascending",
+                                    "Descending"
+                                ]
+                            }
+                        },
+                        "required": [
+                            "$ID",
+                            "$Type",
+                            "attributeRef",
+                            "sortDirection"
+                        ]
+                    }
+                }
+            },
+            "required": [
+                "$ID",
+                "$Type",
+                "sortItems"
+            ]
+        },
         "DataGrid": {
             "type": "object",
             "properties": {
@@ -33,8 +597,192 @@
                     "type": "string",
                     "description": "Type of the object, should be 'Pages$DataGrid'.",
                     "const": "Pages$DataGrid"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "Name of the widget"
+                },
+                "appearance": {
+                    "$ref": "#/definitions/Appearance"
+                },
+                "tabIndex": {
+                    "type": "integer",
+                    "description": "Tab index for accessibility."
+                },
+                "conditionalVisibilitySettings": {
+                    "type": [
+                        "object",
+                        "null"
+                    ],
+                    "description": "Conditional Visibility Settings"
+                },
+                "dataSource": {
+                    "type": "object",
+                    "description": "Data source of the DataGrid widget.",
+                    "properties": {
+                        "$ID": {
+                            "type": "string",
+                            "description": "Unique identifier of the Data source"
+                        },
+                        "$Type": {
+                            "type": "string",
+                            "description": "Type of the object, should be 'Pages$GridXPathSource'.",
+                            "const": "Pages$GridXPathSource"
+                        },
+                        "forceFullObjects": {
+                            "type": "boolean",
+                            "description": "Boolean to specify whether data should be full objects."
+                        },
+                        "entityRef": {
+                            "type": "object",
+                            "description": "Entity reference for the grid",
+                            "properties": {
+                                "$ID": {
+                                    "type": "string",
+                                    "description": "Unique identifier of the entity ref"
+                                },
+                                "$Type": {
+                                    "type": "string",
+                                    "description": "Type of the object, should be 'DomainModels$DirectEntityRef'",
+                                    "const": "DomainModels$DirectEntityRef"
+                                },
+                                "entity": {
+                                    "type": "string",
+                                    "description": "Name of the entity"
+                                }
+                            },
+                            "required": [
+                                "$ID",
+                                "$Type",
+                                "entity"
+                            ]
+                        },
+                        "sourceVariable": {
+                            "type": [
+                                "object",
+                                "null"
+                            ],
+                            "description": "Source variable of the grid"
+                        },
+                        "sortBar": {
+                            "$ref": "#/definitions/GridSortBar"
+                        },
+                        "searchBar": {
+                            "$ref": "#/definitions/SearchBar"
+                        },
+                        "xPathConstraint": {
+                            "type": "string",
+                            "description": "XPath constraint to use"
+                        }
+                    },
+                    "required": [
+                        "$ID",
+                        "$Type",
+                        "forceFullObjects",
+                        "entityRef",
+                        "sortBar",
+                        "searchBar",
+                        "xPathConstraint"
+                    ]
+                },
+                "isControlBarVisible": {
+                    "type": "boolean",
+                    "description": "Indicates if the control bar is visible."
+                },
+                "showPagingBar": {
+                    "type": "string",
+                    "description": "Indicates when the paging bar should be visible.",
+                    "enum": [
+                        "No",
+                        "Yes",
+                        "YesWithTotalCount"
+                    ]
+                },
+                "selectionMode": {
+                    "type": "string",
+                    "description": "Selection mode of the grid.",
+                    "enum": [
+                        "None",
+                        "Single",
+                        "SimpleMulti",
+                        "ExtendedMulti"
+                    ]
+                },
+                "selectFirst": {
+                    "type": "boolean",
+                    "description": "Boolean to specify if the first row should be selected"
+                },
+                "defaultButtonTrigger": {
+                    "type": "string",
+                    "description": "Default button trigger",
+                    "enum": [
+                        "Single",
+                        "Double"
+                    ]
+                },
+                "refreshTime": {
+                    "type": "integer",
+                    "description": "Refresh time of the grid"
+                },
+                "controlBar": {
+                    "$ref": "#/definitions/GridControlBar"
+                },
+                "columns": {
+                    "type": "array",
+                    "description": "Columns within the DataGrid.",
+                    "items": {
+                        "$ref": "#/definitions/GridColumn"
+                    }
+                },
+                "numberOfRows": {
+                    "type": "integer",
+                    "description": "Number of rows to be displayed in the grid"
+                },
+                "showEmptyRows": {
+                    "type": "boolean",
+                    "description": "Boolean to specify if empty rows should be shown"
+                },
+                "widthUnit": {
+                    "type": "string",
+                    "description": "Width unit of the grid",
+                    "enum": [
+                        "Weight",
+                        "Pixels"
+                    ]
+                },
+                "tooltipPage": {
+                    "type": [
+                        "object",
+                        "null"
+                    ],
+                    "description": "Page to be opened as tooltip."
+                },
+                "caption": {
+                    "$ref": "#/definitions/ClientTemplate"
                 }
-            }
+            },
+            "required": [
+                "$ID",
+                "$Type",
+                "name",
+                "appearance",
+                "tabIndex",
+                "conditionalVisibilitySettings",
+                "dataSource",
+                "isControlBarVisible",
+                "showPagingBar",
+                "selectionMode",
+                "selectFirst",
+                "defaultButtonTrigger",
+                "refreshTime",
+                "controlBar",
+                "columns",
+                "numberOfRows",
+                "showEmptyRows",
+                "widthUnit",
+                "tooltipPage",
+                "caption"
+            ]
         },
         "BuildinWidget": {
             "oneOf": [
@@ -49,6 +797,9 @@
                 },
                 {
                     "$ref": "#/definitions/DynamicText"
+                },
+                {
+                    "$ref": "#/definitions/DataGrid"
                 }
             ]
         },
