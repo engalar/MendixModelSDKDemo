@@ -1,12 +1,18 @@
 import {
     createModelUnitFromJSON,
     IAbstractElementJson,
+    IModel,
     pages,
 } from "mendixmodelsdk";
 import { _readFromDumyFile } from "../lib/serialize";
 import { boot } from "../lib/bootstrap";
+import { newRandomModule } from "../lib/moduleUtil";
 
-boot(async (model) => {
+// boot(createFromDummy);
+
+boot(createFromGemini).catch(console.error);
+
+async function createFromDummy(model: IModel) {
     const json = await _readFromDumyFile("page.structure.json");
     const elementJson: IAbstractElementJson = JSON.parse(json);
     const module = model.findModuleByQualifiedName("MyFirstModule");
@@ -15,4 +21,10 @@ boot(async (model) => {
     elementJson.name = "DummyPage";
     createModelUnitFromJSON(module, "folders", elementJson);
     return true;
-});
+}
+async function createFromGemini(model: IModel): Promise<boolean> {
+    const module = newRandomModule(model);
+    const json = JSON.parse(await _readFromDumyFile("c1-domain.json"));
+    createModelUnitFromJSON(module, "folders", json);
+    return false;
+}

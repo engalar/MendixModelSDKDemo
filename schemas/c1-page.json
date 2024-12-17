@@ -1,0 +1,362 @@
+{
+    "$schema": "../schemas/page.schema.json",
+    "$ID": "page-1",
+    "$Type": "Pages$Page",
+    "name": "CourseEnrollmentPage",
+    "documentation": "Page for enrolling students in courses.",
+    "excluded": false,
+    "exportLevel": "None",
+    "canvasWidth": 1200,
+    "canvasHeight": 800,
+    "parameters": [],
+    "layoutCall": {
+        "$ID": "layoutcall-1",
+        "$Type": "Pages$LayoutCall",
+        "layout": "layout-main",
+        "arguments": [
+            {
+                "$ID": "layoutcall-arg-1",
+                "$Type": "Pages$LayoutCallArgument",
+                "parameter": "content",
+                "widgets": [
+                    {
+                        "$ID": "layoutgrid-1",
+                        "$Type": "Pages$LayoutGrid",
+                        "name": "layoutgrid-1",
+                        "appearance": {
+                            "$ID": "appearance-layoutgrid-1",
+                            "$Type": "Pages$Appearance",
+                            "class": null,
+                            "style": null,
+                            "designProperties": [],
+                            "dynamicClasses": null
+                        },
+                        "tabIndex": 0,
+                        "conditionalVisibilitySettings": null,
+                        "width": "FullWidth",
+                        "rows": [
+                            {
+                                "$ID": "layoutgridrow-1",
+                                "$Type": "Pages$LayoutGridRow",
+                                "columns": [
+                                    {
+                                        "$ID": "layoutgridcolumn-1",
+                                        "$Type": "Pages$LayoutGridColumn",
+                                        "weight": 12,
+                                        "tabletWeight": 12,
+                                        "phoneWeight": 12,
+                                        "previewWidth": 100,
+                                        "widgets": [
+                                            {
+                                                "$ID": "dataview-1",
+                                                "$Type": "Pages$DataView",
+                                                "name": "dataview-1",
+                                                "appearance": {
+                                                    "$ID": "appearance-dataview-1",
+                                                    "$Type": "Pages$Appearance",
+                                                    "class": null,
+                                                    "style": null,
+                                                    "designProperties": [],
+                                                    "dynamicClasses": null
+                                                },
+                                                "tabIndex": 0,
+                                                "conditionalVisibilitySettings": null,
+                                                "dataSource": {
+                                                    "$ID": "datasource-1",
+                                                    "$Type": "Pages$MicroflowSource",
+                                                    "forceFullObjects": false,
+                                                    "microflowSettings": {
+                                                        "$ID": "microflowsettings-1",
+                                                        "$Type": "Pages$MicroflowSettings",
+                                                        "microflow": "microflow-1",
+                                                        "parameterMappings": [],
+                                                        "progressBar": "None",
+                                                        "progressMessage": null,
+                                                        "asynchronous": false,
+                                                        "formValidations": "None",
+                                                        "confirmationInfo": null
+                                                    }
+                                                },
+                                                "widgets": [
+                                                    {
+                                                        "$ID": "textbox-1",
+                                                        "$Type": "Pages$TextBox",
+                                                        "name": "textbox-1",
+                                                        "appearance": {
+                                                            "$ID": "appearance-textbox-1",
+                                                            "$Type": "Pages$Appearance",
+                                                            "class": null,
+                                                            "style": null,
+                                                            "designProperties": [],
+                                                            "dynamicClasses": null
+                                                        },
+                                                        "tabIndex": 0,
+                                                        "conditionalVisibilitySettings": null,
+                                                        "conditionalEditabilitySettings": null,
+                                                        "editable": "Always",
+                                                        "labelTemplate": {
+                                                            "$ID": "clienttemplate-label-1",
+                                                            "$Type": "Pages$ClientTemplate",
+                                                            "template": {
+                                                                "$ID": "text-label-1",
+                                                                "$Type": "Texts$Text",
+                                                                "translations": [
+                                                                    {
+                                                                        "$ID": "translation-label-1",
+                                                                        "$Type": "Texts$Translation",
+                                                                        "languageCode": "en_US",
+                                                                        "text": "Course ID"
+                                                                    }
+                                                                ]
+                                                            },
+                                                            "parameters": [],
+                                                            "fallback": null
+                                                        },
+                                                        "screenReaderLabel": null,
+                                                        "attributeRef": {
+                                                            "$ID": "attributeRef-1",
+                                                            "$Type": "DomainModels$AttributeRef",
+                                                            "attribute": "attribute-course-id",
+                                                            "entityRef": null
+                                                        },
+                                                        "readOnlyStyle": "Control",
+                                                        "validation": null,
+                                                        "onChangeAction": {
+                                                            "$ID": "noClientAction-1",
+                                                            "$Type": "Pages$NoClientAction",
+                                                            "disabledDuringExecution": false
+                                                        },
+                                                        "onEnterAction": {
+                                                            "$ID": "noClientAction-2",
+                                                            "$Type": "Pages$NoClientAction",
+                                                            "disabledDuringExecution": false
+                                                        },
+                                                        "onLeaveAction": {
+                                                            "$ID": "noClientAction-3",
+                                                            "$Type": "Pages$NoClientAction",
+                                                            "disabledDuringExecution": false
+                                                        },
+                                                        "sourceVariable": null,
+                                                        "ariaRequired": false,
+                                                        "placeholderTemplate": null,
+                                                        "maxLengthCode": null,
+                                                        "autoFocus": false,
+                                                        "inputMask": null,
+                                                        "formattingInfo": null,
+                                                        "isPasswordBox": false,
+                                                        "keyboardType": "Default",
+                                                        "onEnterKeyPressAction": {
+                                                            "$ID": "noClientAction-4",
+                                                            "$Type": "Pages$NoClientAction",
+                                                            "disabledDuringExecution": false
+                                                        },
+                                                        "autocomplete": false,
+                                                        "autocompletePurpose": "Off",
+                                                        "submitBehaviour": "OnChange",
+                                                        "submitOnInputDelay": null,
+                                                        "nativeAccessibilitySettings": null
+                                                    },
+                                                    {
+                                                        "$ID": "radiogroup-1",
+                                                        "$Type": "Pages$RadioButtonGroup",
+                                                        "name": "radiogroup-1",
+                                                        "appearance": {
+                                                            "$ID": "appearance-radiogroup-1",
+                                                            "$Type": "Pages$Appearance",
+                                                            "class": null,
+                                                            "style": null,
+                                                            "designProperties": [],
+                                                            "dynamicClasses": null
+                                                        },
+                                                        "tabIndex": 0,
+                                                        "conditionalVisibilitySettings": null,
+                                                        "conditionalEditabilitySettings": null,
+                                                        "editable": "Always",
+                                                        "labelTemplate": {
+                                                            "$ID": "clienttemplate-label-2",
+                                                            "$Type": "Pages$ClientTemplate",
+                                                            "template": {
+                                                                "$ID": "text-label-2",
+                                                                "$Type": "Texts$Text",
+                                                                "translations": [
+                                                                    {
+                                                                        "$ID": "translation-label-2",
+                                                                        "$Type": "Texts$Translation",
+                                                                        "languageCode": "en_US",
+                                                                        "text": "Enroll in Course:"
+                                                                    }
+                                                                ]
+                                                            },
+                                                            "parameters": [],
+                                                            "fallback": null
+                                                        },
+                                                        "screenReaderLabel": null,
+                                                        "attributeRef": {
+                                                            "$ID": "attributeref-2",
+                                                            "$Type": "DomainModels$AttributeRef",
+                                                            "attribute": "attribute-course-credits",
+                                                            "entityRef": null
+                                                        },
+                                                        "readOnlyStyle": "Control",
+                                                        "validation": null,
+                                                        "onChangeAction": {
+                                                            "$ID": "noClientAction-5",
+                                                            "$Type": "Pages$NoClientAction",
+                                                            "disabledDuringExecution": false
+                                                        },
+                                                        "onEnterAction": {
+                                                            "$ID": "noClientAction-6",
+                                                            "$Type": "Pages$NoClientAction",
+                                                            "disabledDuringExecution": false
+                                                        },
+                                                        "onLeaveAction": {
+                                                            "$ID": "noClientAction-7",
+                                                            "$Type": "Pages$NoClientAction",
+                                                            "disabledDuringExecution": false
+                                                        },
+                                                        "sourceVariable": null,
+                                                        "ariaRequired": false,
+                                                        "renderHorizontal": false
+                                                    },
+                                                    {
+                                                        "$ID": "inputreferencesetselector-1",
+                                                        "$Type": "Pages$InputReferenceSetSelector",
+                                                        "name": "inputreferencesetselector-1",
+                                                        "appearance": {
+                                                            "$ID": "appearance-inputrefselector-1",
+                                                            "$Type": "Pages$Appearance",
+                                                            "class": null,
+                                                            "style": null,
+                                                            "designProperties": [],
+                                                            "dynamicClasses": null
+                                                        },
+                                                        "tabIndex": 0,
+                                                        "conditionalVisibilitySettings": null,
+                                                        "conditionalEditabilitySettings": null,
+                                                        "editable": "Always",
+                                                        "labelTemplate": {
+                                                            "$ID": "clienttemplate-label-3",
+                                                            "$Type": "Pages$ClientTemplate",
+                                                            "template": {
+                                                                "$ID": "text-label-3",
+                                                                "$Type": "Texts$Text",
+                                                                "translations": [
+                                                                    {
+                                                                        "$ID": "translation-label-3",
+                                                                        "$Type": "Texts$Translation",
+                                                                        "languageCode": "en_US",
+                                                                        "text": "Enrolled Students"
+                                                                    }
+                                                                ]
+                                                            },
+                                                            "parameters": [],
+                                                            "fallback": null
+                                                        },
+                                                        "screenReaderLabel": null,
+                                                        "attributeRef": {
+                                                            "$ID": "attributeRef-3",
+                                                            "$Type": "DomainModels$AttributeRef",
+                                                            "attribute": "attribute-enrollment-id",
+                                                            "entityRef": {
+                                                                "$ID": "entityref-3",
+                                                                "$Type": "DomainModels$IndirectEntityRef",
+                                                                "steps": [
+                                                                    {
+                                                                        "$ID": "entityrefstep-3",
+                                                                        "$Type": "DomainModels$EntityRefStep",
+                                                                        "association": "association-enrollment-student",
+                                                                        "destinationEntity": "entity-student"
+                                                                    }
+                                                                ]
+                                                            }
+                                                        },
+                                                        "readOnlyStyle": "Control",
+                                                        "selectorSource": {
+                                                            "$ID": "selectorsource-1",
+                                                            "$Type": "Pages$SelectorXPathSource",
+                                                            "sortBar": {
+                                                                "$ID": "gridsortbar-1",
+                                                                "$Type": "Pages$GridSortBar",
+                                                                "sortItems": []
+                                                            },
+                                                            "xPathConstraint": null,
+                                                            "constrainedByRefs": []
+                                                        },
+                                                        "selectPageSettings": {
+                                                            "$ID": "pagesettings-1",
+                                                            "$Type": "Pages$PageSettings",
+                                                            "page": null,
+                                                            "titleOverride": null,
+                                                            "parameterMappings": []
+                                                        },
+                                                        "onChangeAction": {
+                                                            "$ID": "noClientAction-8",
+                                                            "$Type": "Pages$NoClientAction",
+                                                            "disabledDuringExecution": false
+                                                        },
+                                                        "sourceVariable": null
+                                                    }
+                                                ],
+                                                "footerWidgets": [],
+                                                "editability": "Always",
+                                                "conditionalEditabilitySettings": null,
+                                                "showFooter": false,
+                                                "noEntityMessage": null,
+                                                "labelWidth": 3,
+                                                "readOnlyStyle": "Inherit"
+                                            }
+                                        ],
+                                        "verticalAlignment": "None",
+                                        "horizontalAlignment": "None",
+                                        "spacingBetweenColumns": false
+                                    }
+                                ],
+                                "conditionalVisibilitySettings": null,
+                                "appearance": {
+                                    "$ID": "appearance-layoutgridrow-1",
+                                    "$Type": "Pages$Appearance",
+                                    "class": null,
+                                    "style": null,
+                                    "designProperties": [],
+                                    "dynamicClasses": null
+                                },
+                                "verticalAlignment": "None",
+                                "horizontalAlignment": "None",
+                                "spacingBetweenColumns": false
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    "title": {
+        "$ID": "text-page-title-1",
+        "$Type": "Texts$Text",
+        "translations": [
+            {
+                "$ID": "translation-page-title-1",
+                "$Type": "Texts$Translation",
+                "languageCode": "en_US",
+                "text": "Course Enrollment Page"
+            }
+        ]
+    },
+    "appearance": {
+        "$ID": "appearance-page-1",
+        "$Type": "Pages$Appearance",
+        "class": null,
+        "style": null,
+        "designProperties": [],
+        "dynamicClasses": null
+    },
+    "allowedRoles": [
+        "Administrator"
+    ],
+    "popupCloseAction": "ClosePage",
+    "popupWidth": 800,
+    "popupHeight": 600,
+    "popupResizable": true,
+    "markAsUsed": false,
+    "url": null
+}

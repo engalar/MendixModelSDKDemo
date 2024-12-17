@@ -1,0 +1,225 @@
+{
+    "$schema": "../schemas/domain.schema.json",
+    "$ID": "domainmodel-1",
+    "$Type": "DomainModels$DomainModel",
+    "documentation": "Domain model for the student course selection system.",
+    "entities": [
+        {
+            "$ID": "entity-student",
+            "$Type": "DomainModels$Entity",
+            "name": "Student",
+            "dataStorageGuid": "data-storage-student",
+            "location": {
+                "x": 100,
+                "y": 100
+            },
+            "documentation": "Represents a student in the system.",
+            "generalization": {
+                "$ID": "generalization-student",
+                "$Type": "DomainModels$NoGeneralization",
+                "hasChangedDate": false,
+                "hasCreatedDate": false,
+                "hasOwner": false,
+                "hasChangedBy": false,
+                "persistable": true
+            },
+            "attributes": [
+                {
+                    "$ID": "attribute-student-id",
+                    "$Type": "DomainModels$Attribute",
+                    "name": "StudentID",
+                    "dataStorageGuid": "data-storage-attribute-student-id",
+                    "type": {
+                        "$ID": "attributetype-string",
+                        "$Type": "DataTypes$StringType",
+                        "length": 20
+                    },
+                    "documentation": "Unique identifier for the student.",
+                    "value": {
+                        "$ID": "value-string",
+                        "$Type": "DomainModels$StoredValue",
+                        "defaultValue": null
+                    },
+                    "exportLevel": "Hidden"
+                },
+                {
+                    "$ID": "attribute-student-name",
+                    "$Type": "DomainModels$Attribute",
+                    "name": "Name",
+                    "dataStorageGuid": "data-storage-attribute-student-name",
+                    "type": {
+                        "$ID": "attributetype-string",
+                        "$Type": "DataTypes$StringType",
+                        "length": 100
+                    },
+                    "documentation": "Name of the student.",
+                    "value": {
+                        "$ID": "value-string",
+                        "$Type": "DomainModels$StoredValue",
+                        "defaultValue": null
+                    },
+                    "exportLevel": "Hidden"
+                }
+            ],
+            "validationRules": [],
+            "eventHandlers": [],
+            "indexes": [],
+            "accessRules": [],
+            "image": null,
+            "imageData": "",
+            "source": null,
+            "exportLevel": "Hidden"
+        },
+        {
+            "$ID": "entity-course",
+            "$Type": "DomainModels$Entity",
+            "name": "Course",
+            "dataStorageGuid": "data-storage-course",
+            "location": {
+                "x": 300,
+                "y": 100
+            },
+            "documentation": "Represents a course offered in the system.",
+            "generalization": {
+                "$ID": "generalization-course",
+                "$Type": "DomainModels$NoGeneralization",
+                "hasChangedDate": false,
+                "hasCreatedDate": false,
+                "hasOwner": false,
+                "hasChangedBy": false,
+                "persistable": true
+            },
+            "attributes": [
+                {
+                    "$ID": "attribute-course-id",
+                    "$Type": "DomainModels$Attribute",
+                    "name": "CourseID",
+                    "dataStorageGuid": "data-storage-attribute-course-id",
+                    "type": {
+                        "$ID": "attributetype-string",
+                        "$Type": "DataTypes$StringType",
+                        "length": 20
+                    },
+                    "documentation": "Unique identifier for the course.",
+                    "value": {
+                        "$ID": "value-string",
+                        "$Type": "DomainModels$StoredValue",
+                        "defaultValue": null
+                    },
+                    "exportLevel": "Hidden"
+                },
+                {
+                    "$ID": "attribute-course-name",
+                    "$Type": "DomainModels$Attribute",
+                    "name": "Name",
+                    "dataStorageGuid": "data-storage-attribute-course-name",
+                    "type": {
+                        "$ID": "attributetype-string",
+                        "$Type": "DataTypes$StringType",
+                        "length": 100
+                    },
+                    "documentation": "Name of the course.",
+                    "value": {
+                        "$ID": "value-string",
+                        "$Type": "DomainModels$StoredValue",
+                        "defaultValue": null
+                    },
+                    "exportLevel": "Hidden"
+                },
+                {
+                    "$ID": "attribute-course-credits",
+                    "$Type": "DomainModels$Attribute",
+                    "name": "Credits",
+                    "dataStorageGuid": "data-storage-attribute-course-credits",
+                    "type": {
+                        "$ID": "attributetype-integer",
+                        "$Type": "DataTypes$IntegerType"
+                    },
+                    "documentation": "Number of credits for the course.",
+                    "value": {
+                        "$ID": "value-integer",
+                        "$Type": "DomainModels$StoredValue",
+                        "defaultValue": null
+                    },
+                    "exportLevel": "Hidden"
+                }
+            ],
+            "validationRules": [],
+            "eventHandlers": [],
+            "indexes": [],
+            "accessRules": [],
+            "image": null,
+            "imageData": "",
+            "source": null,
+            "exportLevel": "Hidden"
+        },
+        {
+            "$ID": "entity-enrollment",
+            "$Type": "DomainModels$Entity",
+            "name": "Enrollment",
+            "dataStorageGuid": "data-storage-enrollment",
+            "location": {
+                "x": 500,
+                "y": 100
+            },
+            "documentation": "Represents the relationship between students and courses.",
+            "generalization": {
+                "$ID": "generalization-enrollment",
+                "$Type": "DomainModels$NoGeneralization",
+                "hasChangedDate": false,
+                "hasCreatedDate": false,
+                "hasOwner": false,
+                "hasChangedBy": false,
+                "persistable": true
+            },
+            "attributes": [
+                {
+                    "$ID": "attribute-enrollment-id",
+                    "$Type": "DomainModels$Attribute",
+                    "name": "EnrollmentID",
+                    "dataStorageGuid": "data-storage-attribute-enrollment-id",
+                    "type": {
+                        "$ID": "attributetype-string",
+                        "$Type": "DataTypes$StringType",
+                        "length": 36
+                    },
+                    "documentation": "Unique identifier for the enrollment.",
+                    "value": {
+                        "$ID": "value-string",
+                        "$Type": "DomainModels$StoredValue",
+                        "defaultValue": null
+                    },
+                    "exportLevel": "Hidden"
+                },
+                {
+                    "$ID": "attribute-enrollment-date",
+                    "$Type": "DomainModels$Attribute",
+                    "name": "EnrollmentDate",
+                    "dataStorageGuid": "data-storage-attribute-enrollment-date",
+                    "type": {
+                        "$ID": "attributetype-datetime",
+                        "$Type": "DataTypes$DateTimeType"
+                    },
+                    "documentation": "Date when the student enrolled in the course.",
+                    "value": {
+                        "$ID": "value-datetime",
+                        "$Type": "DomainModels$StoredValue",
+                        "defaultValue": null
+                    },
+                    "exportLevel": "Hidden"
+                }
+            ],
+            "validationRules": [],
+            "eventHandlers": [],
+            "indexes": [],
+            "accessRules": [],
+            "image": null,
+            "imageData": "",
+            "source": null,
+            "exportLevel": "Hidden"
+        }
+    ],
+    "annotations": [],
+    "associations": [],
+    "crossAssociations": []
+}

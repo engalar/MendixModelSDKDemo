@@ -1,0 +1,147 @@
+{
+    "$schema": "../schemas/microflow.schema.json",
+    "$ID": "microflow-1",
+    "$Type": "Microflows$Microflow",
+    "name": "EnrollStudentInCourse",
+    "documentation": "Microflow to enroll a student in a course.",
+    "excluded": false,
+    "exportLevel": "Hidden",
+    "objectCollection": {
+        "$ID": "objectcollection-1",
+        "$Type": "Microflows$MicroflowObjectCollection",
+        "objects": [
+            {
+                "$ID": "startevent-1",
+                "$Type": "Microflows$StartEvent",
+                "relativeMiddlePoint": {
+                    "x": 50,
+                    "y": 50
+                },
+                "size": {
+                    "width": 40,
+                    "height": 40
+                }
+            },
+            {
+                "$ID": "endevent-1",
+                "$Type": "Microflows$EndEvent",
+                "relativeMiddlePoint": {
+                    "x": 350,
+                    "y": 50
+                },
+                "size": {
+                    "width": 40,
+                    "height": 40
+                },
+                "returnValue": null,
+                "documentation": null
+            },
+            {
+                "$ID": "activity-retrieve",
+                "$Type": "Microflows$ActionActivity",
+                "relativeMiddlePoint": {
+                    "x": 200,
+                    "y": 50
+                },
+                "size": {
+                    "width": 120,
+                    "height": 60
+                },
+                "action": {
+                    "$ID": "retrieve-action-1",
+                    "$Type": "Microflows$RetrieveAction",
+                    "errorHandlingType": "Rollback",
+                    "retrieveSource": {
+                        "$ID": "retrievesource-1",
+                        "$Type": "Microflows$DatabaseRetrieveSource",
+                        "entity": "entity-course",
+                        "range": {
+                            "$ID": "range-1",
+                            "$Type": "Microflows$ConstantRange",
+                            "singleObject": true
+                        },
+                        "xPathConstraint": "[CourseID='course-1']",
+                        "sortItemList": {
+                            "$ID": "sortitemlist-1",
+                            "$Type": "Microflows$SortItemList",
+                            "items": []
+                        }
+                    },
+                    "outputVariableName": "course"
+                },
+                "disabled": false,
+                "caption": "Retrieve Course",
+                "autoGenerateCaption": false,
+                "backgroundColor": "Default",
+                "documentation": null
+            }
+        ]
+    },
+    "flows": [
+        {
+            "$ID": "flow-1",
+            "$Type": "Microflows$SequenceFlow",
+            "origin": "startevent-1",
+            "destination": "activity-retrieve",
+            "originConnectionIndex": 0,
+            "destinationConnectionIndex": 0,
+            "originBezierVector": {
+                "width": 50,
+                "height": 0
+            },
+            "destinationBezierVector": {
+                "width": -50,
+                "height": 0
+            },
+            "lineType": "BezierCurve",
+            "caseValue": {
+                "$ID": "nocase-1",
+                "$Type": "Microflows$NoCase"
+            },
+            "isErrorHandler": false
+        },
+        {
+            "$ID": "flow-2",
+            "$Type": "Microflows$SequenceFlow",
+            "origin": "activity-retrieve",
+            "destination": "endevent-1",
+            "originConnectionIndex": 0,
+            "destinationConnectionIndex": 0,
+            "originBezierVector": {
+                "width": 50,
+                "height": 0
+            },
+            "destinationBezierVector": {
+                "width": -50,
+                "height": 0
+            },
+            "lineType": "BezierCurve",
+            "caseValue": {
+                "$ID": "nocase-1",
+                "$Type": "Microflows$NoCase"
+            },
+            "isErrorHandler": false
+        }
+    ],
+    "microflowReturnType": {
+        "$ID": "returntype-1",
+        "$Type": "DataTypes$ObjectType",
+        "entity": "entity-enrollment"
+    },
+    "markAsUsed": false,
+    "returnVariableName": null,
+    "applyEntityAccess": true,
+    "allowedModuleRoles": [],
+    "microflowActionInfo": null,
+    "workflowActionInfo": null,
+    "allowConcurrentExecution": false,
+    "concurrencyErrorMessage": {
+        "$ID": "concurrencyerrormessage-1",
+        "$Type": "Texts$Text",
+        "translations": []
+    },
+    "concurrencyErrorMicroflow": null,
+    "url": null,
+    "urlSearchParameters": [],
+    "stableId": null
+}
