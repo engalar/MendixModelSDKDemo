@@ -1976,159 +1976,159 @@
                                             "text"
                                         ]
                                     }
+                                },
+                                "parameterMappings": {
+                                    "type": "array",
+                                    "description": "List of parameter mappings",
+                                    "items": {
+                                        "type": "object",
+                                        "description": "Placeholder for Parameter mappings."
+                                    }
                                 }
                             },
-                            "parameterMappings": {
-                                "type": "array",
-                                "description": "List of parameter mappings",
-                                "items": {
-                                    "type": "object",
-                                    "description": "Placeholder for Parameter mappings."
+                            "required": [
+                                "$ID",
+                                "$Type",
+                                "page",
+                                "parameterMappings"
+                            ]
+                        },
+                        "onChangeAction": {
+                            "type": "object",
+                            "description": "Settings for on change action",
+                            "properties": {
+                                "$ID": {
+                                    "type": "string",
+                                    "description": "Unique identifier of the action."
+                                },
+                                "$Type": {
+                                    "type": "string",
+                                    "description": "Type of the object, should be 'Pages$NoClientAction'.",
+                                    "const": "Pages$NoClientAction"
+                                },
+                                "disabledDuringExecution": {
+                                    "type": "boolean",
+                                    "description": "Indicates whether the action should be disabled during execution"
                                 }
-                            }
+                            },
+                            "required": [
+                                "$ID",
+                                "$Type",
+                                "disabledDuringExecution"
+                            ]
                         },
-                        "required": [
-                            "$ID",
-                            "$Type",
-                            "page",
-                            "parameterMappings"
-                        ]
-                    },
-                    "onChangeAction": {
-                        "type": "object",
-                        "description": "Settings for on change action",
-                        "properties": {
-                            "$ID": {
-                                "type": "string",
-                                "description": "Unique identifier of the action."
-                            },
-                            "$Type": {
-                                "type": "string",
-                                "description": "Type of the object, should be 'Pages$NoClientAction'.",
-                                "const": "Pages$NoClientAction"
-                            },
-                            "disabledDuringExecution": {
-                                "type": "boolean",
-                                "description": "Indicates whether the action should be disabled during execution"
-                            }
+                        "sourceVariable": {
+                            "type": [
+                                "object",
+                                "null"
+                            ],
+                            "description": "Source variable of the widget."
                         },
-                        "required": [
-                            "$ID",
-                            "$Type",
-                            "disabledDuringExecution"
-                        ]
-                    },
-                    "sourceVariable": {
-                        "type": [
-                            "object",
-                            "null"
-                        ],
-                        "description": "Source variable of the widget."
-                    },
-                    "validation": {
-                        "type": "object",
-                        "description": "Validation rules for the reference selector",
-                        "properties": {
-                            "$ID": {
-                                "type": "string",
-                                "description": "Unique identifier of the validation."
+                        "validation": {
+                            "type": "object",
+                            "description": "Validation rules for the reference selector",
+                            "properties": {
+                                "$ID": {
+                                    "type": "string",
+                                    "description": "Unique identifier of the validation."
+                                },
+                                "$Type": {
+                                    "type": "string",
+                                    "description": "Type of the object, should be 'Pages$WidgetValidation'.",
+                                    "const": "Pages$WidgetValidation"
+                                },
+                                "expression": {
+                                    "type": "string",
+                                    "description": "Boolean expression to be checked for validation"
+                                },
+                                "message": {
+                                    "$ref": "#/definitions/Text"
+                                }
                             },
-                            "$Type": {
-                                "type": "string",
-                                "description": "Type of the object, should be 'Pages$WidgetValidation'.",
-                                "const": "Pages$WidgetValidation"
-                            },
-                            "expression": {
-                                "type": "string",
-                                "description": "Boolean expression to be checked for validation"
-                            },
-                            "message": {
-                                "$ref": "#/definitions/Text"
-                            }
+                            "required": [
+                                "$ID",
+                                "$Type",
+                                "expression",
+                                "message"
+                            ]
                         },
-                        "required": [
-                            "$ID",
-                            "$Type",
-                            "expression",
-                            "message"
-                        ]
-                    },
-                    "renderMode": {
-                        "type": "string",
-                        "description": "Render mode of this selector.",
-                        "enum": [
-                            "DropDown",
-                            "AutoCompleter",
-                            "Hybrid"
-                        ]
-                    },
-                    "gotoPageSettings": {
-                        "type": "object",
-                        "description": "Settings for the goto page action.",
-                        "properties": {
-                            "$ID": {
-                                "type": "string",
-                                "description": "Unique identifier of the page settings."
-                            },
-                            "$Type": {
-                                "type": "string",
-                                "description": "Type of the object, should be 'Pages$PageSettings'.",
-                                "const": "Pages$PageSettings"
-                            },
-                            "page": {
-                                "type": [
-                                    "string",
-                                    "null"
-                                ],
-                                "description": "Reference to the page to be opened."
-                            },
-                            "titleOverride": {
-                                "type": [
-                                    "object",
-                                    "null"
-                                ],
-                                "description": "Title override of the page.",
-                                "properties": {
-                                    "$ID": {
-                                        "type": "string",
-                                        "description": "Unique identifier of the text."
-                                    },
-                                    "$Type": {
-                                        "type": "string",
-                                        "description": "Type of the text object, should be 'Texts$Text'",
-                                        "const": "Texts$Text"
-                                    },
-                                    "translations": {
-                                        "type": "array",
-                                        "description": "List of translations for the text.",
-                                        "items": {
-                                            "type": "object",
-                                            "description": "Text translation object.",
-                                            "properties": {
-                                                "$ID": {
-                                                    "type": "string",
-                                                    "description": "Unique identifier of the translation"
+                        "renderMode": {
+                            "type": "string",
+                            "description": "Render mode of this selector.",
+                            "enum": [
+                                "DropDown",
+                                "AutoCompleter",
+                                "Hybrid"
+                            ]
+                        },
+                        "gotoPageSettings": {
+                            "type": "object",
+                            "description": "Settings for the goto page action.",
+                            "properties": {
+                                "$ID": {
+                                    "type": "string",
+                                    "description": "Unique identifier of the page settings."
+                                },
+                                "$Type": {
+                                    "type": "string",
+                                    "description": "Type of the object, should be 'Pages$PageSettings'.",
+                                    "const": "Pages$PageSettings"
+                                },
+                                "page": {
+                                    "type": [
+                                        "string",
+                                        "null"
+                                    ],
+                                    "description": "Reference to the page to be opened."
+                                },
+                                "titleOverride": {
+                                    "type": [
+                                        "object",
+                                        "null"
+                                    ],
+                                    "description": "Title override of the page.",
+                                    "properties": {
+                                        "$ID": {
+                                            "type": "string",
+                                            "description": "Unique identifier of the text."
+                                        },
+                                        "$Type": {
+                                            "type": "string",
+                                            "description": "Type of the text object, should be 'Texts$Text'",
+                                            "const": "Texts$Text"
+                                        },
+                                        "translations": {
+                                            "type": "array",
+                                            "description": "List of translations for the text.",
+                                            "items": {
+                                                "type": "object",
+                                                "description": "Text translation object.",
+                                                "properties": {
+                                                    "$ID": {
+                                                        "type": "string",
+                                                        "description": "Unique identifier of the translation"
+                                                    },
+                                                    "$Type": {
+                                                        "type": "string",
+                                                        "description": "Type of the object, should be 'Texts$Translation'",
+                                                        "const": "Texts$Translation"
+                                                    },
+                                                    "languageCode": {
+                                                        "type": "string",
+                                                        "description": "Language code for the translation"
+                                                    },
+                                                    "text": {
+                                                        "type": "string",
+                                                        "description": "Translated text"
+                                                    }
                                                 },
-                                                "$Type": {
-                                                    "type": "string",
-                                                    "description": "Type of the object, should be 'Texts$Translation'",
-                                                    "const": "Texts$Translation"
-                                                },
-                                                "languageCode": {
-                                                    "type": "string",
-                                                    "description": "Language code for the translation"
-                                                },
-                                                "text": {
-                                                    "type": "string",
-                                                    "description": "Translated text"
-                                                }
-                                            },
-                                            "required": [
-                                                "$ID",
-                                                "$Type",
-                                                "languageCode",
-                                                "text"
-                                            ]
+                                                "required": [
+                                                    "$ID",
+                                                    "$Type",
+                                                    "languageCode",
+                                                    "text"
+                                                ]
+                                            }
                                         }
                                     }
                                 },
@@ -2212,33 +2212,33 @@
                             ],
                             "description": "Native accessibility settings."
                         }
-                    },
-                    "required": [
-                        "$ID",
-                        "$Type",
-                        "name",
-                        "appearance",
-                        "tabIndex",
-                        "conditionalVisibilitySettings",
-                        "conditionalEditabilitySettings",
-                        "editable",
-                        "labelTemplate",
-                        "screenReaderLabel",
-                        "attributeRef",
-                        "readOnlyStyle",
-                        "selectorSource",
-                        "selectPageSettings",
-                        "onChangeAction",
-                        "sourceVariable",
-                        "validation",
-                        "renderMode",
-                        "gotoPageSettings",
-                        "formattingInfo",
-                        "emptyOptionCaption",
-                        "nativeAccessibilitySettings"
-                    ]
+                    }
                 }
-            }
+            },
+            "required": [
+                "$ID",
+                "$Type",
+                "name",
+                "appearance",
+                "tabIndex",
+                "conditionalVisibilitySettings",
+                "conditionalEditabilitySettings",
+                "editable",
+                "labelTemplate",
+                "screenReaderLabel",
+                "attributeRef",
+                "readOnlyStyle",
+                "selectorSource",
+                "selectPageSettings",
+                "onChangeAction",
+                "sourceVariable",
+                "validation",
+                "renderMode",
+                "gotoPageSettings",
+                "formattingInfo",
+                "emptyOptionCaption",
+                "nativeAccessibilitySettings"
+            ]
         },
         "ActionButton": {
             "type": "object",
