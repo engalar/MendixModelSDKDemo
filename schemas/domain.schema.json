@@ -20,11 +20,72 @@
                 "y"
             ]
         },
+        "EntityAttribute": {
+            "type": "object",
+            "properties": {
+                "$ID": {
+                    "$ref": "#/definitions/GUID"
+                },
+                "$Type": {
+                    "type": "string",
+                    "enum": [
+                        "DomainModels$Attribute"
+                    ]
+                },
+                "name": {
+                    "type": "string"
+                },
+                "dataStorageGuid": {
+                    "$ref": "#/definitions/GUID"
+                },
+                "type": {
+                    "$ref": "#/definitions/AttributeType"
+                },
+                "documentation": {
+                    "type": "string"
+                },
+                "value": {
+                    "$ref": "#/definitions/Value"
+                },
+                "exportLevel": {
+                    "type": "string",
+                    "enum": [
+                        "Hidden"
+                    ]
+                }
+            },
+            "required": [
+                "$ID",
+                "$Type",
+                "name",
+                "dataStorageGuid",
+                "type",
+                "documentation",
+                "value",
+                "exportLevel"
+            ]
+        },
         "AttributeType": {
             "type": "object",
             "properties": {
                 "$ID": {
                     "$ref": "#/definitions/GUID"
+                },
+                "$Type": {
+                    "type": "string",
+                    "description": "Type of object, should be one of the allowed values.",
+                    "enum": [
+                        "DomainModels$DateTimeAttributeType",
+                        "DomainModels$StringAttributeType",
+                        "DomainModels$IntegerAttributeType",
+                        "DomainModels$BooleanAttributeType",
+                        "DomainModels$EnumerationAttributeType",
+                        "DomainModels$DecimalAttributeType",
+                        "DomainModels$LongAttributeType",
+                        "DomainModels$HashedStringAttributeType",
+                        "DomainModels$AutoNumberAttributeType",
+                        "DomainModels$BinaryAttributeType"
+                    ]
                 },
                 "length": {
                     "type": "integer"
@@ -40,6 +101,13 @@
             "properties": {
                 "$ID": {
                     "$ref": "#/definitions/GUID"
+                },
+                "$Type": {
+                    "type": "string",
+                    "description": "Type of object, should be one of the allowed values.",
+                    "enum": [
+                        "DomainModels$StoredValue"
+                    ]
                 },
                 "defaultValue": {
                     "type": "string"
@@ -70,23 +138,29 @@
                 },
                 "persistable": {
                     "type": "boolean"
+                },
+                "generalization": {
+                    "type": "string",
+                    "description": "Name of the generalization entity name",
+                    "examples": [
+                        "System.User"
+                    ]
                 }
             },
             "required": [
                 "$ID",
-                "$Type",
-                "hasChangedDate",
-                "hasCreatedDate",
-                "hasOwner",
-                "hasChangedBy",
-                "persistable"
+                "$Type"
             ]
         }
     },
     "type": "object",
     "properties": {
         "$ID": {
-            "$ref": "#/definitions/GUID"
+            "$ref": "#/definitions/GUID",
+            "description": "Unique identifier of the domain object",
+            "examples": [
+                "3e2e6b3a-4c6f-4c5f-8f4e-2e6b3a4c6f4c"
+            ]
         },
         "$Type": {
             "type": "string",
@@ -101,6 +175,7 @@
             "type": "array",
             "items": {
                 "type": "object",
+                "description": "Domain entity",
                 "properties": {
                     "$ID": {
                         "$ref": "#/definitions/GUID"
@@ -129,49 +204,7 @@
                     "attributes": {
                         "type": "array",
                         "items": {
-                            "type": "object",
-                            "properties": {
-                                "$ID": {
-                                    "$ref": "#/definitions/GUID"
-                                },
-                                "$Type": {
-                                    "type": "string",
-                                    "enum": [
-                                        "DomainModels$Attribute"
-                                    ]
-                                },
-                                "name": {
-                                    "type": "string"
-                                },
-                                "dataStorageGuid": {
-                                    "$ref": "#/definitions/GUID"
-                                },
-                                "type": {
-                                    "$ref": "#/definitions/AttributeType"
-                                },
-                                "documentation": {
-                                    "type": "string"
-                                },
-                                "value": {
-                                    "$ref": "#/definitions/Value"
-                                },
-                                "exportLevel": {
-                                    "type": "string",
-                                    "enum": [
-                                        "Hidden"
-                                    ]
-                                }
-                            },
-                            "required": [
-                                "$ID",
-                                "$Type",
-                                "name",
-                                "dataStorageGuid",
-                                "type",
-                                "documentation",
-                                "value",
-                                "exportLevel"
-                            ]
+                            "$ref": "#/definitions/EntityAttribute"
                         }
                     },
                     "validationRules": {

@@ -19,12 +19,12 @@ async function createFromDummy(model: IModel) {
     // const dummyPage = pages.Page.createIn(module);
     // dummyPage.name = "DummyPage";
     elementJson.name = "DummyPage";
-    createModelUnitFromJSON(module, "folders", elementJson);
+    createModelUnitFromJSON(module, "documents", elementJson);
     return true;
 }
 async function createFromGemini(model: IModel): Promise<boolean> {
     const module = newRandomModule(model);
     const json = JSON.parse(await _readFromDumyFile("c1-domain.json"));
-    createModelUnitFromJSON(module, "folders", json);
+    createModelUnitFromJSON(module, "domainModel", json);
     return false;
 }

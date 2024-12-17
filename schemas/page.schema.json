@@ -4,6 +4,64 @@
     "description": "Schema for a Mendix Page object",
     "type": "object",
     "definitions": {
+        "CustomWidget": {
+            "oneOf": [
+                {
+                    "type": "object",
+                    "properties": {
+                        "$ID": {
+                            "type": "string",
+                            "description": "Unique identifier of the custom widget"
+                        },
+                        "$Type": {
+                            "type": "string",
+                            "description": "Type of the object, should be 'Pages$CustomWidget'.",
+                            "const": "Pages$CustomWidget"
+                        }
+                    }
+                }
+            ]
+        },
+        "DataGrid": {
+            "type": "object",
+            "properties": {
+                "$ID": {
+                    "type": "string",
+                    "description": "Unique identifier of the datagrid"
+                },
+                "$Type": {
+                    "type": "string",
+                    "description": "Type of the object, should be 'Pages$DataGrid'.",
+                    "const": "Pages$DataGrid"
+                }
+            }
+        },
+        "BuildinWidget": {
+            "oneOf": [
+                {
+                    "$ref": "#/definitions/LayoutGrid"
+                },
+                {
+                    "$ref": "#/definitions/DivContainer"
+                },
+                {
+                    "$ref": "#/definitions/DataView"
+                },
+                {
+                    "$ref": "#/definitions/DynamicText"
+                }
+            ]
+        },
+        "Widget": {
+            "oneOf": [
+                {
+                    "$ref": "#/definitions/BuildinWidget"
+                },
+                {
+                    "$ref": "#/definitions/CustomWidget"
+                }
+            ]
+        },
         "Identifiable": {
             "type": "object",
             "properties": {
@@ -540,7 +598,10 @@
                         "$Type": {
                             "type": "string",
                             "description": "Type of the object, should be 'Pages$MicroflowSource'.",
-                            "const": "Pages$MicroflowSource"
+                            "enum": [
+                                "Pages$MicroflowSource",
+                                "Pages$DataViewSource"
+                            ]
                         },
                         "forceFullObjects": {
                             "type": "boolean",
@@ -622,8 +683,7 @@
                     "required": [
                         "$ID",
                         "$Type",
-                        "forceFullObjects",
-                        "microflowSettings"
+                        "forceFullObjects"
                     ]
                 },
                 "widgets": {
@@ -674,7 +734,8 @@
                     "description": "Style of the widget in read only mode",
                     "enum": [
                         "Inherit",
-                        "Control"
+                        "Control",
+                        "Text"
                     ]
                 }
             },
@@ -1431,222 +1492,222 @@
                                 "type": "string",
                                 "description": "Reference to attribute"
                             }
-                        },
-                        "required": [
-                            "$ID",
-                            "$Type",
-                            "entityRef",
-                            "attribute"
-                        ]
-                    },
-                    "readOnlyStyle": {
-                        "type": "string",
-                        "description": "Style of the widget in read only mode.",
-                        "enum": [
-                            "Inherit",
-                            "Control"
-                        ]
-                    },
-                    "selectorSource": {
-                        "type": "object",
-                        "description": "Selector source settings.",
-                        "properties": {
-                            "$ID": {
-                                "type": "string",
-                                "description": "Unique identifier of the Selector source"
-                            },
-                            "$Type": {
-                                "type": "string",
-                                "description": "Type of the object, should be 'Pages$SelectorXPathSource'",
-                                "const": "Pages$SelectorXPathSource"
-                            },
-                            "sortBar": {
-                                "type": "object",
-                                "description": "Settings for the sort bar",
-                                "properties": {
-                                    "$ID": {
-                                        "type": "string",
-                                        "description": "Unique identifier of the Grid sort bar"
-                                    },
-                                    "$Type": {
-                                        "type": "string",
-                                        "description": "Type of the object, should be 'Pages$GridSortBar'",
-                                        "const": "Pages$GridSortBar"
-                                    },
-                                    "sortItems": {
-                                        "type": "array",
-                                        "description": "List of sort items",
-                                        "items": {
-                                            "type": "object",
-                                            "description": "Placeholder for sort items."
-                                        }
-                                    }
-                                },
-                                "required": [
-                                    "$ID",
-                                    "$Type",
-                                    "sortItems"
-                                ]
-                            },
-                            "xPathConstraint": {
-                                "type": "string",
-                                "description": "XPath constraint to use"
-                            },
-                            "constrainedByRefs": {
-                                "type": "array",
-                                "description": "Constraints by references",
-                                "items": {
-                                    "type": "object",
-                                    "description": "Placeholder for constrained by reference object."
-                                }
-                            }
-                        },
-                        "required": [
-                            "$ID",
-                            "$Type",
-                            "sortBar",
-                            "xPathConstraint",
-                            "constrainedByRefs"
-                        ]
-                    },
-                    "selectPageSettings": {
-                        "type": "object",
-                        "description": "Page settings for the select page",
-                        "properties": {
-                            "$ID": {
-                                "type": "string",
-                                "description": "Unique identifier of the page settings."
-                            },
-                            "$Type": {
-                                "type": "string",
-                                "description": "Type of the object, should be 'Pages$PageSettings'.",
-                                "const": "Pages$PageSettings"
-                            },
-                            "page": {
-                                "type": [
-                                    "string",
-                                    "null"
-                                ],
-                                "description": "Reference to the page to use."
-                            },
-                            "titleOverride": {
-                                "type": [
-                                    "object",
-                                    "null"
-                                ],
-                                "description": "Title override of the page",
-                                "properties": {
-                                    "$ID": {
-                                        "type": "string",
-                                        "description": "Unique identifier of the text."
-                                    },
-                                    "$Type": {
-                                        "type": "string",
-                                        "description": "Type of the object, should be 'Texts$Text'",
-                                        "const": "Texts$Text"
-                                    },
-                                    "translations": {
-                                        "type": "array",
-                                        "description": "List of translations for the text.",
-                                        "items": {
-                                            "type": "object",
-                                            "description": "Text translation object.",
-                                            "properties": {
-                                                "$ID": {
-                                                    "type": "string",
-                                                    "description": "Unique identifier of the translation"
-                                                },
-                                                "$Type": {
-                                                    "type": "string",
-                                                    "description": "Type of the object, should be 'Texts$Translation'",
-                                                    "const": "Texts$Translation"
-                                                },
-                                                "languageCode": {
-                                                    "type": "string",
-                                                    "description": "Language code for the translation"
-                                                },
-                                                "text": {
-                                                    "type": "string",
-                                                    "description": "Translated text"
-                                                }
-                                            },
-                                            "required": [
-                                                "$ID",
-                                                "$Type",
-                                                "languageCode",
-                                                "text"
-                                            ]
-                                        }
-                                    }
-                                },
-                                "parameterMappings": {
-                                    "type": "array",
-                                    "description": "List of parameters mappings",
-                                    "items": {
-                                        "type": "object",
-                                        "description": "Placeholder for Parameter Mappings"
-                                    }
-                                }
-                            },
-                            "required": [
-                                "$ID",
-                                "$Type",
-                                "page",
-                                "parameterMappings"
-                            ]
-                        },
-                        "onChangeAction": {
-                            "type": "object",
-                            "description": "Settings for on change action",
-                            "properties": {
-                                "$ID": {
-                                    "type": "string",
-                                    "description": "Unique identifier of the action."
-                                },
-                                "$Type": {
-                                    "type": "string",
-                                    "description": "Type of the object, should be 'Pages$NoClientAction'.",
-                                    "const": "Pages$NoClientAction"
-                                },
-                                "disabledDuringExecution": {
-                                    "type": "boolean",
-                                    "description": "Indicates whether the action should be disabled during execution"
-                                }
-                            },
-                            "required": [
-                                "$ID",
-                                "$Type",
-                                "disabledDuringExecution"
-                            ]
-                        },
-                        "sourceVariable": {
-                            "type": [
-                                "object",
-                                "null"
-                            ],
-                            "description": "Source variable of the widget."
                         }
                     },
                     "required": [
                         "$ID",
                         "$Type",
-                        "name",
-                        "appearance",
-                        "tabIndex",
-                        "conditionalVisibilitySettings",
-                        "conditionalEditabilitySettings",
-                        "editable",
-                        "labelTemplate",
-                        "screenReaderLabel",
-                        "attributeRef",
-                        "readOnlyStyle",
-                        "selectorSource",
-                        "selectPageSettings",
-                        "onChangeAction",
-                        "sourceVariable"
+                        "entityRef",
+                        "attribute"
                     ]
+                },
+                "readOnlyStyle": {
+                    "type": "string",
+                    "description": "Style of the widget in read only mode.",
+                    "enum": [
+                        "Inherit",
+                        "Control"
+                    ]
+                },
+                "selectorSource": {
+                    "type": "object",
+                    "description": "Selector source settings.",
+                    "properties": {
+                        "$ID": {
+                            "type": "string",
+                            "description": "Unique identifier of the Selector source"
+                        },
+                        "$Type": {
+                            "type": "string",
+                            "description": "Type of the object, should be 'Pages$SelectorXPathSource'",
+                            "const": "Pages$SelectorXPathSource"
+                        },
+                        "sortBar": {
+                            "type": "object",
+                            "description": "Settings for the sort bar",
+                            "properties": {
+                                "$ID": {
+                                    "type": "string",
+                                    "description": "Unique identifier of the Grid sort bar"
+                                },
+                                "$Type": {
+                                    "type": "string",
+                                    "description": "Type of the object, should be 'Pages$GridSortBar'",
+                                    "const": "Pages$GridSortBar"
+                                },
+                                "sortItems": {
+                                    "type": "array",
+                                    "description": "List of sort items",
+                                    "items": {
+                                        "type": "object",
+                                        "description": "Placeholder for sort items."
+                                    }
+                                }
+                            },
+                            "required": [
+                                "$ID",
+                                "$Type",
+                                "sortItems"
+                            ]
+                        },
+                        "xPathConstraint": {
+                            "type": "string",
+                            "description": "XPath constraint to use"
+                        },
+                        "constrainedByRefs": {
+                            "type": "array",
+                            "description": "Constraints by references",
+                            "items": {
+                                "type": "object",
+                                "description": "Placeholder for constrained by reference object."
+                            }
+                        }
+                    },
+                    "required": [
+                        "$ID",
+                        "$Type",
+                        "sortBar",
+                        "xPathConstraint",
+                        "constrainedByRefs"
+                    ]
+                },
+                "selectPageSettings": {
+                    "type": "object",
+                    "description": "Page settings for the select page",
+                    "properties": {
+                        "$ID": {
+                            "type": "string",
+                            "description": "Unique identifier of the page settings."
+                        },
+                        "$Type": {
+                            "type": "string",
+                            "description": "Type of the object, should be 'Pages$PageSettings'.",
+                            "const": "Pages$PageSettings"
+                        },
+                        "page": {
+                            "type": [
+                                "string",
+                                "null"
+                            ],
+                            "description": "Reference to the page to use."
+                        },
+                        "titleOverride": {
+                            "type": [
+                                "object",
+                                "null"
+                            ],
+                            "description": "Title override of the page",
+                            "properties": {
+                                "$ID": {
+                                    "type": "string",
+                                    "description": "Unique identifier of the text."
+                                },
+                                "$Type": {
+                                    "type": "string",
+                                    "description": "Type of the object, should be 'Texts$Text'",
+                                    "const": "Texts$Text"
+                                },
+                                "translations": {
+                                    "type": "array",
+                                    "description": "List of translations for the text.",
+                                    "items": {
+                                        "type": "object",
+                                        "description": "Text translation object.",
+                                        "properties": {
+                                            "$ID": {
+                                                "type": "string",
+                                                "description": "Unique identifier of the translation"
+                                            },
+                                            "$Type": {
+                                                "type": "string",
+                                                "description": "Type of the object, should be 'Texts$Translation'",
+                                                "const": "Texts$Translation"
+                                            },
+                                            "languageCode": {
+                                                "type": "string",
+                                                "description": "Language code for the translation"
+                                            },
+                                            "text": {
+                                                "type": "string",
+                                                "description": "Translated text"
+                                            }
+                                        },
+                                        "required": [
+                                            "$ID",
+                                            "$Type",
+                                            "languageCode",
+                                            "text"
+                                        ]
+                                    }
+                                }
+                            },
+                            "parameterMappings": {
+                                "type": "array",
+                                "description": "List of parameters mappings",
+                                "items": {
+                                    "type": "object",
+                                    "description": "Placeholder for Parameter Mappings"
+                                }
+                            }
+                        }
+                    },
+                    "required": [
+                        "$ID",
+                        "$Type",
+                        "page",
+                        "parameterMappings"
+                    ]
+                },
+                "onChangeAction": {
+                    "type": "object",
+                    "description": "Settings for on change action",
+                    "properties": {
+                        "$ID": {
+                            "type": "string",
+                            "description": "Unique identifier of the action."
+                        },
+                        "$Type": {
+                            "type": "string",
+                            "description": "Type of the object, should be 'Pages$NoClientAction'.",
+                            "const": "Pages$NoClientAction"
+                        },
+                        "disabledDuringExecution": {
+                            "type": "boolean",
+                            "description": "Indicates whether the action should be disabled during execution"
+                        }
+                    },
+                    "required": [
+                        "$ID",
+                        "$Type",
+                        "disabledDuringExecution"
+                    ]
+                },
+                "sourceVariable": {
+                    "type": [
+                        "object",
+                        "null"
+                    ],
+                    "description": "Source variable of the widget."
                 }
-            }
+            },
+            "required": [
+                "$ID",
+                "$Type",
+                "name",
+                "appearance",
+                "tabIndex",
+                "conditionalVisibilitySettings",
+                "conditionalEditabilitySettings",
+                "editable",
+                "labelTemplate",
+                "screenReaderLabel",
+                "attributeRef",
+                "readOnlyStyle",
+                "selectorSource",
+                "selectPageSettings",
+                "onChangeAction",
+                "sourceVariable"
+            ]
         },
         "ReferenceSelector": {
             "type": "object",
@@ -1763,92 +1824,247 @@
                                         ]
                                     }
                                 }
-                            },
-                            "attribute": {
-                                "type": "string",
-                                "description": "Reference to the attribute."
                             }
                         },
-                        "required": [
-                            "$ID",
-                            "$Type",
-                            "entityRef",
-                            "attribute"
-                        ]
+                        "attribute": {
+                            "type": "string",
+                            "description": "Reference to the attribute."
+                        }
                     },
-                    "readOnlyStyle": {
-                        "type": "string",
-                        "description": "Style of the widget in read only mode.",
-                        "enum": [
-                            "Inherit",
-                            "Control"
-                        ]
-                    },
-                    "selectorSource": {
-                        "type": "object",
-                        "description": "Selector source settings.",
-                        "properties": {
-                            "$ID": {
-                                "type": "string",
-                                "description": "Unique identifier of the Selector Source"
-                            },
-                            "$Type": {
-                                "type": "string",
-                                "description": "Type of the object, should be 'Pages$SelectorXPathSource'",
-                                "const": "Pages$SelectorXPathSource"
-                            },
-                            "sortBar": {
-                                "type": "object",
-                                "description": "Settings for the sort bar",
-                                "properties": {
-                                    "$ID": {
-                                        "type": "string",
-                                        "description": "Unique identifier of the grid sort bar."
-                                    },
-                                    "$Type": {
-                                        "type": "string",
-                                        "description": "Type of the object, should be 'Pages$GridSortBar'.",
-                                        "const": "Pages$GridSortBar"
-                                    },
-                                    "sortItems": {
-                                        "type": "array",
-                                        "description": "List of sort items",
-                                        "items": {
-                                            "type": "object",
-                                            "description": "Placeholder for the sort items."
-                                        }
-                                    }
+                    "required": [
+                        "$ID",
+                        "$Type",
+                        "entityRef",
+                        "attribute"
+                    ]
+                },
+                "readOnlyStyle": {
+                    "type": "string",
+                    "description": "Style of the widget in read only mode.",
+                    "enum": [
+                        "Inherit",
+                        "Control"
+                    ]
+                },
+                "selectorSource": {
+                    "type": "object",
+                    "description": "Selector source settings.",
+                    "properties": {
+                        "$ID": {
+                            "type": "string",
+                            "description": "Unique identifier of the Selector Source"
+                        },
+                        "$Type": {
+                            "type": "string",
+                            "description": "Type of the object, should be 'Pages$SelectorXPathSource'",
+                            "const": "Pages$SelectorXPathSource"
+                        },
+                        "sortBar": {
+                            "type": "object",
+                            "description": "Settings for the sort bar",
+                            "properties": {
+                                "$ID": {
+                                    "type": "string",
+                                    "description": "Unique identifier of the grid sort bar."
                                 },
-                                "required": [
-                                    "$ID",
-                                    "$Type",
-                                    "sortItems"
-                                ]
+                                "$Type": {
+                                    "type": "string",
+                                    "description": "Type of the object, should be 'Pages$GridSortBar'.",
+                                    "const": "Pages$GridSortBar"
+                                },
+                                "sortItems": {
+                                    "type": "array",
+                                    "description": "List of sort items",
+                                    "items": {
+                                        "type": "object",
+                                        "description": "Placeholder for the sort items."
+                                    }
+                                }
                             },
-                            "xPathConstraint": {
-                                "type": "string",
-                                "description": "XPath constraint to use."
+                            "required": [
+                                "$ID",
+                                "$Type",
+                                "sortItems"
+                            ]
+                        },
+                        "xPathConstraint": {
+                            "type": "string",
+                            "description": "XPath constraint to use."
+                        },
+                        "constrainedByRefs": {
+                            "type": "array",
+                            "description": "Constraints by references",
+                            "items": {
+                                "type": "object",
+                                "description": "Placeholder for constrained by reference object."
+                            }
+                        }
+                    },
+                    "required": [
+                        "$ID",
+                        "$Type",
+                        "sortBar",
+                        "xPathConstraint",
+                        "constrainedByRefs"
+                    ]
+                },
+                "selectPageSettings": {
+                    "type": "object",
+                    "description": "Select page settings.",
+                    "properties": {
+                        "$ID": {
+                            "type": "string",
+                            "description": "Unique identifier of the page settings."
+                        },
+                        "$Type": {
+                            "type": "string",
+                            "description": "Type of the object, should be 'Pages$PageSettings'.",
+                            "const": "Pages$PageSettings"
+                        },
+                        "page": {
+                            "type": [
+                                "string",
+                                "null"
+                            ],
+                            "description": "Reference to the page to use."
+                        },
+                        "titleOverride": {
+                            "type": [
+                                "object",
+                                "null"
+                            ],
+                            "description": "Title override of the page",
+                            "properties": {
+                                "$ID": {
+                                    "type": "string",
+                                    "description": "Unique identifier of the text."
+                                },
+                                "$Type": {
+                                    "type": "string",
+                                    "description": "Type of the object, should be 'Texts$Text'",
+                                    "const": "Texts$Text"
+                                },
+                                "translations": {
+                                    "type": "array",
+                                    "description": "List of translations for the text.",
+                                    "items": {
+                                        "type": "object",
+                                        "description": "Text translation object.",
+                                        "properties": {
+                                            "$ID": {
+                                                "type": "string",
+                                                "description": "Unique identifier of the translation."
+                                            },
+                                            "$Type": {
+                                                "type": "string",
+                                                "description": "Type of the object, should be 'Texts$Translation'",
+                                                "const": "Texts$Translation"
+                                            },
+                                            "languageCode": {
+                                                "type": "string",
+                                                "description": "Language code for the translation."
+                                            },
+                                            "text": {
+                                                "type": "string",
+                                                "description": "Translated text."
+                                            }
+                                        },
+                                        "required": [
+                                            "$ID",
+                                            "$Type",
+                                            "languageCode",
+                                            "text"
+                                        ]
+                                    }
+                                }
                             },
-                            "constrainedByRefs": {
+                            "parameterMappings": {
                                 "type": "array",
-                                "description": "Constraints by references",
+                                "description": "List of parameter mappings",
                                 "items": {
                                     "type": "object",
-                                    "description": "Placeholder for constrained by reference object."
+                                    "description": "Placeholder for Parameter mappings."
                                 }
                             }
                         },
                         "required": [
                             "$ID",
                             "$Type",
-                            "sortBar",
-                            "xPathConstraint",
-                            "constrainedByRefs"
+                            "page",
+                            "parameterMappings"
                         ]
                     },
-                    "selectPageSettings": {
+                    "onChangeAction": {
                         "type": "object",
-                        "description": "Select page settings.",
+                        "description": "Settings for on change action",
+                        "properties": {
+                            "$ID": {
+                                "type": "string",
+                                "description": "Unique identifier of the action."
+                            },
+                            "$Type": {
+                                "type": "string",
+                                "description": "Type of the object, should be 'Pages$NoClientAction'.",
+                                "const": "Pages$NoClientAction"
+                            },
+                            "disabledDuringExecution": {
+                                "type": "boolean",
+                                "description": "Indicates whether the action should be disabled during execution"
+                            }
+                        },
+                        "required": [
+                            "$ID",
+                            "$Type",
+                            "disabledDuringExecution"
+                        ]
+                    },
+                    "sourceVariable": {
+                        "type": [
+                            "object",
+                            "null"
+                        ],
+                        "description": "Source variable of the widget."
+                    },
+                    "validation": {
+                        "type": "object",
+                        "description": "Validation rules for the reference selector",
+                        "properties": {
+                            "$ID": {
+                                "type": "string",
+                                "description": "Unique identifier of the validation."
+                            },
+                            "$Type": {
+                                "type": "string",
+                                "description": "Type of the object, should be 'Pages$WidgetValidation'.",
+                                "const": "Pages$WidgetValidation"
+                            },
+                            "expression": {
+                                "type": "string",
+                                "description": "Boolean expression to be checked for validation"
+                            },
+                            "message": {
+                                "$ref": "#/definitions/Text"
+                            }
+                        },
+                        "required": [
+                            "$ID",
+                            "$Type",
+                            "expression",
+                            "message"
+                        ]
+                    },
+                    "renderMode": {
+                        "type": "string",
+                        "description": "Render mode of this selector.",
+                        "enum": [
+                            "DropDown",
+                            "AutoCompleter",
+                            "Hybrid"
+                        ]
+                    },
+                    "gotoPageSettings": {
+                        "type": "object",
+                        "description": "Settings for the goto page action.",
                         "properties": {
                             "$ID": {
                                 "type": "string",
@@ -1864,14 +2080,14 @@
                                     "string",
                                     "null"
                                 ],
-                                "description": "Reference to the page to use."
+                                "description": "Reference to the page to be opened."
                             },
                             "titleOverride": {
                                 "type": [
                                     "object",
                                     "null"
                                 ],
-                                "description": "Title override of the page",
+                                "description": "Title override of the page.",
                                 "properties": {
                                     "$ID": {
                                         "type": "string",
@@ -1879,7 +2095,7 @@
                                     },
                                     "$Type": {
                                         "type": "string",
-                                        "description": "Type of the object, should be 'Texts$Text'",
+                                        "description": "Type of the text object, should be 'Texts$Text'",
                                         "const": "Texts$Text"
                                     },
                                     "translations": {
@@ -1891,7 +2107,7 @@
                                             "properties": {
                                                 "$ID": {
                                                     "type": "string",
-                                                    "description": "Unique identifier of the translation."
+                                                    "description": "Unique identifier of the translation"
                                                 },
                                                 "$Type": {
                                                     "type": "string",
@@ -1900,11 +2116,11 @@
                                                 },
                                                 "languageCode": {
                                                     "type": "string",
-                                                    "description": "Language code for the translation."
+                                                    "description": "Language code for the translation"
                                                 },
                                                 "text": {
                                                     "type": "string",
-                                                    "description": "Translated text."
+                                                    "description": "Translated text"
                                                 }
                                             },
                                             "required": [
@@ -1918,10 +2134,10 @@
                                 },
                                 "parameterMappings": {
                                     "type": "array",
-                                    "description": "List of parameter mappings",
+                                    "description": "List of parameter mappings.",
                                     "items": {
                                         "type": "object",
-                                        "description": "Placeholder for Parameter mappings."
+                                        "description": "Placeholder for parameter mappings."
                                     }
                                 }
                             },
@@ -1932,250 +2148,95 @@
                                 "parameterMappings"
                             ]
                         },
-                        "onChangeAction": {
+                        "formattingInfo": {
                             "type": "object",
-                            "description": "Settings for on change action",
+                            "description": "Formatting rules for the input",
                             "properties": {
                                 "$ID": {
                                     "type": "string",
-                                    "description": "Unique identifier of the action."
+                                    "description": "Unique identifier of the formatting information."
                                 },
                                 "$Type": {
                                     "type": "string",
-                                    "description": "Type of the object, should be 'Pages$NoClientAction'.",
-                                    "const": "Pages$NoClientAction"
+                                    "description": "Type of the object, should be 'Pages$FormattingInfo'.",
+                                    "const": "Pages$FormattingInfo"
                                 },
-                                "disabledDuringExecution": {
+                                "decimalPrecision": {
+                                    "type": "integer",
+                                    "description": "Decimal precision to use"
+                                },
+                                "groupDigits": {
                                     "type": "boolean",
-                                    "description": "Indicates whether the action should be disabled during execution"
+                                    "description": "Indicates if numbers should be grouped"
+                                },
+                                "enumFormat": {
+                                    "type": "string",
+                                    "description": "Enum format.",
+                                    "enum": [
+                                        "Text",
+                                        "Key",
+                                        "Value"
+                                    ]
+                                },
+                                "dateFormat": {
+                                    "type": "string",
+                                    "description": "Date format to be used",
+                                    "enum": [
+                                        "Date",
+                                        "DateTime",
+                                        "Time"
+                                    ]
+                                },
+                                "customDateFormat": {
+                                    "type": "string",
+                                    "description": "Custom date format if applicable"
                                 }
                             },
                             "required": [
                                 "$ID",
                                 "$Type",
-                                "disabledDuringExecution"
+                                "decimalPrecision",
+                                "groupDigits",
+                                "enumFormat",
+                                "dateFormat",
+                                "customDateFormat"
                             ]
                         },
-                        "sourceVariable": {
+                        "emptyOptionCaption": {
+                            "$ref": "#/definitions/Text"
+                        },
+                        "nativeAccessibilitySettings": {
                             "type": [
                                 "object",
                                 "null"
                             ],
-                            "description": "Source variable of the widget."
-                        },
-                        "validation": {
-                            "type": "object",
-                            "description": "Validation rules for the reference selector",
-                            "properties": {
-                                "$ID": {
-                                    "type": "string",
-                                    "description": "Unique identifier of the validation."
-                                },
-                                "$Type": {
-                                    "type": "string",
-                                    "description": "Type of the object, should be 'Pages$WidgetValidation'.",
-                                    "const": "Pages$WidgetValidation"
-                                },
-                                "expression": {
-                                    "type": "string",
-                                    "description": "Boolean expression to be checked for validation"
-                                },
-                                "message": {
-                                    "$ref": "#/definitions/Text"
-                                }
-                            },
-                            "required": [
-                                "$ID",
-                                "$Type",
-                                "expression",
-                                "message"
-                            ]
-                        },
-                        "renderMode": {
-                            "type": "string",
-                            "description": "Render mode of this selector.",
-                            "enum": [
-                                "DropDown",
-                                "AutoCompleter",
-                                "Hybrid"
-                            ]
-                        },
-                        "gotoPageSettings": {
-                            "type": "object",
-                            "description": "Settings for the goto page action.",
-                            "properties": {
-                                "$ID": {
-                                    "type": "string",
-                                    "description": "Unique identifier of the page settings."
-                                },
-                                "$Type": {
-                                    "type": "string",
-                                    "description": "Type of the object, should be 'Pages$PageSettings'.",
-                                    "const": "Pages$PageSettings"
-                                },
-                                "page": {
-                                    "type": [
-                                        "string",
-                                        "null"
-                                    ],
-                                    "description": "Reference to the page to be opened."
-                                },
-                                "titleOverride": {
-                                    "type": [
-                                        "object",
-                                        "null"
-                                    ],
-                                    "description": "Title override of the page.",
-                                    "properties": {
-                                        "$ID": {
-                                            "type": "string",
-                                            "description": "Unique identifier of the text."
-                                        },
-                                        "$Type": {
-                                            "type": "string",
-                                            "description": "Type of the text object, should be 'Texts$Text'",
-                                            "const": "Texts$Text"
-                                        },
-                                        "translations": {
-                                            "type": "array",
-                                            "description": "List of translations for the text.",
-                                            "items": {
-                                                "type": "object",
-                                                "description": "Text translation object.",
-                                                "properties": {
-                                                    "$ID": {
-                                                        "type": "string",
-                                                        "description": "Unique identifier of the translation"
-                                                    },
-                                                    "$Type": {
-                                                        "type": "string",
-                                                        "description": "Type of the object, should be 'Texts$Translation'",
-                                                        "const": "Texts$Translation"
-                                                    },
-                                                    "languageCode": {
-                                                        "type": "string",
-                                                        "description": "Language code for the translation"
-                                                    },
-                                                    "text": {
-                                                        "type": "string",
-                                                        "description": "Translated text"
-                                                    }
-                                                },
-                                                "required": [
-                                                    "$ID",
-                                                    "$Type",
-                                                    "languageCode",
-                                                    "text"
-                                                ]
-                                            }
-                                        }
-                                    },
-                                    "parameterMappings": {
-                                        "type": "array",
-                                        "description": "List of parameter mappings.",
-                                        "items": {
-                                            "type": "object",
-                                            "description": "Placeholder for parameter mappings."
-                                        }
-                                    }
-                                },
-                                "required": [
-                                    "$ID",
-                                    "$Type",
-                                    "page",
-                                    "parameterMappings"
-                                ]
-                            },
-                            "formattingInfo": {
-                                "type": "object",
-                                "description": "Formatting rules for the input",
-                                "properties": {
-                                    "$ID": {
-                                        "type": "string",
-                                        "description": "Unique identifier of the formatting information."
-                                    },
-                                    "$Type": {
-                                        "type": "string",
-                                        "description": "Type of the object, should be 'Pages$FormattingInfo'.",
-                                        "const": "Pages$FormattingInfo"
-                                    },
-                                    "decimalPrecision": {
-                                        "type": "integer",
-                                        "description": "Decimal precision to use"
-                                    },
-                                    "groupDigits": {
-                                        "type": "boolean",
-                                        "description": "Indicates if numbers should be grouped"
-                                    },
-                                    "enumFormat": {
-                                        "type": "string",
-                                        "description": "Enum format.",
-                                        "enum": [
-                                            "Text",
-                                            "Key",
-                                            "Value"
-                                        ]
-                                    },
-                                    "dateFormat": {
-                                        "type": "string",
-                                        "description": "Date format to be used",
-                                        "enum": [
-                                            "Date",
-                                            "DateTime",
-                                            "Time"
-                                        ]
-                                    },
-                                    "customDateFormat": {
-                                        "type": "string",
-                                        "description": "Custom date format if applicable"
-                                    }
-                                },
-                                "required": [
-                                    "$ID",
-                                    "$Type",
-                                    "decimalPrecision",
-                                    "groupDigits",
-                                    "enumFormat",
-                                    "dateFormat",
-                                    "customDateFormat"
-                                ]
-                            },
-                            "emptyOptionCaption": {
-                                "$ref": "#/definitions/Text"
-                            },
-                            "nativeAccessibilitySettings": {
-                                "type": [
-                                    "object",
-                                    "null"
-                                ],
-                                "description": "Native accessibility settings."
-                            }
-                        },
-                        "required": [
-                            "$ID",
-                            "$Type",
-                            "name",
-                            "appearance",
-                            "tabIndex",
-                            "conditionalVisibilitySettings",
-                            "conditionalEditabilitySettings",
-                            "editable",
-                            "labelTemplate",
-                            "screenReaderLabel",
-                            "attributeRef",
-                            "readOnlyStyle",
-                            "selectorSource",
-                            "selectPageSettings",
-                            "onChangeAction",
-                            "sourceVariable",
-                            "validation",
-                            "renderMode",
-                            "gotoPageSettings",
-                            "formattingInfo",
-                            "emptyOptionCaption",
-                            "nativeAccessibilitySettings"
-                        ]
-                    }
+                            "description": "Native accessibility settings."
+                        }
+                    },
+                    "required": [
+                        "$ID",
+                        "$Type",
+                        "name",
+                        "appearance",
+                        "tabIndex",
+                        "conditionalVisibilitySettings",
+                        "conditionalEditabilitySettings",
+                        "editable",
+                        "labelTemplate",
+                        "screenReaderLabel",
+                        "attributeRef",
+                        "readOnlyStyle",
+                        "selectorSource",
+                        "selectPageSettings",
+                        "onChangeAction",
+                        "sourceVariable",
+                        "validation",
+                        "renderMode",
+                        "gotoPageSettings",
+                        "formattingInfo",
+                        "emptyOptionCaption",
+                        "nativeAccessibilitySettings"
+                    ]
                 }
             }
         },
@@ -2541,20 +2602,7 @@
                                 "type": "array",
                                 "description": "List of widgets within the LayoutCallArgument.",
                                 "items": {
-                                    "oneOf": [
-                                        {
-                                            "$ref": "#/definitions/LayoutGrid"
-                                        },
-                                        {
-                                            "$ref": "#/definitions/DivContainer"
-                                        },
-                                        {
-                                            "$ref": "#/definitions/DataView"
-                                        },
-                                        {
-                                            "$ref": "#/definitions/DynamicText"
-                                        }
-                                    ]
+                                    "$ref": "#/definitions/Widget"
                                 }
                             }
                         },
@@ -2589,12 +2637,7 @@
         },
         "popupCloseAction": {
             "type": "string",
-            "description": "Close action when page is used as a popup",
-            "enum": [
-                "",
-                "ClosePage",
-                "CancelChanges"
-            ]
+            "description": "Close action when page is used as a popup. Buildin enum is ClosePage, CancelChanges.Or exist action button name of Pages$ActionButton #/definitions/ActionButton"
         },
         "popupWidth": {
             "type": "integer",
