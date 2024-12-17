@@ -26,10 +26,10 @@
                         "appearance": {
                             "$ID": "appearance-layoutgrid-1",
                             "$Type": "Pages$Appearance",
-                            "class": null,
-                            "style": null,
+                            "class": "",
+                            "style": "",
                             "designProperties": [],
-                            "dynamicClasses": null
+                            "dynamicClasses": ""
                         },
                         "tabIndex": 0,
                         "conditionalVisibilitySettings": null,
@@ -54,10 +54,10 @@
                                                 "appearance": {
                                                     "$ID": "appearance-dataview-1",
                                                     "$Type": "Pages$Appearance",
-                                                    "class": null,
-                                                    "style": null,
+                                                    "class": "",
+                                                    "style": "",
                                                     "designProperties": [],
-                                                    "dynamicClasses": null
+                                                    "dynamicClasses": ""
                                                 },
                                                 "tabIndex": 0,
                                                 "conditionalVisibilitySettings": null,
@@ -315,10 +315,10 @@
                                 "appearance": {
                                     "$ID": "appearance-layoutgridrow-1",
                                     "$Type": "Pages$Appearance",
-                                    "class": null,
-                                    "style": null,
+                                    "class": "",
+                                    "style": "",
                                     "designProperties": [],
-                                    "dynamicClasses": null
+                                    "dynamicClasses": ""
                                 },
                                 "verticalAlignment": "None",
                                 "horizontalAlignment": "None",
@@ -345,10 +345,10 @@
     "appearance": {
         "$ID": "appearance-page-1",
         "$Type": "Pages$Appearance",
-        "class": null,
-        "style": null,
+        "class": "",
+        "style": "",
         "designProperties": [],
-        "dynamicClasses": null
+        "dynamicClasses": ""
     },
     "allowedRoles": [
         "Administrator"
@@ -358,5 +358,5 @@
     "popupHeight": 600,
     "popupResizable": true,
     "markAsUsed": false,
-    "url": null
+    "url": ""
 }
