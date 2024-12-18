@@ -100,6 +100,7 @@
                             "enum": [
                                 "Text",
                                 "Key",
+                                "Image",
                                 "Value"
                             ]
                         },
@@ -369,6 +370,105 @@
                 "items"
             ]
         },
+          "ComparisonSearchField": {
+            "type": "object",
+            "properties": {
+                "$ID": {
+                    "type": "string",
+                    "description": "Unique identifier of the search field"
+                },
+                "$Type": {
+                    "type": "string",
+                    "description": "Type of the object, should be 'Pages$ComparisonSearchField'.",
+                    "const": "Pages$ComparisonSearchField"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "Name of the search field"
+                },
+                "caption": {
+                   "$ref": "#/definitions/Text"
+                },
+                "placeholder": {
+                   "$ref": "#/definitions/Text"
+                },
+                 "customDateFormat": {
+                    "type": "string",
+                    "description": "Custom date format to be used."
+                },
+                "type": {
+                    "type": "string",
+                    "description": "Type of the search field",
+                    "enum": [
+                        "Normal",
+                        "Date",
+                         "DateTime",
+                         "Time",
+                         "DatePart"
+                    ]
+                },
+                 "defaultValue": {
+                    "type": "string",
+                    "description": "Default value of the search field."
+                },
+                "attributeRef": {
+                     "type": "object",
+                    "description": "Reference to attribute.",
+                    "properties": {
+                        "$ID": {
+                            "type": "string",
+                            "description": "Unique identifier of the AttributeRef"
+                        },
+                        "$Type": {
+                            "type": "string",
+                            "description": "Type of the object, should be 'DomainModels$AttributeRef'.",
+                            "const": "DomainModels$AttributeRef"
+                        },
+                        "entityRef": {
+                            "type": [
+                                "object",
+                                "null"
+                            ],
+                             "description": "Entity Reference"
+                        },
+                        "attribute": {
+                            "type": "string",
+                            "description": "Reference to the attribute"
+                        }
+                    },
+                    "required": [
+                        "$ID",
+                        "$Type",
+                        "attribute"
+                    ]
+                },
+                "operator": {
+                    "type": "string",
+                    "description": "Operator of the search field.",
+                    "enum": [
+                         "Equal",
+                         "NotEqual",
+                         "Greater",
+                         "GreaterOrEqual",
+                         "Less",
+                         "LessOrEqual",
+                         "Contains"
+                    ]
+                }
+            },
+             "required": [
+                "$ID",
+                "$Type",
+                "name",
+                "caption",
+                "placeholder",
+                "customDateFormat",
+                "type",
+                "defaultValue",
+                "attributeRef",
+                "operator"
+            ]
+        },
         "SearchBar": {
             "type": "object",
             "description": "Settings for the search bar.",
@@ -386,104 +486,7 @@
                     "type": "array",
                     "description": "List of search fields.",
                     "items": {
-                        "type": "object",
-                        "description": "Placeholder for search fields.",
-                        "properties": {
-                            "$ID": {
-                                "type": "string",
-                                "description": "Unique identifier of the search field."
-                            },
-                            "$Type": {
-                                "type": "string",
-                                "description": "Type of the object, should be 'Pages$ComparisonSearchField'.",
-                                "const": "Pages$ComparisonSearchField"
-                            },
-                            "name": {
-                                "type": "string",
-                                "description": "Name of the search field"
-                            },
-                            "caption": {
-                                "$ref": "#/definitions/Text"
-                            },
-                            "placeholder": {
-                                "$ref": "#/definitions/Text"
-                            },
-                            "customDateFormat": {
-                                "type": "string",
-                                "description": "Custom date format."
-                            },
-                            "type": {
-                                "type": "string",
-                                "description": "Type of the search field",
-                                "enum": [
-                                    "Normal",
-                                    "Date",
-                                    "Enum"
-                                ]
-                            },
-                            "defaultValue": {
-                                "type": "string",
-                                "description": "Default value for the search field."
-                            },
-                            "attributeRef": {
-                                "type": "object",
-                                "description": "Reference to the attribute.",
-                                "properties": {
-                                    "$ID": {
-                                        "type": "string",
-                                        "description": "Unique identifier of the AttributeRef."
-                                    },
-                                    "$Type": {
-                                        "type": "string",
-                                        "description": "Type of the object, should be 'DomainModels$AttributeRef'.",
-                                        "const": "DomainModels$AttributeRef"
-                                    },
-                                    "entityRef": {
-                                        "type": [
-                                            "object",
-                                            "null"
-                                        ],
-                                        "description": "Entity Reference"
-                                    },
-                                    "attribute": {
-                                        "type": "string",
-                                        "description": "Reference to the attribute"
-                                    }
-                                },
-                                "required": [
-                                    "$ID",
-                                    "$Type",
-                                    "attribute"
-                                ]
-                            },
-                            "operator": {
-                                "type": "string",
-                                "description": "Operator to be used for the comparison.",
-                                "enum": [
-                                    "Equals",
-                                    "NotEquals",
-                                    "Greater",
-                                    "GreaterOrEquals",
-                                    "Smaller",
-                                    "SmallerOrEquals",
-                                    "Contains",
-                                    "StartsWith",
-                                    "EndsWith"
-                                ]
-                            }
-                        },
-                        "required": [
-                            "$ID",
-                            "$Type",
-                            "name",
-                            "caption",
-                            "placeholder",
-                            "customDateFormat",
-                            "type",
-                            "defaultValue",
-                            "attributeRef",
-                            "operator"
-                        ]
+                        "$ref": "#/definitions/Widget"
                     }
                 },
                 "type": {
@@ -1093,6 +1096,12 @@
         "BuildinWidget": {
             "oneOf": [
                 {
+                    "$ref": "#/definitions/ComparisonSearchField"
+                },
+                {
+                    "$ref": "#/definitions/DropDownSearchField"
+                },
+                {
                     "$ref": "#/definitions/LayoutGrid"
                 },
                 {
@@ -1533,6 +1542,142 @@
                 "$ID",
                 "$Type",
                 "translations"
+            ]
+        },
+        "DropDownSearchField": {
+            "type": "object",
+            "properties": {
+                "$ID": {
+                    "type": "string",
+                    "description": "Unique identifier of the dropdown search field"
+                },
+                "$Type": {
+                    "type": "string",
+                    "description": "Type of the object, should be 'Pages$DropDownSearchField'.",
+                    "const": "Pages$DropDownSearchField"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "Name of the widget"
+                },
+                "caption": {
+                    "$ref": "#/definitions/Text"
+                },
+                "placeholder": {
+                    "$ref": "#/definitions/Text"
+                },
+                "customDateFormat": {
+                    "type": "string",
+                    "description": "Custom date format."
+                },
+                "type": {
+                    "type": "string",
+                    "description": "Type of search field",
+                    "enum": [
+                        "Normal",
+                        "Date",
+                        "DateTime"
+                    ]
+                },
+                "defaultValue": {
+                    "type": "string",
+                    "description": "Default value for the search field"
+                },
+                "attributeRef": {
+                    "type": "object",
+                    "description": "Reference to attribute.",
+                    "properties": {
+                        "$ID": {
+                            "type": "string",
+                            "description": "Unique identifier of the AttributeRef"
+                        },
+                        "$Type": {
+                            "type": "string",
+                            "description": "Type of the object, should be 'DomainModels$AttributeRef'.",
+                            "const": "DomainModels$AttributeRef"
+                        },
+                        "entityRef": {
+                            "type": [
+                                "object",
+                                "null"
+                            ],
+                            "description": "Entity Reference"
+                        },
+                        "attribute": {
+                            "type": "string",
+                            "description": "Reference to the attribute"
+                        }
+                    },
+                    "required": [
+                        "$ID",
+                        "$Type",
+                        "attribute"
+                    ]
+                },
+                "operator": {
+                    "type": "string",
+                    "description": "Operator used in search query",
+                    "enum": [
+                        "Equal",
+                        "NotEqual",
+                        "Greater",
+                        "GreaterOrEqual",
+                        "Less",
+                        "LessOrEqual",
+                        "Contains"
+                    ]
+                },
+                "sortBar": {
+                    "type": "object",
+                    "description": "Settings for the sort bar",
+                    "properties": {
+                        "$ID": {
+                            "type": "string",
+                            "description": "Unique identifier of the Grid sort bar"
+                        },
+                        "$Type": {
+                            "type": "string",
+                            "description": "Type of the object, should be 'Pages$GridSortBar'.",
+                            "const": "Pages$GridSortBar"
+                        },
+                        "sortItems": {
+                            "type": "array",
+                            "description": "List of sort items",
+                            "items": {
+                                "type": "object",
+                                "description": "Placeholder for sort items."
+                            }
+                        }
+                    },
+                    "required": [
+                        "$ID",
+                        "$Type",
+                        "sortItems"
+                    ]
+                },
+                "xPathConstraint": {
+                    "type": "string",
+                    "description": "XPath constraint for the search field"
+                },
+                "allowMultipleSelect": {
+                    "type": "boolean",
+                    "description": "Indicates if multiple values can be selected"
+                }
+            },
+            "required": [
+                "$ID",
+                "$Type",
+                "name",
+                "caption",
+                "placeholder",
+                "customDateFormat",
+                "type",
+                "defaultValue",
+                "attributeRef",
+                "operator",
+                "sortBar",
+                "xPathConstraint",
+                "allowMultipleSelect"
             ]
         },
         "LayoutGridColumn": {
@@ -2218,6 +2363,7 @@
                             "enum": [
                                 "Text",
                                 "Key",
+                                "Image",
                                 "Value"
                             ]
                         },
