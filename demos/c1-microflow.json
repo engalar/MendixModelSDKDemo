@@ -1,5 +1,5 @@
 {
-    "$schema": "microflow.schema.json",
+    "$schema": "../schemas/microflow.schema.json",
     "$ID": "microflow-enroll-student-id",
     "$Type": "Microflows$Microflow",
     "name": "EnrollStudentInCourse",
@@ -128,7 +128,7 @@
         "$Type": "DataTypes$VoidType"
     },
     "markAsUsed": false,
-    "returnVariableName": null,
+    "returnVariableName": "null",
     "applyEntityAccess": false,
     "allowedModuleRoles": [],
     "microflowActionInfo": null,
@@ -137,10 +137,17 @@
     "concurrencyErrorMessage": {
         "$ID": "text-concurrency-error-id-1",
         "$Type": "Texts$Text",
-        "translations": []
+        "translations": [
+            {
+                "$ID": "3314cfdd-bbd5-4829-83ca-f2aa56dba202",
+                "$Type": "Texts$Translation",
+                "languageCode": "en_US",
+                "text": "some error message"
+            }
+        ]
     },
     "concurrencyErrorMicroflow": null,
-    "url": null,
+    "url": "",
     "urlSearchParameters": [],
-    "stableId": "microflow-enroll-student-id"
+    "stableId": "2eaec17a-0f82-4b56-a0c2-d5ca47bd0bc3"
 }

@@ -1,0 +1,72 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "Common Structure Schema for mendix model",
+    "definitions": {
+        "Identifiable": {
+            "type": "string",
+            "description": "Unique identifier. use for placeholer uniqe identifier for human readable name and later will replace with guid by model sdk"
+        },
+        "GUID": {
+            "type": "string",
+            "pattern": "[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}",
+            "description": "GUID of the object"
+        },
+        "Translation": {
+            "type": "object",
+            "properties": {
+                "$ID": {
+                    "$ref": "#/definitions/GUID"
+                },
+                "$Type": {
+                    "type": "string",
+                    "const": "Texts$Translation"
+                },
+                "languageCode": {
+                    "type": "string",
+                    "description": "Language code for the translation",
+                    "enum": [
+                        "en_US",
+                        "zh_CN",
+                        "zh_TW"
+                    ]
+                },
+                "text": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "$ID",
+                "$Type",
+                "languageCode",
+                "text"
+            ]
+        },
+        "Text": {
+            "type": "object",
+            "properties": {
+                "$ID": {
+                    "type": "string"
+                },
+                "$Type": {
+                    "type": "string",
+                    "enum": [
+                        "Texts$Text"
+                    ]
+                },
+                "translations": {
+                    "type": "array",
+                    "description": "List of translations for the text.",
+                    "minItems": 1,
+                    "items": {
+                        "$ref": "#/definitions/Translation"
+                    }
+                }
+            },
+            "required": [
+                "$ID",
+                "$Type",
+                "translations"
+            ]
+        }
+    }
+}

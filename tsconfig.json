@@ -3,7 +3,10 @@
         "experimentalDecorators": true,
         "outDir": "out",
         "skipLibCheck": true,
-        "sourceMap": true
+        "sourceMap": true,
+        // "target": "ES2015",
+        "typeRoots": ["./types", "./node_modules/@types"],
+        "types": ["global"]
     },
-    "include": ["src/**/*"]
+    "include": ["src/**/*", "types"]
 }

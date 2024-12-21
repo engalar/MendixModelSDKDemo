@@ -1,11 +1,18 @@
 {
+    "scripts": {
+        "start": "ts-node src/cli.ts"
+    },
     "dependencies": {
         "@wendellhu/redi": "^0.16.2",
         "mendixmodelsdk": "^4.93.0",
         "mendixplatformsdk": "^5.1.3",
-        "xlsx": "^0.18.5"
+        "node-persist": "^4.0.3",
+        "xlsx": "^0.18.5",
+        "yargs": "^17.7.2"
     },
     "devDependencies": {
+        "@types/node-persist": "^3.1.8",
+        "@types/yargs": "^17.0.33",
         "ts-node": "^10.9.2",
         "typescript": "^5.7.2"
     }

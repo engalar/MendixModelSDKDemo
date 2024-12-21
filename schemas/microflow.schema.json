@@ -2,16 +2,11 @@
     "$schema": "http://json-schema.org/draft-07/schema#",
     "title": "Microflow Structure Schema",
     "definitions": {
-        "Identifiable": {
-            "type": "object",
-            "properties": {
-                "$ID": {
-                    "type": "string",
-                    "description": "Unique identifier"
-                }
-            },
-            "required": [
-                "$ID"
+        "EntityQualifiedName": {
+            "type": "string",
+            "description": "Entity qualified name",
+            "examples": [
+                "SomeModuleName.EntityName"
             ]
         },
         "Size": {
@@ -75,29 +70,6 @@
             "required": [
                 "$ID",
                 "$Type"
-            ]
-        },
-        "Text": {
-            "type": "object",
-            "properties": {
-                "$ID": {
-                    "type": "string"
-                },
-                "$Type": {
-                    "type": "string",
-                    "enum": [
-                        "Texts$Text"
-                    ]
-                },
-                "translations": {
-                    "type": "array",
-                    "items": {}
-                }
-            },
-            "required": [
-                "$ID",
-                "$Type",
-                "translations"
             ]
         },
         "MicroflowObject": {
@@ -257,7 +229,7 @@
                     ]
                 },
                 "entity": {
-                    "type": "string"
+                    "$ref": "#/definitions/EntityQualifiedName"
                 },
                 "range": {
                     "type": "object",
@@ -624,10 +596,11 @@
             ]
         },
         "allowConcurrentExecution": {
-            "type": "boolean"
+            "type": "boolean",
+            "description": "when false, need define either concurrencyErrorMessage or concurrencyErrorMicroflow"
         },
         "concurrencyErrorMessage": {
-            "$ref": "#/definitions/Text"
+            "$ref": "common.schema.json#/definitions/Text"
         },
         "concurrencyErrorMicroflow": {
             "type": [
@@ -643,7 +616,7 @@
             "items": {}
         },
         "stableId": {
-            "type": "string"
+            "$ref": "common.schema.json#/definitions/GUID"
         }
     },
     "required": [

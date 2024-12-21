@@ -1,7 +1,7 @@
 import { createNewApp } from "../lib/bootstrap";
 const name = process.argv[2];
 if (name) {
-    createNewApp("_ModelSdk1");
+    createNewApp(name);
 } else {
     console.log("No app name provided");
 }

@@ -1,6 +1,6 @@
 import { createElementFromJSON } from "mendixmodelsdk";
 import { boot } from "../lib/bootstrap";
-import { _saveToDumyFile } from "../lib/serialize";
+import { saveToFile } from "../lib/serialize";
 
 /* boot(async (model) => {
     // page
@@ -33,7 +33,7 @@ boot(async (model) => {
             const domain = await dm.load();
             const json = dm.toJSON();
             json["$schema"] = "../schemas/domain.schema.json";
-            await _saveToDumyFile(
+            await saveToFile(
                 JSON.stringify(json),
                 `${domain.containerAsModule.name}.domain.json`,
             );
@@ -45,7 +45,7 @@ boot(async (model) => {
             const microflow = await mf.load();
             const json = mf.toJSON();
             json["$schema"] = "../schemas/microflow.schema.json";
-            await _saveToDumyFile(
+            await saveToFile(
                 JSON.stringify(json),
                 `${microflow.qualifiedName}.microflow.json`,
             );
@@ -57,7 +57,7 @@ boot(async (model) => {
             const page = await pg.load();
             const json = pg.toJSON();
             json["$schema"] = "../schemas/page.schema.json";
-            await _saveToDumyFile(
+            await saveToFile(
                 JSON.stringify(json),
                 `${page.qualifiedName}.page.json`,
             );

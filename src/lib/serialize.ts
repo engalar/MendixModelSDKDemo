@@ -3,14 +3,18 @@ import * as path from "path";
 
 // _saveToDumyFile("abc", "a.txt");
 
-export async function _saveToDumyFile(data: string, file_name: string) {
+export async function saveToFile(
+    data: string,
+    file_name: string,
+    source: "demos" | "dumy" = "dumy",
+) {
     let currentDir = __dirname;
     let foundParent = false;
 
     while (!foundParent) {
         if (fs.existsSync(path.join(currentDir, "package.json"))) {
             foundParent = true;
-            const dumyFolder = path.join(currentDir, "dumy");
+            const dumyFolder = path.join(currentDir, source);
             if (!fs.existsSync(dumyFolder)) {
                 fs.mkdirSync(dumyFolder);
             }
@@ -33,14 +37,17 @@ export async function _saveToDumyFile(data: string, file_name: string) {
 
 // _readFromDumyFile("domain.structure.json").then(console.log);
 
-export async function _readFromDumyFile(file_name: string) {
+export async function readFromFile(
+    file_name: string,
+    source: "demos" | "dumy" = "dumy",
+) {
     let currentDir = __dirname;
     let foundParent = false;
 
     while (!foundParent) {
         if (fs.existsSync(path.join(currentDir, "package.json"))) {
             foundParent = true;
-            const dumyFolder = path.join(currentDir, "dumy");
+            const dumyFolder = path.join(currentDir, source);
             if (!fs.existsSync(dumyFolder)) {
                 // throw new Error("dumy folder not found");
                 throw new Error("dumy folder not found");

@@ -1,6 +1,6 @@
 import { IModel } from "mendixmodelsdk";
 import { MendixPlatformClient } from "mendixplatformsdk";
-import { _saveToDumyFile } from "./serialize";
+import { saveToFile } from "./serialize";
 
 export async function boot(
     cb: (model: IModel) => Promise<boolean>,
@@ -14,7 +14,7 @@ export async function boot(
     const workingCopy = workingCopyId
         ? app.getOnlineWorkingCopy(workingCopyId)
         : await app.createTemporaryWorkingCopy(branchName);
-    _saveToDumyFile(JSON.stringify(workingCopy), "currentWorkingCopy.json");
+    saveToFile(JSON.stringify(workingCopy), "currentWorkingCopy.json");
     const model = await workingCopy.openModel();
 
     if (await cb(model)) {
@@ -25,5 +25,9 @@ export async function boot(
 
 export async function createNewApp(name: string) {
     const client = new MendixPlatformClient();
-    const app = await client.createNewApp(name);
+    const app = await client.createNewApp(name, {
+        templateId: 'a2065e4a-bebd-4e13-ae5b-ef0bf89ebf4d' // https://marketplace.mendix.com/link/component/51830
+
+        //Releases V 10.12.41995
+    });
 }
