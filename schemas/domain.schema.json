@@ -1,0 +1,647 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "definitions": {
+        "CriticalGUID": {
+            "type": "string",
+            "format": "uuid",
+            "description": "GUID of the object. you can not give a human readable name first or will lead a error."
+        },
+        "GUID": {
+            "type": "string",
+            "format": "uuid",
+            "description": "GUID of the object. when new create system will replace with new guid, so you can give a human readable name first."
+        },
+        "Location": {
+            "type": "object",
+            "properties": {
+                "x": {
+                    "type": "integer"
+                },
+                "y": {
+                    "type": "integer"
+                }
+            },
+            "required": ["x", "y"]
+        },
+        "EntityAttribute": {
+            "type": "object",
+            "properties": {
+                "$ID": {
+                    "$ref": "#/definitions/GUID"
+                },
+                "$Type": {
+                    "type": "string",
+                    "enum": ["DomainModels$Attribute"]
+                },
+                "name": {
+                    "type": "string"
+                },
+                "dataStorageGuid": {
+                    "$ref": "#/definitions/CriticalGUID"
+                },
+                "type": {
+                    "$ref": "#/definitions/AttributeType"
+                },
+                "documentation": {
+                    "type": "string"
+                },
+                "value": {
+                    "$ref": "#/definitions/Value"
+                },
+                "exportLevel": {
+                    "type": "string",
+                    "enum": ["Hidden"]
+                }
+            },
+            "required": [
+                "$ID",
+                "$Type",
+                "name",
+                "dataStorageGuid",
+                "type",
+                "documentation",
+                "value",
+                "exportLevel"
+            ]
+        },
+        "AttributeType": {
+            "type": "object",
+            "properties": {
+                "$ID": {
+                    "$ref": "#/definitions/GUID"
+                },
+                "$Type": {
+                    "type": "string",
+                    "description": "Type of object, should be one of the allowed values.",
+                    "enum": [
+                        "DomainModels$DateTimeAttributeType",
+                        "DomainModels$StringAttributeType",
+                        "DomainModels$IntegerAttributeType",
+                        "DomainModels$BooleanAttributeType",
+                        "DomainModels$EnumerationAttributeType",
+                        "DomainModels$DecimalAttributeType",
+                        "DomainModels$LongAttributeType",
+                        "DomainModels$HashedStringAttributeType",
+                        "DomainModels$AutoNumberAttributeType",
+                        "DomainModels$BinaryAttributeType"
+                    ]
+                },
+                "length": {
+                    "type": "integer"
+                }
+            },
+            "required": ["$ID", "$Type"]
+        },
+        "Value": {
+            "type": "object",
+            "properties": {
+                "$ID": {
+                    "$ref": "#/definitions/GUID"
+                },
+                "$Type": {
+                    "type": "string",
+                    "description": "Type of object, should be one of the allowed values.",
+                    "enum": ["DomainModels$StoredValue"]
+                },
+                "defaultValue": {
+                    "type": "string"
+                }
+            },
+            "required": ["$ID", "$Type"]
+        },
+        "Generalization": {
+            "type": "object",
+            "properties": {
+                "$ID": {
+                    "$ref": "#/definitions/GUID"
+                },
+                "hasChangedDate": {
+                    "type": "boolean"
+                },
+                "hasCreatedDate": {
+                    "type": "boolean"
+                },
+                "hasOwner": {
+                    "type": "boolean"
+                },
+                "hasChangedBy": {
+                    "type": "boolean"
+                },
+                "persistable": {
+                    "type": "boolean"
+                },
+                "generalization": {
+                    "type": "string",
+                    "description": "Name of the generalization entity name",
+                    "examples": ["System.User"]
+                }
+            },
+            "required": ["$ID", "$Type"]
+        },
+        "Association": {
+            "title": "DomainModels$Association",
+            "description": "Schema for a DomainModels$Association object.",
+            "type": "object",
+            "required": [
+                "$ID",
+                "$Type",
+                "name",
+                "dataStorageGuid",
+                "type",
+                "owner",
+                "deleteBehavior",
+                "parent",
+                "exportLevel",
+                "child",
+                "parentConnection",
+                "childConnection"
+            ],
+            "properties": {
+                "$ID": {
+                    "type": "string",
+                    "description": "Unique identifier for the association."
+                },
+                "$Type": {
+                    "type": "string",
+                    "description": "Type of the object, should be 'DomainModels$Association'.",
+                    "const": "DomainModels$Association"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "Name of the association."
+                },
+                "dataStorageGuid": {
+                    "$ref": "#/definitions/CriticalGUID"
+                },
+                "type": {
+                    "type": "string",
+                    "description": "Type of the association, e.g., 'Reference'."
+                },
+                "owner": {
+                    "type": "string",
+                    "description": "Owner of the association, e.g., 'Default'."
+                },
+                "deleteBehavior": {
+                    "type": "object",
+                    "description": "Defines the delete behavior of the association.",
+                    "required": [
+                        "$ID",
+                        "$Type",
+                        "parentDeleteBehavior",
+                        "childDeleteBehavior",
+                        "parentErrorMessage",
+                        "childErrorMessage"
+                    ],
+                    "properties": {
+                        "$ID": {
+                            "type": "string",
+                            "description": "Unique identifier for the delete behavior."
+                        },
+                        "$Type": {
+                            "type": "string",
+                            "description": "Type of the object, should be 'DomainModels$AssociationDeleteBehavior'.",
+                            "const": "DomainModels$AssociationDeleteBehavior"
+                        },
+                        "parentDeleteBehavior": {
+                            "type": "string",
+                            "description": "Delete behavior for the parent object, e.g., 'DeleteMeButKeepReferences'."
+                        },
+                        "childDeleteBehavior": {
+                            "type": "string",
+                            "description": "Delete behavior for the child object, e.g., 'DeleteMeButKeepReferences'."
+                        },
+                        "parentErrorMessage": {
+                            "type": ["string", "null"],
+                            "description": "Error message for parent delete behavior."
+                        },
+                        "childErrorMessage": {
+                            "type": ["string", "null"],
+                            "description": "Error message for child delete behavior."
+                        }
+                    }
+                },
+                "parent": {
+                    "type": "string",
+                    "description": "GUID of the parent object."
+                },
+                "documentation": {
+                    "type": "string",
+                    "description": "Documentation for the association.",
+                    "default": ""
+                },
+                "source": {
+                    "type": ["null", "string"],
+                    "description": "Source of the association. (Can be null)."
+                },
+                "exportLevel": {
+                    "type": "string",
+                    "description": "Export level of the association, e.g., 'Hidden'.",
+                    "enum": ["Hidden", "Public"]
+                },
+                "child": {
+                    "type": "string",
+                    "description": "GUID of the child object."
+                },
+                "parentConnection": {
+                    "type": "object",
+                    "description": "Parent connection details.",
+                    "required": ["x", "y"],
+                    "properties": {
+                        "x": {
+                            "type": "integer",
+                            "description": "x coordinate of the parent connection."
+                        },
+                        "y": {
+                            "type": "integer",
+                            "description": "y coordinate of the parent connection."
+                        }
+                    }
+                },
+                "childConnection": {
+                    "type": "object",
+                    "description": "Child connection details.",
+                    "required": ["x", "y"],
+                    "properties": {
+                        "x": {
+                            "type": "integer",
+                            "description": "x coordinate of the child connection."
+                        },
+                        "y": {
+                            "type": "integer",
+                            "description": "y coordinate of the child connection."
+                        }
+                    }
+                }
+            }
+        },
+        "MemberAccess": {
+            "type": "object",
+            "properties": {
+                "$ID": {
+                    "$ref": "#/definitions/GUID"
+                },
+                "$Type": {
+                    "type": "string",
+                    "enum": ["DomainModels$MemberAccess"]
+                },
+                "attribute": {
+                    "type": ["string", "null"]
+                },
+                "association": {
+                    "type": ["null", "string"]
+                },
+                "accessRights": {
+                    "type": "string",
+                    "enum": ["ReadWrite", "ReadOnly", "None"]
+                }
+            },
+            "required": [
+                "$ID",
+                "$Type",
+                "attribute",
+                "association",
+                "accessRights"
+            ]
+        },
+        "AccessRule": {
+            "type": "object",
+            "properties": {
+                "$ID": {
+                    "$ref": "#/definitions/GUID"
+                },
+                "$Type": {
+                    "type": "string",
+                    "enum": ["DomainModels$AccessRule"]
+                },
+                "memberAccesses": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/MemberAccess"
+                    }
+                },
+                "moduleRoles": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "documentation": {
+                    "type": "string"
+                },
+                "allowCreate": {
+                    "type": "boolean"
+                },
+                "allowDelete": {
+                    "type": "boolean"
+                },
+                "defaultMemberAccessRights": {
+                    "type": "string",
+                    "enum": ["ReadWrite", "ReadOnly", "None"]
+                },
+                "xPathConstraintCaption": {
+                    "type": "string"
+                },
+                "xPathConstraint": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "$ID",
+                "$Type",
+                "memberAccesses",
+                "moduleRoles",
+                "documentation",
+                "allowCreate",
+                "allowDelete",
+                "defaultMemberAccessRights",
+                "xPathConstraintCaption",
+                "xPathConstraint"
+            ]
+        },
+        "Translation": {
+            "type": "object",
+            "properties": {
+                "$ID": {
+                    "$ref": "#/definitions/GUID"
+                },
+                "$Type": {
+                    "type": "string",
+                    "const": "Texts$Translation"
+                },
+                "languageCode": {
+                    "type": "string"
+                },
+                "text": {
+                    "type": "string"
+                }
+            },
+            "required": ["$ID", "$Type", "languageCode", "text"]
+        },
+        "Text": {
+            "type": "object",
+            "properties": {
+                "$ID": {
+                    "$ref": "#/definitions/GUID"
+                },
+                "$Type": {
+                    "type": "string",
+                    "const": "Texts$Text"
+                },
+                "translations": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Translation"
+                    }
+                }
+            },
+            "required": ["$ID", "$Type", "translations"]
+        },
+        "RequiredRuleInfo": {
+            "type": "object",
+            "properties": {
+                "$ID": {
+                    "$ref": "#/definitions/GUID"
+                },
+                "$Type": {
+                    "type": "string",
+                    "const": "DomainModels$RequiredRuleInfo"
+                }
+            },
+            "required": ["$ID", "$Type"]
+        },
+        "UniqueRuleInfo": {
+            "type": "object",
+            "properties": {
+                "$ID": {
+                    "$ref": "#/definitions/GUID"
+                },
+                "$Type": {
+                    "type": "string",
+                    "const": "DomainModels$UniqueRuleInfo"
+                }
+            },
+            "required": ["$ID", "$Type"]
+        },
+        "ValidationRule": {
+            "type": "object",
+            "properties": {
+                "$ID": {
+                    "$ref": "#/definitions/GUID"
+                },
+                "$Type": {
+                    "type": "string",
+                    "const": "DomainModels$ValidationRule"
+                },
+                "attribute": {
+                    "type": "string"
+                },
+                "errorMessage": {
+                    "$ref": "#/definitions/Text"
+                },
+                "ruleInfo": {
+                    "oneOf": [
+                        {
+                            "$ref": "#/definitions/RequiredRuleInfo"
+                        },
+                        {
+                            "$ref": "#/definitions/UniqueRuleInfo"
+                        }
+                    ]
+                }
+            },
+            "required": [
+                "$ID",
+                "$Type",
+                "attribute",
+                "errorMessage",
+                "ruleInfo"
+            ]
+        },
+        "EntityIndex": {
+            "type": "object",
+            "properties": {
+                "$ID": {
+                    "$ref": "#/definitions/GUID"
+                },
+                "$Type": {
+                    "type": "string",
+                    "const": "DomainModels$Index"
+                },
+                "dataStorageGuid": {
+                    "$ref": "#/definitions/CriticalGUID"
+                },
+                "attributes": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "$ID": {
+                                "$ref": "#/definitions/GUID"
+                            },
+                            "$Type": {
+                                "type": "string",
+                                "const": "DomainModels$IndexedAttribute"
+                            },
+                            "type": {
+                                "type": "string",
+                                "enum": ["Normal"]
+                            },
+                            "attribute": {
+                                "$ref": "#/definitions/GUID"
+                            },
+                            "ascending": {
+                                "type": "boolean"
+                            }
+                        },
+                        "required": [
+                            "$ID",
+                            "$Type",
+                            "type",
+                            "attribute",
+                            "ascending"
+                        ]
+                    }
+                },
+                "includeInOffline": {
+                    "type": "boolean"
+                }
+            },
+            "required": [
+                "$ID",
+                "$Type",
+                "dataStorageGuid",
+                "attributes",
+                "includeInOffline"
+            ]
+        }
+    },
+    "type": "object",
+    "properties": {
+        "$ID": {
+            "$ref": "#/definitions/GUID",
+            "description": "Unique identifier of the domain object",
+            "examples": ["3e2e6b3a-4c6f-4c5f-8f4e-2e6b3a4c6f4c"]
+        },
+        "$Type": {
+            "type": "string",
+            "enum": ["DomainModels$DomainModel"]
+        },
+        "documentation": {
+            "type": "string"
+        },
+        "entities": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "description": "Domain entity",
+                "properties": {
+                    "$ID": {
+                        "$ref": "#/definitions/GUID"
+                    },
+                    "$Type": {
+                        "type": "string",
+                        "enum": ["DomainModels$Entity"]
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "dataStorageGuid": {
+                        "$ref": "#/definitions/CriticalGUID"
+                    },
+                    "location": {
+                        "$ref": "#/definitions/Location"
+                    },
+                    "documentation": {
+                        "type": "string"
+                    },
+                    "generalization": {
+                        "$ref": "#/definitions/Generalization"
+                    },
+                    "attributes": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/definitions/EntityAttribute"
+                        }
+                    },
+                    "validationRules": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/definitions/ValidationRule"
+                        }
+                    },
+                    "eventHandlers": {
+                        "type": "array",
+                        "const": []
+                    },
+                    "indexes": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/definitions/EntityIndex"
+                        }
+                    },
+                    "accessRules": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/definitions/AccessRule"
+                        }
+                    },
+                    "image": {
+                        "type": ["null", "string"]
+                    },
+                    "imageData": {
+                        "type": "string"
+                    },
+                    "source": {
+                        "type": ["null", "string"]
+                    },
+                    "exportLevel": {
+                        "type": "string",
+                        "enum": ["Hidden"]
+                    }
+                },
+                "required": [
+                    "$ID",
+                    "$Type",
+                    "name",
+                    "dataStorageGuid",
+                    "location",
+                    "documentation",
+                    "generalization",
+                    "attributes",
+                    "validationRules",
+                    "eventHandlers",
+                    "indexes",
+                    "accessRules",
+                    "image",
+                    "imageData",
+                    "source",
+                    "exportLevel"
+                ]
+            }
+        },
+        "annotations": {
+            "type": "array",
+            "items": {}
+        },
+        "associations": {
+            "type": "array",
+            "items": {
+                "$ref": "#/definitions/Association"
+            }
+        },
+        "crossAssociations": {
+            "type": "array",
+            "items": {}
+        }
+    },
+    "required": [
+        "$ID",
+        "$Type",
+        "documentation",
+        "entities",
+        "annotations",
+        "associations",
+        "crossAssociations"
+    ]
+}
+

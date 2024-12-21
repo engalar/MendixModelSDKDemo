@@ -1,0 +1,146 @@
+{
+    "$schema": "microflow.schema.json",
+    "$ID": "microflow-enroll-student-id",
+    "$Type": "Microflows$Microflow",
+    "name": "EnrollStudentInCourse",
+    "documentation": "Microflow to enroll a student in a course.",
+    "excluded": false,
+    "exportLevel": "Hidden",
+    "objectCollection": {
+        "$ID": "object-collection-enroll-student-id",
+        "$Type": "Microflows$MicroflowObjectCollection",
+        "objects": [
+            {
+                "$ID": "start-event-enroll-student-id",
+                "$Type": "Microflows$StartEvent",
+                "relativeMiddlePoint": {
+                    "x": 50,
+                    "y": 50
+                },
+                "size": {
+                    "width": 50,
+                    "height": 50
+                }
+            },
+            {
+                "$ID": "end-event-enroll-student-id",
+                "$Type": "Microflows$EndEvent",
+                "relativeMiddlePoint": {
+                    "x": 400,
+                    "y": 50
+                },
+                "size": {
+                    "width": 50,
+                    "height": 50
+                },
+                "returnValue": null,
+                "documentation": null
+            },
+            {
+                "$ID": "action-create-enrollment-id",
+                "$Type": "Microflows$ActionActivity",
+                "relativeMiddlePoint": {
+                    "x": 200,
+                    "y": 50
+                },
+                "size": {
+                    "width": 100,
+                    "height": 50
+                },
+                "action": {
+                    "$ID": "action-create-enrollment-action-id",
+                    "$Type": "Microflows$RetrieveAction",
+                    "errorHandlingType": "Rollback",
+                    "retrieveSource": {
+                        "$ID": "action-create-enrollment-retrieve-source-id",
+                        "$Type": "Microflows$DatabaseRetrieveSource",
+                        "entity": "entity-enrollment-id",
+                        "range": {
+                            "$ID": "action-create-enrollment-range-id",
+                            "$Type": "Microflows$ConstantRange",
+                            "singleObject": true
+                        },
+                        "xPathConstraint": "",
+                        "sortItemList": {
+                            "$ID": "action-create-enrollment-sort-item-list-id",
+                            "$Type": "Microflows$SortItemList",
+                            "items": []
+                        }
+                    },
+                    "outputVariableName": "newEnrollment"
+                },
+                "disabled": false,
+                "caption": "Create New Enrollment",
+                "autoGenerateCaption": false,
+                "backgroundColor": "Default",
+                "documentation": ""
+            }
+        ]
+    },
+    "flows": [
+        {
+            "$ID": "flow-start-to-create-enrollment",
+            "$Type": "Microflows$SequenceFlow",
+            "origin": "start-event-enroll-student-id",
+            "destination": "action-create-enrollment-id",
+            "originConnectionIndex": 1,
+            "destinationConnectionIndex": 1,
+            "originBezierVector": {
+                "width": 0,
+                "height": 0
+            },
+            "destinationBezierVector": {
+                "width": 0,
+                "height": 0
+            },
+            "lineType": "BezierCurve",
+            "caseValue": {
+                "$ID": "no-case-id-1",
+                "$Type": "Microflows$NoCase"
+            },
+            "isErrorHandler": false
+        },
+        {
+            "$ID": "flow-create-enrollment-to-end",
+            "$Type": "Microflows$SequenceFlow",
+            "origin": "action-create-enrollment-id",
+            "destination": "end-event-enroll-student-id",
+            "originConnectionIndex": 1,
+            "destinationConnectionIndex": 1,
+            "originBezierVector": {
+                "width": 0,
+                "height": 0
+            },
+            "destinationBezierVector": {
+                "width": 0,
+                "height": 0
+            },
+            "lineType": "BezierCurve",
+            "caseValue": {
+                "$ID": "no-case-id-2",
+                "$Type": "Microflows$NoCase"
+            },
+            "isErrorHandler": false
+        }
+    ],
+    "microflowReturnType": {
+        "$ID": "void-type-id-1",
+        "$Type": "DataTypes$VoidType"
+    },
+    "markAsUsed": false,
+    "returnVariableName": null,
+    "applyEntityAccess": false,
+    "allowedModuleRoles": [],
+    "microflowActionInfo": null,
+    "workflowActionInfo": null,
+    "allowConcurrentExecution": false,
+    "concurrencyErrorMessage": {
+        "$ID": "text-concurrency-error-id-1",
+        "$Type": "Texts$Text",
+        "translations": []
+    },
+    "concurrencyErrorMicroflow": null,
+    "url": null,
+    "urlSearchParameters": [],
+    "stableId": "microflow-enroll-student-id"
+}

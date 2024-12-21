@@ -1,0 +1,144 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "type": "object",
+    "properties": {
+        "type": {
+            "oneOf": [
+                {
+                    "enum": ["Page"],
+                    "description": "表示mendix页面"
+                }
+            ]
+        },
+        "description": { "type": "string" },
+        "name": { "type": "string" },
+        "canvasWidth": { "type": "integer" },
+        "title": {
+            "type": "object",
+            "properties": {
+                "languageCode": { "type": "string" },
+                "text": { "type": "string" }
+            },
+            "required": ["languageCode", "text"]
+        },
+        "layout": { "$ref": "#/definitions/layout" },
+        "allowedRoles": {
+            "type": "array",
+            "items": { "type": "string" }
+        },
+        "include": {
+            "type": "array",
+            "items": { "type": "string" }
+        }
+    },
+    "required": [
+        "type",
+        "name",
+        "canvasWidth",
+        "title",
+        "layout",
+        "allowedRoles"
+    ],
+    "definitions": {
+        "layout": {
+            "type": "object",
+            "properties": {
+                "type": { "type": "string", "enum": ["Layout"] },
+                "description": { "type": "string" },
+                "name": { "type": "string" },
+                "arguments": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "parameter": { "type": "string" },
+                            "widgets": {
+                                "type": "array",
+                                "items": {
+                                    "oneOf": [
+                                        { "$ref": "#/definitions/widget" },
+                                        { "$ref": "#/definitions/layout" }
+                                    ]
+                                }
+                            }
+                        },
+                        "required": ["parameter", "widgets"]
+                    }
+                }
+            },
+            "required": ["type", "name", "arguments"]
+        },
+        "widget": {
+            "type": "object",
+            "properties": {
+                "type": { "type": "string" },
+                "description": { "type": "string" },
+                "name": { "type": "string" },
+                "appearance": {
+                    "type": "object",
+                    "properties": {
+                        "class": { "type": "string" },
+                        "designProperties": {
+                            "type": "array",
+                            "items": {
+                                "type": "object",
+                                "properties": {
+                                    "key": { "type": "string" },
+                                    "value": { "type": "string" }
+                                },
+                                "required": ["key", "value"]
+                            }
+                        }
+                    }
+                },
+                "content": {
+                    "type": "object",
+                    "properties": {
+                        "translations": {
+                            "type": "array",
+                            "items": {
+                                "type": "object",
+                                "properties": {
+                                    "languageCode": { "type": "string" },
+                                    "text": { "type": "string" }
+                                },
+                                "required": ["languageCode", "text"]
+                            }
+                        }
+                    }
+                },
+                "renderMode": { "type": "string" },
+                "rows": {
+                    "type": "array",
+                    "items": { "$ref": "#/definitions/row" }
+                }
+            },
+            "required": ["type", "name"]
+        },
+        "row": {
+            "type": "object",
+            "properties": {
+                "type": { "type": "string", "enum": ["Row"] },
+                "description": { "type": "string" },
+                "columns": {
+                    "type": "array",
+                    "items": { "$ref": "#/definitions/column" }
+                }
+            },
+            "required": ["type", "columns"]
+        },
+        "column": {
+            "type": "object",
+            "properties": {
+                "type": { "type": "string", "enum": ["Column"] },
+                "description": { "type": "string" },
+                "weight": { "type": "integer" },
+                "widgets": {
+                    "type": "array",
+                    "items": { "$ref": "#/definitions/widget" }
+                }
+            },
+            "required": ["type", "weight", "widgets"]
+        }
+    }
+}

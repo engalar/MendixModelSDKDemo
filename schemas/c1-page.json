@@ -1,0 +1,39 @@
+{
+    "$schema": "../schemas/page.schema.json",
+    "$ID": "page-course-enrollment-id",
+    "$Type": "Pages$Page",
+    "name": "CourseEnrollmentPage",
+    "documentation": "Page for course enrollment.",
+    "excluded": false,
+    "exportLevel": "Hidden",
+    "canvasWidth": 1000,
+    "canvasHeight": 600,
+    "parameters": [],
+    "layoutCall": {
+        "$ID": "page-layout-call-id",
+        "$Type": "Pages$LayoutCall",
+        "layout": "layout-main-id",
+        "arguments": []
+    },
+    "title": {
+        "$ID": "page-title-text-id",
+        "$Type": "Texts$Text",
+        "translations": []
+    },
+    "appearance": {
+        "$ID": "page-appearance-id",
+        "$Type": "Pages$Appearance",
+        "class": "container",
+        "style": "",
+        "designProperties": [],
+        "dynamicClasses": ""
+    },
+    "allowedRoles": [],
+    "popupCloseAction": "",
+    "popupWidth": 500,
+    "popupHeight": 500,
+    "popupResizable": false,
+    "markAsUsed": false,
+    "url": ""
+}
+

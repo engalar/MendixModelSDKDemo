@@ -1,0 +1,272 @@
+{
+    "$schema": "domain.schema.json",
+    "$ID": "domain-model-id-1",
+    "$Type": "DomainModels$DomainModel",
+    "documentation": "Domain model for student course registration system.",
+    "entities": [
+        {
+            "$ID": "entity-student-id",
+            "$Type": "DomainModels$Entity",
+            "name": "Student",
+            "dataStorageGuid": "data-storage-student-guid",
+            "location": {
+                "x": 100,
+                "y": 100
+            },
+            "documentation": "Represents a student in the system.",
+            "generalization": {
+                "$ID": "generalization-student-id",
+                "hasChangedDate": false,
+                "hasCreatedDate": false,
+                "hasOwner": false,
+                "hasChangedBy": false,
+                "persistable": true,
+                "$Type": "DomainModels$NoGeneralization"
+            },
+            "attributes": [
+                {
+                    "$ID": "attribute-student-id",
+                    "$Type": "DomainModels$Attribute",
+                    "name": "StudentID",
+                    "dataStorageGuid": "data-storage-student-id-guid",
+                    "type": {
+                        "$ID": "string-attribute-type-id-1",
+                        "$Type": "DomainModels$StringAttributeType"
+                    },
+                    "documentation": "Unique identifier for a student.",
+                    "value": {
+                        "$ID": "stored-value-student-id-1",
+                        "$Type": "DomainModels$StoredValue"
+                    },
+                    "exportLevel": "Hidden"
+                },
+                {
+                    "$ID": "attribute-student-name",
+                    "$Type": "DomainModels$Attribute",
+                    "dataStorageGuid": "data-storage-student-name-guid",
+                    "name": "StudentName",
+                    "type": {
+                        "$ID": "string-attribute-type-id-2",
+                        "$Type": "DomainModels$StringAttributeType"
+                    },
+                    "documentation": "Name of the student.",
+                    "value": {
+                        "$ID": "stored-value-student-name-1",
+                        "$Type": "DomainModels$StoredValue"
+                    },
+                    "exportLevel": "Hidden"
+                }
+            ],
+            "validationRules": [],
+            "eventHandlers": [],
+            "indexes": [],
+            "accessRules": [],
+            "image": null,
+            "imageData": "",
+            "source": null,
+            "exportLevel": "Hidden"
+        },
+        {
+            "$ID": "entity-course-id",
+            "$Type": "DomainModels$Entity",
+            "name": "Course",
+            "dataStorageGuid": "data-storage-course-guid",
+            "location": {
+                "x": 300,
+                "y": 100
+            },
+            "documentation": "Represents a course in the system.",
+            "generalization": {
+                "$ID": "generalization-course-id",
+                "hasChangedDate": false,
+                "hasCreatedDate": false,
+                "hasOwner": false,
+                "hasChangedBy": false,
+                "persistable": true,
+                "$Type": "DomainModels$NoGeneralization"
+            },
+            "attributes": [
+                {
+                    "$ID": "attribute-course-id",
+                    "$Type": "DomainModels$Attribute",
+                    "name": "CourseID",
+                    "dataStorageGuid": "data-storage-course-id-guid",
+                    "type": {
+                        "$ID": "string-attribute-type-id-3",
+                        "$Type": "DomainModels$StringAttributeType"
+                    },
+                    "documentation": "Unique identifier for a course.",
+                    "value": {
+                        "$ID": "stored-value-course-id-1",
+                        "$Type": "DomainModels$StoredValue"
+                    },
+                    "exportLevel": "Hidden"
+                },
+                {
+                    "$ID": "attribute-course-name",
+                    "$Type": "DomainModels$Attribute",
+                    "dataStorageGuid": "data-storage-course-name-guid",
+                    "name": "CourseName",
+                    "type": {
+                        "$ID": "string-attribute-type-id-4",
+                        "$Type": "DomainModels$StringAttributeType"
+                    },
+                    "documentation": "Name of the course.",
+                    "value": {
+                        "$ID": "stored-value-course-name-1",
+                        "$Type": "DomainModels$StoredValue"
+                    },
+                    "exportLevel": "Hidden"
+                },
+                {
+                    "$ID": "attribute-course-credits",
+                    "$Type": "DomainModels$Attribute",
+                    "dataStorageGuid": "data-storage-course-credits-guid",
+                    "name": "CourseCredits",
+                    "type": {
+                        "$ID": "integer-attribute-type-id-1",
+                        "$Type": "DomainModels$IntegerAttributeType"
+                    },
+                    "documentation": "Credits for the course",
+                    "value": {
+                        "$ID": "stored-value-course-credits-1",
+                        "$Type": "DomainModels$StoredValue"
+                    },
+                    "exportLevel": "Hidden"
+                }
+            ],
+            "validationRules": [],
+            "eventHandlers": [],
+            "indexes": [],
+            "accessRules": [],
+            "image": null,
+            "imageData": "",
+            "source": null,
+            "exportLevel": "Hidden"
+        },
+        {
+            "$ID": "entity-enrollment-id",
+            "$Type": "DomainModels$Entity",
+            "name": "Enrollment",
+            "dataStorageGuid": "data-storage-enrollment-guid",
+            "location": {
+                "x": 500,
+                "y": 100
+            },
+            "documentation": "Represents a student's enrollment in a course.",
+            "generalization": {
+                "$ID": "generalization-enrollment-id",
+                "hasChangedDate": false,
+                "hasCreatedDate": false,
+                "hasOwner": false,
+                "hasChangedBy": false,
+                "persistable": true,
+                "$Type": "DomainModels$NoGeneralization"
+            },
+            "attributes": [
+                {
+                    "$ID": "attribute-enrollment-id",
+                    "$Type": "DomainModels$Attribute",
+                    "name": "EnrollmentID",
+                    "dataStorageGuid": "data-storage-enrollment-id-guid",
+                    "type": {
+                        "$ID": "string-attribute-type-id-5",
+                        "$Type": "DomainModels$StringAttributeType"
+                    },
+                    "documentation": "Unique identifier for enrollment.",
+                    "value": {
+                        "$ID": "stored-value-enrollment-id-1",
+                        "$Type": "DomainModels$StoredValue"
+                    },
+                    "exportLevel": "Hidden"
+                },
+                {
+                    "$ID": "attribute-enrollment-date",
+                    "$Type": "DomainModels$Attribute",
+                    "name": "EnrollmentDate",
+                    "dataStorageGuid": "data-storage-enrollment-date-guid",
+                    "type": {
+                        "$ID": "datetime-attribute-type-id-1",
+                        "$Type": "DomainModels$DateTimeAttributeType"
+                    },
+                    "documentation": "Date of enrollment.",
+                    "value": {
+                        "$ID": "stored-value-enrollment-date-1",
+                        "$Type": "DomainModels$StoredValue"
+                    },
+                    "exportLevel": "Hidden"
+                }
+            ],
+            "validationRules": [],
+            "eventHandlers": [],
+            "indexes": [],
+            "accessRules": [],
+            "image": null,
+            "imageData": "",
+            "source": null,
+            "exportLevel": "Hidden"
+        }
+    ],
+    "annotations": [],
+    "associations": [
+        {
+            "$ID": "association-student-enrollment-id",
+            "$Type": "DomainModels$Association",
+            "name": "StudentEnrollment",
+            "dataStorageGuid": "data-storage-student-enrollment-guid",
+            "type": "ReferenceSet",
+            "owner": "Default",
+            "deleteBehavior": {
+                "$ID": "association-delete-behavior-id-1",
+                "$Type": "DomainModels$AssociationDeleteBehavior",
+                "parentDeleteBehavior": "DeleteMeButKeepReferences",
+                "childDeleteBehavior": "DeleteMeButKeepReferences",
+                "parentErrorMessage": null,
+                "childErrorMessage": null
+            },
+            "parent": "entity-student-id",
+            "documentation": "Association between a student and their enrollments",
+            "source": null,
+            "exportLevel": "Hidden",
+            "child": "entity-enrollment-id",
+            "parentConnection": {
+                "x": 0,
+                "y": 30
+            },
+            "childConnection": {
+                "x": 100,
+                "y": 30
+            }
+        },
+        {
+            "$ID": "association-course-enrollment-id",
+            "$Type": "DomainModels$Association",
+            "name": "CourseEnrollment",
+            "dataStorageGuid": "data-storage-course-enrollment-guid",
+            "type": "ReferenceSet",
+            "owner": "Default",
+            "deleteBehavior": {
+                "$ID": "association-delete-behavior-id-2",
+                "$Type": "DomainModels$AssociationDeleteBehavior",
+                "parentDeleteBehavior": "DeleteMeButKeepReferences",
+                "childDeleteBehavior": "DeleteMeButKeepReferences",
+                "parentErrorMessage": null,
+                "childErrorMessage": null
+            },
+            "parent": "entity-course-id",
+            "documentation": "Association between a course and its enrollments",
+            "source": null,
+            "exportLevel": "Hidden",
+            "child": "entity-enrollment-id",
+            "parentConnection": {
+                "x": 0,
+                "y": 30
+            },
+            "childConnection": {
+                "x": 100,
+                "y": 30
+            }
+        }
+    ],
+    "crossAssociations": []
+}

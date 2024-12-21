@@ -1,0 +1,9 @@
+{
+    "compilerOptions": {
+        "experimentalDecorators": true,
+        "outDir": "out",
+        "skipLibCheck": true,
+        "sourceMap": true
+    },
+    "include": ["src/**/*"]
+}
