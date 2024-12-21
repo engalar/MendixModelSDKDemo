@@ -4,6 +4,15 @@ declare global {
         verbose?: boolean;
     }
 
+    interface ModelOptions extends GlobalOptions {
+        wc: boolean;
+    }
+    interface SessionOptions extends GlobalOptions {
+    }
+    interface ModuleOptions extends ModelOptions {
+
+    }
+
     interface AppCreateOptions extends GlobalOptions {
         appName: string;
     }
@@ -12,19 +21,23 @@ declare global {
         appName: string;
     }
 
-    interface WorkcopyCreateOptions extends GlobalOptions {
-        workcopyName: string;
+    interface AppSetOptions extends GlobalOptions {
+        appId: string;
     }
 
-    interface WorkcopySetOptions extends GlobalOptions {
-        workcopyName: string;
+    interface WorkcopyCreateOptions extends SessionOptions {
+        sessionName: string;
     }
 
-    interface ModelModuleCreateOptions extends GlobalOptions {
+    interface WorkcopySetOptions extends SessionOptions {
+        sessionName: string;
+    }
+
+    interface ModelModuleCreateOptions extends ModuleOptions {
         moduleName: string;
     }
 
-    interface ModelModuleSetOptions extends GlobalOptions {
+    interface ModelModuleSetOptions extends ModuleOptions {
         moduleName: string;
     }
 

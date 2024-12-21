@@ -4,7 +4,9 @@
         "outDir": "out",
         "skipLibCheck": true,
         "sourceMap": true,
-        // "target": "ES2015",
+        "module" : "commonjs",
+		"target" : "es2020",
+        "strict": true,
         "typeRoots": ["./types", "./node_modules/@types"],
         "types": ["global"]
     },
