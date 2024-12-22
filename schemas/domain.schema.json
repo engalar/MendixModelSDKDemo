@@ -2,43 +2,24 @@
     "$schema": "http://json-schema.org/draft-07/schema#",
     "description": "you must give a module name when gen a model, so i can confirm qulified name",
     "definitions": {
-        "CriticalGUID": {
-            "type": "string",
-            "format": "uuid",
-            "description": "GUID of the object. you can not give a human readable name first or will lead a error."
-        },
-        "GUID": {
-            "type": "string",
-            "format": "uuid",
-            "description": "GUID of the object. when new create system will replace with new guid, so you can give a human readable name first."
-        },
-        "Location": {
-            "type": "object",
-            "properties": {
-                "x": {
-                    "type": "integer"
-                },
-                "y": {
-                    "type": "integer"
-                }
-            },
-            "required": ["x", "y"]
-        },
         "EntityAttribute": {
             "type": "object",
             "properties": {
                 "$ID": {
-                    "$ref": "#/definitions/GUID"
+                    "$ref": "common.schema.json#/definitions/Identifiable"
                 },
                 "$Type": {
                     "type": "string",
                     "enum": ["DomainModels$Attribute"]
                 },
                 "name": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "big capital first letter",
+                    "examples": ["XASId", "StudentId"]
                 },
                 "dataStorageGuid": {
-                    "$ref": "#/definitions/CriticalGUID"
+                    "$ref": "common.schema.json#/definitions/GUID",
+                    "description": "strictly follow rule of GUID"
                 },
                 "type": {
                     "$ref": "#/definitions/AttributeType"
@@ -69,7 +50,7 @@
             "type": "object",
             "properties": {
                 "$ID": {
-                    "$ref": "#/definitions/GUID"
+                    "$ref": "common.schema.json#/definitions/Identifiable"
                 },
                 "$Type": {
                     "type": "string",
@@ -97,7 +78,7 @@
             "type": "object",
             "properties": {
                 "$ID": {
-                    "$ref": "#/definitions/GUID"
+                    "$ref": "common.schema.json#/definitions/Identifiable"
                 },
                 "$Type": {
                     "type": "string",
@@ -111,33 +92,60 @@
             "required": ["$ID", "$Type"]
         },
         "Generalization": {
-            "type": "object",
-            "properties": {
-                "$ID": {
-                    "$ref": "#/definitions/GUID"
+            "oneOf": [
+                {
+                    "type": "object",
+                    "properties": {
+                        "$ID": {
+                            "$ref": "common.schema.json#/definitions/Identifiable"
+                        },
+                        "$Type": {
+                            "type": "string",
+                            "const": "DomainModels$Generalization"
+                        },
+                        "generalization": {
+                            "$ref": "common.schema.json#/definitions/EntityQualifiedName"
+                        }
+                    },
+                    "required": ["$ID", "$Type", "generalization"]
                 },
-                "hasChangedDate": {
-                    "type": "boolean"
-                },
-                "hasCreatedDate": {
-                    "type": "boolean"
-                },
-                "hasOwner": {
-                    "type": "boolean"
-                },
-                "hasChangedBy": {
-                    "type": "boolean"
-                },
-                "persistable": {
-                    "type": "boolean"
-                },
-                "generalization": {
-                    "type": "string",
-                    "description": "Name of the generalization entity name",
-                    "examples": ["System.User"]
+                {
+                    "type": "object",
+                    "properties": {
+                        "$ID": {
+                            "$ref": "common.schema.json#/definitions/Identifiable"
+                        },
+                        "$Type": {
+                            "type": "string",
+                            "const": "DomainModels$NoGeneralization"
+                        },
+                        "hasChangedDate": {
+                            "type": "boolean"
+                        },
+                        "hasCreatedDate": {
+                            "type": "boolean"
+                        },
+                        "hasOwner": {
+                            "type": "boolean"
+                        },
+                        "hasChangedBy": {
+                            "type": "boolean"
+                        },
+                        "persistable": {
+                            "type": "boolean"
+                        }
+                    },
+                    "required": [
+                        "$ID",
+                        "$Type",
+                        "hasChangedDate",
+                        "hasCreatedDate",
+                        "hasOwner",
+                        "hasChangedBy",
+                        "persistable"
+                    ]
                 }
-            },
-            "required": ["$ID", "$Type"]
+            ]
         },
         "Association": {
             "title": "DomainModels$Association",
@@ -159,8 +167,7 @@
             ],
             "properties": {
                 "$ID": {
-                    "type": "string",
-                    "description": "Unique identifier for the association."
+                    "$ref": "common.schema.json#/definitions/Identifiable"
                 },
                 "$Type": {
                     "type": "string",
@@ -172,7 +179,7 @@
                     "description": "Name of the association."
                 },
                 "dataStorageGuid": {
-                    "$ref": "#/definitions/CriticalGUID"
+                    "$ref": "common.schema.json#/definitions/GUID"
                 },
                 "type": {
                     "type": "string",
@@ -195,8 +202,7 @@
                     ],
                     "properties": {
                         "$ID": {
-                            "type": "string",
-                            "description": "Unique identifier for the delete behavior."
+                            "$ref": "common.schema.json#/definitions/Identifiable"
                         },
                         "$Type": {
                             "type": "string",
@@ -279,7 +285,7 @@
             "type": "object",
             "properties": {
                 "$ID": {
-                    "$ref": "#/definitions/GUID"
+                    "$ref": "common.schema.json#/definitions/Identifiable"
                 },
                 "$Type": {
                     "type": "string",
@@ -308,7 +314,7 @@
             "type": "object",
             "properties": {
                 "$ID": {
-                    "$ref": "#/definitions/GUID"
+                    "$ref": "common.schema.json#/definitions/Identifiable"
                 },
                 "$Type": {
                     "type": "string",
@@ -363,7 +369,7 @@
             "type": "object",
             "properties": {
                 "$ID": {
-                    "$ref": "#/definitions/GUID"
+                    "$ref": "common.schema.json#/definitions/Identifiable"
                 },
                 "$Type": {
                     "type": "string",
@@ -382,7 +388,7 @@
             "type": "object",
             "properties": {
                 "$ID": {
-                    "$ref": "#/definitions/GUID"
+                    "$ref": "common.schema.json#/definitions/Identifiable"
                 },
                 "$Type": {
                     "type": "string",
@@ -401,7 +407,7 @@
             "type": "object",
             "properties": {
                 "$ID": {
-                    "$ref": "#/definitions/GUID"
+                    "$ref": "common.schema.json#/definitions/Identifiable"
                 },
                 "$Type": {
                     "type": "string",
@@ -414,7 +420,7 @@
             "type": "object",
             "properties": {
                 "$ID": {
-                    "$ref": "#/definitions/GUID"
+                    "$ref": "common.schema.json#/definitions/Identifiable"
                 },
                 "$Type": {
                     "type": "string",
@@ -427,7 +433,7 @@
             "type": "object",
             "properties": {
                 "$ID": {
-                    "$ref": "#/definitions/GUID"
+                    "$ref": "common.schema.json#/definitions/Identifiable"
                 },
                 "$Type": {
                     "type": "string",
@@ -462,14 +468,14 @@
             "type": "object",
             "properties": {
                 "$ID": {
-                    "$ref": "#/definitions/GUID"
+                    "$ref": "common.schema.json#/definitions/Identifiable"
                 },
                 "$Type": {
                     "type": "string",
                     "const": "DomainModels$Index"
                 },
                 "dataStorageGuid": {
-                    "$ref": "#/definitions/CriticalGUID"
+                    "$ref": "common.schema.json#/definitions/GUID"
                 },
                 "attributes": {
                     "type": "array",
@@ -477,7 +483,7 @@
                         "type": "object",
                         "properties": {
                             "$ID": {
-                                "$ref": "#/definitions/GUID"
+                                "$ref": "common.schema.json#/definitions/Identifiable"
                             },
                             "$Type": {
                                 "type": "string",
@@ -519,9 +525,7 @@
     "type": "object",
     "properties": {
         "$ID": {
-            "$ref": "#/definitions/GUID",
-            "description": "Unique identifier of the domain object",
-            "examples": ["3e2e6b3a-4c6f-4c5f-8f4e-2e6b3a4c6f4c"]
+            "$ref": "common.schema.json#/definitions/Identifiable"
         },
         "$Type": {
             "type": "string",
@@ -537,7 +541,7 @@
                 "description": "Domain entity",
                 "properties": {
                     "$ID": {
-                        "$ref": "#/definitions/GUID"
+                        "$ref": "common.schema.json#/definitions/Identifiable"
                     },
                     "$Type": {
                         "type": "string",
@@ -547,10 +551,10 @@
                         "type": "string"
                     },
                     "dataStorageGuid": {
-                        "$ref": "#/definitions/CriticalGUID"
+                        "$ref": "common.schema.json#/definitions/GUID"
                     },
                     "location": {
-                        "$ref": "#/definitions/Location"
+                        "$ref": "common.schema.json#/definitions/Location"
                     },
                     "documentation": {
                         "type": "string"

@@ -1,0 +1,108 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "Mendix Application Model Schema with Explicit Folder and Document Nodes",
+    "description": "Schema for a Mendix application model with explicit folder and document nodes using oneOf.",
+    "type": "object",
+    "definitions": {
+        "Folder": {
+            "type": "object",
+            "description": "A folder in module",
+            "properties": {
+                "$ID": {
+                    "$ref": "common.schema.json#/definitions/Identifiable"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "Name of the folder"
+                },
+                "children": {
+                    "type": "array",
+                    "description": "list of child module nodes",
+                    "items": {
+                        "$ref": "#/definitions/ModuleNode"
+                    }
+                }
+            },
+            "required": ["$ID", "name"]
+        },
+        "Document": {
+            "type": "object",
+            "description": "A document in module",
+            "properties": {
+                "$ID": {
+                    "$ref": "common.schema.json#/definitions/Identifiable"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "Name of the document"
+                },
+                "document": {
+                    "oneOf": [
+                        { "$ref": "page.schema.json#" },
+                        { "$ref": "microflow.schema.json#" }
+                    ]
+                }
+            },
+            "required": ["$ID", "name", "document"]
+        },
+        "ModuleNode": {
+            "oneOf": [
+                { "$ref": "#/definitions/Folder" },
+                { "$ref": "#/definitions/Document" }
+            ]
+        }
+    },
+    "properties": {
+        "modules": {
+            "type": "array",
+            "description": "List of modules in the application.",
+            "items": {
+                "type": "object",
+                "description": "A Mendix module.",
+                "properties": {
+                    "$ID": {
+                        "type": "string",
+                        "description": "Unique identifier of the module"
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "Name of the module"
+                    },
+                    "documentation": {
+                        "type": "string",
+                        "description": "Documentation of the module"
+                    },
+                    "domainModel": {
+                        "$ref": "domain.schema.json#",
+                        "description": "The domain model for this module."
+                    },
+                    "children": {
+                        "type": "array",
+                        "description": "Folders and documents within this module.",
+                        "items": {
+                            "$ref": "#/definitions/ModuleNode"
+                        }
+                    }
+                },
+                "required": [
+                    "$ID",
+                    "name",
+                    "documentation",
+                    "domainModel",
+                    "children"
+                ]
+            }
+        },
+        "settings": {
+            "type": "object",
+            "description": "Application settings, place holder",
+            "properties": {
+                "applicationName": {
+                    "type": "string",
+                    "description": "Application Name"
+                }
+            }
+        }
+    },
+    "required": ["modules"]
+}

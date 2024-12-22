@@ -25,7 +25,7 @@
                     "$ref": "#/definitions/Text"
                 },
                 "attributeRef": {
-                    "$ref": "common.schema.json#/definitions/AttributeRef"
+                    "$ref": "./common.schema.json#/definitions/AttributeRef"
                 },
                 "formattingInfo": {
                     "type": "object",
@@ -325,7 +325,7 @@
                     "description": "Default value of the search field."
                 },
                 "attributeRef": {
-                    "$ref": "common.schema.json#/definitions/AttributeRef"
+                    "$ref": "./common.schema.json#/definitions/AttributeRef"
                 },
                 "operator": {
                     "type": "string",
@@ -421,7 +421,7 @@
                                 "const": "Pages$GridSortItem"
                             },
                             "attributeRef": {
-                                "$ref": "common.schema.json#/definitions/AttributeRef"
+                                "$ref": "./common.schema.json#/definitions/AttributeRef"
                             },
                             "sortDirection": {
                                 "type": "string",
@@ -485,7 +485,7 @@
                             "description": "Boolean to specify whether data should be full objects."
                         },
                         "entityRef": {
-                            "$ref": "common.schema.json#/definitions/EntityRef"
+                            "$ref": "common.schema.json/#/definitions/EntityRef"
                         },
                         "sourceVariable": {
                             "type": ["object", "null"],
@@ -678,7 +678,7 @@
                     "description": "Label for screen readers."
                 },
                 "attributeRef": {
-                    "$ref": "common.schema.json#/definitions/AttributeRef"
+                    "$ref": "./common.schema.json#/definitions/AttributeRef"
                 },
                 "readOnlyStyle": {
                     "type": "string",
@@ -1258,7 +1258,7 @@
                     "description": "Default value for the search field"
                 },
                 "attributeRef": {
-                    "$ref": "common.schema.json#/definitions/AttributeRef"
+                    "$ref": "./common.schema.json#/definitions/AttributeRef"
                 },
                 "operator": {
                     "type": "string",
@@ -1736,7 +1736,7 @@
                     "description": "Label for screen readers."
                 },
                 "attributeRef": {
-                    "$ref": "common.schema.json#/definitions/AttributeRef"
+                    "$ref": "./common.schema.json#/definitions/AttributeRef"
                 },
                 "readOnlyStyle": {
                     "type": "string",
@@ -2025,7 +2025,7 @@
                     "description": "Label for screen readers."
                 },
                 "attributeRef": {
-                    "$ref": "common.schema.json#/definitions/AttributeRef"
+                    "$ref": "./common.schema.json#/definitions/AttributeRef"
                 },
                 "readOnlyStyle": {
                     "type": "string",
@@ -2305,7 +2305,7 @@
                     "description": "Label for screen readers."
                 },
                 "attributeRef": {
-                    "$ref": "common.schema.json#/definitions/AttributeRef"
+                    "$ref": "./common.schema.json#/definitions/AttributeRef"
                 },
                 "readOnlyStyle": {
                     "type": "string",
@@ -2433,7 +2433,7 @@
                     "description": "Label for screen readers."
                 },
                 "attributeRef": {
-                    "$ref": "common.schema.json#/definitions/AttributeRef"
+                    "$ref": "./common.schema.json#/definitions/AttributeRef"
                 },
                 "readOnlyStyle": {
                     "type": "string",

@@ -36,8 +36,7 @@
                     "const": "DomainModels$AttributeRef"
                 },
                 "entityRef": {
-                    "type": ["object", "null"],
-                    "description": "Entity Reference"
+                    "$ref": "#/definitions/entityRef"
                 },
                 "attribute": {
                     "type": "string",
@@ -50,6 +49,18 @@
         "Identifiable": {
             "type": "string",
             "description": "Unique identifier. use for placeholer uniqe identifier for human readable name and later will replace with guid by model sdk"
+        },
+        "Location": {
+            "type": "object",
+            "properties": {
+                "x": {
+                    "type": "integer"
+                },
+                "y": {
+                    "type": "integer"
+                }
+            },
+            "required": ["x", "y"]
         },
         "GUID": {
             "type": "string",
