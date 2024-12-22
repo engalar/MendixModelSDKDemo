@@ -1,6 +1,6 @@
 import yargs from "yargs";
 import { hideBin } from "yargs/helpers";
-import { getItem, init, setItem, removeItem } from "node-persist";
+import { getItem, init, setItem } from "node-persist";
 
 require("dotenv").config();
 
@@ -20,7 +20,7 @@ function logVerbose(args: any, message: string) {
 async function main() {
     await init({ dir: ".cache" }); // 初始化缓存目录
     // --- yargs 配置 ---
-    const argv = yargs(hideBin(process.argv))
+    yargs(hideBin(process.argv))
         .usage("Usage: $0 <command> [options]")
         .option("verbose", {
             alias: "v",
@@ -61,7 +61,7 @@ async function main() {
                         logVerbose(argv, `Deleted app ${options.appName}`);
                     },
                 )
-                .command("show", "show active app", {}, async (argv) => {
+                .command("show", "show active app", {}, async (_argv) => {
                     const appId = await getItem(PersistKey.ActiveAppId);
                     await AppShow(appId);
                 })

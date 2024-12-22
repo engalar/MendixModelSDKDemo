@@ -1,13 +1,12 @@
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
+    "description": "you must give a module name when gen a model, so i can confirm qulified name",
     "title": "Microflow Structure Schema",
     "definitions": {
         "EntityQualifiedName": {
             "type": "string",
             "description": "Entity qualified name",
-            "examples": [
-                "SomeModuleName.EntityName"
-            ]
+            "examples": ["SomeModuleName.EntityName"]
         },
         "Size": {
             "type": "object",
@@ -19,10 +18,7 @@
                     "type": "integer"
                 }
             },
-            "required": [
-                "width",
-                "height"
-            ]
+            "required": ["width", "height"]
         },
         "RelativePoint": {
             "type": "object",
@@ -34,10 +30,7 @@
                     "type": "integer"
                 }
             },
-            "required": [
-                "x",
-                "y"
-            ]
+            "required": ["x", "y"]
         },
         "BezierVector": {
             "type": "object",
@@ -49,10 +42,7 @@
                     "type": "integer"
                 }
             },
-            "required": [
-                "width",
-                "height"
-            ]
+            "required": ["width", "height"]
         },
         "NoCase": {
             "type": "object",
@@ -62,15 +52,10 @@
                 },
                 "$Type": {
                     "type": "string",
-                    "enum": [
-                        "Microflows$NoCase"
-                    ]
+                    "enum": ["Microflows$NoCase"]
                 }
             },
-            "required": [
-                "$ID",
-                "$Type"
-            ]
+            "required": ["$ID", "$Type"]
         },
         "MicroflowObject": {
             "type": "object",
@@ -89,12 +74,7 @@
                     "type": "string"
                 }
             },
-            "required": [
-                "$ID",
-                "relativeMiddlePoint",
-                "size",
-                "documentation"
-            ]
+            "required": ["$ID", "relativeMiddlePoint", "size", "documentation"]
         },
         "MicroflowFlow": {
             "type": "object",
@@ -138,10 +118,7 @@
                             "type": "integer"
                         }
                     },
-                    "required": [
-                        "width",
-                        "height"
-                    ]
+                    "required": ["width", "height"]
                 },
                 "destinationBezierVector": {
                     "type": "object",
@@ -154,16 +131,11 @@
                             "type": "integer"
                         }
                     },
-                    "required": [
-                        "width",
-                        "height"
-                    ]
+                    "required": ["width", "height"]
                 },
                 "lineType": {
                     "type": "string",
-                    "enum": [
-                        "BezierCurve"
-                    ],
+                    "enum": ["BezierCurve"],
                     "description": "Type of line used for the flow."
                 },
                 "caseValue": {
@@ -175,9 +147,7 @@
                             "description": "Unique identifier for the case value."
                         },
                         "$Type": {
-                            "type": [
-                                "string"
-                            ],
+                            "type": ["string"],
                             "enum": [
                                 "Microflows$NoCase",
                                 "Microflows$EnumerationCase",
@@ -186,17 +156,11 @@
                             "description": "Type of the case value"
                         },
                         "value": {
-                            "type": [
-                                "string",
-                                "null"
-                            ],
+                            "type": ["string", "null"],
                             "description": "Value of the enumeration case"
                         }
                     },
-                    "required": [
-                        "$ID",
-                        "$Type"
-                    ]
+                    "required": ["$ID", "$Type"]
                 },
                 "isErrorHandler": {
                     "type": "boolean",
@@ -224,9 +188,7 @@
                 },
                 "$Type": {
                     "type": "string",
-                    "enum": [
-                        "Microflows$DatabaseRetrieveSource"
-                    ]
+                    "enum": ["Microflows$DatabaseRetrieveSource"]
                 },
                 "entity": {
                     "$ref": "#/definitions/EntityQualifiedName"
@@ -239,19 +201,13 @@
                         },
                         "$Type": {
                             "type": "string",
-                            "enum": [
-                                "Microflows$ConstantRange"
-                            ]
+                            "enum": ["Microflows$ConstantRange"]
                         },
                         "singleObject": {
                             "type": "boolean"
                         }
                     },
-                    "required": [
-                        "$ID",
-                        "$Type",
-                        "singleObject"
-                    ]
+                    "required": ["$ID", "$Type", "singleObject"]
                 },
                 "xPathConstraint": {
                     "type": "string"
@@ -264,20 +220,14 @@
                         },
                         "$Type": {
                             "type": "string",
-                            "enum": [
-                                "Microflows$SortItemList"
-                            ]
+                            "enum": ["Microflows$SortItemList"]
                         },
                         "items": {
                             "type": "array",
                             "items": {}
                         }
                     },
-                    "required": [
-                        "$ID",
-                        "$Type",
-                        "items"
-                    ]
+                    "required": ["$ID", "$Type", "items"]
                 }
             },
             "required": [
@@ -297,15 +247,11 @@
                 },
                 "$Type": {
                     "type": "string",
-                    "enum": [
-                        "Microflows$RetrieveAction"
-                    ]
+                    "enum": ["Microflows$RetrieveAction"]
                 },
                 "errorHandlingType": {
                     "type": "string",
-                    "enum": [
-                        "Rollback"
-                    ]
+                    "enum": ["Rollback"]
                 },
                 "retrieveSource": {
                     "$ref": "#/definitions/RetrieveSource"
@@ -340,10 +286,7 @@
                             ]
                         }
                     },
-                    "required": [
-                        "$ID",
-                        "$Type"
-                    ]
+                    "required": ["$ID", "$Type"]
                 },
                 {
                     "type": "object",
@@ -353,19 +296,13 @@
                         },
                         "$Type": {
                             "type": "string",
-                            "enum": [
-                                "DataTypes$ObjectType"
-                            ]
+                            "enum": ["DataTypes$ObjectType"]
                         },
                         "entity": {
                             "type": "string"
                         }
                     },
-                    "required": [
-                        "$ID",
-                        "$Type",
-                        "entity"
-                    ]
+                    "required": ["$ID", "$Type", "entity"]
                 }
             ]
         }
@@ -378,9 +315,7 @@
         },
         "$Type": {
             "type": "string",
-            "enum": [
-                "Microflows$Microflow"
-            ]
+            "enum": ["Microflows$Microflow"]
         },
         "name": {
             "type": "string",
@@ -396,9 +331,7 @@
         },
         "exportLevel": {
             "type": "string",
-            "enum": [
-                "Hidden"
-            ],
+            "enum": ["Hidden"],
             "description": "Export level of the microflow"
         },
         "objectCollection": {
@@ -410,9 +343,7 @@
                 },
                 "$Type": {
                     "type": "string",
-                    "enum": [
-                        "Microflows$MicroflowObjectCollection"
-                    ]
+                    "enum": ["Microflows$MicroflowObjectCollection"]
                 },
                 "objects": {
                     "type": "array",
@@ -426,9 +357,7 @@
                                     },
                                     "$Type": {
                                         "type": "string",
-                                        "enum": [
-                                            "Microflows$StartEvent"
-                                        ]
+                                        "enum": ["Microflows$StartEvent"]
                                     },
                                     "relativeMiddlePoint": {
                                         "$ref": "#/definitions/RelativePoint"
@@ -452,9 +381,7 @@
                                     },
                                     "$Type": {
                                         "type": "string",
-                                        "enum": [
-                                            "Microflows$EndEvent"
-                                        ]
+                                        "enum": ["Microflows$EndEvent"]
                                     },
                                     "relativeMiddlePoint": {
                                         "$ref": "#/definitions/RelativePoint"
@@ -486,9 +413,7 @@
                                     },
                                     "$Type": {
                                         "type": "string",
-                                        "enum": [
-                                            "Microflows$ActionActivity"
-                                        ]
+                                        "enum": ["Microflows$ActionActivity"]
                                     },
                                     "relativeMiddlePoint": {
                                         "$ref": "#/definitions/RelativePoint"
@@ -510,9 +435,7 @@
                                     },
                                     "backgroundColor": {
                                         "type": "string",
-                                        "enum": [
-                                            "Default"
-                                        ]
+                                        "enum": ["Default"]
                                     },
                                     "documentation": {
                                         "type": "string"
@@ -555,11 +478,7 @@
                     }
                 }
             },
-            "required": [
-                "$ID",
-                "$Type",
-                "objects"
-            ]
+            "required": ["$ID", "$Type", "objects"]
         },
         "flows": {
             "type": "array",
@@ -584,16 +503,10 @@
             "items": {}
         },
         "microflowActionInfo": {
-            "type": [
-                "null",
-                "object"
-            ]
+            "type": ["null", "object"]
         },
         "workflowActionInfo": {
-            "type": [
-                "null",
-                "object"
-            ]
+            "type": ["null", "object"]
         },
         "allowConcurrentExecution": {
             "type": "boolean",
@@ -603,10 +516,7 @@
             "$ref": "common.schema.json#/definitions/Text"
         },
         "concurrencyErrorMicroflow": {
-            "type": [
-                "null",
-                "object"
-            ]
+            "type": ["null", "object"]
         },
         "url": {
             "type": "string"
@@ -643,3 +553,4 @@
         "stableId"
     ]
 }
+

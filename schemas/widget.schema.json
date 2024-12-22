@@ -1,0 +1,23 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "custom widget schema",
+    "description": "Schema for extend custom widget",
+    "type": "object",
+    "oneOf": [
+        {
+            "type": "object",
+            "properties": {
+                "$ID": {
+                    "type": "string",
+                    "description": "Unique identifier of the custom widget"
+                },
+                "$Type": {
+                    "type": "string",
+                    "description": "Type of the object, should be 'Pages$CustomWidget'.",
+                    "const": "Pages$CustomWidget"
+                }
+            }
+        }
+    ],
+    "definitions": {}
+}

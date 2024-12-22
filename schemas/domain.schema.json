@@ -1,5 +1,6 @@
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
+    "description": "you must give a module name when gen a model, so i can confirm qulified name",
     "definitions": {
         "CriticalGUID": {
             "type": "string",
@@ -644,4 +645,3 @@
         "crossAssociations"
     ]
 }
-
