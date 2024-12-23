@@ -4,9 +4,9 @@ import { saveToFile } from "./serialize";
 
 export async function boot(
     cb: (model: IModel) => Promise<boolean>,
-    appID: string = process.env.APP_ID,
+    appID: string = process.env.APP_ID!,
     branchName: string = "main",
-    workingCopyId: string = process.env.WORKING_COPY_ID,
+    workingCopyId: string = process.env.WORKING_COPY_ID!,
 ) {
     const client = new MendixPlatformClient();
     const app = client.getApp(appID);
