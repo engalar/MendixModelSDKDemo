@@ -485,7 +485,7 @@
                             "description": "Boolean to specify whether data should be full objects."
                         },
                         "entityRef": {
-                            "$ref": "common.schema.json/#/definitions/EntityRef"
+                            "$ref": "common.schema.json/#/definitions/entityRef"
                         },
                         "sourceVariable": {
                             "type": ["object", "null"],

@@ -1,0 +1,2539 @@
+{
+    "$schema": "../schemas/app.schema.json",
+    "modules": [
+        {
+            "$ID": "module_student_course",
+            "name": "StudentCourseModule",
+            "documentation": "This module manages students, courses, and enrollments.",
+            "domainModel": {
+                "$ID": "domain_model_student_course",
+                "$Type": "DomainModels$DomainModel",
+                "documentation": "Domain model for StudentCourseModule",
+                "entities": [
+                    {
+                        "$ID": "entity_student",
+                        "$Type": "DomainModels$Entity",
+                        "name": "Student",
+                        "dataStorageGuid": "898777c4-9934-4427-9c0b-22b6d0726541",
+                        "location": {
+                            "x": 100,
+                            "y": 100
+                        },
+                        "documentation": "Represents a student.",
+                        "generalization": {
+                            "$ID": "generalization_student",
+                            "$Type": "DomainModels$NoGeneralization",
+                            "hasChangedDate": false,
+                            "hasCreatedDate": true,
+                            "hasOwner": false,
+                            "hasChangedBy": false,
+                            "persistable": true
+                        },
+                        "attributes": [
+                            {
+                                "$ID": "attribute_student_id",
+                                "$Type": "DomainModels$Attribute",
+                                "name": "StudentID",
+                                "dataStorageGuid": "96456929-09e4-4f31-84b2-32b80d70736e",
+                                "type": {
+                                    "$ID": "type_student_id",
+                                    "$Type": "DomainModels$AutoNumberAttributeType"
+                                },
+                                "documentation": "Unique identifier for the student.",
+                                "value": {
+                                    "$ID": "value_student_id",
+                                    "$Type": "DomainModels$StoredValue",
+                                    "defaultValue": ""
+                                },
+                                "exportLevel": "Hidden"
+                            },
+                            {
+                                "$ID": "attribute_student_name",
+                                "$Type": "DomainModels$Attribute",
+                                "name": "Name",
+                                "dataStorageGuid": "0364c581-692b-4398-a20b-a73074a59731",
+                                "type": {
+                                    "$ID": "type_student_name",
+                                    "$Type": "DomainModels$StringAttributeType",
+                                    "length": 255
+                                },
+                                "documentation": "Name of the student.",
+                                "value": {
+                                    "$ID": "value_student_name",
+                                    "$Type": "DomainModels$StoredValue",
+                                    "defaultValue": ""
+                                },
+                                "exportLevel": "Hidden"
+                            },
+                            {
+                                "$ID": "attribute_student_email",
+                                "$Type": "DomainModels$Attribute",
+                                "name": "Email",
+                                "dataStorageGuid": "e03d1456-0059-4e5a-b8e3-77772844095f",
+                                "type": {
+                                    "$ID": "type_student_email",
+                                    "$Type": "DomainModels$StringAttributeType",
+                                    "length": 255
+                                },
+                                "documentation": "Email address of the student.",
+                                "value": {
+                                    "$ID": "value_student_email",
+                                    "$Type": "DomainModels$StoredValue",
+                                    "defaultValue": ""
+                                },
+                                "exportLevel": "Hidden"
+                            }
+                        ],
+                        "validationRules": [],
+                        "eventHandlers": [],
+                        "indexes": [],
+                        "accessRules": [
+                            {
+                                "$ID": "access_rule_student_administrator",
+                                "$Type": "DomainModels$AccessRule",
+                                "memberAccesses": [
+                                    {
+                                        "$ID": "member_access_student_id_admin",
+                                        "$Type": "DomainModels$MemberAccess",
+                                        "attribute": "attribute_student_id",
+                                        "association": null,
+                                        "accessRights": "ReadOnly"
+                                    },
+                                    {
+                                        "$ID": "member_access_student_name_admin",
+                                        "$Type": "DomainModels$MemberAccess",
+                                        "attribute": "attribute_student_name",
+                                        "association": null,
+                                        "accessRights": "ReadWrite"
+                                    },
+                                    {
+                                        "$ID": "member_access_student_email_admin",
+                                        "$Type": "DomainModels$MemberAccess",
+                                        "attribute": "attribute_student_email",
+                                        "association": null,
+                                        "accessRights": "ReadWrite"
+                                    }
+                                ],
+                                "moduleRoles": ["Administrator"],
+                                "documentation": "Administrator access to Student entity.",
+                                "allowCreate": true,
+                                "allowDelete": true,
+                                "defaultMemberAccessRights": "None",
+                                "xPathConstraintCaption": "",
+                                "xPathConstraint": ""
+                            },
+                            {
+                                "$ID": "access_rule_student_user",
+                                "$Type": "DomainModels$AccessRule",
+                                "memberAccesses": [
+                                    {
+                                        "$ID": "member_access_student_id_user",
+                                        "$Type": "DomainModels$MemberAccess",
+                                        "attribute": "attribute_student_id",
+                                        "association": null,
+                                        "accessRights": "ReadOnly"
+                                    },
+                                    {
+                                        "$ID": "member_access_student_name_user",
+                                        "$Type": "DomainModels$MemberAccess",
+                                        "attribute": "attribute_student_name",
+                                        "association": null,
+                                        "accessRights": "ReadOnly"
+                                    },
+                                    {
+                                        "$ID": "member_access_student_email_user",
+                                        "$Type": "DomainModels$MemberAccess",
+                                        "attribute": "attribute_student_email",
+                                        "association": null,
+                                        "accessRights": "ReadOnly"
+                                    }
+                                ],
+                                "moduleRoles": ["User"],
+                                "documentation": "User access to Student entity.",
+                                "allowCreate": false,
+                                "allowDelete": false,
+                                "defaultMemberAccessRights": "None",
+                                "xPathConstraintCaption": "",
+                                "xPathConstraint": "[System.Owner = CurrentUser]"
+                            }
+                        ],
+                        "image": null,
+                        "imageData": "",
+                        "source": null,
+                        "exportLevel": "Hidden"
+                    },
+                    {
+                        "$ID": "entity_course",
+                        "$Type": "DomainModels$Entity",
+                        "name": "Course",
+                        "dataStorageGuid": "3843c299-01dd-4d15-805c-e378d6e53241",
+                        "location": {
+                            "x": 400,
+                            "y": 100
+                        },
+                        "documentation": "Represents a course.",
+                        "generalization": {
+                            "$ID": "generalization_course",
+                            "$Type": "DomainModels$NoGeneralization",
+                            "hasChangedDate": false,
+                            "hasCreatedDate": false,
+                            "hasOwner": false,
+                            "hasChangedBy": false,
+                            "persistable": true
+                        },
+                        "attributes": [
+                            {
+                                "$ID": "attribute_course_id",
+                                "$Type": "DomainModels$Attribute",
+                                "name": "CourseID",
+                                "dataStorageGuid": "7f3f2035-91f3-4a27-a413-3b3c5209274f",
+                                "type": {
+                                    "$ID": "type_course_id",
+                                    "$Type": "DomainModels$AutoNumberAttributeType"
+                                },
+                                "documentation": "Unique identifier for the course.",
+                                "value": {
+                                    "$ID": "value_course_id",
+                                    "$Type": "DomainModels$StoredValue",
+                                    "defaultValue": ""
+                                },
+                                "exportLevel": "Hidden"
+                            },
+                            {
+                                "$ID": "attribute_course_name",
+                                "$Type": "DomainModels$Attribute",
+                                "name": "Name",
+                                "dataStorageGuid": "f1e82780-2284-4b04-b019-32848a6d395b",
+                                "type": {
+                                    "$ID": "type_course_name",
+                                    "$Type": "DomainModels$StringAttributeType",
+                                    "length": 255
+                                },
+                                "documentation": "Name of the course.",
+                                "value": {
+                                    "$ID": "value_course_name",
+                                    "$Type": "DomainModels$StoredValue",
+                                    "defaultValue": ""
+                                },
+                                "exportLevel": "Hidden"
+                            },
+                            {
+                                "$ID": "attribute_course_description",
+                                "$Type": "DomainModels$Attribute",
+                                "name": "Description",
+                                "dataStorageGuid": "9d8c169b-5486-414b-8422-b81e7b82a894",
+                                "type": {
+                                    "$ID": "type_course_description",
+                                    "$Type": "DomainModels$StringAttributeType"
+                                },
+                                "documentation": "Description of the course.",
+                                "value": {
+                                    "$ID": "value_course_description",
+                                    "$Type": "DomainModels$StoredValue",
+                                    "defaultValue": ""
+                                },
+                                "exportLevel": "Hidden"
+                            }
+                        ],
+                        "validationRules": [],
+                        "eventHandlers": [],
+                        "indexes": [],
+                        "accessRules": [
+                            {
+                                "$ID": "access_rule_course_administrator",
+                                "$Type": "DomainModels$AccessRule",
+                                "memberAccesses": [
+                                    {
+                                        "$ID": "member_access_course_id_admin",
+                                        "$Type": "DomainModels$MemberAccess",
+                                        "attribute": "attribute_course_id",
+                                        "association": null,
+                                        "accessRights": "ReadOnly"
+                                    },
+                                    {
+                                        "$ID": "member_access_course_name_admin",
+                                        "$Type": "DomainModels$MemberAccess",
+                                        "attribute": "attribute_course_name",
+                                        "association": null,
+                                        "accessRights": "ReadWrite"
+                                    },
+                                    {
+                                        "$ID": "member_access_course_description_admin",
+                                        "$Type": "DomainModels$MemberAccess",
+                                        "attribute": "attribute_course_description",
+                                        "association": null,
+                                        "accessRights": "ReadWrite"
+                                    }
+                                ],
+                                "moduleRoles": ["Administrator"],
+                                "documentation": "Administrator access to Course entity.",
+                                "allowCreate": true,
+                                "allowDelete": true,
+                                "defaultMemberAccessRights": "None",
+                                "xPathConstraintCaption": "",
+                                "xPathConstraint": ""
+                            },
+                            {
+                                "$ID": "access_rule_course_user",
+                                "$Type": "DomainModels$AccessRule",
+                                "memberAccesses": [
+                                    {
+                                        "$ID": "member_access_course_id_user",
+                                        "$Type": "DomainModels$MemberAccess",
+                                        "attribute": "attribute_course_id",
+                                        "association": null,
+                                        "accessRights": "ReadOnly"
+                                    },
+                                    {
+                                        "$ID": "member_access_course_name_user",
+                                        "$Type": "DomainModels$MemberAccess",
+                                        "attribute": "attribute_course_name",
+                                        "association": null,
+                                        "accessRights": "ReadOnly"
+                                    },
+                                    {
+                                        "$ID": "member_access_course_description_user",
+                                        "$Type": "DomainModels$MemberAccess",
+                                        "attribute": "attribute_course_description",
+                                        "association": null,
+                                        "accessRights": "ReadOnly"
+                                    }
+                                ],
+                                "moduleRoles": ["User"],
+                                "documentation": "User access to Course entity.",
+                                "allowCreate": false,
+                                "allowDelete": false,
+                                "defaultMemberAccessRights": "None",
+                                "xPathConstraintCaption": "",
+                                "xPathConstraint": ""
+                            }
+                        ],
+                        "image": null,
+                        "imageData": "",
+                        "source": null,
+                        "exportLevel": "Hidden"
+                    },
+                    {
+                        "$ID": "entity_enrollment",
+                        "$Type": "DomainModels$Entity",
+                        "name": "Enrollment",
+                        "dataStorageGuid": "b7c4e01b-3e7f-462e-95b0-1e826d686d44",
+                        "location": {
+                            "x": 250,
+                            "y": 300
+                        },
+                        "documentation": "Represents an enrollment of a student in a course.",
+                        "generalization": {
+                            "$ID": "generalization_enrollment",
+                            "$Type": "DomainModels$NoGeneralization",
+                            "hasChangedDate": false,
+                            "hasCreatedDate": true,
+                            "hasOwner": false,
+                            "hasChangedBy": false,
+                            "persistable": true
+                        },
+                        "attributes": [
+                            {
+                                "$ID": "attribute_enrollment_id",
+                                "$Type": "DomainModels$Attribute",
+                                "name": "EnrollmentID",
+                                "dataStorageGuid": "d19f2452-5a71-472f-96b7-a3f00431b879",
+                                "type": {
+                                    "$ID": "type_enrollment_id",
+                                    "$Type": "DomainModels$AutoNumberAttributeType"
+                                },
+                                "documentation": "Unique identifier for the enrollment.",
+                                "value": {
+                                    "$ID": "value_enrollment_id",
+                                    "$Type": "DomainModels$StoredValue",
+                                    "defaultValue": ""
+                                },
+                                "exportLevel": "Hidden"
+                            },
+                            {
+                                "$ID": "attribute_enrollment_date",
+                                "$Type": "DomainModels$Attribute",
+                                "name": "EnrollmentDate",
+                                "dataStorageGuid": "61b92f9e-261c-4487-847e-d04728d386a2",
+                                "type": {
+                                    "$ID": "type_enrollment_date",
+                                    "$Type": "DomainModels$DateTimeAttributeType"
+                                },
+                                "documentation": "Date of enrollment.",
+                                "value": {
+                                    "$ID": "value_enrollment_date",
+                                    "$Type": "DomainModels$StoredValue",
+                                    "defaultValue": ""
+                                },
+                                "exportLevel": "Hidden"
+                            }
+                        ],
+                        "validationRules": [],
+                        "eventHandlers": [],
+                        "indexes": [],
+                        "accessRules": [
+                            {
+                                "$ID": "access_rule_enrollment_administrator",
+                                "$Type": "DomainModels$AccessRule",
+                                "memberAccesses": [
+                                    {
+                                        "$ID": "member_access_enrollment_id_admin",
+                                        "$Type": "DomainModels$MemberAccess",
+                                        "attribute": "attribute_enrollment_id",
+                                        "association": null,
+                                        "accessRights": "ReadOnly"
+                                    },
+                                    {
+                                        "$ID": "member_access_enrollment_date_admin",
+                                        "$Type": "DomainModels$MemberAccess",
+                                        "attribute": "attribute_enrollment_date",
+                                        "association": null,
+                                        "accessRights": "ReadWrite"
+                                    },
+                                    {
+                                        "$ID": "member_access_enrollment_student_admin",
+                                        "$Type": "DomainModels$MemberAccess",
+                                        "attribute": null,
+                                        "association": "association_enrollment_student",
+                                        "accessRights": "ReadWrite"
+                                    },
+                                    {
+                                        "$ID": "member_access_enrollment_course_admin",
+                                        "$Type": "DomainModels$MemberAccess",
+                                        "attribute": null,
+                                        "association": "association_enrollment_course",
+                                        "accessRights": "ReadWrite"
+                                    }
+                                ],
+                                "moduleRoles": ["Administrator"],
+                                "documentation": "Administrator access to Enrollment entity.",
+                                "allowCreate": true,
+                                "allowDelete": true,
+                                "defaultMemberAccessRights": "None",
+                                "xPathConstraintCaption": "",
+                                "xPathConstraint": ""
+                            },
+                            {
+                                "$ID": "access_rule_enrollment_user",
+                                "$Type": "DomainModels$AccessRule",
+                                "memberAccesses": [
+                                    {
+                                        "$ID": "member_access_enrollment_id_user",
+                                        "$Type": "DomainModels$MemberAccess",
+                                        "attribute": "attribute_enrollment_id",
+                                        "association": null,
+                                        "accessRights": "ReadOnly"
+                                    },
+                                    {
+                                        "$ID": "member_access_enrollment_date_user",
+                                        "$Type": "DomainModels$MemberAccess",
+                                        "attribute": "attribute_enrollment_date",
+                                        "association": null,
+                                        "accessRights": "ReadOnly"
+                                    },
+                                    {
+                                        "$ID": "member_access_enrollment_student_user",
+                                        "$Type": "DomainModels$MemberAccess",
+                                        "attribute": null,
+                                        "association": "association_enrollment_student",
+                                        "accessRights": "ReadOnly"
+                                    },
+                                    {
+                                        "$ID": "member_access_enrollment_course_user",
+                                        "$Type": "DomainModels$MemberAccess",
+                                        "attribute": null,
+                                        "association": "association_enrollment_course",
+                                        "accessRights": "ReadOnly"
+                                    }
+                                ],
+                                "moduleRoles": ["User"],
+                                "documentation": "User access to Enrollment entity.",
+                                "allowCreate": false,
+                                "allowDelete": false,
+                                "defaultMemberAccessRights": "None",
+                                "xPathConstraintCaption": "",
+                                "xPathConstraint": "[association_enrollment_student/StudentCourseModule.Student/System.Owner = CurrentUser]"
+                            }
+                        ],
+                        "image": null,
+                        "imageData": "",
+                        "source": null,
+                        "exportLevel": "Hidden"
+                    }
+                ],
+                "annotations": [],
+                "associations": [
+                    {
+                        "$ID": "association_enrollment_student",
+                        "$Type": "DomainModels$Association",
+                        "name": "StudentCourseModule.Enrollment_Student",
+                        "dataStorageGuid": "303c8f8f-487e-4c4f-b24f-79e9c6a781c5",
+                        "type": "Reference",
+                        "owner": "Both",
+                        "deleteBehavior": {
+                            "$ID": "delete_behavior_enrollment_student",
+                            "$Type": "DomainModels$AssociationDeleteBehavior",
+                            "parentDeleteBehavior": "DeleteMeButKeepReferences",
+                            "childDeleteBehavior": "DeleteMeButKeepReferences",
+                            "parentErrorMessage": null,
+                            "childErrorMessage": null
+                        },
+                        "parent": "entity_enrollment",
+                        "documentation": "",
+                        "source": null,
+                        "exportLevel": "Hidden",
+                        "child": "entity_student",
+                        "parentConnection": {
+                            "x": 0,
+                            "y": -1
+                        },
+                        "childConnection": {
+                            "x": 0,
+                            "y": 1
+                        }
+                    },
+                    {
+                        "$ID": "association_enrollment_course",
+                        "$Type": "DomainModels$Association",
+                        "name": "StudentCourseModule.Enrollment_Course",
+                        "dataStorageGuid": "55d3729a-2f6b-4d6a-9461-6c573f3c4033",
+                        "type": "Reference",
+                        "owner": "Both",
+                        "deleteBehavior": {
+                            "$ID": "delete_behavior_enrollment_course",
+                            "$Type": "DomainModels$AssociationDeleteBehavior",
+                            "parentDeleteBehavior": "DeleteMeButKeepReferences",
+                            "childDeleteBehavior": "DeleteMeButKeepReferences",
+                            "parentErrorMessage": null,
+                            "childErrorMessage": null
+                        },
+                        "parent": "entity_enrollment",
+                        "documentation": "",
+                        "source": null,
+                        "exportLevel": "Hidden",
+                        "child": "entity_course",
+                        "parentConnection": {
+                            "x": 1,
+                            "y": 0
+                        },
+                        "childConnection": {
+                            "x": -1,
+                            "y": 0
+                        }
+                    }
+                ],
+                "crossAssociations": []
+            },
+            "children": [
+                {
+                    "$ID": "folder_pages",
+                    "name": "Pages",
+                    "children": [
+                        {
+                            "$ID": "page_student_overview",
+                            "name": "StudentOverview",
+                            "document": {
+                                "$ID": "page_student_overview_document",
+                                "$Type": "Pages$Page",
+                                "name": "StudentOverview",
+                                "documentation": "Page to display an overview of students.",
+                                "excluded": false,
+                                "exportLevel": "Hidden",
+                                "canvasWidth": 1024,
+                                "canvasHeight": 768,
+                                "parameters": [],
+                                "layoutCall": {
+                                    "$ID": "layout_call_student_overview",
+                                    "$Type": "Pages$LayoutCall",
+                                    "layout": "layout_main",
+                                    "arguments": [
+                                        {
+                                            "$ID": "layout_call_argument_student_overview_content",
+                                            "$Type": "Pages$LayoutCallArgument",
+                                            "parameter": "layout_parameter_content",
+                                            "widgets": [
+                                                {
+                                                    "$ID": "data_grid_students",
+                                                    "$Type": "Pages$DataGrid",
+                                                    "name": "dataGridStudents",
+                                                    "appearance": {
+                                                        "$ID": "appearance_data_grid_students",
+                                                        "$Type": "Pages$Appearance",
+                                                        "class": "",
+                                                        "style": "",
+                                                        "designProperties": [],
+                                                        "dynamicClasses": ""
+                                                    },
+                                                    "tabIndex": 0,
+                                                    "conditionalVisibilitySettings": null,
+                                                    "dataSource": {
+                                                        "$ID": "data_source_data_grid_students",
+                                                        "$Type": "Pages$GridXPathSource",
+                                                        "forceFullObjects": false,
+                                                        "entityRef": {
+                                                            "$ID": "entity_ref_data_grid_students",
+                                                            "$Type": "DomainModels$DirectEntityRef",
+                                                            "entity": "StudentCourseModule.Student"
+                                                        },
+                                                        "sourceVariable": null,
+                                                        "sortBar": {
+                                                            "$ID": "sort_bar_data_grid_students",
+                                                            "$Type": "Pages$GridSortBar",
+                                                            "sortItems": [
+                                                                {
+                                                                    "$ID": "sort_item_student_id",
+                                                                    "$Type": "Pages$GridSortItem",
+                                                                    "attributeRef": {
+                                                                        "$ID": "attribute_ref_sort_item_student_id",
+                                                                        "$Type": "DomainModels$AttributeRef",
+                                                                        "entityRef": {
+                                                                            "$ID": "entity_ref_sort_item_student_id",
+                                                                            "$Type": "DomainModels$DirectEntityRef",
+                                                                            "entity": "StudentCourseModule.Student"
+                                                                        },
+                                                                        "attribute": "StudentCourseModule.Student.StudentID"
+                                                                    },
+                                                                    "sortDirection": "Ascending"
+                                                                }
+                                                            ]
+                                                        },
+                                                        "searchBar": {
+                                                            "$ID": "search_bar_data_grid_students",
+                                                            "$Type": "Pages$SearchBar",
+                                                            "items": [
+                                                                {
+                                                                    "$ID": "search_field_student_name",
+                                                                    "$Type": "Pages$ComparisonSearchField",
+                                                                    "name": "searchFieldStudentName",
+                                                                    "caption": {
+                                                                        "$ID": "caption_search_field_student_name",
+                                                                        "$Type": "Texts$Text",
+                                                                        "translations": [
+                                                                            {
+                                                                                "$ID": "translation_search_field_student_name_en_US",
+                                                                                "$Type": "Texts$Translation",
+                                                                                "languageCode": "en_US",
+                                                                                "text": "Name"
+                                                                            }
+                                                                        ]
+                                                                    },
+                                                                    "placeholder": {
+                                                                        "$ID": "placeholder_search_field_student_name",
+                                                                        "$Type": "Texts$Text",
+                                                                        "translations": [
+                                                                            {
+                                                                                "$ID": "translation_placeholder_search_field_student_name_en_US",
+                                                                                "$Type": "Texts$Translation",
+                                                                                "languageCode": "en_US",
+                                                                                "text": "Enter student name"
+                                                                            }
+                                                                        ]
+                                                                    },
+                                                                    "customDateFormat": "",
+                                                                    "type": "Normal",
+                                                                    "defaultValue": "",
+                                                                    "attributeRef": {
+                                                                        "$ID": "attribute_ref_search_field_student_name",
+                                                                        "$Type": "DomainModels$AttributeRef",
+                                                                        "entityRef": {
+                                                                            "$ID": "entity_ref_search_field_student_name",
+                                                                            "$Type": "DomainModels$DirectEntityRef",
+                                                                            "entity": "StudentCourseModule.Student"
+                                                                        },
+                                                                        "attribute": "StudentCourseModule.Student.Name"
+                                                                    },
+                                                                    "operator": "Contains"
+                                                                }
+                                                            ],
+                                                            "type": "FoldableOpen",
+                                                            "waitForSearch": true
+                                                        },
+                                                        "xPathConstraint": ""
+                                                    },
+                                                    "isControlBarVisible": true,
+                                                    "showPagingBar": "YesWithTotalCount",
+                                                    "selectionMode": "Single",
+                                                    "selectFirst": false,
+                                                    "defaultButtonTrigger": "Single",
+                                                    "refreshTime": 0,
+                                                    "controlBar": {
+                                                        "$ID": "control_bar_data_grid_students",
+                                                        "$Type": "Pages$GridControlBar",
+                                                        "items": [
+                                                            {
+                                                                "$ID": "grid_action_button_new_student",
+                                                                "$Type": "Pages$GridActionButton",
+                                                                "name": "gridActionButtonNewStudent",
+                                                                "caption": {
+                                                                    "$ID": "caption_grid_action_button_new_student",
+                                                                    "$Type": "Pages$ClientTemplate",
+                                                                    "template": {
+                                                                        "$ID": "template_caption_grid_action_button_new_student",
+                                                                        "$Type": "Texts$Text",
+                                                                        "translations": [
+                                                                            {
+                                                                                "$ID": "translation_caption_grid_action_button_new_student_en_US",
+                                                                                "$Type": "Texts$Translation",
+                                                                                "languageCode": "en_US",
+                                                                                "text": "New"
+                                                                            }
+                                                                        ]
+                                                                    },
+                                                                    "parameters": [],
+                                                                    "fallback": {
+                                                                        "$ID": "fallback_caption_grid_action_button_new_student",
+                                                                        "$Type": "Texts$Text",
+                                                                        "translations": []
+                                                                    }
+                                                                },
+                                                                "tooltip": {
+                                                                    "$ID": "tooltip_grid_action_button_new_student",
+                                                                    "$Type": "Texts$Text",
+                                                                    "translations": [
+                                                                        {
+                                                                            "$ID": "translation_tooltip_grid_action_button_new_student_en_US",
+                                                                            "$Type": "Texts$Translation",
+                                                                            "languageCode": "en_US",
+                                                                            "text": "Create a new student"
+                                                                        }
+                                                                    ]
+                                                                },
+                                                                "icon": null,
+                                                                "appearance": {
+                                                                    "$ID": "appearance_grid_action_button_new_student",
+                                                                    "$Type": "Pages$Appearance",
+                                                                    "class": "",
+                                                                    "style": "",
+                                                                    "designProperties": [],
+                                                                    "dynamicClasses": ""
+                                                                },
+                                                                "conditionalVisibilitySettings": null,
+                                                                "buttonStyle": "Primary",
+                                                                "action": {
+                                                                    "$ID": "action_grid_action_button_new_student",
+                                                                    "$Type": "Pages$MicroflowClientAction",
+                                                                    "disabledDuringExecution": false,
+                                                                    "microflowSettings": {
+                                                                        "$ID": "microflow_settings_action_grid_action_button_new_student",
+                                                                        "$Type": "Pages$MicroflowSettings",
+                                                                        "microflow": "StudentCourseModule.ACT_CreateStudent",
+                                                                        "parameterMappings": [],
+                                                                        "progressBar": "None",
+                                                                        "progressMessage": null,
+                                                                        "asynchronous": false,
+                                                                        "formValidations": "None",
+                                                                        "confirmationInfo": null
+                                                                    }
+                                                                },
+                                                                "maintainSelectionAfterMicroflow": false
+                                                            },
+                                                            {
+                                                                "$ID": "grid_search_button_data_grid_students",
+                                                                "$Type": "Pages$GridSearchButton",
+                                                                "name": "gridSearchButtonDataGridStudents",
+                                                                "caption": {
+                                                                    "$ID": "caption_grid_search_button_data_grid_students",
+                                                                    "$Type": "Pages$ClientTemplate",
+                                                                    "template": {
+                                                                        "$ID": "template_caption_grid_search_button_data_grid_students",
+                                                                        "$Type": "Texts$Text",
+                                                                        "translations": [
+                                                                            {
+                                                                                "$ID": "translation_caption_grid_search_button_data_grid_students_en_US",
+                                                                                "$Type": "Texts$Translation",
+                                                                                "languageCode": "en_US",
+                                                                                "text": "Search"
+                                                                            }
+                                                                        ]
+                                                                    },
+                                                                    "parameters": [],
+                                                                    "fallback": {
+                                                                        "$ID": "fallback_caption_grid_search_button_data_grid_students",
+                                                                        "$Type": "Texts$Text",
+                                                                        "translations": []
+                                                                    }
+                                                                },
+                                                                "tooltip": {
+                                                                    "$ID": "tooltip_grid_search_button_data_grid_students",
+                                                                    "$Type": "Texts$Text",
+                                                                    "translations": [
+                                                                        {
+                                                                            "$ID": "translation_tooltip_grid_search_button_data_grid_students_en_US",
+                                                                            "$Type": "Texts$Translation",
+                                                                            "languageCode": "en_US",
+                                                                            "text": "Search for students"
+                                                                        }
+                                                                    ]
+                                                                },
+                                                                "icon": null,
+                                                                "appearance": {
+                                                                    "$ID": "appearance_grid_search_button_data_grid_students",
+                                                                    "$Type": "Pages$Appearance",
+                                                                    "class": "",
+                                                                    "style": "",
+                                                                    "designProperties": [],
+                                                                    "dynamicClasses": ""
+                                                                },
+                                                                "conditionalVisibilitySettings": null,
+                                                                "buttonStyle": "Default"
+                                                            }
+                                                        ],
+                                                        "defaultButton": "grid_action_button_new_student"
+                                                    },
+                                                    "columns": [
+                                                        {
+                                                            "$ID": "column_student_id",
+                                                            "$Type": "Pages$GridColumn",
+                                                            "name": "columnStudentID",
+                                                            "caption": {
+                                                                "$ID": "caption_column_student_id",
+                                                                "$Type": "Texts$Text",
+                                                                "translations": [
+                                                                    {
+                                                                        "$ID": "translation_caption_column_student_id_en_US",
+                                                                        "$Type": "Texts$Translation",
+                                                                        "languageCode": "en_US",
+                                                                        "text": "Student ID"
+                                                                    }
+                                                                ]
+                                                            },
+                                                            "attributeRef": {
+                                                                "$ID": "attribute_ref_column_student_id",
+                                                                "$Type": "DomainModels$AttributeRef",
+                                                                "entityRef": {
+                                                                    "$ID": "entity_ref_column_student_id",
+                                                                    "$Type": "DomainModels$DirectEntityRef",
+                                                                    "entity": "StudentCourseModule.Student"
+                                                                },
+                                                                "attribute": "StudentCourseModule.Student.StudentID"
+                                                            },
+                                                            "formattingInfo": {
+                                                                "$ID": "formatting_info_column_student_id",
+                                                                "$Type": "Pages$FormattingInfo",
+                                                                "decimalPrecision": -1,
+                                                                "groupDigits": false,
+                                                                "enumFormat": "Text",
+                                                                "dateFormat": "Date",
+                                                                "customDateFormat": ""
+                                                            },
+                                                            "showTooltip": false,
+                                                            "aggregateCaption": {
+                                                                "$ID": "aggregate_caption_column_student_id",
+                                                                "$Type": "Texts$Text",
+                                                                "translations": []
+                                                            },
+                                                            "aggregateFunction": "None",
+                                                            "editable": false,
+                                                            "width": 1,
+                                                            "appearance": {
+                                                                "$ID": "appearance_column_student_id",
+                                                                "$Type": "Pages$Appearance",
+                                                                "class": "",
+                                                                "style": "",
+                                                                "designProperties": [],
+                                                                "dynamicClasses": ""
+                                                            }
+                                                        },
+                                                        {
+                                                            "$ID": "column_student_name",
+                                                            "$Type": "Pages$GridColumn",
+                                                            "name": "columnStudentName",
+                                                            "caption": {
+                                                                "$ID": "caption_column_student_name",
+                                                                "$Type": "Texts$Text",
+                                                                "translations": [
+                                                                    {
+                                                                        "$ID": "translation_caption_column_student_name_en_US",
+                                                                        "$Type": "Texts$Translation",
+                                                                        "languageCode": "en_US",
+                                                                        "text": "Name"
+                                                                    }
+                                                                ]
+                                                            },
+                                                            "attributeRef": {
+                                                                "$ID": "attribute_ref_column_student_name",
+                                                                "$Type": "DomainModels$AttributeRef",
+                                                                "entityRef": {
+                                                                    "$ID": "entity_ref_column_student_name",
+                                                                    "$Type": "DomainModels$DirectEntityRef",
+                                                                    "entity": "StudentCourseModule.Student"
+                                                                },
+                                                                "attribute": "StudentCourseModule.Student.Name"
+                                                            },
+                                                            "formattingInfo": {
+                                                                "$ID": "formatting_info_column_student_name",
+                                                                "$Type": "Pages$FormattingInfo",
+                                                                "decimalPrecision": -1,
+                                                                "groupDigits": false,
+                                                                "enumFormat": "Text",
+                                                                "dateFormat": "Date",
+                                                                "customDateFormat": ""
+                                                            },
+                                                            "showTooltip": false,
+                                                            "aggregateCaption": {
+                                                                "$ID": "aggregate_caption_column_student_name",
+                                                                "$Type": "Texts$Text",
+                                                                "translations": []
+                                                            },
+                                                            "aggregateFunction": "None",
+                                                            "editable": false,
+                                                            "width": 2,
+                                                            "appearance": {
+                                                                "$ID": "appearance_column_student_name",
+                                                                "$Type": "Pages$Appearance",
+                                                                "class": "",
+                                                                "style": "",
+                                                                "designProperties": [],
+                                                                "dynamicClasses": ""
+                                                            }
+                                                        },
+                                                        {
+                                                            "$ID": "column_student_email",
+                                                            "$Type": "Pages$GridColumn",
+                                                            "name": "columnStudentEmail",
+                                                            "caption": {
+                                                                "$ID": "caption_column_student_email",
+                                                                "$Type": "Texts$Text",
+                                                                "translations": [
+                                                                    {
+                                                                        "$ID": "translation_caption_column_student_email_en_US",
+                                                                        "$Type": "Texts$Translation",
+                                                                        "languageCode": "en_US",
+                                                                        "text": "Email"
+                                                                    }
+                                                                ]
+                                                            },
+                                                            "attributeRef": {
+                                                                "$ID": "attribute_ref_column_student_email",
+                                                                "$Type": "DomainModels$AttributeRef",
+                                                                "entityRef": {
+                                                                    "$ID": "entity_ref_column_student_email",
+                                                                    "$Type": "DomainModels$DirectEntityRef",
+                                                                    "entity": "StudentCourseModule.Student"
+                                                                },
+                                                                "attribute": "StudentCourseModule.Student.Email"
+                                                            },
+                                                            "formattingInfo": {
+                                                                "$ID": "formatting_info_column_student_email",
+                                                                "$Type": "Pages$FormattingInfo",
+                                                                "decimalPrecision": -1,
+                                                                "groupDigits": false,
+                                                                "enumFormat": "Text",
+                                                                "dateFormat": "Date",
+                                                                "customDateFormat": ""
+                                                            },
+                                                            "showTooltip": false,
+                                                            "aggregateCaption": {
+                                                                "$ID": "aggregate_caption_column_student_email",
+                                                                "$Type": "Texts$Text",
+                                                                "translations": []
+                                                            },
+                                                            "aggregateFunction": "None",
+                                                            "editable": false,
+                                                            "width": 2,
+                                                            "appearance": {
+                                                                "$ID": "appearance_column_student_email",
+                                                                "$Type": "Pages$Appearance",
+                                                                "class": "",
+                                                                "style": "",
+                                                                "designProperties": [],
+                                                                "dynamicClasses": ""
+                                                            }
+                                                        }
+                                                    ],
+                                                    "numberOfRows": 20,
+                                                    "showEmptyRows": false,
+                                                    "widthUnit": "Weight",
+                                                    "tooltipPage": null,
+                                                    "caption": {
+                                                        "$ID": "caption_data_grid_students",
+                                                        "$Type": "Pages$ClientTemplate",
+                                                        "template": {
+                                                            "$ID": "template_caption_data_grid_students",
+                                                            "$Type": "Texts$Text",
+                                                            "translations": [
+                                                                {
+                                                                    "$ID": "translation_caption_data_grid_students_en_US",
+                                                                    "$Type": "Texts$Translation",
+                                                                    "languageCode": "en_US",
+                                                                    "text": "Students"
+                                                                }
+                                                            ]
+                                                        },
+                                                        "parameters": [],
+                                                        "fallback": {
+                                                            "$ID": "fallback_caption_data_grid_students",
+                                                            "$Type": "Texts$Text",
+                                                            "translations": []
+                                                        }
+                                                    }
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                "title": {
+                                    "$ID": "title_page_student_overview",
+                                    "$Type": "Texts$Text",
+                                    "translations": [
+                                        {
+                                            "$ID": "translation_title_page_student_overview_en_US",
+                                            "$Type": "Texts$Translation",
+                                            "languageCode": "en_US",
+                                            "text": "Student Overview"
+                                        }
+                                    ]
+                                },
+                                "appearance": {
+                                    "$ID": "appearance_page_student_overview",
+                                    "$Type": "Pages$Appearance",
+                                    "class": "",
+                                    "style": "",
+                                    "designProperties": [],
+                                    "dynamicClasses": ""
+                                },
+                                "allowedRoles": ["Administrator", "User"],
+                                "popupCloseAction": "ClosePage",
+                                "popupWidth": null,
+                                "popupHeight": null,
+                                "popupResizable": false,
+                                "markAsUsed": true,
+                                "url": "/student-overview"
+                            }
+                        },
+                        {
+                            "$ID": "page_course_overview",
+                            "name": "CourseOverview",
+                            "document": {
+                                "$ID": "page_course_overview_document",
+                                "$Type": "Pages$Page",
+                                "name": "CourseOverview",
+                                "documentation": "Page to display an overview of courses.",
+                                "excluded": false,
+                                "exportLevel": "Hidden",
+                                "canvasWidth": 1024,
+                                "canvasHeight": 768,
+                                "parameters": [],
+                                "layoutCall": {
+                                    "$ID": "layout_call_course_overview",
+                                    "$Type": "Pages$LayoutCall",
+                                    "layout": "layout_main",
+                                    "arguments": [
+                                        {
+                                            "$ID": "layout_call_argument_course_overview_content",
+                                            "$Type": "Pages$LayoutCallArgument",
+                                            "parameter": "layout_parameter_content",
+                                            "widgets": [
+                                                {
+                                                    "$ID": "data_grid_courses",
+                                                    "$Type": "Pages$DataGrid",
+                                                    "name": "dataGridCourses",
+                                                    "appearance": {
+                                                        "$ID": "appearance_data_grid_courses",
+                                                        "$Type": "Pages$Appearance",
+                                                        "class": "",
+                                                        "style": "",
+                                                        "designProperties": [],
+                                                        "dynamicClasses": ""
+                                                    },
+                                                    "tabIndex": 0,
+                                                    "conditionalVisibilitySettings": null,
+                                                    "dataSource": {
+                                                        "$ID": "data_source_data_grid_courses",
+                                                        "$Type": "Pages$GridXPathSource",
+                                                        "forceFullObjects": false,
+                                                        "entityRef": {
+                                                            "$ID": "entity_ref_data_grid_courses",
+                                                            "$Type": "DomainModels$DirectEntityRef",
+                                                            "entity": "StudentCourseModule.Course"
+                                                        },
+                                                        "sourceVariable": null,
+                                                        "sortBar": {
+                                                            "$ID": "sort_bar_data_grid_courses",
+                                                            "$Type": "Pages$GridSortBar",
+                                                            "sortItems": [
+                                                                {
+                                                                    "$ID": "sort_item_course_id",
+                                                                    "$Type": "Pages$GridSortItem",
+                                                                    "attributeRef": {
+                                                                        "$ID": "attribute_ref_sort_item_course_id",
+                                                                        "$Type": "DomainModels$AttributeRef",
+                                                                        "entityRef": {
+                                                                            "$ID": "entity_ref_sort_item_course_id",
+                                                                            "$Type": "DomainModels$DirectEntityRef",
+                                                                            "entity": "StudentCourseModule.Course"
+                                                                        },
+                                                                        "attribute": "StudentCourseModule.Course.CourseID"
+                                                                    },
+                                                                    "sortDirection": "Ascending"
+                                                                }
+                                                            ]
+                                                        },
+                                                        "searchBar": {
+                                                            "$ID": "search_bar_data_grid_courses",
+                                                            "$Type": "Pages$SearchBar",
+                                                            "items": [
+                                                                {
+                                                                    "$ID": "search_field_course_name",
+                                                                    "$Type": "Pages$ComparisonSearchField",
+                                                                    "name": "searchFieldCourseName",
+                                                                    "caption": {
+                                                                        "$ID": "caption_search_field_course_name",
+                                                                        "$Type": "Texts$Text",
+                                                                        "translations": [
+                                                                            {
+                                                                                "$ID": "translation_search_field_course_name_en_US",
+                                                                                "$Type": "Texts$Translation",
+                                                                                "languageCode": "en_US",
+                                                                                "text": "Name"
+                                                                            }
+                                                                        ]
+                                                                    },
+                                                                    "placeholder": {
+                                                                        "$ID": "placeholder_search_field_course_name",
+                                                                        "$Type": "Texts$Text",
+                                                                        "translations": [
+                                                                            {
+                                                                                "$ID": "translation_placeholder_search_field_course_name_en_US",
+                                                                                "$Type": "Texts$Translation",
+                                                                                "languageCode": "en_US",
+                                                                                "text": "Enter course name"
+                                                                            }
+                                                                        ]
+                                                                    },
+                                                                    "customDateFormat": "",
+                                                                    "type": "Normal",
+                                                                    "defaultValue": "",
+                                                                    "attributeRef": {
+                                                                        "$ID": "attribute_ref_search_field_course_name",
+                                                                        "$Type": "DomainModels$AttributeRef",
+                                                                        "entityRef": {
+                                                                            "$ID": "entity_ref_search_field_course_name",
+                                                                            "$Type": "DomainModels$DirectEntityRef",
+                                                                            "entity": "StudentCourseModule.Course"
+                                                                        },
+                                                                        "attribute": "StudentCourseModule.Course.Name"
+                                                                    },
+                                                                    "operator": "Contains"
+                                                                }
+                                                            ],
+                                                            "type": "FoldableOpen",
+                                                            "waitForSearch": true
+                                                        },
+                                                        "xPathConstraint": ""
+                                                    },
+                                                    "isControlBarVisible": true,
+                                                    "showPagingBar": "YesWithTotalCount",
+                                                    "selectionMode": "Single",
+                                                    "selectFirst": false,
+                                                    "defaultButtonTrigger": "Single",
+                                                    "refreshTime": 0,
+                                                    "controlBar": {
+                                                        "$ID": "control_bar_data_grid_courses",
+                                                        "$Type": "Pages$GridControlBar",
+                                                        "items": [
+                                                            {
+                                                                "$ID": "grid_action_button_new_course",
+                                                                "$Type": "Pages$GridActionButton",
+                                                                "name": "gridActionButtonNewCourse",
+                                                                "caption": {
+                                                                    "$ID": "caption_grid_action_button_new_course",
+                                                                    "$Type": "Pages$ClientTemplate",
+                                                                    "template": {
+                                                                        "$ID": "template_caption_grid_action_button_new_course",
+                                                                        "$Type": "Texts$Text",
+                                                                        "translations": [
+                                                                            {
+                                                                                "$ID": "translation_caption_grid_action_button_new_course_en_US",
+                                                                                "$Type": "Texts$Translation",
+                                                                                "languageCode": "en_US",
+                                                                                "text": "New"
+                                                                            }
+                                                                        ]
+                                                                    },
+                                                                    "parameters": [],
+                                                                    "fallback": {
+                                                                        "$ID": "fallback_caption_grid_action_button_new_course",
+                                                                        "$Type": "Texts$Text",
+                                                                        "translations": []
+                                                                    }
+                                                                },
+                                                                "tooltip": {
+                                                                    "$ID": "tooltip_grid_action_button_new_course",
+                                                                    "$Type": "Texts$Text",
+                                                                    "translations": [
+                                                                        {
+                                                                            "$ID": "translation_tooltip_grid_action_button_new_course_en_US",
+                                                                            "$Type": "Texts$Translation",
+                                                                            "languageCode": "en_US",
+                                                                            "text": "Create a new course"
+                                                                        }
+                                                                    ]
+                                                                },
+                                                                "icon": null,
+                                                                "appearance": {
+                                                                    "$ID": "appearance_grid_action_button_new_course",
+                                                                    "$Type": "Pages$Appearance",
+                                                                    "class": "",
+                                                                    "style": "",
+                                                                    "designProperties": [],
+                                                                    "dynamicClasses": ""
+                                                                },
+                                                                "conditionalVisibilitySettings": null,
+                                                                "buttonStyle": "Primary",
+                                                                "action": {
+                                                                    "$ID": "action_create_course",
+                                                                    "$Type": "Pages$MicroflowClientAction",
+                                                                    "disabledDuringExecution": false,
+                                                                    "microflowSettings": {
+                                                                        "$ID": "microflow_settings_create_course",
+                                                                        "$Type": "Pages$MicroflowSettings",
+                                                                        "microflow": "StudentCourseModule.ACT_CreateCourse",
+                                                                        "parameterMappings": [],
+                                                                        "progressBar": "None",
+                                                                        "progressMessage": null,
+                                                                        "asynchronous": true,
+                                                                        "formValidations": "None",
+                                                                        "confirmationInfo": null
+                                                                    }
+                                                                },
+                                                                "maintainSelectionAfterMicroflow": false
+                                                            },
+                                                            {
+                                                                "$ID": "grid_search_button_data_grid_courses",
+                                                                "$Type": "Pages$GridSearchButton",
+                                                                "name": "gridSearchButtonDataGridCourses",
+                                                                "caption": {
+                                                                    "$ID": "caption_grid_search_button_data_grid_courses",
+                                                                    "$Type": "Pages$ClientTemplate",
+                                                                    "template": {
+                                                                        "$ID": "template_caption_grid_search_button_data_grid_courses",
+                                                                        "$Type": "Texts$Text",
+                                                                        "translations": [
+                                                                            {
+                                                                                "$ID": "translation_caption_grid_search_button_data_grid_courses_en_US",
+                                                                                "$Type": "Texts$Translation",
+                                                                                "languageCode": "en_US",
+                                                                                "text": "Search"
+                                                                            }
+                                                                        ]
+                                                                    },
+                                                                    "parameters": [],
+                                                                    "fallback": {
+                                                                        "$ID": "fallback_caption_grid_search_button_data_grid_courses",
+                                                                        "$Type": "Texts$Text",
+                                                                        "translations": []
+                                                                    }
+                                                                },
+                                                                "tooltip": {
+                                                                    "$ID": "tooltip_grid_search_button_data_grid_courses",
+                                                                    "$Type": "Texts$Text",
+                                                                    "translations": [
+                                                                        {
+                                                                            "$ID": "translation_tooltip_grid_search_button_data_grid_courses_en_US",
+                                                                            "$Type": "Texts$Translation",
+                                                                            "languageCode": "en_US",
+                                                                            "text": "Search for courses"
+                                                                        }
+                                                                    ]
+                                                                },
+                                                                "icon": null,
+                                                                "appearance": {
+                                                                    "$ID": "appearance_grid_search_button_data_grid_courses",
+                                                                    "$Type": "Pages$Appearance",
+                                                                    "class": "",
+                                                                    "style": "",
+                                                                    "designProperties": [],
+                                                                    "dynamicClasses": ""
+                                                                },
+                                                                "conditionalVisibilitySettings": null,
+                                                                "buttonStyle": "Default"
+                                                            }
+                                                        ],
+                                                        "defaultButton": "grid_action_button_new_course"
+                                                    },
+                                                    "columns": [
+                                                        {
+                                                            "$ID": "column_course_id",
+                                                            "$Type": "Pages$GridColumn",
+                                                            "name": "columnCourseID",
+                                                            "caption": {
+                                                                "$ID": "caption_column_course_id",
+                                                                "$Type": "Texts$Text",
+                                                                "translations": [
+                                                                    {
+                                                                        "$ID": "translation_caption_column_course_id_en_US",
+                                                                        "$Type": "Texts$Translation",
+                                                                        "languageCode": "en_US",
+                                                                        "text": "Course ID"
+                                                                    }
+                                                                ]
+                                                            },
+                                                            "attributeRef": {
+                                                                "$ID": "attribute_ref_column_course_id",
+                                                                "$Type": "DomainModels$AttributeRef",
+                                                                "entityRef": {
+                                                                    "$ID": "entity_ref_column_course_id",
+                                                                    "$Type": "DomainModels$DirectEntityRef",
+                                                                    "entity": "StudentCourseModule.Course"
+                                                                },
+                                                                "attribute": "StudentCourseModule.Course.CourseID"
+                                                            },
+                                                            "formattingInfo": {
+                                                                "$ID": "formatting_info_column_course_id",
+                                                                "$Type": "Pages$FormattingInfo",
+                                                                "decimalPrecision": -1,
+                                                                "groupDigits": false,
+                                                                "enumFormat": "Text",
+                                                                "dateFormat": "Date",
+                                                                "customDateFormat": ""
+                                                            },
+                                                            "showTooltip": false,
+                                                            "aggregateCaption": {
+                                                                "$ID": "aggregate_caption_column_course_id",
+                                                                "$Type": "Texts$Text",
+                                                                "translations": []
+                                                            },
+                                                            "aggregateFunction": "None",
+                                                            "editable": false,
+                                                            "width": 1,
+                                                            "appearance": {
+                                                                "$ID": "appearance_column_course_id",
+                                                                "$Type": "Pages$Appearance",
+                                                                "class": "",
+                                                                "style": "",
+                                                                "designProperties": [],
+                                                                "dynamicClasses": ""
+                                                            }
+                                                        },
+                                                        {
+                                                            "$ID": "column_course_name",
+                                                            "$Type": "Pages$GridColumn",
+                                                            "name": "columnCourseName",
+                                                            "caption": {
+                                                                "$ID": "caption_column_course_name",
+                                                                "$Type": "Texts$Text",
+                                                                "translations": [
+                                                                    {
+                                                                        "$ID": "translation_caption_column_course_name_en_US",
+                                                                        "$Type": "Texts$Translation",
+                                                                        "languageCode": "en_US",
+                                                                        "text": "Name"
+                                                                    }
+                                                                ]
+                                                            },
+                                                            "attributeRef": {
+                                                                "$ID": "attribute_ref_column_course_name",
+                                                                "$Type": "DomainModels$AttributeRef",
+                                                                "entityRef": {
+                                                                    "$ID": "entity_ref_column_course_name",
+                                                                    "$Type": "DomainModels$DirectEntityRef",
+                                                                    "entity": "StudentCourseModule.Course"
+                                                                },
+                                                                "attribute": "StudentCourseModule.Course.Name"
+                                                            },
+                                                            "formattingInfo": {
+                                                                "$ID": "formatting_info_column_course_name",
+                                                                "$Type": "Pages$FormattingInfo",
+                                                                "decimalPrecision": -1,
+                                                                "groupDigits": false,
+                                                                "enumFormat": "Text",
+                                                                "dateFormat": "Date",
+                                                                "customDateFormat": ""
+                                                            },
+                                                            "showTooltip": false,
+                                                            "aggregateCaption": {
+                                                                "$ID": "aggregate_caption_column_course_name",
+                                                                "$Type": "Texts$Text",
+                                                                "translations": []
+                                                            },
+                                                            "aggregateFunction": "None",
+                                                            "editable": false,
+                                                            "width": 2,
+                                                            "appearance": {
+                                                                "$ID": "appearance_column_course_name",
+                                                                "$Type": "Pages$Appearance",
+                                                                "class": "",
+                                                                "style": "",
+                                                                "designProperties": [],
+                                                                "dynamicClasses": ""
+                                                            }
+                                                        },
+                                                        {
+                                                            "$ID": "column_course_description",
+                                                            "$Type": "Pages$GridColumn",
+                                                            "name": "columnCourseDescription",
+                                                            "caption": {
+                                                                "$ID": "caption_column_course_description",
+                                                                "$Type": "Texts$Text",
+                                                                "translations": [
+                                                                    {
+                                                                        "$ID": "translation_caption_column_course_description_en_US",
+                                                                        "$Type": "Texts$Translation",
+                                                                        "languageCode": "en_US",
+                                                                        "text": "Description"
+                                                                    }
+                                                                ]
+                                                            },
+                                                            "attributeRef": {
+                                                                "$ID": "attribute_ref_column_course_description",
+                                                                "$Type": "DomainModels$AttributeRef",
+                                                                "entityRef": {
+                                                                    "$ID": "entity_ref_column_course_description",
+                                                                    "$Type": "DomainModels$DirectEntityRef",
+                                                                    "entity": "StudentCourseModule.Course"
+                                                                },
+                                                                "attribute": "StudentCourseModule.Course.Description"
+                                                            },
+                                                            "formattingInfo": {
+                                                                "$ID": "formatting_info_column_course_description",
+                                                                "$Type": "Pages$FormattingInfo",
+                                                                "decimalPrecision": -1,
+                                                                "groupDigits": false,
+                                                                "enumFormat": "Text",
+                                                                "dateFormat": "Date",
+                                                                "customDateFormat": ""
+                                                            },
+                                                            "showTooltip": false,
+                                                            "aggregateCaption": {
+                                                                "$ID": "aggregate_caption_column_course_description",
+                                                                "$Type": "Texts$Text",
+                                                                "translations": []
+                                                            },
+                                                            "aggregateFunction": "None",
+                                                            "editable": false,
+                                                            "width": 3,
+                                                            "appearance": {
+                                                                "$ID": "appearance_column_course_description",
+                                                                "$Type": "Pages$Appearance",
+                                                                "class": "",
+                                                                "style": "",
+                                                                "designProperties": [],
+                                                                "dynamicClasses": ""
+                                                            }
+                                                        }
+                                                    ],
+                                                    "numberOfRows": 20,
+                                                    "showEmptyRows": false,
+                                                    "widthUnit": "Weight",
+                                                    "tooltipPage": null,
+                                                    "caption": {
+                                                        "$ID": "caption_data_grid_courses",
+                                                        "$Type": "Pages$ClientTemplate",
+                                                        "template": {
+                                                            "$ID": "template_caption_data_grid_courses",
+                                                            "$Type": "Texts$Text",
+                                                            "translations": [
+                                                                {
+                                                                    "$ID": "translation_caption_data_grid_courses_en_US",
+                                                                    "$Type": "Texts$Translation",
+                                                                    "languageCode": "en_US",
+                                                                    "text": "Courses"
+                                                                }
+                                                            ]
+                                                        },
+                                                        "parameters": [],
+                                                        "fallback": {
+                                                            "$ID": "fallback_caption_data_grid_courses",
+                                                            "$Type": "Texts$Text",
+                                                            "translations": []
+                                                        }
+                                                    }
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                "title": {
+                                    "$ID": "title_page_course_overview",
+                                    "$Type": "Texts$Text",
+                                    "translations": [
+                                        {
+                                            "$ID": "translation_title_page_course_overview_en_US",
+                                            "$Type": "Texts$Translation",
+                                            "languageCode": "en_US",
+                                            "text": "Course Overview"
+                                        }
+                                    ]
+                                },
+                                "appearance": {
+                                    "$ID": "appearance_page_course_overview",
+                                    "$Type": "Pages$Appearance",
+                                    "class": "",
+                                    "style": "",
+                                    "designProperties": [],
+                                    "dynamicClasses": ""
+                                },
+                                "allowedRoles": ["Administrator", "User"],
+                                "popupCloseAction": "ClosePage",
+                                "popupWidth": null,
+                                "popupHeight": null,
+                                "popupResizable": false,
+                                "markAsUsed": true,
+                                "url": "/course-overview"
+                            }
+                        },
+                        {
+                            "$ID": "page_enrollment_overview",
+                            "name": "EnrollmentOverview",
+                            "document": {
+                                "$ID": "page_enrollment_overview_document",
+                                "$Type": "Pages$Page",
+                                "name": "EnrollmentOverview",
+                                "documentation": "Page to display an overview of enrollments.",
+                                "excluded": false,
+                                "exportLevel": "Hidden",
+                                "canvasWidth": 1024,
+                                "canvasHeight": 768,
+                                "parameters": [],
+                                "layoutCall": {
+                                    "$ID": "layout_call_enrollment_overview",
+                                    "$Type": "Pages$LayoutCall",
+                                    "layout": "layout_main",
+                                    "arguments": [
+                                        {
+                                            "$ID": "layout_call_argument_enrollment_overview_content",
+                                            "$Type": "Pages$LayoutCallArgument",
+                                            "parameter": "layout_parameter_content",
+                                            "widgets": [
+                                                {
+                                                    "$ID": "data_grid_enrollments",
+                                                    "$Type": "Pages$DataGrid",
+                                                    "name": "dataGridEnrollments",
+                                                    "appearance": {
+                                                        "$ID": "appearance_data_grid_enrollments",
+                                                        "$Type": "Pages$Appearance",
+                                                        "class": "",
+                                                        "style": "",
+                                                        "designProperties": [],
+                                                        "dynamicClasses": ""
+                                                    },
+                                                    "tabIndex": 0,
+                                                    "conditionalVisibilitySettings": null,
+                                                    "dataSource": {
+                                                        "$ID": "data_source_data_grid_enrollments",
+                                                        "$Type": "Pages$GridXPathSource",
+                                                        "forceFullObjects": false,
+                                                        "entityRef": {
+                                                            "$ID": "entity_ref_data_grid_enrollments",
+                                                            "$Type": "DomainModels$DirectEntityRef",
+                                                            "entity": "StudentCourseModule.Enrollment"
+                                                        },
+                                                        "sourceVariable": null,
+                                                        "sortBar": {
+                                                            "$ID": "sort_bar_data_grid_enrollments",
+                                                            "$Type": "Pages$GridSortBar",
+                                                            "sortItems": [
+                                                                {
+                                                                    "$ID": "sort_item_enrollment_id",
+                                                                    "$Type": "Pages$GridSortItem",
+                                                                    "attributeRef": {
+                                                                        "$ID": "attribute_ref_sort_item_enrollment_id",
+                                                                        "$Type": "DomainModels$AttributeRef",
+                                                                        "entityRef": {
+                                                                            "$ID": "entity_ref_sort_item_enrollment_id",
+                                                                            "$Type": "DomainModels$DirectEntityRef",
+                                                                            "entity": "StudentCourseModule.Enrollment"
+                                                                        },
+                                                                        "attribute": "StudentCourseModule.Enrollment.EnrollmentID"
+                                                                    },
+                                                                    "sortDirection": "Ascending"
+                                                                }
+                                                            ]
+                                                        },
+                                                        "searchBar": {
+                                                            "$ID": "search_bar_data_grid_enrollments",
+                                                            "$Type": "Pages$SearchBar",
+                                                            "items": [],
+                                                            "type": "None",
+                                                            "waitForSearch": false
+                                                        },
+                                                        "xPathConstraint": ""
+                                                    },
+                                                    "isControlBarVisible": true,
+                                                    "showPagingBar": "YesWithTotalCount",
+                                                    "selectionMode": "Single",
+                                                    "selectFirst": false,
+                                                    "defaultButtonTrigger": "Single",
+                                                    "refreshTime": 0,
+                                                    "controlBar": {
+                                                        "$ID": "control_bar_data_grid_enrollments",
+                                                        "$Type": "Pages$GridControlBar",
+                                                        "items": [
+                                                            {
+                                                                "$ID": "grid_action_button_new_enrollment",
+                                                                "$Type": "Pages$GridActionButton",
+                                                                "name": "gridActionButtonNewEnrollment",
+                                                                "caption": {
+                                                                    "$ID": "caption_grid_action_button_new_enrollment",
+                                                                    "$Type": "Pages$ClientTemplate",
+                                                                    "template": {
+                                                                        "$ID": "template_caption_grid_action_button_new_enrollment",
+                                                                        "$Type": "Texts$Text",
+                                                                        "translations": [
+                                                                            {
+                                                                                "$ID": "translation_caption_grid_action_button_new_enrollment_en_US",
+                                                                                "$Type": "Texts$Translation",
+                                                                                "languageCode": "en_US",
+                                                                                "text": "New"
+                                                                            }
+                                                                        ]
+                                                                    },
+                                                                    "parameters": [],
+                                                                    "fallback": {
+                                                                        "$ID": "fallback_caption_grid_action_button_new_enrollment",
+                                                                        "$Type": "Texts$Text",
+                                                                        "translations": []
+                                                                    }
+                                                                },
+                                                                "tooltip": {
+                                                                    "$ID": "tooltip_grid_action_button_new_enrollment",
+                                                                    "$Type": "Texts$Text",
+                                                                    "translations": [
+                                                                        {
+                                                                            "$ID": "translation_tooltip_grid_action_button_new_enrollment_en_US",
+                                                                            "$Type": "Texts$Translation",
+                                                                            "languageCode": "en_US",
+                                                                            "text": "Create a new enrollment"
+                                                                        }
+                                                                    ]
+                                                                },
+                                                                "icon": null,
+                                                                "appearance": {
+                                                                    "$ID": "appearance_grid_action_button_new_enrollment",
+                                                                    "$Type": "Pages$Appearance",
+                                                                    "class": "",
+                                                                    "style": "",
+                                                                    "designProperties": [],
+                                                                    "dynamicClasses": ""
+                                                                },
+                                                                "conditionalVisibilitySettings": null,
+                                                                "buttonStyle": "Primary",
+                                                                "action": {
+                                                                    "$ID": "action_create_enrollment",
+                                                                    "$Type": "Pages$MicroflowClientAction",
+                                                                    "disabledDuringExecution": false,
+                                                                    "microflowSettings": {
+                                                                        "$ID": "microflow_settings_create_enrollment",
+                                                                        "$Type": "Pages$MicroflowSettings",
+                                                                        "microflow": "StudentCourseModule.ACT_CreateEnrollment",
+                                                                        "parameterMappings": [],
+                                                                        "progressBar": "None",
+                                                                        "progressMessage": null,
+                                                                        "asynchronous": true,
+                                                                        "formValidations": "None",
+                                                                        "confirmationInfo": null
+                                                                    }
+                                                                },
+                                                                "maintainSelectionAfterMicroflow": false
+                                                            }
+                                                        ],
+                                                        "defaultButton": null
+                                                    },
+                                                    "columns": [
+                                                        {
+                                                            "$ID": "column_enrollment_id",
+                                                            "$Type": "Pages$GridColumn",
+                                                            "name": "columnEnrollmentID",
+                                                            "caption": {
+                                                                "$ID": "caption_column_enrollment_id",
+                                                                "$Type": "Texts$Text",
+                                                                "translations": [
+                                                                    {
+                                                                        "$ID": "translation_caption_column_enrollment_id_en_US",
+                                                                        "$Type": "Texts$Translation",
+                                                                        "languageCode": "en_US",
+                                                                        "text": "Enrollment ID"
+                                                                    }
+                                                                ]
+                                                            },
+                                                            "attributeRef": {
+                                                                "$ID": "attribute_ref_column_enrollment_id",
+                                                                "$Type": "DomainModels$AttributeRef",
+                                                                "entityRef": {
+                                                                    "$ID": "entity_ref_column_enrollment_id",
+                                                                    "$Type": "DomainModels$DirectEntityRef",
+                                                                    "entity": "StudentCourseModule.Enrollment"
+                                                                },
+                                                                "attribute": "StudentCourseModule.Enrollment.EnrollmentID"
+                                                            },
+                                                            "formattingInfo": {
+                                                                "$ID": "formatting_info_column_enrollment_id",
+                                                                "$Type": "Pages$FormattingInfo",
+                                                                "decimalPrecision": -1,
+                                                                "groupDigits": false,
+                                                                "enumFormat": "Text",
+                                                                "dateFormat": "Date",
+                                                                "customDateFormat": ""
+                                                            },
+                                                            "showTooltip": false,
+                                                            "aggregateCaption": {
+                                                                "$ID": "aggregate_caption_column_enrollment_id",
+                                                                "$Type": "Texts$Text",
+                                                                "translations": []
+                                                            },
+                                                            "aggregateFunction": "None",
+                                                            "editable": false,
+                                                            "width": 1,
+                                                            "appearance": {
+                                                                "$ID": "appearance_column_enrollment_id",
+                                                                "$Type": "Pages$Appearance",
+                                                                "class": "",
+                                                                "style": "",
+                                                                "designProperties": [],
+                                                                "dynamicClasses": ""
+                                                            }
+                                                        },
+                                                        {
+                                                            "$ID": "column_enrollment_student",
+                                                            "$Type": "Pages$GridColumn",
+                                                            "name": "columnEnrollmentStudent",
+                                                            "caption": {
+                                                                "$ID": "caption_column_enrollment_student",
+                                                                "$Type": "Texts$Text",
+                                                                "translations": [
+                                                                    {
+                                                                        "$ID": "translation_caption_column_enrollment_student_en_US",
+                                                                        "$Type": "Texts$Translation",
+                                                                        "languageCode": "en_US",
+                                                                        "text": "Student"
+                                                                    }
+                                                                ]
+                                                            },
+                                                            "attributeRef": {
+                                                                "$ID": "attribute_ref_column_enrollment_student",
+                                                                "$Type": "DomainModels$AttributeRef",
+                                                                "entityRef": {
+                                                                    "$ID": "entity_ref_column_enrollment_student",
+                                                                    "$Type": "DomainModels$DirectEntityRef",
+                                                                    "entity": "StudentCourseModule.Student"
+                                                                },
+                                                                "attribute": "StudentCourseModule.Student.Name"
+                                                            },
+                                                            "formattingInfo": {
+                                                                "$ID": "formatting_info_column_enrollment_student",
+                                                                "$Type": "Pages$FormattingInfo",
+                                                                "decimalPrecision": -1,
+                                                                "groupDigits": false,
+                                                                "enumFormat": "Text",
+                                                                "dateFormat": "Date",
+                                                                "customDateFormat": ""
+                                                            },
+                                                            "showTooltip": false,
+                                                            "aggregateCaption": {
+                                                                "$ID": "aggregate_caption_column_enrollment_student",
+                                                                "$Type": "Texts$Text",
+                                                                "translations": []
+                                                            },
+                                                            "aggregateFunction": "None",
+                                                            "editable": false,
+                                                            "width": 2,
+                                                            "appearance": {
+                                                                "$ID": "appearance_column_enrollment_student",
+                                                                "$Type": "Pages$Appearance",
+                                                                "class": "",
+                                                                "style": "",
+                                                                "designProperties": [],
+                                                                "dynamicClasses": ""
+                                                            }
+                                                        },
+                                                        {
+                                                            "$ID": "column_enrollment_course",
+                                                            "$Type": "Pages$GridColumn",
+                                                            "name": "columnEnrollmentCourse",
+                                                            "caption": {
+                                                                "$ID": "caption_column_enrollment_course",
+                                                                "$Type": "Texts$Text",
+                                                                "translations": [
+                                                                    {
+                                                                        "$ID": "translation_caption_column_enrollment_course_en_US",
+                                                                        "$Type": "Texts$Translation",
+                                                                        "languageCode": "en_US",
+                                                                        "text": "Course"
+                                                                    }
+                                                                ]
+                                                            },
+                                                            "attributeRef": {
+                                                                "$ID": "attribute_ref_column_enrollment_course",
+                                                                "$Type": "DomainModels$AttributeRef",
+                                                                "entityRef": {
+                                                                    "$ID": "entity_ref_column_enrollment_course",
+                                                                    "$Type": "DomainModels$DirectEntityRef",
+                                                                    "entity": "StudentCourseModule.Course"
+                                                                },
+                                                                "attribute": "StudentCourseModule.Course.Name"
+                                                            },
+                                                            "formattingInfo": {
+                                                                "$ID": "formatting_info_column_enrollment_course",
+                                                                "$Type": "Pages$FormattingInfo",
+                                                                "decimalPrecision": -1,
+                                                                "groupDigits": false,
+                                                                "enumFormat": "Text",
+                                                                "dateFormat": "Date",
+                                                                "customDateFormat": ""
+                                                            },
+                                                            "showTooltip": false,
+                                                            "aggregateCaption": {
+                                                                "$ID": "aggregate_caption_column_enrollment_course",
+                                                                "$Type": "Texts$Text",
+                                                                "translations": []
+                                                            },
+                                                            "aggregateFunction": "None",
+                                                            "editable": false,
+                                                            "width": 2,
+                                                            "appearance": {
+                                                                "$ID": "appearance_column_enrollment_course",
+                                                                "$Type": "Pages$Appearance",
+                                                                "class": "",
+                                                                "style": "",
+                                                                "designProperties": [],
+                                                                "dynamicClasses": ""
+                                                            }
+                                                        },
+                                                        {
+                                                            "$ID": "column_enrollment_date",
+                                                            "$Type": "Pages$GridColumn",
+                                                            "name": "columnEnrollmentDate",
+                                                            "caption": {
+                                                                "$ID": "caption_column_enrollment_date",
+                                                                "$Type": "Texts$Text",
+                                                                "translations": [
+                                                                    {
+                                                                        "$ID": "translation_caption_column_enrollment_date_en_US",
+                                                                        "$Type": "Texts$Translation",
+                                                                        "languageCode": "en_US",
+                                                                        "text": "Enrollment Date"
+                                                                    }
+                                                                ]
+                                                            },
+                                                            "attributeRef": {
+                                                                "$ID": "attribute_ref_column_enrollment_date",
+                                                                "$Type": "DomainModels$AttributeRef",
+                                                                "entityRef": {
+                                                                    "$ID": "entity_ref_column_enrollment_date",
+                                                                    "$Type": "DomainModels$DirectEntityRef",
+                                                                    "entity": "StudentCourseModule.Enrollment"
+                                                                },
+                                                                "attribute": "StudentCourseModule.Enrollment.EnrollmentDate"
+                                                            },
+                                                            "formattingInfo": {
+                                                                "$ID": "formatting_info_column_enrollment_date",
+                                                                "$Type": "Pages$FormattingInfo",
+                                                                "decimalPrecision": -1,
+                                                                "groupDigits": false,
+                                                                "enumFormat": "Text",
+                                                                "dateFormat": "DateTime",
+                                                                "customDateFormat": ""
+                                                            },
+                                                            "showTooltip": false,
+                                                            "aggregateCaption": {
+                                                                "$ID": "aggregate_caption_column_enrollment_date",
+                                                                "$Type": "Texts$Text",
+                                                                "translations": []
+                                                            },
+                                                            "aggregateFunction": "None",
+                                                            "editable": false,
+                                                            "width": 2,
+                                                            "appearance": {
+                                                                "$ID": "appearance_column_enrollment_date",
+                                                                "$Type": "Pages$Appearance",
+                                                                "class": "",
+                                                                "style": "",
+                                                                "designProperties": [],
+                                                                "dynamicClasses": ""
+                                                            }
+                                                        }
+                                                    ],
+                                                    "numberOfRows": 20,
+                                                    "showEmptyRows": false,
+                                                    "widthUnit": "Weight",
+                                                    "tooltipPage": null,
+                                                    "caption": {
+                                                        "$ID": "caption_data_grid_enrollments",
+                                                        "$Type": "Pages$ClientTemplate",
+                                                        "template": {
+                                                            "$ID": "template_caption_data_grid_enrollments",
+                                                            "$Type": "Texts$Text",
+                                                            "translations": [
+                                                                {
+                                                                    "$ID": "translation_caption_data_grid_enrollments_en_US",
+                                                                    "$Type": "Texts$Translation",
+                                                                    "languageCode": "en_US",
+                                                                    "text": "Enrollments"
+                                                                }
+                                                            ]
+                                                        },
+                                                        "parameters": [],
+                                                        "fallback": {
+                                                            "$ID": "fallback_caption_data_grid_enrollments",
+                                                            "$Type": "Texts$Text",
+                                                            "translations": []
+                                                        }
+                                                    }
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                "title": {
+                                    "$ID": "title_page_enrollment_overview",
+                                    "$Type": "Texts$Text",
+                                    "translations": [
+                                        {
+                                            "$ID": "translation_title_page_enrollment_overview_en_US",
+                                            "$Type": "Texts$Translation",
+                                            "languageCode": "en_US",
+                                            "text": "Enrollment Overview"
+                                        }
+                                    ]
+                                },
+                                "appearance": {
+                                    "$ID": "appearance_page_enrollment_overview",
+                                    "$Type": "Pages$Appearance",
+                                    "class": "",
+                                    "style": "",
+                                    "designProperties": [],
+                                    "dynamicClasses": ""
+                                },
+                                "allowedRoles": ["Administrator", "User"],
+                                "popupCloseAction": "ClosePage",
+                                "popupWidth": null,
+                                "popupHeight": null,
+                                "popupResizable": false,
+                                "markAsUsed": true,
+                                "url": "/enrollment-overview"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "$ID": "folder_microflows",
+                    "name": "Microflows",
+                    "children": [
+                        {
+                            "$ID": "microflow_create_student",
+                            "name": "ACT_CreateStudent",
+                            "document": {
+                                "$ID": "microflow_document_create_student",
+                                "$Type": "Microflows$Microflow",
+                                "name": "ACT_CreateStudent",
+                                "documentation": "Creates a new student and opens the StudentEdit page.",
+                                "excluded": false,
+                                "exportLevel": "Hidden",
+                                "objectCollection": {
+                                    "$ID": "object_collection_create_student",
+                                    "$Type": "Microflows$MicroflowObjectCollection",
+                                    "objects": [
+                                        {
+                                            "$ID": "start_event_create_student",
+                                            "$Type": "Microflows$StartEvent",
+                                            "relativeMiddlePoint": {
+                                                "x": 50,
+                                                "y": 100
+                                            },
+                                            "size": {
+                                                "width": 20,
+                                                "height": 20
+                                            }
+                                        },
+                                        {
+                                            "$ID": "action_activity_create_student",
+                                            "$Type": "Microflows$ActionActivity",
+                                            "relativeMiddlePoint": {
+                                                "x": 180,
+                                                "y": 100
+                                            },
+                                            "size": {
+                                                "width": 60,
+                                                "height": 40
+                                            },
+                                            "action": {
+                                                "$ID": "action_create_student_object",
+                                                "$Type": "Microflows$CreateAction",
+                                                "errorHandlingType": "Rollback",
+                                                "outputVariableName": "NewStudent",
+                                                "objectType": {
+                                                    "type": "object",
+                                                    "properties": {
+                                                        "$ID": {
+                                                            "type": "string"
+                                                        },
+                                                        "$Type": {
+                                                            "type": "string",
+                                                            "enum": [
+                                                                "DataTypes$ObjectType"
+                                                            ]
+                                                        },
+                                                        "entity": {
+                                                            "type": "string"
+                                                        }
+                                                    },
+                                                    "required": [
+                                                        "$ID",
+                                                        "$Type",
+                                                        "entity"
+                                                    ]
+                                                },
+                                                "entity": "StudentCourseModule.Student"
+                                            },
+                                            "disabled": false,
+                                            "caption": "Create Student",
+                                            "autoGenerateCaption": true,
+                                            "backgroundColor": "Default",
+                                            "documentation": ""
+                                        },
+                                        {
+                                            "$ID": "action_activity_show_page_student_edit",
+                                            "$Type": "Microflows$ActionActivity",
+                                            "relativeMiddlePoint": {
+                                                "x": 340,
+                                                "y": 100
+                                            },
+                                            "size": {
+                                                "width": 60,
+                                                "height": 40
+                                            },
+                                            "action": {
+                                                "$ID": "action_show_page_student_edit",
+                                                "$Type": "Microflows$ShowPageAction",
+                                                "errorHandlingType": "Rollback",
+                                                "outputVariableName": "",
+                                                "page": "page_student_edit",
+                                                "parameterMappings": [
+                                                    {
+                                                        "$ID": "parameter_mapping_show_page_student_edit",
+                                                        "$Type": "Microflows$MicroflowParameterMapping",
+                                                        "parameter": "page_student_edit_parameter",
+                                                        "expression": "$NewStudent"
+                                                    }
+                                                ]
+                                            },
+                                            "disabled": false,
+                                            "caption": "Show Student Edit",
+                                            "autoGenerateCaption": true,
+                                            "backgroundColor": "Default",
+                                            "documentation": ""
+                                        },
+                                        {
+                                            "$ID": "end_event_create_student",
+                                            "$Type": "Microflows$EndEvent",
+                                            "relativeMiddlePoint": {
+                                                "x": 470,
+                                                "y": 100
+                                            },
+                                            "size": {
+                                                "width": 20,
+                                                "height": 20
+                                            },
+                                            "returnValue": "",
+                                            "documentation": ""
+                                        }
+                                    ]
+                                },
+                                "flows": [
+                                    {
+                                        "$ID": "flow_start_to_create",
+                                        "$Type": "Microflows$SequenceFlow",
+                                        "origin": "start_event_create_student",
+                                        "destination": "action_activity_create_student",
+                                        "originConnectionIndex": 2,
+                                        "destinationConnectionIndex": 0,
+                                        "originBezierVector": {
+                                            "width": 30,
+                                            "height": 0
+                                        },
+                                        "destinationBezierVector": {
+                                            "width": -30,
+                                            "height": 0
+                                        },
+                                        "lineType": "BezierCurve",
+                                        "caseValue": {
+                                            "$ID": "case_value_start_to_create",
+                                            "$Type": "Microflows$NoCase"
+                                        },
+                                        "isErrorHandler": false
+                                    },
+                                    {
+                                        "$ID": "flow_create_to_show_page",
+                                        "$Type": "Microflows$SequenceFlow",
+                                        "origin": "action_activity_create_student",
+                                        "destination": "action_activity_show_page_student_edit",
+                                        "originConnectionIndex": 2,
+                                        "destinationConnectionIndex": 0,
+                                        "originBezierVector": {
+                                            "width": 30,
+                                            "height": 0
+                                        },
+                                        "destinationBezierVector": {
+                                            "width": -30,
+                                            "height": 0
+                                        },
+                                        "lineType": "BezierCurve",
+                                        "caseValue": {
+                                            "$ID": "case_value_create_to_show_page",
+                                            "$Type": "Microflows$NoCase"
+                                        },
+                                        "isErrorHandler": false
+                                    },
+                                    {
+                                        "$ID": "flow_show_page_to_end",
+                                        "$Type": "Microflows$SequenceFlow",
+                                        "origin": "action_activity_show_page_student_edit",
+                                        "destination": "end_event_create_student",
+                                        "originConnectionIndex": 2,
+                                        "destinationConnectionIndex": 0,
+                                        "originBezierVector": {
+                                            "width": 30,
+                                            "height": 0
+                                        },
+                                        "destinationBezierVector": {
+                                            "width": -30,
+                                            "height": 0
+                                        },
+                                        "lineType": "BezierCurve",
+                                        "caseValue": {
+                                            "$ID": "case_value_show_page_to_end",
+                                            "$Type": "Microflows$NoCase"
+                                        },
+                                        "isErrorHandler": false
+                                    }
+                                ],
+                                "microflowReturnType": {
+                                    "$ID": "return_type_create_student",
+                                    "$Type": "DataTypes$VoidType"
+                                },
+                                "markAsUsed": true,
+                                "returnVariableName": "ReturnValue",
+                                "applyEntityAccess": false,
+                                "allowedModuleRoles": [],
+                                "microflowActionInfo": null,
+                                "workflowActionInfo": null,
+                                "allowConcurrentExecution": true,
+                                "concurrencyErrorMessage": null,
+                                "concurrencyErrorMicroflow": null,
+                                "url": "",
+                                "urlSearchParameters": [],
+                                "stableId": "e8f8d2b5-2c4a-4e73-9d61-17c8b24d3a7f"
+                            }
+                        },
+                        {
+                            "$ID": "microflow_create_course",
+                            "name": "ACT_CreateCourse",
+                            "document": {
+                                "$ID": "microflow_document_create_course",
+                                "$Type": "Microflows$Microflow",
+                                "name": "ACT_CreateCourse",
+                                "documentation": "Creates a new course and opens the CourseEdit page.",
+                                "excluded": false,
+                                "exportLevel": "Hidden",
+                                "objectCollection": {
+                                    "$ID": "object_collection_create_course",
+                                    "$Type": "Microflows$MicroflowObjectCollection",
+                                    "objects": [
+                                        {
+                                            "$ID": "start_event_create_course",
+                                            "$Type": "Microflows$StartEvent",
+                                            "relativeMiddlePoint": {
+                                                "x": 50,
+                                                "y": 100
+                                            },
+                                            "size": {
+                                                "width": 20,
+                                                "height": 20
+                                            }
+                                        },
+                                        {
+                                            "$ID": "action_activity_create_course",
+                                            "$Type": "Microflows$ActionActivity",
+                                            "relativeMiddlePoint": {
+                                                "x": 180,
+                                                "y": 100
+                                            },
+                                            "size": {
+                                                "width": 60,
+                                                "height": 40
+                                            },
+                                            "action": {
+                                                "$ID": "action_create_course_object",
+                                                "$Type": "Microflows$CreateAction",
+                                                "errorHandlingType": "Rollback",
+                                                "outputVariableName": "NewCourse",
+                                                "objectType": {
+                                                    "type": "object",
+                                                    "properties": {
+                                                        "$ID": {
+                                                            "type": "string"
+                                                        },
+                                                        "$Type": {
+                                                            "type": "string",
+                                                            "enum": [
+                                                                "DataTypes$ObjectType"
+                                                            ]
+                                                        },
+                                                        "entity": {
+                                                            "type": "string"
+                                                        }
+                                                    },
+                                                    "required": [
+                                                        "$ID",
+                                                        "$Type",
+                                                        "entity"
+                                                    ]
+                                                },
+                                                "entity": "StudentCourseModule.Course"
+                                            },
+                                            "disabled": false,
+                                            "caption": "Create Course",
+                                            "autoGenerateCaption": true,
+                                            "backgroundColor": "Default",
+                                            "documentation": ""
+                                        },
+                                        {
+                                            "$ID": "action_activity_show_page_course_edit",
+                                            "$Type": "Microflows$ActionActivity",
+                                            "relativeMiddlePoint": {
+                                                "x": 340,
+                                                "y": 100
+                                            },
+                                            "size": {
+                                                "width": 60,
+                                                "height": 40
+                                            },
+                                            "action": {
+                                                "$ID": "action_show_page_course_edit",
+                                                "$Type": "Microflows$ShowPageAction",
+                                                "errorHandlingType": "Rollback",
+                                                "outputVariableName": "",
+                                                "page": "page_course_edit",
+                                                "parameterMappings": [
+                                                    {
+                                                        "$ID": "parameter_mapping_show_page_course_edit",
+                                                        "$Type": "Microflows$MicroflowParameterMapping",
+                                                        "parameter": "page_course_edit_parameter",
+                                                        "expression": "$NewCourse"
+                                                    }
+                                                ]
+                                            },
+                                            "disabled": false,
+                                            "caption": "Show Course Edit",
+                                            "autoGenerateCaption": true,
+                                            "backgroundColor": "Default",
+                                            "documentation": ""
+                                        },
+                                        {
+                                            "$ID": "end_event_create_course",
+                                            "$Type": "Microflows$EndEvent",
+                                            "relativeMiddlePoint": {
+                                                "x": 470,
+                                                "y": 100
+                                            },
+                                            "size": {
+                                                "width": 20,
+                                                "height": 20
+                                            },
+                                            "returnValue": "",
+                                            "documentation": ""
+                                        }
+                                    ]
+                                },
+                                "flows": [
+                                    {
+                                        "$ID": "flow_start_to_create_course",
+                                        "$Type": "Microflows$SequenceFlow",
+                                        "origin": "start_event_create_course",
+                                        "destination": "action_activity_create_course",
+                                        "originConnectionIndex": 2,
+                                        "destinationConnectionIndex": 0,
+                                        "originBezierVector": {
+                                            "width": 30,
+                                            "height": 0
+                                        },
+                                        "destinationBezierVector": {
+                                            "width": -30,
+                                            "height": 0
+                                        },
+                                        "lineType": "BezierCurve",
+                                        "caseValue": {
+                                            "$ID": "case_value_start_to_create_course",
+                                            "$Type": "Microflows$NoCase"
+                                        },
+                                        "isErrorHandler": false
+                                    },
+                                    {
+                                        "$ID": "flow_create_course_to_end",
+                                        "$Type": "Microflows$SequenceFlow",
+                                        "origin": "action_activity_create_course",
+                                        "destination": "action_activity_show_page_course_edit",
+                                        "originConnectionIndex": 2,
+                                        "destinationConnectionIndex": 0,
+                                        "originBezierVector": {
+                                            "width": 30,
+                                            "height": 0
+                                        },
+                                        "destinationBezierVector": {
+                                            "width": -30,
+                                            "height": 0
+                                        },
+                                        "lineType": "BezierCurve",
+                                        "caseValue": {
+                                            "$ID": "case_value_create_course_to_end",
+                                            "$Type": "Microflows$NoCase"
+                                        },
+                                        "isErrorHandler": false
+                                    },
+                                    {
+                                        "$ID": "flow_show_page_course_edit_to_end",
+                                        "$Type": "Microflows$SequenceFlow",
+                                        "origin": "action_activity_show_page_course_edit",
+                                        "destination": "end_event_create_course",
+                                        "originConnectionIndex": 2,
+                                        "destinationConnectionIndex": 0,
+                                        "originBezierVector": {
+                                            "width": 30,
+                                            "height": 0
+                                        },
+                                        "destinationBezierVector": {
+                                            "width": -30,
+                                            "height": 0
+                                        },
+                                        "lineType": "BezierCurve",
+                                        "caseValue": {
+                                            "$ID": "case_value_show_page_course_edit_to_end",
+                                            "$Type": "Microflows$NoCase"
+                                        },
+                                        "isErrorHandler": false
+                                    }
+                                ],
+                                "microflowReturnType": {
+                                    "$ID": "return_type_create_course",
+                                    "$Type": "DataTypes$VoidType"
+                                },
+                                "markAsUsed": true,
+                                "returnVariableName": "ReturnValue",
+                                "applyEntityAccess": false,
+                                "allowedModuleRoles": [],
+                                "microflowActionInfo": null,
+                                "workflowActionInfo": null,
+                                "allowConcurrentExecution": true,
+                                "concurrencyErrorMessage": null,
+                                "concurrencyErrorMicroflow": null,
+                                "url": "",
+                                "urlSearchParameters": [],
+                                "stableId": "8990976f-b361-4f37-999e-4274d2868b33"
+                            }
+                        },
+                        {
+                            "$ID": "microflow_create_enrollment",
+                            "name": "ACT_CreateEnrollment",
+                            "document": {
+                                "$ID": "microflow_document_create_enrollment",
+                                "$Type": "Microflows$Microflow",
+                                "name": "ACT_CreateEnrollment",
+                                "documentation": "Creates a new enrollment and opens the EnrollmentEdit page.",
+                                "excluded": false,
+                                "exportLevel": "Hidden",
+                                "objectCollection": {
+                                    "$ID": "object_collection_create_enrollment",
+                                    "$Type": "Microflows$MicroflowObjectCollection",
+                                    "objects": [
+                                        {
+                                            "$ID": "start_event_create_enrollment",
+                                            "$Type": "Microflows$StartEvent",
+                                            "relativeMiddlePoint": {
+                                                "x": 50,
+                                                "y": 100
+                                            },
+                                            "size": {
+                                                "width": 20,
+                                                "height": 20
+                                            }
+                                        },
+                                        {
+                                            "$ID": "action_activity_create_enrollment",
+                                            "$Type": "Microflows$ActionActivity",
+                                            "relativeMiddlePoint": {
+                                                "x": 180,
+                                                "y": 100
+                                            },
+                                            "size": {
+                                                "width": 60,
+                                                "height": 40
+                                            },
+                                            "action": {
+                                                "$ID": "action_create_enrollment_object",
+                                                "$Type": "Microflows$CreateAction",
+                                                "errorHandlingType": "Rollback",
+                                                "outputVariableName": "NewEnrollment",
+                                                "objectType": {
+                                                    "type": "object",
+                                                    "properties": {
+                                                        "$ID": {
+                                                            "type": "string"
+                                                        },
+                                                        "$Type": {
+                                                            "type": "string",
+                                                            "enum": [
+                                                                "DataTypes$ObjectType"
+                                                            ]
+                                                        },
+                                                        "entity": {
+                                                            "type": "string"
+                                                        }
+                                                    },
+                                                    "required": [
+                                                        "$ID",
+                                                        "$Type",
+                                                        "entity"
+                                                    ]
+                                                },
+                                                "entity": "StudentCourseModule.Enrollment"
+                                            },
+                                            "disabled": false,
+                                            "caption": "Create Enrollment",
+                                            "autoGenerateCaption": true,
+                                            "backgroundColor": "Default",
+                                            "documentation": ""
+                                        },
+                                        {
+                                            "$ID": "action_activity_show_page_enrollment_edit",
+                                            "$Type": "Microflows$ActionActivity",
+                                            "relativeMiddlePoint": {
+                                                "x": 340,
+                                                "y": 100
+                                            },
+                                            "size": {
+                                                "width": 60,
+                                                "height": 40
+                                            },
+                                            "action": {
+                                                "$ID": "action_show_page_enrollment_edit",
+                                                "$Type": "Microflows$ShowPageAction",
+                                                "errorHandlingType": "Rollback",
+                                                "outputVariableName": "",
+                                                "page": "page_enrollment_edit",
+                                                "parameterMappings": [
+                                                    {
+                                                        "$ID": "parameter_mapping_show_page_enrollment_edit",
+                                                        "$Type": "Microflows$MicroflowParameterMapping",
+                                                        "parameter": "page_enrollment_edit_parameter",
+                                                        "expression": "$NewEnrollment"
+                                                    }
+                                                ]
+                                            },
+                                            "disabled": false,
+                                            "caption": "Show Enrollment Edit",
+                                            "autoGenerateCaption": true,
+                                            "backgroundColor": "Default",
+                                            "documentation": ""
+                                        },
+                                        {
+                                            "$ID": "end_event_create_enrollment",
+                                            "$Type": "Microflows$EndEvent",
+                                            "relativeMiddlePoint": {
+                                                "x": 470,
+                                                "y": 100
+                                            },
+                                            "size": {
+                                                "width": 20,
+                                                "height": 20
+                                            },
+                                            "returnValue": "",
+                                            "documentation": ""
+                                        }
+                                    ]
+                                },
+                                "flows": [
+                                    {
+                                        "$ID": "flow_start_to_create_enrollment",
+                                        "$Type": "Microflows$SequenceFlow",
+                                        "origin": "start_event_create_enrollment",
+                                        "destination": "action_activity_create_enrollment",
+                                        "originConnectionIndex": 2,
+                                        "destinationConnectionIndex": 0,
+                                        "originBezierVector": {
+                                            "width": 30,
+                                            "height": 0
+                                        },
+                                        "destinationBezierVector": {
+                                            "width": -30,
+                                            "height": 0
+                                        },
+                                        "lineType": "BezierCurve",
+                                        "caseValue": {
+                                            "$ID": "case_value_start_to_create_enrollment",
+                                            "$Type": "Microflows$NoCase"
+                                        },
+                                        "isErrorHandler": false
+                                    },
+                                    {
+                                        "$ID": "flow_create_to_show_page_enrollment_edit",
+                                        "$Type": "Microflows$SequenceFlow",
+                                        "origin": "action_activity_create_enrollment",
+                                        "destination": "action_activity_show_page_enrollment_edit",
+                                        "originConnectionIndex": 2,
+                                        "destinationConnectionIndex": 0,
+                                        "originBezierVector": {
+                                            "width": 30,
+                                            "height": 0
+                                        },
+                                        "destinationBezierVector": {
+                                            "width": -30,
+                                            "height": 0
+                                        },
+                                        "lineType": "BezierCurve",
+                                        "caseValue": {
+                                            "$ID": "case_value_create_to_show_page_enrollment_edit",
+                                            "$Type": "Microflows$NoCase"
+                                        },
+                                        "isErrorHandler": false
+                                    },
+                                    {
+                                        "$ID": "flow_show_page_to_end_create_enrollment",
+                                        "$Type": "Microflows$SequenceFlow",
+                                        "origin": "action_activity_show_page_enrollment_edit",
+                                        "destination": "end_event_create_enrollment",
+                                        "originConnectionIndex": 2,
+                                        "destinationConnectionIndex": 0,
+                                        "originBezierVector": {
+                                            "width": 30,
+                                            "height": 0
+                                        },
+                                        "destinationBezierVector": {
+                                            "width": -30,
+                                            "height": 0
+                                        },
+                                        "lineType": "BezierCurve",
+                                        "caseValue": {
+                                            "$ID": "case_value_show_page_to_end_create_enrollment",
+                                            "$Type": "Microflows$NoCase"
+                                        },
+                                        "isErrorHandler": false
+                                    }
+                                ],
+                                "microflowReturnType": {
+                                    "$ID": "return_type_create_enrollment",
+                                    "$Type": "DataTypes$VoidType"
+                                },
+                                "markAsUsed": true,
+                                "returnVariableName": "ReturnValue",
+                                "applyEntityAccess": false,
+                                "allowedModuleRoles": [],
+                                "microflowActionInfo": null,
+                                "workflowActionInfo": null,
+                                "allowConcurrentExecution": true,
+                                "concurrencyErrorMessage": null,
+                                "concurrencyErrorMicroflow": null,
+                                "url": "",
+                                "urlSearchParameters": [],
+                                "stableId": "375d8f26-7b30-4e97-a46d-557f3db1a5f9"
+                            }
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "settings": {
+        "applicationName": "Student Course System"
+    }
+}
