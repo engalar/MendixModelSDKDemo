@@ -8,8 +8,8 @@ async function main() {
     const appId = "b67d8b80-c748-4153-b9f1-d22e5a7f84ba"; // 你的 App ID
     const branchName = "main"; // 分支名称，通常为 "main"
     const moduleName = "Example"; // 模块名称
-    const microflowName = "Microflow"; // 微流名称
-    const outputFilePath = "microflow.json"; // 输出文件路径
+    const microflowName = "Microflow_3"; // 微流名称
+    const outputFilePath = "microflow_3.json"; // 输出文件路径
 
     try {
         const client = new MendixPlatformClient();

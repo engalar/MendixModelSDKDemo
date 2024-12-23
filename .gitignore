@@ -3,3 +3,4 @@ out
 dumy
 .env
 .cache
+schemas/*.model.json

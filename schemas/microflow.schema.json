@@ -3,10 +3,18 @@
     "description": "you must give a module name when gen a model, so i can confirm qulified name",
     "title": "Microflow Structure Schema",
     "definitions": {
+        "ErrorHandlingType": {
+            "type": "string",
+            "enum": [
+                "Rollback"
+            ]
+        },
         "EntityQualifiedName": {
             "type": "string",
             "description": "Entity qualified name",
-            "examples": ["SomeModuleName.EntityName"]
+            "examples": [
+                "SomeModuleName.EntityName"
+            ]
         },
         "Size": {
             "type": "object",
@@ -18,7 +26,10 @@
                     "type": "integer"
                 }
             },
-            "required": ["width", "height"]
+            "required": [
+                "width",
+                "height"
+            ]
         },
         "RelativePoint": {
             "type": "object",
@@ -30,7 +41,10 @@
                     "type": "integer"
                 }
             },
-            "required": ["x", "y"]
+            "required": [
+                "x",
+                "y"
+            ]
         },
         "BezierVector": {
             "type": "object",
@@ -42,7 +56,10 @@
                     "type": "integer"
                 }
             },
-            "required": ["width", "height"]
+            "required": [
+                "width",
+                "height"
+            ]
         },
         "NoCase": {
             "type": "object",
@@ -52,10 +69,15 @@
                 },
                 "$Type": {
                     "type": "string",
-                    "enum": ["Microflows$NoCase"]
+                    "enum": [
+                        "Microflows$NoCase"
+                    ]
                 }
             },
-            "required": ["$ID", "$Type"]
+            "required": [
+                "$ID",
+                "$Type"
+            ]
         },
         "MicroflowObject": {
             "type": "object",
@@ -74,7 +96,12 @@
                     "type": "string"
                 }
             },
-            "required": ["$ID", "relativeMiddlePoint", "size", "documentation"]
+            "required": [
+                "$ID",
+                "relativeMiddlePoint",
+                "size",
+                "documentation"
+            ]
         },
         "MicroflowFlow": {
             "type": "object",
@@ -118,7 +145,10 @@
                             "type": "integer"
                         }
                     },
-                    "required": ["width", "height"]
+                    "required": [
+                        "width",
+                        "height"
+                    ]
                 },
                 "destinationBezierVector": {
                     "type": "object",
@@ -131,11 +161,16 @@
                             "type": "integer"
                         }
                     },
-                    "required": ["width", "height"]
+                    "required": [
+                        "width",
+                        "height"
+                    ]
                 },
                 "lineType": {
                     "type": "string",
-                    "enum": ["BezierCurve"],
+                    "enum": [
+                        "BezierCurve"
+                    ],
                     "description": "Type of line used for the flow."
                 },
                 "caseValue": {
@@ -147,7 +182,9 @@
                             "description": "Unique identifier for the case value."
                         },
                         "$Type": {
-                            "type": ["string"],
+                            "type": [
+                                "string"
+                            ],
                             "enum": [
                                 "Microflows$NoCase",
                                 "Microflows$EnumerationCase",
@@ -156,11 +193,17 @@
                             "description": "Type of the case value"
                         },
                         "value": {
-                            "type": ["string", "null"],
+                            "type": [
+                                "string",
+                                "null"
+                            ],
                             "description": "Value of the enumeration case"
                         }
                     },
-                    "required": ["$ID", "$Type"]
+                    "required": [
+                        "$ID",
+                        "$Type"
+                    ]
                 },
                 "isErrorHandler": {
                     "type": "boolean",
@@ -188,7 +231,9 @@
                 },
                 "$Type": {
                     "type": "string",
-                    "enum": ["Microflows$DatabaseRetrieveSource"]
+                    "enum": [
+                        "Microflows$DatabaseRetrieveSource"
+                    ]
                 },
                 "entity": {
                     "$ref": "#/definitions/EntityQualifiedName"
@@ -201,13 +246,19 @@
                         },
                         "$Type": {
                             "type": "string",
-                            "enum": ["Microflows$ConstantRange"]
+                            "enum": [
+                                "Microflows$ConstantRange"
+                            ]
                         },
                         "singleObject": {
                             "type": "boolean"
                         }
                     },
-                    "required": ["$ID", "$Type", "singleObject"]
+                    "required": [
+                        "$ID",
+                        "$Type",
+                        "singleObject"
+                    ]
                 },
                 "xPathConstraint": {
                     "type": "string"
@@ -220,14 +271,20 @@
                         },
                         "$Type": {
                             "type": "string",
-                            "enum": ["Microflows$SortItemList"]
+                            "enum": [
+                                "Microflows$SortItemList"
+                            ]
                         },
                         "items": {
                             "type": "array",
                             "items": {}
                         }
                     },
-                    "required": ["$ID", "$Type", "items"]
+                    "required": [
+                        "$ID",
+                        "$Type",
+                        "items"
+                    ]
                 }
             },
             "required": [
@@ -240,32 +297,134 @@
             ]
         },
         "Action": {
-            "type": "object",
-            "properties": {
-                "$ID": {
-                    "type": "string"
+            "error": "Invalid value, must match one of the schemas",
+            "oneOf": [
+                {
+                    "type": "object",
+                    "description": "actual action for retrieve",
+                    "properties": {
+                        "$ID": {
+                            "$ref": "common.schema.json#/definitions/Identifiable"
+                        },
+                        "$Type": {
+                            "type": "string",
+                            "enum": [
+                                "Microflows$RetrieveAction"
+                            ]
+                        },
+                        "errorHandlingType": {
+                            "$ref": "#/definitions/ErrorHandlingType"
+                        },
+                        "retrieveSource": {
+                            "$ref": "#/definitions/RetrieveSource"
+                        },
+                        "outputVariableName": {
+                            "type": "string"
+                        }
+                    },
+                    "required": [
+                        "$ID",
+                        "$Type",
+                        "errorHandlingType",
+                        "retrieveSource",
+                        "outputVariableName"
+                    ]
                 },
-                "$Type": {
-                    "type": "string",
-                    "enum": ["Microflows$RetrieveAction"]
+                {
+                    "type": "object",
+                    "description": "actual action for java action call",
+                    "properties": {
+                        "$ID": {
+                            "$ref": "common.schema.json#/definitions/Identifiable"
+                        },
+                        "$Type": {
+                            "type": "string",
+                            "enum": [
+                                "Microflows$JavaActionCallAction"
+                            ]
+                        },
+                        "errorHandlingType": {
+                            "$ref": "#/definitions/ErrorHandlingType"
+                        },
+                        "javaAction": {
+                            "$ref": "common.schema.json#/definitions/QualifiedName"
+                        },
+                        "outputVariableName": {
+                            "type": "string"
+                        },
+                        "queueSettings": {
+                            "type": "null"
+                        },
+                        "parameterMappings": {
+                            "type": "array",
+                            "items": {},
+                            "default": []
+                        },
+                        "useReturnVariable": {
+                            "type": "boolean",
+                            "default": true,
+                            "description": "if true, the outputVariableName is used as return value"
+                        }
+                    },
+                    "required": [
+                        "$ID",
+                        "$Type",
+                        "errorHandlingType",
+                        "javaAction",
+                        "queueSettings",
+                        "parameterMappings",
+                        "useReturnVariable",
+                        "outputVariableName"
+                    ]
                 },
-                "errorHandlingType": {
-                    "type": "string",
-                    "enum": ["Rollback"]
-                },
-                "retrieveSource": {
-                    "$ref": "#/definitions/RetrieveSource"
-                },
-                "outputVariableName": {
-                    "type": "string"
+                {
+                    "type": "object",
+                    "description": "actual action for log message",
+                    "properties": {
+                        "$ID": {
+                            "$ref": "common.schema.json#/definitions/Identifiable"
+                        },
+                        "$Type": {
+                            "type": "string",
+                            "enum": [
+                                "Microflows$LogMessageAction"
+                            ]
+                        },
+                        "errorHandlingType": {
+                            "$ref": "#/definitions/ErrorHandlingType"
+                        },
+                        "level": {
+                            "type": "string",
+                            "enum": [
+                                "Trace",
+                                "Debug",
+                                "Info",
+                                "Warn",
+                                "Error",
+                                "Critical"
+                            ]
+                        },
+                        "node": {
+                            "type": "string"
+                        },
+                        "messageTemplate": {
+                            "$ref": "common.schema.json#/definitions/StringTemplate"
+                        },
+                        "includeLatestStackTrace": {
+                            "type": "boolean",
+                            "default": false
+                        }
+                    },
+                    "required": [
+                        "$ID",
+                        "$Type",
+                        "errorHandlingType",
+                        "level",
+                        "node",
+                        "messageTemplate",
+                        "includeLatestStackTrace"
+                    ]
                 }
-            },
-            "required": [
-                "$ID",
-                "$Type",
-                "errorHandlingType",
-                "retrieveSource",
-                "outputVariableName"
             ]
         },
         "ReturnType": {
@@ -286,7 +445,10 @@
                             ]
                         }
                     },
-                    "required": ["$ID", "$Type"]
+                    "required": [
+                        "$ID",
+                        "$Type"
+                    ]
                 },
                 {
                     "type": "object",
@@ -296,45 +458,23 @@
                         },
                         "$Type": {
                             "type": "string",
-                            "enum": ["DataTypes$ObjectType"]
+                            "enum": [
+                                "DataTypes$ObjectType"
+                            ]
                         },
                         "entity": {
                             "type": "string"
                         }
                     },
-                    "required": ["$ID", "$Type", "entity"]
+                    "required": [
+                        "$ID",
+                        "$Type",
+                        "entity"
+                    ]
                 }
             ]
-        }
-    },
-    "type": "object",
-    "properties": {
-        "$ID": {
-            "type": "string",
-            "description": "Unique identifier of the microflow"
         },
-        "$Type": {
-            "type": "string",
-            "enum": ["Microflows$Microflow"]
-        },
-        "name": {
-            "type": "string",
-            "description": "Name of the microflow"
-        },
-        "documentation": {
-            "type": "string",
-            "description": "Documentation of the microflow"
-        },
-        "excluded": {
-            "type": "boolean",
-            "description": "Indicates if the microflow is excluded"
-        },
-        "exportLevel": {
-            "type": "string",
-            "enum": ["Hidden"],
-            "description": "Export level of the microflow"
-        },
-        "objectCollection": {
+        "ObjectCollection": {
             "type": "object",
             "properties": {
                 "$ID": {
@@ -343,21 +483,27 @@
                 },
                 "$Type": {
                     "type": "string",
-                    "enum": ["Microflows$MicroflowObjectCollection"]
+                    "enum": [
+                        "Microflows$MicroflowObjectCollection"
+                    ]
                 },
                 "objects": {
                     "type": "array",
+                    "description": "Objects of the object collection",
                     "items": {
                         "anyOf": [
                             {
                                 "type": "object",
+                                "description": "can only have one start event in a microflow",
                                 "properties": {
                                     "$ID": {
-                                        "type": "string"
+                                        "$ref": "common.schema.json#/definitions/Identifiable"
                                     },
                                     "$Type": {
                                         "type": "string",
-                                        "enum": ["Microflows$StartEvent"]
+                                        "enum": [
+                                            "Microflows$StartEvent"
+                                        ]
                                     },
                                     "relativeMiddlePoint": {
                                         "$ref": "#/definitions/RelativePoint"
@@ -375,13 +521,16 @@
                             },
                             {
                                 "type": "object",
+                                "description": "can have multiple end events in a microflow, atleast one",
                                 "properties": {
                                     "$ID": {
-                                        "type": "string"
+                                        "$ref": "common.schema.json#/definitions/Identifiable"
                                     },
                                     "$Type": {
                                         "type": "string",
-                                        "enum": ["Microflows$EndEvent"]
+                                        "enum": [
+                                            "Microflows$EndEvent"
+                                        ]
                                     },
                                     "relativeMiddlePoint": {
                                         "$ref": "#/definitions/RelativePoint"
@@ -407,13 +556,16 @@
                             },
                             {
                                 "type": "object",
+                                "description": "can have multiple action activities in a microflow",
                                 "properties": {
                                     "$ID": {
-                                        "type": "string"
+                                        "$ref": "common.schema.json#/definitions/Identifiable"
                                     },
                                     "$Type": {
                                         "type": "string",
-                                        "enum": ["Microflows$ActionActivity"]
+                                        "enum": [
+                                            "Microflows$ActionActivity"
+                                        ]
                                     },
                                     "relativeMiddlePoint": {
                                         "$ref": "#/definitions/RelativePoint"
@@ -428,14 +580,17 @@
                                         "type": "boolean"
                                     },
                                     "caption": {
-                                        "type": "string"
+                                        "type": "string",
+                                        "description": "Caption of the action"
                                     },
                                     "autoGenerateCaption": {
                                         "type": "boolean"
                                     },
                                     "backgroundColor": {
                                         "type": "string",
-                                        "enum": ["Default"]
+                                        "enum": [
+                                            "Default"
+                                        ]
                                     },
                                     "documentation": {
                                         "type": "string"
@@ -455,30 +610,145 @@
                                 ]
                             },
                             {
-                                "$ID": "string",
-                                "$Type": "Microflows$ExclusiveSplit",
-                                "relativeMiddlePoint": {
-                                    "x": "number",
-                                    "y": "number"
+                                "type": "object",
+                                "properties": {
+                                    "$ID": {
+                                        "$ref": "common.schema.json#/definitions/Identifiable"
+                                    },
+                                    "$Type": {
+                                        "type": "string",
+                                        "enum": [
+                                            "Microflows$ExclusiveSplit"
+                                        ]
+                                    },
+                                    "relativeMiddlePoint": {
+                                        "$ref": "#/definitions/RelativePoint"
+                                    },
+                                    "size": {
+                                        "$ref": "#/definitions/Size"
+                                    },
+                                    "splitCondition": {
+                                        "$ID": "string",
+                                        "$Type": "Microflows$ExpressionSplitCondition",
+                                        "expression": "string"
+                                    },
+                                    "caption": {
+                                        "type": "string",
+                                        "description": "Caption of the action"
+                                    },
+                                    "errorHandlingType": {
+                                        "$ref": "#/definitions/ErrorHandlingType"
+                                    },
+                                    "documentation": {
+                                        "type": "string"
+                                    }
+                                }
+                            },
+                            {
+                                "type": "object",
+                                "properties": {
+                                    "$ID": {
+                                        "$ref": "common.schema.json#/definitions/Identifiable"
+                                    },
+                                    "$Type": {
+                                        "type": "string",
+                                        "enum": [
+                                            "Microflows$LoopedActivity"
+                                        ]
+                                    },
+                                    "relativeMiddlePoint": {
+                                        "$ref": "#/definitions/RelativePoint"
+                                    },
+                                    "size": {
+                                        "$ref": "#/definitions/Size"
+                                    },
+                                    "errorHandlingType": {
+                                        "$ref": "#/definitions/ErrorHandlingType"
+                                    },
+                                    "documentation": {
+                                        "type": "string"
+                                    },
+                                    "loopSource": {
+                                        "type": "object",
+                                        "properties": {
+                                            "$ID": {
+                                                "$ref": "common.schema.json#/definitions/Identifiable"
+                                            },
+                                            "$Type": {
+                                                "type": "string",
+                                                "enum": [
+                                                    "Microflows$WhileLoopCondition"
+                                                ]
+                                            },
+                                            "whileExpression": {
+                                                "type": "string",
+                                                "examples": [
+                                                    "$currentUser/Active"
+                                                ]
+                                            },
+                                            "caption": {
+                                                "type": "string"
+                                            }
+                                        }
+                                    },
+                                    "objectCollection": {
+                                        "$ref": "#/definitions/ObjectCollection"
+                                    }
                                 },
-                                "size": {
-                                    "width": "number",
-                                    "height": "number"
-                                },
-                                "splitCondition": {
-                                    "$ID": "string",
-                                    "$Type": "Microflows$ExpressionSplitCondition",
-                                    "expression": "string"
-                                },
-                                "caption": "string",
-                                "errorHandlingType": "string",
-                                "documentation": "string"
+                                "required": [
+                                    "$ID",
+                                    "$Type",
+                                    "relativeMiddlePoint",
+                                    "size",
+                                    "errorHandlingType",
+                                    "documentation",
+                                    "loopSource",
+                                    "objectCollection"
+                                ]
                             }
                         ]
                     }
                 }
             },
-            "required": ["$ID", "$Type", "objects"]
+            "required": [
+                "$ID",
+                "$Type",
+                "objects"
+            ]
+        }
+    },
+    "type": "object",
+    "properties": {
+        "$ID": {
+            "$ref": "common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+            "type": "string",
+            "enum": [
+                "Microflows$Microflow"
+            ]
+        },
+        "name": {
+            "type": "string",
+            "description": "Name of the microflow"
+        },
+        "documentation": {
+            "type": "string",
+            "description": "Documentation of the microflow"
+        },
+        "excluded": {
+            "type": "boolean",
+            "description": "Indicates if the microflow is excluded"
+        },
+        "exportLevel": {
+            "type": "string",
+            "enum": [
+                "Hidden"
+            ],
+            "description": "Export level of the microflow"
+        },
+        "objectCollection": {
+            "$ref": "#/definitions/ObjectCollection"
         },
         "flows": {
             "type": "array",
@@ -503,10 +773,16 @@
             "items": {}
         },
         "microflowActionInfo": {
-            "type": ["null", "object"]
+            "type": [
+                "null",
+                "object"
+            ]
         },
         "workflowActionInfo": {
-            "type": ["null", "object"]
+            "type": [
+                "null",
+                "object"
+            ]
         },
         "allowConcurrentExecution": {
             "type": "boolean",
@@ -516,7 +792,10 @@
             "$ref": "common.schema.json#/definitions/Text"
         },
         "concurrencyErrorMicroflow": {
-            "type": ["null", "object"]
+            "type": [
+                "null",
+                "object"
+            ]
         },
         "url": {
             "type": "string"
@@ -553,4 +832,3 @@
         "stableId"
     ]
 }
-

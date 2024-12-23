@@ -2,8 +2,76 @@
     "$schema": "http://json-schema.org/draft-07/schema#",
     "title": "Common Structure Schema for mendix model",
     "definitions": {
+            "TemplateArgument": {
+            "type": "object",
+            "description": "string template interpolation argument",
+            "properties": {
+                "$ID": {
+                    "$ref": "#/definitions/Identifiable"
+                },
+                "$Type": {
+                    "type": "string",
+                    "enum": [
+                        "Microflows$TemplateArgument"
+                    ]
+                },
+                "expression": {
+                    "type": "string",
+                    "examples": [
+                        "$currentUser/Name\n"
+                    ]
+                }
+            },
+            "required": [
+                "$ID",
+                "$Type",
+                "expression"
+            ]
+        },
+        "StringTemplate": {
+            "type": "object",
+            "description": "string template",
+            "properties": {
+                "$ID": {
+                    "$ref": "#/definitions/Identifiable"
+                },
+                "$Type": {
+                    "type": "string",
+                    "enum": [
+                        "Microflows$StringTemplate"
+                    ]
+                },
+                "arguments": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/TemplateArgument"
+                    },
+                    "default": []
+                },
+                "text": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "$ID",
+                "$Type",
+                "arguments",
+                "text"
+            ]
+        },
+        "QualifiedName": {
+            "type": "string",
+            "description": "QualifiedName of the document e.g. microflow page entity",
+            "examples": [
+                "System.User",
+                "MyFirstModule.Java_action"
+            ]
+        },
         "entityRef": {
-            "type": ["object", "null"],
+            "type": [
+                "object",
+                "null"
+            ],
             "properties": {
                 "$ID": {
                     "$ref": "#/definitions/GUID"
@@ -21,7 +89,9 @@
         "EntityQualifiedName": {
             "type": "string",
             "description": "Entity qualified name. moduleName.entityName",
-            "examples": ["System.User"]
+            "examples": [
+                "System.User"
+            ]
         },
         "AttributeRef": {
             "type": "object",
@@ -41,10 +111,16 @@
                 "attribute": {
                     "type": "string",
                     "description": "Reference to the attribute. compose with module name entity name and attribute name. moduleName.entityName.attributeName",
-                    "examples": ["System.XASInstance.XASId"]
+                    "examples": [
+                        "System.XASInstance.XASId"
+                    ]
                 }
             },
-            "required": ["$ID", "$Type", "attribute"]
+            "required": [
+                "$ID",
+                "$Type",
+                "attribute"
+            ]
         },
         "Identifiable": {
             "type": "string",
@@ -60,11 +136,14 @@
                     "type": "integer"
                 }
             },
-            "required": ["x", "y"]
+            "required": [
+                "x",
+                "y"
+            ]
         },
         "GUID": {
             "type": "string",
-            "pattern": "[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}",
+            "pattern": "[0-9a-zA-Z]{8}-[0-9a-zA-Z]{4}-[0-9a-zA-Z]{4}-[0-9a-zA-Z]{4}-[0-9a-zA-Z]{12}",
             "description": "GUID of the object"
         },
         "Translation": {
@@ -80,13 +159,22 @@
                 "languageCode": {
                     "type": "string",
                     "description": "Language code for the translation",
-                    "enum": ["en_US", "zh_CN", "zh_TW"]
+                    "enum": [
+                        "en_US",
+                        "zh_CN",
+                        "zh_TW"
+                    ]
                 },
                 "text": {
                     "type": "string"
                 }
             },
-            "required": ["$ID", "$Type", "languageCode", "text"]
+            "required": [
+                "$ID",
+                "$Type",
+                "languageCode",
+                "text"
+            ]
         },
         "Text": {
             "type": "object",
@@ -96,18 +184,24 @@
                 },
                 "$Type": {
                     "type": "string",
-                    "enum": ["Texts$Text"]
+                    "enum": [
+                        "Texts$Text"
+                    ]
                 },
                 "translations": {
                     "type": "array",
                     "description": "List of translations for the text.",
-                    "minItems": 1,
+                    "minItems": 0,
                     "items": {
                         "$ref": "#/definitions/Translation"
                     }
                 }
             },
-            "required": ["$ID", "$Type", "translations"]
+            "required": [
+                "$ID",
+                "$Type",
+                "translations"
+            ]
         }
     }
 }
