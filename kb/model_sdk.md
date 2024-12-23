@@ -18,7 +18,7 @@ const branchName = "main"; // 分支名称，通常为 "main"
 const appID = "your app id"; // 你的 App ID
 const workingCopyId = "your last created workingCopyId"; // 可选：已有的在线工作副本 ID
 
-const client = new MendixPlatformClient();
+const client = new MendixPlatformClient();// 自动读取环境变量MENDIX_TOKEN完成认证
 const app = client.getApp(appID);
 
 // 获取在线工作副本，如果提供了 workingCopyId 则获取指定的，否则创建一个新的
@@ -159,14 +159,11 @@ import {
     IAbstractElementJson,
     IModel,
 } from "mendixmodelsdk";
-
-async function createFromJSON(model: IModel, moduleName: string, filePath: string, attributeName: string = "documents"): Promise<boolean> {
-    const module = model.findModuleByQualifiedName(moduleName); // 或者使用 newRandomModule(model) 创建一个随机名称的新模块
-    const json = JSON.parse(await readFromFile(filePath));
-    delete json["$schema"]; // 如果存在 $schema 属性，需要删除
-    createModelUnitFromJSON(module, attributeName, json);
-    return true;
-}
+const module = model.findModuleByQualifiedName(moduleName);
+const json = JSON.parse(some_model_json_string);
+delete json["$schema"]; // 如果存在 $schema 属性，需要删除
+createModelUnitFromJSON(module, attributeName, json);
+return true;
 ```
 
 可以使用 `createModelUnitFromJSON()` 方法将 JSON 数据反序列化为模型单元。
@@ -175,24 +172,7 @@ async function createFromJSON(model: IModel, moduleName: string, filePath: strin
 -   `attributeName`:  模块中用于存储模型单元的属性名称。
     -   对于 `DomainModels$DomainModel` 类型，应设置为 `"domainModel"`。
     -   对于 `Pages$Page` 等其他文档类型，应设置为 `"documents"`。
--   `json`:  表示模型单元的 JSON 数据。
-
-**示例:**
-
-1. **从 JSON 创建一个新页面:**
-
-    ```ts
-    // 假设 "page.json" 包含一个页面的 JSON 数据
-    await createFromJSON(model, "MyFirstModule", "page.json");
-    ```
-
-2. **从 JSON 创建一个领域模型:**
-
-    ```ts
-    // 假设 "domainModel.json" 包含一个领域模型的 JSON 数据
-    await createFromJSON(model, "MyFirstModule", "domainModel.json", "domainModel");
-    ```
-
+-   `json`:  表示模型单元的 JSON 数据。目前仅支持page、domain和microflow，不支持module
 
 ## 关闭连接
 
