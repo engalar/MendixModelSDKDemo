@@ -1057,25 +1057,24 @@
                                                     "conditionalVisibilitySettings": null,
                                                     "dataSource": {
                                                         "$ID": "DataSource_ListView_Courses",
-                                                        "$Type": "Pages$MicroflowSource",
+                                                        "$Type": "Pages$ListViewXPathSource",
                                                         "forceFullObjects": false,
-                                                        "microflowSettings": {
-                                                            "$ID": "MicroflowSettings_ListView_Courses",
-                                                            "$Type": "Pages$MicroflowSettings",
-                                                            "microflow": "StudentCourseSystem.GetAvailableCourses",
-                                                            "parameterMappings": [
-                                                                {
-                                                                    "$ID": "MicroflowParameterMapping_ListView_Courses",
-                                                                    "$Type": "Pages$MicroflowParameterMapping",
-                                                                    "parameter": "Microflow_GetAvailableCourses_Parameter_Student",
-                                                                    "expression": "$Page_Student_Dashboard_Parameter_Student"
-                                                                }
-                                                            ],
-                                                            "progressBar": "None",
-                                                            "progressMessage": null,
-                                                            "asynchronous": true,
-                                                            "formValidations": "None",
-                                                            "confirmationInfo": null
+                                                        "entityRef": {
+                                                            "$ID": "EntityRef_ListView_Courses",
+                                                            "$Type": "DomainModels$DirectEntityRef",
+                                                            "entity": "StudentCourseSystem.Course"
+                                                        },
+                                                        "sourceVariable": null,
+                                                        "sortBar": {
+                                                            "$ID": "SortBar_ListView_Courses",
+                                                            "$Type": "Pages$GridSortBar",
+                                                            "sortItems": []
+                                                        },
+                                                        "xPathConstraint": "",
+                                                        "search": {
+                                                            "$ID": "Search_ListView_Courses",
+                                                            "$Type": "Pages$ListViewSearch",
+                                                            "searchRefs": []
                                                         }
                                                     },
                                                     "widgets": [
@@ -1287,57 +1286,20 @@
                                                         }
                                                     ],
                                                     "pageSize": 10,
-                                                    "onClickPageSettings": {
-                                                        "$ID": "OnClickPageSettings_ListView_Courses",
-                                                        "$Type": "Pages$PageSettings",
-                                                        "page": null,
-                                                        "titleOverride": null,
-                                                        "parameterMappings": []
-                                                    },
                                                     "clickAction": {
                                                         "$ID": "ClickAction_ListView_Courses",
                                                         "$Type": "Pages$NoClientAction",
                                                         "disabledDuringExecution": false
                                                     },
+                                                    "editable": false,
+                                                    "templates": [],
+                                                    "scrollDirection": "Vertical",
+                                                    "numberOfColumns": 0,
                                                     "pullDownAction": {
                                                         "$ID": "PullDownAction_ListView_Courses",
                                                         "$Type": "Pages$NoClientAction",
                                                         "disabledDuringExecution": false
-                                                    },
-                                                    "pullDownMicroflowSettings": {
-                                                        "$ID": "PullDownMicroflowSettings_ListView_Courses",
-                                                        "$Type": "Pages$MicroflowSettings",
-                                                        "microflow": null,
-                                                        "parameterMappings": [],
-                                                        "progressBar": "None",
-                                                        "progressMessage": null,
-                                                        "asynchronous": false,
-                                                        "formValidations": "None",
-                                                        "confirmationInfo": null
-                                                    },
-                                                    "scrollDirection": "Vertical",
-                                                    "onScrollEndReachedAction": {
-                                                        "$ID": "OnScrollEndReachedAction_ListView_Courses",
-                                                        "$Type": "Pages$NoClientAction",
-                                                        "disabledDuringExecution": false
-                                                    },
-                                                    "onScrollEndReachedMicroflowSettings": {
-                                                        "$ID": "OnScrollEndReachedMicroflowSettings_ListView_Courses",
-                                                        "$Type": "Pages$MicroflowSettings",
-                                                        "microflow": null,
-                                                        "parameterMappings": [],
-                                                        "progressBar": "None",
-                                                        "progressMessage": null,
-                                                        "asynchronous": false,
-                                                        "formValidations": "None",
-                                                        "confirmationInfo": null
-                                                    },
-                                                    "loadMoreSizeMode": "ShowMoreButton",
-                                                    "numberOfItems": 100,
-                                                    "renderAfterItems": "None",
-                                                    "spacingBetweenItems": 0,
-                                                    "showScrollReachedStyle": false,
-                                                    "nativeRenderMode": "Div"
+                                                    }
                                                 }
                                             ]
                                         }
