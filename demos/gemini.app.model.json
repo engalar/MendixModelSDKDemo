@@ -669,11 +669,7 @@
                                                         "$ID": "DataSource_DataView_StudentInfo",
                                                         "$Type": "Pages$DataViewSource",
                                                         "forceFullObjects": false,
-                                                        "sourceVariable": {
-                                                            "$ID": "DataSource_DataView_StudentInfo_SourceVariable",
-                                                            "$Type": "Pages$ParameterMapping",
-                                                            "variable": "Page_Student_Dashboard_Parameter_Student"
-                                                        }
+                                                        "sourceVariable": null
                                                     },
                                                     "widgets": [
                                                         {
@@ -809,11 +805,7 @@
                                                                                         "$Type": "Pages$NoClientAction",
                                                                                         "disabledDuringExecution": false
                                                                                     },
-                                                                                    "sourceVariable": {
-                                                                                        "$ID": "SourceVariable_TextBox_StudentName",
-                                                                                        "$Type": "Pages$ParameterMapping",
-                                                                                        "variable": "Page_Student_Dashboard_Parameter_Student"
-                                                                                    },
+                                                                                    "sourceVariable": null,
                                                                                     "ariaRequired": false,
                                                                                     "placeholderTemplate": {
                                                                                         "$ID": "PlaceholderTemplate_TextBox_StudentName",
@@ -976,11 +968,7 @@
                                                                                         "$Type": "Pages$NoClientAction",
                                                                                         "disabledDuringExecution": false
                                                                                     },
-                                                                                    "sourceVariable": {
-                                                                                        "$ID": "SourceVariable_TextBox_StudentDepartment",
-                                                                                        "$Type": "Pages$ParameterMapping",
-                                                                                        "variable": "Page_Student_Dashboard_Parameter_Student"
-                                                                                    },
+                                                                                    "sourceVariable": null,
                                                                                     "ariaRequired": false,
                                                                                     "placeholderTemplate": {
                                                                                         "$ID": "PlaceholderTemplate_TextBox_StudentDepartment",
@@ -1138,7 +1126,7 @@
                                                                                         "parameters": [
                                                                                             {
                                                                                                 "$ID": "Parameter_DynamicText_CourseName_CourseName",
-                                                                                                "$Type": "Pages$TemplateParameter",
+                                                                                                "$Type": "Pages$ClientTemplateParameter",
                                                                                                 "attributeRef": {
                                                                                                     "$ID": "AttributeRef_Parameter_DynamicText_CourseName",
                                                                                                     "$Type": "DomainModels$AttributeRef",
@@ -1203,7 +1191,7 @@
                                                                                         "parameters": [
                                                                                             {
                                                                                                 "$ID": "Parameter_DynamicText_CourseTeacher_TeacherName",
-                                                                                                "$Type": "Pages$TemplateParameter",
+                                                                                                "$Type": "Pages$ClientTemplateParameter",
                                                                                                 "attributeRef": {
                                                                                                     "$ID": "AttributeRef_Parameter_DynamicText_CourseTeacher",
                                                                                                     "$Type": "DomainModels$AttributeRef",

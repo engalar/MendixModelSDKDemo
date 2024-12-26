@@ -200,7 +200,32 @@
                             "description": "List of template parameters",
                             "items": {
                                 "type": "object",
-                                "description": "Placeholder for template parameters"
+                                "description": "Placeholder for template parameters",
+                                "properties": {
+                                    "$ID": {
+                                        "$ref": "common.schema.json#/definitions/Identifiable"
+                                    },
+                                    "$Type": {
+                                        "type": "string",
+                                        "const": "Pages$ClientTemplateParameter"
+                                    },
+                                    "attributeRef": {
+                                        "$ref": "common.schema.json#/definitions/AttributeRef"
+                                    },
+                                    "expression": {
+                                        "type": "string",
+                                        "description": "mendix xpath expression"
+                                    },
+                                    "formattingInfo":{
+                                        "$ref": "#/definitions/FormattingInfo"
+                                    },
+                                    "sourceVariable": {
+                                        "type": [
+                                            "null"
+                                        ],
+                                        "description": "Source variable of the widget."
+                                    }
+                                }
                             }
                         },
                         "fallback": {
@@ -519,7 +544,6 @@
                         },
                         "sourceVariable": {
                             "type": [
-                                "object",
                                 "null"
                             ],
                             "description": "Source variable of the widget."
@@ -598,7 +622,6 @@
                                 },
                                 "sourceVariable": {
                                     "type": [
-                                        "object",
                                         "null"
                                     ],
                                     "description": "Source variable for the delete action."
@@ -853,7 +876,6 @@
                 },
                 "sourceVariable": {
                     "type": [
-                        "object",
                         "null"
                     ],
                     "description": "Source variable of the grid"
@@ -901,7 +923,6 @@
                 },
                 "sourceVariable": {
                     "type": [
-                        "object",
                         "null"
                     ],
                     "description": "Source variable of the list view"
