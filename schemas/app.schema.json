@@ -23,7 +23,11 @@
                     }
                 }
             },
-            "required": ["$ID", "name"]
+            "required": [
+                "$ID",
+                "name",
+                "children"
+            ]
         },
         "Document": {
             "type": "object",
@@ -38,17 +42,29 @@
                 },
                 "document": {
                     "oneOf": [
-                        { "$ref": "page.schema.json#" },
-                        { "$ref": "microflow.schema.json#" }
+                        {
+                            "$ref": "page.schema.json#"
+                        },
+                        {
+                            "$ref": "microflow.schema.json#"
+                        }
                     ]
                 }
             },
-            "required": ["$ID", "name", "document"]
+            "required": [
+                "$ID",
+                "name",
+                "document"
+            ]
         },
         "ModuleNode": {
             "oneOf": [
-                { "$ref": "#/definitions/Folder" },
-                { "$ref": "#/definitions/Document" }
+                {
+                    "$ref": "#/definitions/Folder"
+                },
+                {
+                    "$ref": "#/definitions/Document"
+                }
             ]
         }
     },
@@ -104,5 +120,7 @@
             }
         }
     },
-    "required": ["modules"]
+    "required": [
+        "modules"
+    ]
 }

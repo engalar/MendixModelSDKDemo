@@ -1,0 +1,548 @@
+{
+    "$schema": "../schemas/app.schema.json",
+    "modules": [
+        {
+            "$ID": "module1",
+            "name": "CourseSelectionModule",
+            "documentation": "This module handles the course selection process.",
+            "domainModel": {
+                "$ID": "domainModel1",
+                "$Type": "DomainModels$DomainModel",
+                "documentation": "Domain model for course selection.",
+                "entities": [
+                    {
+                        "$ID": "entity1",
+                        "$Type": "DomainModels$Entity",
+                        "name": "Student",
+                        "dataStorageGuid": "11111111-1111-1111-1111-111111111111",
+                        "location": {
+                            "x": 100,
+                            "y": 100
+                        },
+                        "documentation": "Entity representing a student.",
+                        "generalization": {
+                            "$ID": "gen1",
+                            "$Type": "DomainModels$NoGeneralization",
+                            "hasChangedDate": false,
+                            "hasCreatedDate": false,
+                            "hasOwner": false,
+                            "hasChangedBy": false,
+                            "persistable": true
+                        },
+                        "attributes": [
+                            {
+                                "$ID": "attr1",
+                                "$Type": "DomainModels$Attribute",
+                                "name": "Name",
+                                "dataStorageGuid": "22222222-2222-2222-2222-222222222222",
+                                "type": {
+                                    "$ID": "attrType1",
+                                    "$Type": "DomainModels$StringAttributeType"
+                                },
+                                "documentation": "The name of the student.",
+                                "value": {
+                                    "$ID": "value1",
+                                    "$Type": "DomainModels$StoredValue",
+                                    "defaultValue": ""
+                                },
+                                "exportLevel": "Hidden"
+                            }
+                        ],
+                        "validationRules": [],
+                        "eventHandlers": [],
+                        "indexes": [],
+                        "accessRules": [],
+                        "image": null,
+                        "imageData": "",
+                        "source": null,
+                        "exportLevel": "Hidden"
+                    },
+                    {
+                        "$ID": "entity2",
+                        "$Type": "DomainModels$Entity",
+                        "name": "Course",
+                        "dataStorageGuid": "33333333-3333-3333-3333-333333333333",
+                        "location": {
+                            "x": 300,
+                            "y": 100
+                        },
+                        "documentation": "Entity representing a course.",
+                        "generalization": {
+                            "$ID": "gen2",
+                            "$Type": "DomainModels$NoGeneralization",
+                            "hasChangedDate": false,
+                            "hasCreatedDate": false,
+                            "hasOwner": false,
+                            "hasChangedBy": false,
+                            "persistable": true
+                        },
+                        "attributes": [
+                            {
+                                "$ID": "attr2",
+                                "$Type": "DomainModels$Attribute",
+                                "name": "Title",
+                                "dataStorageGuid": "44444444-4444-4444-4444-444444444444",
+                                "type": {
+                                    "$ID": "attrType2",
+                                    "$Type": "DomainModels$StringAttributeType"
+                                },
+                                "documentation": "The title of the course.",
+                                "value": {
+                                    "$ID": "value2",
+                                    "$Type": "DomainModels$StoredValue",
+                                    "defaultValue": ""
+                                },
+                                "exportLevel": "Hidden"
+                            }
+                        ],
+                        "validationRules": [],
+                        "eventHandlers": [],
+                        "indexes": [],
+                        "accessRules": [],
+                        "image": null,
+                        "imageData": "",
+                        "source": null,
+                        "exportLevel": "Hidden"
+                    },
+                    {
+                        "$ID": "entity3",
+                        "$Type": "DomainModels$Entity",
+                        "name": "Enrollment",
+                        "dataStorageGuid": "55555555-5555-5555-5555-555555555555",
+                        "location": {
+                            "x": 200,
+                            "y": 300
+                        },
+                        "documentation": "Entity representing the enrollment of a student in a course.",
+                        "generalization": {
+                            "$ID": "gen3",
+                            "$Type": "DomainModels$NoGeneralization",
+                            "hasChangedDate": false,
+                            "hasCreatedDate": false,
+                            "hasOwner": false,
+                            "hasChangedBy": false,
+                            "persistable": true
+                        },
+                        "attributes": [],
+                        "validationRules": [],
+                        "eventHandlers": [],
+                        "indexes": [],
+                        "accessRules": [],
+                        "image": null,
+                        "imageData": "",
+                        "source": null,
+                        "exportLevel": "Hidden"
+                    }
+                ],
+                "annotations": [],
+                "associations": [
+                    {
+                        "$ID": "assoc1",
+                        "$Type": "DomainModels$Association",
+                        "name": "Student_Enrollment",
+                        "dataStorageGuid": "66666666-6666-6666-6666-666666666666",
+                        "type": "Reference",
+                        "owner": "Default",
+                        "deleteBehavior": {
+                            "$ID": "delBehavior1",
+                            "$Type": "DomainModels$AssociationDeleteBehavior",
+                            "parentDeleteBehavior": "DeleteMeButKeepReferences",
+                            "childDeleteBehavior": "DeleteMeButKeepReferences",
+                            "parentErrorMessage": null,
+                            "childErrorMessage": null
+                        },
+                        "parent": "11111111-1111-1111-1111-111111111111",
+                        "documentation": "",
+                        "source": null,
+                        "exportLevel": "Hidden",
+                        "child": "55555555-5555-5555-5555-555555555555",
+                        "parentConnection": {
+                            "x": 150,
+                            "y": 200
+                        },
+                        "childConnection": {
+                            "x": 200,
+                            "y": 350
+                        }
+                    },
+                    {
+                        "$ID": "assoc2",
+                        "$Type": "DomainModels$Association",
+                        "name": "Course_Enrollment",
+                        "dataStorageGuid": "77777777-7777-7777-7777-777777777777",
+                        "type": "Reference",
+                        "owner": "Default",
+                        "deleteBehavior": {
+                            "$ID": "delBehavior2",
+                            "$Type": "DomainModels$AssociationDeleteBehavior",
+                            "parentDeleteBehavior": "DeleteMeButKeepReferences",
+                            "childDeleteBehavior": "DeleteMeButKeepReferences",
+                            "parentErrorMessage": null,
+                            "childErrorMessage": null
+                        },
+                        "parent": "33333333-3333-3333-3333-333333333333",
+                        "documentation": "",
+                        "source": null,
+                        "exportLevel": "Hidden",
+                        "child": "55555555-5555-5555-5555-555555555555",
+                        "parentConnection": {
+                            "x": 350,
+                            "y": 200
+                        },
+                        "childConnection": {
+                            "x": 200,
+                            "y": 350
+                        }
+                    }
+                ],
+                "crossAssociations": []
+            },
+            "children": [
+                {
+                    "$ID": "folder1",
+                    "name": "Microflows",
+                    "children": [
+                        {
+                            "$ID": "microflow1",
+                            "name": "EnrollStudent",
+                            "document": {
+                                "$ID": "microflowDoc1",
+                                "$Type": "Microflows$Microflow",
+                                "name": "EnrollStudent",
+                                "documentation": "Microflow to enroll a student in a course.",
+                                "excluded": false,
+                                "exportLevel": "Hidden",
+                                "objectCollection": {
+                                    "$ID": "objCollection1",
+                                    "$Type": "Microflows$MicroflowObjectCollection",
+                                    "objects": [
+                                        {
+                                            "$ID": "startEvent1",
+                                            "$Type": "Microflows$StartEvent",
+                                            "relativeMiddlePoint": {
+                                                "x": 0,
+                                                "y": 0
+                                            },
+                                            "size": {
+                                                "width": 30,
+                                                "height": 30
+                                            }
+                                        },
+                                        {
+                                            "$ID": "actionActivity1",
+                                            "$Type": "Microflows$ActionActivity",
+                                            "relativeMiddlePoint": {
+                                                "x": 100,
+                                                "y": 0
+                                            },
+                                            "size": {
+                                                "width": 120,
+                                                "height": 60
+                                            },
+                                            "action": {
+                                                "$ID": "createObjectAction1",
+                                                "$Type": "Microflows$CreateObjectAction",
+                                                "errorHandlingType": "Rollback",
+                                                "items": [],
+                                                "refreshInClient": false,
+                                                "commit": "No",
+                                                "entity": "CourseSelectionModule.Enrollment",
+                                                "outputVariableName": "NewEnrollment"
+                                            },
+                                            "disabled": false,
+                                            "caption": "Create Enrollment",
+                                            "autoGenerateCaption": true,
+                                            "backgroundColor": "Default",
+                                            "documentation": ""
+                                        },
+                                        {
+                                            "$ID": "endEvent1",
+                                            "$Type": "Microflows$EndEvent",
+                                            "relativeMiddlePoint": {
+                                                "x": 200,
+                                                "y": 0
+                                            },
+                                            "size": {
+                                                "width": 30,
+                                                "height": 30
+                                            },
+                                            "returnValue": "",
+                                            "documentation": ""
+                                        }
+                                    ]
+                                },
+                                "flows": [
+                                    {
+                                        "$ID": "flow1",
+                                        "$Type": "Microflows$SequenceFlow",
+                                        "origin": "startEvent1",
+                                        "destination": "actionActivity1",
+                                        "originConnectionIndex": 1,
+                                        "destinationConnectionIndex": 0,
+                                        "originBezierVector": {
+                                            "width": 0,
+                                            "height": 0
+                                        },
+                                        "destinationBezierVector": {
+                                            "width": 0,
+                                            "height": 0
+                                        },
+                                        "lineType": "BezierCurve"
+                                    },
+                                    {
+                                        "$ID": "flow2",
+                                        "$Type": "Microflows$SequenceFlow",
+                                        "origin": "actionActivity1",
+                                        "destination": "endEvent1",
+                                        "originConnectionIndex": 1,
+                                        "destinationConnectionIndex": 0,
+                                        "originBezierVector": {
+                                            "width": 0,
+                                            "height": 0
+                                        },
+                                        "destinationBezierVector": {
+                                            "width": 0,
+                                            "height": 0
+                                        },
+                                        "lineType": "BezierCurve"
+                                    }
+                                ],
+                                "microflowReturnType": {
+                                    "$ID": "returnType1",
+                                    "$Type": "DataTypes$VoidType"
+                                },
+                                "markAsUsed": false,
+                                "returnVariableName": "",
+                                "applyEntityAccess": false,
+                                "allowedModuleRoles": [],
+                                "microflowActionInfo": null,
+                                "workflowActionInfo": null,
+                                "allowConcurrentExecution": true,
+                                "concurrencyErrorMessage": {
+                                    "$ID": "concurrencyErrorMsg1",
+                                    "$Type": "Texts$Text",
+                                    "translations": []
+                                },
+                                "concurrencyErrorMicroflow": null,
+                                "url": "",
+                                "urlSearchParameters": [],
+                                "stableId": "88888888-8888-8888-8888-888888888888"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "$ID": "folder2",
+                    "name": "Pages",
+                    "children": [
+                        {
+                            "$ID": "page1",
+                            "name": "StudentCourseSelection",
+                            "document": {
+                                "$ID": "pageDoc1",
+                                "$Type": "Pages$Page",
+                                "name": "StudentCourseSelection",
+                                "documentation": "Page for students to select courses.",
+                                "excluded": false,
+                                "exportLevel": "None",
+                                "canvasWidth": 800,
+                                "canvasHeight": 600,
+                                "parameters": [],
+                                "layoutCall": {
+                                    "$ID": "layoutCall1",
+                                    "$Type": "Pages$LayoutCall",
+                                    "layout": "MyFirstModule.MyLayout",
+                                    "arguments": []
+                                },
+                                "title": {
+                                    "$ID": "title1",
+                                    "$Type": "Texts$Text",
+                                    "translations": [
+                                        {
+                                            "$ID": "titleTranslation1",
+                                            "$Type": "Texts$Translation",
+                                            "languageCode": "en_US",
+                                            "text": "Course Selection"
+                                        }
+                                    ]
+                                },
+                                "appearance": {
+                                    "$ID": "appearance1",
+                                    "$Type": "Pages$Appearance",
+                                    "class": "",
+                                    "style": "",
+                                    "designProperties": [],
+                                    "dynamicClasses": ""
+                                },
+                                "allowedRoles": [],
+                                "popupCloseAction": "ClosePage",
+                                "popupWidth": 400,
+                                "popupHeight": 300,
+                                "popupResizable": false,
+                                "markAsUsed": false,
+                                "url": "",
+                                "widgets": [
+                                    {
+                                        "$ID": "dataView1",
+                                        "$Type": "Pages$DataView",
+                                        "name": "StudentDataView",
+                                        "appearance": {
+                                            "$ID": "appearance2",
+                                            "$Type": "Pages$Appearance",
+                                            "class": "",
+                                            "style": "",
+                                            "designProperties": [],
+                                            "dynamicClasses": ""
+                                        },
+                                        "tabIndex": 0,
+                                        "conditionalVisibilitySettings": null,
+                                        "dataSource": {
+                                            "$ID": "dataSource1",
+                                            "$Type": "Pages$MicroflowSource",
+                                            "forceFullObjects": true,
+                                            "microflowSettings": {
+                                                "$ID": "microflowSettings1",
+                                                "$Type": "Pages$MicroflowSettings",
+                                                "microflow": "CourseSelectionModule.GetStudent",
+                                                "parameterMappings": [],
+                                                "progressBar": "None",
+                                                "progressMessage": null,
+                                                "asynchronous": false,
+                                                "formValidations": "None",
+                                                "confirmationInfo": null
+                                            }
+                                        },
+                                        "widgets": [
+                                            {
+                                                "$ID": "textBox1",
+                                                "$Type": "Pages$TextBox",
+                                                "name": "StudentName",
+                                                "appearance": {
+                                                    "$ID": "appearance3",
+                                                    "$Type": "Pages$Appearance",
+                                                    "class": "",
+                                                    "style": "",
+                                                    "designProperties": [],
+                                                    "dynamicClasses": ""
+                                                },
+                                                "tabIndex": 0,
+                                                "conditionalVisibilitySettings": null,
+                                                "conditionalEditabilitySettings": null,
+                                                "editable": "Always",
+                                                "labelTemplate": {
+                                                    "$ID": "labelTemplate1",
+                                                    "$Type": "Pages$ClientTemplate",
+                                                    "template": {
+                                                        "$ID": "labelText1",
+                                                        "$Type": "Texts$Text",
+                                                        "translations": [
+                                                            {
+                                                                "$ID": "labelTranslation1",
+                                                                "$Type": "Texts$Translation",
+                                                                "languageCode": "en_US",
+                                                                "text": "Name"
+                                                            }
+                                                        ]
+                                                    },
+                                                    "parameters": [],
+                                                    "fallback": {
+                                                        "$ID": "fallback1",
+                                                        "$Type": "Texts$Text",
+                                                        "translations": []
+                                                    }
+                                                },
+                                                "screenReaderLabel": null,
+                                                "attributeRef": "CourseSelectionModule.Student.Name",
+                                                "readOnlyStyle": "Inherit",
+                                                "validation": {
+                                                    "$ID": "validation1",
+                                                    "$Type": "Pages$WidgetValidation",
+                                                    "expression": "",
+                                                    "message": {
+                                                        "$ID": "validationMsg1",
+                                                        "$Type": "Texts$Text",
+                                                        "translations": []
+                                                    }
+                                                },
+                                                "onChangeAction": {
+                                                    "$ID": "onChangeAction1",
+                                                    "$Type": "Pages$NoClientAction",
+                                                    "disabledDuringExecution": false
+                                                },
+                                                "onEnterAction": {
+                                                    "$ID": "onEnterAction1",
+                                                    "$Type": "Pages$NoClientAction",
+                                                    "disabledDuringExecution": false
+                                                },
+                                                "onLeaveAction": {
+                                                    "$ID": "onLeaveAction1",
+                                                    "$Type": "Pages$NoClientAction",
+                                                    "disabledDuringExecution": false
+                                                },
+                                                "sourceVariable": null,
+                                                "ariaRequired": false,
+                                                "placeholderTemplate": {
+                                                    "$ID": "placeholderTemplate1",
+                                                    "$Type": "Pages$ClientTemplate",
+                                                    "template": {
+                                                        "$ID": "placeholderText1",
+                                                        "$Type": "Texts$Text",
+                                                        "translations": []
+                                                    },
+                                                    "parameters": [],
+                                                    "fallback": {
+                                                        "$ID": "fallback2",
+                                                        "$Type": "Texts$Text",
+                                                        "translations": []
+                                                    }
+                                                },
+                                                "maxLengthCode": 255,
+                                                "autoFocus": false,
+                                                "inputMask": "",
+                                                "formattingInfo": {
+                                                    "$ID": "formattingInfo1",
+                                                    "$Type": "Pages$FormattingInfo",
+                                                    "decimalPrecision": 0,
+                                                    "groupDigits": false,
+                                                    "enumFormat": "Text",
+                                                    "dateFormat": "Date",
+                                                    "customDateFormat": ""
+                                                },
+                                                "isPasswordBox": false,
+                                                "keyboardType": "Default",
+                                                "onEnterKeyPressAction": {
+                                                    "$ID": "onEnterKeyPressAction1",
+                                                    "$Type": "Pages$NoClientAction",
+                                                    "disabledDuringExecution": false
+                                                },
+                                                "autocomplete": false,
+                                                "autocompletePurpose": "Off",
+                                                "submitBehaviour": "OnChange",
+                                                "submitOnInputDelay": 0,
+                                                "nativeAccessibilitySettings": null
+                                            }
+                                        ],
+                                        "footerWidgets": [],
+                                        "editability": "Always",
+                                        "conditionalEditabilitySettings": null,
+                                        "showFooter": false,
+                                        "noEntityMessage": {
+                                            "$ID": "noEntityMsg1",
+                                            "$Type": "Texts$Text",
+                                            "translations": []
+                                        },
+                                        "labelWidth": 0,
+                                        "readOnlyStyle": "Inherit"
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "settings": {
+        "applicationName": "Student Course Selection System"
+    }
+}

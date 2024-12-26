@@ -4,3 +4,4 @@ dumy
 .env
 .cache
 schemas/*.model.json
+agent

@@ -3,6 +3,30 @@
     "description": "you must give a module name when gen a model, so i can confirm qulified name",
     "title": "Microflow Structure Schema",
     "definitions": {
+        "_EntityBase": {
+            "type": "object",
+            "allOf": [
+                {
+                    "$ref": "common.schema.json#/definitions/_Base"
+                }
+            ],
+            "properties": {
+                "refreshInClient": {
+                    "type": "boolean"
+                },
+                "commit": {
+                    "type": "string",
+                    "enum": [
+                        "No",
+                        "Yes"
+                    ]
+                }
+            },
+            "required": [
+                "refreshInClient",
+                "commit"
+            ]
+        },
         "ErrorHandlingType": {
             "type": "string",
             "enum": [
@@ -228,7 +252,7 @@
             "type": "object",
             "properties": {
                 "$ID": {
-                    "type": "string"
+                    "$ref": "common.schema.json#/definitions/Identifiable"
                 },
                 "$Type": {
                     "type": "string",
@@ -297,9 +321,63 @@
                 "sortItemList"
             ]
         },
+        "TextTemplate": {
+            "type": "object",
+            "properties": {
+                "$ID": {
+                    "$ref": "common.schema.json#/definitions/Identifiable"
+                },
+                "$Type": {
+                    "type": "string",
+                    "enum": [
+                        "Microflows$TextTemplate"
+                    ]
+                },
+                "arguments": {
+                    "type": "array",
+                    "items": {}
+                },
+                "text": {
+                    "$ref": "common.schema.json#/definitions/Text"
+                }
+            },
+            "required": [
+                "$ID",
+                "$Type",
+                "arguments",
+                "text"
+            ]
+        },
         "Action": {
             "error": "Invalid value, must match one of the schemas",
             "oneOf": [
+                {
+                    "type": "object",
+                    "description": "can only have one start event in a microflow",
+                    "properties": {
+                        "$ID": {
+                            "$ref": "common.schema.json#/definitions/Identifiable"
+                        },
+                        "$Type": {
+                            "type": "string",
+                            "enum": [
+                                "Microflows$CastAction"
+                            ]
+                        },
+                        "errorHandlingType": {
+                            "$ref": "#/definitions/ErrorHandlingType"
+                        },
+                        "outputVariableName": {
+                            "type": "string"
+                        }
+                    },
+                    "required": [
+                        "$ID",
+                        "$Type",
+                        "errorHandlingType",
+                        "outputVariableName"
+                    ]
+                },
                 {
                     "type": "object",
                     "description": "actual action for java action call",
@@ -349,6 +427,98 @@
                 },
                 {
                     "type": "object",
+                    "description": "send a validation msg to client",
+                    "properties": {
+                        "$ID": {
+                            "$ref": "common.schema.json#/definitions/Identifiable"
+                        },
+                        "$Type": {
+                            "type": "string",
+                            "enum": [
+                                "Microflows$ShowMessageAction"
+                            ]
+                        },
+                        "errorHandlingType": {
+                            "$ref": "#/definitions/ErrorHandlingType"
+                        },
+                        "template": {
+                            "$ref": "#/definitions/TextTemplate"
+                        },
+                        "type": {
+                            "type": "string",
+                            "enum": [
+                                "Error",
+                                "Information"
+                            ]
+                        },
+                        "blocking": {
+                            "type": "boolean"
+                        },
+                        "objectVariableName": {
+                            "type": "string"
+                        },
+                        "attribute": {
+                            "$ref": "common.schema.json#/definitions/AttributeQualifiedName"
+                        },
+                        "association": {
+                            "type": "null"
+                        }
+                    },
+                    "required": [
+                        "$ID",
+                        "$Type",
+                        "errorHandlingType",
+                        "template"
+                    ]
+                },
+                {
+                    "type": "object",
+                    "description": "send a validation msg to client",
+                    "properties": {
+                        "$ID": {
+                            "$ref": "common.schema.json#/definitions/Identifiable"
+                        },
+                        "$Type": {
+                            "type": "string",
+                            "enum": [
+                                "Microflows$ValidationFeedbackAction"
+                            ]
+                        },
+                        "errorHandlingType": {
+                            "$ref": "#/definitions/ErrorHandlingType"
+                        },
+                        "feedbackTemplate": {
+                            "$ref": "#/definitions/TextTemplate"
+                        },
+                        "type": {
+                            "type": "string",
+                            "enum": [
+                                "Error",
+                                "Information"
+                            ]
+                        },
+                        "blocking": {
+                            "type": "boolean"
+                        },
+                        "objectVariableName": {
+                            "type": "string"
+                        },
+                        "attribute": {
+                            "$ref": "common.schema.json#/definitions/AttributeQualifiedName"
+                        },
+                        "association": {
+                            "type": "null"
+                        }
+                    },
+                    "required": [
+                        "$ID",
+                        "$Type",
+                        "errorHandlingType",
+                        "feedbackTemplate"
+                    ]
+                },
+                {
+                    "type": "object",
                     "description": "actual action for log message",
                     "properties": {
                         "$ID": {
@@ -369,7 +539,7 @@
                                 "Trace",
                                 "Debug",
                                 "Info",
-                                "Warn",
+                                "Warning",
                                 "Error",
                                 "Critical"
                             ]
@@ -397,10 +567,12 @@
                 },
                 {
                     "type": "object",
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/_EntityBase"
+                        }
+                    ],
                     "properties": {
-                        "$ID": {
-                            "$ref": "common.schema.json#/definitions/GUID"
-                        },
                         "$Type": {
                             "type": "string",
                             "const": "Microflows$CreateObjectAction"
@@ -414,15 +586,6 @@
                                 "$ref": "#/definitions/MemberChange"
                             }
                         },
-                        "refreshInClient": {
-                            "type": "boolean"
-                        },
-                        "commit": {
-                            "type": "string",
-                            "enum": [
-                                "No"
-                            ]
-                        },
                         "entity": {
                             "$ref": "#/definitions/EntityQualifiedName"
                         },
@@ -431,12 +594,9 @@
                         }
                     },
                     "required": [
-                        "$ID",
                         "$Type",
                         "errorHandlingType",
                         "items",
-                        "refreshInClient",
-                        "commit",
                         "entity",
                         "outputVariableName"
                     ]
@@ -522,7 +682,7 @@
                     "type": "object",
                     "properties": {
                         "$ID": {
-                            "$ref": "common.schema.json#/definitions/GUID"
+                            "$ref": "common.schema.json#/definitions/Identifiable"
                         },
                         "$Type": {
                             "type": "string",
@@ -608,10 +768,12 @@
                 },
                 {
                     "type": "object",
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/_EntityBase"
+                        }
+                    ],
                     "properties": {
-                        "$ID": {
-                            "$ref": "common.schema.json#/definitions/GUID"
-                        },
                         "$Type": {
                             "type": "string",
                             "const": "Microflows$ChangeObjectAction"
@@ -624,15 +786,6 @@
                             "items": {
                                 "$ref": "#/definitions/MemberChange"
                             }
-                        },
-                        "refreshInClient": {
-                            "type": "boolean"
-                        },
-                        "commit": {
-                            "type": "string",
-                            "enum": [
-                                "Yes"
-                            ]
                         },
                         "changeVariableName": {
                             "type": "string"
@@ -665,7 +818,14 @@
                             "type": "string"
                         },
                         "attribute": {
-                            "$ref": "common.schema.json#/definitions/AttributeQualifiedName"
+                            "oneOf": [
+                                {
+                                    "type": "null"
+                                },
+                                {
+                                    "$ref": "common.schema.json#/definitions/AttributeQualifiedName"
+                                }
+                            ]
                         },
                         "expression": {
                             "type": "string"
@@ -676,7 +836,8 @@
                         "aggregateFunction": {
                             "type": "string",
                             "enum": [
-                                "Sum"
+                                "Sum",
+                                "Count"
                             ]
                         },
                         "outputVariableName": {
@@ -890,7 +1051,7 @@
                     "type": "object",
                     "properties": {
                         "$ID": {
-                            "$ref": "common.schema.json#/definitions/GUID"
+                            "$ref": "common.schema.json#/definitions/Identifiable"
                         },
                         "$Type": {
                             "type": "string",
@@ -1060,6 +1221,7 @@
         },
         "MemberChange": {
             "type": "object",
+            "description": "attribute and association change are exclusive",
             "properties": {
                 "$ID": {
                     "$ref": "common.schema.json#/definitions/Identifiable"
@@ -1069,10 +1231,19 @@
                     "const": "Microflows$MemberChange"
                 },
                 "attribute": {
-                    "type": "string"
+                    "type": [
+                        "null",
+                        "string"
+                    ]
                 },
                 "association": {
-                    "type": "null"
+                    "type": [
+                        "null",
+                        "string"
+                    ],
+                    "examples": [
+                        "System.User_Language"
+                    ]
                 },
                 "type": {
                     "type": "string",
@@ -1181,7 +1352,9 @@
                     "type": "string",
                     "enum": [
                         "DataTypes$BooleanType",
-                        "DataTypes$VoidType"
+                        "DataTypes$VoidType",
+                        "DataTypes$StringType",
+                        "DataTypes$ObjectType"
                     ]
                 }
             },
@@ -1271,7 +1444,7 @@
                                 {
                                     "properties": {
                                         "$ID": {
-                                            "$ref": "common.schema.json#/definitions/GUID"
+                                            "$ref": "common.schema.json#/definitions/Identifiable"
                                         },
                                         "$Type": {
                                             "type": "string",
@@ -1290,7 +1463,7 @@
                                 {
                                     "properties": {
                                         "$ID": {
-                                            "$ref": "common.schema.json#/definitions/GUID"
+                                            "$ref": "common.schema.json#/definitions/Identifiable"
                                         },
                                         "$Type": {
                                             "type": "string",
@@ -1481,6 +1654,53 @@
                 "expression"
             ]
         },
+        "RuleSplitCondition": {
+            "type": "object",
+            "properties": {
+                "$ID": {
+                    "$ref": "common.schema.json#/definitions/Identifiable"
+                },
+                "$Type": {
+                    "type": "string",
+                    "const": "Microflows$RuleSplitCondition"
+                },
+                "ruleCall": {
+                    "type": "object",
+                    "properties": {
+                        "$ID": {
+                            "$ref": "common.schema.json#/definitions/Identifiable"
+                        },
+                        "$Type": {
+                            "type": "string",
+                            "enum": [
+                                "Microflows$RuleCall"
+                            ]
+                        },
+                        "rule": {
+                            "type": "string",
+                            "examples": [
+                                "MendixSSO.ValidateTokenEncryptionKey"
+                            ]
+                        },
+                        "parameterMappings": {
+                            "type": "array",
+                            "items": {}
+                        }
+                    },
+                    "required": [
+                        "$ID",
+                        "$Type",
+                        "rule",
+                        "parameterMappings"
+                    ]
+                }
+            },
+            "required": [
+                "$ID",
+                "$Type",
+                "ruleCall"
+            ]
+        },
         "ObjectCollection": {
             "type": "object",
             "properties": {
@@ -1521,26 +1741,7 @@
                                         "type": "string"
                                     },
                                     "variableType": {
-                                        "type": "object",
-                                        "properties": {
-                                            "$ID": {
-                                                "type": "string"
-                                            },
-                                            "$Type": {
-                                                "type": "string",
-                                                "enum": [
-                                                    "DataTypes$ObjectType"
-                                                ]
-                                            },
-                                            "entity": {
-                                                "type": "string"
-                                            }
-                                        },
-                                        "required": [
-                                            "$ID",
-                                            "$Type",
-                                            "entity"
-                                        ]
+                                        "$ref": "#/definitions/VariableType"
                                     },
                                     "documentation": {
                                         "type": "string"
@@ -1582,6 +1783,45 @@
                                     "$Type",
                                     "relativeMiddlePoint",
                                     "size"
+                                ]
+                            },
+                            {
+                                "type": "object",
+                                "description": "can only have one start event in a microflow",
+                                "properties": {
+                                    "$ID": {
+                                        "$ref": "common.schema.json#/definitions/Identifiable"
+                                    },
+                                    "$Type": {
+                                        "type": "string",
+                                        "enum": [
+                                            "Microflows$InheritanceSplit"
+                                        ]
+                                    },
+                                    "relativeMiddlePoint": {
+                                        "$ref": "#/definitions/RelativePoint"
+                                    },
+                                    "size": {
+                                        "$ref": "#/definitions/Size"
+                                    },
+                                    "splitVariableName": {
+                                        "type": "string"
+                                    },
+                                    "caption": {
+                                        "type": "string"
+                                    },
+                                    "documentation": {
+                                        "type": "string"
+                                    }
+                                },
+                                "required": [
+                                    "$ID",
+                                    "$Type",
+                                    "relativeMiddlePoint",
+                                    "size",
+                                    "splitVariableName",
+                                    "caption",
+                                    "documentation"
                                 ]
                             },
                             {
@@ -1654,7 +1894,8 @@
                                     "backgroundColor": {
                                         "type": "string",
                                         "enum": [
-                                            "Default"
+                                            "Default",
+                                            "Green"
                                         ]
                                     },
                                     "documentation": {
@@ -1693,7 +1934,14 @@
                                         "$ref": "#/definitions/Size"
                                     },
                                     "splitCondition": {
-                                        "$ref": "#/definitions/ExpressionSplitCondition"
+                                        "oneOf": [
+                                            {
+                                                "$ref": "#/definitions/RuleSplitCondition"
+                                            },
+                                            {
+                                                "$ref": "#/definitions/ExpressionSplitCondition"
+                                            }
+                                        ]
                                     },
                                     "caption": {
                                         "type": "string",
@@ -1745,7 +1993,7 @@
                                 "type": "object",
                                 "properties": {
                                     "$ID": {
-                                        "$ref": "common.schema.json#/definitions/GUID"
+                                        "$ref": "common.schema.json#/definitions/Identifiable"
                                     },
                                     "$Type": {
                                         "type": "string",
@@ -1818,27 +2066,51 @@
                                         "type": "string"
                                     },
                                     "loopSource": {
-                                        "type": "object",
-                                        "properties": {
-                                            "$ID": {
-                                                "$ref": "common.schema.json#/definitions/Identifiable"
+                                        "oneOf": [
+                                            {
+                                                "type": "object",
+                                                "properties": {
+                                                    "$ID": {
+                                                        "$ref": "common.schema.json#/definitions/Identifiable"
+                                                    },
+                                                    "$Type": {
+                                                        "type": "string",
+                                                        "enum": [
+                                                            "Microflows$IterableList"
+                                                        ]
+                                                    },
+                                                    "listVariableName": {
+                                                        "type": "string"
+                                                    },
+                                                    "variableName": {
+                                                        "type": "string"
+                                                    }
+                                                }
                                             },
-                                            "$Type": {
-                                                "type": "string",
-                                                "enum": [
-                                                    "Microflows$WhileLoopCondition"
-                                                ]
-                                            },
-                                            "whileExpression": {
-                                                "type": "string",
-                                                "examples": [
-                                                    "$currentUser/Active"
-                                                ]
-                                            },
-                                            "caption": {
-                                                "type": "string"
+                                            {
+                                                "type": "object",
+                                                "properties": {
+                                                    "$ID": {
+                                                        "$ref": "common.schema.json#/definitions/Identifiable"
+                                                    },
+                                                    "$Type": {
+                                                        "type": "string",
+                                                        "enum": [
+                                                            "Microflows$WhileLoopCondition"
+                                                        ]
+                                                    },
+                                                    "whileExpression": {
+                                                        "type": "string",
+                                                        "examples": [
+                                                            "$currentUser/Active"
+                                                        ]
+                                                    },
+                                                    "caption": {
+                                                        "type": "string"
+                                                    }
+                                                }
                                             }
-                                        }
+                                        ]
                                     },
                                     "objectCollection": {
                                         "$ref": "#/definitions/ObjectCollection"

@@ -2,6 +2,18 @@
     "$schema": "http://json-schema.org/draft-07/schema#",
     "title": "Common Structure Schema for mendix model",
     "definitions": {
+        "_Base": {
+            "type": "object",
+            "properties": {
+                "$ID": {
+                    "type": "string",
+                    "description": "Unique identifier. use for placeholer uniqe identifier for human readable name and later will replace with guid by model sdk"
+                }
+            },
+            "required": [
+                "$ID"
+            ]
+        },
         "TemplateArgument": {
             "type": "object",
             "description": "string template interpolation argument",
@@ -69,7 +81,7 @@
         },
         "AttributeQualifiedName": {
             "type": "string",
-            "description": "QualifiedName of the document e.g. microflow page entity",
+            "description": "Qualified attribute name of the entity ",
             "examples": [
                 "System.User",
                 "MyFirstModule.MyEntity.MyAttribute"
@@ -82,7 +94,7 @@
             ],
             "properties": {
                 "$ID": {
-                    "$ref": "#/definitions/GUID"
+                    "$ref": "#/definitions/Identifiable"
                 },
                 "$Type": {
                     "type": "string",
@@ -106,7 +118,7 @@
             "description": "Reference to attribute.",
             "properties": {
                 "$ID": {
-                    "$ref": "#/definitions/GUID"
+                    "$ref": "#/definitions/Identifiable"
                 },
                 "$Type": {
                     "type": "string",
@@ -170,7 +182,8 @@
                     "enum": [
                         "en_US",
                         "zh_CN",
-                        "zh_TW"
+                        "zh_TW",
+                        "nl_NL"
                     ]
                 },
                 "text": {
