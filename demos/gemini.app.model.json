@@ -644,12 +644,12 @@
                                 "layoutCall": {
                                     "$ID": "LayoutCall_Student_Dashboard",
                                     "$Type": "Pages$LayoutCall",
-                                    "layout": "Layout_Student",
+                                    "layout": "Atlas_Core.Atlas_Default",
                                     "arguments": [
                                         {
                                             "$ID": "LayoutCallArgument_Student_Dashboard_Main",
                                             "$Type": "Pages$LayoutCallArgument",
-                                            "parameter": "Layout_Student_Content",
+                                            "parameter": "Atlas_Core.Atlas_Default.Main",
                                             "widgets": [
                                                 {
                                                     "$ID": "DataView_StudentInfo",
@@ -1646,7 +1646,18 @@
                                 "microflowActionInfo": null,
                                 "workflowActionInfo": null,
                                 "allowConcurrentExecution": true,
-                                "concurrencyErrorMessage": null,
+                                "concurrencyErrorMessage": {
+                                    "$ID": "my_text",
+                                    "$Type": "Texts$Text",
+                                    "translations": [
+                                        {
+                                            "$ID": "my_translation",
+                                            "$Type": "Texts$Translation",
+                                            "languageCode": "en_US",
+                                            "text": ""
+                                        }
+                                    ]
+                                },
                                 "concurrencyErrorMicroflow": null,
                                 "url": "",
                                 "urlSearchParameters": [],

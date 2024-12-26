@@ -4,6 +4,33 @@
     "description": "you must give a module name when gen a model, so i can confirm qulified name",
     "type": "object",
     "definitions": {
+        "_Widget": {
+            "type": "object",
+            "properties": {
+                "$ID": {
+                    "type": "string",
+                    "description": "Unique identifier of the widget"
+                },
+                "appearance": {
+                    "$ref": "#/definitions/Appearance"
+                },
+                "tabIndex": {
+                    "type": "integer",
+                    "description": "Tab index for accessibility."
+                },
+                "conditionalVisibilitySettings": {
+                    "type": [
+                        "object",
+                        "null"
+                    ],
+                    "description": "Settings for conditional visibility"
+                }
+            },
+            "required": [
+                "$ID",
+                "$Type"
+            ]
+        },
         "GridColumn": {
             "type": "object",
             "description": "Datagrid column.",
@@ -51,12 +78,21 @@
                         "enumFormat": {
                             "type": "string",
                             "description": "Enum format.",
-                            "enum": ["Text", "Key", "Image", "Value"]
+                            "enum": [
+                                "Text",
+                                "Key",
+                                "Image",
+                                "Value"
+                            ]
                         },
                         "dateFormat": {
                             "type": "string",
                             "description": "Date format to be used.",
-                            "enum": ["Date", "DateTime", "Time"]
+                            "enum": [
+                                "Date",
+                                "DateTime",
+                                "Time"
+                            ]
                         },
                         "customDateFormat": {
                             "type": "string",
@@ -83,7 +119,14 @@
                 "aggregateFunction": {
                     "type": "string",
                     "description": "Aggregation function to use for the column.",
-                    "enum": ["None", "Sum", "Average", "Min", "Max", "Count"]
+                    "enum": [
+                        "None",
+                        "Sum",
+                        "Average",
+                        "Min",
+                        "Max",
+                        "Count"
+                    ]
                 },
                 "editable": {
                     "type": "boolean",
@@ -154,7 +197,10 @@
                                         "$ref": "#/definitions/Text"
                                     },
                                     "icon": {
-                                        "type": ["object", "null"],
+                                        "type": [
+                                            "object",
+                                            "null"
+                                        ],
                                         "description": "Icon to be displayed on the button",
                                         "properties": {
                                             "$ID": {
@@ -175,7 +221,10 @@
                                         "$ref": "#/definitions/Appearance"
                                     },
                                     "conditionalVisibilitySettings": {
-                                        "type": ["object", "null"],
+                                        "type": [
+                                            "object",
+                                            "null"
+                                        ],
                                         "description": "Settings for conditional visibility"
                                     },
                                     "buttonStyle": {
@@ -227,7 +276,10 @@
                                         "$ref": "#/definitions/Text"
                                     },
                                     "icon": {
-                                        "type": ["object", "null"],
+                                        "type": [
+                                            "object",
+                                            "null"
+                                        ],
                                         "description": "Icon to be displayed on the button",
                                         "properties": {
                                             "$ID": {
@@ -248,7 +300,10 @@
                                         "$ref": "#/definitions/Appearance"
                                     },
                                     "conditionalVisibilitySettings": {
-                                        "type": ["object", "null"],
+                                        "type": [
+                                            "object",
+                                            "null"
+                                        ],
                                         "description": "Settings for conditional visibility."
                                     },
                                     "buttonStyle": {
@@ -283,11 +338,18 @@
                     }
                 },
                 "defaultButton": {
-                    "type": ["string", "null"],
+                    "type": [
+                        "string",
+                        "null"
+                    ],
                     "description": "Reference to the default button."
                 }
             },
-            "required": ["$ID", "$Type", "items"]
+            "required": [
+                "$ID",
+                "$Type",
+                "items"
+            ]
         },
         "ComparisonSearchField": {
             "type": "object",
@@ -318,7 +380,13 @@
                 "type": {
                     "type": "string",
                     "description": "Type of the search field",
-                    "enum": ["Normal", "Date", "DateTime", "Time", "DatePart"]
+                    "enum": [
+                        "Normal",
+                        "Date",
+                        "DateTime",
+                        "Time",
+                        "DatePart"
+                    ]
                 },
                 "defaultValue": {
                     "type": "string",
@@ -389,7 +457,13 @@
                     "description": "Boolean to indicate whether the grid should wait for search"
                 }
             },
-            "required": ["$ID", "$Type", "items", "type", "waitForSearch"]
+            "required": [
+                "$ID",
+                "$Type",
+                "items",
+                "type",
+                "waitForSearch"
+            ]
         },
         "GridSortBar": {
             "type": "object",
@@ -426,7 +500,10 @@
                             "sortDirection": {
                                 "type": "string",
                                 "description": "Direction of sort.",
-                                "enum": ["Ascending", "Descending"]
+                                "enum": [
+                                    "Ascending",
+                                    "Descending"
+                                ]
                             }
                         },
                         "required": [
@@ -438,7 +515,11 @@
                     }
                 }
             },
-            "required": ["$ID", "$Type", "sortItems"]
+            "required": [
+                "$ID",
+                "$Type",
+                "sortItems"
+            ]
         },
         "DataGrid": {
             "type": "object",
@@ -464,7 +545,10 @@
                     "description": "Tab index for accessibility."
                 },
                 "conditionalVisibilitySettings": {
-                    "type": ["object", "null"],
+                    "type": [
+                        "object",
+                        "null"
+                    ],
                     "description": "Conditional Visibility Settings"
                 },
                 "dataSource": {
@@ -488,7 +572,10 @@
                             "$ref": "common.schema.json/#/definitions/entityRef"
                         },
                         "sourceVariable": {
-                            "type": ["object", "null"],
+                            "type": [
+                                "object",
+                                "null"
+                            ],
                             "description": "Source variable of the grid"
                         },
                         "sortBar": {
@@ -519,12 +606,21 @@
                 "showPagingBar": {
                     "type": "string",
                     "description": "Indicates when the paging bar should be visible.",
-                    "enum": ["No", "Yes", "YesWithTotalCount"]
+                    "enum": [
+                        "No",
+                        "Yes",
+                        "YesWithTotalCount"
+                    ]
                 },
                 "selectionMode": {
                     "type": "string",
                     "description": "Selection mode of the grid.",
-                    "enum": ["None", "Single", "SimpleMulti", "ExtendedMulti"]
+                    "enum": [
+                        "None",
+                        "Single",
+                        "SimpleMulti",
+                        "ExtendedMulti"
+                    ]
                 },
                 "selectFirst": {
                     "type": "boolean",
@@ -533,7 +629,10 @@
                 "defaultButtonTrigger": {
                     "type": "string",
                     "description": "Default button trigger",
-                    "enum": ["Single", "Double"]
+                    "enum": [
+                        "Single",
+                        "Double"
+                    ]
                 },
                 "refreshTime": {
                     "type": "integer",
@@ -560,10 +659,16 @@
                 "widthUnit": {
                     "type": "string",
                     "description": "Width unit of the grid",
-                    "enum": ["Weight", "Pixels"]
+                    "enum": [
+                        "Weight",
+                        "Pixels"
+                    ]
                 },
                 "tooltipPage": {
-                    "type": ["object", "null"],
+                    "type": [
+                        "object",
+                        "null"
+                    ],
                     "description": "Page to be opened as tooltip."
                 },
                 "caption": {
@@ -617,7 +722,10 @@
                     "description": "Tab index for accessibility."
                 },
                 "conditionalVisibilitySettings": {
-                    "type": ["object", "null"],
+                    "type": [
+                        "object",
+                        "null"
+                    ],
                     "description": "Settings for conditional visibility"
                 },
                 "caption": {
@@ -658,23 +766,36 @@
                     "description": "Tab index for accessibility."
                 },
                 "conditionalVisibilitySettings": {
-                    "type": ["object", "null"],
+                    "type": [
+                        "object",
+                        "null"
+                    ],
                     "description": "Settings for conditional visibility"
                 },
                 "conditionalEditabilitySettings": {
-                    "type": ["object", "null"],
+                    "type": [
+                        "object",
+                        "null"
+                    ],
                     "description": "Conditional editability settings."
                 },
                 "editable": {
                     "type": "string",
                     "description": "Specifies when the widget is editable.",
-                    "enum": ["Always", "Never", "Conditional"]
+                    "enum": [
+                        "Always",
+                        "Never",
+                        "Conditional"
+                    ]
                 },
                 "labelTemplate": {
                     "$ref": "#/definitions/ClientTemplate"
                 },
                 "screenReaderLabel": {
-                    "type": ["string", "null"],
+                    "type": [
+                        "string",
+                        "null"
+                    ],
                     "description": "Label for screen readers."
                 },
                 "attributeRef": {
@@ -683,7 +804,10 @@
                 "readOnlyStyle": {
                     "type": "string",
                     "description": "Style of the widget in read only mode.",
-                    "enum": ["Inherit", "Control"]
+                    "enum": [
+                        "Inherit",
+                        "Control"
+                    ]
                 },
                 "validation": {
                     "type": "object",
@@ -706,7 +830,12 @@
                             "$ref": "#/definitions/Text"
                         }
                     },
-                    "required": ["$ID", "$Type", "expression", "message"]
+                    "required": [
+                        "$ID",
+                        "$Type",
+                        "expression",
+                        "message"
+                    ]
                 },
                 "onChangeAction": {
                     "type": "object",
@@ -726,7 +855,11 @@
                             "description": "Indicates whether the action should be disabled during execution"
                         }
                     },
-                    "required": ["$ID", "$Type", "disabledDuringExecution"]
+                    "required": [
+                        "$ID",
+                        "$Type",
+                        "disabledDuringExecution"
+                    ]
                 },
                 "onEnterAction": {
                     "type": "object",
@@ -746,7 +879,11 @@
                             "description": "Indicates whether the action should be disabled during execution"
                         }
                     },
-                    "required": ["$ID", "$Type", "disabledDuringExecution"]
+                    "required": [
+                        "$ID",
+                        "$Type",
+                        "disabledDuringExecution"
+                    ]
                 },
                 "onLeaveAction": {
                     "type": "object",
@@ -766,10 +903,17 @@
                             "description": "Indicates whether the action should be disabled during execution"
                         }
                     },
-                    "required": ["$ID", "$Type", "disabledDuringExecution"]
+                    "required": [
+                        "$ID",
+                        "$Type",
+                        "disabledDuringExecution"
+                    ]
                 },
                 "sourceVariable": {
-                    "type": ["object", "null"],
+                    "type": [
+                        "object",
+                        "null"
+                    ],
                     "description": "Source variable of the widget."
                 },
                 "ariaRequired": {
@@ -779,15 +923,25 @@
                 "labelPosition": {
                     "type": "string",
                     "description": "Specifies where the label should be rendered",
-                    "enum": ["Default", "Left", "Top"]
+                    "enum": [
+                        "Default",
+                        "Left",
+                        "Top"
+                    ]
                 },
                 "nativeRenderMode": {
                     "type": "string",
                     "description": "Native render mode of this checkbox",
-                    "enum": ["Switch", "CheckBox"]
+                    "enum": [
+                        "Switch",
+                        "CheckBox"
+                    ]
                 },
                 "nativeAccessibilitySettings": {
-                    "type": ["object", "null"],
+                    "type": [
+                        "object",
+                        "null"
+                    ],
                     "description": "Native accessibility settings of the widget"
                 }
             },
@@ -828,6 +982,9 @@
                 },
                 {
                     "$ref": "#/definitions/DivContainer"
+                },
+                {
+                    "$ref": "#/definitions/ListView"
                 },
                 {
                     "$ref": "#/definitions/DataView"
@@ -906,7 +1063,10 @@
                     "$ref": "#/definitions/Text"
                 },
                 "icon": {
-                    "type": ["object", "null"],
+                    "type": [
+                        "object",
+                        "null"
+                    ],
                     "description": "Icon to be displayed on the button",
                     "properties": {
                         "$ID": {
@@ -916,7 +1076,10 @@
                         "$Type": {
                             "type": "string",
                             "description": "Type of the object, should be 'Pages$ImageIcon' or 'Pages$GlyphIcon'",
-                            "enum": ["Pages$ImageIcon", "Pages$GlyphIcon"]
+                            "enum": [
+                                "Pages$ImageIcon",
+                                "Pages$GlyphIcon"
+                            ]
                         }
                     }
                 },
@@ -924,7 +1087,10 @@
                     "$ref": "#/definitions/Appearance"
                 },
                 "conditionalVisibilitySettings": {
-                    "type": ["object", "null"],
+                    "type": [
+                        "object",
+                        "null"
+                    ],
                     "description": "Conditional visibility settings."
                 },
                 "buttonStyle": {
@@ -962,7 +1128,10 @@
                             "description": "Boolean to specify if page should be closed"
                         },
                         "sourceVariable": {
-                            "type": ["object", "null"],
+                            "type": [
+                                "object",
+                                "null"
+                            ],
                             "description": "Source variable for the delete action."
                         }
                     },
@@ -1016,7 +1185,10 @@
                     "description": "Tab index for accessibility."
                 },
                 "conditionalVisibilitySettings": {
-                    "type": ["object", "null"],
+                    "type": [
+                        "object",
+                        "null"
+                    ],
                     "description": "Settings for conditional visibility"
                 },
                 "tabPages": {
@@ -1047,7 +1219,10 @@
                                 "description": "Boolean to specify if page should refresh on show."
                             },
                             "conditionalVisibilitySettings": {
-                                "type": ["object", "null"],
+                                "type": [
+                                    "object",
+                                    "null"
+                                ],
                                 "description": "Settings for conditional visibility of tab page"
                             },
                             "widgets": {
@@ -1059,7 +1234,10 @@
                                 }
                             },
                             "badge": {
-                                "type": ["object", "null"],
+                                "type": [
+                                    "object",
+                                    "null"
+                                ],
                                 "description": "Badge of the tab page"
                             }
                         },
@@ -1076,7 +1254,10 @@
                     }
                 },
                 "defaultPage": {
-                    "type": ["string", "null"],
+                    "type": [
+                        "string",
+                        "null"
+                    ],
                     "description": "Default selected tab page."
                 }
             },
@@ -1099,7 +1280,9 @@
                     "description": "Unique identifier of the object"
                 }
             },
-            "required": ["$ID"]
+            "required": [
+                "$ID"
+            ]
         },
         "Appearance": {
             "type": "object",
@@ -1129,8 +1312,7 @@
                         "description": "Design property value",
                         "properties": {
                             "$ID": {
-                                "type": "string",
-                                "description": "Unique identifier of the design property."
+                                "$ref": "common.schema.json#/definitions/Identifiable"
                             },
                             "$Type": {
                                 "type": "string",
@@ -1139,30 +1321,61 @@
                             },
                             "key": {
                                 "type": "string",
-                                "description": "Key for the design property."
+                                "description": "Key for the design property.",
+                                "examples": [
+                                    "Style"
+                                ]
                             },
                             "value": {
-                                "type": "object",
-                                "description": "Value of the design property.",
-                                "properties": {
-                                    "$ID": {
-                                        "type": "string",
-                                        "description": "Unique identifier of the option design property value."
+                                "oneOf": [
+                                    {
+                                        "type": "object",
+                                        "description": "Value of the design property.",
+                                        "properties": {
+                                            "$ID": {
+                                                "$ref": "common.schema.json#/definitions/Identifiable"
+                                            },
+                                            "$Type": {
+                                                "type": "string",
+                                                "const": "Pages$OptionDesignPropertyValue"
+                                            },
+                                            "option": {
+                                                "type": "string",
+                                                "description": "Option value for the design property"
+                                            }
+                                        },
+                                        "required": [
+                                            "$ID",
+                                            "$Type",
+                                            "option"
+                                        ]
                                     },
-                                    "$Type": {
-                                        "type": "string",
-                                        "description": "Type of the object, should be 'Pages$OptionDesignPropertyValue'.",
-                                        "const": "Pages$OptionDesignPropertyValue"
-                                    },
-                                    "option": {
-                                        "type": "string",
-                                        "description": "Option value for the design property"
+                                    {
+                                        "type": "object",
+                                        "description": "Value of the design property.",
+                                        "properties": {
+                                            "$ID": {
+                                                "$ref": "common.schema.json#/definitions/Identifiable"
+                                            },
+                                            "$Type": {
+                                                "type": "string",
+                                                "const": "Pages$ToggleDesignPropertyValue"
+                                            }
+                                        },
+                                        "required": [
+                                            "$ID",
+                                            "$Type"
+                                        ]
                                     }
-                                },
-                                "required": ["$ID", "$Type", "option"]
+                                ]
                             }
                         },
-                        "required": ["$ID", "$Type", "key", "value"]
+                        "required": [
+                            "$ID",
+                            "$Type",
+                            "key",
+                            "value"
+                        ]
                     }
                 },
                 "dynamicClasses": {
@@ -1216,11 +1429,20 @@
                                 "description": "Translated text"
                             }
                         },
-                        "required": ["$ID", "$Type", "languageCode", "text"]
+                        "required": [
+                            "$ID",
+                            "$Type",
+                            "languageCode",
+                            "text"
+                        ]
                     }
                 }
             },
-            "required": ["$ID", "$Type", "translations"]
+            "required": [
+                "$ID",
+                "$Type",
+                "translations"
+            ]
         },
         "DropDownSearchField": {
             "type": "object",
@@ -1251,7 +1473,11 @@
                 "type": {
                     "type": "string",
                     "description": "Type of search field",
-                    "enum": ["Normal", "Date", "DateTime"]
+                    "enum": [
+                        "Normal",
+                        "Date",
+                        "DateTime"
+                    ]
                 },
                 "defaultValue": {
                     "type": "string",
@@ -1295,7 +1521,11 @@
                             }
                         }
                     },
-                    "required": ["$ID", "$Type", "sortItems"]
+                    "required": [
+                        "$ID",
+                        "$Type",
+                        "sortItems"
+                    ]
                 },
                 "xPathConstraint": {
                     "type": "string",
@@ -1363,7 +1593,12 @@
                 "verticalAlignment": {
                     "type": "string",
                     "description": "Vertical alignment of the column",
-                    "enum": ["None", "Top", "Middle", "Bottom"]
+                    "enum": [
+                        "None",
+                        "Top",
+                        "Middle",
+                        "Bottom"
+                    ]
                 }
             },
             "required": [
@@ -1396,7 +1631,10 @@
                     }
                 },
                 "conditionalVisibilitySettings": {
-                    "type": ["object", "null"],
+                    "type": [
+                        "object",
+                        "null"
+                    ],
                     "description": "Conditional visibility settings"
                 },
                 "appearance": {
@@ -1405,19 +1643,33 @@
                 "verticalAlignment": {
                     "type": "string",
                     "description": "Vertical alignment of the row.",
-                    "enum": ["None", "Top", "Middle", "Bottom"]
+                    "enum": [
+                        "None",
+                        "Top",
+                        "Middle",
+                        "Bottom"
+                    ]
                 },
                 "horizontalAlignment": {
                     "type": "string",
                     "description": "Horizontal alignment of the row.",
-                    "enum": ["None", "Left", "Center", "Right"]
+                    "enum": [
+                        "None",
+                        "Left",
+                        "Center",
+                        "Right"
+                    ]
                 },
                 "spacingBetweenColumns": {
                     "type": "boolean",
                     "description": "Whether to add spacing between columns"
                 }
             },
-            "required": ["$ID", "$Type", "columns"]
+            "required": [
+                "$ID",
+                "$Type",
+                "columns"
+            ]
         },
         "LayoutGrid": {
             "type": "object",
@@ -1443,13 +1695,19 @@
                     "description": "Tab index for accessibility."
                 },
                 "conditionalVisibilitySettings": {
-                    "type": ["object", "null"],
+                    "type": [
+                        "object",
+                        "null"
+                    ],
                     "description": "Settings for conditional visibility."
                 },
                 "width": {
                     "type": "string",
                     "description": "Width of the LayoutGrid widget",
-                    "enum": ["FullWidth", "Content"]
+                    "enum": [
+                        "FullWidth",
+                        "Content"
+                    ]
                 },
                 "rows": {
                     "type": "array",
@@ -1497,7 +1755,13 @@
                     "$ref": "#/definitions/Text"
                 }
             },
-            "required": ["$ID", "$Type", "template", "parameters", "fallback"]
+            "required": [
+                "$ID",
+                "$Type",
+                "template",
+                "parameters",
+                "fallback"
+            ]
         },
         "DivContainer": {
             "type": "object",
@@ -1523,7 +1787,10 @@
                     "description": "Tab index for accessibility"
                 },
                 "conditionalVisibilitySettings": {
-                    "type": ["object", "null"],
+                    "type": [
+                        "object",
+                        "null"
+                    ],
                     "description": "Settings for conditional visibility"
                 },
                 "widgets": {
@@ -1536,7 +1803,10 @@
                 "renderMode": {
                     "type": "string",
                     "description": "Render mode of the container.",
-                    "enum": ["Div", "Section"]
+                    "enum": [
+                        "Div",
+                        "Section"
+                    ]
                 },
                 "onClickAction": {
                     "type": "object",
@@ -1556,14 +1826,21 @@
                             "description": "Boolean to specify if the action should be disabled during execution"
                         }
                     },
-                    "required": ["$ID", "$Type", "disabledDuringExecution"]
+                    "required": [
+                        "$ID",
+                        "$Type",
+                        "disabledDuringExecution"
+                    ]
                 },
                 "screenReaderHidden": {
                     "type": "boolean",
                     "description": "Indicates whether the widget should be hidden for screen readers."
                 },
                 "nativeAccessibilitySettings": {
-                    "type": ["object", "null"],
+                    "type": [
+                        "object",
+                        "null"
+                    ],
                     "description": "Native accessibility settings of the widget"
                 }
             },
@@ -1579,6 +1856,210 @@
                 "onClickAction",
                 "screenReaderHidden",
                 "nativeAccessibilitySettings"
+            ]
+        },
+        "ListView": {
+            "type": "object",
+            "properties": {
+                "$ID": {
+                    "type": "string",
+                    "description": "Unique identifier of the widget"
+                },
+                "$Type": {
+                    "type": "string",
+                    "description": "Type of the widget, should be 'Pages$ListView'",
+                    "const": "Pages$ListView"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "Name of the widget"
+                },
+                "appearance": {
+                    "$ref": "#/definitions/Appearance"
+                },
+                "tabIndex": {
+                    "type": "integer",
+                    "description": "Tab index for accessibility."
+                },
+                "conditionalVisibilitySettings": {
+                    "type": [
+                        "object",
+                        "null"
+                    ],
+                    "description": "Settings for conditional visibility"
+                },
+                "dataSource": {
+                    "type": "object",
+                    "description": "Data source of the ListView widget.",
+                    "properties": {
+                        "$ID": {
+                            "type": "string",
+                            "description": "Unique identifier of the Data source"
+                        },
+                        "$Type": {
+                            "type": "string",
+                            "description": "Type of the object, should be 'Pages$ListViewXPathSource'.",
+                            "const": "Pages$ListViewXPathSource"
+                        },
+                        "forceFullObjects": {
+                            "type": "boolean",
+                            "description": "Boolean to specify whether data should be full objects"
+                        },
+                        "entityRef": {
+                            "$ref": "common.schema.json/#/definitions/entityRef"
+                        },
+                        "sourceVariable": {
+                            "type": [
+                                "object",
+                                "null"
+                            ],
+                            "description": "Source variable of the list view"
+                        },
+                        "sortBar": {
+                            "$ref": "#/definitions/GridSortBar"
+                        },
+                        "xPathConstraint": {
+                            "type": "string",
+                            "description": "XPath constraint to use"
+                        },
+                        "search": {
+                            "type": "object",
+                            "description": "Search settings.",
+                            "properties": {
+                                "$ID": {
+                                    "type": "string",
+                                    "description": "Unique identifier of the search object."
+                                },
+                                "$Type": {
+                                    "type": "string",
+                                    "description": "Type of the object, should be 'Pages$ListViewSearch'.",
+                                    "const": "Pages$ListViewSearch"
+                                },
+                                "searchRefs": {
+                                    "type": "array",
+                                    "description": "List of attribute references used for searching.",
+                                    "items": {
+                                        "$ref": "./common.schema.json#/definitions/AttributeRef"
+                                    }
+                                }
+                            },
+                            "required": [
+                                "$ID",
+                                "$Type",
+                                "searchRefs"
+                            ]
+                        }
+                    },
+                    "required": [
+                        "$ID",
+                        "$Type",
+                        "forceFullObjects",
+                        "entityRef",
+                        "sortBar",
+                        "xPathConstraint",
+                        "search"
+                    ]
+                },
+                "widgets": {
+                    "type": "array",
+                    "description": "List of widgets within this container.",
+                    "items": {
+                        "$ref": "#/definitions/Widget"
+                    }
+                },
+                "pageSize": {
+                    "type": "integer",
+                    "description": "Number of items per page"
+                },
+                "clickAction": {
+                    "type": "object",
+                    "description": "Settings for click action",
+                    "properties": {
+                        "$ID": {
+                            "type": "string",
+                            "description": "Unique identifier of the action."
+                        },
+                        "$Type": {
+                            "type": "string",
+                            "description": "Type of the object, should be 'Pages$NoClientAction'.",
+                            "const": "Pages$NoClientAction"
+                        },
+                        "disabledDuringExecution": {
+                            "type": "boolean",
+                            "description": "Boolean to specify if the action should be disabled during execution"
+                        }
+                    },
+                    "required": [
+                        "$ID",
+                        "$Type",
+                        "disabledDuringExecution"
+                    ]
+                },
+                "editable": {
+                    "type": "boolean",
+                    "description": "Boolean to indicate if list view is editable."
+                },
+                "templates": {
+                    "type": "array",
+                    "description": "List of templates within this container",
+                    "items": {
+                        "type": "object",
+                        "description": "Placeholder for template object."
+                    }
+                },
+                "scrollDirection": {
+                    "type": "string",
+                    "description": "Scroll direction of the list view",
+                    "enum": [
+                        "Vertical",
+                        "Horizontal"
+                    ]
+                },
+                "numberOfColumns": {
+                    "type": "integer",
+                    "description": "Number of columns for horizontal layout"
+                },
+                "pullDownAction": {
+                    "type": "object",
+                    "description": "Settings for pull down action",
+                    "properties": {
+                        "$ID": {
+                            "type": "string",
+                            "description": "Unique identifier of the action."
+                        },
+                        "$Type": {
+                            "type": "string",
+                            "description": "Type of the object, should be 'Pages$NoClientAction'.",
+                            "const": "Pages$NoClientAction"
+                        },
+                        "disabledDuringExecution": {
+                            "type": "boolean",
+                            "description": "Boolean to specify if the action should be disabled during execution"
+                        }
+                    },
+                    "required": [
+                        "$ID",
+                        "$Type",
+                        "disabledDuringExecution"
+                    ]
+                }
+            },
+            "required": [
+                "$ID",
+                "$Type",
+                "name",
+                "appearance",
+                "tabIndex",
+                "conditionalVisibilitySettings",
+                "dataSource",
+                "widgets",
+                "pageSize",
+                "clickAction",
+                "editable",
+                "templates",
+                "scrollDirection",
+                "numberOfColumns",
+                "pullDownAction"
             ]
         },
         "DataView": {
@@ -1605,7 +2086,10 @@
                     "description": "Tab index for accessibility."
                 },
                 "conditionalVisibilitySettings": {
-                    "type": ["object", "null"],
+                    "type": [
+                        "object",
+                        "null"
+                    ],
                     "description": "Settings for conditional visibility"
                 },
                 "dataSource": {
@@ -1632,7 +2116,11 @@
                             "$ref": "#/definitions/MicroflowSettings"
                         }
                     },
-                    "required": ["$ID", "$Type", "forceFullObjects"]
+                    "required": [
+                        "$ID",
+                        "$Type",
+                        "forceFullObjects"
+                    ]
                 },
                 "widgets": {
                     "type": "array",
@@ -1651,10 +2139,17 @@
                 "editability": {
                     "type": "string",
                     "description": "Specifies when the widget is editable.",
-                    "enum": ["Always", "Never", "Conditional"]
+                    "enum": [
+                        "Always",
+                        "Never",
+                        "Conditional"
+                    ]
                 },
                 "conditionalEditabilitySettings": {
-                    "type": ["object", "null"],
+                    "type": [
+                        "object",
+                        "null"
+                    ],
                     "description": "Conditional editability settings."
                 },
                 "showFooter": {
@@ -1671,7 +2166,11 @@
                 "readOnlyStyle": {
                     "type": "string",
                     "description": "Style of the widget in read only mode",
-                    "enum": ["Inherit", "Control", "Text"]
+                    "enum": [
+                        "Inherit",
+                        "Control",
+                        "Text"
+                    ]
                 }
             },
             "required": [
@@ -1716,23 +2215,36 @@
                     "description": "Tab index for accessibility."
                 },
                 "conditionalVisibilitySettings": {
-                    "type": ["object", "null"],
+                    "type": [
+                        "object",
+                        "null"
+                    ],
                     "description": "Settings for conditional visibility"
                 },
                 "conditionalEditabilitySettings": {
-                    "type": ["object", "null"],
+                    "type": [
+                        "object",
+                        "null"
+                    ],
                     "description": "Conditional editability settings."
                 },
                 "editable": {
                     "type": "string",
                     "description": "Specifies when the widget is editable.",
-                    "enum": ["Always", "Never", "Conditional"]
+                    "enum": [
+                        "Always",
+                        "Never",
+                        "Conditional"
+                    ]
                 },
                 "labelTemplate": {
                     "$ref": "#/definitions/ClientTemplate"
                 },
                 "screenReaderLabel": {
-                    "type": ["string", "null"],
+                    "type": [
+                        "string",
+                        "null"
+                    ],
                     "description": "Label for screen readers."
                 },
                 "attributeRef": {
@@ -1741,7 +2253,10 @@
                 "readOnlyStyle": {
                     "type": "string",
                     "description": "Style of the widget in read only mode.",
-                    "enum": ["Inherit", "Control"]
+                    "enum": [
+                        "Inherit",
+                        "Control"
+                    ]
                 },
                 "validation": {
                     "type": "object",
@@ -1764,7 +2279,12 @@
                             "$ref": "#/definitions/Text"
                         }
                     },
-                    "required": ["$ID", "$Type", "expression", "message"]
+                    "required": [
+                        "$ID",
+                        "$Type",
+                        "expression",
+                        "message"
+                    ]
                 },
                 "onChangeAction": {
                     "type": "object",
@@ -1784,7 +2304,11 @@
                             "description": "Indicates whether the action should be disabled during execution"
                         }
                     },
-                    "required": ["$ID", "$Type", "disabledDuringExecution"]
+                    "required": [
+                        "$ID",
+                        "$Type",
+                        "disabledDuringExecution"
+                    ]
                 },
                 "onEnterAction": {
                     "type": "object",
@@ -1804,7 +2328,11 @@
                             "description": "Indicates whether the action should be disabled during execution"
                         }
                     },
-                    "required": ["$ID", "$Type", "disabledDuringExecution"]
+                    "required": [
+                        "$ID",
+                        "$Type",
+                        "disabledDuringExecution"
+                    ]
                 },
                 "onLeaveAction": {
                     "type": "object",
@@ -1824,10 +2352,17 @@
                             "description": "Indicates whether the action should be disabled during execution"
                         }
                     },
-                    "required": ["$ID", "$Type", "disabledDuringExecution"]
+                    "required": [
+                        "$ID",
+                        "$Type",
+                        "disabledDuringExecution"
+                    ]
                 },
                 "sourceVariable": {
-                    "type": ["object", "null"],
+                    "type": [
+                        "object",
+                        "null"
+                    ],
                     "description": "Source variable of the widget."
                 },
                 "ariaRequired": {
@@ -1873,12 +2408,21 @@
                         "enumFormat": {
                             "type": "string",
                             "description": "Enum format.",
-                            "enum": ["Text", "Key", "Image", "Value"]
+                            "enum": [
+                                "Text",
+                                "Key",
+                                "Image",
+                                "Value"
+                            ]
                         },
                         "dateFormat": {
                             "type": "string",
                             "description": "Date format to be used.",
-                            "enum": ["Date", "DateTime", "Time"]
+                            "enum": [
+                                "Date",
+                                "DateTime",
+                                "Time"
+                            ]
                         },
                         "customDateFormat": {
                             "type": "string",
@@ -1902,7 +2446,12 @@
                 "keyboardType": {
                     "type": "string",
                     "description": "Keyboard type.",
-                    "enum": ["Default", "Number", "Email", "Phone"]
+                    "enum": [
+                        "Default",
+                        "Number",
+                        "Email",
+                        "Phone"
+                    ]
                 },
                 "onEnterKeyPressAction": {
                     "type": "object",
@@ -1922,7 +2471,11 @@
                             "description": "Indicates whether the action should be disabled during execution"
                         }
                     },
-                    "required": ["$ID", "$Type", "disabledDuringExecution"]
+                    "required": [
+                        "$ID",
+                        "$Type",
+                        "disabledDuringExecution"
+                    ]
                 },
                 "autocomplete": {
                     "type": "boolean",
@@ -1931,19 +2484,31 @@
                 "autocompletePurpose": {
                     "type": "string",
                     "description": "Purpose of autocomplete feature.",
-                    "enum": ["On", "Off", "Name", "Email", "Phone"]
+                    "enum": [
+                        "On",
+                        "Off",
+                        "Name",
+                        "Email",
+                        "Phone"
+                    ]
                 },
                 "submitBehaviour": {
                     "type": "string",
                     "description": "Behaviour on submit of the input",
-                    "enum": ["OnChange", "OnEndEditing"]
+                    "enum": [
+                        "OnChange",
+                        "OnEndEditing"
+                    ]
                 },
                 "submitOnInputDelay": {
                     "type": "integer",
                     "description": "Delay for input value submit."
                 },
                 "nativeAccessibilitySettings": {
-                    "type": ["object", "null"],
+                    "type": [
+                        "object",
+                        "null"
+                    ],
                     "description": "Native accessibility settings"
                 }
             },
@@ -2005,23 +2570,36 @@
                     "description": "Tab index for accessibility."
                 },
                 "conditionalVisibilitySettings": {
-                    "type": ["object", "null"],
+                    "type": [
+                        "object",
+                        "null"
+                    ],
                     "description": "Settings for conditional visibility"
                 },
                 "conditionalEditabilitySettings": {
-                    "type": ["object", "null"],
+                    "type": [
+                        "object",
+                        "null"
+                    ],
                     "description": "Conditional editability settings."
                 },
                 "editable": {
                     "type": "string",
                     "description": "Specifies when the widget is editable.",
-                    "enum": ["Always", "Never", "Conditional"]
+                    "enum": [
+                        "Always",
+                        "Never",
+                        "Conditional"
+                    ]
                 },
                 "labelTemplate": {
                     "$ref": "#/definitions/ClientTemplate"
                 },
                 "screenReaderLabel": {
-                    "type": ["string", "null"],
+                    "type": [
+                        "string",
+                        "null"
+                    ],
                     "description": "Label for screen readers."
                 },
                 "attributeRef": {
@@ -2030,7 +2608,10 @@
                 "readOnlyStyle": {
                     "type": "string",
                     "description": "Style of the widget in read only mode.",
-                    "enum": ["Inherit", "Control"]
+                    "enum": [
+                        "Inherit",
+                        "Control"
+                    ]
                 },
                 "validation": {
                     "type": "object",
@@ -2053,7 +2634,12 @@
                             "$ref": "#/definitions/Text"
                         }
                     },
-                    "required": ["$ID", "$Type", "expression", "message"]
+                    "required": [
+                        "$ID",
+                        "$Type",
+                        "expression",
+                        "message"
+                    ]
                 },
                 "onChangeAction": {
                     "type": "object",
@@ -2073,7 +2659,11 @@
                             "description": "Boolean to specify if the action should be disabled during execution"
                         }
                     },
-                    "required": ["$ID", "$Type", "disabledDuringExecution"]
+                    "required": [
+                        "$ID",
+                        "$Type",
+                        "disabledDuringExecution"
+                    ]
                 },
                 "onEnterAction": {
                     "type": "object",
@@ -2093,7 +2683,11 @@
                             "description": "Indicates whether the action should be disabled during execution"
                         }
                     },
-                    "required": ["$ID", "$Type", "disabledDuringExecution"]
+                    "required": [
+                        "$ID",
+                        "$Type",
+                        "disabledDuringExecution"
+                    ]
                 },
                 "onLeaveAction": {
                     "type": "object",
@@ -2113,10 +2707,17 @@
                             "description": "Indicates whether the action should be disabled during execution"
                         }
                     },
-                    "required": ["$ID", "$Type", "disabledDuringExecution"]
+                    "required": [
+                        "$ID",
+                        "$Type",
+                        "disabledDuringExecution"
+                    ]
                 },
                 "sourceVariable": {
-                    "type": ["object", "null"],
+                    "type": [
+                        "object",
+                        "null"
+                    ],
                     "description": "Source variable of the widget."
                 },
                 "ariaRequired": {
@@ -2187,7 +2788,11 @@
                                     }
                                 }
                             },
-                            "required": ["$ID", "$Type", "sortItems"]
+                            "required": [
+                                "$ID",
+                                "$Type",
+                                "sortItems"
+                            ]
                         },
                         "xPathConstraint": {
                             "type": "string",
@@ -2202,7 +2807,10 @@
                             }
                         }
                     },
-                    "required": ["$ID", "$Type"]
+                    "required": [
+                        "$ID",
+                        "$Type"
+                    ]
                 },
                 {
                     "title": "Selector Microflow Source",
@@ -2219,7 +2827,11 @@
                             "$ref": "#/definitions/MicroflowSettings"
                         }
                     },
-                    "required": ["$ID", "$Type", "dataSourceMicroflowSettings"]
+                    "required": [
+                        "$ID",
+                        "$Type",
+                        "dataSourceMicroflowSettings"
+                    ]
                 }
             ]
         },
@@ -2243,23 +2855,38 @@
                 },
                 "progressBar": {
                     "type": "string",
-                    "enum": ["None"]
+                    "enum": [
+                        "None"
+                    ]
                 },
                 "progressMessage": {
-                    "type": ["string", "null"]
+                    "type": [
+                        "string",
+                        "null"
+                    ]
                 },
                 "asynchronous": {
                     "type": "boolean"
                 },
                 "formValidations": {
                     "type": "string",
-                    "enum": ["None", "All"]
+                    "enum": [
+                        "None",
+                        "All"
+                    ]
                 },
                 "confirmationInfo": {
-                    "type": ["object", "null"]
+                    "type": [
+                        "object",
+                        "null"
+                    ]
                 }
             },
-            "required": ["$ID", "$Type", "microflow"]
+            "required": [
+                "$ID",
+                "$Type",
+                "microflow"
+            ]
         },
         "InputReferenceSetSelector": {
             "type": "object",
@@ -2285,23 +2912,36 @@
                     "description": "Tab index for accessibility"
                 },
                 "conditionalVisibilitySettings": {
-                    "type": ["object", "null"],
+                    "type": [
+                        "object",
+                        "null"
+                    ],
                     "description": "Conditional visibility settings"
                 },
                 "conditionalEditabilitySettings": {
-                    "type": ["object", "null"],
+                    "type": [
+                        "object",
+                        "null"
+                    ],
                     "description": "Settings for conditional editability."
                 },
                 "editable": {
                     "type": "string",
                     "description": "Specifies when the widget is editable.",
-                    "enum": ["Always", "Never", "Conditional"]
+                    "enum": [
+                        "Always",
+                        "Never",
+                        "Conditional"
+                    ]
                 },
                 "labelTemplate": {
                     "$ref": "#/definitions/ClientTemplate"
                 },
                 "screenReaderLabel": {
-                    "type": ["string", "null"],
+                    "type": [
+                        "string",
+                        "null"
+                    ],
                     "description": "Label for screen readers."
                 },
                 "attributeRef": {
@@ -2310,7 +2950,10 @@
                 "readOnlyStyle": {
                     "type": "string",
                     "description": "Style of the widget in read only mode.",
-                    "enum": ["Inherit", "Control"]
+                    "enum": [
+                        "Inherit",
+                        "Control"
+                    ]
                 },
                 "selectorSource": {
                     "$ref": "#/definitions/SelectorSource"
@@ -2329,7 +2972,10 @@
                             "const": "Pages$PageSettings"
                         },
                         "page": {
-                            "type": ["string", "null"],
+                            "type": [
+                                "string",
+                                "null"
+                            ],
                             "description": "Reference to the page to use."
                         },
                         "titleOverride": {
@@ -2343,7 +2989,12 @@
                             ]
                         }
                     },
-                    "required": ["$ID", "$Type", "page", "parameterMappings"]
+                    "required": [
+                        "$ID",
+                        "$Type",
+                        "page",
+                        "parameterMappings"
+                    ]
                 },
                 "onChangeAction": {
                     "type": "object",
@@ -2363,10 +3014,17 @@
                             "description": "Indicates whether the action should be disabled during execution"
                         }
                     },
-                    "required": ["$ID", "$Type", "disabledDuringExecution"]
+                    "required": [
+                        "$ID",
+                        "$Type",
+                        "disabledDuringExecution"
+                    ]
                 },
                 "sourceVariable": {
-                    "type": ["object", "null"],
+                    "type": [
+                        "object",
+                        "null"
+                    ],
                     "description": "Source variable of the widget."
                 }
             },
@@ -2413,23 +3071,36 @@
                     "description": "Tab index for accessibility."
                 },
                 "conditionalVisibilitySettings": {
-                    "type": ["object", "null"],
+                    "type": [
+                        "object",
+                        "null"
+                    ],
                     "description": "Settings for conditional visibility."
                 },
                 "conditionalEditabilitySettings": {
-                    "type": ["object", "null"],
+                    "type": [
+                        "object",
+                        "null"
+                    ],
                     "description": "Conditional editability settings."
                 },
                 "editable": {
                     "type": "string",
                     "description": "Specifies when the widget is editable.",
-                    "enum": ["Always", "Never", "Conditional"]
+                    "enum": [
+                        "Always",
+                        "Never",
+                        "Conditional"
+                    ]
                 },
                 "labelTemplate": {
                     "$ref": "#/definitions/ClientTemplate"
                 },
                 "screenReaderLabel": {
-                    "type": ["string", "null"],
+                    "type": [
+                        "string",
+                        "null"
+                    ],
                     "description": "Label for screen readers."
                 },
                 "attributeRef": {
@@ -2438,7 +3109,10 @@
                 "readOnlyStyle": {
                     "type": "string",
                     "description": "Style of the widget in read only mode.",
-                    "enum": ["Inherit", "Control"]
+                    "enum": [
+                        "Inherit",
+                        "Control"
+                    ]
                 },
                 "selectorSource": {
                     "$ref": "#/definitions/SelectorSource"
@@ -2457,7 +3131,10 @@
                             "const": "Pages$PageSettings"
                         },
                         "page": {
-                            "type": ["string", "null"],
+                            "type": [
+                                "string",
+                                "null"
+                            ],
                             "description": "Reference to the page to use."
                         },
                         "titleOverride": {
@@ -2495,7 +3172,10 @@
                             ]
                         },
                         "sourceVariable": {
-                            "type": ["object", "null"],
+                            "type": [
+                                "object",
+                                "null"
+                            ],
                             "description": "Source variable of the widget."
                         },
                         "validation": {
@@ -2529,7 +3209,11 @@
                         "renderMode": {
                             "type": "string",
                             "description": "Render mode of this selector.",
-                            "enum": ["DropDown", "AutoCompleter", "Hybrid"]
+                            "enum": [
+                                "DropDown",
+                                "AutoCompleter",
+                                "Hybrid"
+                            ]
                         },
                         "gotoPageSettings": {
                             "type": "object",
@@ -2545,7 +3229,10 @@
                                     "const": "Pages$PageSettings"
                                 },
                                 "page": {
-                                    "type": ["string", "null"],
+                                    "type": [
+                                        "string",
+                                        "null"
+                                    ],
                                     "description": "Reference to the page to be opened."
                                 },
                                 "titleOverride": {
@@ -2598,12 +3285,20 @@
                                 "enumFormat": {
                                     "type": "string",
                                     "description": "Enum format.",
-                                    "enum": ["Text", "Key", "Value"]
+                                    "enum": [
+                                        "Text",
+                                        "Key",
+                                        "Value"
+                                    ]
                                 },
                                 "dateFormat": {
                                     "type": "string",
                                     "description": "Date format to be used",
-                                    "enum": ["Date", "DateTime", "Time"]
+                                    "enum": [
+                                        "Date",
+                                        "DateTime",
+                                        "Time"
+                                    ]
                                 },
                                 "customDateFormat": {
                                     "type": "string",
@@ -2624,7 +3319,10 @@
                             "$ref": "#/definitions/Text"
                         },
                         "nativeAccessibilitySettings": {
-                            "type": ["object", "null"],
+                            "type": [
+                                "object",
+                                "null"
+                            ],
                             "description": "Native accessibility settings."
                         }
                     }
@@ -2679,7 +3377,10 @@
                     "description": "Tab index for accessibility."
                 },
                 "conditionalVisibilitySettings": {
-                    "type": ["object", "null"],
+                    "type": [
+                        "object",
+                        "null"
+                    ],
                     "description": "Conditional visibility settings."
                 },
                 "caption": {
@@ -2714,7 +3415,10 @@
                     "description": "Tab index for accessibility"
                 },
                 "conditionalVisibilitySettings": {
-                    "type": ["object", "null"],
+                    "type": [
+                        "object",
+                        "null"
+                    ],
                     "description": "Settings for conditional visibility."
                 },
                 "content": {
@@ -2748,7 +3452,10 @@
                     ]
                 },
                 "nativeAccessibilitySettings": {
-                    "type": ["object", "null"],
+                    "type": [
+                        "object",
+                        "null"
+                    ],
                     "description": "Native accessibility settings of the widget."
                 }
             },
@@ -2791,7 +3498,11 @@
         "exportLevel": {
             "type": "string",
             "description": "Export level of the page",
-            "enum": ["Hidden", "None", "All"]
+            "enum": [
+                "Hidden",
+                "None",
+                "All"
+            ]
         },
         "canvasWidth": {
             "type": "integer",
@@ -2824,7 +3535,10 @@
                 },
                 "layout": {
                     "type": "string",
-                    "description": "Reference to the layout used."
+                    "description": "Page layout document name, consist of module name and layout name, reference a exist layout document.",
+                    "examples": [
+                        "Atlas_Core.Atlas_Default"
+                    ]
                 },
                 "arguments": {
                     "type": "array",
@@ -2844,7 +3558,10 @@
                             },
                             "parameter": {
                                 "type": "string",
-                                "description": "Reference to the layout parameter."
+                                "description": "page layout placeholder name",
+                                "examples": [
+                                    "Atlas_Core.Atlas_Default.Main"
+                                ]
                             },
                             "widgets": {
                                 "type": "array",
@@ -2854,11 +3571,21 @@
                                 }
                             }
                         },
-                        "required": ["$ID", "$Type", "parameter", "widgets"]
+                        "required": [
+                            "$ID",
+                            "$Type",
+                            "parameter",
+                            "widgets"
+                        ]
                     }
                 }
             },
-            "required": ["$ID", "$Type", "layout", "arguments"]
+            "required": [
+                "$ID",
+                "$Type",
+                "layout",
+                "arguments"
+            ]
         },
         "title": {
             "$ref": "#/definitions/Text"

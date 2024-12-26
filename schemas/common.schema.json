@@ -170,7 +170,7 @@
             "type": "object",
             "properties": {
                 "$ID": {
-                    "$ref": "#/definitions/GUID"
+                    "$ref": "#/definitions/Identifiable"
                 },
                 "$Type": {
                     "type": "string",
