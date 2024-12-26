@@ -92,19 +92,62 @@
                 "object",
                 "null"
             ],
-            "properties": {
-                "$ID": {
-                    "$ref": "#/definitions/Identifiable"
+            "oneOf": [
+                {
+                    "properties": {
+                        "$ID": {
+                            "$ref": "#/definitions/Identifiable"
+                        },
+                        "$Type": {
+                            "type": "string",
+                            "description": "Type of the object, should be 'DomainModels$DirectEntityRef'.",
+                            "const": "DomainModels$DirectEntityRef"
+                        },
+                        "entity": {
+                            "$ref": "#/definitions/EntityQualifiedName"
+                        }
+                    }
                 },
-                "$Type": {
-                    "type": "string",
-                    "description": "Type of the object, should be 'DomainModels$DirectEntityRef'.",
-                    "const": "DomainModels$DirectEntityRef"
-                },
-                "entity": {
-                    "$ref": "#/definitions/EntityQualifiedName"
+                {
+                    "properties": {
+                        "$ID": {
+                            "$ref": "#/definitions/Identifiable"
+                        },
+                        "$Type": {
+                            "type": "string",
+                            "const": "DomainModels$IndirectEntityRef"
+                        },
+                        "steps": {
+                            "type": "array",
+                            "items": {
+                                "type": "object",
+                                "properties": {
+                                    "$ID": {
+                                        "$ref": "#/definitions/Identifiable"
+                                    },
+                                    "$Type": {
+                                        "type": "string",
+                                        "const": "DomainModels$EntityRefStep"
+                                    },
+                                    "destinationEntity": {
+                                        "$ref": "#/definitions/EntityQualifiedName"
+                                    },
+                                    "association": {
+                                        "type": "string",
+                                        "description": "Association name. moduleName.associationName",
+                                        "examples": [
+                                            "System.UserRoles"
+                                        ]
+                                    }
+                                }
+                            }
+                        },
+                        "attribute": {
+                            "$ref": "#/definitions/AttributeQualifiedName"
+                        }
+                    }
                 }
-            }
+            ]
         },
         "EntityQualifiedName": {
             "type": "string",
@@ -126,7 +169,14 @@
                     "const": "DomainModels$AttributeRef"
                 },
                 "entityRef": {
-                    "$ref": "#/definitions/entityRef"
+                    "oneOf": [
+                        {
+                            "type": "null"
+                        },
+                        {
+                            "$ref": "#/definitions/entityRef"
+                        }
+                    ]
                 },
                 "attribute": {
                     "type": "string",

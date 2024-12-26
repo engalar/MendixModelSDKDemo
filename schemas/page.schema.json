@@ -462,25 +462,7 @@
                                 "null"
                             ],
                             "description": "Settings for conditional visibility"
-                        }
-                    },
-                    "required": [
-                        "name",
-                        "appearance",
-                        "tabIndex",
-                        "conditionalVisibilitySettings"
-                    ]
-                }
-            ]
-        },
-        "EditableWidget": {
-            "type": "object",
-            "allOf": [
-                {
-                    "$ref": "#/definitions/BasicWidget"
-                },
-                {
-                    "properties": {
+                        },
                         "conditionalEditabilitySettings": {
                             "type": [
                                 "object",
@@ -497,6 +479,31 @@
                                 "Conditional"
                             ]
                         },
+                        "readOnlyStyle": {
+                            "type": "string",
+                            "description": "Style of the widget in read only mode.",
+                            "enum": [
+                                "Inherit",
+                                "Control",
+                                "Text"
+                            ]
+                        }
+                    },
+                    "required": [
+                        "name",
+                        "appearance"
+                    ]
+                }
+            ]
+        },
+        "EditableWidget": {
+            "type": "object",
+            "allOf": [
+                {
+                    "$ref": "#/definitions/BasicWidget"
+                },
+                {
+                    "properties": {
                         "labelTemplate": {
                             "$ref": "#/definitions/ClientTemplate"
                         },
@@ -508,15 +515,7 @@
                             "description": "Label for screen readers."
                         },
                         "attributeRef": {
-                            "$ref": "./common.schema.json#/definitions/AttributeRef"
-                        },
-                        "readOnlyStyle": {
-                            "type": "string",
-                            "description": "Style of the widget in read only mode.",
-                            "enum": [
-                                "Inherit",
-                                "Control"
-                            ]
+                            "$ref": "common.schema.json#/definitions/AttributeRef"
                         },
                         "sourceVariable": {
                             "type": [
@@ -1507,7 +1506,7 @@
             "type": "object",
             "allOf": [
                 {
-                    "$ref": "#/definitions/EditableWidget"
+                    "$ref": "#/definitions/BasicWidget"
                 },
                 {
                     "properties": {
@@ -1524,7 +1523,7 @@
                             "description": "Select page settings.",
                             "properties": {
                                 "$ID": {
-                                    "type": "string",
+                                    "$ref": "common.schema.json#/definitions/Identifiable",
                                     "description": "Unique identifier of the page settings."
                                 },
                                 "$Type": {
@@ -2124,75 +2123,68 @@
         },
         "ListView": {
             "type": "object",
-            "allOf": [
-                {
-                    "$ref": "#/definitions/BasicWidget"
+            "properties": {
+                "$Type": {
+                    "type": "string",
+                    "description": "Type of the widget, should be 'Pages$ListView'",
+                    "const": "Pages$ListView"
                 },
-                {
-                    "properties": {
-                        "$Type": {
-                            "type": "string",
-                            "description": "Type of the widget, should be 'Pages$ListView'",
-                            "const": "Pages$ListView"
-                        },
-                        "dataSource": {
-                            "$ref": "#/definitions/ListViewDataSource"
-                        },
-                        "widgets": {
-                            "type": "array",
-                            "description": "List of widgets within this container.",
-                            "items": {
-                                "$ref": "#/definitions/Widget"
-                            }
-                        },
-                        "pageSize": {
-                            "type": "integer",
-                            "description": "Number of items per page"
-                        },
-                        "clickAction": {
-                            "$ref": "#/definitions/NoClientAction"
-                        },
-                        "editable": {
-                            "type": "boolean",
-                            "description": "Boolean to indicate if list view is editable."
-                        },
-                        "templates": {
-                            "type": "array",
-                            "description": "List of templates within this container",
-                            "items": {
-                                "type": "object",
-                                "description": "Placeholder for template object."
-                            }
-                        },
-                        "scrollDirection": {
-                            "type": "string",
-                            "description": "Scroll direction of the list view",
-                            "enum": [
-                                "Vertical",
-                                "Horizontal"
-                            ]
-                        },
-                        "numberOfColumns": {
-                            "type": "integer",
-                            "description": "Number of columns for horizontal layout"
-                        },
-                        "pullDownAction": {
-                            "$ref": "#/definitions/NoClientAction"
-                        }
-                    },
-                    "required": [
-                        "$Type",
-                        "dataSource",
-                        "widgets",
-                        "pageSize",
-                        "clickAction",
-                        "editable",
-                        "templates",
-                        "scrollDirection",
-                        "numberOfColumns",
-                        "pullDownAction"
+                "dataSource": {
+                    "$ref": "#/definitions/ListViewDataSource"
+                },
+                "widgets": {
+                    "type": "array",
+                    "description": "List of widgets within this container.",
+                    "items": {
+                        "$ref": "#/definitions/Widget"
+                    }
+                },
+                "pageSize": {
+                    "type": "integer",
+                    "description": "Number of items per page"
+                },
+                "clickAction": {
+                    "$ref": "#/definitions/NoClientAction"
+                },
+                "editable": {
+                    "type": "boolean",
+                    "description": "Boolean to indicate if list view is editable."
+                },
+                "templates": {
+                    "type": "array",
+                    "description": "List of templates within this container",
+                    "items": {
+                        "type": "object",
+                        "description": "Placeholder for template object."
+                    }
+                },
+                "scrollDirection": {
+                    "type": "string",
+                    "description": "Scroll direction of the list view",
+                    "enum": [
+                        "Vertical",
+                        "Horizontal"
                     ]
+                },
+                "numberOfColumns": {
+                    "type": "integer",
+                    "description": "Number of columns for horizontal layout"
+                },
+                "pullDownAction": {
+                    "$ref": "#/definitions/NoClientAction"
                 }
+            },
+            "required": [
+                "$Type",
+                "dataSource",
+                "widgets",
+                "pageSize",
+                "clickAction",
+                "editable",
+                "templates",
+                "scrollDirection",
+                "numberOfColumns",
+                "pullDownAction"
             ]
         },
         "DataView": {
