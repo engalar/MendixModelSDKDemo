@@ -3,6 +3,9 @@
         "start": "ts-node src/cli/index.ts"
     },
     "dependencies": {
+        "@babel/parser": "^7.26.3",
+        "@babel/traverse": "^7.26.4",
+        "@babel/types": "^7.26.3",
         "@wendellhu/redi": "^0.16.2",
         "dotenv": "^16.4.7",
         "mendixmodelsdk": "^4.93.0",

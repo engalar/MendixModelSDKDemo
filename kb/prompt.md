@@ -28,3 +28,12 @@
 {app.model.json}
 通过 model sdk读取app.model.json创建应用，尽可能采用反序列化的方式
 ```
+
+# schema extract
+```
+{.js}
+{.d.ts}
+{.schema.json}
+
+思考从domainmodels.js和domainmodels.d.ts.txt（实际上是typescript typing）用AST提取出domain.schema.json
+```

@@ -216,14 +216,11 @@
                                         "type": "string",
                                         "description": "mendix xpath expression"
                                     },
-                                    "formattingInfo":{
+                                    "formattingInfo": {
                                         "$ref": "#/definitions/FormattingInfo"
                                     },
                                     "sourceVariable": {
-                                        "type": [
-                                            "null"
-                                        ],
-                                        "description": "Source variable of the widget."
+                                        "$ref": "#/definitions/PageVariable"
                                     }
                                 }
                             }
@@ -401,6 +398,12 @@
                             "$ref": "#/definitions/Text"
                         }
                     ]
+                },
+                "parameterMappings": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/ParameterMapping"
+                    }
                 }
             },
             "required": [
@@ -408,6 +411,28 @@
                 "$Type",
                 "page"
             ]
+        },
+        "ParameterMapping": {
+            "type": "object",
+            "properties": {
+                "$ID": {
+                    "$ref": "common.schema.json#/definitions/Identifiable"
+                },
+                "$Type": {
+                    "type": "string",
+                    "const": "Pages$PageParameterMapping"
+                },
+                "parameter": {
+                    "type": "string",
+                    "description": "Parameter of the microflow. module_name.document_name.parameter_name",
+                    "examples": [
+                        "Administration.Account_Edit.Account"
+                    ]
+                },
+                "variable": {
+                    "$ref": "#/definitions/PageVariable"
+                }
+            }
         },
         "MicroflowSettings": {
             "type": "object",
@@ -425,7 +450,9 @@
                 },
                 "parameterMappings": {
                     "type": "array",
-                    "items": {}
+                    "items": {
+                        "$ref": "#/definitions/ParameterMapping"
+                    }
                 },
                 "progressBar": {
                     "type": "string",
@@ -543,14 +570,52 @@
                             "$ref": "common.schema.json#/definitions/AttributeRef"
                         },
                         "sourceVariable": {
-                            "type": [
-                                "null"
-                            ],
-                            "description": "Source variable of the widget."
+                            "$ref": "#/definitions/PageVariable"
                         }
                     }
                 }
             ]
+        },
+        "PageVariable": {
+            "type": [
+                "null",
+                "object"
+            ],
+            "properties": {
+                "$ID": {
+                    "$ref": "common.schema.json#/definitions/Identifiable"
+                },
+                "$Type": {
+                    "type": "string",
+                    "const": "Pages$PageVariable"
+                },
+                "widget": {
+                    "type": [
+                        "string",
+                        "null"
+                    ],
+                    "description": "Name of the data container widget, a.k.a. DataView or ListView.",
+                    "examples": [
+                        "dataView1"
+                    ]
+                },
+                "pageParameter": {
+                    "type": [
+                        "string",
+                        "null"
+                    ],
+                    "description": "Name of the page parameter.",
+                    "examples": [
+                        "Account"
+                    ]
+                },
+                "snippetParameter": {
+                    "type": "null"
+                },
+                "useAllPages": {
+                    "type": "boolean"
+                }
+            }
         },
         "ActionWidget": {
             "type": "object",
@@ -600,38 +665,97 @@
                             "const": "Pages$GridActionButton"
                         },
                         "action": {
-                            "type": "object",
-                            "description": "Action when button is clicked",
-                            "properties": {
-                                "$ID": {
-                                    "type": "string",
-                                    "description": "Unique identifier of the Client action."
+                            "oneOf": [
+                                {
+                                    "type": "object",
+                                    "description": "Action when button is clicked",
+                                    "properties": {
+                                        "$ID": {
+                                            "type": "string",
+                                            "description": "Unique identifier of the Client action."
+                                        },
+                                        "$Type": {
+                                            "type": "string",
+                                            "description": "Type of the object, should be 'Pages$DeleteClientAction'.",
+                                            "const": "Pages$DeleteClientAction"
+                                        },
+                                        "disabledDuringExecution": {
+                                            "type": "boolean",
+                                            "description": "Indicates whether the action should be disabled during execution"
+                                        },
+                                        "closePage": {
+                                            "type": "boolean",
+                                            "description": "Boolean to specify if page should be closed"
+                                        },
+                                        "sourceVariable": {
+                                            "$ref": "#/definitions/PageVariable"
+                                        }
+                                    },
+                                    "required": [
+                                        "$ID",
+                                        "$Type",
+                                        "disabledDuringExecution",
+                                        "closePage"
+                                    ]
                                 },
-                                "$Type": {
-                                    "type": "string",
-                                    "description": "Type of the object, should be 'Pages$DeleteClientAction'.",
-                                    "const": "Pages$DeleteClientAction"
+                                {
+                                    "type": "object",
+                                    "description": "Action when button is clicked",
+                                    "properties": {
+                                        "$ID": {
+                                            "type": "string",
+                                            "description": "Unique identifier of the Client action."
+                                        },
+                                        "$Type": {
+                                            "type": "string",
+                                            "const": "Pages$MicroflowClientAction"
+                                        },
+                                        "microflowSettings": {
+                                            "$ref": "#/definitions/MicroflowSettings"
+                                        }
+                                    },
+                                    "required": [
+                                        "$ID",
+                                        "$Type",
+                                        "microflowSettings"
+                                    ]
                                 },
-                                "disabledDuringExecution": {
-                                    "type": "boolean",
-                                    "description": "Indicates whether the action should be disabled during execution"
-                                },
-                                "closePage": {
-                                    "type": "boolean",
-                                    "description": "Boolean to specify if page should be closed"
-                                },
-                                "sourceVariable": {
-                                    "type": [
-                                        "null"
-                                    ],
-                                    "description": "Source variable for the delete action."
+                                {
+                                    "type": "object",
+                                    "description": "Action when button is clicked",
+                                    "properties": {
+                                        "$ID": {
+                                            "type": "string",
+                                            "description": "Unique identifier of the Client action."
+                                        },
+                                        "$Type": {
+                                            "type": "string",
+                                            "const": "Pages$PageClientAction"
+                                        },
+                                        "disabledDuringExecution": {
+                                            "type": "boolean"
+                                        },
+                                        "pageSettings": {
+                                            "$ref": "#/definitions/PageSettings"
+                                        },
+                                        "pagesForSpecializations": {
+                                            "type": "array",
+                                            "items": {},
+                                            "default": []
+                                        },
+                                        "numberOfPagesToClose2": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "required": [
+                                        "$ID",
+                                        "$Type",
+                                        "disabledDuringExecution",
+                                        "pageSettings",
+                                        "pagesForSpecializations",
+                                        "numberOfPagesToClose2"
+                                    ]
                                 }
-                            },
-                            "required": [
-                                "$ID",
-                                "$Type",
-                                "disabledDuringExecution",
-                                "closePage"
                             ]
                         },
                         "maintainSelectionAfterMicroflow": {
@@ -875,10 +999,7 @@
                     "$ref": "common.schema.json/#/definitions/entityRef"
                 },
                 "sourceVariable": {
-                    "type": [
-                        "null"
-                    ],
-                    "description": "Source variable of the grid"
+                    "$ref": "#/definitions/PageVariable"
                 },
                 "sortBar": {
                     "$ref": "#/definitions/GridSortBar"
@@ -922,10 +1043,7 @@
                     "$ref": "common.schema.json/#/definitions/entityRef"
                 },
                 "sourceVariable": {
-                    "type": [
-                        "null"
-                    ],
-                    "description": "Source variable of the list view"
+                    "$ref": "#/definitions/PageVariable"
                 },
                 "sortBar": {
                     "$ref": "#/definitions/GridSortBar"
@@ -1213,7 +1331,8 @@
                                 "None",
                                 "FoldableOpen",
                                 "FoldableClosed",
-                                "AlwaysVisible"
+                                "AlwaysVisible",
+                                "AlwaysOpen"
                             ]
                         },
                         "waitForSearch": {
@@ -1619,7 +1738,27 @@
                                             "description": "List of parameter mappings.",
                                             "items": {
                                                 "type": "object",
-                                                "description": "Placeholder for parameter mappings."
+                                                "description": "Placeholder for parameter mappings.",
+                                                "properties": {
+                                                    "$ID": {
+                                                        "$ref": "common.schema.json#/definitions/Identifiable"
+                                                    },
+                                                    "$Type": {
+                                                        "type": "string",
+                                                        "description": "Type of the object, should be 'Pages$PageParameterMapping'.",
+                                                        "const": "Pages$PageParameterMapping"
+                                                    },
+                                                    "parameter": {
+                                                        "type": "string",
+                                                        "description": "Parameter of the microflow. module_name.document_name.parameter_name",
+                                                        "examples": [
+                                                            "Administration.Account_Edit.Account"
+                                                        ]
+                                                    },
+                                                    "variable": {
+                                                        "$ref": "#/definitions/PageVariable"
+                                                    }
+                                                }
                                             }
                                         }
                                     },
@@ -2326,8 +2465,7 @@
                             "type": "array",
                             "description": "List of widgets within this tab page.",
                             "items": {
-                                "type": "object",
-                                "description": "Widget object, refer to widget definitions for properties"
+                                "$ref": "#/definitions/Widget"
                             }
                         },
                         "badge": {

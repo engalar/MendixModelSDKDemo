@@ -805,7 +805,14 @@
                                                                                         "$Type": "Pages$NoClientAction",
                                                                                         "disabledDuringExecution": false
                                                                                     },
-                                                                                    "sourceVariable": null,
+                                                                                    "sourceVariable": {
+                                                                                        "$ID": "my_sv2",
+                                                                                        "$Type": "Pages$PageVariable",
+                                                                                        "widget": null,
+                                                                                        "pageParameter": "Account",
+                                                                                        "snippetParameter": null,
+                                                                                        "useAllPages": false
+                                                                                    },
                                                                                     "ariaRequired": false,
                                                                                     "placeholderTemplate": {
                                                                                         "$ID": "PlaceholderTemplate_TextBox_StudentName",
@@ -968,7 +975,14 @@
                                                                                         "$Type": "Pages$NoClientAction",
                                                                                         "disabledDuringExecution": false
                                                                                     },
-                                                                                    "sourceVariable": null,
+                                                                                    "sourceVariable": {
+                                                                                        "$ID": "my_sv1",
+                                                                                        "$Type": "Pages$PageVariable",
+                                                                                        "widget": null,
+                                                                                        "pageParameter": "Account",
+                                                                                        "snippetParameter": null,
+                                                                                        "useAllPages": false
+                                                                                    },
                                                                                     "ariaRequired": false,
                                                                                     "placeholderTemplate": {
                                                                                         "$ID": "PlaceholderTemplate_TextBox_StudentDepartment",
