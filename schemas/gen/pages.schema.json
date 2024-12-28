@@ -1,0 +1,5916 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "definitions": {
+    "AbstractDesignPropertyValue": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Pages$AbstractDesignPropertyValue"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "AccessibilitySettings": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Pages$AccessibilitySettings"
+        },
+        "screenReaderDescription": {
+          "$ref": "#/definitions/ClientTemplate"
+        },
+        "screenReaderTitle": {
+          "$ref": "#/definitions/ClientTemplate"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type",
+        "screenReaderDescription",
+        "screenReaderTitle"
+      ]
+    },
+    "Widget": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Pages$Widget"
+        },
+        "name": {
+          "type": "string"
+        },
+        "appearance": {
+          "$ref": "#/definitions/Appearance"
+        },
+        "tabIndex": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type",
+        "appearance"
+      ]
+    },
+    "ConditionallyVisibleWidget": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Pages$ConditionallyVisibleWidget"
+        },
+        "conditionalVisibilitySettings": {
+          "$ref": "#/definitions/ConditionalVisibilitySettings"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "Button": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Pages$Button"
+        },
+        "caption": {
+          "$ref": "#/definitions/ClientTemplate"
+        },
+        "tooltip": {
+          "$ref": "texts.schema.json#/definitions/Text"
+        },
+        "icon": {
+          "$ref": "#/definitions/Icon"
+        },
+        "renderType": {
+          "type": "string",
+          "enum": [
+            "Button",
+            "Link"
+          ]
+        },
+        "buttonStyle": {
+          "type": "string",
+          "enum": [
+            "Default",
+            "Inverse",
+            "Primary",
+            "Info",
+            "Success",
+            "Warning",
+            "Danger"
+          ]
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type",
+        "caption",
+        "tooltip"
+      ]
+    },
+    "ActionButton": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Pages$ActionButton"
+        },
+        "action": {
+          "$ref": "#/definitions/ClientAction"
+        },
+        "ariaRole": {
+          "type": "string",
+          "enum": [
+            "Button",
+            "Link",
+            "Checkbox",
+            "Radio",
+            "Tab",
+            "MenuItem",
+            "MenuItemCheckbox",
+            "MenuItemRadio",
+            "Option",
+            "Switch",
+            "TreeItem"
+          ]
+        },
+        "nativeAccessibilitySettings": {
+          "$ref": "#/definitions/AccessibilitySettings"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type",
+        "action"
+      ]
+    },
+    "ActionItem": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Pages$ActionItem"
+        },
+        "action": {
+          "$ref": "#/definitions/ClientAction"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type",
+        "action"
+      ]
+    },
+    "Appearance": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Pages$Appearance"
+        },
+        "class": {
+          "type": "string"
+        },
+        "style": {
+          "type": "string"
+        },
+        "designProperties": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DesignPropertyValue"
+          }
+        },
+        "dynamicClasses": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "DataSource": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Pages$DataSource"
+        },
+        "forceFullObjects": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "EntityPathSource": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Pages$EntityPathSource"
+        },
+        "entityRef": {
+          "$ref": "domainmodels.schema.json#/definitions/EntityRef"
+        },
+        "sourceVariable": {
+          "$ref": "#/definitions/PageVariable"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "AssociationSource": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Pages$AssociationSource"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "ConditionallyEditableWidget": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Pages$ConditionallyEditableWidget"
+        },
+        "conditionalEditabilitySettings": {
+          "$ref": "#/definitions/ConditionalEditabilitySettings"
+        },
+        "editable": {
+          "type": "string",
+          "enum": [
+            "Always",
+            "Never",
+            "Conditional"
+          ]
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "InputWidget": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Pages$InputWidget"
+        },
+        "labelTemplate": {
+          "$ref": "#/definitions/ClientTemplate"
+        },
+        "screenReaderLabel": {
+          "$ref": "#/definitions/ClientTemplate"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "MemberWidget": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Pages$MemberWidget"
+        },
+        "attributeRef": {
+          "$ref": "domainmodels.schema.json#/definitions/AttributeRef"
+        },
+        "readOnlyStyle": {
+          "type": "string",
+          "enum": [
+            "Inherit",
+            "Control",
+            "Text"
+          ]
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "AssociationWidget": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Pages$AssociationWidget"
+        },
+        "selectorSource": {
+          "$ref": "#/definitions/SelectorSource"
+        },
+        "selectPageSettings": {
+          "$ref": "#/definitions/PageSettings"
+        },
+        "onChangeAction": {
+          "$ref": "#/definitions/ClientAction"
+        },
+        "sourceVariable": {
+          "$ref": "#/definitions/PageVariable"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type",
+        "selectorSource",
+        "selectPageSettings",
+        "onChangeAction"
+      ]
+    },
+    "AttributeWidget": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Pages$AttributeWidget"
+        },
+        "validation": {
+          "$ref": "#/definitions/WidgetValidation"
+        },
+        "onChangeAction": {
+          "$ref": "#/definitions/ClientAction"
+        },
+        "onEnterAction": {
+          "$ref": "#/definitions/ClientAction"
+        },
+        "onLeaveAction": {
+          "$ref": "#/definitions/ClientAction"
+        },
+        "sourceVariable": {
+          "$ref": "#/definitions/PageVariable"
+        },
+        "ariaRequired": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type",
+        "validation",
+        "onChangeAction",
+        "onEnterAction",
+        "onLeaveAction"
+      ]
+    },
+    "AttributeWidgetWithPlaceholder": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Pages$AttributeWidgetWithPlaceholder"
+        },
+        "placeholderTemplate": {
+          "$ref": "#/definitions/ClientTemplate"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type",
+        "placeholderTemplate"
+      ]
+    },
+    "BackButton": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Pages$BackButton"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "FormBase": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Pages$FormBase"
+        },
+        "canvasWidth": {
+          "type": "string"
+        },
+        "canvasHeight": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "TemplateFormBase": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Pages$TemplateFormBase"
+        },
+        "displayName": {
+          "type": "string"
+        },
+        "documentationUrl": {
+          "type": "string"
+        },
+        "templateCategory": {
+          "type": "string"
+        },
+        "templateCategoryWeight": {
+          "type": "string"
+        },
+        "imageData": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "BuildingBlock": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Pages$BuildingBlock"
+        },
+        "widgets": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Widget"
+          }
+        },
+        "platform": {
+          "type": "string",
+          "enum": [
+            "Web",
+            "Native"
+          ]
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "ClientAction": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Pages$ClientAction"
+        },
+        "disabledDuringExecution": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "CallNanoflowClientAction": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Pages$CallNanoflowClientAction"
+        },
+        "nanoflow": {
+          "type": "string",
+          "description": "microflows.schema.json#/definitions/INanoflow"
+        },
+        "parameterMappings": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NanoflowParameterMapping"
+          }
+        },
+        "progressBar": {
+          "type": "string",
+          "enum": [
+            "None",
+            "NonBlocking",
+            "Blocking"
+          ]
+        },
+        "progressMessage": {
+          "$ref": "texts.schema.json#/definitions/Text"
+        },
+        "confirmationInfo": {
+          "$ref": "#/definitions/ConfirmationInfo"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "CallWorkflowClientAction": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Pages$CallWorkflowClientAction"
+        },
+        "workflow": {
+          "type": "string",
+          "description": "workflows.schema.json#/definitions/IWorkflow"
+        },
+        "closePage": {
+          "type": "boolean"
+        },
+        "confirmationInfo": {
+          "$ref": "#/definitions/ConfirmationInfo"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "CancelButton": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Pages$CancelButton"
+        },
+        "closePage": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "CancelChangesClientAction": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Pages$CancelChangesClientAction"
+        },
+        "closePage": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "CheckBox": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Pages$CheckBox"
+        },
+        "labelPosition": {
+          "type": "string",
+          "enum": [
+            "Default",
+            "BeforeControl",
+            "AfterControl"
+          ]
+        },
+        "nativeRenderMode": {
+          "type": "string",
+          "enum": [
+            "CheckBox",
+            "Switch"
+          ]
+        },
+        "nativeAccessibilitySettings": {
+          "$ref": "#/definitions/AccessibilitySettings"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "ClientTemplate": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Pages$ClientTemplate"
+        },
+        "template": {
+          "$ref": "texts.schema.json#/definitions/Text"
+        },
+        "parameters": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ClientTemplateParameter"
+          }
+        },
+        "fallback": {
+          "$ref": "texts.schema.json#/definitions/Text"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type",
+        "template",
+        "fallback"
+      ]
+    },
+    "ClientTemplateParameter": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Pages$ClientTemplateParameter"
+        },
+        "attributeRef": {
+          "$ref": "domainmodels.schema.json#/definitions/AttributeRef"
+        },
+        "expression": {
+          "type": "string"
+        },
+        "formattingInfo": {
+          "$ref": "#/definitions/FormattingInfo"
+        },
+        "sourceVariable": {
+          "$ref": "#/definitions/PageVariable"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type",
+        "formattingInfo"
+      ]
+    },
+    "ClosePageClientAction": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Pages$ClosePageClientAction"
+        },
+        "numberOfPagesToClose": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "EntityWidget": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Pages$EntityWidget"
+        },
+        "dataSource": {
+          "$ref": "#/definitions/DataSource"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type",
+        "dataSource"
+      ]
+    },
+    "ListenTargetWidget": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Pages$ListenTargetWidget"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "Grid": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Pages$Grid"
+        },
+        "isControlBarVisible": {
+          "type": "boolean"
+        },
+        "showPagingBar": {
+          "type": "string",
+          "enum": [
+            "YesWithTotalCount",
+            "YesWithoutTotalCount",
+            "No"
+          ]
+        },
+        "selectionMode": {
+          "type": "string",
+          "enum": [
+            "None",
+            "Single",
+            "SingleAndMaintain",
+            "Multi",
+            "SimpleMulti"
+          ]
+        },
+        "selectFirst": {
+          "type": "boolean"
+        },
+        "defaultButtonTrigger": {
+          "type": "string",
+          "enum": [
+            "Single",
+            "Double"
+          ]
+        },
+        "refreshTime": {
+          "type": "string"
+        },
+        "controlBar": {
+          "$ref": "#/definitions/GridControlBar"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type",
+        "controlBar"
+      ]
+    },
+    "ColumnGrid": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Pages$ColumnGrid"
+        },
+        "columns": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/GridColumn"
+          }
+        },
+        "numberOfRows": {
+          "type": "string"
+        },
+        "showEmptyRows": {
+          "type": "boolean"
+        },
+        "widthUnit": {
+          "type": "string",
+          "enum": [
+            "Weight",
+            "Pixels"
+          ]
+        },
+        "tooltipPage": {
+          "type": "string",
+          "description": "#/definitions/Page"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "ControlBarItem": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Pages$ControlBarItem"
+        },
+        "name": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "SearchField": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Pages$SearchField"
+        },
+        "caption": {
+          "$ref": "texts.schema.json#/definitions/Text"
+        },
+        "placeholder": {
+          "$ref": "texts.schema.json#/definitions/Text"
+        },
+        "customDateFormat": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "Normal",
+            "Hidden",
+            "ReadOnly"
+          ]
+        },
+        "defaultValue": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type",
+        "caption",
+        "placeholder"
+      ]
+    },
+    "SingleSearchField": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Pages$SingleSearchField"
+        },
+        "attributeRef": {
+          "$ref": "domainmodels.schema.json#/definitions/AttributeRef"
+        },
+        "operator": {
+          "type": "string",
+          "enum": [
+            "Contains",
+            "StartsWith",
+            "Greater",
+            "GreaterOrEqual",
+            "Equal",
+            "NotEqual",
+            "SmallerOrEqual",
+            "Smaller"
+          ]
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "ComparisonSearchField": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Pages$ComparisonSearchField"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "CompoundDesignPropertyValue": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Pages$CompoundDesignPropertyValue"
+        },
+        "properties": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DesignPropertyValue"
+          }
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "ConditionalSettings": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Pages$ConditionalSettings"
+        },
+        "attribute": {
+          "type": "string",
+          "description": "domainmodels.schema.json#/definitions/IAttribute"
+        },
+        "conditions": {
+          "type": "array",
+          "items": {
+            "$ref": "enumerations.schema.json#/definitions/Condition"
+          }
+        },
+        "expression": {
+          "type": "string"
+        },
+        "sourceVariable": {
+          "$ref": "#/definitions/PageVariable"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "ConditionalEditabilitySettings": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Pages$ConditionalEditabilitySettings"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "ConditionalVisibilitySettings": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Pages$ConditionalVisibilitySettings"
+        },
+        "moduleRoles": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "description": "security.schema.json#/definitions/IModuleRole"
+          }
+        },
+        "ignoreSecurity": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "ConfirmationInfo": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Pages$ConfirmationInfo"
+        },
+        "question": {
+          "$ref": "texts.schema.json#/definitions/Text"
+        },
+        "proceedButtonCaption": {
+          "$ref": "texts.schema.json#/definitions/Text"
+        },
+        "cancelButtonCaption": {
+          "$ref": "texts.schema.json#/definitions/Text"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type",
+        "question",
+        "proceedButtonCaption",
+        "cancelButtonCaption"
+      ]
+    },
+    "ControlBar": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Pages$ControlBar"
+        },
+        "items": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ControlBarItem"
+          }
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "ControlBarButton": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Pages$ControlBarButton"
+        },
+        "caption": {
+          "$ref": "#/definitions/ClientTemplate"
+        },
+        "tooltip": {
+          "$ref": "texts.schema.json#/definitions/Text"
+        },
+        "icon": {
+          "$ref": "#/definitions/Icon"
+        },
+        "appearance": {
+          "$ref": "#/definitions/Appearance"
+        },
+        "conditionalVisibilitySettings": {
+          "$ref": "#/definitions/ConditionalVisibilitySettings"
+        },
+        "buttonStyle": {
+          "type": "string",
+          "enum": [
+            "Default",
+            "Inverse",
+            "Primary",
+            "Info",
+            "Success",
+            "Warning",
+            "Danger"
+          ]
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type",
+        "caption",
+        "tooltip",
+        "appearance"
+      ]
+    },
+    "CreateObjectClientAction": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Pages$CreateObjectClientAction"
+        },
+        "entityRef": {
+          "$ref": "domainmodels.schema.json#/definitions/EntityRef"
+        },
+        "pageSettings": {
+          "$ref": "#/definitions/PageSettings"
+        },
+        "numberOfPagesToClose2": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type",
+        "pageSettings"
+      ]
+    },
+    "CustomDesignPropertyValue": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Pages$CustomDesignPropertyValue"
+        },
+        "value": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "DataGrid": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Pages$DataGrid"
+        },
+        "caption": {
+          "$ref": "#/definitions/ClientTemplate"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type",
+        "caption"
+      ]
+    },
+    "GridControlBarButton": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Pages$GridControlBarButton"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "DataGridAddButton": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Pages$DataGridAddButton"
+        },
+        "pageSettings": {
+          "$ref": "#/definitions/PageSettings"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type",
+        "pageSettings"
+      ]
+    },
+    "DataGridExportToCSVButton": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Pages$DataGridExportToCSVButton"
+        },
+        "maxNumberOfRows": {
+          "type": "string"
+        },
+        "decimalSeparator": {
+          "type": "string"
+        },
+        "groupSeparator": {
+          "type": "string"
+        },
+        "delimiter": {
+          "type": "string"
+        },
+        "generateExcelHint": {
+          "type": "boolean"
+        },
+        "useGridDateFormat": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "DataGridExportToExcelButton": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Pages$DataGridExportToExcelButton"
+        },
+        "maxNumberOfRows": {
+          "type": "string"
+        },
+        "useExcelDateType": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "DataGridRemoveButton": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Pages$DataGridRemoveButton"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "DataView": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Pages$DataView"
+        },
+        "widgets": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Widget"
+          }
+        },
+        "footerWidgets": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Widget"
+          }
+        },
+        "editability": {
+          "type": "string",
+          "enum": [
+            "Always",
+            "Never",
+            "Conditional"
+          ]
+        },
+        "conditionalEditabilitySettings": {
+          "$ref": "#/definitions/ConditionalEditabilitySettings"
+        },
+        "showFooter": {
+          "type": "boolean"
+        },
+        "noEntityMessage": {
+          "$ref": "texts.schema.json#/definitions/Text"
+        },
+        "labelWidth": {
+          "type": "string"
+        },
+        "readOnlyStyle": {
+          "type": "string",
+          "enum": [
+            "Control",
+            "Text"
+          ]
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type",
+        "noEntityMessage"
+      ]
+    },
+    "DataViewControlBarButton": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Pages$DataViewControlBarButton"
+        },
+        "tabIndex": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "DataViewActionButton": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Pages$DataViewActionButton"
+        },
+        "action": {
+          "$ref": "#/definitions/ClientAction"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type",
+        "action"
+      ]
+    },
+    "DataViewCancelButton": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Pages$DataViewCancelButton"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "DataViewCloseButton": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Pages$DataViewCloseButton"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "DataViewControlBar": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Pages$DataViewControlBar"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "DataViewSaveButton": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Pages$DataViewSaveButton"
+        },
+        "syncAutomatically": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "DataViewSource": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Pages$DataViewSource"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "DatabaseConstraint": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Pages$DatabaseConstraint"
+        },
+        "attribute": {
+          "type": "string",
+          "description": "domainmodels.schema.json#/definitions/IAttribute"
+        },
+        "operator": {
+          "type": "string",
+          "enum": [
+            "Equals",
+            "NotEquals",
+            "Contains",
+            "NotContains",
+            "LessThan",
+            "LessThanOrEquals",
+            "GreaterThan",
+            "GreaterThanOrEquals"
+          ]
+        },
+        "value": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "SortableEntityPathSource": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Pages$SortableEntityPathSource"
+        },
+        "sortBar": {
+          "$ref": "#/definitions/GridSortBar"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type",
+        "sortBar"
+      ]
+    },
+    "DatabaseSourceBase": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Pages$DatabaseSourceBase"
+        },
+        "databaseConstraints": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DatabaseConstraint"
+          }
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "DatePicker": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Pages$DatePicker"
+        },
+        "formattingInfo": {
+          "$ref": "#/definitions/FormattingInfo"
+        },
+        "nativeAccessibilitySettings": {
+          "$ref": "#/definitions/AccessibilitySettings"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type",
+        "formattingInfo"
+      ]
+    },
+    "DeleteClientAction": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Pages$DeleteClientAction"
+        },
+        "closePage": {
+          "type": "boolean"
+        },
+        "sourceVariable": {
+          "$ref": "#/definitions/PageVariable"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "DesignPropertyValue": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Pages$DesignPropertyValue"
+        },
+        "key": {
+          "type": "string"
+        },
+        "value": {
+          "$ref": "#/definitions/AbstractDesignPropertyValue"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "DivContainer": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Pages$DivContainer"
+        },
+        "widgets": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Widget"
+          }
+        },
+        "renderMode": {
+          "type": "string",
+          "enum": [
+            "Div",
+            "Section",
+            "Article",
+            "Header",
+            "Footer",
+            "Main",
+            "Nav",
+            "Aside",
+            "Hgroup",
+            "Address"
+          ]
+        },
+        "onClickAction": {
+          "$ref": "#/definitions/ClientAction"
+        },
+        "screenReaderHidden": {
+          "type": "boolean"
+        },
+        "nativeAccessibilitySettings": {
+          "$ref": "#/definitions/AccessibilitySettings"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type",
+        "onClickAction"
+      ]
+    },
+    "DropDown": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Pages$DropDown"
+        },
+        "emptyOptionCaption": {
+          "$ref": "texts.schema.json#/definitions/Text"
+        },
+        "nativeAccessibilitySettings": {
+          "$ref": "#/definitions/AccessibilitySettings"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type",
+        "emptyOptionCaption"
+      ]
+    },
+    "DropDownButton": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Pages$DropDownButton"
+        },
+        "items": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DropDownButtonItem"
+          }
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "DropDownButtonItem": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Pages$DropDownButtonItem"
+        },
+        "caption": {
+          "$ref": "texts.schema.json#/definitions/Text"
+        },
+        "image": {
+          "type": "string",
+          "description": "images.schema.json#/definitions/IImage"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type",
+        "caption"
+      ]
+    },
+    "DropDownSearchField": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Pages$DropDownSearchField"
+        },
+        "sortBar": {
+          "$ref": "#/definitions/GridSortBar"
+        },
+        "xPathConstraint": {
+          "type": "string"
+        },
+        "allowMultipleSelect": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type",
+        "sortBar"
+      ]
+    },
+    "DynamicImageViewer": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Pages$DynamicImageViewer"
+        },
+        "defaultImage": {
+          "type": "string",
+          "description": "images.schema.json#/definitions/IImage"
+        },
+        "widthUnit": {
+          "type": "string",
+          "enum": [
+            "Auto",
+            "Pixels",
+            "Percentage"
+          ]
+        },
+        "heightUnit": {
+          "type": "string",
+          "enum": [
+            "Auto",
+            "Pixels",
+            "Percentage"
+          ]
+        },
+        "width": {
+          "type": "string"
+        },
+        "height": {
+          "type": "string"
+        },
+        "responsive": {
+          "type": "boolean"
+        },
+        "showAsThumbnail": {
+          "type": "boolean"
+        },
+        "clickAction": {
+          "$ref": "#/definitions/ClientAction"
+        },
+        "onClickEnlarge": {
+          "type": "boolean"
+        },
+        "alternativeText": {
+          "$ref": "#/definitions/ClientTemplate"
+        },
+        "nativeAccessibilitySettings": {
+          "$ref": "#/definitions/AccessibilitySettings"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type",
+        "clickAction",
+        "alternativeText"
+      ]
+    },
+    "DynamicText": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Pages$DynamicText"
+        },
+        "content": {
+          "$ref": "#/definitions/ClientTemplate"
+        },
+        "renderMode": {
+          "type": "string",
+          "enum": [
+            "Text",
+            "Paragraph",
+            "H1",
+            "H2",
+            "H3",
+            "H4",
+            "H5",
+            "H6"
+          ]
+        },
+        "nativeTextStyle": {
+          "type": "string",
+          "enum": [
+            "Text",
+            "Heading1",
+            "Heading2",
+            "Heading3",
+            "Heading4",
+            "Heading5",
+            "Heading6"
+          ]
+        },
+        "nativeAccessibilitySettings": {
+          "$ref": "#/definitions/AccessibilitySettings"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type",
+        "content"
+      ]
+    },
+    "TemplateType": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Pages$TemplateType"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "EditPageTemplateType": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Pages$EditPageTemplateType"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "FileManager": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Pages$FileManager"
+        },
+        "allowedExtensions": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "Upload",
+            "Download",
+            "Both"
+          ]
+        },
+        "maxFileSize": {
+          "type": "string"
+        },
+        "showFileInBrowser": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "FormattingInfo": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Pages$FormattingInfo"
+        },
+        "decimalPrecision": {
+          "type": "string"
+        },
+        "groupDigits": {
+          "type": "boolean"
+        },
+        "enumFormat": {
+          "type": "string",
+          "enum": [
+            "Text",
+            "Image"
+          ]
+        },
+        "dateFormat": {
+          "type": "string",
+          "enum": [
+            "Date",
+            "Time",
+            "DateTime",
+            "Custom"
+          ]
+        },
+        "customDateFormat": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "Icon": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Pages$Icon"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "GlyphIcon": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Pages$GlyphIcon"
+        },
+        "code": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "GridActionButton": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Pages$GridActionButton"
+        },
+        "action": {
+          "$ref": "#/definitions/ClientAction"
+        },
+        "maintainSelectionAfterMicroflow": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type",
+        "action"
+      ]
+    },
+    "GridBaseSource": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Pages$GridBaseSource"
+        },
+        "searchBar": {
+          "$ref": "#/definitions/SearchBar"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type",
+        "searchBar"
+      ]
+    },
+    "GridColumn": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Pages$GridColumn"
+        },
+        "name": {
+          "type": "string"
+        },
+        "caption": {
+          "$ref": "texts.schema.json#/definitions/Text"
+        },
+        "attributeRef": {
+          "$ref": "domainmodels.schema.json#/definitions/AttributeRef"
+        },
+        "formattingInfo": {
+          "$ref": "#/definitions/FormattingInfo"
+        },
+        "showTooltip": {
+          "type": "boolean"
+        },
+        "aggregateCaption": {
+          "$ref": "texts.schema.json#/definitions/Text"
+        },
+        "aggregateFunction": {
+          "type": "string",
+          "enum": [
+            "None",
+            "Average",
+            "Maximum",
+            "Minimum",
+            "Sum",
+            "Count"
+          ]
+        },
+        "editable": {
+          "type": "boolean"
+        },
+        "width": {
+          "type": "string"
+        },
+        "appearance": {
+          "$ref": "#/definitions/Appearance"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type",
+        "caption",
+        "formattingInfo",
+        "aggregateCaption",
+        "appearance"
+      ]
+    },
+    "GridControlBar": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Pages$GridControlBar"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "GridDatabaseSource": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Pages$GridDatabaseSource"
+        },
+        "searchBar": {
+          "$ref": "#/definitions/SearchBar"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type",
+        "searchBar"
+      ]
+    },
+    "GridDeleteButton": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Pages$GridDeleteButton"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "GridDeselectAllButton": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Pages$GridDeselectAllButton"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "GridEditButton": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Pages$GridEditButton"
+        },
+        "pageSettings": {
+          "$ref": "#/definitions/PageSettings"
+        },
+        "pagesForSpecializations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PageForSpecialization"
+          }
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type",
+        "pageSettings"
+      ]
+    },
+    "GridNewButton": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Pages$GridNewButton"
+        },
+        "entity": {
+          "type": "string",
+          "description": "domainmodels.schema.json#/definitions/IEntity"
+        },
+        "editLocation": {
+          "type": "string",
+          "enum": [
+            "InlineAtTop",
+            "InlineAtBottom",
+            "Form"
+          ]
+        },
+        "pageSettings": {
+          "$ref": "#/definitions/PageSettings"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type",
+        "pageSettings"
+      ]
+    },
+    "GridSearchButton": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Pages$GridSearchButton"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "GridSelectAllButton": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Pages$GridSelectAllButton"
+        },
+        "selectionType": {
+          "type": "string",
+          "enum": [
+            "SelectPage",
+            "SelectAll"
+          ]
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "GridSortBar": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Pages$GridSortBar"
+        },
+        "sortItems": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/GridSortItem"
+          }
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "GridSortItem": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Pages$GridSortItem"
+        },
+        "attributeRef": {
+          "$ref": "domainmodels.schema.json#/definitions/AttributeRef"
+        },
+        "sortDirection": {
+          "type": "string",
+          "enum": [
+            "Ascending",
+            "Descending"
+          ]
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type",
+        "attributeRef"
+      ]
+    },
+    "GridXPathSource": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Pages$GridXPathSource"
+        },
+        "xPathConstraint": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "GroupBox": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Pages$GroupBox"
+        },
+        "caption": {
+          "$ref": "#/definitions/ClientTemplate"
+        },
+        "collapsible": {
+          "type": "string",
+          "enum": [
+            "No",
+            "YesInitiallyExpanded",
+            "YesInitiallyCollapsed"
+          ]
+        },
+        "headerMode": {
+          "type": "string",
+          "enum": [
+            "Div",
+            "H1",
+            "H2",
+            "H3",
+            "H4",
+            "H5",
+            "H6"
+          ]
+        },
+        "widgets": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Widget"
+          }
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "Header": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Pages$Header"
+        },
+        "leftWidgets": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Widget"
+          }
+        },
+        "rightWidgets": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Widget"
+          }
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "SplitPane": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Pages$SplitPane"
+        },
+        "firstWidgets": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Widget"
+          }
+        },
+        "secondWidgets": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Widget"
+          }
+        },
+        "animatedResize": {
+          "type": "boolean"
+        },
+        "height": {
+          "type": "string"
+        },
+        "position": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "HorizontalSplitPane": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Pages$HorizontalSplitPane"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "IconCollectionIcon": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Pages$IconCollectionIcon"
+        },
+        "image": {
+          "type": "string",
+          "description": "customicons.schema.json#/definitions/ICustomIcon"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type",
+        "image"
+      ]
+    },
+    "ImageIcon": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Pages$ImageIcon"
+        },
+        "image": {
+          "type": "string",
+          "description": "images.schema.json#/definitions/IImage"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type",
+        "image"
+      ]
+    },
+    "ImageUploader": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Pages$ImageUploader"
+        },
+        "allowedExtensions": {
+          "type": "string"
+        },
+        "thumbnailSize": {
+          "type": "string"
+        },
+        "maxFileSize": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "ImageViewerSource": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Pages$ImageViewerSource"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "InputReferenceSetSelector": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Pages$InputReferenceSetSelector"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "Label": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Pages$Label"
+        },
+        "caption": {
+          "$ref": "texts.schema.json#/definitions/Text"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type",
+        "caption"
+      ]
+    },
+    "Layout": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Pages$Layout"
+        },
+        "content": {
+          "$ref": "#/definitions/LayoutContent"
+        },
+        "appearance": {
+          "$ref": "#/definitions/Appearance"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type",
+        "content",
+        "appearance"
+      ]
+    },
+    "LayoutCall": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Pages$LayoutCall"
+        },
+        "layout": {
+          "type": "string",
+          "description": "#/definitions/Layout"
+        },
+        "arguments": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/LayoutCallArgument"
+          }
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type",
+        "layout"
+      ]
+    },
+    "LayoutCallArgument": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Pages$LayoutCallArgument"
+        },
+        "parameter": {
+          "type": "string",
+          "description": "#/definitions/LayoutParameter"
+        },
+        "widgets": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Widget"
+          }
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type",
+        "parameter"
+      ]
+    },
+    "LayoutContent": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Pages$LayoutContent"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "LayoutGrid": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Pages$LayoutGrid"
+        },
+        "width": {
+          "type": "string",
+          "enum": [
+            "FullWidth",
+            "FixedWidth"
+          ]
+        },
+        "rows": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/LayoutGridRow"
+          }
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "LayoutGridColumn": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Pages$LayoutGridColumn"
+        },
+        "weight": {
+          "type": "string"
+        },
+        "tabletWeight": {
+          "type": "string"
+        },
+        "phoneWeight": {
+          "type": "string"
+        },
+        "previewWidth": {
+          "type": "string"
+        },
+        "widgets": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Widget"
+          }
+        },
+        "appearance": {
+          "$ref": "#/definitions/Appearance"
+        },
+        "verticalAlignment": {
+          "type": "string",
+          "enum": [
+            "None",
+            "Start",
+            "Center",
+            "End"
+          ]
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type",
+        "appearance"
+      ]
+    },
+    "LayoutGridRow": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Pages$LayoutGridRow"
+        },
+        "columns": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/LayoutGridColumn"
+          }
+        },
+        "conditionalVisibilitySettings": {
+          "$ref": "#/definitions/ConditionalVisibilitySettings"
+        },
+        "appearance": {
+          "$ref": "#/definitions/Appearance"
+        },
+        "verticalAlignment": {
+          "type": "string",
+          "enum": [
+            "None",
+            "Start",
+            "Center",
+            "End"
+          ]
+        },
+        "horizontalAlignment": {
+          "type": "string",
+          "enum": [
+            "None",
+            "Start",
+            "Center",
+            "End"
+          ]
+        },
+        "spacingBetweenColumns": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type",
+        "appearance"
+      ]
+    },
+    "LayoutParameter": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Pages$LayoutParameter"
+        },
+        "name": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "LinkButton": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Pages$LinkButton"
+        },
+        "linkType": {
+          "type": "string",
+          "enum": [
+            "Web",
+            "Email",
+            "Call",
+            "Text"
+          ]
+        },
+        "address": {
+          "$ref": "#/definitions/StaticOrDynamicString"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type",
+        "address"
+      ]
+    },
+    "ListView": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Pages$ListView"
+        },
+        "widgets": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Widget"
+          }
+        },
+        "pageSize": {
+          "type": "string"
+        },
+        "clickAction": {
+          "$ref": "#/definitions/ClientAction"
+        },
+        "editable": {
+          "type": "boolean"
+        },
+        "templates": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ListViewTemplate"
+          }
+        },
+        "scrollDirection": {
+          "type": "string",
+          "enum": [
+            "Vertical",
+            "Horizontal"
+          ]
+        },
+        "numberOfColumns": {
+          "type": "string"
+        },
+        "pullDownAction": {
+          "$ref": "#/definitions/ClientAction"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type",
+        "clickAction",
+        "pullDownAction"
+      ]
+    },
+    "ListViewDatabaseSource": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Pages$ListViewDatabaseSource"
+        },
+        "search": {
+          "$ref": "#/definitions/ListViewSearch"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type",
+        "search"
+      ]
+    },
+    "ListViewSearch": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Pages$ListViewSearch"
+        },
+        "searchRefs": {
+          "type": "array",
+          "items": {
+            "$ref": "domainmodels.schema.json#/definitions/AttributeRef"
+          }
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "ListViewTemplate": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Pages$ListViewTemplate"
+        },
+        "specialization": {
+          "type": "string",
+          "description": "domainmodels.schema.json#/definitions/IEntity"
+        },
+        "widgets": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Widget"
+          }
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type",
+        "specialization"
+      ]
+    },
+    "XPathSourceBase": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Pages$XPathSourceBase"
+        },
+        "xPathConstraint": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "ListViewXPathSource": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Pages$ListViewXPathSource"
+        },
+        "search": {
+          "$ref": "#/definitions/ListViewSearch"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type",
+        "search"
+      ]
+    },
+    "ListenTargetSource": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Pages$ListenTargetSource"
+        },
+        "listenTarget": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "LocalVariable": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Pages$LocalVariable"
+        },
+        "name": {
+          "type": "string"
+        },
+        "variableType": {
+          "$ref": "datatypes.schema.json#/definitions/DataType"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type",
+        "variableType"
+      ]
+    },
+    "LoginButton": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Pages$LoginButton"
+        },
+        "validationMessageWidget": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "LoginTextBox": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Pages$LoginTextBox"
+        },
+        "label": {
+          "$ref": "texts.schema.json#/definitions/Text"
+        },
+        "labelWidth": {
+          "type": "string"
+        },
+        "placeholder": {
+          "$ref": "texts.schema.json#/definitions/Text"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type",
+        "placeholder"
+      ]
+    },
+    "LoginIdTextBox": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Pages$LoginIdTextBox"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "LogoutButton": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Pages$LogoutButton"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "MasterDetail": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Pages$MasterDetail"
+        },
+        "master": {
+          "$ref": "#/definitions/MasterDetailMasterRegion"
+        },
+        "detail": {
+          "$ref": "#/definitions/MasterDetailDetailRegion"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type",
+        "master",
+        "detail"
+      ]
+    },
+    "MasterDetailRegion": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Pages$MasterDetailRegion"
+        },
+        "widget": {
+          "$ref": "#/definitions/Widget"
+        },
+        "class": {
+          "type": "string"
+        },
+        "style": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "MasterDetailDetailRegion": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Pages$MasterDetailDetailRegion"
+        },
+        "responsiveWeight": {
+          "type": "string"
+        },
+        "tabletWeight": {
+          "type": "string"
+        },
+        "title": {
+          "$ref": "texts.schema.json#/definitions/Text"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type",
+        "title"
+      ]
+    },
+    "MasterDetailMasterRegion": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Pages$MasterDetailMasterRegion"
+        },
+        "responsiveWeight": {
+          "type": "string"
+        },
+        "tabletWeight": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "MenuWidget": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Pages$MenuWidget"
+        },
+        "menuSource": {
+          "$ref": "#/definitions/MenuSource"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type",
+        "menuSource"
+      ]
+    },
+    "MenuBar": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Pages$MenuBar"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "MenuSource": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Pages$MenuSource"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "MenuDocumentSource": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Pages$MenuDocumentSource"
+        },
+        "menu": {
+          "type": "string",
+          "description": "menus.schema.json#/definitions/IMenuDocument"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "MicroflowClientAction": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Pages$MicroflowClientAction"
+        },
+        "microflowSettings": {
+          "$ref": "#/definitions/MicroflowSettings"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type",
+        "microflowSettings"
+      ]
+    },
+    "MicroflowParameterMapping": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Pages$MicroflowParameterMapping"
+        },
+        "parameter": {
+          "type": "string",
+          "description": "microflows.schema.json#/definitions/IMicroflowParameter"
+        },
+        "expression": {
+          "type": "string"
+        },
+        "variable": {
+          "$ref": "#/definitions/PageVariable"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type",
+        "parameter"
+      ]
+    },
+    "MicroflowSettings": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Pages$MicroflowSettings"
+        },
+        "microflow": {
+          "type": "string",
+          "description": "microflows.schema.json#/definitions/IMicroflow"
+        },
+        "parameterMappings": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MicroflowParameterMapping"
+          }
+        },
+        "progressBar": {
+          "type": "string",
+          "enum": [
+            "None",
+            "NonBlocking",
+            "Blocking"
+          ]
+        },
+        "progressMessage": {
+          "$ref": "texts.schema.json#/definitions/Text"
+        },
+        "asynchronous": {
+          "type": "boolean"
+        },
+        "formValidations": {
+          "type": "string",
+          "enum": [
+            "None",
+            "Widget",
+            "All"
+          ]
+        },
+        "confirmationInfo": {
+          "$ref": "#/definitions/ConfirmationInfo"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "MicroflowSource": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Pages$MicroflowSource"
+        },
+        "microflowSettings": {
+          "$ref": "#/definitions/MicroflowSettings"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type",
+        "microflowSettings"
+      ]
+    },
+    "NamedValue": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Pages$NamedValue"
+        },
+        "name": {
+          "type": "string"
+        },
+        "value": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "NanoflowParameterMapping": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Pages$NanoflowParameterMapping"
+        },
+        "parameter": {
+          "type": "string",
+          "description": "microflows.schema.json#/definitions/INanoflowParameter"
+        },
+        "expression": {
+          "type": "string"
+        },
+        "variable": {
+          "$ref": "#/definitions/PageVariable"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type",
+        "parameter"
+      ]
+    },
+    "NanoflowSource": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Pages$NanoflowSource"
+        },
+        "nanoflow": {
+          "type": "string",
+          "description": "microflows.schema.json#/definitions/INanoflow"
+        },
+        "parameterMappings": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NanoflowParameterMapping"
+          }
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "NativeLayoutContent": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Pages$NativeLayoutContent"
+        },
+        "layoutType": {
+          "type": "string",
+          "enum": [
+            "Default",
+            "TopLevel",
+            "Popup"
+          ]
+        },
+        "widgets": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Widget"
+          }
+        },
+        "rightHeaderPlaceholder": {
+          "$ref": "#/definitions/Placeholder"
+        },
+        "showBottomBar": {
+          "type": "boolean"
+        },
+        "sidebar": {
+          "type": "boolean"
+        },
+        "sidebarWidgets": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Widget"
+          }
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "NavigationList": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Pages$NavigationList"
+        },
+        "items": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NavigationListItem"
+          }
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "NavigationListItem": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Pages$NavigationListItem"
+        },
+        "widgets": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Widget"
+          }
+        },
+        "appearance": {
+          "$ref": "#/definitions/Appearance"
+        },
+        "conditionalVisibilitySettings": {
+          "$ref": "#/definitions/ConditionalVisibilitySettings"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type",
+        "appearance"
+      ]
+    },
+    "NavigationSource": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Pages$NavigationSource"
+        },
+        "navigationProfile": {
+          "type": "string",
+          "description": "navigation.schema.json#/definitions/INavigationProfile"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type",
+        "navigationProfile"
+      ]
+    },
+    "NavigationTree": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Pages$NavigationTree"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "NewButton": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Pages$NewButton"
+        },
+        "entityRef": {
+          "$ref": "domainmodels.schema.json#/definitions/EntityRef"
+        },
+        "pageSettings": {
+          "$ref": "#/definitions/PageSettings"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type",
+        "pageSettings"
+      ]
+    },
+    "NoClientAction": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Pages$NoClientAction"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "OfflineSchema": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Pages$OfflineSchema"
+        },
+        "role": {
+          "type": "string",
+          "description": "security.schema.json#/definitions/IUserRole"
+        },
+        "tables": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "OfflineSchemaFetchInstruction": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Pages$OfflineSchemaFetchInstruction"
+        },
+        "tableName": {
+          "type": "string"
+        },
+        "xPath": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "OnClickBehavior": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Pages$OnClickBehavior"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "OnClickEnlarge": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Pages$OnClickEnlarge"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "OnClickMicroflow": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Pages$OnClickMicroflow"
+        },
+        "microflowSettings": {
+          "$ref": "#/definitions/MicroflowSettings"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type",
+        "microflowSettings"
+      ]
+    },
+    "OnClickNothing": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Pages$OnClickNothing"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "OpenLinkClientAction": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Pages$OpenLinkClientAction"
+        },
+        "linkType": {
+          "type": "string",
+          "enum": [
+            "Web",
+            "Email",
+            "Call",
+            "Text"
+          ]
+        },
+        "address": {
+          "$ref": "#/definitions/StaticOrDynamicString"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type",
+        "address"
+      ]
+    },
+    "OpenUserTaskClientAction": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Pages$OpenUserTaskClientAction"
+        },
+        "assignOnOpen": {
+          "type": "boolean"
+        },
+        "openWhenAssigned": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "OpenWorkflowClientAction": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Pages$OpenWorkflowClientAction"
+        },
+        "defaultPage": {
+          "type": "string",
+          "description": "#/definitions/Page"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "OptionDesignPropertyValue": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Pages$OptionDesignPropertyValue"
+        },
+        "option": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "Page": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Pages$Page"
+        },
+        "parameters": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PageParameter"
+          }
+        },
+        "layoutCall": {
+          "$ref": "#/definitions/LayoutCall"
+        },
+        "title": {
+          "$ref": "texts.schema.json#/definitions/Text"
+        },
+        "appearance": {
+          "$ref": "#/definitions/Appearance"
+        },
+        "allowedRoles": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "description": "security.schema.json#/definitions/IModuleRole"
+          }
+        },
+        "popupCloseAction": {
+          "type": "string"
+        },
+        "popupWidth": {
+          "type": "string"
+        },
+        "popupHeight": {
+          "type": "string"
+        },
+        "popupResizable": {
+          "type": "boolean"
+        },
+        "markAsUsed": {
+          "type": "boolean"
+        },
+        "url": {
+          "type": "string"
+        },
+        "variables": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/LocalVariable"
+          }
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type",
+        "layoutCall",
+        "title",
+        "appearance"
+      ]
+    },
+    "PageClientAction": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Pages$PageClientAction"
+        },
+        "pageSettings": {
+          "$ref": "#/definitions/PageSettings"
+        },
+        "pagesForSpecializations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PageForSpecialization"
+          }
+        },
+        "numberOfPagesToClose2": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type",
+        "pageSettings"
+      ]
+    },
+    "PageForSpecialization": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Pages$PageForSpecialization"
+        },
+        "entity": {
+          "type": "string",
+          "description": "domainmodels.schema.json#/definitions/IEntity"
+        },
+        "pageSettings": {
+          "$ref": "#/definitions/PageSettings"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type",
+        "entity",
+        "pageSettings"
+      ]
+    },
+    "PageParameter": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Pages$PageParameter"
+        },
+        "name": {
+          "type": "string"
+        },
+        "parameterType": {
+          "$ref": "datatypes.schema.json#/definitions/DataType"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type",
+        "parameterType"
+      ]
+    },
+    "PageParameterMapping": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Pages$PageParameterMapping"
+        },
+        "parameter": {
+          "type": "string",
+          "description": "#/definitions/PageParameter"
+        },
+        "variable": {
+          "$ref": "#/definitions/PageVariable"
+        },
+        "argument": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type",
+        "parameter",
+        "variable"
+      ]
+    },
+    "PageSettings": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Pages$PageSettings"
+        },
+        "page": {
+          "type": "string",
+          "description": "#/definitions/Page"
+        },
+        "titleOverride": {
+          "$ref": "microflows.schema.json#/definitions/TextTemplate"
+        },
+        "parameterMappings": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PageParameterMapping"
+          }
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "PageTemplate": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Pages$PageTemplate"
+        },
+        "layoutCall": {
+          "$ref": "#/definitions/LayoutCall"
+        },
+        "appearance": {
+          "$ref": "#/definitions/Appearance"
+        },
+        "templateType": {
+          "$ref": "#/definitions/TemplateType"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type",
+        "layoutCall",
+        "appearance",
+        "templateType"
+      ]
+    },
+    "PageVariable": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Pages$PageVariable"
+        },
+        "widget": {
+          "type": "string"
+        },
+        "pageParameter": {
+          "type": "string"
+        },
+        "snippetParameter": {
+          "type": "string"
+        },
+        "localVariable": {
+          "type": "string"
+        },
+        "useAllPages": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "ParameterAttributeUrlSegment": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Pages$ParameterAttributeUrlSegment"
+        },
+        "pageParameter": {
+          "type": "string"
+        },
+        "attribute": {
+          "type": "string",
+          "description": "domainmodels.schema.json#/definitions/IAttribute"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type",
+        "pageParameter",
+        "attribute"
+      ]
+    },
+    "ParameterIdUrlSegment": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Pages$ParameterIdUrlSegment"
+        },
+        "pageParameter": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type",
+        "pageParameter"
+      ]
+    },
+    "PasswordTextBox": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Pages$PasswordTextBox"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "Placeholder": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Pages$Placeholder"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "RadioButtonGroup": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Pages$RadioButtonGroup"
+        },
+        "renderHorizontal": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "RangeSearchField": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Pages$RangeSearchField"
+        },
+        "lowerBoundRef": {
+          "$ref": "domainmodels.schema.json#/definitions/AttributeRef"
+        },
+        "upperBoundRef": {
+          "$ref": "domainmodels.schema.json#/definitions/AttributeRef"
+        },
+        "includeLower": {
+          "type": "boolean"
+        },
+        "includeUpper": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "ReferenceSelector": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Pages$ReferenceSelector"
+        },
+        "validation": {
+          "$ref": "#/definitions/WidgetValidation"
+        },
+        "renderMode": {
+          "type": "string",
+          "enum": [
+            "Form",
+            "DropDown"
+          ]
+        },
+        "gotoPageSettings": {
+          "$ref": "#/definitions/PageSettings"
+        },
+        "formattingInfo": {
+          "$ref": "#/definitions/FormattingInfo"
+        },
+        "emptyOptionCaption": {
+          "$ref": "texts.schema.json#/definitions/Text"
+        },
+        "nativeAccessibilitySettings": {
+          "$ref": "#/definitions/AccessibilitySettings"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type",
+        "validation",
+        "gotoPageSettings",
+        "formattingInfo",
+        "emptyOptionCaption"
+      ]
+    },
+    "ReferenceSetSelector": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Pages$ReferenceSetSelector"
+        },
+        "onChangeAction": {
+          "$ref": "#/definitions/ClientAction"
+        },
+        "constrainedByRefs": {
+          "type": "array",
+          "items": {
+            "$ref": "domainmodels.schema.json#/definitions/EntityRef"
+          }
+        },
+        "xPathConstraint": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type",
+        "onChangeAction"
+      ]
+    },
+    "ReferenceSetSource": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Pages$ReferenceSetSource"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "RegularPageTemplateType": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Pages$RegularPageTemplateType"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "RetrievalQuery": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Pages$RetrievalQuery"
+        },
+        "queryId": {
+          "type": "string"
+        },
+        "allowedUserRoleSets": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/UserRoleSet"
+          }
+        },
+        "xPath": {
+          "type": "string"
+        },
+        "microflow": {
+          "type": "string",
+          "description": "microflows.schema.json#/definitions/IMicroflow"
+        },
+        "entityPath": {
+          "type": "string"
+        },
+        "pageName": {
+          "type": "string"
+        },
+        "widgetName": {
+          "type": "string"
+        },
+        "usedAssociations": {
+          "type": "string"
+        },
+        "usedAttributes": {
+          "type": "string"
+        },
+        "parameters": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RetrievalQueryParameter"
+          }
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "RetrievalQueryParameter": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Pages$RetrievalQueryParameter"
+        },
+        "name": {
+          "type": "string"
+        },
+        "types": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "RetrievalSchema": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Pages$RetrievalSchema"
+        },
+        "usedAssociations": {
+          "type": "string"
+        },
+        "widgetName": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "RuntimeOperation": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Pages$RuntimeOperation"
+        },
+        "operationId": {
+          "type": "string"
+        },
+        "parameters": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RetrievalQueryParameter"
+          }
+        },
+        "constants": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NamedValue"
+          }
+        },
+        "operationType": {
+          "type": "string"
+        },
+        "allowedUserRoleSets": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/UserRoleSet"
+          }
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "SaveButton": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Pages$SaveButton"
+        },
+        "syncAutomatically": {
+          "type": "boolean"
+        },
+        "closePage": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "SaveChangesClientAction": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Pages$SaveChangesClientAction"
+        },
+        "syncAutomatically": {
+          "type": "boolean"
+        },
+        "closePage": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "ScrollContainer": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Pages$ScrollContainer"
+        },
+        "center": {
+          "$ref": "#/definitions/ScrollContainerRegion"
+        },
+        "left": {
+          "$ref": "#/definitions/ScrollContainerRegion"
+        },
+        "right": {
+          "$ref": "#/definitions/ScrollContainerRegion"
+        },
+        "top": {
+          "$ref": "#/definitions/ScrollContainerRegion"
+        },
+        "bottom": {
+          "$ref": "#/definitions/ScrollContainerRegion"
+        },
+        "layoutMode": {
+          "type": "string",
+          "enum": [
+            "Headline",
+            "Sidebar"
+          ]
+        },
+        "widthMode": {
+          "type": "string",
+          "enum": [
+            "Auto",
+            "Pixels",
+            "Percentage"
+          ]
+        },
+        "width": {
+          "type": "string"
+        },
+        "alignment": {
+          "type": "string",
+          "enum": [
+            "Left",
+            "Center",
+            "Right"
+          ]
+        },
+        "scrollBehavior": {
+          "type": "string",
+          "enum": [
+            "PerRegion",
+            "FullWidget"
+          ]
+        },
+        "nativeHideScrollbars": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type",
+        "center"
+      ]
+    },
+    "ScrollContainerRegion": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Pages$ScrollContainerRegion"
+        },
+        "widgets": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Widget"
+          }
+        },
+        "sizeMode": {
+          "type": "string",
+          "enum": [
+            "Auto",
+            "Pixels",
+            "Percentage"
+          ]
+        },
+        "size": {
+          "type": "string"
+        },
+        "appearance": {
+          "$ref": "#/definitions/Appearance"
+        },
+        "toggleMode": {
+          "type": "string",
+          "enum": [
+            "None",
+            "PushContentAside",
+            "SlideOverContent",
+            "ShrinkContentInitiallyOpen",
+            "ShrinkContentInitiallyClosed"
+          ]
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type",
+        "appearance"
+      ]
+    },
+    "SearchBar": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Pages$SearchBar"
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "None",
+            "FoldableOpen",
+            "FoldableClosed",
+            "AlwaysOpen"
+          ]
+        },
+        "waitForSearch": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "SelectButton": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Pages$SelectButton"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "SelectPageTemplateType": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Pages$SelectPageTemplateType"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "SelectorSource": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Pages$SelectorSource"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "SelectorDatabaseSource": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Pages$SelectorDatabaseSource"
+        },
+        "databaseConstraints": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DatabaseConstraint"
+          }
+        },
+        "sortBar": {
+          "$ref": "#/definitions/GridSortBar"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type",
+        "sortBar"
+      ]
+    },
+    "SelectorMicroflowSource": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Pages$SelectorMicroflowSource"
+        },
+        "dataSourceMicroflowSettings": {
+          "$ref": "#/definitions/MicroflowSettings"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type",
+        "dataSourceMicroflowSettings"
+      ]
+    },
+    "SelectorXPathSource": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Pages$SelectorXPathSource"
+        },
+        "sortBar": {
+          "$ref": "#/definitions/GridSortBar"
+        },
+        "xPathConstraint": {
+          "type": "string"
+        },
+        "constrainedByRefs": {
+          "type": "array",
+          "items": {
+            "$ref": "domainmodels.schema.json#/definitions/EntityRef"
+          }
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type",
+        "sortBar"
+      ]
+    },
+    "SetTaskOutcomeClientAction": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Pages$SetTaskOutcomeClientAction"
+        },
+        "outcomeValue": {
+          "type": "string"
+        },
+        "closePage": {
+          "type": "boolean"
+        },
+        "commit": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "SidebarToggleButton": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Pages$SidebarToggleButton"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "SignOutClientAction": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Pages$SignOutClientAction"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "SimpleMenuBar": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Pages$SimpleMenuBar"
+        },
+        "orientation": {
+          "type": "string",
+          "enum": [
+            "Horizontal",
+            "Vertical"
+          ]
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "Snippet": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Pages$Snippet"
+        },
+        "widgets": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Widget"
+          }
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "Web",
+            "Native"
+          ]
+        },
+        "parameters": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SnippetParameter"
+          }
+        },
+        "variables": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/LocalVariable"
+          }
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "SnippetCall": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Pages$SnippetCall"
+        },
+        "snippet": {
+          "type": "string",
+          "description": "#/definitions/Snippet"
+        },
+        "parameterMappings": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SnippetParameterMapping"
+          }
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "SnippetCallWidget": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Pages$SnippetCallWidget"
+        },
+        "snippetCall": {
+          "$ref": "#/definitions/SnippetCall"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type",
+        "snippetCall"
+      ]
+    },
+    "SnippetParameter": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Pages$SnippetParameter"
+        },
+        "name": {
+          "type": "string"
+        },
+        "parameterType": {
+          "$ref": "datatypes.schema.json#/definitions/DataType"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type",
+        "parameterType"
+      ]
+    },
+    "SnippetParameterMapping": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Pages$SnippetParameterMapping"
+        },
+        "parameter": {
+          "type": "string",
+          "description": "#/definitions/SnippetParameter"
+        },
+        "variable": {
+          "$ref": "#/definitions/PageVariable"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type",
+        "parameter",
+        "variable"
+      ]
+    },
+    "StaticImageViewer": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Pages$StaticImageViewer"
+        },
+        "image": {
+          "type": "string",
+          "description": "images.schema.json#/definitions/IImage"
+        },
+        "widthUnit": {
+          "type": "string",
+          "enum": [
+            "Auto",
+            "Pixels",
+            "Percentage"
+          ]
+        },
+        "heightUnit": {
+          "type": "string",
+          "enum": [
+            "Auto",
+            "Pixels",
+            "Percentage"
+          ]
+        },
+        "width": {
+          "type": "string"
+        },
+        "height": {
+          "type": "string"
+        },
+        "clickAction": {
+          "$ref": "#/definitions/ClientAction"
+        },
+        "responsive": {
+          "type": "boolean"
+        },
+        "alternativeText": {
+          "$ref": "#/definitions/ClientTemplate"
+        },
+        "nativeAccessibilitySettings": {
+          "$ref": "#/definitions/AccessibilitySettings"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type",
+        "clickAction",
+        "alternativeText"
+      ]
+    },
+    "StaticOrDynamicString": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Pages$StaticOrDynamicString"
+        },
+        "isDynamic": {
+          "type": "boolean"
+        },
+        "value": {
+          "type": "string"
+        },
+        "attributeRef": {
+          "$ref": "domainmodels.schema.json#/definitions/AttributeRef"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "UrlSegment": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Pages$UrlSegment"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "StaticUrlSegment": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Pages$StaticUrlSegment"
+        },
+        "segment": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "SyncButton": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Pages$SyncButton"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "SyncClientAction": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Pages$SyncClientAction"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "TabContainer": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Pages$TabContainer"
+        },
+        "tabPages": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TabPage"
+          }
+        },
+        "activePageAttributeRef": {
+          "$ref": "domainmodels.schema.json#/definitions/AttributeRef"
+        },
+        "activePageSourceVariable": {
+          "$ref": "#/definitions/PageVariable"
+        },
+        "activePageOnChangeAction": {
+          "$ref": "#/definitions/ClientAction"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type",
+        "activePageOnChangeAction"
+      ]
+    },
+    "TabPage": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Pages$TabPage"
+        },
+        "name": {
+          "type": "string"
+        },
+        "caption": {
+          "$ref": "texts.schema.json#/definitions/Text"
+        },
+        "refreshOnShow": {
+          "type": "boolean"
+        },
+        "conditionalVisibilitySettings": {
+          "$ref": "#/definitions/ConditionalVisibilitySettings"
+        },
+        "widgets": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Widget"
+          }
+        },
+        "badge": {
+          "$ref": "#/definitions/ClientTemplate"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type",
+        "caption"
+      ]
+    },
+    "Table": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Pages$Table"
+        },
+        "cells": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TableCell"
+          }
+        },
+        "columns": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TableColumn"
+          }
+        },
+        "widthUnit": {
+          "type": "string",
+          "enum": [
+            "Weight",
+            "Pixels"
+          ]
+        },
+        "rows": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TableRow"
+          }
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "TableCell": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Pages$TableCell"
+        },
+        "appearance": {
+          "$ref": "#/definitions/Appearance"
+        },
+        "isHeader": {
+          "type": "boolean"
+        },
+        "widgets": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Widget"
+          }
+        },
+        "leftColumnIndex": {
+          "type": "string"
+        },
+        "topRowIndex": {
+          "type": "string"
+        },
+        "width": {
+          "type": "string"
+        },
+        "height": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type",
+        "appearance"
+      ]
+    },
+    "TableColumn": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Pages$TableColumn"
+        },
+        "width": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "TableRow": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Pages$TableRow"
+        },
+        "appearance": {
+          "$ref": "#/definitions/Appearance"
+        },
+        "conditionalVisibilitySettings": {
+          "$ref": "#/definitions/ConditionalVisibilitySettings"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type",
+        "appearance"
+      ]
+    },
+    "TemplateGrid": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Pages$TemplateGrid"
+        },
+        "contents": {
+          "$ref": "#/definitions/TemplateGridContents"
+        },
+        "numberOfRows": {
+          "type": "string"
+        },
+        "numberOfColumns": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type",
+        "contents"
+      ]
+    },
+    "TemplateGridContents": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Pages$TemplateGridContents"
+        },
+        "widgets": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Widget"
+          }
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "TemplatePlaceholder": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Pages$TemplatePlaceholder"
+        },
+        "type": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "TextWidget": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Pages$TextWidget"
+        },
+        "maxLengthCode": {
+          "type": "string"
+        },
+        "autoFocus": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "TextArea": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Pages$TextArea"
+        },
+        "numberOfLines": {
+          "type": "string"
+        },
+        "counterMessage": {
+          "$ref": "texts.schema.json#/definitions/Text"
+        },
+        "textTooLongMessage": {
+          "$ref": "texts.schema.json#/definitions/Text"
+        },
+        "autocomplete": {
+          "type": "boolean"
+        },
+        "submitBehaviour": {
+          "type": "string",
+          "enum": [
+            "OnEndEditing",
+            "WhileEditing"
+          ]
+        },
+        "submitOnInputDelay": {
+          "type": "string"
+        },
+        "nativeAccessibilitySettings": {
+          "$ref": "#/definitions/AccessibilitySettings"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type",
+        "counterMessage",
+        "textTooLongMessage"
+      ]
+    },
+    "TextBox": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Pages$TextBox"
+        },
+        "inputMask": {
+          "type": "string"
+        },
+        "formattingInfo": {
+          "$ref": "#/definitions/FormattingInfo"
+        },
+        "isPasswordBox": {
+          "type": "boolean"
+        },
+        "keyboardType": {
+          "type": "string",
+          "enum": [
+            "NumberPad",
+            "DecimalPad",
+            "EmailAddress",
+            "PhonePad",
+            "URL",
+            "Default"
+          ]
+        },
+        "onEnterKeyPressAction": {
+          "$ref": "#/definitions/ClientAction"
+        },
+        "autocomplete": {
+          "type": "boolean"
+        },
+        "autocompletePurpose": {
+          "type": "string",
+          "enum": [
+            "On",
+            "Off",
+            "FullName",
+            "HonorificPrefix",
+            "GivenName",
+            "AdditionalName",
+            "FamilyName",
+            "HonorificSuffix",
+            "Nickname",
+            "JobTitle",
+            "Username",
+            "NewPassword",
+            "CurrentPassword",
+            "CompanyName",
+            "StreetAddress",
+            "StreetAddressLine1",
+            "StreetAddressLine2",
+            "StreetAddressLine3",
+            "AddressLevel4",
+            "AddressLevel3",
+            "AddressLevel2",
+            "AddressLevel1",
+            "CountryCode",
+            "CountryName",
+            "PostalCode",
+            "CreditCardFullName",
+            "CreditCardGivenName",
+            "CreditCardAdditionalName",
+            "CreditCardFamilyName",
+            "CreditCardNumber",
+            "CreditCardExpiration",
+            "CreditCardExpirationMonth",
+            "CreditCardExpirationYear",
+            "CreditCardSecurityCode",
+            "CreditCardType",
+            "TransactionCurrency",
+            "TransactionAmount",
+            "Language",
+            "Birthday",
+            "DayOfBirth",
+            "MonthOfBirth",
+            "YearOfBirth",
+            "Sex",
+            "Url",
+            "Photo",
+            "TelephoneNumber",
+            "TelephoneCountryCode",
+            "TelephoneWithoutCountryCode",
+            "TelephoneAreaCode",
+            "TelephoneLocal",
+            "TelephoneLocalPrefix",
+            "TelephoneLocalSuffix",
+            "TelephoneExtension",
+            "Email",
+            "InstantMessageProtocol"
+          ]
+        },
+        "submitBehaviour": {
+          "type": "string",
+          "enum": [
+            "OnEndEditing",
+            "WhileEditing"
+          ]
+        },
+        "submitOnInputDelay": {
+          "type": "string"
+        },
+        "nativeAccessibilitySettings": {
+          "$ref": "#/definitions/AccessibilitySettings"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type",
+        "formattingInfo",
+        "onEnterKeyPressAction"
+      ]
+    },
+    "Title": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Pages$Title"
+        },
+        "nativeAccessibilitySettings": {
+          "$ref": "#/definitions/AccessibilitySettings"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "ToggleDesignPropertyValue": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Pages$ToggleDesignPropertyValue"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "UserRoleSet": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Pages$UserRoleSet"
+        },
+        "userRoles": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "description": "security.schema.json#/definitions/IUserRole"
+          }
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "WorkflowTemplateType": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Pages$WorkflowTemplateType"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "UserTaskTemplateType": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Pages$UserTaskTemplateType"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "ValidationMessage": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Pages$ValidationMessage"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "VerticalFlow": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Pages$VerticalFlow"
+        },
+        "widgets": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Widget"
+          }
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "VerticalSplitPane": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Pages$VerticalSplitPane"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "WebLayoutContent": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Pages$WebLayoutContent"
+        },
+        "layoutType": {
+          "type": "string",
+          "enum": [
+            "Responsive",
+            "Tablet",
+            "Phone",
+            "ModalPopup",
+            "Popup",
+            "Legacy"
+          ]
+        },
+        "layoutCall": {
+          "$ref": "#/definitions/LayoutCall"
+        },
+        "widgets": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Widget"
+          }
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "WidgetValidation": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Pages$WidgetValidation"
+        },
+        "expression": {
+          "type": "string"
+        },
+        "message": {
+          "$ref": "texts.schema.json#/definitions/Text"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type",
+        "message"
+      ]
+    },
+    "WorkflowOverviewTemplateType": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Pages$WorkflowOverviewTemplateType"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    }
+  }
+}

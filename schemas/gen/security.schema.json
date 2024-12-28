@@ -1,0 +1,287 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "definitions": {
+    "AccessRuleContainerBase": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Security$AccessRuleContainerBase"
+        },
+        "accessRules": {
+          "type": "array",
+          "items": {
+            "$ref": "domainmodels.schema.json#/definitions/AccessRule"
+          }
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "DemoUser": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Security$DemoUser"
+        },
+        "userName": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        },
+        "entity": {
+          "type": "string",
+          "description": "domainmodels.schema.json#/definitions/IEntity"
+        },
+        "userRoles": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "description": "#/definitions/UserRole"
+          }
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "FileDocumentAccessRuleContainer": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Security$FileDocumentAccessRuleContainer"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "ImageAccessRuleContainer": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Security$ImageAccessRuleContainer"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "ModuleRole": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Security$ModuleRole"
+        },
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "ModuleSecurity": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Security$ModuleSecurity"
+        },
+        "moduleRoles": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ModuleRole"
+          }
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "PasswordPolicySettings": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Security$PasswordPolicySettings"
+        },
+        "minimumLength": {
+          "type": "string"
+        },
+        "requireMixedCase": {
+          "type": "boolean"
+        },
+        "requireSymbol": {
+          "type": "boolean"
+        },
+        "requireDigit": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "ProjectSecurity": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Security$ProjectSecurity"
+        },
+        "securityLevel": {
+          "type": "string",
+          "enum": [
+            "CheckNothing",
+            "CheckFormsAndMicroflows",
+            "CheckEverything"
+          ]
+        },
+        "checkSecurity": {
+          "type": "boolean"
+        },
+        "strictPageUrlCheck": {
+          "type": "boolean"
+        },
+        "userRoles": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/UserRole"
+          }
+        },
+        "adminUserName": {
+          "type": "string"
+        },
+        "adminPassword": {
+          "type": "string"
+        },
+        "adminUserRoleName": {
+          "type": "string"
+        },
+        "enableDemoUsers": {
+          "type": "boolean"
+        },
+        "demoUsers": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DemoUser"
+          }
+        },
+        "enableGuestAccess": {
+          "type": "boolean"
+        },
+        "guestUserRoleName": {
+          "type": "string"
+        },
+        "passwordPolicySettings": {
+          "$ref": "#/definitions/PasswordPolicySettings"
+        },
+        "fileDocumentAccess": {
+          "$ref": "#/definitions/FileDocumentAccessRuleContainer"
+        },
+        "imageAccess": {
+          "$ref": "#/definitions/ImageAccessRuleContainer"
+        },
+        "strictMode": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type",
+        "passwordPolicySettings",
+        "fileDocumentAccess",
+        "imageAccess"
+      ]
+    },
+    "UserRole": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Security$UserRole"
+        },
+        "guid": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "moduleRoles": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "description": "#/definitions/ModuleRole"
+          }
+        },
+        "manageAllRoles": {
+          "type": "boolean"
+        },
+        "manageableRoles": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "description": "#/definitions/UserRole"
+          }
+        },
+        "manageUsersWithoutRoles": {
+          "type": "boolean"
+        },
+        "checkSecurity": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    }
+  }
+}

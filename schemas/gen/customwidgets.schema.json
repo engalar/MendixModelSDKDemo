@@ -1,0 +1,536 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "definitions": {
+    "CustomWidget": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "CustomWidgets$CustomWidget"
+        },
+        "type": {
+          "$ref": "#/definitions/CustomWidgetType"
+        },
+        "object": {
+          "$ref": "#/definitions/WidgetObject"
+        },
+        "labelTemplate": {
+          "$ref": "pages.schema.json#/definitions/ClientTemplate"
+        },
+        "conditionalEditabilitySettings": {
+          "$ref": "pages.schema.json#/definitions/ConditionalEditabilitySettings"
+        },
+        "editable": {
+          "type": "string"
+        },
+        "conditionalVisibilitySettings": {
+          "$ref": "pages.schema.json#/definitions/ConditionalVisibilitySettings"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "CustomWidgetDatabaseSource": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "CustomWidgets$CustomWidgetDatabaseSource"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "CustomWidgetType": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "CustomWidgets$CustomWidgetType"
+        },
+        "widgetId": {
+          "type": "string"
+        },
+        "needsEntityContext": {
+          "type": "boolean"
+        },
+        "pluginWidget": {
+          "type": "boolean"
+        },
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "studioProCategory": {
+          "type": "string"
+        },
+        "studioCategory": {
+          "type": "string"
+        },
+        "supportedPlatform": {
+          "type": "string"
+        },
+        "offlineCapable": {
+          "type": "boolean"
+        },
+        "objectType": {
+          "$ref": "#/definitions/WidgetObjectType"
+        },
+        "helpUrl": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type",
+        "objectType"
+      ]
+    },
+    "CustomWidgetXPathSource": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "CustomWidgets$CustomWidgetXPathSource"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "WidgetEnumerationValue": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "CustomWidgets$WidgetEnumerationValue"
+        },
+        "key": {
+          "type": "string"
+        },
+        "caption": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "WidgetObject": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "CustomWidgets$WidgetObject"
+        },
+        "properties": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/WidgetProperty"
+          }
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "WidgetObjectType": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "CustomWidgets$WidgetObjectType"
+        },
+        "propertyTypes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/WidgetPropertyType"
+          }
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "WidgetProperty": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "CustomWidgets$WidgetProperty"
+        },
+        "value": {
+          "$ref": "#/definitions/WidgetValue"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "WidgetPropertyType": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "CustomWidgets$WidgetPropertyType"
+        },
+        "key": {
+          "type": "string"
+        },
+        "category": {
+          "type": "string"
+        },
+        "caption": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "isDefault": {
+          "type": "boolean"
+        },
+        "valueType": {
+          "$ref": "#/definitions/WidgetValueType"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "WidgetReturnType": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "CustomWidgets$WidgetReturnType"
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "None",
+            "Void",
+            "Boolean",
+            "Integer",
+            "Float",
+            "DateTime",
+            "String",
+            "Object",
+            "Decimal"
+          ]
+        },
+        "isList": {
+          "type": "boolean"
+        },
+        "entityProperty": {
+          "type": "string"
+        },
+        "assignableTo": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "WidgetTranslation": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "CustomWidgets$WidgetTranslation"
+        },
+        "languageCode": {
+          "type": "string"
+        },
+        "text": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "WidgetValue": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "CustomWidgets$WidgetValue"
+        },
+        "primitiveValue": {
+          "type": "string"
+        },
+        "entityRef": {
+          "$ref": "domainmodels.schema.json#/definitions/EntityRef"
+        },
+        "attributeRef": {
+          "$ref": "domainmodels.schema.json#/definitions/AttributeRef"
+        },
+        "page": {
+          "type": "string",
+          "description": "pages.schema.json#/definitions/IPage"
+        },
+        "microflow": {
+          "type": "string",
+          "description": "microflows.schema.json#/definitions/IMicroflow"
+        },
+        "nanoflow": {
+          "type": "string",
+          "description": "microflows.schema.json#/definitions/INanoflow"
+        },
+        "icon": {
+          "$ref": "pages.schema.json#/definitions/Icon"
+        },
+        "image": {
+          "type": "string",
+          "description": "images.schema.json#/definitions/IImage"
+        },
+        "translatableValue": {
+          "$ref": "texts.schema.json#/definitions/Text"
+        },
+        "textTemplate": {
+          "$ref": "pages.schema.json#/definitions/ClientTemplate"
+        },
+        "xPathConstraint": {
+          "type": "string"
+        },
+        "objects": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/WidgetObject"
+          }
+        },
+        "action": {
+          "$ref": "pages.schema.json#/definitions/ClientAction"
+        },
+        "expression": {
+          "type": "string"
+        },
+        "widgets": {
+          "type": "array",
+          "items": {
+            "$ref": "pages.schema.json#/definitions/Widget"
+          }
+        },
+        "dataSource": {
+          "$ref": "pages.schema.json#/definitions/DataSource"
+        },
+        "sourceVariable": {
+          "$ref": "pages.schema.json#/definitions/PageVariable"
+        },
+        "selection": {
+          "type": "string",
+          "enum": [
+            "None",
+            "Single",
+            "Multi"
+          ]
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type",
+        "action"
+      ]
+    },
+    "WidgetValueType": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "CustomWidgets$WidgetValueType"
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "Action",
+            "Attribute",
+            "Association",
+            "Boolean",
+            "DataSource",
+            "Entity",
+            "EntityConstraint",
+            "Enumeration",
+            "Expression",
+            "File",
+            "Form",
+            "Icon",
+            "Image",
+            "Integer",
+            "Decimal",
+            "Microflow",
+            "Nanoflow",
+            "Object",
+            "String",
+            "Selection",
+            "TranslatableString",
+            "TextTemplate",
+            "System",
+            "Widgets"
+          ]
+        },
+        "isList": {
+          "type": "boolean"
+        },
+        "isLinked": {
+          "type": "boolean"
+        },
+        "isMetaData": {
+          "type": "boolean"
+        },
+        "entityProperty": {
+          "type": "string"
+        },
+        "allowNonPersistableEntities": {
+          "type": "boolean"
+        },
+        "isPath": {
+          "type": "string",
+          "enum": [
+            "No",
+            "Optional",
+            "Yes"
+          ]
+        },
+        "pathType": {
+          "type": "string",
+          "enum": [
+            "None",
+            "Reference",
+            "ReferenceSet"
+          ]
+        },
+        "parameterIsList": {
+          "type": "boolean"
+        },
+        "multiline": {
+          "type": "boolean"
+        },
+        "defaultValue": {
+          "type": "string"
+        },
+        "required": {
+          "type": "boolean"
+        },
+        "onChangeProperty": {
+          "type": "string"
+        },
+        "dataSourceProperty": {
+          "type": "string"
+        },
+        "selectableObjectsProperty": {
+          "type": "string"
+        },
+        "attributeTypes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "associationTypes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "selectionTypes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "enumerationValues": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/WidgetEnumerationValue"
+          }
+        },
+        "objectType": {
+          "$ref": "#/definitions/WidgetObjectType"
+        },
+        "returnType": {
+          "$ref": "#/definitions/WidgetReturnType"
+        },
+        "translations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/WidgetTranslation"
+          }
+        },
+        "setLabel": {
+          "type": "boolean"
+        },
+        "defaultType": {
+          "type": "string",
+          "enum": [
+            "None",
+            "CallMicroflow",
+            "CallNanoflow",
+            "OpenPage",
+            "Database",
+            "Microflow",
+            "Nanoflow",
+            "Association"
+          ]
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    }
+  }
+}

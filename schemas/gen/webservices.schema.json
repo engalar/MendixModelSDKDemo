@@ -1,0 +1,674 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "definitions": {
+    "DataMember": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "WebServices$DataMember"
+        },
+        "exposedName": {
+          "type": "string"
+        },
+        "isOptional": {
+          "type": "boolean"
+        },
+        "isNillable": {
+          "type": "boolean"
+        },
+        "isKey": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "DataEntityBase": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "WebServices$DataEntityBase"
+        },
+        "childMembers": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DataMember"
+          }
+        },
+        "entity": {
+          "type": "string",
+          "description": "domainmodels.schema.json#/definitions/IEntity"
+        },
+        "exposedItemName": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "DataAssociation": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "WebServices$DataAssociation"
+        },
+        "association": {
+          "type": "string",
+          "description": "domainmodels.schema.json#/definitions/IAssociationBase"
+        },
+        "exposedAssociationName": {
+          "type": "string"
+        },
+        "summary": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "DataAttribute": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "WebServices$DataAttribute"
+        },
+        "attribute": {
+          "type": "string",
+          "description": "domainmodels.schema.json#/definitions/IAttribute"
+        },
+        "summary": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "filterable": {
+          "type": "boolean"
+        },
+        "sortable": {
+          "type": "boolean"
+        },
+        "enumerationAsString": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "DataEntity": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "WebServices$DataEntity"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "ImportedWebService": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "WebServices$ImportedWebService"
+        },
+        "wsdlDescription": {
+          "$ref": "#/definitions/WsdlDescription"
+        },
+        "wsdlUrl": {
+          "type": "string"
+        },
+        "useMtom": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "OperationInfo": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "WebServices$OperationInfo"
+        },
+        "name": {
+          "type": "string"
+        },
+        "documentation": {
+          "type": "string"
+        },
+        "soapAction": {
+          "type": "string"
+        },
+        "requestHeaderRpcElement": {
+          "$ref": "#/definitions/RpcOperationElement"
+        },
+        "requestBodyRpcElement": {
+          "$ref": "#/definitions/RpcOperationElement"
+        },
+        "responseBodyRpcElement": {
+          "$ref": "#/definitions/RpcOperationElement"
+        },
+        "requestHeaderElementName": {
+          "type": "string"
+        },
+        "requestHeaderEncoded": {
+          "type": "boolean"
+        },
+        "requestHeaderPartEncoding": {
+          "$ref": "#/definitions/PartEncoding"
+        },
+        "requestBodyEncoded": {
+          "type": "boolean"
+        },
+        "requestBodyElementName": {
+          "type": "string"
+        },
+        "requestBodyPartEncodings": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PartEncoding"
+          }
+        },
+        "responseBodyElementName": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type",
+        "requestHeaderRpcElement",
+        "requestBodyRpcElement",
+        "responseBodyRpcElement"
+      ]
+    },
+    "PartEncoding": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "WebServices$PartEncoding"
+        },
+        "partName": {
+          "type": "string"
+        },
+        "partXsdType": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "PublishedServiceBase": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "WebServices$PublishedServiceBase"
+        },
+        "versionedServices": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VersionedService"
+          }
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "PublishedAppService": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "WebServices$PublishedAppService"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "PublishedResource": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "WebServices$PublishedResource"
+        },
+        "dataEntity": {
+          "$ref": "#/definitions/DataEntity"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type",
+        "dataEntity"
+      ]
+    },
+    "PublishedOperation": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "WebServices$PublishedOperation"
+        },
+        "name": {
+          "type": "string"
+        },
+        "image": {
+          "type": "string",
+          "description": "images.schema.json#/definitions/IImage"
+        },
+        "description": {
+          "type": "string"
+        },
+        "documentation": {
+          "type": "string"
+        },
+        "microflow": {
+          "type": "string",
+          "description": "microflows.schema.json#/definitions/IMicroflow"
+        },
+        "parameters": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PublishedParameter"
+          }
+        },
+        "entityExposedName": {
+          "type": "string"
+        },
+        "operationReturnType": {
+          "$ref": "datatypes.schema.json#/definitions/DataType"
+        },
+        "returnTypeIsOptional": {
+          "type": "boolean"
+        },
+        "returnTypeIsNillable": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type",
+        "operationReturnType"
+      ]
+    },
+    "PublishedParameter": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "WebServices$PublishedParameter"
+        },
+        "parameter": {
+          "type": "string",
+          "description": "microflows.schema.json#/definitions/IMicroflowParameter"
+        },
+        "entityExposedName": {
+          "type": "string"
+        },
+        "isOptional": {
+          "type": "boolean"
+        },
+        "isNillable": {
+          "type": "boolean"
+        },
+        "entityExposedItemName": {
+          "type": "string"
+        },
+        "parameterType": {
+          "$ref": "datatypes.schema.json#/definitions/DataType"
+        },
+        "dataEntity": {
+          "$ref": "#/definitions/DataEntity"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type",
+        "parameterType",
+        "dataEntity"
+      ]
+    },
+    "PublishedWebService": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "WebServices$PublishedWebService"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "RpcMessagePartElement": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "WebServices$RpcMessagePartElement"
+        },
+        "partName": {
+          "type": "string"
+        },
+        "typeName": {
+          "type": "string"
+        },
+        "elementName": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "RpcOperationElement": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "WebServices$RpcOperationElement"
+        },
+        "name": {
+          "type": "string"
+        },
+        "messagePartElements": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RpcMessagePartElement"
+          }
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "ServiceInfo": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "WebServices$ServiceInfo"
+        },
+        "name": {
+          "type": "string"
+        },
+        "documentation": {
+          "type": "string"
+        },
+        "portName": {
+          "type": "string"
+        },
+        "location": {
+          "type": "string"
+        },
+        "soapVersion": {
+          "type": "string",
+          "enum": [
+            "Soap11",
+            "Soap12"
+          ]
+        },
+        "locationConstant": {
+          "type": "string",
+          "description": "constants.schema.json#/definitions/IConstant"
+        },
+        "operations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/OperationInfo"
+          }
+        },
+        "usingAddressing": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "SystemIdDataAttribute": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "WebServices$SystemIdDataAttribute"
+        },
+        "entity": {
+          "type": "string",
+          "description": "domainmodels.schema.json#/definitions/IEntity"
+        },
+        "summary": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "VersionedService": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "WebServices$VersionedService"
+        },
+        "documentation": {
+          "type": "string"
+        },
+        "targetNamespace": {
+          "type": "string"
+        },
+        "headerAuthentication": {
+          "type": "string",
+          "enum": [
+            "None",
+            "UsernamePassword",
+            "Custom"
+          ]
+        },
+        "operations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PublishedOperation"
+          }
+        },
+        "optimizedXml": {
+          "type": "boolean"
+        },
+        "headerImportMapping": {
+          "type": "string",
+          "description": "importmappings.schema.json#/definitions/IImportMapping"
+        },
+        "objectHandlingBackup": {
+          "type": "string"
+        },
+        "headerMicroflow": {
+          "type": "string",
+          "description": "microflows.schema.json#/definitions/IMicroflow"
+        },
+        "versionNumber": {
+          "type": "string"
+        },
+        "caption": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "image": {
+          "type": "string",
+          "description": "images.schema.json#/definitions/IImage"
+        },
+        "validate": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "WsdlDescription": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "WebServices$WsdlDescription"
+        },
+        "wsdlEntries": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/WsdlEntry"
+          }
+        },
+        "schemaEntries": {
+          "type": "array",
+          "items": {
+            "$ref": "xmlschemas.schema.json#/definitions/XmlSchemaEntry"
+          }
+        },
+        "services": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ServiceInfo"
+          }
+        },
+        "targetNamespace": {
+          "type": "string"
+        },
+        "importsHaveLocations": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "WsdlEntry": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "WebServices$WsdlEntry"
+        },
+        "location": {
+          "type": "string"
+        },
+        "contents": {
+          "type": "string"
+        },
+        "localizedLocationFormat": {
+          "type": "string"
+        },
+        "localizedContentsFormat": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    }
+  }
+}

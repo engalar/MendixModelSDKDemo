@@ -1,0 +1,208 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "definitions": {
+    "ConsumedKafkaService": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Kafka$ConsumedKafkaService"
+        },
+        "metadataReferences": {
+          "type": "array",
+          "items": {
+            "$ref": "rest.schema.json#/definitions/MetadataReference"
+          }
+        },
+        "serviceFeed": {
+          "type": "string"
+        },
+        "brokerUrl": {
+          "type": "string",
+          "description": "constants.schema.json#/definitions/IConstant"
+        },
+        "brokerUsername": {
+          "type": "string",
+          "description": "constants.schema.json#/definitions/IConstant"
+        },
+        "brokerPassword": {
+          "type": "string",
+          "description": "constants.schema.json#/definitions/IConstant"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "KafkaMappedValue": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Kafka$KafkaMappedValue"
+        },
+        "remoteName": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "KafkaRemoteEntitySource": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Kafka$KafkaRemoteEntitySource"
+        },
+        "sourceDocument": {
+          "type": "string",
+          "description": "#/definitions/ConsumedKafkaService"
+        },
+        "remoteName": {
+          "type": "string"
+        },
+        "topicName": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "PublishedKafkaResource": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Kafka$PublishedKafkaResource"
+        },
+        "entity": {
+          "type": "string",
+          "description": "domainmodels.schema.json#/definitions/IEntity"
+        },
+        "exposedName": {
+          "type": "string"
+        },
+        "attributes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PublishedKafkaResourceAttribute"
+          }
+        },
+        "summary": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type",
+        "entity"
+      ]
+    },
+    "PublishedKafkaResourceAttribute": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Kafka$PublishedKafkaResourceAttribute"
+        },
+        "attribute": {
+          "type": "string",
+          "description": "domainmodels.schema.json#/definitions/IAttribute"
+        },
+        "exposedName": {
+          "type": "string"
+        },
+        "summary": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type",
+        "attribute"
+      ]
+    },
+    "PublishedKafkaService": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Kafka$PublishedKafkaService"
+        },
+        "namespace": {
+          "type": "string"
+        },
+        "serviceFeed": {
+          "type": "string"
+        },
+        "metadata": {
+          "type": "string"
+        },
+        "serviceName": {
+          "type": "string"
+        },
+        "resources": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PublishedKafkaResource"
+          }
+        },
+        "version": {
+          "type": "string"
+        },
+        "summary": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "brokerUrl": {
+          "type": "string",
+          "description": "constants.schema.json#/definitions/IConstant"
+        },
+        "brokerUsername": {
+          "type": "string",
+          "description": "constants.schema.json#/definitions/IConstant"
+        },
+        "brokerPassword": {
+          "type": "string",
+          "description": "constants.schema.json#/definitions/IConstant"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    }
+  }
+}

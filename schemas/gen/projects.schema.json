@@ -1,0 +1,308 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "definitions": {
+    "ModuleDocument": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Projects$ModuleDocument"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "Document": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Projects$Document"
+        },
+        "name": {
+          "type": "string"
+        },
+        "documentation": {
+          "type": "string"
+        },
+        "excluded": {
+          "type": "boolean"
+        },
+        "exportLevel": {
+          "type": "string",
+          "enum": [
+            "Hidden",
+            "API"
+          ]
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "FolderBase": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Projects$FolderBase"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "Folder": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Projects$Folder"
+        },
+        "name": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "JarDependency": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Projects$JarDependency"
+        },
+        "groupId": {
+          "type": "string"
+        },
+        "artifactId": {
+          "type": "string"
+        },
+        "version": {
+          "type": "string"
+        },
+        "isIncluded": {
+          "type": "boolean"
+        },
+        "exclusions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/JarDependencyExclusion"
+          }
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "JarDependencyExclusion": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Projects$JarDependencyExclusion"
+        },
+        "groupId": {
+          "type": "string"
+        },
+        "artifactId": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "Module": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Projects$Module"
+        },
+        "sortIndex": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "fromAppStore": {
+          "type": "boolean"
+        },
+        "appStoreGuid": {
+          "type": "string"
+        },
+        "appStoreVersionGuid": {
+          "type": "string"
+        },
+        "appStoreVersion": {
+          "type": "string"
+        },
+        "appStorePackageId": {
+          "type": "string"
+        },
+        "isThemeModule": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "ModuleSettings": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Projects$ModuleSettings"
+        },
+        "exportLevel": {
+          "type": "string",
+          "enum": [
+            "Source",
+            "Protected"
+          ]
+        },
+        "protectedModuleType": {
+          "type": "string",
+          "enum": [
+            "AddOn",
+            "Solution"
+          ]
+        },
+        "version": {
+          "type": "string"
+        },
+        "solutionIdentifier": {
+          "type": "string"
+        },
+        "extensionName": {
+          "type": "string"
+        },
+        "jarDependencies": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/JarDependency"
+          }
+        },
+        "basedOnVersion": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "OneTimeConversionMarker": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Projects$OneTimeConversionMarker"
+        },
+        "name": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "Project": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Projects$Project"
+        },
+        "isSystemProject": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "ProjectConversion": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Projects$ProjectConversion"
+        },
+        "markers": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/OneTimeConversionMarker"
+          }
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "ProjectDocument": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Projects$ProjectDocument"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    }
+  }
+}

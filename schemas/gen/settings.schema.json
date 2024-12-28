@@ -1,0 +1,720 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "definitions": {
+    "ActionActivityDefaultColor": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Settings$ActionActivityDefaultColor"
+        },
+        "actionActivityType": {
+          "type": "string"
+        },
+        "backgroundColor": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "Certificate": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Settings$Certificate"
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "Authority",
+            "Client"
+          ]
+        },
+        "data": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "ProjectSettingsPart": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Settings$ProjectSettingsPart"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "CertificateSettings": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Settings$CertificateSettings"
+        },
+        "certificates": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Certificate"
+          }
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "Configuration": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Settings$Configuration"
+        },
+        "name": {
+          "type": "string"
+        },
+        "applicationRootUrl": {
+          "type": "string"
+        },
+        "runtimePortNumber": {
+          "type": "string"
+        },
+        "adminPortNumber": {
+          "type": "string"
+        },
+        "runtimePortOnlyLocal": {
+          "type": "boolean"
+        },
+        "adminPortOnlyLocal": {
+          "type": "boolean"
+        },
+        "maxJavaHeapSize": {
+          "type": "string"
+        },
+        "extraJvmParameters": {
+          "type": "string"
+        },
+        "databaseType": {
+          "type": "string",
+          "enum": [
+            "Hsqldb",
+            "Db2",
+            "SqlServer",
+            "MySql",
+            "Oracle",
+            "PostgreSql",
+            "SapHana"
+          ]
+        },
+        "databaseUrl": {
+          "type": "string"
+        },
+        "databaseName": {
+          "type": "string"
+        },
+        "databaseUseIntegratedSecurity": {
+          "type": "boolean"
+        },
+        "databaseUserName": {
+          "type": "string"
+        },
+        "databasePassword": {
+          "type": "string"
+        },
+        "customSettings": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CustomSetting"
+          }
+        },
+        "constantValues": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ConstantValue"
+          }
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "ConfigurationSettings": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Settings$ConfigurationSettings"
+        },
+        "configurations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Configuration"
+          }
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "ConstantValue": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Settings$ConstantValue"
+        },
+        "constant": {
+          "type": "string",
+          "description": "constants.schema.json#/definitions/IConstant"
+        },
+        "sharedOrPrivateValue": {
+          "$ref": "#/definitions/SharedOrPrivateValue"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type",
+        "constant",
+        "sharedOrPrivateValue"
+      ]
+    },
+    "CustomSetting": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Settings$CustomSetting"
+        },
+        "name": {
+          "type": "string"
+        },
+        "value": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "DistributionSettings": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Settings$DistributionSettings"
+        },
+        "isDistributable": {
+          "type": "boolean"
+        },
+        "version": {
+          "type": "string"
+        },
+        "basedOnVersion": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "IntegrationProjectSettingsPart": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Settings$IntegrationProjectSettingsPart"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "JarDeploymentSettings": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Settings$JarDeploymentSettings"
+        },
+        "exclusions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/JarLocationBase"
+          }
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "JarLocationBase": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Settings$JarLocationBase"
+        },
+        "jarFileName": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "JavaActionsSettings": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Settings$JavaActionsSettings"
+        },
+        "generatePostfixesForParameters": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "Language": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Settings$Language"
+        },
+        "code": {
+          "type": "string"
+        },
+        "checkCompleteness": {
+          "type": "boolean"
+        },
+        "customDateFormat": {
+          "type": "string"
+        },
+        "customTimeFormat": {
+          "type": "string"
+        },
+        "customDateTimeFormat": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "LanguageSettings": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Settings$LanguageSettings"
+        },
+        "defaultLanguageCode": {
+          "type": "string"
+        },
+        "languages": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Language"
+          }
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "ModelerSettings": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Settings$ModelerSettings"
+        },
+        "lowerCaseMicroflowVariables": {
+          "type": "boolean"
+        },
+        "actionActivityDefaultColors": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ActionActivityDefaultColor"
+          }
+        },
+        "defaultSequenceFlowLineType": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "SharedOrPrivateValue": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Settings$SharedOrPrivateValue"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "PrivateValue": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Settings$PrivateValue"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "ProjectSettings": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Settings$ProjectSettings"
+        },
+        "settingsParts": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ProjectSettingsPart"
+          }
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "ProtectedModuleJarLocation": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Settings$ProtectedModuleJarLocation"
+        },
+        "moduleName": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "RuntimeSettings": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Settings$RuntimeSettings"
+        },
+        "afterStartupMicroflow": {
+          "type": "string",
+          "description": "microflows.schema.json#/definitions/IMicroflow"
+        },
+        "beforeShutdownMicroflow": {
+          "type": "string",
+          "description": "microflows.schema.json#/definitions/IMicroflow"
+        },
+        "healthCheckMicroflow": {
+          "type": "string",
+          "description": "microflows.schema.json#/definitions/IMicroflow"
+        },
+        "firstDayOfWeek": {
+          "type": "string",
+          "enum": [
+            "Default",
+            "Sunday",
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday",
+            "Saturday"
+          ]
+        },
+        "defaultTimeZoneCode": {
+          "type": "string"
+        },
+        "scheduledEventTimeZoneCode": {
+          "type": "string"
+        },
+        "hashAlgorithm": {
+          "type": "string",
+          "enum": [
+            "BCrypt",
+            "SSHA256",
+            "SHA256",
+            "MD5"
+          ]
+        },
+        "bcryptCost": {
+          "type": "string"
+        },
+        "roundingMode": {
+          "type": "string",
+          "enum": [
+            "HalfUp",
+            "HalfEven"
+          ]
+        },
+        "allowUserMultipleSessions": {
+          "type": "boolean"
+        },
+        "enableDataStorageOptimisticLocking": {
+          "type": "boolean"
+        },
+        "useSystemContextForBackgroundTasks": {
+          "type": "boolean"
+        },
+        "useDatabaseForeignKeyConstraints": {
+          "type": "boolean"
+        },
+        "javaVersion": {
+          "type": "string",
+          "enum": [
+            "Java11",
+            "Java17",
+            "Java21"
+          ]
+        },
+        "useOQLVersion2": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "SharedValue": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Settings$SharedValue"
+        },
+        "value": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "ThemeModuleEntry": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Settings$ThemeModuleEntry"
+        },
+        "moduleName": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "UserLibJarLocation": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Settings$UserLibJarLocation"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "WebUIProjectSettingsPart": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Settings$WebUIProjectSettingsPart"
+        },
+        "useOptimizedClient": {
+          "type": "string",
+          "enum": [
+            "No",
+            "Yes",
+            "MigrationMode"
+          ]
+        },
+        "urlPrefix": {
+          "type": "string"
+        },
+        "enableWidgetBundling": {
+          "type": "boolean"
+        },
+        "enableMicroflowReachabilityAnalysis": {
+          "type": "boolean"
+        },
+        "themeModuleOrder": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ThemeModuleEntry"
+          }
+        },
+        "enableNewWidgetGeneration": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "WorkflowsProjectSettingsPart": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Settings$WorkflowsProjectSettingsPart"
+        },
+        "userEntity": {
+          "type": "string",
+          "description": "domainmodels.schema.json#/definitions/IEntity"
+        },
+        "workflowEngineParallelism": {
+          "type": "string"
+        },
+        "defaultTaskParallelism": {
+          "type": "string"
+        },
+        "workflowOnStateChangeEvent": {
+          "$ref": "workflows.schema.json#/definitions/MicroflowEventHandler"
+        },
+        "usertaskOnStateChangeEvent": {
+          "$ref": "workflows.schema.json#/definitions/MicroflowEventHandler"
+        },
+        "onWorkflowEvent": {
+          "type": "array",
+          "items": {
+            "$ref": "workflows.schema.json#/definitions/WorkflowEventHandler"
+          }
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    }
+  }
+}

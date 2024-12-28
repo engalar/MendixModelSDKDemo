@@ -1,0 +1,579 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "definitions": {
+    "AppServiceAction": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "AppServices$AppServiceAction"
+        },
+        "name": {
+          "type": "string"
+        },
+        "caption": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "parameters": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AppServiceActionParameter"
+          }
+        },
+        "microflow": {
+          "type": "string",
+          "description": "microflows.schema.json#/definitions/IMicroflow"
+        },
+        "actionReturnType": {
+          "$ref": "datatypes.schema.json#/definitions/DataType"
+        },
+        "returnTypeCanBeEmpty": {
+          "type": "boolean"
+        },
+        "image": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type",
+        "actionReturnType"
+      ]
+    },
+    "AppServiceActionParameter": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "AppServices$AppServiceActionParameter"
+        },
+        "name": {
+          "type": "string"
+        },
+        "parameterType": {
+          "$ref": "datatypes.schema.json#/definitions/DataType"
+        },
+        "canBeEmpty": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type",
+        "parameterType"
+      ]
+    },
+    "ConsumedAppService": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "AppServices$ConsumedAppService"
+        },
+        "actions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AppServiceAction"
+          }
+        },
+        "msd": {
+          "$ref": "#/definitions/Msd"
+        },
+        "fromAppStore": {
+          "type": "boolean"
+        },
+        "appStoreGuid": {
+          "type": "string"
+        },
+        "appStoreVersionGuid": {
+          "type": "string"
+        },
+        "appStoreVersion": {
+          "type": "string"
+        },
+        "appServiceLocation": {
+          "type": "string",
+          "enum": [
+            "Default",
+            "Constant",
+            "Parameter"
+          ]
+        },
+        "locationConstant": {
+          "type": "string",
+          "description": "constants.schema.json#/definitions/IConstant"
+        },
+        "useTimeOut": {
+          "type": "boolean"
+        },
+        "timeOut": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type",
+        "msd"
+      ]
+    },
+    "Msd": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "AppServices$Msd"
+        },
+        "version": {
+          "$ref": "#/definitions/MsdVersion"
+        },
+        "metadata": {
+          "$ref": "#/definitions/MsdMetadata"
+        },
+        "domainModel": {
+          "$ref": "#/definitions/MsdDomainModel"
+        },
+        "enumerations": {
+          "$ref": "#/definitions/MsdEnumerationContainer"
+        },
+        "wsdlDescription": {
+          "$ref": "webservices.schema.json#/definitions/WsdlDescription"
+        },
+        "wsdl": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type",
+        "version",
+        "metadata",
+        "domainModel",
+        "enumerations",
+        "wsdlDescription"
+      ]
+    },
+    "MsdAssociation": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "AppServices$MsdAssociation"
+        },
+        "name": {
+          "type": "string"
+        },
+        "guid": {
+          "type": "string"
+        },
+        "parentEntityName": {
+          "type": "string"
+        },
+        "childEntityName": {
+          "type": "string"
+        },
+        "associationType": {
+          "type": "string"
+        },
+        "associationOwner": {
+          "type": "string"
+        },
+        "parentDeleteBehavior": {
+          "type": "string"
+        },
+        "childDeleteBehavior": {
+          "type": "string"
+        },
+        "associationKind": {
+          "type": "string"
+        },
+        "parentX": {
+          "type": "string"
+        },
+        "parentY": {
+          "type": "string"
+        },
+        "childX": {
+          "type": "string"
+        },
+        "childY": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "MsdAttribute": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "AppServices$MsdAttribute"
+        },
+        "name": {
+          "type": "string"
+        },
+        "guid": {
+          "type": "string"
+        },
+        "attributeType": {
+          "type": "string"
+        },
+        "enumerationName": {
+          "type": "string"
+        },
+        "defaultValue": {
+          "type": "string"
+        },
+        "length": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "MsdDomainModel": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "AppServices$MsdDomainModel"
+        },
+        "entities": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MsdEntity"
+          }
+        },
+        "associations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MsdAssociation"
+          }
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "MsdEntity": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "AppServices$MsdEntity"
+        },
+        "name": {
+          "type": "string"
+        },
+        "guid": {
+          "type": "string"
+        },
+        "generalizationName": {
+          "type": "string"
+        },
+        "persistable": {
+          "type": "boolean"
+        },
+        "locationX": {
+          "type": "string"
+        },
+        "locationY": {
+          "type": "string"
+        },
+        "attributes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MsdAttribute"
+          }
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "MsdEnumeration": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "AppServices$MsdEnumeration"
+        },
+        "name": {
+          "type": "string"
+        },
+        "guid": {
+          "type": "string"
+        },
+        "values": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MsdEnumerationValue"
+          }
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "MsdEnumerationContainer": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "AppServices$MsdEnumerationContainer"
+        },
+        "enumerations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MsdEnumeration"
+          }
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "MsdEnumerationValue": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "AppServices$MsdEnumerationValue"
+        },
+        "name": {
+          "type": "string"
+        },
+        "guid": {
+          "type": "string"
+        },
+        "translations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MsdText"
+          }
+        },
+        "image": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "MsdMetadata": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "AppServices$MsdMetadata"
+        },
+        "name": {
+          "type": "string"
+        },
+        "documentation": {
+          "type": "string"
+        },
+        "version": {
+          "type": "string"
+        },
+        "publishDateTime": {
+          "type": "string"
+        },
+        "serviceGuid": {
+          "type": "string"
+        },
+        "versionGuid": {
+          "type": "string"
+        },
+        "instanceGuid": {
+          "type": "string"
+        },
+        "supportedProtocols": {
+          "type": "string"
+        },
+        "headerAuthentication": {
+          "type": "string"
+        },
+        "microflows": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MsdMicroflow"
+          }
+        },
+        "caption": {
+          "type": "string"
+        },
+        "image": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "MsdMicroflow": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "AppServices$MsdMicroflow"
+        },
+        "name": {
+          "type": "string"
+        },
+        "documentation": {
+          "type": "string"
+        },
+        "image": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "parameters": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MsdMicroflowParameter"
+          }
+        },
+        "returnType": {
+          "type": "string"
+        },
+        "returnTypeSpecification": {
+          "type": "string"
+        },
+        "returnTypeCanBeEmpty": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "MsdMicroflowParameter": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "AppServices$MsdMicroflowParameter"
+        },
+        "name": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        },
+        "typeSpecification": {
+          "type": "string"
+        },
+        "canBeEmpty": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "MsdText": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "AppServices$MsdText"
+        },
+        "languageCode": {
+          "type": "string"
+        },
+        "caption": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "MsdVersion": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "AppServices$MsdVersion"
+        },
+        "version": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    }
+  }
+}

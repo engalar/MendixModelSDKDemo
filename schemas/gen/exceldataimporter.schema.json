@@ -1,0 +1,376 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "definitions": {
+    "CSVSheet": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "ExcelDataImporter$CSVSheet"
+        },
+        "delimiter": {
+          "type": "string"
+        },
+        "quoteChar": {
+          "type": "string"
+        },
+        "escapeChar": {
+          "type": "string"
+        },
+        "headerIncluded": {
+          "type": "boolean"
+        },
+        "entity": {
+          "type": "string",
+          "description": "domainmodels.schema.json#/definitions/IEntity"
+        },
+        "columnAttributeMappings": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ColumnAttributeMapping"
+          }
+        },
+        "csvRootElement": {
+          "$ref": "#/definitions/DataImporterElement"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type",
+        "csvRootElement"
+      ]
+    },
+    "TemplateContents": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "ExcelDataImporter$TemplateContents"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "CSVTemplateContents": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "ExcelDataImporter$CSVTemplateContents"
+        },
+        "sheet": {
+          "$ref": "#/definitions/CSVSheet"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type",
+        "sheet"
+      ]
+    },
+    "ColumnAttributeMapping": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "ExcelDataImporter$ColumnAttributeMapping"
+        },
+        "reference": {
+          "$ref": "#/definitions/Reference"
+        },
+        "attribute": {
+          "type": "string",
+          "description": "domainmodels.schema.json#/definitions/IAttribute"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type",
+        "reference",
+        "attribute"
+      ]
+    },
+    "CsvSheetMappingSourceReference": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "ExcelDataImporter$CsvSheetMappingSourceReference"
+        },
+        "csvSheet": {
+          "type": "string",
+          "description": "#/definitions/CSVSheet"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type",
+        "csvSheet"
+      ]
+    },
+    "DataImporterElement": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "ExcelDataImporter$DataImporterElement"
+        },
+        "originalValues": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "ExcelSheet": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "ExcelDataImporter$ExcelSheet"
+        },
+        "reference": {
+          "$ref": "#/definitions/Reference"
+        },
+        "headerRowStartsAt": {
+          "type": "string"
+        },
+        "dataRowStartsAt": {
+          "type": "string"
+        },
+        "entity": {
+          "type": "string",
+          "description": "domainmodels.schema.json#/definitions/IEntity"
+        },
+        "columnAttributeMappings": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ColumnAttributeMapping"
+          }
+        },
+        "excelRootElement": {
+          "$ref": "#/definitions/DataImporterElement"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type",
+        "reference",
+        "excelRootElement"
+      ]
+    },
+    "ExcelSheetMappingSourceReference": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "ExcelDataImporter$ExcelSheetMappingSourceReference"
+        },
+        "excelSheet": {
+          "type": "string",
+          "description": "#/definitions/ExcelSheet"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type",
+        "excelSheet"
+      ]
+    },
+    "ExcelTemplateContents": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "ExcelDataImporter$ExcelTemplateContents"
+        },
+        "sheets": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ExcelSheet"
+          }
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "ImportExcelDataAction": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "ExcelDataImporter$ImportExcelDataAction"
+        },
+        "template": {
+          "type": "string",
+          "description": "#/definitions/Template"
+        },
+        "fileVariableName": {
+          "type": "string"
+        },
+        "outputVariableName": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "Reference": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "ExcelDataImporter$Reference"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "IndexReference": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "ExcelDataImporter$IndexReference"
+        },
+        "referencedIndex": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "NameReference": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "ExcelDataImporter$NameReference"
+        },
+        "referencedName": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "Sheet": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "ExcelDataImporter$Sheet"
+        },
+        "reference": {
+          "$ref": "#/definitions/Reference"
+        },
+        "headerRowStartsAt": {
+          "type": "string"
+        },
+        "dataRowStartsAt": {
+          "type": "string"
+        },
+        "entity": {
+          "type": "string",
+          "description": "domainmodels.schema.json#/definitions/IEntity"
+        },
+        "columnAttributeMappings": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ColumnAttributeMapping"
+          }
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type",
+        "reference",
+        "entity"
+      ]
+    },
+    "Template": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "ExcelDataImporter$Template"
+        },
+        "templateName": {
+          "type": "string"
+        },
+        "contents": {
+          "$ref": "#/definitions/TemplateContents"
+        },
+        "fileName": {
+          "type": "string"
+        },
+        "useAsMappingSource": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    }
+  }
+}

@@ -1,0 +1,1283 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "definitions": {
+    "TargetUserInput": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Workflows$TargetUserInput"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "AbsoluteAmountUserInput": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Workflows$AbsoluteAmountUserInput"
+        },
+        "amount": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "AllUserInput": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Workflows$AllUserInput"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "Annotation": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Workflows$Annotation"
+        },
+        "description": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "Outcome": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Workflows$Outcome"
+        },
+        "flow": {
+          "$ref": "#/definitions/Flow"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type",
+        "flow"
+      ]
+    },
+    "ConditionOutcome": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Workflows$ConditionOutcome"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "BooleanConditionOutcome": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Workflows$BooleanConditionOutcome"
+        },
+        "value": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "BoundaryEvent": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Workflows$BoundaryEvent"
+        },
+        "flow": {
+          "$ref": "#/definitions/Flow"
+        },
+        "caption": {
+          "type": "string"
+        },
+        "annotation": {
+          "$ref": "#/definitions/Annotation"
+        },
+        "isInterrupting": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type",
+        "flow"
+      ]
+    },
+    "WorkflowActivity": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Workflows$WorkflowActivity"
+        },
+        "name": {
+          "type": "string"
+        },
+        "caption": {
+          "type": "string"
+        },
+        "annotation": {
+          "$ref": "#/definitions/Annotation"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "ConditionOutcomeActivity": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Workflows$ConditionOutcomeActivity"
+        },
+        "outcomes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ConditionOutcome"
+          }
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "CallMicroflowTask": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Workflows$CallMicroflowTask"
+        },
+        "microflow": {
+          "type": "string",
+          "description": "microflows.schema.json#/definitions/IMicroflow"
+        },
+        "parameterMappings": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MicroflowCallParameterMapping"
+          }
+        },
+        "boundaryEvents": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/BoundaryEvent"
+          }
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "CallWorkflowActivity": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Workflows$CallWorkflowActivity"
+        },
+        "workflow": {
+          "type": "string",
+          "description": "#/definitions/Workflow"
+        },
+        "parameterMappings": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/WorkflowCallParameterMapping"
+          }
+        },
+        "boundaryEvents": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/BoundaryEvent"
+          }
+        },
+        "executeAsync": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "UserTaskCompletionCriteria": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Workflows$UserTaskCompletionCriteria"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "ConsensusCompletionCriteria": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Workflows$ConsensusCompletionCriteria"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "UserSource": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Workflows$UserSource"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "EmptyUserSource": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Workflows$EmptyUserSource"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "EndOfBoundaryEventPathActivity": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Workflows$EndOfBoundaryEventPathActivity"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "EndWorkflowActivity": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Workflows$EndWorkflowActivity"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "EnumerationValueConditionOutcome": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Workflows$EnumerationValueConditionOutcome"
+        },
+        "value": {
+          "type": "string",
+          "description": "enumerations.schema.json#/definitions/IEnumerationValue"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "ExclusiveSplitActivity": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Workflows$ExclusiveSplitActivity"
+        },
+        "expression": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "Flow": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Workflows$Flow"
+        },
+        "activities": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/WorkflowActivity"
+          }
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "JumpToActivity": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Workflows$JumpToActivity"
+        },
+        "targetActivity": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "MajorityCompletionCriteria": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Workflows$MajorityCompletionCriteria"
+        },
+        "completionType": {
+          "type": "string",
+          "enum": [
+            "Relative",
+            "Absolute"
+          ]
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "UserTaskEvent": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Workflows$UserTaskEvent"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "MicroflowBasedEvent": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Workflows$MicroflowBasedEvent"
+        },
+        "microflow": {
+          "type": "string",
+          "description": "microflows.schema.json#/definitions/IMicroflow"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "MicroflowBasedUserSource": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Workflows$MicroflowBasedUserSource"
+        },
+        "microflow": {
+          "type": "string",
+          "description": "microflows.schema.json#/definitions/IMicroflow"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "MicroflowCallParameterMapping": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Workflows$MicroflowCallParameterMapping"
+        },
+        "parameter": {
+          "type": "string",
+          "description": "microflows.schema.json#/definitions/IMicroflowParameter"
+        },
+        "expression": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type",
+        "parameter"
+      ]
+    },
+    "MicroflowCompletionCriteria": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Workflows$MicroflowCompletionCriteria"
+        },
+        "microflow": {
+          "type": "string",
+          "description": "microflows.schema.json#/definitions/IMicroflow"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "MicroflowEventHandler": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Workflows$MicroflowEventHandler"
+        },
+        "microflow": {
+          "type": "string",
+          "description": "microflows.schema.json#/definitions/IMicroflow"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "UserTaskCompletion": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Workflows$UserTaskCompletion"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "MultiInputCompletion": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Workflows$MultiInputCompletion"
+        },
+        "targetUserInput": {
+          "$ref": "#/definitions/TargetUserInput"
+        },
+        "completionCriteria": {
+          "$ref": "#/definitions/UserTaskCompletionCriteria"
+        },
+        "awaitAllUsers": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type",
+        "targetUserInput",
+        "completionCriteria"
+      ]
+    },
+    "UserTaskActivity": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Workflows$UserTaskActivity"
+        },
+        "taskPage": {
+          "$ref": "#/definitions/PageReference"
+        },
+        "taskName": {
+          "$ref": "microflows.schema.json#/definitions/StringTemplate"
+        },
+        "taskDescription": {
+          "$ref": "microflows.schema.json#/definitions/StringTemplate"
+        },
+        "dueDate": {
+          "type": "string"
+        },
+        "userSource": {
+          "$ref": "#/definitions/UserSource"
+        },
+        "outcomes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/UserTaskOutcome"
+          }
+        },
+        "boundaryEvents": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/BoundaryEvent"
+          }
+        },
+        "onCreatedEvent": {
+          "$ref": "#/definitions/UserTaskEvent"
+        },
+        "autoAssignSingleTargetUser": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type",
+        "taskPage",
+        "taskName",
+        "taskDescription",
+        "userSource",
+        "onCreatedEvent"
+      ]
+    },
+    "MultiUserTaskActivity": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Workflows$MultiUserTaskActivity"
+        },
+        "targetUserInput": {
+          "$ref": "#/definitions/TargetUserInput"
+        },
+        "completionCriteria": {
+          "$ref": "#/definitions/UserTaskCompletionCriteria"
+        },
+        "awaitAllUsers": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type",
+        "targetUserInput",
+        "completionCriteria"
+      ]
+    },
+    "NoEvent": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Workflows$NoEvent"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "PageParameterMapping": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Workflows$PageParameterMapping"
+        },
+        "parameter": {
+          "type": "string",
+          "description": "pages.schema.json#/definitions/IPageParameter"
+        },
+        "expression": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type",
+        "parameter"
+      ]
+    },
+    "PageReference": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Workflows$PageReference"
+        },
+        "page": {
+          "type": "string",
+          "description": "pages.schema.json#/definitions/IPage"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "ParallelSplitActivity": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Workflows$ParallelSplitActivity"
+        },
+        "outcomes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ParallelSplitOutcome"
+          }
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "ParallelSplitOutcome": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Workflows$ParallelSplitOutcome"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "Parameter": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Workflows$Parameter"
+        },
+        "entity": {
+          "type": "string",
+          "description": "domainmodels.schema.json#/definitions/IEntity"
+        },
+        "name": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "PercentageAmountUserInput": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Workflows$PercentageAmountUserInput"
+        },
+        "percentage": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "SingleInputCompletion": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Workflows$SingleInputCompletion"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "SingleUserTaskActivity": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Workflows$SingleUserTaskActivity"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "ThresholdCompletionCriteria": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Workflows$ThresholdCompletionCriteria"
+        },
+        "completionType": {
+          "type": "string",
+          "enum": [
+            "Relative",
+            "Absolute"
+          ]
+        },
+        "threshold": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "TimerBoundaryEvent": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Workflows$TimerBoundaryEvent"
+        },
+        "delay": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "UserTask": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Workflows$UserTask"
+        },
+        "taskPage": {
+          "$ref": "#/definitions/PageReference"
+        },
+        "taskName": {
+          "$ref": "microflows.schema.json#/definitions/StringTemplate"
+        },
+        "taskDescription": {
+          "$ref": "microflows.schema.json#/definitions/StringTemplate"
+        },
+        "dueDate": {
+          "type": "string"
+        },
+        "userSource": {
+          "$ref": "#/definitions/UserSource"
+        },
+        "outcomes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/UserTaskOutcome"
+          }
+        },
+        "onCreatedEvent": {
+          "$ref": "#/definitions/UserTaskEvent"
+        },
+        "autoAssignSingleTargetUser": {
+          "type": "boolean"
+        },
+        "userTaskCompletion": {
+          "$ref": "#/definitions/UserTaskCompletion"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type",
+        "taskPage",
+        "taskName",
+        "taskDescription",
+        "userSource",
+        "onCreatedEvent",
+        "userTaskCompletion"
+      ]
+    },
+    "UserTaskOutcome": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Workflows$UserTaskOutcome"
+        },
+        "value": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "VetoCompletionCriteria": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Workflows$VetoCompletionCriteria"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "VoidConditionOutcome": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Workflows$VoidConditionOutcome"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "WaitForNotificationActivity": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Workflows$WaitForNotificationActivity"
+        },
+        "boundaryEvents": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/BoundaryEvent"
+          }
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "WaitForTimerActivity": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Workflows$WaitForTimerActivity"
+        },
+        "delay": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "Workflow": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Workflows$Workflow"
+        },
+        "title": {
+          "type": "string"
+        },
+        "parameter": {
+          "$ref": "#/definitions/Parameter"
+        },
+        "adminPage": {
+          "$ref": "#/definitions/PageReference"
+        },
+        "flow": {
+          "$ref": "#/definitions/Flow"
+        },
+        "workflowName": {
+          "$ref": "microflows.schema.json#/definitions/StringTemplate"
+        },
+        "workflowDescription": {
+          "$ref": "microflows.schema.json#/definitions/StringTemplate"
+        },
+        "dueDate": {
+          "type": "string"
+        },
+        "workflowOnStateChangeEvent": {
+          "$ref": "#/definitions/MicroflowEventHandler"
+        },
+        "usertaskOnStateChangeEvent": {
+          "$ref": "#/definitions/MicroflowEventHandler"
+        },
+        "onWorkflowEvent": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/WorkflowEventHandler"
+          }
+        },
+        "annotation": {
+          "$ref": "#/definitions/Annotation"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type",
+        "parameter",
+        "flow",
+        "workflowName",
+        "workflowDescription"
+      ]
+    },
+    "WorkflowCallParameterMapping": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Workflows$WorkflowCallParameterMapping"
+        },
+        "parameter": {
+          "type": "string",
+          "description": "#/definitions/Parameter"
+        },
+        "expression": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type",
+        "parameter"
+      ]
+    },
+    "WorkflowDefinitionSelection": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Workflows$WorkflowDefinitionSelection"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "WorkflowDefinitionNameSelection": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Workflows$WorkflowDefinitionNameSelection"
+        },
+        "workflow": {
+          "type": "string",
+          "description": "#/definitions/Workflow"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type",
+        "workflow"
+      ]
+    },
+    "WorkflowDefinitionObjectSelection": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Workflows$WorkflowDefinitionObjectSelection"
+        },
+        "workflowDefinitionVariable": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "WorkflowEventHandler": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Workflows$WorkflowEventHandler"
+        },
+        "description": {
+          "type": "string"
+        },
+        "microflowEventHandler": {
+          "$ref": "#/definitions/MicroflowEventHandler"
+        },
+        "eventTypes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "documentation": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "WorkflowType": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Workflows$WorkflowType"
+        },
+        "entity": {
+          "type": "string",
+          "description": "domainmodels.schema.json#/definitions/IEntity"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "XPathBasedUserSource": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Workflows$XPathBasedUserSource"
+        },
+        "xPathConstraint": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    }
+  }
+}

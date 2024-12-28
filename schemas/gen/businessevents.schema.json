@@ -1,0 +1,425 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "definitions": {
+    "AttributeEnumeration": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "BusinessEvents$AttributeEnumeration"
+        },
+        "items": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AttributeEnumerationItem"
+          }
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "AttributeEnumerationItem": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "BusinessEvents$AttributeEnumerationItem"
+        },
+        "value": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "BusinessEventDefinition": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "BusinessEvents$BusinessEventDefinition"
+        },
+        "serviceName": {
+          "type": "string"
+        },
+        "eventNamePrefix": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "summary": {
+          "type": "string"
+        },
+        "channels": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Channel"
+          }
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "BusinessEventService": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "BusinessEvents$BusinessEventService"
+        },
+        "definition": {
+          "$ref": "#/definitions/BusinessEventDefinition"
+        },
+        "document": {
+          "type": "string"
+        },
+        "operationImplementations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ServiceOperation"
+          }
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "Channel": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "BusinessEvents$Channel"
+        },
+        "channelName": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "messages": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Message"
+          }
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "ConsumedBusinessEvent": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "BusinessEvents$ConsumedBusinessEvent"
+        },
+        "eventName": {
+          "type": "string"
+        },
+        "channelId": {
+          "type": "string"
+        },
+        "entity": {
+          "type": "string",
+          "description": "domainmodels.schema.json#/definitions/IEntity"
+        },
+        "microflow": {
+          "type": "string",
+          "description": "microflows.schema.json#/definitions/IMicroflow"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type",
+        "entity",
+        "microflow"
+      ]
+    },
+    "ConsumedBusinessEventService": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "BusinessEvents$ConsumedBusinessEventService"
+        },
+        "version": {
+          "type": "string"
+        },
+        "contract": {
+          "type": "string"
+        },
+        "businessEvents": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ConsumedBusinessEvent"
+          }
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "Message": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "BusinessEvents$Message"
+        },
+        "messageName": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "attributes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MessageAttribute"
+          }
+        },
+        "canPublish": {
+          "type": "boolean"
+        },
+        "canSubscribe": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "MessageAttribute": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "BusinessEvents$MessageAttribute"
+        },
+        "attributeType": {
+          "$ref": "domainmodels.schema.json#/definitions/AttributeType"
+        },
+        "attributeName": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "enumerationDefinition": {
+          "$ref": "#/definitions/AttributeEnumeration"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type",
+        "attributeType"
+      ]
+    },
+    "PublishedBusinessEventService": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "BusinessEvents$PublishedBusinessEventService"
+        },
+        "serviceName": {
+          "type": "string"
+        },
+        "eventNamePrefix": {
+          "type": "string"
+        },
+        "version": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "summary": {
+          "type": "string"
+        },
+        "channels": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PublishedChannel"
+          }
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "PublishedChannel": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "BusinessEvents$PublishedChannel"
+        },
+        "channelId": {
+          "type": "string"
+        },
+        "channelName": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "messages": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PublishedMessage"
+          }
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "PublishedMessage": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "BusinessEvents$PublishedMessage"
+        },
+        "entity": {
+          "type": "string",
+          "description": "domainmodels.schema.json#/definitions/IEntity"
+        },
+        "eventName": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "summary": {
+          "type": "string"
+        },
+        "attributes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PublishedMessageAttribute"
+          }
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type",
+        "entity"
+      ]
+    },
+    "PublishedMessageAttribute": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "BusinessEvents$PublishedMessageAttribute"
+        },
+        "attribute": {
+          "type": "string",
+          "description": "domainmodels.schema.json#/definitions/IAttribute"
+        },
+        "attributeType": {
+          "$ref": "domainmodels.schema.json#/definitions/AttributeType"
+        },
+        "exposedName": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type",
+        "attribute",
+        "attributeType"
+      ]
+    },
+    "ServiceOperation": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "BusinessEvents$ServiceOperation"
+        },
+        "messageName": {
+          "type": "string"
+        },
+        "operation": {
+          "type": "string"
+        },
+        "entity": {
+          "type": "string",
+          "description": "domainmodels.schema.json#/definitions/IEntity"
+        },
+        "microflow": {
+          "type": "string",
+          "description": "microflows.schema.json#/definitions/IMicroflow"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type",
+        "entity"
+      ]
+    }
+  }
+}

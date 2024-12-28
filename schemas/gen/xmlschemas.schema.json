@@ -1,0 +1,93 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "definitions": {
+    "MxSchema": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "XmlSchemas$MxSchema"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "XmlElement": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "XmlSchemas$XmlElement"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "XmlSchema": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "XmlSchemas$XmlSchema"
+        },
+        "entries": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/XmlSchemaEntry"
+          }
+        },
+        "filePath": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "XmlSchemaEntry": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "XmlSchemas$XmlSchemaEntry"
+        },
+        "targetNamespace": {
+          "type": "string"
+        },
+        "location": {
+          "type": "string"
+        },
+        "contents": {
+          "type": "string"
+        },
+        "localizedLocationFormat": {
+          "type": "string"
+        },
+        "localizedContentsFormat": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    }
+  }
+}

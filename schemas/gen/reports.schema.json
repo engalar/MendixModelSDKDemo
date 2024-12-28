@@ -1,0 +1,442 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "definitions": {
+    "ReportWidget": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Reports$ReportWidget"
+        },
+        "dataSet": {
+          "type": "string",
+          "description": "datasets.schema.json#/definitions/IDataSet"
+        },
+        "generateOnLoad": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "BasicReport": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Reports$BasicReport"
+        },
+        "columns": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/BasicReportColumn"
+          }
+        },
+        "aggregates": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/BasicReportAggregate"
+          }
+        },
+        "showExportButton": {
+          "type": "boolean"
+        },
+        "zoomInfo": {
+          "$ref": "#/definitions/ReportZoomInfo"
+        },
+        "isPagingEnabled": {
+          "type": "boolean"
+        },
+        "pageSize": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type",
+        "zoomInfo"
+      ]
+    },
+    "BasicReportAggregate": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Reports$BasicReportAggregate"
+        },
+        "caption": {
+          "$ref": "texts.schema.json#/definitions/Text"
+        },
+        "aggregateFunction": {
+          "type": "string",
+          "enum": [
+            "Sum",
+            "Average",
+            "Count",
+            "Minimum",
+            "Maximum"
+          ]
+        },
+        "applicablePerColumn": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type",
+        "caption"
+      ]
+    },
+    "BasicReportColumn": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Reports$BasicReportColumn"
+        },
+        "caption": {
+          "$ref": "texts.schema.json#/definitions/Text"
+        },
+        "dataSetColumnName": {
+          "type": "string"
+        },
+        "width": {
+          "type": "string"
+        },
+        "alignment": {
+          "type": "string"
+        },
+        "format": {
+          "type": "string",
+          "enum": [
+            "Default",
+            "MonthName",
+            "WeekdayName"
+          ]
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type",
+        "caption"
+      ]
+    },
+    "ReportButton": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Reports$ReportButton"
+        },
+        "caption": {
+          "$ref": "texts.schema.json#/definitions/Text"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type",
+        "caption"
+      ]
+    },
+    "ReportChart": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Reports$ReportChart"
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "VerticalBars",
+            "VerticalBars3D",
+            "HorizontalBars",
+            "Lines",
+            "Area"
+          ]
+        },
+        "seriess": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ReportChartSeries"
+          }
+        },
+        "xAxisCaption": {
+          "$ref": "texts.schema.json#/definitions/Text"
+        },
+        "yAxisCaption": {
+          "$ref": "texts.schema.json#/definitions/Text"
+        },
+        "xAxisColumn": {
+          "type": "string"
+        },
+        "xAxisFormat": {
+          "type": "string",
+          "enum": [
+            "Default",
+            "MonthName",
+            "WeekdayName"
+          ]
+        },
+        "yAxisPrecision": {
+          "type": "string"
+        },
+        "yAxisUseMinMax": {
+          "type": "boolean"
+        },
+        "yAxisMinimum": {
+          "type": "string"
+        },
+        "yAxisMaximum": {
+          "type": "string"
+        },
+        "aspectRatio": {
+          "type": "string",
+          "enum": [
+            "SixteenToNine",
+            "ThreeToTwo",
+            "FourToThree",
+            "OneToOne",
+            "ThreeToFour",
+            "TwoToThree",
+            "NineToSixteen"
+          ]
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type",
+        "xAxisCaption",
+        "yAxisCaption"
+      ]
+    },
+    "ReportChartSeries": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Reports$ReportChartSeries"
+        },
+        "caption": {
+          "$ref": "texts.schema.json#/definitions/Text"
+        },
+        "dataSetColumn": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type",
+        "caption"
+      ]
+    },
+    "ReportDateRangeField": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Reports$ReportDateRangeField"
+        },
+        "caption": {
+          "$ref": "texts.schema.json#/definitions/Text"
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "Year",
+            "Month",
+            "Week",
+            "Period",
+            "Quarter"
+          ]
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type",
+        "caption"
+      ]
+    },
+    "ReportParameter": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Reports$ReportParameter"
+        },
+        "parameter": {
+          "type": "string",
+          "description": "datasets.schema.json#/definitions/IDataSetParameter"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "ReportDateRangeSelector": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Reports$ReportDateRangeSelector"
+        },
+        "fields": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ReportDateRangeField"
+          }
+        },
+        "minYear": {
+          "type": "string"
+        },
+        "maxYear": {
+          "type": "string"
+        },
+        "fieldsPerRow": {
+          "type": "string"
+        },
+        "showFromToRange": {
+          "type": "boolean"
+        },
+        "fromCaption": {
+          "$ref": "texts.schema.json#/definitions/Text"
+        },
+        "toCaption": {
+          "$ref": "texts.schema.json#/definitions/Text"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type",
+        "fromCaption",
+        "toCaption"
+      ]
+    },
+    "ReportDropDown": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Reports$ReportDropDown"
+        },
+        "attribute": {
+          "type": "string",
+          "description": "domainmodels.schema.json#/definitions/IAttribute"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "ReportPane": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Reports$ReportPane"
+        },
+        "parameterWidget": {
+          "$ref": "pages.schema.json#/definitions/Widget"
+        },
+        "reportWidget": {
+          "$ref": "pages.schema.json#/definitions/Widget"
+        },
+        "generateOnLoad": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "ReportZoomInfo": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Reports$ReportZoomInfo"
+        },
+        "targetPage": {
+          "type": "string",
+          "description": "pages.schema.json#/definitions/IPage"
+        },
+        "mappings": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ReportZoomMapping"
+          }
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "ReportZoomMapping": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Reports$ReportZoomMapping"
+        },
+        "targetParameterName": {
+          "type": "string"
+        },
+        "sourceReportColumnName": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    }
+  }
+}

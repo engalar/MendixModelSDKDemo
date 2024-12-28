@@ -1,0 +1,400 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "definitions": {
+    "Element": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Mappings$Element"
+        },
+        "elementType": {
+          "type": "string",
+          "enum": [
+            "Undefined",
+            "Inheritance",
+            "Choice",
+            "Object",
+            "Value",
+            "Sequence",
+            "All",
+            "NamedArray",
+            "Array",
+            "Wrapper"
+          ]
+        },
+        "primitiveType": {
+          "type": "string"
+        },
+        "path": {
+          "type": "string"
+        },
+        "isDefaultType": {
+          "type": "boolean"
+        },
+        "minOccurs": {
+          "type": "string"
+        },
+        "maxOccurs": {
+          "type": "string"
+        },
+        "nillable": {
+          "type": "boolean"
+        },
+        "exposedName": {
+          "type": "string"
+        },
+        "exposedItemName": {
+          "type": "string"
+        },
+        "maxLength": {
+          "type": "string"
+        },
+        "fractionDigits": {
+          "type": "string"
+        },
+        "totalDigits": {
+          "type": "string"
+        },
+        "errorMessage": {
+          "type": "string"
+        },
+        "warningMessage": {
+          "type": "string"
+        },
+        "children": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Element"
+          }
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "MappingDocument": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Mappings$MappingDocument"
+        },
+        "rootMappingElements": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ObjectMappingElement"
+          }
+        },
+        "xmlSchema": {
+          "type": "string",
+          "description": "xmlschemas.schema.json#/definitions/IXmlSchema"
+        },
+        "jsonStructure": {
+          "type": "string",
+          "description": "jsonstructures.schema.json#/definitions/IJsonStructure"
+        },
+        "rootElementName": {
+          "type": "string"
+        },
+        "importedWebService": {
+          "type": "string",
+          "description": "webservices.schema.json#/definitions/IImportedWebService"
+        },
+        "serviceName": {
+          "type": "string"
+        },
+        "operationName": {
+          "type": "string"
+        },
+        "messageDefinition": {
+          "type": "string",
+          "description": "messagedefinitions.schema.json#/definitions/IMessageDefinition"
+        },
+        "mappingSourceReference": {
+          "$ref": "#/definitions/MappingSourceReference"
+        },
+        "publicName": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "MappingElement": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Mappings$MappingElement"
+        },
+        "documentation": {
+          "type": "string"
+        },
+        "elementType": {
+          "type": "string",
+          "enum": [
+            "Undefined",
+            "Inheritance",
+            "Choice",
+            "Object",
+            "Value",
+            "Sequence",
+            "All",
+            "NamedArray",
+            "Array",
+            "Wrapper"
+          ]
+        },
+        "jsonPath": {
+          "type": "string"
+        },
+        "xmlPath": {
+          "type": "string"
+        },
+        "minOccurs": {
+          "type": "string"
+        },
+        "maxOccurs": {
+          "type": "string"
+        },
+        "nillable": {
+          "type": "boolean"
+        },
+        "exposedName": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "MappingMicroflowCall": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Mappings$MappingMicroflowCall"
+        },
+        "microflow": {
+          "type": "string",
+          "description": "microflows.schema.json#/definitions/IMicroflow"
+        },
+        "parameterMappings": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MappingMicroflowParameter"
+          }
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "MappingMicroflowParameter": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Mappings$MappingMicroflowParameter"
+        },
+        "parameter": {
+          "type": "string",
+          "description": "microflows.schema.json#/definitions/IMicroflowParameter"
+        },
+        "levelOfParent": {
+          "type": "string"
+        },
+        "jsonValueElementPath": {
+          "type": "string"
+        },
+        "xmlValueElementPath": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "MappingSource": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Mappings$MappingSource"
+        },
+        "name": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "MappingSourceDocument": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Mappings$MappingSourceDocument"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "MappingSourceReference": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Mappings$MappingSourceReference"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "ObjectMappingElement": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Mappings$ObjectMappingElement"
+        },
+        "mappingMicroflowCall": {
+          "$ref": "#/definitions/MappingMicroflowCall"
+        },
+        "children": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MappingElement"
+          }
+        },
+        "entity": {
+          "type": "string",
+          "description": "domainmodels.schema.json#/definitions/IEntity"
+        },
+        "association": {
+          "type": "string",
+          "description": "domainmodels.schema.json#/definitions/IAssociationBase"
+        },
+        "objectHandling": {
+          "type": "string",
+          "enum": [
+            "Parameter",
+            "Create",
+            "Find",
+            "Custom"
+          ]
+        },
+        "objectHandlingBackup": {
+          "type": "string",
+          "enum": [
+            "Create",
+            "Ignore",
+            "Error"
+          ]
+        },
+        "objectHandlingBackupAllowOverride": {
+          "type": "boolean"
+        },
+        "isDefaultType": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "ValueMappingElement": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Mappings$ValueMappingElement"
+        },
+        "type": {
+          "$ref": "datatypes.schema.json#/definitions/DataType"
+        },
+        "isKey": {
+          "type": "boolean"
+        },
+        "isXmlAttribute": {
+          "type": "boolean"
+        },
+        "xmlPrimitiveType": {
+          "type": "string"
+        },
+        "isContent": {
+          "type": "boolean"
+        },
+        "attribute": {
+          "type": "string",
+          "description": "domainmodels.schema.json#/definitions/IAttribute"
+        },
+        "converter": {
+          "type": "string",
+          "description": "microflows.schema.json#/definitions/IMicroflow"
+        },
+        "maxLength": {
+          "type": "string"
+        },
+        "fractionDigits": {
+          "type": "string"
+        },
+        "totalDigits": {
+          "type": "string"
+        },
+        "originalValue": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type",
+        "type"
+      ]
+    }
+  }
+}

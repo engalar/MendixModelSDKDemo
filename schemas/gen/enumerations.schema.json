@@ -1,0 +1,114 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "definitions": {
+    "Condition": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Enumerations$Condition"
+        },
+        "attributeValue": {
+          "type": "string"
+        },
+        "editableVisible": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "Enumeration": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Enumerations$Enumeration"
+        },
+        "values": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/EnumerationValue"
+          }
+        },
+        "remoteSource": {
+          "$ref": "#/definitions/RemoteEnumerationSource"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "EnumerationValue": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Enumerations$EnumerationValue"
+        },
+        "name": {
+          "type": "string"
+        },
+        "caption": {
+          "$ref": "texts.schema.json#/definitions/Text"
+        },
+        "image": {
+          "type": "string",
+          "description": "images.schema.json#/definitions/IImage"
+        },
+        "remoteValue": {
+          "$ref": "#/definitions/RemoteEnumerationValue"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type",
+        "caption"
+      ]
+    },
+    "RemoteEnumerationSource": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Enumerations$RemoteEnumerationSource"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "RemoteEnumerationValue": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Enumerations$RemoteEnumerationValue"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    }
+  }
+}

@@ -1,0 +1,349 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "definitions": {
+    "DataSet": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "DataSets$DataSet"
+        },
+        "source": {
+          "$ref": "#/definitions/DataSetSource"
+        },
+        "parameters": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DataSetParameter"
+          }
+        },
+        "dataSetAccess": {
+          "$ref": "#/definitions/DataSetAccess"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type",
+        "source",
+        "dataSetAccess"
+      ]
+    },
+    "DataSetAccess": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "DataSets$DataSetAccess"
+        },
+        "moduleRoleAccessList": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DataSetModuleRoleAccess"
+          }
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "DataSetColumn": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "DataSets$DataSetColumn"
+        },
+        "name": {
+          "type": "string"
+        },
+        "columnType": {
+          "$ref": "datatypes.schema.json#/definitions/DataType"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type",
+        "columnType"
+      ]
+    },
+    "DataSetConstraintAccess": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "DataSets$DataSetConstraintAccess"
+        },
+        "constraintText": {
+          "type": "string"
+        },
+        "enabled": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "DataSetParameterConstraint": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "DataSets$DataSetParameterConstraint"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "DataSetDateTimeConstraint": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "DataSets$DataSetDateTimeConstraint"
+        },
+        "modifier": {
+          "type": "string",
+          "enum": [
+            "Last",
+            "This",
+            "Next",
+            "Past",
+            "Future",
+            "Always"
+          ]
+        },
+        "length": {
+          "type": "string",
+          "enum": [
+            "Day",
+            "Week",
+            "Period",
+            "Month",
+            "Quarter",
+            "Year"
+          ]
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "DataSetModuleRoleAccess": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "DataSets$DataSetModuleRoleAccess"
+        },
+        "parameterAccessList": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DataSetParameterAccess"
+          }
+        },
+        "moduleRole": {
+          "type": "string",
+          "description": "security.schema.json#/definitions/IModuleRole"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "DataSetNumericConstraint": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "DataSets$DataSetNumericConstraint"
+        },
+        "begin": {
+          "type": "string"
+        },
+        "applyBegin": {
+          "type": "boolean"
+        },
+        "end": {
+          "type": "string"
+        },
+        "applyEnd": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "DataSetObjectConstraint": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "DataSets$DataSetObjectConstraint"
+        },
+        "name": {
+          "type": "string"
+        },
+        "constraint": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "DataSetParameter": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "DataSets$DataSetParameter"
+        },
+        "name": {
+          "type": "string"
+        },
+        "parameterType": {
+          "$ref": "datatypes.schema.json#/definitions/DataType"
+        },
+        "parameterTypeIsRange": {
+          "type": "boolean"
+        },
+        "constraints": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DataSetParameterConstraint"
+          }
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type",
+        "parameterType"
+      ]
+    },
+    "DataSetParameterAccess": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "DataSets$DataSetParameterAccess"
+        },
+        "parameterName": {
+          "type": "string"
+        },
+        "constraintAccessList": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DataSetConstraintAccess"
+          }
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "DataSetSource": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "DataSets$DataSetSource"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "JavaDataSetSource": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "DataSets$JavaDataSetSource"
+        },
+        "columns": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DataSetColumn"
+          }
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "OqlDataSetSource": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "DataSets$OqlDataSetSource"
+        },
+        "query": {
+          "type": "string"
+        },
+        "ignoreErrorsInQuery": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    }
+  }
+}

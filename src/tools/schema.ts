@@ -5,6 +5,7 @@ const traverse = require("@babel/traverse").default;
 const generator = require("@babel/generator").default;
 const t = require("@babel/types");
 const fs = require("fs");
+const path = require("path");
 
 
 async function extractInterfaces(dtsCode: string): Promise<Set<string>> {
@@ -23,7 +24,7 @@ async function extractInterfaces(dtsCode: string): Promise<Set<string>> {
 
     return interfaceSet;
 }
-async function extractSchema(jsCode, dtsCode) {
+async function extractSchema(jsCode, dtsCode, interfaceSet) {
     const jsAst = parser.parse(jsCode, {
         sourceType: "module",
         plugins: ["typescript"],
@@ -33,8 +34,6 @@ async function extractSchema(jsCode, dtsCode) {
         sourceType: "module",
         plugins: ["typescript"],
     });
-
-    const interfaceSet = await extractInterfaces(dtsCode);
 
     const schema = {
         "$schema": "http://json-schema.org/draft-07/schema#",
@@ -485,9 +484,51 @@ async function extractSchema(jsCode, dtsCode) {
     return schema;
 }
 
-const jsCode = fs.readFileSync("node_modules/mendixmodelsdk/src/gen/domainmodels.js", "utf-8");
-const dtsCode = fs.readFileSync("node_modules/mendixmodelsdk/src/gen/domainmodels.d.ts", "utf-8");
 
-extractSchema(jsCode, dtsCode).then(schema => {
-    console.log(JSON.stringify(schema, null, 2));
-});
+async function main() {
+    const genDir = "node_modules/mendixmodelsdk/src/gen";
+    const schemaDir = "schemas/gen";
+
+    // 确保 schema 目录存在
+    fs.mkdirSync(schemaDir, { recursive: true });
+
+    const files = fs.readdirSync(genDir);
+    const filePairs: { [key: string]: { js: string; ts: string } } = {}; // 移除 ts 的可选属性
+
+    // 遍历 .js 文件并构建 baseName
+    for (const file of files) {
+        const ext = path.extname(file);
+
+        // 只处理 .js 文件
+        if (ext === ".js" && !file.startsWith("all-model-classes")) {
+            const baseName = path.basename(file, ext);
+            filePairs[baseName] = { js: file, ts: baseName + '.d.ts' }; // 直接拼接 .ts 文件名
+        }
+    }
+
+    // 收集所有 .ts 文件中的接口
+    let allInterfaces = new Set<string>();
+    for (const baseName in filePairs) {
+        const pair = filePairs[baseName];
+        // 直接读取 ts 文件，无需判断是否存在
+        const tsCode = fs.readFileSync(path.join(genDir, pair.ts), "utf-8");
+        const interfaces = await extractInterfaces(tsCode);
+        allInterfaces = new Set([...allInterfaces, ...interfaces]);
+    }
+
+    // 处理每个文件对
+    for (const baseName in filePairs) {
+        const pair = filePairs[baseName];
+        // 直接读取 js 和 ts 文件，无需判断是否存在
+        const jsCode = fs.readFileSync(path.join(genDir, pair.js), "utf-8");
+        const tsCode = fs.readFileSync(path.join(genDir, pair.ts), "utf-8");
+
+        const schema = await extractSchema(jsCode, tsCode, allInterfaces);
+
+        const schemaFileName = path.join(schemaDir, `${baseName}.schema.json`);
+        fs.writeFileSync(schemaFileName, JSON.stringify(schema, null, 2));
+        console.log(`Schema saved to: ${schemaFileName}`);
+    }
+}
+
+main().catch(console.error);

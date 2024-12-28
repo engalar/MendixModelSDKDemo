@@ -1,0 +1,642 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "definitions": {
+    "ChangeMode": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "ODataPublish$ChangeMode"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "CallMicroflowToChange": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "ODataPublish$CallMicroflowToChange"
+        },
+        "microflow": {
+          "type": "string",
+          "description": "microflows.schema.json#/definitions/IMicroflow"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type",
+        "microflow"
+      ]
+    },
+    "ReadMode": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "ODataPublish$ReadMode"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "CallMicroflowToRead": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "ODataPublish$CallMicroflowToRead"
+        },
+        "microflow": {
+          "type": "string",
+          "description": "microflows.schema.json#/definitions/IMicroflow"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "ChangeNotSupported": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "ODataPublish$ChangeNotSupported"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "ChangeSource": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "ODataPublish$ChangeSource"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "EntitySet": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "ODataPublish$EntitySet"
+        },
+        "exposedName": {
+          "type": "string"
+        },
+        "alternativeExposedName": {
+          "type": "string"
+        },
+        "usePaging": {
+          "type": "boolean"
+        },
+        "pageSize": {
+          "type": "string"
+        },
+        "updateMode": {
+          "$ref": "#/definitions/ChangeMode"
+        },
+        "insertMode": {
+          "$ref": "#/definitions/ChangeMode"
+        },
+        "deleteMode": {
+          "$ref": "#/definitions/ChangeMode"
+        },
+        "readMode": {
+          "$ref": "#/definitions/ReadMode"
+        },
+        "queryOptions": {
+          "$ref": "#/definitions/QueryOptions"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type",
+        "updateMode",
+        "insertMode",
+        "deleteMode",
+        "readMode",
+        "queryOptions"
+      ]
+    },
+    "EntityType": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "ODataPublish$EntityType"
+        },
+        "exposedName": {
+          "type": "string"
+        },
+        "entity": {
+          "type": "string",
+          "description": "domainmodels.schema.json#/definitions/IEntity"
+        },
+        "childMembers": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PublishedMember"
+          }
+        },
+        "summary": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type",
+        "entity"
+      ]
+    },
+    "PublishedMember": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "ODataPublish$PublishedMember"
+        },
+        "exposedName": {
+          "type": "string"
+        },
+        "summary": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "PublishedAssociationEnd": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "ODataPublish$PublishedAssociationEnd"
+        },
+        "association": {
+          "type": "string",
+          "description": "domainmodels.schema.json#/definitions/IAssociationBase"
+        },
+        "entity": {
+          "type": "string",
+          "description": "domainmodels.schema.json#/definitions/IEntity"
+        },
+        "canBeEmpty": {
+          "type": "boolean"
+        },
+        "exposedAssociationName": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type",
+        "entity"
+      ]
+    },
+    "PublishedAttribute": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "ODataPublish$PublishedAttribute"
+        },
+        "attribute": {
+          "type": "string",
+          "description": "domainmodels.schema.json#/definitions/IAttribute"
+        },
+        "canBeEmpty": {
+          "type": "boolean"
+        },
+        "isPartOfKey": {
+          "type": "boolean"
+        },
+        "filterable": {
+          "type": "boolean"
+        },
+        "sortable": {
+          "type": "boolean"
+        },
+        "enumerationAsString": {
+          "type": "boolean"
+        },
+        "stringAsGuid": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "PublishedContract": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "ODataPublish$PublishedContract"
+        },
+        "serviceFeed": {
+          "$ref": "#/definitions/ServiceFeed"
+        },
+        "metadata": {
+          "type": "string"
+        },
+        "openApi": {
+          "type": "string"
+        },
+        "graphQL": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type",
+        "serviceFeed"
+      ]
+    },
+    "PublishedEnumeration": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "ODataPublish$PublishedEnumeration"
+        },
+        "exposedName": {
+          "type": "string"
+        },
+        "enumeration": {
+          "type": "string",
+          "description": "enumerations.schema.json#/definitions/IEnumeration"
+        },
+        "values": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PublishedEnumerationValue"
+          }
+        },
+        "summary": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type",
+        "enumeration"
+      ]
+    },
+    "PublishedEnumerationValue": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "ODataPublish$PublishedEnumerationValue"
+        },
+        "exposedName": {
+          "type": "string"
+        },
+        "enumerationValue": {
+          "type": "string",
+          "description": "enumerations.schema.json#/definitions/IEnumerationValue"
+        },
+        "summary": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type",
+        "enumerationValue"
+      ]
+    },
+    "PublishedId": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "ODataPublish$PublishedId"
+        },
+        "isPartOfKey": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "PublishedMicroflow": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "ODataPublish$PublishedMicroflow"
+        },
+        "exposedName": {
+          "type": "string"
+        },
+        "alternativeExposedName": {
+          "type": "string"
+        },
+        "microflow": {
+          "type": "string",
+          "description": "microflows.schema.json#/definitions/IMicroflow"
+        },
+        "parameters": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PublishedMicroflowParameter"
+          }
+        },
+        "returnType": {
+          "$ref": "datatypes.schema.json#/definitions/DataType"
+        },
+        "summary": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type",
+        "microflow",
+        "returnType"
+      ]
+    },
+    "PublishedMicroflowParameter": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "ODataPublish$PublishedMicroflowParameter"
+        },
+        "exposedName": {
+          "type": "string"
+        },
+        "microflowParameter": {
+          "type": "string",
+          "description": "microflows.schema.json#/definitions/IMicroflowParameter"
+        },
+        "dataType": {
+          "$ref": "datatypes.schema.json#/definitions/DataType"
+        },
+        "canBeEmpty": {
+          "type": "boolean"
+        },
+        "summary": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type",
+        "microflowParameter",
+        "dataType"
+      ]
+    },
+    "PublishedODataService2": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "ODataPublish$PublishedODataService2"
+        },
+        "namespace": {
+          "type": "string"
+        },
+        "path": {
+          "type": "string"
+        },
+        "allowedModuleRoles": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "description": "security.schema.json#/definitions/IModuleRole"
+          }
+        },
+        "serviceName": {
+          "type": "string"
+        },
+        "entityTypes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/EntityType"
+          }
+        },
+        "entitySets": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/EntitySet"
+          }
+        },
+        "microflows": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PublishedMicroflow"
+          }
+        },
+        "enumerations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PublishedEnumeration"
+          }
+        },
+        "publishAssociations": {
+          "type": "boolean"
+        },
+        "version": {
+          "type": "string"
+        },
+        "authenticationMicroflow": {
+          "type": "string",
+          "description": "microflows.schema.json#/definitions/IMicroflow"
+        },
+        "authenticationTypes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "summary": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "replaceIllegalChars": {
+          "type": "boolean"
+        },
+        "useGeneralization": {
+          "type": "boolean"
+        },
+        "oDataVersion": {
+          "type": "string",
+          "enum": [
+            "OData4",
+            "OData3"
+          ]
+        },
+        "includeMetadataByDefault": {
+          "type": "boolean"
+        },
+        "supportsGraphQL": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "QueryOptions": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "ODataPublish$QueryOptions"
+        },
+        "countable": {
+          "type": "boolean"
+        },
+        "topSupported": {
+          "type": "boolean"
+        },
+        "skipSupported": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "ReadSource": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "ODataPublish$ReadSource"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "ServiceFeed": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "ODataPublish$ServiceFeed"
+        },
+        "xml": {
+          "type": "string"
+        },
+        "json": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    }
+  }
+}

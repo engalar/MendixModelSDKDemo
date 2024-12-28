@@ -1,0 +1,1636 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "definitions": {
+    "AccessRule": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "DomainModels$AccessRule"
+        },
+        "memberAccesses": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MemberAccess"
+          }
+        },
+        "moduleRoles": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "description": "security.schema.json#/definitions/IModuleRole"
+          }
+        },
+        "documentation": {
+          "type": "string"
+        },
+        "allowCreate": {
+          "type": "boolean"
+        },
+        "allowDelete": {
+          "type": "boolean"
+        },
+        "defaultMemberAccessRights": {
+          "type": "string",
+          "enum": [
+            "None",
+            "ReadOnly",
+            "ReadWrite"
+          ]
+        },
+        "xPathConstraintCaption": {
+          "type": "string"
+        },
+        "xPathConstraint": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "Annotation": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "DomainModels$Annotation"
+        },
+        "caption": {
+          "type": "string"
+        },
+        "location": {
+          "type": "string"
+        },
+        "width": {
+          "type": "string"
+        },
+        "exportLevel": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "AssociationBase": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "DomainModels$AssociationBase"
+        },
+        "name": {
+          "type": "string"
+        },
+        "dataStorageGuid": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "Reference",
+            "ReferenceSet"
+          ]
+        },
+        "owner": {
+          "type": "string",
+          "enum": [
+            "Default",
+            "Both"
+          ]
+        },
+        "deleteBehavior": {
+          "$ref": "#/definitions/AssociationDeleteBehavior"
+        },
+        "documentation": {
+          "type": "string"
+        },
+        "source": {
+          "$ref": "#/definitions/AssociationSource"
+        },
+        "exportLevel": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type",
+        "deleteBehavior"
+      ]
+    },
+    "Association": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "DomainModels$Association"
+        },
+        "parentConnection": {
+          "type": "string"
+        },
+        "childConnection": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "AssociationCapabilities": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "DomainModels$AssociationCapabilities"
+        },
+        "navigability": {
+          "type": "string",
+          "enum": [
+            "BothDirections",
+            "ParentToChild",
+            "ChildToParent"
+          ]
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "AssociationDeleteBehavior": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "DomainModels$AssociationDeleteBehavior"
+        },
+        "parentDeleteBehavior": {
+          "type": "string",
+          "enum": [
+            "DeleteMeAndReferences",
+            "DeleteMeButKeepReferences",
+            "DeleteMeIfNoReferences"
+          ]
+        },
+        "childDeleteBehavior": {
+          "type": "string",
+          "enum": [
+            "DeleteMeAndReferences",
+            "DeleteMeButKeepReferences",
+            "DeleteMeIfNoReferences"
+          ]
+        },
+        "parentErrorMessage": {
+          "$ref": "texts.schema.json#/definitions/Text"
+        },
+        "childErrorMessage": {
+          "$ref": "texts.schema.json#/definitions/Text"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "MemberRef": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "DomainModels$MemberRef"
+        },
+        "entityRef": {
+          "$ref": "#/definitions/IndirectEntityRef"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "AssociationRef": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "DomainModels$AssociationRef"
+        },
+        "association": {
+          "type": "string",
+          "description": "#/definitions/AssociationBase"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type",
+        "association"
+      ]
+    },
+    "AssociationSource": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "DomainModels$AssociationSource"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "Attribute": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "DomainModels$Attribute"
+        },
+        "name": {
+          "type": "string"
+        },
+        "dataStorageGuid": {
+          "type": "string"
+        },
+        "type": {
+          "$ref": "#/definitions/AttributeType"
+        },
+        "documentation": {
+          "type": "string"
+        },
+        "value": {
+          "$ref": "#/definitions/ValueType"
+        },
+        "exportLevel": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type",
+        "type",
+        "value"
+      ]
+    },
+    "AttributeCapabilities": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "DomainModels$AttributeCapabilities"
+        },
+        "filterable": {
+          "type": "boolean"
+        },
+        "sortable": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "AttributeRef": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "DomainModels$AttributeRef"
+        },
+        "attribute": {
+          "type": "string",
+          "description": "#/definitions/Attribute"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type",
+        "attribute"
+      ]
+    },
+    "AttributeType": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "DomainModels$AttributeType"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "NumericAttributeTypeBase": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "DomainModels$NumericAttributeTypeBase"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "IntegerAttributeTypeBase": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "DomainModels$IntegerAttributeTypeBase"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "AutoNumberAttributeType": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "DomainModels$AutoNumberAttributeType"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "BinaryAttributeType": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "DomainModels$BinaryAttributeType"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "BooleanAttributeType": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "DomainModels$BooleanAttributeType"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "ValueType": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "DomainModels$ValueType"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "MappedValue": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "DomainModels$MappedValue"
+        },
+        "defaultValueDesignTime": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "CachedMappedValue": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "DomainModels$CachedMappedValue"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "CalculatedValue": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "DomainModels$CalculatedValue"
+        },
+        "microflow": {
+          "type": "string",
+          "description": "microflows.schema.json#/definitions/IMicroflow"
+        },
+        "passEntity": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "CrossAssociation": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "DomainModels$CrossAssociation"
+        },
+        "child": {
+          "type": "string",
+          "description": "#/definitions/Entity"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type",
+        "child"
+      ]
+    },
+    "DecimalAttributeTypeBase": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "DomainModels$DecimalAttributeTypeBase"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "FloatAttributeTypeBase": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "DomainModels$FloatAttributeTypeBase"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "CurrencyAttributeType": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "DomainModels$CurrencyAttributeType"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "DateTimeAttributeType": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "DomainModels$DateTimeAttributeType"
+        },
+        "localizeDate": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "DecimalAttributeType": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "DomainModels$DecimalAttributeType"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "EntityRef": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "DomainModels$EntityRef"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "DirectEntityRef": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "DomainModels$DirectEntityRef"
+        },
+        "entity": {
+          "type": "string",
+          "description": "#/definitions/Entity"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type",
+        "entity"
+      ]
+    },
+    "DomainModel": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "DomainModels$DomainModel"
+        },
+        "documentation": {
+          "type": "string"
+        },
+        "entities": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Entity"
+          }
+        },
+        "annotations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Annotation"
+          }
+        },
+        "associations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Association"
+          }
+        },
+        "crossAssociations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CrossAssociation"
+          }
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "Entity": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "DomainModels$Entity"
+        },
+        "name": {
+          "type": "string"
+        },
+        "dataStorageGuid": {
+          "type": "string"
+        },
+        "location": {
+          "type": "string"
+        },
+        "documentation": {
+          "type": "string"
+        },
+        "generalization": {
+          "$ref": "#/definitions/GeneralizationBase"
+        },
+        "attributes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Attribute"
+          }
+        },
+        "validationRules": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ValidationRule"
+          }
+        },
+        "eventHandlers": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/EventHandler"
+          }
+        },
+        "indexes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Index"
+          }
+        },
+        "accessRules": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AccessRule"
+          }
+        },
+        "image": {
+          "type": "string",
+          "description": "images.schema.json#/definitions/IImage"
+        },
+        "imageData": {
+          "type": "string"
+        },
+        "source": {
+          "$ref": "#/definitions/EntitySource"
+        },
+        "exportLevel": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type",
+        "generalization"
+      ]
+    },
+    "EntityCapabilities": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "DomainModels$EntityCapabilities"
+        },
+        "countable": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "EntityKey": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "DomainModels$EntityKey"
+        },
+        "parts": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/EntityKeyPart"
+          }
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "EntityKeyPart": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "DomainModels$EntityKeyPart"
+        },
+        "name": {
+          "type": "string"
+        },
+        "type": {
+          "$ref": "#/definitions/AttributeType"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type",
+        "type"
+      ]
+    },
+    "EntityRefStep": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "DomainModels$EntityRefStep"
+        },
+        "association": {
+          "type": "string",
+          "description": "#/definitions/AssociationBase"
+        },
+        "destinationEntity": {
+          "type": "string",
+          "description": "#/definitions/Entity"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type",
+        "association",
+        "destinationEntity"
+      ]
+    },
+    "EntitySource": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "DomainModels$EntitySource"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "EnumerationAttributeType": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "DomainModels$EnumerationAttributeType"
+        },
+        "enumeration": {
+          "type": "string",
+          "description": "enumerations.schema.json#/definitions/IEnumeration"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type",
+        "enumeration"
+      ]
+    },
+    "RuleInfo": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "DomainModels$RuleInfo"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "EqualsToRuleInfo": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "DomainModels$EqualsToRuleInfo"
+        },
+        "useValue": {
+          "type": "boolean"
+        },
+        "equalsToValue": {
+          "type": "string"
+        },
+        "equalsToAttribute": {
+          "type": "string",
+          "description": "#/definitions/Attribute"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "EventHandler": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "DomainModels$EventHandler"
+        },
+        "moment": {
+          "type": "string",
+          "enum": [
+            "Before",
+            "After"
+          ]
+        },
+        "event": {
+          "type": "string",
+          "enum": [
+            "Create",
+            "Commit",
+            "Delete",
+            "RollBack"
+          ]
+        },
+        "microflow": {
+          "type": "string",
+          "description": "microflows.schema.json#/definitions/IMicroflow"
+        },
+        "raiseErrorOnFalse": {
+          "type": "boolean"
+        },
+        "passEventObject": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "FloatAttributeType": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "DomainModels$FloatAttributeType"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "GeneralizationBase": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "DomainModels$GeneralizationBase"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "Generalization": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "DomainModels$Generalization"
+        },
+        "generalization": {
+          "type": "string",
+          "description": "#/definitions/Entity"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type",
+        "generalization"
+      ]
+    },
+    "HashedStringAttributeType": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "DomainModels$HashedStringAttributeType"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "Index": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "DomainModels$Index"
+        },
+        "dataStorageGuid": {
+          "type": "string"
+        },
+        "attributes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/IndexedAttribute"
+          }
+        },
+        "includeInOffline": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "IndexedAttribute": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "DomainModels$IndexedAttribute"
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "Normal",
+            "CreatedDate",
+            "ChangedDate"
+          ]
+        },
+        "ascending": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "IndirectEntityRef": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "DomainModels$IndirectEntityRef"
+        },
+        "steps": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/EntityRefStep"
+          }
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "IntegerAttributeType": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "DomainModels$IntegerAttributeType"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "LongAttributeType": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "DomainModels$LongAttributeType"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "RemoteEntitySource": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "DomainModels$RemoteEntitySource"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "MaterializedRemoteEntitySource": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "DomainModels$MaterializedRemoteEntitySource"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "MaxLengthRuleInfo": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "DomainModels$MaxLengthRuleInfo"
+        },
+        "maxLength": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "MemberAccess": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "DomainModels$MemberAccess"
+        },
+        "attribute": {
+          "type": "string",
+          "description": "#/definitions/Attribute"
+        },
+        "association": {
+          "type": "string",
+          "description": "#/definitions/AssociationBase"
+        },
+        "accessRights": {
+          "type": "string",
+          "enum": [
+            "None",
+            "ReadOnly",
+            "ReadWrite"
+          ]
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "MultiLanguageAttributeType": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "DomainModels$MultiLanguageAttributeType"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "NoGeneralization": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "DomainModels$NoGeneralization"
+        },
+        "hasChangedDate": {
+          "type": "boolean"
+        },
+        "hasCreatedDate": {
+          "type": "boolean"
+        },
+        "hasOwner": {
+          "type": "boolean"
+        },
+        "hasChangedBy": {
+          "type": "boolean"
+        },
+        "persistable": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "OqlViewAssociationSource": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "DomainModels$OqlViewAssociationSource"
+        },
+        "reference": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "ViewEntitySource": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "DomainModels$ViewEntitySource"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "OqlViewEntitySource": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "DomainModels$OqlViewEntitySource"
+        },
+        "oql": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "OqlViewValue": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "DomainModels$OqlViewValue"
+        },
+        "reference": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "QueryBasedRemoteEntitySource": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "DomainModels$QueryBasedRemoteEntitySource"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "RangeRuleInfo": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "DomainModels$RangeRuleInfo"
+        },
+        "typeOfRange": {
+          "type": "string",
+          "enum": [
+            "GreaterThanOrEqualTo",
+            "SmallerThanOrEqualTo",
+            "Between"
+          ]
+        },
+        "useMinValue": {
+          "type": "boolean"
+        },
+        "useMaxValue": {
+          "type": "boolean"
+        },
+        "minValue": {
+          "type": "string"
+        },
+        "maxValue": {
+          "type": "string"
+        },
+        "minAttribute": {
+          "type": "string",
+          "description": "#/definitions/Attribute"
+        },
+        "maxAttribute": {
+          "type": "string",
+          "description": "#/definitions/Attribute"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "RegExRuleInfo": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "DomainModels$RegExRuleInfo"
+        },
+        "regularExpression": {
+          "type": "string",
+          "description": "regularexpressions.schema.json#/definitions/IRegularExpression"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "RemoteAssociationSource": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "DomainModels$RemoteAssociationSource"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "RemoteEntitySourceDocument": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "DomainModels$RemoteEntitySourceDocument"
+        },
+        "description": {
+          "type": "string"
+        },
+        "catalogUrl": {
+          "type": "string"
+        },
+        "icon": {
+          "type": "string"
+        },
+        "metadata": {
+          "type": "string"
+        },
+        "metadataUrl": {
+          "type": "string"
+        },
+        "serviceName": {
+          "type": "string"
+        },
+        "version": {
+          "type": "string"
+        },
+        "endpointId": {
+          "type": "string"
+        },
+        "minimumMxVersion": {
+          "type": "string"
+        },
+        "recommendedMxVersion": {
+          "type": "string"
+        },
+        "applicationId": {
+          "type": "string"
+        },
+        "environmentType": {
+          "type": "string",
+          "enum": [
+            "Production",
+            "Sandbox",
+            "NonProduction",
+            "Unknown"
+          ]
+        },
+        "metadataHash": {
+          "type": "string"
+        },
+        "validated": {
+          "type": "boolean"
+        },
+        "validatedEntities": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "RequiredRuleInfo": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "DomainModels$RequiredRuleInfo"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "StoredValue": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "DomainModels$StoredValue"
+        },
+        "defaultValue": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "StringAttributeType": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "DomainModels$StringAttributeType"
+        },
+        "length": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "UniqueRuleInfo": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "DomainModels$UniqueRuleInfo"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "ValidationRule": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "DomainModels$ValidationRule"
+        },
+        "attribute": {
+          "type": "string",
+          "description": "#/definitions/Attribute"
+        },
+        "errorMessage": {
+          "$ref": "texts.schema.json#/definitions/Text"
+        },
+        "ruleInfo": {
+          "$ref": "#/definitions/RuleInfo"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type",
+        "attribute",
+        "errorMessage",
+        "ruleInfo"
+      ]
+    }
+  }
+}

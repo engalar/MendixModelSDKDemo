@@ -1,0 +1,4606 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "definitions": {
+    "WorkflowOperation": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Microflows$WorkflowOperation"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "AbortOperation": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Microflows$AbortOperation"
+        },
+        "workflowVariable": {
+          "type": "string"
+        },
+        "reason": {
+          "$ref": "#/definitions/StringTemplate"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type",
+        "reason"
+      ]
+    },
+    "MicroflowObject": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Microflows$MicroflowObject"
+        },
+        "relativeMiddlePoint": {
+          "type": "string"
+        },
+        "size": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "Activity": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Microflows$Activity"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "ActionActivity": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Microflows$ActionActivity"
+        },
+        "action": {
+          "$ref": "#/definitions/MicroflowAction"
+        },
+        "disabled": {
+          "type": "boolean"
+        },
+        "caption": {
+          "type": "string"
+        },
+        "autoGenerateCaption": {
+          "type": "boolean"
+        },
+        "backgroundColor": {
+          "type": "string",
+          "enum": [
+            "Default",
+            "Blue",
+            "Gray",
+            "Green",
+            "LightBlue",
+            "Orange",
+            "Purple",
+            "Red",
+            "Yellow"
+          ]
+        },
+        "documentation": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "RequestHandling": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Microflows$RequestHandling"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "AdvancedRequestHandling": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Microflows$AdvancedRequestHandling"
+        },
+        "parameterMappings": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/WebServiceOperationAdvancedParameterMapping"
+          }
+        },
+        "nullValueOption": {
+          "type": "string",
+          "enum": [
+            "SendAsNil",
+            "LeaveOutElement"
+          ]
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "MicroflowAction": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Microflows$MicroflowAction"
+        },
+        "errorHandlingType": {
+          "type": "string",
+          "enum": [
+            "Rollback",
+            "Custom",
+            "CustomWithoutRollBack",
+            "Continue",
+            "Abort"
+          ]
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "AggregateListAction": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Microflows$AggregateListAction"
+        },
+        "inputListVariableName": {
+          "type": "string"
+        },
+        "attribute": {
+          "type": "string",
+          "description": "domainmodels.schema.json#/definitions/IAttribute"
+        },
+        "expression": {
+          "type": "string"
+        },
+        "useExpression": {
+          "type": "boolean"
+        },
+        "aggregateFunction": {
+          "type": "string",
+          "enum": [
+            "Sum",
+            "Average",
+            "Count",
+            "Minimum",
+            "Maximum",
+            "All",
+            "Any",
+            "Reduce"
+          ]
+        },
+        "outputVariableName": {
+          "type": "string"
+        },
+        "reduceReturnDataType": {
+          "$ref": "datatypes.schema.json#/definitions/DataType"
+        },
+        "reduceInitialValueExpression": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type",
+        "reduceReturnDataType"
+      ]
+    },
+    "Annotation": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Microflows$Annotation"
+        },
+        "caption": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "Flow": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Microflows$Flow"
+        },
+        "originConnectionIndex": {
+          "type": "string"
+        },
+        "destinationConnectionIndex": {
+          "type": "string"
+        },
+        "line": {
+          "$ref": "#/definitions/Line"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type",
+        "line"
+      ]
+    },
+    "AnnotationFlow": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Microflows$AnnotationFlow"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "AppServiceCallAction": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Microflows$AppServiceCallAction"
+        },
+        "appServiceAction": {
+          "type": "string",
+          "description": "appservices.schema.json#/definitions/IAppServiceAction"
+        },
+        "parameterMappings": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AppServiceCallParameterMapping"
+          }
+        },
+        "useVariable": {
+          "type": "boolean"
+        },
+        "outputVariableName": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "AppServiceCallParameterMapping": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Microflows$AppServiceCallParameterMapping"
+        },
+        "parameter": {
+          "type": "string",
+          "description": "appservices.schema.json#/definitions/IAppServiceActionParameter"
+        },
+        "argument": {
+          "type": "string"
+        },
+        "argumentModel": {
+          "$ref": "expressions.schema.json#/definitions/Expression"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type",
+        "argumentModel"
+      ]
+    },
+    "ApplyJumpToOptionAction": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Microflows$ApplyJumpToOptionAction"
+        },
+        "workflowJumpToDetailsVariable": {
+          "type": "string"
+        },
+        "outputVariableName": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "RetrieveSource": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Microflows$RetrieveSource"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "AssociationRetrieveSource": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Microflows$AssociationRetrieveSource"
+        },
+        "startVariableName": {
+          "type": "string"
+        },
+        "association": {
+          "type": "string",
+          "description": "domainmodels.schema.json#/definitions/IAssociationBase"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "CodeActionParameterValue": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Microflows$CodeActionParameterValue"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "ExpressionBasedCodeActionParameterValue": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Microflows$ExpressionBasedCodeActionParameterValue"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "BasicCodeActionParameterValue": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Microflows$BasicCodeActionParameterValue"
+        },
+        "argument": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "JavaActionParameterValue": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Microflows$JavaActionParameterValue"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "BasicJavaActionParameterValue": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Microflows$BasicJavaActionParameterValue"
+        },
+        "argument": {
+          "type": "string"
+        },
+        "argumentModel": {
+          "$ref": "expressions.schema.json#/definitions/Expression"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type",
+        "argumentModel"
+      ]
+    },
+    "Line": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Microflows$Line"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "BezierCurve": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Microflows$BezierCurve"
+        },
+        "originControlVector": {
+          "type": "string"
+        },
+        "destinationControlVector": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "ListOperation": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Microflows$ListOperation"
+        },
+        "listVariableName": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "BinaryListOperation": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Microflows$BinaryListOperation"
+        },
+        "secondListOrObjectVariableName": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "BinaryRequestHandling": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Microflows$BinaryRequestHandling"
+        },
+        "expression": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "BodyVariable": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Microflows$BodyVariable"
+        },
+        "variableName": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "BreakEvent": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Microflows$BreakEvent"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "CallExternalAction": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Microflows$CallExternalAction"
+        },
+        "consumedODataService": {
+          "type": "string",
+          "description": "rest.schema.json#/definitions/IConsumedODataService"
+        },
+        "name": {
+          "type": "string"
+        },
+        "parameterMappings": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ExternalActionParameterMapping"
+          }
+        },
+        "variableName": {
+          "type": "string"
+        },
+        "variableDataType": {
+          "$ref": "datatypes.schema.json#/definitions/DataType"
+        },
+        "includedAssociations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/IncludedAssociation"
+          }
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type",
+        "variableDataType"
+      ]
+    },
+    "CaseValue": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Microflows$CaseValue"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "CastAction": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Microflows$CastAction"
+        },
+        "outputVariableName": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "ChangeListAction": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Microflows$ChangeListAction"
+        },
+        "changeVariableName": {
+          "type": "string"
+        },
+        "value": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "Set",
+            "Add",
+            "Remove",
+            "Clear"
+          ]
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "ChangeMembersAction": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Microflows$ChangeMembersAction"
+        },
+        "items": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MemberChange"
+          }
+        },
+        "refreshInClient": {
+          "type": "boolean"
+        },
+        "commit": {
+          "type": "string",
+          "enum": [
+            "Yes",
+            "YesWithoutEvents",
+            "No"
+          ]
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "ChangeObjectAction": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Microflows$ChangeObjectAction"
+        },
+        "changeVariableName": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "ChangeVariableAction": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Microflows$ChangeVariableAction"
+        },
+        "changeVariableName": {
+          "type": "string"
+        },
+        "value": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "ClearFromClientAction": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Microflows$ClearFromClientAction"
+        },
+        "entity": {
+          "type": "string",
+          "description": "domainmodels.schema.json#/definitions/IEntity"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "CloseFormAction": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Microflows$CloseFormAction"
+        },
+        "numberOfPagesToClose": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "CodeActionParameterMapping": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Microflows$CodeActionParameterMapping"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "CommitAction": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Microflows$CommitAction"
+        },
+        "withEvents": {
+          "type": "boolean"
+        },
+        "commitVariableName": {
+          "type": "string"
+        },
+        "refreshInClient": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "Range": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Microflows$Range"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "ConstantRange": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Microflows$ConstantRange"
+        },
+        "singleObject": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "Contains": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Microflows$Contains"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "ContinueEvent": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Microflows$ContinueEvent"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "ContinueOperation": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Microflows$ContinueOperation"
+        },
+        "workflowVariable": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "MeterAction": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Microflows$MeterAction"
+        },
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "tags": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MeterTagMapping"
+          }
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "CounterMeterAction": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Microflows$CounterMeterAction"
+        },
+        "value": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "CreateListAction": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Microflows$CreateListAction"
+        },
+        "entity": {
+          "type": "string",
+          "description": "domainmodels.schema.json#/definitions/IEntity"
+        },
+        "outputVariableName": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "CreateObjectAction": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Microflows$CreateObjectAction"
+        },
+        "entity": {
+          "type": "string",
+          "description": "domainmodels.schema.json#/definitions/IEntity"
+        },
+        "outputVariableName": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "CreateVariableAction": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Microflows$CreateVariableAction"
+        },
+        "variableName": {
+          "type": "string"
+        },
+        "variableType": {
+          "$ref": "datatypes.schema.json#/definitions/DataType"
+        },
+        "initialValue": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type",
+        "variableType"
+      ]
+    },
+    "CustomRange": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Microflows$CustomRange"
+        },
+        "limitExpression": {
+          "type": "string"
+        },
+        "offsetExpression": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "CustomRequestHandling": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Microflows$CustomRequestHandling"
+        },
+        "template": {
+          "$ref": "#/definitions/StringTemplate"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type",
+        "template"
+      ]
+    },
+    "DatabaseRetrieveSource": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Microflows$DatabaseRetrieveSource"
+        },
+        "entity": {
+          "type": "string",
+          "description": "domainmodels.schema.json#/definitions/IEntity"
+        },
+        "range": {
+          "$ref": "#/definitions/Range"
+        },
+        "xPathConstraint": {
+          "type": "string"
+        },
+        "sortItemList": {
+          "$ref": "#/definitions/SortItemList"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type",
+        "range",
+        "sortItemList"
+      ]
+    },
+    "DeleteAction": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Microflows$DeleteAction"
+        },
+        "deleteVariableName": {
+          "type": "string"
+        },
+        "refreshInClient": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "DeleteExternalObject": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Microflows$DeleteExternalObject"
+        },
+        "deleteVariableName": {
+          "type": "string"
+        },
+        "refreshInClient": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "DocumentTemplateParameterMapping": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Microflows$DocumentTemplateParameterMapping"
+        },
+        "widgetName": {
+          "type": "string"
+        },
+        "argument": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "DownloadFileAction": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Microflows$DownloadFileAction"
+        },
+        "fileDocumentVariableName": {
+          "type": "string"
+        },
+        "showFileInBrowser": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "EndEvent": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Microflows$EndEvent"
+        },
+        "returnValue": {
+          "type": "string"
+        },
+        "documentation": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "EntityTypeCodeActionParameterValue": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Microflows$EntityTypeCodeActionParameterValue"
+        },
+        "entity": {
+          "type": "string",
+          "description": "domainmodels.schema.json#/definitions/IEntity"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "EntityTypeJavaActionParameterValue": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Microflows$EntityTypeJavaActionParameterValue"
+        },
+        "entity": {
+          "type": "string",
+          "description": "domainmodels.schema.json#/definitions/IEntity"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "EnumerationCase": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Microflows$EnumerationCase"
+        },
+        "value": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "ErrorEvent": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Microflows$ErrorEvent"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "ExclusiveMerge": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Microflows$ExclusiveMerge"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "ExclusiveSplit": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Microflows$ExclusiveSplit"
+        },
+        "splitCondition": {
+          "$ref": "#/definitions/SplitCondition"
+        },
+        "caption": {
+          "type": "string"
+        },
+        "errorHandlingType": {
+          "type": "string",
+          "enum": [
+            "Rollback",
+            "Custom",
+            "CustomWithoutRollBack",
+            "Continue",
+            "Abort"
+          ]
+        },
+        "documentation": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type",
+        "splitCondition"
+      ]
+    },
+    "ExportMappingJavaActionParameterValue": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Microflows$ExportMappingJavaActionParameterValue"
+        },
+        "exportMapping": {
+          "type": "string",
+          "description": "exportmappings.schema.json#/definitions/IExportMapping"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "ExportMappingParameterValue": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Microflows$ExportMappingParameterValue"
+        },
+        "exportMapping": {
+          "type": "string",
+          "description": "exportmappings.schema.json#/definitions/IExportMapping"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "ExportXmlAction": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Microflows$ExportXmlAction"
+        },
+        "resultHandling": {
+          "$ref": "#/definitions/MappingRequestHandling"
+        },
+        "outputMethod": {
+          "$ref": "#/definitions/OutputMethod"
+        },
+        "isValidationRequired": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type",
+        "resultHandling",
+        "outputMethod"
+      ]
+    },
+    "ExpressionListOperation": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Microflows$ExpressionListOperation"
+        },
+        "expression": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "SplitCondition": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Microflows$SplitCondition"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "ExpressionSplitCondition": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Microflows$ExpressionSplitCondition"
+        },
+        "expression": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "ExternalActionParameterMapping": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Microflows$ExternalActionParameterMapping"
+        },
+        "parameterName": {
+          "type": "string"
+        },
+        "parameterType": {
+          "$ref": "datatypes.schema.json#/definitions/DataType"
+        },
+        "canBeEmpty": {
+          "type": "boolean"
+        },
+        "argument": {
+          "type": "string"
+        },
+        "includedAssociations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/IncludedAssociation"
+          }
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type",
+        "parameterType"
+      ]
+    },
+    "OutputMethod": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Microflows$OutputMethod"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "FileDocumentExport": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Microflows$FileDocumentExport"
+        },
+        "targetDocumentVariableName": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "InspectAttribute": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Microflows$InspectAttribute"
+        },
+        "expression": {
+          "type": "string"
+        },
+        "attribute": {
+          "type": "string",
+          "description": "domainmodels.schema.json#/definitions/IAttribute"
+        },
+        "association": {
+          "type": "string",
+          "description": "domainmodels.schema.json#/definitions/IAssociationBase"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "Filter": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Microflows$Filter"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "FilterByExpression": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Microflows$FilterByExpression"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "Find": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Microflows$Find"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "FindByExpression": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Microflows$FindByExpression"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "FormDataPart": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Microflows$FormDataPart"
+        },
+        "key": {
+          "type": "string"
+        },
+        "value": {
+          "type": "string"
+        },
+        "headerEntries": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/HttpHeaderEntry"
+          }
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "FormDataRequestHandling": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Microflows$FormDataRequestHandling"
+        },
+        "parts": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/FormDataPart"
+          }
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "GaugeMeterAction": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Microflows$GaugeMeterAction"
+        },
+        "value": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "GenerateDocumentAction": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Microflows$GenerateDocumentAction"
+        },
+        "fileVariableName": {
+          "type": "string"
+        },
+        "languageVariableName": {
+          "type": "string"
+        },
+        "documentType": {
+          "type": "string",
+          "enum": [
+            "HTML",
+            "PDF",
+            "DOCX",
+            "DOC",
+            "RTF",
+            "ODT"
+          ]
+        },
+        "languageSetting": {
+          "type": "string",
+          "enum": [
+            "CurrentUser",
+            "ProjectDefault",
+            "Variable"
+          ]
+        },
+        "documentTemplate": {
+          "type": "string",
+          "description": "documenttemplates.schema.json#/definitions/IDocumentTemplate"
+        },
+        "parameterMappings": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DocumentTemplateParameterMapping"
+          }
+        },
+        "overrideTopMargin": {
+          "type": "boolean"
+        },
+        "overrideBottomMargin": {
+          "type": "boolean"
+        },
+        "overrideLeftMargin": {
+          "type": "boolean"
+        },
+        "overrideRightMargin": {
+          "type": "boolean"
+        },
+        "marginLeftInInch": {
+          "type": "string"
+        },
+        "marginRightInInch": {
+          "type": "string"
+        },
+        "marginTopInInch": {
+          "type": "string"
+        },
+        "marginBottomInInch": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "GenerateJumpToOptionsAction": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Microflows$GenerateJumpToOptionsAction"
+        },
+        "workflowVariable": {
+          "type": "string"
+        },
+        "outputVariableName": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "GetWorkflowActivityRecordsAction": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Microflows$GetWorkflowActivityRecordsAction"
+        },
+        "workflowVariable": {
+          "type": "string"
+        },
+        "outputVariableName": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "GetWorkflowDataAction": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Microflows$GetWorkflowDataAction"
+        },
+        "workflowVariable": {
+          "type": "string"
+        },
+        "workflow": {
+          "type": "string",
+          "description": "workflows.schema.json#/definitions/IWorkflow"
+        },
+        "outputVariableName": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "GetWorkflowsAction": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Microflows$GetWorkflowsAction"
+        },
+        "workflowContextVariableName": {
+          "type": "string"
+        },
+        "outputVariableName": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "Head": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Microflows$Head"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "HttpConfiguration": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Microflows$HttpConfiguration"
+        },
+        "overrideLocation": {
+          "type": "boolean"
+        },
+        "customLocation": {
+          "type": "string"
+        },
+        "customLocationTemplate": {
+          "$ref": "#/definitions/StringTemplate"
+        },
+        "useAuthentication": {
+          "type": "boolean"
+        },
+        "httpAuthenticationUserName": {
+          "type": "string"
+        },
+        "authenticationPassword": {
+          "type": "string"
+        },
+        "headerEntries": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/HttpHeaderEntry"
+          }
+        },
+        "newHttpMethod": {
+          "type": "string"
+        },
+        "clientCertificate": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "HttpHeaderEntry": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Microflows$HttpHeaderEntry"
+        },
+        "key": {
+          "type": "string"
+        },
+        "value": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "ImportMappingCall": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Microflows$ImportMappingCall"
+        },
+        "mapping": {
+          "type": "string",
+          "description": "importmappings.schema.json#/definitions/IImportMapping"
+        },
+        "objectHandlingBackup": {
+          "type": "string"
+        },
+        "commit": {
+          "type": "string",
+          "enum": [
+            "Yes",
+            "YesWithoutEvents",
+            "No"
+          ]
+        },
+        "mappingArgumentVariableName": {
+          "type": "string"
+        },
+        "range": {
+          "$ref": "#/definitions/Range"
+        },
+        "contentType": {
+          "type": "string",
+          "enum": [
+            "Xml",
+            "Json"
+          ]
+        },
+        "forceSingleOccurrence": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type",
+        "range"
+      ]
+    },
+    "ImportMappingJavaActionParameterValue": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Microflows$ImportMappingJavaActionParameterValue"
+        },
+        "importMapping": {
+          "type": "string",
+          "description": "importmappings.schema.json#/definitions/IImportMapping"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "ImportMappingParameterValue": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Microflows$ImportMappingParameterValue"
+        },
+        "importMapping": {
+          "type": "string",
+          "description": "importmappings.schema.json#/definitions/IImportMapping"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "ImportXmlAction": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Microflows$ImportXmlAction"
+        },
+        "xmlDocumentVariableName": {
+          "type": "string"
+        },
+        "resultHandling": {
+          "$ref": "#/definitions/ResultHandling"
+        },
+        "isValidationRequired": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type",
+        "resultHandling"
+      ]
+    },
+    "IncludedAssociation": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Microflows$IncludedAssociation"
+        },
+        "association": {
+          "type": "string",
+          "description": "domainmodels.schema.json#/definitions/IAssociationBase"
+        },
+        "isParent": {
+          "type": "boolean"
+        },
+        "includedAssociations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/IncludedAssociation"
+          }
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type",
+        "association"
+      ]
+    },
+    "IncrementCounterMeterAction": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Microflows$IncrementCounterMeterAction"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "InheritanceCase": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Microflows$InheritanceCase"
+        },
+        "value": {
+          "type": "string",
+          "description": "domainmodels.schema.json#/definitions/IEntity"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "InheritanceSplit": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Microflows$InheritanceSplit"
+        },
+        "splitVariableName": {
+          "type": "string"
+        },
+        "caption": {
+          "type": "string"
+        },
+        "documentation": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "Intersect": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Microflows$Intersect"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "LoopSource": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Microflows$LoopSource"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "IterableList": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Microflows$IterableList"
+        },
+        "listVariableName": {
+          "type": "string"
+        },
+        "variableName": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "JavaActionCallAction": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Microflows$JavaActionCallAction"
+        },
+        "javaAction": {
+          "type": "string",
+          "description": "javaactions.schema.json#/definitions/IJavaAction"
+        },
+        "queueSettings": {
+          "$ref": "queues.schema.json#/definitions/QueueSettings"
+        },
+        "parameterMappings": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/JavaActionParameterMapping"
+          }
+        },
+        "useReturnVariable": {
+          "type": "boolean"
+        },
+        "outputVariableName": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "JavaActionParameterMapping": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Microflows$JavaActionParameterMapping"
+        },
+        "parameter": {
+          "type": "string",
+          "description": "javaactions.schema.json#/definitions/IJavaActionParameter"
+        },
+        "parameterValue": {
+          "$ref": "#/definitions/CodeActionParameterValue"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type",
+        "parameter",
+        "parameterValue"
+      ]
+    },
+    "JavaScriptActionCallAction": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Microflows$JavaScriptActionCallAction"
+        },
+        "javaScriptAction": {
+          "type": "string",
+          "description": "javascriptactions.schema.json#/definitions/IJavaScriptAction"
+        },
+        "parameterMappings": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/JavaScriptActionParameterMapping"
+          }
+        },
+        "useReturnVariable": {
+          "type": "boolean"
+        },
+        "outputVariableName": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "JavaScriptActionParameterMapping": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Microflows$JavaScriptActionParameterMapping"
+        },
+        "parameter": {
+          "type": "string",
+          "description": "javascriptactions.schema.json#/definitions/IJavaScriptActionParameter"
+        },
+        "parameterValue": {
+          "$ref": "#/definitions/CodeActionParameterValue"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type",
+        "parameter",
+        "parameterValue"
+      ]
+    },
+    "ListEquals": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Microflows$ListEquals"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "ListOperationAction": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Microflows$ListOperationAction"
+        },
+        "operation": {
+          "$ref": "#/definitions/ListOperation"
+        },
+        "outputVariableName": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type",
+        "operation"
+      ]
+    },
+    "ListRange": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Microflows$ListRange"
+        },
+        "customRange": {
+          "$ref": "#/definitions/CustomRange"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type",
+        "customRange"
+      ]
+    },
+    "LockWorkflowAction": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Microflows$LockWorkflowAction"
+        },
+        "workflowSelection": {
+          "$ref": "workflows.schema.json#/definitions/WorkflowDefinitionSelection"
+        },
+        "pauseAllWorkflows": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "LogMessageAction": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Microflows$LogMessageAction"
+        },
+        "level": {
+          "type": "string",
+          "enum": [
+            "Trace",
+            "Debug",
+            "Info",
+            "Warning",
+            "Error",
+            "Critical"
+          ]
+        },
+        "node": {
+          "type": "string"
+        },
+        "messageTemplate": {
+          "$ref": "#/definitions/StringTemplate"
+        },
+        "includeLatestStackTrace": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type",
+        "messageTemplate"
+      ]
+    },
+    "LoopedActivity": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Microflows$LoopedActivity"
+        },
+        "objectCollection": {
+          "$ref": "#/definitions/MicroflowObjectCollection"
+        },
+        "errorHandlingType": {
+          "type": "string",
+          "enum": [
+            "Rollback",
+            "Custom",
+            "CustomWithoutRollBack",
+            "Continue",
+            "Abort"
+          ]
+        },
+        "documentation": {
+          "type": "string"
+        },
+        "loopSource": {
+          "$ref": "#/definitions/LoopSource"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type",
+        "objectCollection",
+        "loopSource"
+      ]
+    },
+    "MLModelCall": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Microflows$MLModelCall"
+        },
+        "modelReference": {
+          "type": "string"
+        },
+        "mlMappingDocument": {
+          "type": "string",
+          "description": "mlmappings.schema.json#/definitions/IMLMappingDocument"
+        },
+        "parameterMappings": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MLModelCallParameterMapping"
+          }
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "MLModelCallAction": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Microflows$MLModelCallAction"
+        },
+        "mlMappingDocument": {
+          "type": "string",
+          "description": "mlmappings.schema.json#/definitions/IMLMappingDocument"
+        },
+        "inputVariableName": {
+          "type": "string"
+        },
+        "outputVariableName": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "MLModelCallParameterMapping": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Microflows$MLModelCallParameterMapping"
+        },
+        "parameterName": {
+          "type": "string"
+        },
+        "parameterType": {
+          "$ref": "datatypes.schema.json#/definitions/DataType"
+        },
+        "initialValue": {
+          "type": "string"
+        },
+        "initialValueModel": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type",
+        "parameterType"
+      ]
+    },
+    "MappingRequestHandling": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Microflows$MappingRequestHandling"
+        },
+        "mapping": {
+          "type": "string",
+          "description": "exportmappings.schema.json#/definitions/IExportMapping"
+        },
+        "mappingArgumentVariableName": {
+          "type": "string"
+        },
+        "contentType": {
+          "type": "string",
+          "enum": [
+            "Xml",
+            "Json"
+          ]
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "MemberChange": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Microflows$MemberChange"
+        },
+        "attribute": {
+          "type": "string",
+          "description": "domainmodels.schema.json#/definitions/IAttribute"
+        },
+        "association": {
+          "type": "string",
+          "description": "domainmodels.schema.json#/definitions/IAssociationBase"
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "Set",
+            "Add",
+            "Remove"
+          ]
+        },
+        "value": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "MeterTagMapping": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Microflows$MeterTagMapping"
+        },
+        "key": {
+          "type": "string"
+        },
+        "value": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "MicroflowBase": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Microflows$MicroflowBase"
+        },
+        "objectCollection": {
+          "$ref": "#/definitions/MicroflowObjectCollection"
+        },
+        "flows": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Flow"
+          }
+        },
+        "microflowReturnType": {
+          "$ref": "datatypes.schema.json#/definitions/DataType"
+        },
+        "markAsUsed": {
+          "type": "boolean"
+        },
+        "returnVariableName": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type",
+        "objectCollection",
+        "microflowReturnType"
+      ]
+    },
+    "ServerSideMicroflow": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Microflows$ServerSideMicroflow"
+        },
+        "applyEntityAccess": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "Microflow": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Microflows$Microflow"
+        },
+        "allowedModuleRoles": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "description": "security.schema.json#/definitions/IModuleRole"
+          }
+        },
+        "microflowActionInfo": {
+          "$ref": "codeactions.schema.json#/definitions/MicroflowActionInfo"
+        },
+        "workflowActionInfo": {
+          "$ref": "codeactions.schema.json#/definitions/MicroflowActionInfo"
+        },
+        "allowConcurrentExecution": {
+          "type": "boolean"
+        },
+        "concurrencyErrorMessage": {
+          "$ref": "texts.schema.json#/definitions/Text"
+        },
+        "concurrencyErrorMicroflow": {
+          "type": "string",
+          "description": "#/definitions/Microflow"
+        },
+        "url": {
+          "type": "string"
+        },
+        "urlSearchParameters": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "description": "#/definitions/MicroflowParameter"
+          }
+        },
+        "stableId": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type",
+        "concurrencyErrorMessage"
+      ]
+    },
+    "MicroflowCall": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Microflows$MicroflowCall"
+        },
+        "microflow": {
+          "type": "string",
+          "description": "#/definitions/Microflow"
+        },
+        "queueSettings": {
+          "$ref": "queues.schema.json#/definitions/QueueSettings"
+        },
+        "parameterMappings": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MicroflowCallParameterMapping"
+          }
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "MicroflowCallAction": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Microflows$MicroflowCallAction"
+        },
+        "microflowCall": {
+          "$ref": "#/definitions/MicroflowCall"
+        },
+        "useReturnVariable": {
+          "type": "boolean"
+        },
+        "outputVariableName": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type",
+        "microflowCall"
+      ]
+    },
+    "MicroflowCallParameterMapping": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Microflows$MicroflowCallParameterMapping"
+        },
+        "parameter": {
+          "type": "string",
+          "description": "#/definitions/MicroflowParameter"
+        },
+        "argument": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type",
+        "parameter"
+      ]
+    },
+    "MicroflowJavaActionParameterValue": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Microflows$MicroflowJavaActionParameterValue"
+        },
+        "microflow": {
+          "type": "string",
+          "description": "#/definitions/Microflow"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "MicroflowObjectCollection": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Microflows$MicroflowObjectCollection"
+        },
+        "objects": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MicroflowObject"
+          }
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "MicroflowParameterBase": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Microflows$MicroflowParameterBase"
+        },
+        "name": {
+          "type": "string"
+        },
+        "parameterType": {
+          "$ref": "datatypes.schema.json#/definitions/DataType"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type",
+        "parameterType"
+      ]
+    },
+    "MicroflowParameter": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Microflows$MicroflowParameter"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "MicroflowParameterAttributeUrlSegment": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Microflows$MicroflowParameterAttributeUrlSegment"
+        },
+        "microflowParameter": {
+          "type": "string"
+        },
+        "attribute": {
+          "type": "string",
+          "description": "domainmodels.schema.json#/definitions/IAttribute"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type",
+        "microflowParameter",
+        "attribute"
+      ]
+    },
+    "MicroflowParameterObject": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Microflows$MicroflowParameterObject"
+        },
+        "name": {
+          "type": "string"
+        },
+        "variableType": {
+          "$ref": "datatypes.schema.json#/definitions/DataType"
+        },
+        "documentation": {
+          "type": "string"
+        },
+        "hasVariableNameBeenChanged": {
+          "type": "boolean"
+        },
+        "isRequired": {
+          "type": "boolean"
+        },
+        "defaultValue": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type",
+        "variableType"
+      ]
+    },
+    "MicroflowParameterValue": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Microflows$MicroflowParameterValue"
+        },
+        "microflow": {
+          "type": "string",
+          "description": "#/definitions/Microflow"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "MicroflowPrimitiveParameterUrlSegment": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Microflows$MicroflowPrimitiveParameterUrlSegment"
+        },
+        "microflowParameter": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type",
+        "microflowParameter"
+      ]
+    },
+    "Nanoflow": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Microflows$Nanoflow"
+        },
+        "allowedModuleRoles": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "description": "security.schema.json#/definitions/IModuleRole"
+          }
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "NanoflowCall": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Microflows$NanoflowCall"
+        },
+        "nanoflow": {
+          "type": "string",
+          "description": "#/definitions/Nanoflow"
+        },
+        "parameterMappings": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NanoflowCallParameterMapping"
+          }
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "NanoflowCallAction": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Microflows$NanoflowCallAction"
+        },
+        "nanoflowCall": {
+          "$ref": "#/definitions/NanoflowCall"
+        },
+        "useReturnVariable": {
+          "type": "boolean"
+        },
+        "outputVariableName": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type",
+        "nanoflowCall"
+      ]
+    },
+    "NanoflowCallParameterMapping": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Microflows$NanoflowCallParameterMapping"
+        },
+        "parameter": {
+          "type": "string",
+          "description": "#/definitions/NanoflowParameter"
+        },
+        "argument": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type",
+        "parameter"
+      ]
+    },
+    "NanoflowParameter": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Microflows$NanoflowParameter"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "NoCase": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Microflows$NoCase"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "NotifyWorkflowAction": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Microflows$NotifyWorkflowAction"
+        },
+        "workflowVariable": {
+          "type": "string"
+        },
+        "activity": {
+          "type": "string",
+          "description": "workflows.schema.json#/definitions/IWaitForNotificationActivity"
+        },
+        "outputVariableName": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "OpenUserTaskAction": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Microflows$OpenUserTaskAction"
+        },
+        "userTaskVariable": {
+          "type": "string"
+        },
+        "assignOnOpen": {
+          "type": "boolean"
+        },
+        "openWhenAssigned": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "OpenWorkflowAction": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Microflows$OpenWorkflowAction"
+        },
+        "workflowVariable": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "OrthogonalPath": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Microflows$OrthogonalPath"
+        },
+        "segmentPositions": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "OutputVariable": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Microflows$OutputVariable"
+        },
+        "variableName": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "ParameterIdUrlSegment": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Microflows$ParameterIdUrlSegment"
+        },
+        "microflowParameter": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type",
+        "microflowParameter"
+      ]
+    },
+    "PauseOperation": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Microflows$PauseOperation"
+        },
+        "workflowVariable": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "TypedTemplateArgument": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Microflows$TypedTemplateArgument"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "PrimitiveTypedTemplateArgument": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Microflows$PrimitiveTypedTemplateArgument"
+        },
+        "expression": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "Boolean",
+            "DateTime",
+            "Decimal",
+            "Integer",
+            "String"
+          ]
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "ProxyConfiguration": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Microflows$ProxyConfiguration"
+        },
+        "usernameExpression": {
+          "type": "string"
+        },
+        "passwordExpression": {
+          "type": "string"
+        },
+        "hostExpression": {
+          "type": "string"
+        },
+        "portExpression": {
+          "type": "string"
+        },
+        "useConfigurationExpression": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "PushToClientAction": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Microflows$PushToClientAction"
+        },
+        "dataVariableName": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "RestCallAction": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Microflows$RestCallAction"
+        },
+        "httpConfiguration": {
+          "$ref": "#/definitions/HttpConfiguration"
+        },
+        "requestHandling": {
+          "$ref": "#/definitions/RequestHandling"
+        },
+        "requestHandlingType": {
+          "type": "string",
+          "enum": [
+            "Mapping",
+            "Simple",
+            "Advanced",
+            "Binary",
+            "Custom",
+            "FormData"
+          ]
+        },
+        "resultHandling": {
+          "$ref": "#/definitions/ResultHandling"
+        },
+        "resultHandlingType": {
+          "type": "string",
+          "enum": [
+            "Mapping",
+            "String",
+            "HttpResponse",
+            "FileDocument",
+            "None"
+          ]
+        },
+        "errorResultHandlingType": {
+          "type": "string",
+          "enum": [
+            "HttpResponse",
+            "None"
+          ]
+        },
+        "useRequestTimeOut": {
+          "type": "boolean"
+        },
+        "timeOutExpression": {
+          "type": "string"
+        },
+        "requestProxyType": {
+          "type": "string",
+          "enum": [
+            "DefaultProxy",
+            "Override",
+            "NoProxy"
+          ]
+        },
+        "proxyConfiguration": {
+          "$ref": "#/definitions/ProxyConfiguration"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type",
+        "httpConfiguration",
+        "requestHandling",
+        "resultHandling"
+      ]
+    },
+    "RestOperationCallAction": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Microflows$RestOperationCallAction"
+        },
+        "operation": {
+          "type": "string",
+          "description": "rest.schema.json#/definitions/IRestOperation"
+        },
+        "baseUrlParameterMapping": {
+          "$ref": "#/definitions/RestParameterMapping"
+        },
+        "bodyVariable": {
+          "$ref": "#/definitions/BodyVariable"
+        },
+        "parameterMappings": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RestOperationParameterMapping"
+          }
+        },
+        "outputVariable": {
+          "$ref": "#/definitions/OutputVariable"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "RestOperationParameterMapping": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Microflows$RestOperationParameterMapping"
+        },
+        "parameter": {
+          "type": "string",
+          "description": "rest.schema.json#/definitions/IOperationParameter"
+        },
+        "value": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type",
+        "parameter"
+      ]
+    },
+    "RestParameterMapping": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Microflows$RestParameterMapping"
+        },
+        "parameter": {
+          "type": "string",
+          "description": "rest.schema.json#/definitions/IRestParameter"
+        },
+        "value": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type",
+        "parameter"
+      ]
+    },
+    "RestartOperation": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Microflows$RestartOperation"
+        },
+        "workflowVariable": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "ResultHandling": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Microflows$ResultHandling"
+        },
+        "importMappingCall": {
+          "$ref": "#/definitions/ImportMappingCall"
+        },
+        "storeInVariable": {
+          "type": "boolean"
+        },
+        "outputVariableName": {
+          "type": "string"
+        },
+        "variableType": {
+          "$ref": "datatypes.schema.json#/definitions/DataType"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type",
+        "variableType"
+      ]
+    },
+    "ResumeOperation": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Microflows$ResumeOperation"
+        },
+        "workflowVariable": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "RetrieveAction": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Microflows$RetrieveAction"
+        },
+        "retrieveSource": {
+          "$ref": "#/definitions/RetrieveSource"
+        },
+        "outputVariableName": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type",
+        "retrieveSource"
+      ]
+    },
+    "RetryOperation": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Microflows$RetryOperation"
+        },
+        "workflowVariable": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "RollbackAction": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Microflows$RollbackAction"
+        },
+        "rollbackVariableName": {
+          "type": "string"
+        },
+        "refreshInClient": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "Rule": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Microflows$Rule"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "RuleCall": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Microflows$RuleCall"
+        },
+        "rule": {
+          "type": "string",
+          "description": "#/definitions/Rule"
+        },
+        "parameterMappings": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RuleCallParameterMapping"
+          }
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "RuleCallParameterMapping": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Microflows$RuleCallParameterMapping"
+        },
+        "parameter": {
+          "type": "string",
+          "description": "#/definitions/RuleParameter"
+        },
+        "argument": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type",
+        "parameter"
+      ]
+    },
+    "RuleParameter": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Microflows$RuleParameter"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "RuleSplitCondition": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Microflows$RuleSplitCondition"
+        },
+        "ruleCall": {
+          "$ref": "#/definitions/RuleCall"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type",
+        "ruleCall"
+      ]
+    },
+    "SendExternalObject": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Microflows$SendExternalObject"
+        },
+        "variableNameToBeSent": {
+          "type": "string"
+        },
+        "refreshInClient": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "SequenceFlow": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Microflows$SequenceFlow"
+        },
+        "caseValues": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CaseValue"
+          }
+        },
+        "isErrorHandler": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "SetTaskOutcomeAction": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Microflows$SetTaskOutcomeAction"
+        },
+        "workflowTaskVariable": {
+          "type": "string"
+        },
+        "outcomeValue": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "ShowHomePageAction": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Microflows$ShowHomePageAction"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "ShowMessageAction": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Microflows$ShowMessageAction"
+        },
+        "template": {
+          "$ref": "#/definitions/TextTemplate"
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "Information",
+            "Warning",
+            "Error"
+          ]
+        },
+        "blocking": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type",
+        "template"
+      ]
+    },
+    "ShowPageAction": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Microflows$ShowPageAction"
+        },
+        "pageSettings": {
+          "$ref": "pages.schema.json#/definitions/PageSettings"
+        },
+        "numberOfPagesToClose": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type",
+        "pageSettings"
+      ]
+    },
+    "SimpleRequestHandling": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Microflows$SimpleRequestHandling"
+        },
+        "parameterMappings": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/WebServiceOperationSimpleParameterMapping"
+          }
+        },
+        "nullValueOption": {
+          "type": "string",
+          "enum": [
+            "SendAsNil",
+            "LeaveOutElement"
+          ]
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "Sort": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Microflows$Sort"
+        },
+        "sortItemList": {
+          "$ref": "#/definitions/SortItemList"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type",
+        "sortItemList"
+      ]
+    },
+    "SortItem": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Microflows$SortItem"
+        },
+        "attributeRef": {
+          "$ref": "domainmodels.schema.json#/definitions/AttributeRef"
+        },
+        "sortOrder": {
+          "type": "string",
+          "enum": [
+            "Ascending",
+            "Descending"
+          ]
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type",
+        "attributeRef"
+      ]
+    },
+    "SortItemList": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Microflows$SortItemList"
+        },
+        "items": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SortItem"
+          }
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "StartEvent": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Microflows$StartEvent"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "Template": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Microflows$Template"
+        },
+        "arguments": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TemplateArgument"
+          }
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "StringTemplate": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Microflows$StringTemplate"
+        },
+        "text": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "StringTemplateParameterValue": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Microflows$StringTemplateParameterValue"
+        },
+        "typedTemplate": {
+          "$ref": "#/definitions/TypedTemplate"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type",
+        "typedTemplate"
+      ]
+    },
+    "Subtract": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Microflows$Subtract"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "SynchronizeAction": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Microflows$SynchronizeAction"
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "All",
+            "Unsynchronized",
+            "Specific"
+          ]
+        },
+        "variableNames": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "Tail": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Microflows$Tail"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "TemplateArgument": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Microflows$TemplateArgument"
+        },
+        "expression": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "TextTemplate": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Microflows$TextTemplate"
+        },
+        "text": {
+          "$ref": "texts.schema.json#/definitions/Text"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type",
+        "text"
+      ]
+    },
+    "TypedTemplate": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Microflows$TypedTemplate"
+        },
+        "text": {
+          "type": "string"
+        },
+        "arguments": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TypedTemplateArgument"
+          }
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "Union": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Microflows$Union"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "UnlockWorkflowAction": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Microflows$UnlockWorkflowAction"
+        },
+        "workflowSelection": {
+          "$ref": "workflows.schema.json#/definitions/WorkflowDefinitionSelection"
+        },
+        "resumeAllPausedWorkflows": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "UnpauseOperation": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Microflows$UnpauseOperation"
+        },
+        "workflowVariable": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "ValidationFeedbackAction": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Microflows$ValidationFeedbackAction"
+        },
+        "feedbackTemplate": {
+          "$ref": "#/definitions/TextTemplate"
+        },
+        "objectVariableName": {
+          "type": "string"
+        },
+        "attribute": {
+          "type": "string",
+          "description": "domainmodels.schema.json#/definitions/IAttribute"
+        },
+        "association": {
+          "type": "string",
+          "description": "domainmodels.schema.json#/definitions/IAssociationBase"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type",
+        "feedbackTemplate"
+      ]
+    },
+    "VariableExport": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Microflows$VariableExport"
+        },
+        "outputVariableName": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "WebServiceCallAction": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Microflows$WebServiceCallAction"
+        },
+        "importedWebService": {
+          "type": "string",
+          "description": "webservices.schema.json#/definitions/IImportedWebService"
+        },
+        "serviceName": {
+          "type": "string"
+        },
+        "operationName": {
+          "type": "string"
+        },
+        "useRequestTimeOut": {
+          "type": "boolean"
+        },
+        "timeOutExpression": {
+          "type": "string"
+        },
+        "requestHeaderHandling": {
+          "$ref": "#/definitions/RequestHandling"
+        },
+        "requestBodyHandling": {
+          "$ref": "#/definitions/RequestHandling"
+        },
+        "resultHandling": {
+          "$ref": "#/definitions/ResultHandling"
+        },
+        "httpConfiguration": {
+          "$ref": "#/definitions/HttpConfiguration"
+        },
+        "isValidationRequired": {
+          "type": "boolean"
+        },
+        "requestProxyType": {
+          "type": "string",
+          "enum": [
+            "DefaultProxy",
+            "Override",
+            "NoProxy"
+          ]
+        },
+        "proxyConfiguration": {
+          "$ref": "#/definitions/ProxyConfiguration"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type",
+        "requestHeaderHandling",
+        "requestBodyHandling",
+        "resultHandling",
+        "httpConfiguration"
+      ]
+    },
+    "WebServiceOperationParameterMapping": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Microflows$WebServiceOperationParameterMapping"
+        },
+        "isChecked": {
+          "type": "boolean"
+        },
+        "parameterName": {
+          "type": "string"
+        },
+        "argument": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "WebServiceOperationAdvancedParameterMapping": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Microflows$WebServiceOperationAdvancedParameterMapping"
+        },
+        "mapping": {
+          "type": "string",
+          "description": "exportmappings.schema.json#/definitions/IExportMapping"
+        },
+        "mappingArgumentVariableName": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "WebServiceOperationSimpleParameterMapping": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Microflows$WebServiceOperationSimpleParameterMapping"
+        },
+        "parameterPath": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "WhileLoopCondition": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Microflows$WhileLoopCondition"
+        },
+        "whileExpression": {
+          "type": "string"
+        },
+        "caption": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "WorkflowCallAction": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Microflows$WorkflowCallAction"
+        },
+        "workflow": {
+          "type": "string",
+          "description": "workflows.schema.json#/definitions/IWorkflow"
+        },
+        "workflowContextVariable": {
+          "type": "string"
+        },
+        "useReturnVariable": {
+          "type": "boolean"
+        },
+        "outputVariableName": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "WorkflowOperationAction": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Microflows$WorkflowOperationAction"
+        },
+        "operation": {
+          "$ref": "#/definitions/WorkflowOperation"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type",
+        "operation"
+      ]
+    }
+  }
+}

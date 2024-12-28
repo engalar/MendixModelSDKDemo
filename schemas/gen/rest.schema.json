@@ -1,0 +1,1472 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "definitions": {
+    "AuthenticationScheme": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Rest$AuthenticationScheme"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "BasicAuthenticationScheme": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Rest$BasicAuthenticationScheme"
+        },
+        "username": {
+          "$ref": "#/definitions/Value"
+        },
+        "password": {
+          "$ref": "#/definitions/Value"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type",
+        "username",
+        "password"
+      ]
+    },
+    "Body": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Rest$Body"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "ChangeMode": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Rest$ChangeMode"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "CallMicroflowToChange": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Rest$CallMicroflowToChange"
+        },
+        "microflow": {
+          "type": "string",
+          "description": "microflows.schema.json#/definitions/IMicroflow"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type",
+        "microflow"
+      ]
+    },
+    "ReadMode": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Rest$ReadMode"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "CallMicroflowToRead": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Rest$CallMicroflowToRead"
+        },
+        "microflow": {
+          "type": "string",
+          "description": "microflows.schema.json#/definitions/IMicroflow"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "ChangeNotSupported": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Rest$ChangeNotSupported"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "ChangeSource": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Rest$ChangeSource"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "Value": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Rest$Value"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "ConstantValue": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Rest$ConstantValue"
+        },
+        "value": {
+          "type": "string",
+          "description": "constants.schema.json#/definitions/IConstant"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type",
+        "value"
+      ]
+    },
+    "ConsumedODataService": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Rest$ConsumedODataService"
+        },
+        "metadataReferences": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MetadataReference"
+          }
+        },
+        "proxyType": {
+          "type": "string"
+        },
+        "proxyHost": {
+          "type": "string",
+          "description": "constants.schema.json#/definitions/IConstant"
+        },
+        "proxyPort": {
+          "type": "string",
+          "description": "constants.schema.json#/definitions/IConstant"
+        },
+        "proxyUsername": {
+          "type": "string",
+          "description": "constants.schema.json#/definitions/IConstant"
+        },
+        "proxyPassword": {
+          "type": "string",
+          "description": "constants.schema.json#/definitions/IConstant"
+        },
+        "httpConfiguration": {
+          "$ref": "microflows.schema.json#/definitions/HttpConfiguration"
+        },
+        "configurationMicroflow": {
+          "type": "string",
+          "description": "microflows.schema.json#/definitions/IMicroflow"
+        },
+        "timeoutExpression": {
+          "type": "string"
+        },
+        "oDataVersion": {
+          "type": "string",
+          "enum": [
+            "OData2",
+            "OData3",
+            "OData4"
+          ]
+        },
+        "lastUpdated": {
+          "type": "string"
+        },
+        "useQuerySegment": {
+          "type": "boolean"
+        },
+        "errorHandlingMicroflow": {
+          "type": "string",
+          "description": "microflows.schema.json#/definitions/IMicroflow"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type",
+        "httpConfiguration"
+      ]
+    },
+    "ConsumedRestService": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Rest$ConsumedRestService"
+        },
+        "baseUrl": {
+          "$ref": "#/definitions/ValueTemplate"
+        },
+        "authenticationScheme": {
+          "$ref": "#/definitions/AuthenticationScheme"
+        },
+        "operations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RestOperation"
+          }
+        },
+        "baseUrlParameter": {
+          "$ref": "#/definitions/RestParameter"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type",
+        "baseUrl"
+      ]
+    },
+    "CorsConfiguration": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Rest$CorsConfiguration"
+        },
+        "allowedOrigins": {
+          "type": "string",
+          "description": "constants.schema.json#/definitions/IConstant"
+        },
+        "allowAuthentication": {
+          "type": "boolean"
+        },
+        "maxAge": {
+          "type": "string",
+          "description": "constants.schema.json#/definitions/IConstant"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "HeaderWithValueTemplate": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Rest$HeaderWithValueTemplate"
+        },
+        "name": {
+          "type": "string"
+        },
+        "value": {
+          "$ref": "#/definitions/ValueTemplate"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type",
+        "value"
+      ]
+    },
+    "ImplicitMappingBody": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Rest$ImplicitMappingBody"
+        },
+        "rootMappingElement": {
+          "$ref": "exportmappings.schema.json#/definitions/ExportObjectMappingElement"
+        },
+        "testValue": {
+          "$ref": "#/definitions/Value"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type",
+        "rootMappingElement",
+        "testValue"
+      ]
+    },
+    "RestOperationResponseHandling": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Rest$RestOperationResponseHandling"
+        },
+        "statusCode": {
+          "type": "string"
+        },
+        "contentType": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "ImplicitMappingResponseHandling": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Rest$ImplicitMappingResponseHandling"
+        },
+        "rootMappingElement": {
+          "$ref": "importmappings.schema.json#/definitions/ImportObjectMappingElement"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type",
+        "rootMappingElement"
+      ]
+    },
+    "MetadataReference": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Rest$MetadataReference"
+        },
+        "uri": {
+          "type": "string"
+        },
+        "metadata": {
+          "type": "string"
+        },
+        "metadataReferences": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MetadataReference"
+          }
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "NoResponseHandling": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Rest$NoResponseHandling"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "ODataEntityTypeSource": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Rest$ODataEntityTypeSource"
+        },
+        "sourceDocument": {
+          "type": "string",
+          "description": "#/definitions/ConsumedODataService"
+        },
+        "entityTypeName": {
+          "type": "string"
+        },
+        "key": {
+          "$ref": "#/definitions/ODataKey"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "ODataKey": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Rest$ODataKey"
+        },
+        "parts": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ODataKeyPart"
+          }
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "ODataKeyPart": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Rest$ODataKeyPart"
+        },
+        "name": {
+          "type": "string"
+        },
+        "entityKeyPartName": {
+          "type": "string"
+        },
+        "type": {
+          "$ref": "domainmodels.schema.json#/definitions/AttributeType"
+        },
+        "remoteType": {
+          "type": "string"
+        },
+        "filterable": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type",
+        "type"
+      ]
+    },
+    "ODataMappedValue": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Rest$ODataMappedValue"
+        },
+        "remoteName": {
+          "type": "string"
+        },
+        "remoteType": {
+          "type": "string"
+        },
+        "filterable": {
+          "type": "boolean"
+        },
+        "sortable": {
+          "type": "boolean"
+        },
+        "representsStream": {
+          "type": "boolean"
+        },
+        "updatable": {
+          "type": "boolean"
+        },
+        "creatable": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "ODataRemoteAssociationSource": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Rest$ODataRemoteAssociationSource"
+        },
+        "remoteParentNavigationProperty": {
+          "type": "string"
+        },
+        "remoteChildNavigationProperty": {
+          "type": "string"
+        },
+        "navigability2": {
+          "type": "string"
+        },
+        "updatableFromChild": {
+          "type": "boolean"
+        },
+        "updatableFromParent": {
+          "type": "boolean"
+        },
+        "creatableFromChild": {
+          "type": "boolean"
+        },
+        "creatableFromParent": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "ODataRemoteEntitySource": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Rest$ODataRemoteEntitySource"
+        },
+        "sourceDocument": {
+          "type": "string",
+          "description": "#/definitions/ConsumedODataService"
+        },
+        "entityTypeName": {
+          "type": "string"
+        },
+        "entitySetName": {
+          "type": "string"
+        },
+        "key": {
+          "$ref": "#/definitions/ODataKey"
+        },
+        "countable": {
+          "type": "boolean"
+        },
+        "creatable": {
+          "type": "boolean"
+        },
+        "deletable": {
+          "type": "boolean"
+        },
+        "topSupported": {
+          "type": "boolean"
+        },
+        "skipSupported": {
+          "type": "boolean"
+        },
+        "createChangeLocally": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "ODataRemoteEnumerationSource": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Rest$ODataRemoteEnumerationSource"
+        },
+        "consumedODataService": {
+          "type": "string",
+          "description": "#/definitions/ConsumedODataService"
+        },
+        "remoteName": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "ODataRemoteEnumerationValue": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Rest$ODataRemoteEnumerationValue"
+        },
+        "remoteName": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "OperationParameter": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Rest$OperationParameter"
+        },
+        "name": {
+          "type": "string"
+        },
+        "dataType": {
+          "$ref": "datatypes.schema.json#/definitions/DataType"
+        },
+        "testValue": {
+          "$ref": "#/definitions/Value"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type",
+        "dataType",
+        "testValue"
+      ]
+    },
+    "PublishedODataContract": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Rest$PublishedODataContract"
+        },
+        "serviceFeed": {
+          "$ref": "#/definitions/ServiceFeed"
+        },
+        "metadata": {
+          "type": "string"
+        },
+        "openApi": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type",
+        "serviceFeed"
+      ]
+    },
+    "PublishedODataEnumeration": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Rest$PublishedODataEnumeration"
+        },
+        "exposedName": {
+          "type": "string"
+        },
+        "enumeration": {
+          "type": "string",
+          "description": "enumerations.schema.json#/definitions/IEnumeration"
+        },
+        "values": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PublishedODataEnumerationValue"
+          }
+        },
+        "summary": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type",
+        "enumeration"
+      ]
+    },
+    "PublishedODataEnumerationValue": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Rest$PublishedODataEnumerationValue"
+        },
+        "exposedName": {
+          "type": "string"
+        },
+        "enumerationValue": {
+          "type": "string",
+          "description": "enumerations.schema.json#/definitions/IEnumerationValue"
+        },
+        "summary": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type",
+        "enumerationValue"
+      ]
+    },
+    "PublishedODataMicroflow": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Rest$PublishedODataMicroflow"
+        },
+        "exposedName": {
+          "type": "string"
+        },
+        "microflow": {
+          "type": "string",
+          "description": "microflows.schema.json#/definitions/IMicroflow"
+        },
+        "parameters": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PublishedODataMicroflowParameter"
+          }
+        },
+        "returnType": {
+          "$ref": "datatypes.schema.json#/definitions/DataType"
+        },
+        "summary": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type",
+        "microflow",
+        "returnType"
+      ]
+    },
+    "PublishedODataMicroflowParameter": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Rest$PublishedODataMicroflowParameter"
+        },
+        "exposedName": {
+          "type": "string"
+        },
+        "microflowParameter": {
+          "type": "string",
+          "description": "microflows.schema.json#/definitions/IMicroflowParameter"
+        },
+        "dataType": {
+          "$ref": "datatypes.schema.json#/definitions/DataType"
+        },
+        "canBeEmpty": {
+          "type": "boolean"
+        },
+        "summary": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type",
+        "microflowParameter",
+        "dataType"
+      ]
+    },
+    "PublishedODataService": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Rest$PublishedODataService"
+        },
+        "namespace": {
+          "type": "string"
+        },
+        "path": {
+          "type": "string"
+        },
+        "allowedModuleRoles": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "description": "security.schema.json#/definitions/IModuleRole"
+          }
+        },
+        "serviceName": {
+          "type": "string"
+        },
+        "resources": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PublishedRestResource"
+          }
+        },
+        "microflows": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PublishedODataMicroflow"
+          }
+        },
+        "enumerations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PublishedODataEnumeration"
+          }
+        },
+        "publishAssociations": {
+          "type": "boolean"
+        },
+        "version": {
+          "type": "string"
+        },
+        "authenticationMicroflow": {
+          "type": "string",
+          "description": "microflows.schema.json#/definitions/IMicroflow"
+        },
+        "authenticationTypes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "summary": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "replaceIllegalChars": {
+          "type": "boolean"
+        },
+        "useGeneralization": {
+          "type": "boolean"
+        },
+        "oDataVersion": {
+          "type": "string",
+          "enum": [
+            "OData4",
+            "OData3"
+          ]
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "PublishedRestResource": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Rest$PublishedRestResource"
+        },
+        "path": {
+          "type": "string"
+        },
+        "exposedName": {
+          "type": "string"
+        },
+        "summary": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "usePaging": {
+          "type": "boolean"
+        },
+        "pageSize": {
+          "type": "string"
+        },
+        "updateMode": {
+          "$ref": "#/definitions/ChangeMode"
+        },
+        "insertMode": {
+          "$ref": "#/definitions/ChangeMode"
+        },
+        "deleteMode": {
+          "$ref": "#/definitions/ChangeMode"
+        },
+        "readMode": {
+          "$ref": "#/definitions/ReadMode"
+        },
+        "queryOptions": {
+          "$ref": "#/definitions/QueryOptions"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type",
+        "updateMode",
+        "insertMode",
+        "deleteMode",
+        "readMode",
+        "queryOptions"
+      ]
+    },
+    "PublishedRestService": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Rest$PublishedRestService"
+        },
+        "path": {
+          "type": "string"
+        },
+        "serviceName": {
+          "type": "string"
+        },
+        "version": {
+          "type": "string"
+        },
+        "authenticationTypes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "authenticationMicroflow": {
+          "type": "string",
+          "description": "microflows.schema.json#/definitions/IMicroflow"
+        },
+        "corsConfiguration": {
+          "$ref": "#/definitions/CorsConfiguration"
+        },
+        "allowedRoles": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "description": "security.schema.json#/definitions/IModuleRole"
+          }
+        },
+        "resources": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PublishedRestServiceResource"
+          }
+        },
+        "parameters": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RestOperationParameter"
+          }
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "PublishedRestServiceOperation": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Rest$PublishedRestServiceOperation"
+        },
+        "summary": {
+          "type": "string"
+        },
+        "documentation": {
+          "type": "string"
+        },
+        "path": {
+          "type": "string"
+        },
+        "deprecated": {
+          "type": "boolean"
+        },
+        "parameters": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RestOperationParameter"
+          }
+        },
+        "httpMethod": {
+          "type": "string"
+        },
+        "microflow": {
+          "type": "string",
+          "description": "microflows.schema.json#/definitions/IMicroflow"
+        },
+        "exportMapping": {
+          "type": "string",
+          "description": "exportmappings.schema.json#/definitions/IExportMapping"
+        },
+        "importMapping": {
+          "type": "string",
+          "description": "importmappings.schema.json#/definitions/IImportMapping"
+        },
+        "objectHandlingBackup": {
+          "type": "string"
+        },
+        "commit": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "PublishedRestServiceResource": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Rest$PublishedRestServiceResource"
+        },
+        "name": {
+          "type": "string"
+        },
+        "documentation": {
+          "type": "string"
+        },
+        "operations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PublishedRestServiceOperation"
+          }
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "QueryOptions": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Rest$QueryOptions"
+        },
+        "countable": {
+          "type": "boolean"
+        },
+        "topSupported": {
+          "type": "boolean"
+        },
+        "skipSupported": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "ReadSource": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Rest$ReadSource"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "RestOperation": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Rest$RestOperation"
+        },
+        "name": {
+          "type": "string"
+        },
+        "path": {
+          "$ref": "#/definitions/ValueTemplate"
+        },
+        "method": {
+          "$ref": "#/definitions/RestOperationMethod"
+        },
+        "timeout": {
+          "type": "string"
+        },
+        "headers": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/HeaderWithValueTemplate"
+          }
+        },
+        "parameters": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/OperationParameter"
+          }
+        },
+        "responseHandling": {
+          "$ref": "#/definitions/RestOperationResponseHandling"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type",
+        "path",
+        "method",
+        "responseHandling"
+      ]
+    },
+    "RestOperationMethod": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Rest$RestOperationMethod"
+        },
+        "httpMethod": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "RestOperationMethodWithBody": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Rest$RestOperationMethodWithBody"
+        },
+        "body": {
+          "$ref": "#/definitions/Body"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type",
+        "body"
+      ]
+    },
+    "RestOperationMethodWithoutBody": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Rest$RestOperationMethodWithoutBody"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "RestOperationParameter": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Rest$RestOperationParameter"
+        },
+        "name": {
+          "type": "string"
+        },
+        "microflowParameter": {
+          "type": "string",
+          "description": "microflows.schema.json#/definitions/IMicroflowParameter"
+        },
+        "type": {
+          "$ref": "datatypes.schema.json#/definitions/DataType"
+        },
+        "parameterType": {
+          "type": "string",
+          "enum": [
+            "Path",
+            "Query",
+            "Body",
+            "Header",
+            "Form"
+          ]
+        },
+        "description": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type",
+        "type"
+      ]
+    },
+    "RestParameter": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Rest$RestParameter"
+        },
+        "name": {
+          "type": "string"
+        },
+        "dataType": {
+          "$ref": "datatypes.schema.json#/definitions/DataType"
+        },
+        "testValue": {
+          "$ref": "#/definitions/Value"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type",
+        "dataType",
+        "testValue"
+      ]
+    },
+    "ServiceFeed": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Rest$ServiceFeed"
+        },
+        "xml": {
+          "type": "string"
+        },
+        "json": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "StringBody": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Rest$StringBody"
+        },
+        "valueTemplate": {
+          "$ref": "#/definitions/ValueTemplate"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type",
+        "valueTemplate"
+      ]
+    },
+    "StringValue": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Rest$StringValue"
+        },
+        "value": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "ValueTemplate": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Rest$ValueTemplate"
+        },
+        "value": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    }
+  }
+}

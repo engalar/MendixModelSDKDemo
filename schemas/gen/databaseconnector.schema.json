@@ -1,0 +1,460 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "definitions": {
+    "AdditionalProperty": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "DatabaseConnector$AdditionalProperty"
+        },
+        "key": {
+          "type": "string"
+        },
+        "value": {
+          "$ref": "#/definitions/AdditionalPropertyValue"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "AdditionalPropertyValue": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "DatabaseConnector$AdditionalPropertyValue"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "ColumnMapping": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "DatabaseConnector$ColumnMapping"
+        },
+        "columnName": {
+          "type": "string"
+        },
+        "sqlDataType": {
+          "$ref": "#/definitions/SqlDataType"
+        },
+        "attribute": {
+          "type": "string",
+          "description": "domainmodels.schema.json#/definitions/IAttribute"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type",
+        "attribute"
+      ]
+    },
+    "ConnectionDetails": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "DatabaseConnector$ConnectionDetails"
+        },
+        "host": {
+          "type": "string"
+        },
+        "port": {
+          "type": "string"
+        },
+        "databaseName": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "ConnectionInput": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "DatabaseConnector$ConnectionInput"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "ConnectionParts": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "DatabaseConnector$ConnectionParts"
+        },
+        "host": {
+          "type": "string"
+        },
+        "port": {
+          "type": "string"
+        },
+        "databaseName": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "ConnectionString": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "DatabaseConnector$ConnectionString"
+        },
+        "value": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "DatabaseConnection": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "DatabaseConnector$DatabaseConnection"
+        },
+        "databaseType": {
+          "type": "string"
+        },
+        "connectionInput": {
+          "$ref": "#/definitions/ConnectionInput"
+        },
+        "connectionString": {
+          "type": "string",
+          "description": "constants.schema.json#/definitions/IConstant"
+        },
+        "userName": {
+          "type": "string",
+          "description": "constants.schema.json#/definitions/IConstant"
+        },
+        "password": {
+          "type": "string",
+          "description": "constants.schema.json#/definitions/IConstant"
+        },
+        "lastSelectedQuery": {
+          "type": "string",
+          "description": "#/definitions/DatabaseQuery"
+        },
+        "queries": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DatabaseQuery"
+          }
+        },
+        "additionalProperties": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AdditionalProperty"
+          }
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "DatabaseQuery": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "DatabaseConnector$DatabaseQuery"
+        },
+        "name": {
+          "type": "string"
+        },
+        "query": {
+          "type": "string"
+        },
+        "tableMappings": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TableMapping"
+          }
+        },
+        "parameters": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/QueryParameter"
+          }
+        },
+        "queryType": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "ExecuteDatabaseQueryAction": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "DatabaseConnector$ExecuteDatabaseQueryAction"
+        },
+        "query": {
+          "type": "string",
+          "description": "#/definitions/DatabaseQuery"
+        },
+        "parameterMappings": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/QueryParameterMapping"
+          }
+        },
+        "outputVariableName": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "SqlDataType": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "DatabaseConnector$SqlDataType"
+        },
+        "dataTypeName": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "LimitedLengthSqlDataType": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "DatabaseConnector$LimitedLengthSqlDataType"
+        },
+        "length": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "QueryParameter": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "DatabaseConnector$QueryParameter"
+        },
+        "parameterName": {
+          "type": "string"
+        },
+        "sqlDataType": {
+          "$ref": "#/definitions/SqlDataType"
+        },
+        "dataType": {
+          "$ref": "datatypes.schema.json#/definitions/DataType"
+        },
+        "defaultValue": {
+          "type": "string"
+        },
+        "mode": {
+          "type": "string",
+          "enum": [
+            "Unknown",
+            "In",
+            "Out",
+            "InOut"
+          ]
+        },
+        "databaseParameterName": {
+          "type": "string"
+        },
+        "emptyValueBecomesNull": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type",
+        "dataType"
+      ]
+    },
+    "QueryParameterMapping": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "DatabaseConnector$QueryParameterMapping"
+        },
+        "parameterName": {
+          "type": "string"
+        },
+        "value": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "SimpleSqlDataType": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "DatabaseConnector$SimpleSqlDataType"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "TableMapping": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "DatabaseConnector$TableMapping"
+        },
+        "tableName": {
+          "type": "string"
+        },
+        "entity": {
+          "type": "string",
+          "description": "domainmodels.schema.json#/definitions/IEntity"
+        },
+        "columns": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ColumnMapping"
+          }
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type",
+        "entity"
+      ]
+    },
+    "ValueAsConstant": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "DatabaseConnector$ValueAsConstant"
+        },
+        "value": {
+          "type": "string",
+          "description": "constants.schema.json#/definitions/IConstant"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "ValueAsString": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "DatabaseConnector$ValueAsString"
+        },
+        "value": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    }
+  }
+}

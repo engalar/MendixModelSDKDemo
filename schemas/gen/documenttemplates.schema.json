@@ -1,0 +1,853 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "definitions": {
+    "Widget": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "DocumentTemplates$Widget"
+        },
+        "name": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "AttributeWidget": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "DocumentTemplates$AttributeWidget"
+        },
+        "attributeRef": {
+          "$ref": "domainmodels.schema.json#/definitions/AttributeRef"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "ConditionSettings": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "DocumentTemplates$ConditionSettings"
+        },
+        "conditions": {
+          "type": "array",
+          "items": {
+            "$ref": "enumerations.schema.json#/definitions/Condition"
+          }
+        },
+        "attribute": {
+          "type": "string",
+          "description": "domainmodels.schema.json#/definitions/IAttribute"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "EntityWidget": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "DocumentTemplates$EntityWidget"
+        },
+        "entityRef": {
+          "$ref": "domainmodels.schema.json#/definitions/EntityRef"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "Grid": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "DocumentTemplates$Grid"
+        },
+        "cellSpacing": {
+          "type": "string"
+        },
+        "cellPadding": {
+          "type": "string"
+        },
+        "style": {
+          "$ref": "#/definitions/Style"
+        },
+        "sortBar": {
+          "$ref": "#/definitions/GridSortBar"
+        },
+        "microflow": {
+          "type": "string",
+          "description": "microflows.schema.json#/definitions/IMicroflow"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type",
+        "style",
+        "sortBar"
+      ]
+    },
+    "DataGrid": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "DocumentTemplates$DataGrid"
+        },
+        "columns": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DataGridColumn"
+          }
+        },
+        "weights": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "DataGridCell": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "DocumentTemplates$DataGridCell"
+        },
+        "style": {
+          "$ref": "#/definitions/Style"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type",
+        "style"
+      ]
+    },
+    "DataGridColumn": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "DocumentTemplates$DataGridColumn"
+        },
+        "attributeRef": {
+          "$ref": "domainmodels.schema.json#/definitions/AttributeRef"
+        },
+        "caption": {
+          "$ref": "texts.schema.json#/definitions/Text"
+        },
+        "style": {
+          "$ref": "#/definitions/Style"
+        },
+        "oddRowsCell": {
+          "$ref": "#/definitions/DataGridCell"
+        },
+        "evenRowsCell": {
+          "$ref": "#/definitions/DataGridCell"
+        },
+        "formattingInfo": {
+          "$ref": "pages.schema.json#/definitions/FormattingInfo"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type",
+        "caption",
+        "style",
+        "oddRowsCell",
+        "formattingInfo"
+      ]
+    },
+    "DataView": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "DocumentTemplates$DataView"
+        },
+        "contents": {
+          "$ref": "#/definitions/DataViewContents"
+        },
+        "microflow": {
+          "type": "string",
+          "description": "microflows.schema.json#/definitions/IMicroflow"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type",
+        "contents"
+      ]
+    },
+    "DropZone": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "DocumentTemplates$DropZone"
+        },
+        "widget": {
+          "$ref": "#/definitions/Widget"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "DataViewContents": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "DocumentTemplates$DataViewContents"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "DocumentTemplate": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "DocumentTemplates$DocumentTemplate"
+        },
+        "toplevels": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Widget"
+          }
+        },
+        "canvasWidth": {
+          "type": "string"
+        },
+        "pageWidth": {
+          "type": "string"
+        },
+        "pageHeight": {
+          "type": "string"
+        },
+        "ppi": {
+          "type": "string"
+        },
+        "marginLeftInInch": {
+          "type": "string"
+        },
+        "marginRightInInch": {
+          "type": "string"
+        },
+        "marginTopInInch": {
+          "type": "string"
+        },
+        "marginBottomInInch": {
+          "type": "string"
+        },
+        "style": {
+          "$ref": "#/definitions/Style"
+        },
+        "header": {
+          "$ref": "#/definitions/Header"
+        },
+        "footer": {
+          "$ref": "#/definitions/Footer"
+        },
+        "showHeaderAndFooterOnFirstPage": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type",
+        "style"
+      ]
+    },
+    "DocumentTemplateParameter": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "DocumentTemplates$DocumentTemplateParameter"
+        },
+        "name": {
+          "type": "string"
+        },
+        "parameterType": {
+          "$ref": "datatypes.schema.json#/definitions/DataType"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type",
+        "parameterType"
+      ]
+    },
+    "DynamicImageViewer": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "DocumentTemplates$DynamicImageViewer"
+        },
+        "defaultImage": {
+          "type": "string",
+          "description": "images.schema.json#/definitions/IImage"
+        },
+        "useThumbnail": {
+          "type": "boolean"
+        },
+        "width": {
+          "type": "string"
+        },
+        "height": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "DynamicLabel": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "DocumentTemplates$DynamicLabel"
+        },
+        "style": {
+          "$ref": "#/definitions/Style"
+        },
+        "renderXHTML": {
+          "type": "boolean"
+        },
+        "formattingInfo": {
+          "$ref": "pages.schema.json#/definitions/FormattingInfo"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type",
+        "style",
+        "formattingInfo"
+      ]
+    },
+    "Footer": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "DocumentTemplates$Footer"
+        },
+        "bottomMargin": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "GridSortBar": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "DocumentTemplates$GridSortBar"
+        },
+        "sortItems": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/GridSortItem"
+          }
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "GridSortItem": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "DocumentTemplates$GridSortItem"
+        },
+        "attributeRef": {
+          "$ref": "domainmodels.schema.json#/definitions/AttributeRef"
+        },
+        "sortOrder": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type",
+        "attributeRef"
+      ]
+    },
+    "Header": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "DocumentTemplates$Header"
+        },
+        "topMargin": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "LineBreak": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "DocumentTemplates$LineBreak"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "PageBreak": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "DocumentTemplates$PageBreak"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "StaticImageViewer": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "DocumentTemplates$StaticImageViewer"
+        },
+        "image": {
+          "type": "string",
+          "description": "images.schema.json#/definitions/IImage"
+        },
+        "width": {
+          "type": "string"
+        },
+        "height": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "StaticLabel": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "DocumentTemplates$StaticLabel"
+        },
+        "caption": {
+          "$ref": "texts.schema.json#/definitions/Text"
+        },
+        "style": {
+          "$ref": "#/definitions/Style"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type",
+        "caption",
+        "style"
+      ]
+    },
+    "Style": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "DocumentTemplates$Style"
+        },
+        "fontFamily": {
+          "type": "string",
+          "enum": [
+            "Courier",
+            "Tahoma",
+            "Times",
+            "Helvetica",
+            "Arial"
+          ]
+        },
+        "fontSize": {
+          "type": "string"
+        },
+        "bold": {
+          "type": "boolean"
+        },
+        "italic": {
+          "type": "boolean"
+        },
+        "fontColor": {
+          "type": "string"
+        },
+        "backgroundColor": {
+          "type": "string"
+        },
+        "overrideFontFamily": {
+          "type": "boolean"
+        },
+        "overrideFontSize": {
+          "type": "boolean"
+        },
+        "overrideBold": {
+          "type": "boolean"
+        },
+        "overrideItalic": {
+          "type": "boolean"
+        },
+        "overrideFontColor": {
+          "type": "boolean"
+        },
+        "overrideBackgroundColor": {
+          "type": "boolean"
+        },
+        "borderStyleTop": {
+          "type": "string",
+          "enum": [
+            "None",
+            "Dotted",
+            "Dashed",
+            "Solid"
+          ]
+        },
+        "borderStyleBottom": {
+          "type": "string",
+          "enum": [
+            "None",
+            "Dotted",
+            "Dashed",
+            "Solid"
+          ]
+        },
+        "borderStyleLeft": {
+          "type": "string",
+          "enum": [
+            "None",
+            "Dotted",
+            "Dashed",
+            "Solid"
+          ]
+        },
+        "borderStyleRight": {
+          "type": "string",
+          "enum": [
+            "None",
+            "Dotted",
+            "Dashed",
+            "Solid"
+          ]
+        },
+        "borderWidthTop": {
+          "type": "string"
+        },
+        "borderWidthBottom": {
+          "type": "string"
+        },
+        "borderWidthLeft": {
+          "type": "string"
+        },
+        "borderWidthRight": {
+          "type": "string"
+        },
+        "borderColorTop": {
+          "type": "string"
+        },
+        "borderColorBottom": {
+          "type": "string"
+        },
+        "borderColorLeft": {
+          "type": "string"
+        },
+        "borderColorRight": {
+          "type": "string"
+        },
+        "textAlign": {
+          "type": "string",
+          "enum": [
+            "Left",
+            "Right",
+            "Center"
+          ]
+        },
+        "customStyles": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "Table": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "DocumentTemplates$Table"
+        },
+        "rows": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TableRow"
+          }
+        },
+        "columnWeights": {
+          "type": "string"
+        },
+        "cellSpacing": {
+          "type": "string"
+        },
+        "cellPadding": {
+          "type": "string"
+        },
+        "style": {
+          "$ref": "#/definitions/Style"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type",
+        "style"
+      ]
+    },
+    "TableCell": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "DocumentTemplates$TableCell"
+        },
+        "colSpan": {
+          "type": "string"
+        },
+        "rowSpan": {
+          "type": "string"
+        },
+        "isPartOfSpan": {
+          "type": "boolean"
+        },
+        "style": {
+          "$ref": "#/definitions/Style"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type",
+        "style"
+      ]
+    },
+    "TableRow": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "DocumentTemplates$TableRow"
+        },
+        "cells": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TableCell"
+          }
+        },
+        "conditionSettings": {
+          "$ref": "#/definitions/ConditionSettings"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type",
+        "conditionSettings"
+      ]
+    },
+    "TemplateGrid": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "DocumentTemplates$TemplateGrid"
+        },
+        "numberOfColumns": {
+          "type": "string"
+        },
+        "oddRowsContents": {
+          "$ref": "#/definitions/TemplateGridContents"
+        },
+        "evenRowsContents": {
+          "$ref": "#/definitions/TemplateGridContents"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type",
+        "oddRowsContents"
+      ]
+    },
+    "TemplateGridContents": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "DocumentTemplates$TemplateGridContents"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "Title": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "DocumentTemplates$Title"
+        },
+        "caption": {
+          "$ref": "texts.schema.json#/definitions/Text"
+        },
+        "style": {
+          "$ref": "#/definitions/Style"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type",
+        "caption",
+        "style"
+      ]
+    }
+  }
+}

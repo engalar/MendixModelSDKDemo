@@ -1,0 +1,352 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "definitions": {
+    "Schedule": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "ScheduledEvents$Schedule"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "DaySchedule": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "ScheduledEvents$DaySchedule"
+        },
+        "hourOfDay": {
+          "type": "string"
+        },
+        "minuteOfHour": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "HourSchedule": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "ScheduledEvents$HourSchedule"
+        },
+        "multiplier": {
+          "type": "string"
+        },
+        "minuteOffset": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "MinuteSchedule": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "ScheduledEvents$MinuteSchedule"
+        },
+        "multiplier": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "MonthSchedule": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "ScheduledEvents$MonthSchedule"
+        },
+        "multiplier": {
+          "type": "string"
+        },
+        "monthOffset": {
+          "type": "string"
+        },
+        "hourOfDay": {
+          "type": "string"
+        },
+        "minuteOfHour": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "MonthDateSchedule": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "ScheduledEvents$MonthDateSchedule"
+        },
+        "dayOfMonth": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "MonthWeekdaySchedule": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "ScheduledEvents$MonthWeekdaySchedule"
+        },
+        "daySelector": {
+          "type": "string",
+          "enum": [
+            "First",
+            "Second",
+            "Third",
+            "Fourth",
+            "Last"
+          ]
+        },
+        "weekday": {
+          "type": "string",
+          "enum": [
+            "Sunday",
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday",
+            "Saturday"
+          ]
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "ScheduledEvent": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "ScheduledEvents$ScheduledEvent"
+        },
+        "startDateTime": {
+          "type": "string"
+        },
+        "timeZone": {
+          "type": "string",
+          "enum": [
+            "UTC",
+            "Server"
+          ]
+        },
+        "schedule": {
+          "$ref": "#/definitions/Schedule"
+        },
+        "onOverlap": {
+          "type": "string",
+          "enum": [
+            "SkipNext",
+            "DelayNext"
+          ]
+        },
+        "interval": {
+          "type": "string"
+        },
+        "intervalType": {
+          "type": "string",
+          "enum": [
+            "Second",
+            "Minute",
+            "Hour",
+            "Day",
+            "Week",
+            "Month",
+            "Year"
+          ]
+        },
+        "microflow": {
+          "type": "string",
+          "description": "microflows.schema.json#/definitions/IMicroflow"
+        },
+        "enabled": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "WeekSchedule": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "ScheduledEvents$WeekSchedule"
+        },
+        "sunday": {
+          "type": "boolean"
+        },
+        "monday": {
+          "type": "boolean"
+        },
+        "tuesday": {
+          "type": "boolean"
+        },
+        "wednesday": {
+          "type": "boolean"
+        },
+        "thursday": {
+          "type": "boolean"
+        },
+        "friday": {
+          "type": "boolean"
+        },
+        "saturday": {
+          "type": "boolean"
+        },
+        "hourOfDay": {
+          "type": "string"
+        },
+        "minuteOfHour": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "YearSchedule": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "ScheduledEvents$YearSchedule"
+        },
+        "month": {
+          "type": "string"
+        },
+        "hourOfDay": {
+          "type": "string"
+        },
+        "minuteOfHour": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "YearDateSchedule": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "ScheduledEvents$YearDateSchedule"
+        },
+        "dayOfMonth": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "YearWeekdaySchedule": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "ScheduledEvents$YearWeekdaySchedule"
+        },
+        "daySelector": {
+          "type": "string",
+          "enum": [
+            "First",
+            "Second",
+            "Third",
+            "Fourth",
+            "Last"
+          ]
+        },
+        "weekday": {
+          "type": "string",
+          "enum": [
+            "Sunday",
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday",
+            "Saturday"
+          ]
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    }
+  }
+}

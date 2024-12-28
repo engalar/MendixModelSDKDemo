@@ -1,0 +1,424 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "definitions": {
+    "Expression": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Expressions$Expression"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "BinaryExpression": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Expressions$BinaryExpression"
+        },
+        "operator": {
+          "type": "string",
+          "enum": [
+            "None",
+            "And",
+            "Or",
+            "Equals",
+            "NotEquals",
+            "GreaterThan",
+            "LessThan",
+            "GreaterThanOrEqual",
+            "LessThanOrEqual",
+            "Minus",
+            "Plus",
+            "Multiply",
+            "Divide",
+            "Div",
+            "Mod"
+          ]
+        },
+        "left": {
+          "$ref": "#/definitions/Expression"
+        },
+        "right": {
+          "$ref": "#/definitions/Expression"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type",
+        "left",
+        "right"
+      ]
+    },
+    "LiteralExpression": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Expressions$LiteralExpression"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "BooleanLiteral": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Expressions$BooleanLiteral"
+        },
+        "value": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "ConstantRefExpression": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Expressions$ConstantRefExpression"
+        },
+        "constant": {
+          "type": "string",
+          "description": "constants.schema.json#/definitions/IConstant"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type",
+        "constant"
+      ]
+    },
+    "EmptyLiteral": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Expressions$EmptyLiteral"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "EnumerationValueRefExpression": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Expressions$EnumerationValueRefExpression"
+        },
+        "value": {
+          "type": "string",
+          "description": "enumerations.schema.json#/definitions/IEnumerationValue"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type",
+        "value"
+      ]
+    },
+    "FloatLiteral": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Expressions$FloatLiteral"
+        },
+        "value": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "FunctionCallExpression": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Expressions$FunctionCallExpression"
+        },
+        "functionName": {
+          "type": "string"
+        },
+        "arguments": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Expression"
+          }
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "VariableRef": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Expressions$VariableRef"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "GlobalVariableRef": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Expressions$GlobalVariableRef"
+        },
+        "referredName": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "IfExpression": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Expressions$IfExpression"
+        },
+        "condition": {
+          "$ref": "#/definitions/Expression"
+        },
+        "ifTrue": {
+          "$ref": "#/definitions/Expression"
+        },
+        "ifFalse": {
+          "$ref": "#/definitions/Expression"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type",
+        "condition",
+        "ifTrue",
+        "ifFalse"
+      ]
+    },
+    "IntegerLiteral": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Expressions$IntegerLiteral"
+        },
+        "value": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "NoExpression": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Expressions$NoExpression"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "NoVariableRef": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Expressions$NoVariableRef"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "ParenthesisExpression": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Expressions$ParenthesisExpression"
+        },
+        "expression": {
+          "$ref": "#/definitions/Expression"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type",
+        "expression"
+      ]
+    },
+    "StringLiteral": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Expressions$StringLiteral"
+        },
+        "value": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "UnaryExpression": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Expressions$UnaryExpression"
+        },
+        "operator": {
+          "type": "string",
+          "enum": [
+            "None",
+            "UnaryMinus"
+          ]
+        },
+        "expression": {
+          "$ref": "#/definitions/Expression"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type",
+        "expression"
+      ]
+    },
+    "UnparsableExpression": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Expressions$UnparsableExpression"
+        },
+        "expression": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type"
+      ]
+    },
+    "VariableRefExpression": {
+      "type": "object",
+      "properties": {
+        "$ID": {
+          "$ref": "../common.schema.json#/definitions/Identifiable"
+        },
+        "$Type": {
+          "type": "string",
+          "const": "Expressions$VariableRefExpression"
+        },
+        "variable": {
+          "$ref": "#/definitions/VariableRef"
+        },
+        "member": {
+          "$ref": "domainmodels.schema.json#/definitions/MemberRef"
+        }
+      },
+      "required": [
+        "$ID",
+        "$Type",
+        "variable"
+      ]
+    }
+  }
+}
