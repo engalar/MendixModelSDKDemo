@@ -2,6 +2,36 @@
     "$schema": "http://json-schema.org/draft-07/schema#",
     "title": "Common Structure Schema for mendix model",
     "definitions": {
+        "Size": {
+            "type": "object",
+            "properties": {
+                "width": {
+                    "type": "integer"
+                },
+                "height": {
+                    "type": "integer"
+                }
+            },
+            "required": [
+                "width",
+                "height"
+            ]
+        },
+        "Point": {
+            "type": "object",
+            "properties": {
+                "x": {
+                    "type": "integer"
+                },
+                "y": {
+                    "type": "integer"
+                }
+            },
+            "required": [
+                "width",
+                "height"
+            ]
+        },
         "_Base": {
             "type": "object",
             "properties": {

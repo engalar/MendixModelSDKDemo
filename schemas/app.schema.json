@@ -43,10 +43,10 @@
                 "document": {
                     "oneOf": [
                         {
-                            "$ref": "page.schema.json#"
+                            "$ref": "gen/pages.schema.json#/definitions/Page"
                         },
                         {
-                            "$ref": "microflow.schema.json#"
+                            "$ref": "gen/microflows.schema.json#/definitions/Microflow"
                         }
                     ]
                 }
