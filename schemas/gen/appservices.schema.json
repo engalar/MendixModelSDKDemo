@@ -12,13 +12,24 @@
           "const": "AppServices$AppServiceAction"
         },
         "name": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "caption": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "description": {
-          "type": "string"
+          "type": "string",
+          "default": ""
+        },
+        "returnTypeCanBeEmpty": {
+          "type": "boolean",
+          "default": false
+        },
+        "image": {
+          "type": "string",
+          "default": ""
         },
         "parameters": {
           "type": "array",
@@ -28,16 +39,10 @@
         },
         "microflow": {
           "type": "string",
-          "description": "microflows.schema.json#/definitions/IMicroflow"
+          "description": "ByNameReferenceProperty: microflows.schema.json#/definitions/Microflow"
         },
         "actionReturnType": {
           "$ref": "datatypes.schema.json#/definitions/DataType"
-        },
-        "returnTypeCanBeEmpty": {
-          "type": "boolean"
-        },
-        "image": {
-          "type": "string"
         }
       },
       "required": [
@@ -57,13 +62,15 @@
           "const": "AppServices$AppServiceActionParameter"
         },
         "name": {
-          "type": "string"
+          "type": "string",
+          "default": ""
+        },
+        "canBeEmpty": {
+          "type": "boolean",
+          "default": false
         },
         "parameterType": {
           "$ref": "datatypes.schema.json#/definitions/DataType"
-        },
-        "canBeEmpty": {
-          "type": "boolean"
         }
       },
       "required": [
@@ -82,6 +89,30 @@
           "type": "string",
           "const": "AppServices$ConsumedAppService"
         },
+        "fromAppStore": {
+          "type": "boolean",
+          "default": false
+        },
+        "appStoreGuid": {
+          "type": "string",
+          "default": ""
+        },
+        "appStoreVersionGuid": {
+          "type": "string",
+          "default": ""
+        },
+        "appStoreVersion": {
+          "type": "string",
+          "default": ""
+        },
+        "useTimeOut": {
+          "type": "boolean",
+          "default": false
+        },
+        "timeOut": {
+          "type": "integer",
+          "default": 30
+        },
         "actions": {
           "type": "array",
           "items": {
@@ -90,18 +121,6 @@
         },
         "msd": {
           "$ref": "#/definitions/Msd"
-        },
-        "fromAppStore": {
-          "type": "boolean"
-        },
-        "appStoreGuid": {
-          "type": "string"
-        },
-        "appStoreVersionGuid": {
-          "type": "string"
-        },
-        "appStoreVersion": {
-          "type": "string"
         },
         "appServiceLocation": {
           "type": "string",
@@ -113,19 +132,18 @@
         },
         "locationConstant": {
           "type": "string",
-          "description": "constants.schema.json#/definitions/IConstant"
-        },
-        "useTimeOut": {
-          "type": "boolean"
-        },
-        "timeOut": {
-          "type": "string"
+          "description": "ByNameReferenceProperty: constants.schema.json#/definitions/Constant"
         }
       },
       "required": [
         "$ID",
         "$Type",
         "msd"
+      ],
+      "allOf": [
+        {
+          "$ref": "projects.schema.json#/definitions/Document"
+        }
       ]
     },
     "Msd": {
@@ -137,6 +155,10 @@
         "$Type": {
           "type": "string",
           "const": "AppServices$Msd"
+        },
+        "wsdl": {
+          "type": "string",
+          "default": ""
         },
         "version": {
           "$ref": "#/definitions/MsdVersion"
@@ -152,9 +174,6 @@
         },
         "wsdlDescription": {
           "$ref": "webservices.schema.json#/definitions/WsdlDescription"
-        },
-        "wsdl": {
-          "type": "string"
         }
       },
       "required": [
@@ -178,43 +197,56 @@
           "const": "AppServices$MsdAssociation"
         },
         "name": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "guid": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "parentEntityName": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "childEntityName": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "associationType": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "associationOwner": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "parentDeleteBehavior": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "childDeleteBehavior": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "associationKind": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "parentX": {
-          "type": "string"
+          "type": "integer",
+          "default": 0
         },
         "parentY": {
-          "type": "string"
+          "type": "integer",
+          "default": 0
         },
         "childX": {
-          "type": "string"
+          "type": "integer",
+          "default": 0
         },
         "childY": {
-          "type": "string"
+          "type": "integer",
+          "default": 0
         }
       },
       "required": [
@@ -233,22 +265,28 @@
           "const": "AppServices$MsdAttribute"
         },
         "name": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "guid": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "attributeType": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "enumerationName": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "defaultValue": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "length": {
-          "type": "string"
+          "type": "integer",
+          "default": 0
         }
       },
       "required": [
@@ -295,22 +333,28 @@
           "const": "AppServices$MsdEntity"
         },
         "name": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "guid": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "generalizationName": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "persistable": {
-          "type": "boolean"
+          "type": "boolean",
+          "default": false
         },
         "locationX": {
-          "type": "string"
+          "type": "integer",
+          "default": 0
         },
         "locationY": {
-          "type": "string"
+          "type": "integer",
+          "default": 0
         },
         "attributes": {
           "type": "array",
@@ -335,10 +379,12 @@
           "const": "AppServices$MsdEnumeration"
         },
         "name": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "guid": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "values": {
           "type": "array",
@@ -385,19 +431,22 @@
           "const": "AppServices$MsdEnumerationValue"
         },
         "name": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "guid": {
-          "type": "string"
+          "type": "string",
+          "default": ""
+        },
+        "image": {
+          "type": "string",
+          "default": ""
         },
         "translations": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/MsdText"
           }
-        },
-        "image": {
-          "type": "string"
         }
       },
       "required": [
@@ -416,30 +465,50 @@
           "const": "AppServices$MsdMetadata"
         },
         "name": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "documentation": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "version": {
-          "type": "string"
+          "type": "integer",
+          "default": 0
         },
         "publishDateTime": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "serviceGuid": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "versionGuid": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "instanceGuid": {
-          "type": "string"
-        },
-        "supportedProtocols": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "headerAuthentication": {
+          "type": "string",
+          "default": ""
+        },
+        "caption": {
+          "type": "string",
+          "default": ""
+        },
+        "image": {
+          "type": "string",
+          "default": ""
+        },
+        "description": {
+          "type": "string",
+          "default": ""
+        },
+        "supportedProtocols": {
           "type": "string"
         },
         "microflows": {
@@ -447,15 +516,6 @@
           "items": {
             "$ref": "#/definitions/MsdMicroflow"
           }
-        },
-        "caption": {
-          "type": "string"
-        },
-        "image": {
-          "type": "string"
-        },
-        "description": {
-          "type": "string"
         }
       },
       "required": [
@@ -474,31 +534,38 @@
           "const": "AppServices$MsdMicroflow"
         },
         "name": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "documentation": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "image": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "description": {
-          "type": "string"
+          "type": "string",
+          "default": ""
+        },
+        "returnType": {
+          "type": "string",
+          "default": ""
+        },
+        "returnTypeSpecification": {
+          "type": "string",
+          "default": ""
+        },
+        "returnTypeCanBeEmpty": {
+          "type": "boolean",
+          "default": false
         },
         "parameters": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/MsdMicroflowParameter"
           }
-        },
-        "returnType": {
-          "type": "string"
-        },
-        "returnTypeSpecification": {
-          "type": "string"
-        },
-        "returnTypeCanBeEmpty": {
-          "type": "boolean"
         }
       },
       "required": [
@@ -517,16 +584,20 @@
           "const": "AppServices$MsdMicroflowParameter"
         },
         "name": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "type": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "typeSpecification": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "canBeEmpty": {
-          "type": "boolean"
+          "type": "boolean",
+          "default": false
         }
       },
       "required": [
@@ -545,10 +616,12 @@
           "const": "AppServices$MsdText"
         },
         "languageCode": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "caption": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         }
       },
       "required": [
@@ -567,7 +640,8 @@
           "const": "AppServices$MsdVersion"
         },
         "version": {
-          "type": "string"
+          "type": "integer",
+          "default": 0
         }
       },
       "required": [

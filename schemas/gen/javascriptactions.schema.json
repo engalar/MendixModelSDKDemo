@@ -18,6 +18,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "codeactions.schema.json#/definitions/CodeAction"
+        }
       ]
     },
     "JavaScriptActionParameter": {
@@ -34,6 +39,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "codeactions.schema.json#/definitions/CodeActionParameter"
+        }
       ]
     },
     "NanoflowJavaScriptActionParameterType": {
@@ -50,6 +60,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "codeactions.schema.json#/definitions/ParameterType"
+        }
       ]
     }
   }

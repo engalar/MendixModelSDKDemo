@@ -12,10 +12,12 @@
           "const": "Images$Image"
         },
         "name": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "imageData": {
-          "type": "string"
+          "type": "string",
+          "contentEncoding": "base64"
         },
         "imageFormat": {
           "type": "string",
@@ -55,6 +57,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "projects.schema.json#/definitions/Document"
+        }
       ]
     }
   }

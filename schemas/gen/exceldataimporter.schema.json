@@ -12,20 +12,24 @@
           "const": "ExcelDataImporter$CSVSheet"
         },
         "delimiter": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "quoteChar": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "escapeChar": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "headerIncluded": {
-          "type": "boolean"
+          "type": "boolean",
+          "default": true
         },
         "entity": {
           "type": "string",
-          "description": "domainmodels.schema.json#/definitions/IEntity"
+          "description": "ByNameReferenceProperty: domainmodels.schema.json#/definitions/Entity"
         },
         "columnAttributeMappings": {
           "type": "array",
@@ -41,6 +45,11 @@
         "$ID",
         "$Type",
         "csvRootElement"
+      ],
+      "allOf": [
+        {
+          "$ref": "mappings.schema.json#/definitions/MappingSource"
+        }
       ]
     },
     "TemplateContents": {
@@ -77,6 +86,11 @@
         "$ID",
         "$Type",
         "sheet"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/TemplateContents"
+        }
       ]
     },
     "ColumnAttributeMapping": {
@@ -94,7 +108,7 @@
         },
         "attribute": {
           "type": "string",
-          "description": "domainmodels.schema.json#/definitions/IAttribute"
+          "description": "ByNameReferenceProperty: domainmodels.schema.json#/definitions/Attribute"
         }
       },
       "required": [
@@ -116,13 +130,18 @@
         },
         "csvSheet": {
           "type": "string",
-          "description": "#/definitions/CSVSheet"
+          "description": "ByNameReferenceProperty: #/definitions/CSVSheet"
         }
       },
       "required": [
         "$ID",
         "$Type",
         "csvSheet"
+      ],
+      "allOf": [
+        {
+          "$ref": "mappings.schema.json#/definitions/MappingSourceReference"
+        }
       ]
     },
     "DataImporterElement": {
@@ -142,6 +161,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "mappings.schema.json#/definitions/Element"
+        }
       ]
     },
     "ExcelSheet": {
@@ -154,18 +178,20 @@
           "type": "string",
           "const": "ExcelDataImporter$ExcelSheet"
         },
+        "headerRowStartsAt": {
+          "type": "integer",
+          "default": 1
+        },
+        "dataRowStartsAt": {
+          "type": "integer",
+          "default": 1
+        },
         "reference": {
           "$ref": "#/definitions/Reference"
         },
-        "headerRowStartsAt": {
-          "type": "string"
-        },
-        "dataRowStartsAt": {
-          "type": "string"
-        },
         "entity": {
           "type": "string",
-          "description": "domainmodels.schema.json#/definitions/IEntity"
+          "description": "ByNameReferenceProperty: domainmodels.schema.json#/definitions/Entity"
         },
         "columnAttributeMappings": {
           "type": "array",
@@ -182,6 +208,11 @@
         "$Type",
         "reference",
         "excelRootElement"
+      ],
+      "allOf": [
+        {
+          "$ref": "mappings.schema.json#/definitions/MappingSource"
+        }
       ]
     },
     "ExcelSheetMappingSourceReference": {
@@ -196,13 +227,18 @@
         },
         "excelSheet": {
           "type": "string",
-          "description": "#/definitions/ExcelSheet"
+          "description": "ByNameReferenceProperty: #/definitions/ExcelSheet"
         }
       },
       "required": [
         "$ID",
         "$Type",
         "excelSheet"
+      ],
+      "allOf": [
+        {
+          "$ref": "mappings.schema.json#/definitions/MappingSourceReference"
+        }
       ]
     },
     "ExcelTemplateContents": {
@@ -225,6 +261,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/TemplateContents"
+        }
       ]
     },
     "ImportExcelDataAction": {
@@ -237,20 +278,27 @@
           "type": "string",
           "const": "ExcelDataImporter$ImportExcelDataAction"
         },
-        "template": {
-          "type": "string",
-          "description": "#/definitions/Template"
-        },
         "fileVariableName": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "outputVariableName": {
-          "type": "string"
+          "type": "string",
+          "default": ""
+        },
+        "template": {
+          "type": "string",
+          "description": "ByNameReferenceProperty: #/definitions/Template"
         }
       },
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "microflows.schema.json#/definitions/MicroflowAction"
+        }
       ]
     },
     "Reference": {
@@ -280,12 +328,18 @@
           "const": "ExcelDataImporter$IndexReference"
         },
         "referencedIndex": {
-          "type": "string"
+          "type": "integer",
+          "default": 1
         }
       },
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/Reference"
+        }
       ]
     },
     "NameReference": {
@@ -299,12 +353,18 @@
           "const": "ExcelDataImporter$NameReference"
         },
         "referencedName": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         }
       },
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/Reference"
+        }
       ]
     },
     "Sheet": {
@@ -317,18 +377,20 @@
           "type": "string",
           "const": "ExcelDataImporter$Sheet"
         },
+        "headerRowStartsAt": {
+          "type": "integer",
+          "default": 1
+        },
+        "dataRowStartsAt": {
+          "type": "integer",
+          "default": 1
+        },
         "reference": {
           "$ref": "#/definitions/Reference"
         },
-        "headerRowStartsAt": {
-          "type": "string"
-        },
-        "dataRowStartsAt": {
-          "type": "string"
-        },
         "entity": {
           "type": "string",
-          "description": "domainmodels.schema.json#/definitions/IEntity"
+          "description": "ByNameReferenceProperty: domainmodels.schema.json#/definitions/Entity"
         },
         "columnAttributeMappings": {
           "type": "array",
@@ -355,21 +417,29 @@
           "const": "ExcelDataImporter$Template"
         },
         "templateName": {
-          "type": "string"
+          "type": "string",
+          "default": ""
+        },
+        "fileName": {
+          "type": "string",
+          "default": ""
+        },
+        "useAsMappingSource": {
+          "type": "boolean",
+          "default": false
         },
         "contents": {
           "$ref": "#/definitions/TemplateContents"
-        },
-        "fileName": {
-          "type": "string"
-        },
-        "useAsMappingSource": {
-          "type": "boolean"
         }
       },
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "mappings.schema.json#/definitions/MappingSourceDocument"
+        }
       ]
     }
   }

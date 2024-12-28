@@ -12,7 +12,8 @@
           "const": "DatabaseConnector$AdditionalProperty"
         },
         "key": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "value": {
           "$ref": "#/definitions/AdditionalPropertyValue"
@@ -50,14 +51,15 @@
           "const": "DatabaseConnector$ColumnMapping"
         },
         "columnName": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "sqlDataType": {
           "$ref": "#/definitions/SqlDataType"
         },
         "attribute": {
           "type": "string",
-          "description": "domainmodels.schema.json#/definitions/IAttribute"
+          "description": "ByNameReferenceProperty: domainmodels.schema.json#/definitions/Attribute"
         }
       },
       "required": [
@@ -77,13 +79,16 @@
           "const": "DatabaseConnector$ConnectionDetails"
         },
         "host": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "port": {
-          "type": "string"
+          "type": "integer",
+          "default": 0
         },
         "databaseName": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         }
       },
       "required": [
@@ -118,18 +123,26 @@
           "const": "DatabaseConnector$ConnectionParts"
         },
         "host": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "port": {
-          "type": "string"
+          "type": "integer",
+          "default": 0
         },
         "databaseName": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         }
       },
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ConnectionInput"
+        }
       ]
     },
     "ConnectionString": {
@@ -143,12 +156,18 @@
           "const": "DatabaseConnector$ConnectionString"
         },
         "value": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         }
       },
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ConnectionInput"
+        }
       ]
     },
     "DatabaseConnection": {
@@ -162,26 +181,27 @@
           "const": "DatabaseConnector$DatabaseConnection"
         },
         "databaseType": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "connectionInput": {
           "$ref": "#/definitions/ConnectionInput"
         },
         "connectionString": {
           "type": "string",
-          "description": "constants.schema.json#/definitions/IConstant"
+          "description": "ByNameReferenceProperty: constants.schema.json#/definitions/Constant"
         },
         "userName": {
           "type": "string",
-          "description": "constants.schema.json#/definitions/IConstant"
+          "description": "ByNameReferenceProperty: constants.schema.json#/definitions/Constant"
         },
         "password": {
           "type": "string",
-          "description": "constants.schema.json#/definitions/IConstant"
+          "description": "ByNameReferenceProperty: constants.schema.json#/definitions/Constant"
         },
         "lastSelectedQuery": {
           "type": "string",
-          "description": "#/definitions/DatabaseQuery"
+          "description": "ByNameReferenceProperty: #/definitions/DatabaseQuery"
         },
         "queries": {
           "type": "array",
@@ -199,6 +219,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "projects.schema.json#/definitions/Document"
+        }
       ]
     },
     "DatabaseQuery": {
@@ -212,10 +237,16 @@
           "const": "DatabaseConnector$DatabaseQuery"
         },
         "name": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "query": {
-          "type": "string"
+          "type": "string",
+          "default": ""
+        },
+        "queryType": {
+          "type": "integer",
+          "default": -1
         },
         "tableMappings": {
           "type": "array",
@@ -228,9 +259,6 @@
           "items": {
             "$ref": "#/definitions/QueryParameter"
           }
-        },
-        "queryType": {
-          "type": "string"
         }
       },
       "required": [
@@ -248,23 +276,29 @@
           "type": "string",
           "const": "DatabaseConnector$ExecuteDatabaseQueryAction"
         },
+        "outputVariableName": {
+          "type": "string",
+          "default": ""
+        },
         "query": {
           "type": "string",
-          "description": "#/definitions/DatabaseQuery"
+          "description": "ByNameReferenceProperty: #/definitions/DatabaseQuery"
         },
         "parameterMappings": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/QueryParameterMapping"
           }
-        },
-        "outputVariableName": {
-          "type": "string"
         }
       },
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "microflows.schema.json#/definitions/MicroflowAction"
+        }
       ]
     },
     "SqlDataType": {
@@ -278,7 +312,8 @@
           "const": "DatabaseConnector$SqlDataType"
         },
         "dataTypeName": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         }
       },
       "required": [
@@ -297,12 +332,18 @@
           "const": "DatabaseConnector$LimitedLengthSqlDataType"
         },
         "length": {
-          "type": "string"
+          "type": "integer",
+          "default": 0
         }
       },
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/SqlDataType"
+        }
       ]
     },
     "QueryParameter": {
@@ -316,16 +357,26 @@
           "const": "DatabaseConnector$QueryParameter"
         },
         "parameterName": {
-          "type": "string"
+          "type": "string",
+          "default": ""
+        },
+        "defaultValue": {
+          "type": "string",
+          "default": ""
+        },
+        "databaseParameterName": {
+          "type": "string",
+          "default": ""
+        },
+        "emptyValueBecomesNull": {
+          "type": "boolean",
+          "default": false
         },
         "sqlDataType": {
           "$ref": "#/definitions/SqlDataType"
         },
         "dataType": {
           "$ref": "datatypes.schema.json#/definitions/DataType"
-        },
-        "defaultValue": {
-          "type": "string"
         },
         "mode": {
           "type": "string",
@@ -335,12 +386,6 @@
             "Out",
             "InOut"
           ]
-        },
-        "databaseParameterName": {
-          "type": "string"
-        },
-        "emptyValueBecomesNull": {
-          "type": "boolean"
         }
       },
       "required": [
@@ -360,10 +405,12 @@
           "const": "DatabaseConnector$QueryParameterMapping"
         },
         "parameterName": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "value": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         }
       },
       "required": [
@@ -385,6 +432,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/SqlDataType"
+        }
       ]
     },
     "TableMapping": {
@@ -398,11 +450,12 @@
           "const": "DatabaseConnector$TableMapping"
         },
         "tableName": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "entity": {
           "type": "string",
-          "description": "domainmodels.schema.json#/definitions/IEntity"
+          "description": "ByNameReferenceProperty: domainmodels.schema.json#/definitions/Entity"
         },
         "columns": {
           "type": "array",
@@ -429,12 +482,17 @@
         },
         "value": {
           "type": "string",
-          "description": "constants.schema.json#/definitions/IConstant"
+          "description": "ByNameReferenceProperty: constants.schema.json#/definitions/Constant"
         }
       },
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/AdditionalPropertyValue"
+        }
       ]
     },
     "ValueAsString": {
@@ -448,12 +506,18 @@
           "const": "DatabaseConnector$ValueAsString"
         },
         "value": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         }
       },
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/AdditionalPropertyValue"
+        }
       ]
     }
   }

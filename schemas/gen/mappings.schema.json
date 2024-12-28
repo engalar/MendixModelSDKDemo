@@ -11,6 +11,54 @@
           "type": "string",
           "const": "Mappings$Element"
         },
+        "path": {
+          "type": "string",
+          "default": ""
+        },
+        "isDefaultType": {
+          "type": "boolean",
+          "default": false
+        },
+        "minOccurs": {
+          "type": "integer",
+          "default": 1
+        },
+        "maxOccurs": {
+          "type": "integer",
+          "default": 1
+        },
+        "nillable": {
+          "type": "boolean",
+          "default": false
+        },
+        "exposedName": {
+          "type": "string",
+          "default": ""
+        },
+        "exposedItemName": {
+          "type": "string",
+          "default": ""
+        },
+        "maxLength": {
+          "type": "integer",
+          "default": -1
+        },
+        "fractionDigits": {
+          "type": "integer",
+          "default": -1
+        },
+        "totalDigits": {
+          "type": "integer",
+          "default": -1
+        },
+        "errorMessage": {
+          "type": "string",
+          "default": ""
+        },
+        "warningMessage": {
+          "type": "string",
+          "default": ""
+        },
         "elementType": {
           "type": "string",
           "enum": [
@@ -27,42 +75,6 @@
           ]
         },
         "primitiveType": {
-          "type": "string"
-        },
-        "path": {
-          "type": "string"
-        },
-        "isDefaultType": {
-          "type": "boolean"
-        },
-        "minOccurs": {
-          "type": "string"
-        },
-        "maxOccurs": {
-          "type": "string"
-        },
-        "nillable": {
-          "type": "boolean"
-        },
-        "exposedName": {
-          "type": "string"
-        },
-        "exposedItemName": {
-          "type": "string"
-        },
-        "maxLength": {
-          "type": "string"
-        },
-        "fractionDigits": {
-          "type": "string"
-        },
-        "totalDigits": {
-          "type": "string"
-        },
-        "errorMessage": {
-          "type": "string"
-        },
-        "warningMessage": {
           "type": "string"
         },
         "children": {
@@ -87,6 +99,22 @@
           "type": "string",
           "const": "Mappings$MappingDocument"
         },
+        "rootElementName": {
+          "type": "string",
+          "default": ""
+        },
+        "serviceName": {
+          "type": "string",
+          "default": ""
+        },
+        "operationName": {
+          "type": "string",
+          "default": ""
+        },
+        "publicName": {
+          "type": "string",
+          "default": ""
+        },
         "rootMappingElements": {
           "type": "array",
           "items": {
@@ -95,39 +123,32 @@
         },
         "xmlSchema": {
           "type": "string",
-          "description": "xmlschemas.schema.json#/definitions/IXmlSchema"
+          "description": "ByNameReferenceProperty: xmlschemas.schema.json#/definitions/XmlSchema"
         },
         "jsonStructure": {
           "type": "string",
-          "description": "jsonstructures.schema.json#/definitions/IJsonStructure"
-        },
-        "rootElementName": {
-          "type": "string"
+          "description": "ByNameReferenceProperty: jsonstructures.schema.json#/definitions/JsonStructure"
         },
         "importedWebService": {
           "type": "string",
-          "description": "webservices.schema.json#/definitions/IImportedWebService"
-        },
-        "serviceName": {
-          "type": "string"
-        },
-        "operationName": {
-          "type": "string"
+          "description": "ByNameReferenceProperty: webservices.schema.json#/definitions/ImportedWebService"
         },
         "messageDefinition": {
           "type": "string",
-          "description": "messagedefinitions.schema.json#/definitions/IMessageDefinition"
+          "description": "ByNameReferenceProperty: messagedefinitions.schema.json#/definitions/MessageDefinition"
         },
         "mappingSourceReference": {
           "$ref": "#/definitions/MappingSourceReference"
-        },
-        "publicName": {
-          "type": "string"
         }
       },
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "projects.schema.json#/definitions/Document"
+        }
       ]
     },
     "MappingElement": {
@@ -141,7 +162,32 @@
           "const": "Mappings$MappingElement"
         },
         "documentation": {
-          "type": "string"
+          "type": "string",
+          "default": ""
+        },
+        "jsonPath": {
+          "type": "string",
+          "default": ""
+        },
+        "xmlPath": {
+          "type": "string",
+          "default": ""
+        },
+        "minOccurs": {
+          "type": "integer",
+          "default": 0
+        },
+        "maxOccurs": {
+          "type": "integer",
+          "default": 0
+        },
+        "nillable": {
+          "type": "boolean",
+          "default": false
+        },
+        "exposedName": {
+          "type": "string",
+          "default": ""
         },
         "elementType": {
           "type": "string",
@@ -157,24 +203,6 @@
             "Array",
             "Wrapper"
           ]
-        },
-        "jsonPath": {
-          "type": "string"
-        },
-        "xmlPath": {
-          "type": "string"
-        },
-        "minOccurs": {
-          "type": "string"
-        },
-        "maxOccurs": {
-          "type": "string"
-        },
-        "nillable": {
-          "type": "boolean"
-        },
-        "exposedName": {
-          "type": "string"
         }
       },
       "required": [
@@ -194,7 +222,7 @@
         },
         "microflow": {
           "type": "string",
-          "description": "microflows.schema.json#/definitions/IMicroflow"
+          "description": "ByNameReferenceProperty: microflows.schema.json#/definitions/Microflow"
         },
         "parameterMappings": {
           "type": "array",
@@ -218,18 +246,21 @@
           "type": "string",
           "const": "Mappings$MappingMicroflowParameter"
         },
-        "parameter": {
-          "type": "string",
-          "description": "microflows.schema.json#/definitions/IMicroflowParameter"
-        },
         "levelOfParent": {
-          "type": "string"
+          "type": "integer",
+          "default": -1
         },
         "jsonValueElementPath": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "xmlValueElementPath": {
-          "type": "string"
+          "type": "string",
+          "default": ""
+        },
+        "parameter": {
+          "type": "string",
+          "description": "ByNameReferenceProperty: microflows.schema.json#/definitions/MicroflowParameter"
         }
       },
       "required": [
@@ -248,7 +279,8 @@
           "const": "Mappings$MappingSource"
         },
         "name": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         }
       },
       "required": [
@@ -270,6 +302,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "projects.schema.json#/definitions/Document"
+        }
       ]
     },
     "MappingSourceReference": {
@@ -298,6 +335,14 @@
           "type": "string",
           "const": "Mappings$ObjectMappingElement"
         },
+        "objectHandlingBackupAllowOverride": {
+          "type": "boolean",
+          "default": false
+        },
+        "isDefaultType": {
+          "type": "boolean",
+          "default": false
+        },
         "mappingMicroflowCall": {
           "$ref": "#/definitions/MappingMicroflowCall"
         },
@@ -309,11 +354,11 @@
         },
         "entity": {
           "type": "string",
-          "description": "domainmodels.schema.json#/definitions/IEntity"
+          "description": "ByNameReferenceProperty: domainmodels.schema.json#/definitions/Entity"
         },
         "association": {
           "type": "string",
-          "description": "domainmodels.schema.json#/definitions/IAssociationBase"
+          "description": "ByNameReferenceProperty: domainmodels.schema.json#/definitions/AssociationBase"
         },
         "objectHandling": {
           "type": "string",
@@ -331,17 +376,16 @@
             "Ignore",
             "Error"
           ]
-        },
-        "objectHandlingBackupAllowOverride": {
-          "type": "boolean"
-        },
-        "isDefaultType": {
-          "type": "boolean"
         }
       },
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/MappingElement"
+        }
       ]
     },
     "ValueMappingElement": {
@@ -354,46 +398,58 @@
           "type": "string",
           "const": "Mappings$ValueMappingElement"
         },
-        "type": {
-          "$ref": "datatypes.schema.json#/definitions/DataType"
-        },
         "isKey": {
-          "type": "boolean"
+          "type": "boolean",
+          "default": false
         },
         "isXmlAttribute": {
-          "type": "boolean"
+          "type": "boolean",
+          "default": false
+        },
+        "isContent": {
+          "type": "boolean",
+          "default": false
+        },
+        "maxLength": {
+          "type": "integer",
+          "default": -1
+        },
+        "fractionDigits": {
+          "type": "integer",
+          "default": -1
+        },
+        "totalDigits": {
+          "type": "integer",
+          "default": -1
+        },
+        "originalValue": {
+          "type": "string",
+          "default": ""
+        },
+        "type": {
+          "$ref": "datatypes.schema.json#/definitions/DataType"
         },
         "xmlPrimitiveType": {
           "type": "string"
         },
-        "isContent": {
-          "type": "boolean"
-        },
         "attribute": {
           "type": "string",
-          "description": "domainmodels.schema.json#/definitions/IAttribute"
+          "description": "ByNameReferenceProperty: domainmodels.schema.json#/definitions/Attribute"
         },
         "converter": {
           "type": "string",
-          "description": "microflows.schema.json#/definitions/IMicroflow"
-        },
-        "maxLength": {
-          "type": "string"
-        },
-        "fractionDigits": {
-          "type": "string"
-        },
-        "totalDigits": {
-          "type": "string"
-        },
-        "originalValue": {
-          "type": "string"
+          "description": "ByNameReferenceProperty: microflows.schema.json#/definitions/Microflow"
         }
       },
       "required": [
         "$ID",
         "$Type",
         "type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/MappingElement"
+        }
       ]
     }
   }

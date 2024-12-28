@@ -29,6 +29,11 @@
         "$Type",
         "source",
         "dataSetAccess"
+      ],
+      "allOf": [
+        {
+          "$ref": "projects.schema.json#/definitions/Document"
+        }
       ]
     },
     "DataSetAccess": {
@@ -64,7 +69,8 @@
           "const": "DataSets$DataSetColumn"
         },
         "name": {
-          "type": "string"
+          "type": "string",
+          "default": "Column"
         },
         "columnType": {
           "$ref": "datatypes.schema.json#/definitions/DataType"
@@ -87,10 +93,12 @@
           "const": "DataSets$DataSetConstraintAccess"
         },
         "constraintText": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "enabled": {
-          "type": "boolean"
+          "type": "boolean",
+          "default": false
         }
       },
       "required": [
@@ -150,6 +158,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataSetParameterConstraint"
+        }
       ]
     },
     "DataSetModuleRoleAccess": {
@@ -170,7 +183,7 @@
         },
         "moduleRole": {
           "type": "string",
-          "description": "security.schema.json#/definitions/IModuleRole"
+          "description": "ByNameReferenceProperty: security.schema.json#/definitions/ModuleRole"
         }
       },
       "required": [
@@ -189,21 +202,30 @@
           "const": "DataSets$DataSetNumericConstraint"
         },
         "begin": {
-          "type": "string"
+          "type": "string",
+          "default": "0"
         },
         "applyBegin": {
-          "type": "boolean"
+          "type": "boolean",
+          "default": true
         },
         "end": {
-          "type": "string"
+          "type": "string",
+          "default": "0"
         },
         "applyEnd": {
-          "type": "boolean"
+          "type": "boolean",
+          "default": true
         }
       },
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataSetParameterConstraint"
+        }
       ]
     },
     "DataSetObjectConstraint": {
@@ -217,15 +239,22 @@
           "const": "DataSets$DataSetObjectConstraint"
         },
         "name": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "constraint": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         }
       },
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataSetParameterConstraint"
+        }
       ]
     },
     "DataSetParameter": {
@@ -239,13 +268,15 @@
           "const": "DataSets$DataSetParameter"
         },
         "name": {
-          "type": "string"
+          "type": "string",
+          "default": ""
+        },
+        "parameterTypeIsRange": {
+          "type": "boolean",
+          "default": false
         },
         "parameterType": {
           "$ref": "datatypes.schema.json#/definitions/DataType"
-        },
-        "parameterTypeIsRange": {
-          "type": "boolean"
         },
         "constraints": {
           "type": "array",
@@ -271,7 +302,8 @@
           "const": "DataSets$DataSetParameterAccess"
         },
         "parameterName": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "constraintAccessList": {
           "type": "array",
@@ -321,6 +353,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataSetSource"
+        }
       ]
     },
     "OqlDataSetSource": {
@@ -334,15 +371,22 @@
           "const": "DataSets$OqlDataSetSource"
         },
         "query": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "ignoreErrorsInQuery": {
-          "type": "boolean"
+          "type": "boolean",
+          "default": false
         }
       },
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataSetSource"
+        }
       ]
     }
   }

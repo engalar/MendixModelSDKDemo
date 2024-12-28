@@ -12,7 +12,8 @@
           "const": "DocumentTemplates$Widget"
         },
         "name": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         }
       },
       "required": [
@@ -37,6 +38,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/MemberWidget"
+        }
       ]
     },
     "ConditionSettings": {
@@ -57,7 +63,7 @@
         },
         "attribute": {
           "type": "string",
-          "description": "domainmodels.schema.json#/definitions/IAttribute"
+          "description": "ByNameReferenceProperty: domainmodels.schema.json#/definitions/Attribute"
         }
       },
       "required": [
@@ -82,6 +88,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ConditionallyVisibleWidget"
+        }
       ]
     },
     "Grid": {
@@ -95,10 +106,12 @@
           "const": "DocumentTemplates$Grid"
         },
         "cellSpacing": {
-          "type": "string"
+          "type": "integer",
+          "default": 0
         },
         "cellPadding": {
-          "type": "string"
+          "type": "integer",
+          "default": 0
         },
         "style": {
           "$ref": "#/definitions/Style"
@@ -108,7 +121,7 @@
         },
         "microflow": {
           "type": "string",
-          "description": "microflows.schema.json#/definitions/IMicroflow"
+          "description": "ByNameReferenceProperty: microflows.schema.json#/definitions/Microflow"
         }
       },
       "required": [
@@ -116,6 +129,11 @@
         "$Type",
         "style",
         "sortBar"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ListenTargetWidget"
+        }
       ]
     },
     "DataGrid": {
@@ -141,6 +159,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ColumnGrid"
+        }
       ]
     },
     "DataGridCell": {
@@ -216,13 +239,18 @@
         },
         "microflow": {
           "type": "string",
-          "description": "microflows.schema.json#/definitions/IMicroflow"
+          "description": "ByNameReferenceProperty: microflows.schema.json#/definitions/Microflow"
         }
       },
       "required": [
         "$ID",
         "$Type",
         "contents"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/EntityWidget"
+        }
       ]
     },
     "DropZone": {
@@ -258,6 +286,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/DropZone"
+        }
       ]
     },
     "DocumentTemplate": {
@@ -270,35 +303,47 @@
           "type": "string",
           "const": "DocumentTemplates$DocumentTemplate"
         },
+        "canvasWidth": {
+          "type": "integer",
+          "default": 800
+        },
+        "pageWidth": {
+          "type": "string",
+          "default": "8.268"
+        },
+        "pageHeight": {
+          "type": "string",
+          "default": "11.693"
+        },
+        "ppi": {
+          "type": "integer",
+          "default": 120
+        },
+        "marginLeftInInch": {
+          "type": "number",
+          "default": 0.5
+        },
+        "marginRightInInch": {
+          "type": "number",
+          "default": 0.5
+        },
+        "marginTopInInch": {
+          "type": "number",
+          "default": 0.5
+        },
+        "marginBottomInInch": {
+          "type": "number",
+          "default": 0.5
+        },
+        "showHeaderAndFooterOnFirstPage": {
+          "type": "boolean",
+          "default": true
+        },
         "toplevels": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/Widget"
           }
-        },
-        "canvasWidth": {
-          "type": "string"
-        },
-        "pageWidth": {
-          "type": "string"
-        },
-        "pageHeight": {
-          "type": "string"
-        },
-        "ppi": {
-          "type": "string"
-        },
-        "marginLeftInInch": {
-          "type": "string"
-        },
-        "marginRightInInch": {
-          "type": "string"
-        },
-        "marginTopInInch": {
-          "type": "string"
-        },
-        "marginBottomInInch": {
-          "type": "string"
         },
         "style": {
           "$ref": "#/definitions/Style"
@@ -308,15 +353,17 @@
         },
         "footer": {
           "$ref": "#/definitions/Footer"
-        },
-        "showHeaderAndFooterOnFirstPage": {
-          "type": "boolean"
         }
       },
       "required": [
         "$ID",
         "$Type",
         "style"
+      ],
+      "allOf": [
+        {
+          "$ref": "projects.schema.json#/definitions/Document"
+        }
       ]
     },
     "DocumentTemplateParameter": {
@@ -330,7 +377,8 @@
           "const": "DocumentTemplates$DocumentTemplateParameter"
         },
         "name": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "parameterType": {
           "$ref": "datatypes.schema.json#/definitions/DataType"
@@ -352,23 +400,31 @@
           "type": "string",
           "const": "DocumentTemplates$DynamicImageViewer"
         },
-        "defaultImage": {
-          "type": "string",
-          "description": "images.schema.json#/definitions/IImage"
-        },
         "useThumbnail": {
-          "type": "boolean"
+          "type": "boolean",
+          "default": false
         },
         "width": {
-          "type": "string"
+          "type": "integer",
+          "default": 0
         },
         "height": {
-          "type": "string"
+          "type": "integer",
+          "default": 0
+        },
+        "defaultImage": {
+          "type": "string",
+          "description": "ByNameReferenceProperty: images.schema.json#/definitions/Image"
         }
       },
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/EntityWidget"
+        }
       ]
     },
     "DynamicLabel": {
@@ -381,11 +437,12 @@
           "type": "string",
           "const": "DocumentTemplates$DynamicLabel"
         },
+        "renderXHTML": {
+          "type": "boolean",
+          "default": false
+        },
         "style": {
           "$ref": "#/definitions/Style"
-        },
-        "renderXHTML": {
-          "type": "boolean"
         },
         "formattingInfo": {
           "$ref": "pages.schema.json#/definitions/FormattingInfo"
@@ -396,6 +453,11 @@
         "$Type",
         "style",
         "formattingInfo"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/AttributeWidget"
+        }
       ]
     },
     "Footer": {
@@ -409,12 +471,18 @@
           "const": "DocumentTemplates$Footer"
         },
         "bottomMargin": {
-          "type": "string"
+          "type": "number",
+          "default": 0
         }
       },
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/DropZone"
+        }
       ]
     },
     "GridSortBar": {
@@ -473,12 +541,18 @@
           "const": "DocumentTemplates$Header"
         },
         "topMargin": {
-          "type": "string"
+          "type": "number",
+          "default": 0
         }
       },
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/Widget"
+        }
       ]
     },
     "LineBreak": {
@@ -495,6 +569,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/Widget"
+        }
       ]
     },
     "PageBreak": {
@@ -511,6 +590,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/Widget"
+        }
       ]
     },
     "StaticImageViewer": {
@@ -523,20 +607,27 @@
           "type": "string",
           "const": "DocumentTemplates$StaticImageViewer"
         },
-        "image": {
-          "type": "string",
-          "description": "images.schema.json#/definitions/IImage"
-        },
         "width": {
-          "type": "string"
+          "type": "integer",
+          "default": 0
         },
         "height": {
-          "type": "string"
+          "type": "integer",
+          "default": 0
+        },
+        "image": {
+          "type": "string",
+          "description": "ByNameReferenceProperty: images.schema.json#/definitions/Image"
         }
       },
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ConditionallyVisibleWidget"
+        }
       ]
     },
     "StaticLabel": {
@@ -561,6 +652,11 @@
         "$Type",
         "caption",
         "style"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/Widget"
+        }
       ]
     },
     "Style": {
@@ -573,6 +669,110 @@
           "type": "string",
           "const": "DocumentTemplates$Style"
         },
+        "fontSize": {
+          "type": "integer",
+          "default": 10
+        },
+        "bold": {
+          "type": "boolean",
+          "default": false
+        },
+        "italic": {
+          "type": "boolean",
+          "default": false
+        },
+        "fontColor": {
+          "$ref": "../common.schema.json#/definitions/Color",
+          "default": {
+            "red": 0,
+            "green": 0,
+            "blue": 0
+          }
+        },
+        "backgroundColor": {
+          "$ref": "../common.schema.json#/definitions/Color",
+          "default": {
+            "red": 255,
+            "green": 255,
+            "blue": 255
+          }
+        },
+        "overrideFontFamily": {
+          "type": "boolean",
+          "default": false
+        },
+        "overrideFontSize": {
+          "type": "boolean",
+          "default": false
+        },
+        "overrideBold": {
+          "type": "boolean",
+          "default": false
+        },
+        "overrideItalic": {
+          "type": "boolean",
+          "default": false
+        },
+        "overrideFontColor": {
+          "type": "boolean",
+          "default": false
+        },
+        "overrideBackgroundColor": {
+          "type": "boolean",
+          "default": false
+        },
+        "borderWidthTop": {
+          "type": "integer",
+          "default": 1
+        },
+        "borderWidthBottom": {
+          "type": "integer",
+          "default": 1
+        },
+        "borderWidthLeft": {
+          "type": "integer",
+          "default": 1
+        },
+        "borderWidthRight": {
+          "type": "integer",
+          "default": 1
+        },
+        "borderColorTop": {
+          "$ref": "../common.schema.json#/definitions/Color",
+          "default": {
+            "red": 0,
+            "green": 0,
+            "blue": 0
+          }
+        },
+        "borderColorBottom": {
+          "$ref": "../common.schema.json#/definitions/Color",
+          "default": {
+            "red": 0,
+            "green": 0,
+            "blue": 0
+          }
+        },
+        "borderColorLeft": {
+          "$ref": "../common.schema.json#/definitions/Color",
+          "default": {
+            "red": 0,
+            "green": 0,
+            "blue": 0
+          }
+        },
+        "borderColorRight": {
+          "$ref": "../common.schema.json#/definitions/Color",
+          "default": {
+            "red": 0,
+            "green": 0,
+            "blue": 0
+          }
+        },
+        "customStyles": {
+          "type": "string",
+          "default": ""
+        },
         "fontFamily": {
           "type": "string",
           "enum": [
@@ -582,39 +782,6 @@
             "Helvetica",
             "Arial"
           ]
-        },
-        "fontSize": {
-          "type": "string"
-        },
-        "bold": {
-          "type": "boolean"
-        },
-        "italic": {
-          "type": "boolean"
-        },
-        "fontColor": {
-          "type": "string"
-        },
-        "backgroundColor": {
-          "type": "string"
-        },
-        "overrideFontFamily": {
-          "type": "boolean"
-        },
-        "overrideFontSize": {
-          "type": "boolean"
-        },
-        "overrideBold": {
-          "type": "boolean"
-        },
-        "overrideItalic": {
-          "type": "boolean"
-        },
-        "overrideFontColor": {
-          "type": "boolean"
-        },
-        "overrideBackgroundColor": {
-          "type": "boolean"
         },
         "borderStyleTop": {
           "type": "string",
@@ -652,30 +819,6 @@
             "Solid"
           ]
         },
-        "borderWidthTop": {
-          "type": "string"
-        },
-        "borderWidthBottom": {
-          "type": "string"
-        },
-        "borderWidthLeft": {
-          "type": "string"
-        },
-        "borderWidthRight": {
-          "type": "string"
-        },
-        "borderColorTop": {
-          "type": "string"
-        },
-        "borderColorBottom": {
-          "type": "string"
-        },
-        "borderColorLeft": {
-          "type": "string"
-        },
-        "borderColorRight": {
-          "type": "string"
-        },
         "textAlign": {
           "type": "string",
           "enum": [
@@ -683,9 +826,6 @@
             "Right",
             "Center"
           ]
-        },
-        "customStyles": {
-          "type": "string"
         }
       },
       "required": [
@@ -703,6 +843,14 @@
           "type": "string",
           "const": "DocumentTemplates$Table"
         },
+        "cellSpacing": {
+          "type": "integer",
+          "default": 0
+        },
+        "cellPadding": {
+          "type": "integer",
+          "default": 0
+        },
         "rows": {
           "type": "array",
           "items": {
@@ -710,12 +858,6 @@
           }
         },
         "columnWeights": {
-          "type": "string"
-        },
-        "cellSpacing": {
-          "type": "string"
-        },
-        "cellPadding": {
           "type": "string"
         },
         "style": {
@@ -726,6 +868,11 @@
         "$ID",
         "$Type",
         "style"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ConditionallyVisibleWidget"
+        }
       ]
     },
     "TableCell": {
@@ -739,13 +886,16 @@
           "const": "DocumentTemplates$TableCell"
         },
         "colSpan": {
-          "type": "string"
+          "type": "integer",
+          "default": 1
         },
         "rowSpan": {
-          "type": "string"
+          "type": "integer",
+          "default": 1
         },
         "isPartOfSpan": {
-          "type": "boolean"
+          "type": "boolean",
+          "default": false
         },
         "style": {
           "$ref": "#/definitions/Style"
@@ -755,6 +905,11 @@
         "$ID",
         "$Type",
         "style"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/DropZone"
+        }
       ]
     },
     "TableRow": {
@@ -794,7 +949,8 @@
           "const": "DocumentTemplates$TemplateGrid"
         },
         "numberOfColumns": {
-          "type": "string"
+          "type": "integer",
+          "default": 2
         },
         "oddRowsContents": {
           "$ref": "#/definitions/TemplateGridContents"
@@ -807,6 +963,11 @@
         "$ID",
         "$Type",
         "oddRowsContents"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/Grid"
+        }
       ]
     },
     "TemplateGridContents": {
@@ -823,6 +984,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/DropZone"
+        }
       ]
     },
     "Title": {
@@ -847,6 +1013,11 @@
         "$Type",
         "caption",
         "style"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ConditionallyVisibleWidget"
+        }
       ]
     }
   }

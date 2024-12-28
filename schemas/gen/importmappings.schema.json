@@ -11,17 +11,23 @@
           "type": "string",
           "const": "ImportMappings$ImportMapping"
         },
+        "useSubtransactionsForMicroflows": {
+          "type": "boolean",
+          "default": false
+        },
         "parameterType": {
           "$ref": "datatypes.schema.json#/definitions/DataType"
-        },
-        "useSubtransactionsForMicroflows": {
-          "type": "boolean"
         }
       },
       "required": [
         "$ID",
         "$Type",
         "parameterType"
+      ],
+      "allOf": [
+        {
+          "$ref": "mappings.schema.json#/definitions/MappingDocument"
+        }
       ]
     },
     "ImportObjectMappingElement": {
@@ -38,6 +44,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "mappings.schema.json#/definitions/ObjectMappingElement"
+        }
       ]
     },
     "ImportValueMappingElement": {
@@ -54,6 +65,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "mappings.schema.json#/definitions/ValueMappingElement"
+        }
       ]
     }
   }

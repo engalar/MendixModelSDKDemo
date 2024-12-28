@@ -31,6 +31,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataType"
+        }
       ]
     },
     "BooleanType": {
@@ -47,6 +52,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/PrimitiveType"
+        }
       ]
     },
     "DateTimeType": {
@@ -63,6 +73,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/PrimitiveType"
+        }
       ]
     },
     "DecimalType": {
@@ -79,6 +94,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/PrimitiveType"
+        }
       ]
     },
     "EmptyType": {
@@ -95,6 +115,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataType"
+        }
       ]
     },
     "EntityType": {
@@ -109,13 +134,18 @@
         },
         "entity": {
           "type": "string",
-          "description": "domainmodels.schema.json#/definitions/IEntity"
+          "description": "ByNameReferenceProperty: domainmodels.schema.json#/definitions/Entity"
         }
       },
       "required": [
         "$ID",
         "$Type",
         "entity"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/Type"
+        }
       ]
     },
     "EnumerationType": {
@@ -130,13 +160,18 @@
         },
         "enumeration": {
           "type": "string",
-          "description": "enumerations.schema.json#/definitions/IEnumeration"
+          "description": "ByNameReferenceProperty: enumerations.schema.json#/definitions/Enumeration"
         }
       },
       "required": [
         "$ID",
         "$Type",
         "enumeration"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/Type"
+        }
       ]
     },
     "FloatType": {
@@ -153,6 +188,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/PrimitiveType"
+        }
       ]
     },
     "IntegerType": {
@@ -169,6 +209,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/PrimitiveType"
+        }
       ]
     },
     "ListType": {
@@ -185,6 +230,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/Type"
+        }
       ]
     },
     "ObjectType": {
@@ -201,6 +251,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/EntityType"
+        }
       ]
     },
     "StringType": {
@@ -217,6 +272,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/PrimitiveType"
+        }
       ]
     },
     "UnknownType": {
@@ -233,6 +293,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataType"
+        }
       ]
     },
     "VoidType": {
@@ -249,6 +314,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataType"
+        }
       ]
     }
   }

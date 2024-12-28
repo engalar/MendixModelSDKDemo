@@ -29,13 +29,18 @@
         },
         "microflow": {
           "type": "string",
-          "description": "microflows.schema.json#/definitions/IMicroflow"
+          "description": "ByNameReferenceProperty: microflows.schema.json#/definitions/Microflow"
         }
       },
       "required": [
         "$ID",
         "$Type",
         "microflow"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ChangeMode"
+        }
       ]
     },
     "ReadMode": {
@@ -66,12 +71,17 @@
         },
         "microflow": {
           "type": "string",
-          "description": "microflows.schema.json#/definitions/IMicroflow"
+          "description": "ByNameReferenceProperty: microflows.schema.json#/definitions/Microflow"
         }
       },
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ReadMode"
+        }
       ]
     },
     "ChangeNotSupported": {
@@ -88,6 +98,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ChangeMode"
+        }
       ]
     },
     "ChangeSource": {
@@ -104,6 +119,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ChangeMode"
+        }
       ]
     },
     "EntitySet": {
@@ -117,16 +137,20 @@
           "const": "ODataPublish$EntitySet"
         },
         "exposedName": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "alternativeExposedName": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "usePaging": {
-          "type": "boolean"
+          "type": "boolean",
+          "default": false
         },
         "pageSize": {
-          "type": "string"
+          "type": "integer",
+          "default": 10000
         },
         "updateMode": {
           "$ref": "#/definitions/ChangeMode"
@@ -165,29 +189,37 @@
           "const": "ODataPublish$EntityType"
         },
         "exposedName": {
-          "type": "string"
+          "type": "string",
+          "default": ""
+        },
+        "summary": {
+          "type": "string",
+          "default": ""
+        },
+        "description": {
+          "type": "string",
+          "default": ""
         },
         "entity": {
           "type": "string",
-          "description": "domainmodels.schema.json#/definitions/IEntity"
+          "description": "ByNameReferenceProperty: domainmodels.schema.json#/definitions/Entity"
         },
         "childMembers": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/PublishedMember"
           }
-        },
-        "summary": {
-          "type": "string"
-        },
-        "description": {
-          "type": "string"
         }
       },
       "required": [
         "$ID",
         "$Type",
         "entity"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/Type"
+        }
       ]
     },
     "PublishedMember": {
@@ -201,13 +233,16 @@
           "const": "ODataPublish$PublishedMember"
         },
         "exposedName": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "summary": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "description": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         }
       },
       "required": [
@@ -225,25 +260,32 @@
           "type": "string",
           "const": "ODataPublish$PublishedAssociationEnd"
         },
+        "canBeEmpty": {
+          "type": "boolean",
+          "default": false
+        },
+        "exposedAssociationName": {
+          "type": "string",
+          "default": ""
+        },
         "association": {
           "type": "string",
-          "description": "domainmodels.schema.json#/definitions/IAssociationBase"
+          "description": "ByNameReferenceProperty: domainmodels.schema.json#/definitions/AssociationBase"
         },
         "entity": {
           "type": "string",
-          "description": "domainmodels.schema.json#/definitions/IEntity"
-        },
-        "canBeEmpty": {
-          "type": "boolean"
-        },
-        "exposedAssociationName": {
-          "type": "string"
+          "description": "ByNameReferenceProperty: domainmodels.schema.json#/definitions/Entity"
         }
       },
       "required": [
         "$ID",
         "$Type",
         "entity"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/PublishedMember"
+        }
       ]
     },
     "PublishedAttribute": {
@@ -256,32 +298,43 @@
           "type": "string",
           "const": "ODataPublish$PublishedAttribute"
         },
-        "attribute": {
-          "type": "string",
-          "description": "domainmodels.schema.json#/definitions/IAttribute"
-        },
         "canBeEmpty": {
-          "type": "boolean"
+          "type": "boolean",
+          "default": false
         },
         "isPartOfKey": {
-          "type": "boolean"
+          "type": "boolean",
+          "default": false
         },
         "filterable": {
-          "type": "boolean"
+          "type": "boolean",
+          "default": true
         },
         "sortable": {
-          "type": "boolean"
+          "type": "boolean",
+          "default": true
         },
         "enumerationAsString": {
-          "type": "boolean"
+          "type": "boolean",
+          "default": false
         },
         "stringAsGuid": {
-          "type": "boolean"
+          "type": "boolean",
+          "default": false
+        },
+        "attribute": {
+          "type": "string",
+          "description": "ByNameReferenceProperty: domainmodels.schema.json#/definitions/Attribute"
         }
       },
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/PublishedMember"
+        }
       ]
     },
     "PublishedContract": {
@@ -294,17 +347,20 @@
           "type": "string",
           "const": "ODataPublish$PublishedContract"
         },
-        "serviceFeed": {
-          "$ref": "#/definitions/ServiceFeed"
-        },
         "metadata": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "openApi": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "graphQL": {
-          "type": "string"
+          "type": "string",
+          "default": ""
+        },
+        "serviceFeed": {
+          "$ref": "#/definitions/ServiceFeed"
         }
       },
       "required": [
@@ -324,23 +380,26 @@
           "const": "ODataPublish$PublishedEnumeration"
         },
         "exposedName": {
-          "type": "string"
+          "type": "string",
+          "default": ""
+        },
+        "summary": {
+          "type": "string",
+          "default": ""
+        },
+        "description": {
+          "type": "string",
+          "default": ""
         },
         "enumeration": {
           "type": "string",
-          "description": "enumerations.schema.json#/definitions/IEnumeration"
+          "description": "ByNameReferenceProperty: enumerations.schema.json#/definitions/Enumeration"
         },
         "values": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/PublishedEnumerationValue"
           }
-        },
-        "summary": {
-          "type": "string"
-        },
-        "description": {
-          "type": "string"
         }
       },
       "required": [
@@ -360,17 +419,20 @@
           "const": "ODataPublish$PublishedEnumerationValue"
         },
         "exposedName": {
-          "type": "string"
+          "type": "string",
+          "default": ""
+        },
+        "summary": {
+          "type": "string",
+          "default": ""
+        },
+        "description": {
+          "type": "string",
+          "default": ""
         },
         "enumerationValue": {
           "type": "string",
-          "description": "enumerations.schema.json#/definitions/IEnumerationValue"
-        },
-        "summary": {
-          "type": "string"
-        },
-        "description": {
-          "type": "string"
+          "description": "ByNameReferenceProperty: enumerations.schema.json#/definitions/EnumerationValue"
         }
       },
       "required": [
@@ -390,12 +452,18 @@
           "const": "ODataPublish$PublishedId"
         },
         "isPartOfKey": {
-          "type": "boolean"
+          "type": "boolean",
+          "default": false
         }
       },
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/PublishedMember"
+        }
       ]
     },
     "PublishedMicroflow": {
@@ -409,14 +477,24 @@
           "const": "ODataPublish$PublishedMicroflow"
         },
         "exposedName": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "alternativeExposedName": {
-          "type": "string"
+          "type": "string",
+          "default": ""
+        },
+        "summary": {
+          "type": "string",
+          "default": ""
+        },
+        "description": {
+          "type": "string",
+          "default": ""
         },
         "microflow": {
           "type": "string",
-          "description": "microflows.schema.json#/definitions/IMicroflow"
+          "description": "ByNameReferenceProperty: microflows.schema.json#/definitions/Microflow"
         },
         "parameters": {
           "type": "array",
@@ -426,12 +504,6 @@
         },
         "returnType": {
           "$ref": "datatypes.schema.json#/definitions/DataType"
-        },
-        "summary": {
-          "type": "string"
-        },
-        "description": {
-          "type": "string"
         }
       },
       "required": [
@@ -452,23 +524,27 @@
           "const": "ODataPublish$PublishedMicroflowParameter"
         },
         "exposedName": {
-          "type": "string"
+          "type": "string",
+          "default": ""
+        },
+        "canBeEmpty": {
+          "type": "boolean",
+          "default": false
+        },
+        "summary": {
+          "type": "string",
+          "default": ""
+        },
+        "description": {
+          "type": "string",
+          "default": ""
         },
         "microflowParameter": {
           "type": "string",
-          "description": "microflows.schema.json#/definitions/IMicroflowParameter"
+          "description": "ByNameReferenceProperty: microflows.schema.json#/definitions/MicroflowParameter"
         },
         "dataType": {
           "$ref": "datatypes.schema.json#/definitions/DataType"
-        },
-        "canBeEmpty": {
-          "type": "boolean"
-        },
-        "summary": {
-          "type": "string"
-        },
-        "description": {
-          "type": "string"
         }
       },
       "required": [
@@ -489,20 +565,55 @@
           "const": "ODataPublish$PublishedODataService2"
         },
         "namespace": {
-          "type": "string"
+          "type": "string",
+          "default": "DefaultNamespace"
         },
         "path": {
-          "type": "string"
+          "type": "string",
+          "default": ""
+        },
+        "serviceName": {
+          "type": "string",
+          "default": ""
+        },
+        "publishAssociations": {
+          "type": "boolean",
+          "default": true
+        },
+        "version": {
+          "type": "string",
+          "default": "1.0.0"
+        },
+        "summary": {
+          "type": "string",
+          "default": ""
+        },
+        "description": {
+          "type": "string",
+          "default": ""
+        },
+        "replaceIllegalChars": {
+          "type": "boolean",
+          "default": false
+        },
+        "useGeneralization": {
+          "type": "boolean",
+          "default": false
+        },
+        "includeMetadataByDefault": {
+          "type": "boolean",
+          "default": true
+        },
+        "supportsGraphQL": {
+          "type": "boolean",
+          "default": false
         },
         "allowedModuleRoles": {
           "type": "array",
           "items": {
             "type": "string",
-            "description": "security.schema.json#/definitions/IModuleRole"
+            "description": "ByNameReferenceListProperty: security.schema.json#/definitions/ModuleRole"
           }
-        },
-        "serviceName": {
-          "type": "string"
         },
         "entityTypes": {
           "type": "array",
@@ -528,15 +639,9 @@
             "$ref": "#/definitions/PublishedEnumeration"
           }
         },
-        "publishAssociations": {
-          "type": "boolean"
-        },
-        "version": {
-          "type": "string"
-        },
         "authenticationMicroflow": {
           "type": "string",
-          "description": "microflows.schema.json#/definitions/IMicroflow"
+          "description": "ByNameReferenceProperty: microflows.schema.json#/definitions/Microflow"
         },
         "authenticationTypes": {
           "type": "array",
@@ -544,35 +649,22 @@
             "type": "string"
           }
         },
-        "summary": {
-          "type": "string"
-        },
-        "description": {
-          "type": "string"
-        },
-        "replaceIllegalChars": {
-          "type": "boolean"
-        },
-        "useGeneralization": {
-          "type": "boolean"
-        },
         "oDataVersion": {
           "type": "string",
           "enum": [
             "OData4",
             "OData3"
           ]
-        },
-        "includeMetadataByDefault": {
-          "type": "boolean"
-        },
-        "supportsGraphQL": {
-          "type": "boolean"
         }
       },
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "projects.schema.json#/definitions/Document"
+        }
       ]
     },
     "QueryOptions": {
@@ -586,13 +678,16 @@
           "const": "ODataPublish$QueryOptions"
         },
         "countable": {
-          "type": "boolean"
+          "type": "boolean",
+          "default": true
         },
         "topSupported": {
-          "type": "boolean"
+          "type": "boolean",
+          "default": true
         },
         "skipSupported": {
-          "type": "boolean"
+          "type": "boolean",
+          "default": true
         }
       },
       "required": [
@@ -614,6 +709,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ReadMode"
+        }
       ]
     },
     "ServiceFeed": {
@@ -627,10 +727,12 @@
           "const": "ODataPublish$ServiceFeed"
         },
         "xml": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "json": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         }
       },
       "required": [

@@ -19,7 +19,7 @@
         },
         "page": {
           "type": "string",
-          "description": "pages.schema.json#/definitions/IPage"
+          "description": "ByNameReferenceProperty: pages.schema.json#/definitions/Page"
         }
       },
       "required": [
@@ -51,6 +51,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "pages.schema.json#/definitions/FormBase"
+        }
       ]
     },
     "NativeLayoutCallArgument": {
@@ -65,7 +70,7 @@
         },
         "parameter": {
           "type": "string",
-          "description": "pages.schema.json#/definitions/ILayoutParameter"
+          "description": "ByNameReferenceProperty: pages.schema.json#/definitions/LayoutParameter"
         },
         "widgets": {
           "type": "array",
@@ -92,7 +97,7 @@
         },
         "layout": {
           "type": "string",
-          "description": "#/definitions/NativeLayout"
+          "description": "ByNameReferenceProperty: #/definitions/NativeLayout"
         },
         "arguments": {
           "type": "array",
@@ -105,6 +110,11 @@
         "$ID",
         "$Type",
         "layout"
+      ],
+      "allOf": [
+        {
+          "$ref": "pages.schema.json#/definitions/FormBase"
+        }
       ]
     },
     "NativePageClientAction": {
@@ -119,12 +129,17 @@
         },
         "page": {
           "type": "string",
-          "description": "#/definitions/NativePage"
+          "description": "ByNameReferenceProperty: #/definitions/NativePage"
         }
       },
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "pages.schema.json#/definitions/ClientAction"
+        }
       ]
     },
     "NativePlaceholder": {
@@ -141,6 +156,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "pages.schema.json#/definitions/Widget"
+        }
       ]
     }
   }

@@ -15,6 +15,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "projects.schema.json#/definitions/Document"
+        }
       ]
     },
     "XmlElement": {
@@ -31,6 +36,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "mappings.schema.json#/definitions/Element"
+        }
       ]
     },
     "XmlSchema": {
@@ -43,19 +53,25 @@
           "type": "string",
           "const": "XmlSchemas$XmlSchema"
         },
+        "filePath": {
+          "type": "string",
+          "default": ""
+        },
         "entries": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/XmlSchemaEntry"
           }
-        },
-        "filePath": {
-          "type": "string"
         }
       },
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/MxSchema"
+        }
       ]
     },
     "XmlSchemaEntry": {
@@ -69,19 +85,24 @@
           "const": "XmlSchemas$XmlSchemaEntry"
         },
         "targetNamespace": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "location": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "contents": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "localizedLocationFormat": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "localizedContentsFormat": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         }
       },
       "required": [

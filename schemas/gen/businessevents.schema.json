@@ -34,7 +34,8 @@
           "const": "BusinessEvents$AttributeEnumerationItem"
         },
         "value": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         }
       },
       "required": [
@@ -53,16 +54,20 @@
           "const": "BusinessEvents$BusinessEventDefinition"
         },
         "serviceName": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "eventNamePrefix": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "description": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "summary": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "channels": {
           "type": "array",
@@ -86,11 +91,12 @@
           "type": "string",
           "const": "BusinessEvents$BusinessEventService"
         },
+        "document": {
+          "type": "string",
+          "default": ""
+        },
         "definition": {
           "$ref": "#/definitions/BusinessEventDefinition"
-        },
-        "document": {
-          "type": "string"
         },
         "operationImplementations": {
           "type": "array",
@@ -102,6 +108,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "projects.schema.json#/definitions/Document"
+        }
       ]
     },
     "Channel": {
@@ -115,10 +126,12 @@
           "const": "BusinessEvents$Channel"
         },
         "channelName": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "description": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "messages": {
           "type": "array",
@@ -143,18 +156,20 @@
           "const": "BusinessEvents$ConsumedBusinessEvent"
         },
         "eventName": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "channelId": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "entity": {
           "type": "string",
-          "description": "domainmodels.schema.json#/definitions/IEntity"
+          "description": "ByNameReferenceProperty: domainmodels.schema.json#/definitions/Entity"
         },
         "microflow": {
           "type": "string",
-          "description": "microflows.schema.json#/definitions/IMicroflow"
+          "description": "ByNameReferenceProperty: microflows.schema.json#/definitions/Microflow"
         }
       },
       "required": [
@@ -175,10 +190,12 @@
           "const": "BusinessEvents$ConsumedBusinessEventService"
         },
         "version": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "contract": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "businessEvents": {
           "type": "array",
@@ -190,6 +207,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "projects.schema.json#/definitions/Document"
+        }
       ]
     },
     "Message": {
@@ -203,22 +225,26 @@
           "const": "BusinessEvents$Message"
         },
         "messageName": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "description": {
-          "type": "string"
+          "type": "string",
+          "default": ""
+        },
+        "canPublish": {
+          "type": "boolean",
+          "default": false
+        },
+        "canSubscribe": {
+          "type": "boolean",
+          "default": false
         },
         "attributes": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/MessageAttribute"
           }
-        },
-        "canPublish": {
-          "type": "boolean"
-        },
-        "canSubscribe": {
-          "type": "boolean"
         }
       },
       "required": [
@@ -236,14 +262,16 @@
           "type": "string",
           "const": "BusinessEvents$MessageAttribute"
         },
-        "attributeType": {
-          "$ref": "domainmodels.schema.json#/definitions/AttributeType"
-        },
         "attributeName": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "description": {
-          "type": "string"
+          "type": "string",
+          "default": ""
+        },
+        "attributeType": {
+          "$ref": "domainmodels.schema.json#/definitions/AttributeType"
         },
         "enumerationDefinition": {
           "$ref": "#/definitions/AttributeEnumeration"
@@ -266,19 +294,24 @@
           "const": "BusinessEvents$PublishedBusinessEventService"
         },
         "serviceName": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "eventNamePrefix": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "version": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "description": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "summary": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "channels": {
           "type": "array",
@@ -290,6 +323,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "projects.schema.json#/definitions/Document"
+        }
       ]
     },
     "PublishedChannel": {
@@ -303,13 +341,16 @@
           "const": "BusinessEvents$PublishedChannel"
         },
         "channelId": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "channelName": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "description": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "messages": {
           "type": "array",
@@ -333,18 +374,21 @@
           "type": "string",
           "const": "BusinessEvents$PublishedMessage"
         },
-        "entity": {
-          "type": "string",
-          "description": "domainmodels.schema.json#/definitions/IEntity"
-        },
         "eventName": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "description": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "summary": {
-          "type": "string"
+          "type": "string",
+          "default": ""
+        },
+        "entity": {
+          "type": "string",
+          "description": "ByNameReferenceProperty: domainmodels.schema.json#/definitions/Entity"
         },
         "attributes": {
           "type": "array",
@@ -369,18 +413,20 @@
           "type": "string",
           "const": "BusinessEvents$PublishedMessageAttribute"
         },
+        "exposedName": {
+          "type": "string",
+          "default": ""
+        },
+        "description": {
+          "type": "string",
+          "default": ""
+        },
         "attribute": {
           "type": "string",
-          "description": "domainmodels.schema.json#/definitions/IAttribute"
+          "description": "ByNameReferenceProperty: domainmodels.schema.json#/definitions/Attribute"
         },
         "attributeType": {
           "$ref": "domainmodels.schema.json#/definitions/AttributeType"
-        },
-        "exposedName": {
-          "type": "string"
-        },
-        "description": {
-          "type": "string"
         }
       },
       "required": [
@@ -401,18 +447,20 @@
           "const": "BusinessEvents$ServiceOperation"
         },
         "messageName": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "operation": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "entity": {
           "type": "string",
-          "description": "domainmodels.schema.json#/definitions/IEntity"
+          "description": "ByNameReferenceProperty: domainmodels.schema.json#/definitions/Entity"
         },
         "microflow": {
           "type": "string",
-          "description": "microflows.schema.json#/definitions/IMicroflow"
+          "description": "ByNameReferenceProperty: microflows.schema.json#/definitions/Microflow"
         }
       },
       "required": [

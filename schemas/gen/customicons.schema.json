@@ -12,10 +12,12 @@
           "const": "CustomIcons$CustomIcon"
         },
         "name": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "characterCode": {
-          "type": "string"
+          "type": "integer",
+          "default": 0
         },
         "tags": {
           "type": "string"
@@ -37,13 +39,16 @@
           "const": "CustomIcons$CustomIconCollection"
         },
         "collectionClass": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "prefix": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "fontData": {
-          "type": "string"
+          "type": "string",
+          "contentEncoding": "base64"
         },
         "icons": {
           "type": "array",
@@ -55,6 +60,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "projects.schema.json#/definitions/Document"
+        }
       ]
     }
   }

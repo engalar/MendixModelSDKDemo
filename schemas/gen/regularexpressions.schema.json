@@ -12,12 +12,18 @@
           "const": "RegularExpressions$RegularExpression"
         },
         "regEx": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         }
       },
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "projects.schema.json#/definitions/Document"
+        }
       ]
     }
   }

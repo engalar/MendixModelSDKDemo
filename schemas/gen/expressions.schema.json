@@ -59,6 +59,11 @@
         "$Type",
         "left",
         "right"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/Expression"
+        }
       ]
     },
     "LiteralExpression": {
@@ -75,6 +80,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/Expression"
+        }
       ]
     },
     "BooleanLiteral": {
@@ -88,12 +98,18 @@
           "const": "Expressions$BooleanLiteral"
         },
         "value": {
-          "type": "boolean"
+          "type": "boolean",
+          "default": false
         }
       },
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/LiteralExpression"
+        }
       ]
     },
     "ConstantRefExpression": {
@@ -108,13 +124,18 @@
         },
         "constant": {
           "type": "string",
-          "description": "constants.schema.json#/definitions/IConstant"
+          "description": "ByNameReferenceProperty: constants.schema.json#/definitions/Constant"
         }
       },
       "required": [
         "$ID",
         "$Type",
         "constant"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/Expression"
+        }
       ]
     },
     "EmptyLiteral": {
@@ -131,6 +152,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/LiteralExpression"
+        }
       ]
     },
     "EnumerationValueRefExpression": {
@@ -145,13 +171,18 @@
         },
         "value": {
           "type": "string",
-          "description": "enumerations.schema.json#/definitions/IEnumerationValue"
+          "description": "ByNameReferenceProperty: enumerations.schema.json#/definitions/EnumerationValue"
         }
       },
       "required": [
         "$ID",
         "$Type",
         "value"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/Expression"
+        }
       ]
     },
     "FloatLiteral": {
@@ -165,12 +196,18 @@
           "const": "Expressions$FloatLiteral"
         },
         "value": {
-          "type": "string"
+          "type": "number",
+          "default": 0
         }
       },
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/LiteralExpression"
+        }
       ]
     },
     "FunctionCallExpression": {
@@ -184,7 +221,8 @@
           "const": "Expressions$FunctionCallExpression"
         },
         "functionName": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "arguments": {
           "type": "array",
@@ -196,6 +234,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/Expression"
+        }
       ]
     },
     "VariableRef": {
@@ -225,12 +268,18 @@
           "const": "Expressions$GlobalVariableRef"
         },
         "referredName": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         }
       },
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/VariableRef"
+        }
       ]
     },
     "IfExpression": {
@@ -259,6 +308,11 @@
         "condition",
         "ifTrue",
         "ifFalse"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/Expression"
+        }
       ]
     },
     "IntegerLiteral": {
@@ -272,12 +326,18 @@
           "const": "Expressions$IntegerLiteral"
         },
         "value": {
-          "type": "string"
+          "type": "integer",
+          "default": 0
         }
       },
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/LiteralExpression"
+        }
       ]
     },
     "NoExpression": {
@@ -294,6 +354,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/Expression"
+        }
       ]
     },
     "NoVariableRef": {
@@ -310,6 +375,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/VariableRef"
+        }
       ]
     },
     "ParenthesisExpression": {
@@ -330,6 +400,11 @@
         "$ID",
         "$Type",
         "expression"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/Expression"
+        }
       ]
     },
     "StringLiteral": {
@@ -343,12 +418,18 @@
           "const": "Expressions$StringLiteral"
         },
         "value": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         }
       },
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/LiteralExpression"
+        }
       ]
     },
     "UnaryExpression": {
@@ -376,6 +457,11 @@
         "$ID",
         "$Type",
         "expression"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/Expression"
+        }
       ]
     },
     "UnparsableExpression": {
@@ -389,12 +475,18 @@
           "const": "Expressions$UnparsableExpression"
         },
         "expression": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         }
       },
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/Expression"
+        }
       ]
     },
     "VariableRefExpression": {
@@ -418,6 +510,11 @@
         "$ID",
         "$Type",
         "variable"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/Expression"
+        }
       ]
     }
   }

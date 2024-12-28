@@ -28,13 +28,16 @@
           "const": "Projects$Document"
         },
         "name": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "documentation": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "excluded": {
-          "type": "boolean"
+          "type": "boolean",
+          "default": false
         },
         "exportLevel": {
           "type": "string",
@@ -47,6 +50,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ModuleDocument"
+        }
       ]
     },
     "FolderBase": {
@@ -76,12 +84,18 @@
           "const": "Projects$Folder"
         },
         "name": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         }
       },
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/FolderBase"
+        }
       ]
     },
     "JarDependency": {
@@ -95,16 +109,20 @@
           "const": "Projects$JarDependency"
         },
         "groupId": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "artifactId": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "version": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "isIncluded": {
-          "type": "boolean"
+          "type": "boolean",
+          "default": true
         },
         "exclusions": {
           "type": "array",
@@ -129,10 +147,12 @@
           "const": "Projects$JarDependencyExclusion"
         },
         "groupId": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "artifactId": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         }
       },
       "required": [
@@ -151,33 +171,46 @@
           "const": "Projects$Module"
         },
         "sortIndex": {
-          "type": "string"
+          "type": "number",
+          "default": 0
         },
         "name": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "fromAppStore": {
-          "type": "boolean"
+          "type": "boolean",
+          "default": false
         },
         "appStoreGuid": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "appStoreVersionGuid": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "appStoreVersion": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "appStorePackageId": {
-          "type": "string"
+          "type": "integer",
+          "default": 0
         },
         "isThemeModule": {
-          "type": "boolean"
+          "type": "boolean",
+          "default": false
         }
       },
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/FolderBase"
+        }
       ]
     },
     "ModuleSettings": {
@@ -189,6 +222,22 @@
         "$Type": {
           "type": "string",
           "const": "Projects$ModuleSettings"
+        },
+        "version": {
+          "type": "string",
+          "default": "1.0.0"
+        },
+        "solutionIdentifier": {
+          "type": "string",
+          "default": ""
+        },
+        "extensionName": {
+          "type": "string",
+          "default": ""
+        },
+        "basedOnVersion": {
+          "type": "string",
+          "default": ""
         },
         "exportLevel": {
           "type": "string",
@@ -204,28 +253,21 @@
             "Solution"
           ]
         },
-        "version": {
-          "type": "string"
-        },
-        "solutionIdentifier": {
-          "type": "string"
-        },
-        "extensionName": {
-          "type": "string"
-        },
         "jarDependencies": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/JarDependency"
           }
-        },
-        "basedOnVersion": {
-          "type": "string"
         }
       },
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ModuleDocument"
+        }
       ]
     },
     "OneTimeConversionMarker": {
@@ -239,7 +281,8 @@
           "const": "Projects$OneTimeConversionMarker"
         },
         "name": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         }
       },
       "required": [
@@ -258,7 +301,8 @@
           "const": "Projects$Project"
         },
         "isSystemProject": {
-          "type": "boolean"
+          "type": "boolean",
+          "default": false
         }
       },
       "required": [

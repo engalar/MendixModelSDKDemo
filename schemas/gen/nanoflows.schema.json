@@ -13,12 +13,17 @@
         },
         "nanoflow": {
           "type": "string",
-          "description": "microflows.schema.json#/definitions/INanoflow"
+          "description": "ByNameReferenceProperty: microflows.schema.json#/definitions/Nanoflow"
         }
       },
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "microflows.schema.json#/definitions/CodeActionParameterValue"
+        }
       ]
     }
   }

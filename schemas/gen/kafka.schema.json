@@ -11,31 +11,37 @@
           "type": "string",
           "const": "Kafka$ConsumedKafkaService"
         },
+        "serviceFeed": {
+          "type": "string",
+          "default": ""
+        },
         "metadataReferences": {
           "type": "array",
           "items": {
             "$ref": "rest.schema.json#/definitions/MetadataReference"
           }
         },
-        "serviceFeed": {
-          "type": "string"
-        },
         "brokerUrl": {
           "type": "string",
-          "description": "constants.schema.json#/definitions/IConstant"
+          "description": "ByNameReferenceProperty: constants.schema.json#/definitions/Constant"
         },
         "brokerUsername": {
           "type": "string",
-          "description": "constants.schema.json#/definitions/IConstant"
+          "description": "ByNameReferenceProperty: constants.schema.json#/definitions/Constant"
         },
         "brokerPassword": {
           "type": "string",
-          "description": "constants.schema.json#/definitions/IConstant"
+          "description": "ByNameReferenceProperty: constants.schema.json#/definitions/Constant"
         }
       },
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "domainmodels.schema.json#/definitions/RemoteEntitySourceDocument"
+        }
       ]
     },
     "KafkaMappedValue": {
@@ -49,12 +55,18 @@
           "const": "Kafka$KafkaMappedValue"
         },
         "remoteName": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         }
       },
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "domainmodels.schema.json#/definitions/CachedMappedValue"
+        }
       ]
     },
     "KafkaRemoteEntitySource": {
@@ -67,20 +79,27 @@
           "type": "string",
           "const": "Kafka$KafkaRemoteEntitySource"
         },
-        "sourceDocument": {
-          "type": "string",
-          "description": "#/definitions/ConsumedKafkaService"
-        },
         "remoteName": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "topicName": {
-          "type": "string"
+          "type": "string",
+          "default": ""
+        },
+        "sourceDocument": {
+          "type": "string",
+          "description": "ByNameReferenceProperty: #/definitions/ConsumedKafkaService"
         }
       },
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "domainmodels.schema.json#/definitions/MaterializedRemoteEntitySource"
+        }
       ]
     },
     "PublishedKafkaResource": {
@@ -93,24 +112,27 @@
           "type": "string",
           "const": "Kafka$PublishedKafkaResource"
         },
+        "exposedName": {
+          "type": "string",
+          "default": ""
+        },
+        "summary": {
+          "type": "string",
+          "default": ""
+        },
+        "description": {
+          "type": "string",
+          "default": ""
+        },
         "entity": {
           "type": "string",
-          "description": "domainmodels.schema.json#/definitions/IEntity"
-        },
-        "exposedName": {
-          "type": "string"
+          "description": "ByNameReferenceProperty: domainmodels.schema.json#/definitions/Entity"
         },
         "attributes": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/PublishedKafkaResourceAttribute"
           }
-        },
-        "summary": {
-          "type": "string"
-        },
-        "description": {
-          "type": "string"
         }
       },
       "required": [
@@ -129,18 +151,21 @@
           "type": "string",
           "const": "Kafka$PublishedKafkaResourceAttribute"
         },
-        "attribute": {
-          "type": "string",
-          "description": "domainmodels.schema.json#/definitions/IAttribute"
-        },
         "exposedName": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "summary": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "description": {
-          "type": "string"
+          "type": "string",
+          "default": ""
+        },
+        "attribute": {
+          "type": "string",
+          "description": "ByNameReferenceProperty: domainmodels.schema.json#/definitions/Attribute"
         }
       },
       "required": [
@@ -160,16 +185,32 @@
           "const": "Kafka$PublishedKafkaService"
         },
         "namespace": {
-          "type": "string"
+          "type": "string",
+          "default": "DefaultNamespace"
         },
         "serviceFeed": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "metadata": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "serviceName": {
-          "type": "string"
+          "type": "string",
+          "default": ""
+        },
+        "version": {
+          "type": "string",
+          "default": "1.0.0"
+        },
+        "summary": {
+          "type": "string",
+          "default": ""
+        },
+        "description": {
+          "type": "string",
+          "default": ""
         },
         "resources": {
           "type": "array",
@@ -177,31 +218,27 @@
             "$ref": "#/definitions/PublishedKafkaResource"
           }
         },
-        "version": {
-          "type": "string"
-        },
-        "summary": {
-          "type": "string"
-        },
-        "description": {
-          "type": "string"
-        },
         "brokerUrl": {
           "type": "string",
-          "description": "constants.schema.json#/definitions/IConstant"
+          "description": "ByNameReferenceProperty: constants.schema.json#/definitions/Constant"
         },
         "brokerUsername": {
           "type": "string",
-          "description": "constants.schema.json#/definitions/IConstant"
+          "description": "ByNameReferenceProperty: constants.schema.json#/definitions/Constant"
         },
         "brokerPassword": {
           "type": "string",
-          "description": "constants.schema.json#/definitions/IConstant"
+          "description": "ByNameReferenceProperty: constants.schema.json#/definitions/Constant"
         }
       },
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "projects.schema.json#/definitions/Document"
+        }
       ]
     }
   }

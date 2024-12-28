@@ -12,10 +12,12 @@
           "const": "ExportMappings$ExportMapping"
         },
         "parameterName": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "isHeader": {
-          "type": "boolean"
+          "type": "boolean",
+          "default": false
         },
         "nullValueOption": {
           "type": "string"
@@ -24,6 +26,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "mappings.schema.json#/definitions/MappingDocument"
+        }
       ]
     },
     "ExportObjectMappingElement": {
@@ -40,6 +47,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "mappings.schema.json#/definitions/ObjectMappingElement"
+        }
       ]
     },
     "ExportValueMappingElement": {
@@ -56,6 +68,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "mappings.schema.json#/definitions/ValueMappingElement"
+        }
       ]
     }
   }

@@ -12,12 +12,18 @@
           "const": "JsonStructures$JsonElement"
         },
         "originalValue": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         }
       },
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "mappings.schema.json#/definitions/Element"
+        }
       ]
     },
     "JsonStructure": {
@@ -31,7 +37,8 @@
           "const": "JsonStructures$JsonStructure"
         },
         "jsonSnippet": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "elements": {
           "type": "array",
@@ -43,6 +50,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "xmlschemas.schema.json#/definitions/MxSchema"
+        }
       ]
     }
   }

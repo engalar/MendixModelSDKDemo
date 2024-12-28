@@ -52,13 +52,15 @@
           "const": "Pages$Widget"
         },
         "name": {
-          "type": "string"
+          "type": "string",
+          "default": ""
+        },
+        "tabIndex": {
+          "type": "integer",
+          "default": 0
         },
         "appearance": {
           "$ref": "#/definitions/Appearance"
-        },
-        "tabIndex": {
-          "type": "string"
         }
       },
       "required": [
@@ -84,6 +86,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/Widget"
+        }
       ]
     },
     "Button": {
@@ -130,6 +137,11 @@
         "$Type",
         "caption",
         "tooltip"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ConditionallyVisibleWidget"
+        }
       ]
     },
     "ActionButton": {
@@ -169,6 +181,11 @@
         "$ID",
         "$Type",
         "action"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/Button"
+        }
       ]
     },
     "ActionItem": {
@@ -202,19 +219,22 @@
           "const": "Pages$Appearance"
         },
         "class": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "style": {
-          "type": "string"
+          "type": "string",
+          "default": ""
+        },
+        "dynamicClasses": {
+          "type": "string",
+          "default": ""
         },
         "designProperties": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/DesignPropertyValue"
           }
-        },
-        "dynamicClasses": {
-          "type": "string"
         }
       },
       "required": [
@@ -233,7 +253,8 @@
           "const": "Pages$DataSource"
         },
         "forceFullObjects": {
-          "type": "boolean"
+          "type": "boolean",
+          "default": false
         }
       },
       "required": [
@@ -261,6 +282,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataSource"
+        }
       ]
     },
     "AssociationSource": {
@@ -277,6 +303,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/EntityPathSource"
+        }
       ]
     },
     "ConditionallyEditableWidget": {
@@ -304,6 +335,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ConditionallyVisibleWidget"
+        }
       ]
     },
     "InputWidget": {
@@ -326,6 +362,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ConditionallyEditableWidget"
+        }
       ]
     },
     "MemberWidget": {
@@ -353,6 +394,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/InputWidget"
+        }
       ]
     },
     "AssociationWidget": {
@@ -384,6 +430,11 @@
         "selectorSource",
         "selectPageSettings",
         "onChangeAction"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/MemberWidget"
+        }
       ]
     },
     "AttributeWidget": {
@@ -395,6 +446,10 @@
         "$Type": {
           "type": "string",
           "const": "Pages$AttributeWidget"
+        },
+        "ariaRequired": {
+          "type": "boolean",
+          "default": false
         },
         "validation": {
           "$ref": "#/definitions/WidgetValidation"
@@ -410,9 +465,6 @@
         },
         "sourceVariable": {
           "$ref": "#/definitions/PageVariable"
-        },
-        "ariaRequired": {
-          "type": "boolean"
         }
       },
       "required": [
@@ -422,6 +474,11 @@
         "onChangeAction",
         "onEnterAction",
         "onLeaveAction"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/MemberWidget"
+        }
       ]
     },
     "AttributeWidgetWithPlaceholder": {
@@ -442,6 +499,11 @@
         "$ID",
         "$Type",
         "placeholderTemplate"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/AttributeWidget"
+        }
       ]
     },
     "BackButton": {
@@ -458,6 +520,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/Button"
+        }
       ]
     },
     "FormBase": {
@@ -471,15 +538,22 @@
           "const": "Pages$FormBase"
         },
         "canvasWidth": {
-          "type": "string"
+          "type": "integer",
+          "default": 800
         },
         "canvasHeight": {
-          "type": "string"
+          "type": "integer",
+          "default": 600
         }
       },
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "projects.schema.json#/definitions/Document"
+        }
       ]
     },
     "TemplateFormBase": {
@@ -493,24 +567,34 @@
           "const": "Pages$TemplateFormBase"
         },
         "displayName": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "documentationUrl": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "templateCategory": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "templateCategoryWeight": {
-          "type": "string"
+          "type": "integer",
+          "default": 0
         },
         "imageData": {
-          "type": "string"
+          "type": "string",
+          "contentEncoding": "base64"
         }
       },
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/FormBase"
+        }
       ]
     },
     "BuildingBlock": {
@@ -540,6 +624,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/TemplateFormBase"
+        }
       ]
     },
     "ClientAction": {
@@ -553,7 +642,8 @@
           "const": "Pages$ClientAction"
         },
         "disabledDuringExecution": {
-          "type": "boolean"
+          "type": "boolean",
+          "default": true
         }
       },
       "required": [
@@ -573,7 +663,7 @@
         },
         "nanoflow": {
           "type": "string",
-          "description": "microflows.schema.json#/definitions/INanoflow"
+          "description": "ByNameReferenceProperty: microflows.schema.json#/definitions/Nanoflow"
         },
         "parameterMappings": {
           "type": "array",
@@ -599,6 +689,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ClientAction"
+        }
       ]
     },
     "CallWorkflowClientAction": {
@@ -611,12 +706,13 @@
           "type": "string",
           "const": "Pages$CallWorkflowClientAction"
         },
+        "closePage": {
+          "type": "boolean",
+          "default": true
+        },
         "workflow": {
           "type": "string",
-          "description": "workflows.schema.json#/definitions/IWorkflow"
-        },
-        "closePage": {
-          "type": "boolean"
+          "description": "ByNameReferenceProperty: workflows.schema.json#/definitions/Workflow"
         },
         "confirmationInfo": {
           "$ref": "#/definitions/ConfirmationInfo"
@@ -625,6 +721,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ClientAction"
+        }
       ]
     },
     "CancelButton": {
@@ -638,12 +739,18 @@
           "const": "Pages$CancelButton"
         },
         "closePage": {
-          "type": "boolean"
+          "type": "boolean",
+          "default": true
         }
       },
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/Button"
+        }
       ]
     },
     "CancelChangesClientAction": {
@@ -657,12 +764,18 @@
           "const": "Pages$CancelChangesClientAction"
         },
         "closePage": {
-          "type": "boolean"
+          "type": "boolean",
+          "default": true
         }
       },
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ClientAction"
+        }
       ]
     },
     "CheckBox": {
@@ -697,6 +810,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/AttributeWidget"
+        }
       ]
     },
     "ClientTemplate": {
@@ -739,11 +857,12 @@
           "type": "string",
           "const": "Pages$ClientTemplateParameter"
         },
+        "expression": {
+          "type": "string",
+          "default": ""
+        },
         "attributeRef": {
           "$ref": "domainmodels.schema.json#/definitions/AttributeRef"
-        },
-        "expression": {
-          "type": "string"
         },
         "formattingInfo": {
           "$ref": "#/definitions/FormattingInfo"
@@ -769,12 +888,18 @@
           "const": "Pages$ClosePageClientAction"
         },
         "numberOfPagesToClose": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         }
       },
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ClientAction"
+        }
       ]
     },
     "EntityWidget": {
@@ -795,6 +920,11 @@
         "$ID",
         "$Type",
         "dataSource"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ConditionallyVisibleWidget"
+        }
       ]
     },
     "ListenTargetWidget": {
@@ -811,6 +941,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/EntityWidget"
+        }
       ]
     },
     "Grid": {
@@ -824,7 +959,16 @@
           "const": "Pages$Grid"
         },
         "isControlBarVisible": {
-          "type": "boolean"
+          "type": "boolean",
+          "default": true
+        },
+        "selectFirst": {
+          "type": "boolean",
+          "default": false
+        },
+        "refreshTime": {
+          "type": "integer",
+          "default": 0
         },
         "showPagingBar": {
           "type": "string",
@@ -844,18 +988,12 @@
             "SimpleMulti"
           ]
         },
-        "selectFirst": {
-          "type": "boolean"
-        },
         "defaultButtonTrigger": {
           "type": "string",
           "enum": [
             "Single",
             "Double"
           ]
-        },
-        "refreshTime": {
-          "type": "string"
         },
         "controlBar": {
           "$ref": "#/definitions/GridControlBar"
@@ -865,6 +1003,11 @@
         "$ID",
         "$Type",
         "controlBar"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ListenTargetWidget"
+        }
       ]
     },
     "ColumnGrid": {
@@ -877,17 +1020,19 @@
           "type": "string",
           "const": "Pages$ColumnGrid"
         },
+        "numberOfRows": {
+          "type": "integer",
+          "default": 20
+        },
+        "showEmptyRows": {
+          "type": "boolean",
+          "default": false
+        },
         "columns": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/GridColumn"
           }
-        },
-        "numberOfRows": {
-          "type": "string"
-        },
-        "showEmptyRows": {
-          "type": "boolean"
         },
         "widthUnit": {
           "type": "string",
@@ -898,12 +1043,17 @@
         },
         "tooltipPage": {
           "type": "string",
-          "description": "#/definitions/Page"
+          "description": "ByNameReferenceProperty: #/definitions/Page"
         }
       },
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/Grid"
+        }
       ]
     },
     "ControlBarItem": {
@@ -917,7 +1067,8 @@
           "const": "Pages$ControlBarItem"
         },
         "name": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         }
       },
       "required": [
@@ -935,14 +1086,19 @@
           "type": "string",
           "const": "Pages$SearchField"
         },
+        "customDateFormat": {
+          "type": "string",
+          "default": ""
+        },
+        "defaultValue": {
+          "type": "string",
+          "default": ""
+        },
         "caption": {
           "$ref": "texts.schema.json#/definitions/Text"
         },
         "placeholder": {
           "$ref": "texts.schema.json#/definitions/Text"
-        },
-        "customDateFormat": {
-          "type": "string"
         },
         "type": {
           "type": "string",
@@ -951,9 +1107,6 @@
             "Hidden",
             "ReadOnly"
           ]
-        },
-        "defaultValue": {
-          "type": "string"
         }
       },
       "required": [
@@ -961,6 +1114,11 @@
         "$Type",
         "caption",
         "placeholder"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ControlBarItem"
+        }
       ]
     },
     "SingleSearchField": {
@@ -993,6 +1151,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/SearchField"
+        }
       ]
     },
     "ComparisonSearchField": {
@@ -1009,6 +1172,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/SingleSearchField"
+        }
       ]
     },
     "CompoundDesignPropertyValue": {
@@ -1031,6 +1199,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/AbstractDesignPropertyValue"
+        }
       ]
     },
     "ConditionalSettings": {
@@ -1043,18 +1216,19 @@
           "type": "string",
           "const": "Pages$ConditionalSettings"
         },
+        "expression": {
+          "type": "string",
+          "default": ""
+        },
         "attribute": {
           "type": "string",
-          "description": "domainmodels.schema.json#/definitions/IAttribute"
+          "description": "ByNameReferenceProperty: domainmodels.schema.json#/definitions/Attribute"
         },
         "conditions": {
           "type": "array",
           "items": {
             "$ref": "enumerations.schema.json#/definitions/Condition"
           }
-        },
-        "expression": {
-          "type": "string"
         },
         "sourceVariable": {
           "$ref": "#/definitions/PageVariable"
@@ -1079,6 +1253,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ConditionalSettings"
+        }
       ]
     },
     "ConditionalVisibilitySettings": {
@@ -1091,20 +1270,26 @@
           "type": "string",
           "const": "Pages$ConditionalVisibilitySettings"
         },
+        "ignoreSecurity": {
+          "type": "boolean",
+          "default": false
+        },
         "moduleRoles": {
           "type": "array",
           "items": {
             "type": "string",
-            "description": "security.schema.json#/definitions/IModuleRole"
+            "description": "ByNameReferenceListProperty: security.schema.json#/definitions/ModuleRole"
           }
-        },
-        "ignoreSecurity": {
-          "type": "boolean"
         }
       },
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ConditionalSettings"
+        }
       ]
     },
     "ConfirmationInfo": {
@@ -1201,6 +1386,11 @@
         "caption",
         "tooltip",
         "appearance"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ControlBarItem"
+        }
       ]
     },
     "CreateObjectClientAction": {
@@ -1213,20 +1403,26 @@
           "type": "string",
           "const": "Pages$CreateObjectClientAction"
         },
+        "numberOfPagesToClose2": {
+          "type": "string",
+          "default": ""
+        },
         "entityRef": {
           "$ref": "domainmodels.schema.json#/definitions/EntityRef"
         },
         "pageSettings": {
           "$ref": "#/definitions/PageSettings"
-        },
-        "numberOfPagesToClose2": {
-          "type": "string"
         }
       },
       "required": [
         "$ID",
         "$Type",
         "pageSettings"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ClientAction"
+        }
       ]
     },
     "CustomDesignPropertyValue": {
@@ -1240,12 +1436,18 @@
           "const": "Pages$CustomDesignPropertyValue"
         },
         "value": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         }
       },
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/AbstractDesignPropertyValue"
+        }
       ]
     },
     "DataGrid": {
@@ -1266,6 +1468,11 @@
         "$ID",
         "$Type",
         "caption"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ColumnGrid"
+        }
       ]
     },
     "GridControlBarButton": {
@@ -1282,6 +1489,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ControlBarButton"
+        }
       ]
     },
     "DataGridAddButton": {
@@ -1302,6 +1514,11 @@
         "$ID",
         "$Type",
         "pageSettings"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/GridControlBarButton"
+        }
       ]
     },
     "DataGridExportToCSVButton": {
@@ -1315,27 +1532,38 @@
           "const": "Pages$DataGridExportToCSVButton"
         },
         "maxNumberOfRows": {
-          "type": "string"
+          "type": "integer",
+          "default": 1000
         },
         "decimalSeparator": {
-          "type": "string"
+          "type": "string",
+          "default": "."
         },
         "groupSeparator": {
-          "type": "string"
+          "type": "string",
+          "default": ","
         },
         "delimiter": {
-          "type": "string"
+          "type": "string",
+          "default": ";"
         },
         "generateExcelHint": {
-          "type": "boolean"
+          "type": "boolean",
+          "default": false
         },
         "useGridDateFormat": {
-          "type": "boolean"
+          "type": "boolean",
+          "default": false
         }
       },
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/GridControlBarButton"
+        }
       ]
     },
     "DataGridExportToExcelButton": {
@@ -1349,15 +1577,22 @@
           "const": "Pages$DataGridExportToExcelButton"
         },
         "maxNumberOfRows": {
-          "type": "string"
+          "type": "integer",
+          "default": 1000
         },
         "useExcelDateType": {
-          "type": "boolean"
+          "type": "boolean",
+          "default": true
         }
       },
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/GridControlBarButton"
+        }
       ]
     },
     "DataGridRemoveButton": {
@@ -1374,6 +1609,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/GridControlBarButton"
+        }
       ]
     },
     "DataView": {
@@ -1385,6 +1625,14 @@
         "$Type": {
           "type": "string",
           "const": "Pages$DataView"
+        },
+        "showFooter": {
+          "type": "boolean",
+          "default": true
+        },
+        "labelWidth": {
+          "type": "integer",
+          "default": 3
         },
         "widgets": {
           "type": "array",
@@ -1409,14 +1657,8 @@
         "conditionalEditabilitySettings": {
           "$ref": "#/definitions/ConditionalEditabilitySettings"
         },
-        "showFooter": {
-          "type": "boolean"
-        },
         "noEntityMessage": {
           "$ref": "texts.schema.json#/definitions/Text"
-        },
-        "labelWidth": {
-          "type": "string"
         },
         "readOnlyStyle": {
           "type": "string",
@@ -1430,6 +1672,11 @@
         "$ID",
         "$Type",
         "noEntityMessage"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/EntityWidget"
+        }
       ]
     },
     "DataViewControlBarButton": {
@@ -1443,12 +1690,18 @@
           "const": "Pages$DataViewControlBarButton"
         },
         "tabIndex": {
-          "type": "string"
+          "type": "integer",
+          "default": 0
         }
       },
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ControlBarButton"
+        }
       ]
     },
     "DataViewActionButton": {
@@ -1469,6 +1722,11 @@
         "$ID",
         "$Type",
         "action"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataViewControlBarButton"
+        }
       ]
     },
     "DataViewCancelButton": {
@@ -1485,6 +1743,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataViewControlBarButton"
+        }
       ]
     },
     "DataViewCloseButton": {
@@ -1501,6 +1764,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataViewControlBarButton"
+        }
       ]
     },
     "DataViewControlBar": {
@@ -1517,6 +1785,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ControlBar"
+        }
       ]
     },
     "DataViewSaveButton": {
@@ -1530,12 +1803,18 @@
           "const": "Pages$DataViewSaveButton"
         },
         "syncAutomatically": {
-          "type": "boolean"
+          "type": "boolean",
+          "default": false
         }
       },
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataViewControlBarButton"
+        }
       ]
     },
     "DataViewSource": {
@@ -1552,6 +1831,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/EntityPathSource"
+        }
       ]
     },
     "DatabaseConstraint": {
@@ -1564,9 +1848,13 @@
           "type": "string",
           "const": "Pages$DatabaseConstraint"
         },
+        "value": {
+          "type": "string",
+          "default": ""
+        },
         "attribute": {
           "type": "string",
-          "description": "domainmodels.schema.json#/definitions/IAttribute"
+          "description": "ByNameReferenceProperty: domainmodels.schema.json#/definitions/Attribute"
         },
         "operator": {
           "type": "string",
@@ -1580,9 +1868,6 @@
             "GreaterThan",
             "GreaterThanOrEquals"
           ]
-        },
-        "value": {
-          "type": "string"
         }
       },
       "required": [
@@ -1608,6 +1893,11 @@
         "$ID",
         "$Type",
         "sortBar"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/EntityPathSource"
+        }
       ]
     },
     "DatabaseSourceBase": {
@@ -1630,6 +1920,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/SortableEntityPathSource"
+        }
       ]
     },
     "DatePicker": {
@@ -1653,6 +1948,11 @@
         "$ID",
         "$Type",
         "formattingInfo"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/AttributeWidgetWithPlaceholder"
+        }
       ]
     },
     "DeleteClientAction": {
@@ -1666,7 +1966,8 @@
           "const": "Pages$DeleteClientAction"
         },
         "closePage": {
-          "type": "boolean"
+          "type": "boolean",
+          "default": true
         },
         "sourceVariable": {
           "$ref": "#/definitions/PageVariable"
@@ -1675,6 +1976,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ClientAction"
+        }
       ]
     },
     "DesignPropertyValue": {
@@ -1688,7 +1994,8 @@
           "const": "Pages$DesignPropertyValue"
         },
         "key": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "value": {
           "$ref": "#/definitions/AbstractDesignPropertyValue"
@@ -1708,6 +2015,10 @@
         "$Type": {
           "type": "string",
           "const": "Pages$DivContainer"
+        },
+        "screenReaderHidden": {
+          "type": "boolean",
+          "default": false
         },
         "widgets": {
           "type": "array",
@@ -1733,9 +2044,6 @@
         "onClickAction": {
           "$ref": "#/definitions/ClientAction"
         },
-        "screenReaderHidden": {
-          "type": "boolean"
-        },
         "nativeAccessibilitySettings": {
           "$ref": "#/definitions/AccessibilitySettings"
         }
@@ -1744,6 +2052,11 @@
         "$ID",
         "$Type",
         "onClickAction"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ConditionallyVisibleWidget"
+        }
       ]
     },
     "DropDown": {
@@ -1767,6 +2080,11 @@
         "$ID",
         "$Type",
         "emptyOptionCaption"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/AttributeWidget"
+        }
       ]
     },
     "DropDownButton": {
@@ -1789,6 +2107,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/Button"
+        }
       ]
     },
     "DropDownButtonItem": {
@@ -1806,13 +2129,18 @@
         },
         "image": {
           "type": "string",
-          "description": "images.schema.json#/definitions/IImage"
+          "description": "ByNameReferenceProperty: images.schema.json#/definitions/Image"
         }
       },
       "required": [
         "$ID",
         "$Type",
         "caption"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ActionItem"
+        }
       ]
     },
     "DropDownSearchField": {
@@ -1825,20 +2153,27 @@
           "type": "string",
           "const": "Pages$DropDownSearchField"
         },
-        "sortBar": {
-          "$ref": "#/definitions/GridSortBar"
-        },
         "xPathConstraint": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "allowMultipleSelect": {
-          "type": "boolean"
+          "type": "boolean",
+          "default": false
+        },
+        "sortBar": {
+          "$ref": "#/definitions/GridSortBar"
         }
       },
       "required": [
         "$ID",
         "$Type",
         "sortBar"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/SingleSearchField"
+        }
       ]
     },
     "DynamicImageViewer": {
@@ -1851,9 +2186,29 @@
           "type": "string",
           "const": "Pages$DynamicImageViewer"
         },
+        "width": {
+          "type": "integer",
+          "default": 0
+        },
+        "height": {
+          "type": "integer",
+          "default": 0
+        },
+        "responsive": {
+          "type": "boolean",
+          "default": true
+        },
+        "showAsThumbnail": {
+          "type": "boolean",
+          "default": false
+        },
+        "onClickEnlarge": {
+          "type": "boolean",
+          "default": false
+        },
         "defaultImage": {
           "type": "string",
-          "description": "images.schema.json#/definitions/IImage"
+          "description": "ByNameReferenceProperty: images.schema.json#/definitions/Image"
         },
         "widthUnit": {
           "type": "string",
@@ -1871,23 +2226,8 @@
             "Percentage"
           ]
         },
-        "width": {
-          "type": "string"
-        },
-        "height": {
-          "type": "string"
-        },
-        "responsive": {
-          "type": "boolean"
-        },
-        "showAsThumbnail": {
-          "type": "boolean"
-        },
         "clickAction": {
           "$ref": "#/definitions/ClientAction"
-        },
-        "onClickEnlarge": {
-          "type": "boolean"
         },
         "alternativeText": {
           "$ref": "#/definitions/ClientTemplate"
@@ -1901,6 +2241,11 @@
         "$Type",
         "clickAction",
         "alternativeText"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/EntityWidget"
+        }
       ]
     },
     "DynamicText": {
@@ -1949,6 +2294,11 @@
         "$ID",
         "$Type",
         "content"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ConditionallyVisibleWidget"
+        }
       ]
     },
     "TemplateType": {
@@ -1981,6 +2331,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/TemplateType"
+        }
       ]
     },
     "FileManager": {
@@ -1994,7 +2349,16 @@
           "const": "Pages$FileManager"
         },
         "allowedExtensions": {
-          "type": "string"
+          "type": "string",
+          "default": ""
+        },
+        "maxFileSize": {
+          "type": "integer",
+          "default": 5
+        },
+        "showFileInBrowser": {
+          "type": "boolean",
+          "default": false
         },
         "type": {
           "type": "string",
@@ -2003,17 +2367,16 @@
             "Download",
             "Both"
           ]
-        },
-        "maxFileSize": {
-          "type": "string"
-        },
-        "showFileInBrowser": {
-          "type": "boolean"
         }
       },
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/InputWidget"
+        }
       ]
     },
     "FormattingInfo": {
@@ -2027,10 +2390,16 @@
           "const": "Pages$FormattingInfo"
         },
         "decimalPrecision": {
-          "type": "string"
+          "type": "integer",
+          "default": 2
         },
         "groupDigits": {
-          "type": "boolean"
+          "type": "boolean",
+          "default": false
+        },
+        "customDateFormat": {
+          "type": "string",
+          "default": ""
         },
         "enumFormat": {
           "type": "string",
@@ -2047,9 +2416,6 @@
             "DateTime",
             "Custom"
           ]
-        },
-        "customDateFormat": {
-          "type": "string"
         }
       },
       "required": [
@@ -2084,12 +2450,18 @@
           "const": "Pages$GlyphIcon"
         },
         "code": {
-          "type": "string"
+          "type": "integer",
+          "default": -1
         }
       },
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/Icon"
+        }
       ]
     },
     "GridActionButton": {
@@ -2102,17 +2474,23 @@
           "type": "string",
           "const": "Pages$GridActionButton"
         },
+        "maintainSelectionAfterMicroflow": {
+          "type": "boolean",
+          "default": false
+        },
         "action": {
           "$ref": "#/definitions/ClientAction"
-        },
-        "maintainSelectionAfterMicroflow": {
-          "type": "boolean"
         }
       },
       "required": [
         "$ID",
         "$Type",
         "action"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/GridControlBarButton"
+        }
       ]
     },
     "GridBaseSource": {
@@ -2133,6 +2511,11 @@
         "$ID",
         "$Type",
         "searchBar"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/SortableEntityPathSource"
+        }
       ]
     },
     "GridColumn": {
@@ -2146,7 +2529,20 @@
           "const": "Pages$GridColumn"
         },
         "name": {
-          "type": "string"
+          "type": "string",
+          "default": ""
+        },
+        "showTooltip": {
+          "type": "boolean",
+          "default": false
+        },
+        "editable": {
+          "type": "boolean",
+          "default": false
+        },
+        "width": {
+          "type": "integer",
+          "default": 0
         },
         "caption": {
           "$ref": "texts.schema.json#/definitions/Text"
@@ -2156,9 +2552,6 @@
         },
         "formattingInfo": {
           "$ref": "#/definitions/FormattingInfo"
-        },
-        "showTooltip": {
-          "type": "boolean"
         },
         "aggregateCaption": {
           "$ref": "texts.schema.json#/definitions/Text"
@@ -2173,12 +2566,6 @@
             "Sum",
             "Count"
           ]
-        },
-        "editable": {
-          "type": "boolean"
-        },
-        "width": {
-          "type": "string"
         },
         "appearance": {
           "$ref": "#/definitions/Appearance"
@@ -2207,6 +2594,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ControlBar"
+        }
       ]
     },
     "GridDatabaseSource": {
@@ -2227,6 +2619,11 @@
         "$ID",
         "$Type",
         "searchBar"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/DatabaseSourceBase"
+        }
       ]
     },
     "GridDeleteButton": {
@@ -2243,6 +2640,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/GridControlBarButton"
+        }
       ]
     },
     "GridDeselectAllButton": {
@@ -2259,6 +2661,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/GridControlBarButton"
+        }
       ]
     },
     "GridEditButton": {
@@ -2285,6 +2692,11 @@
         "$ID",
         "$Type",
         "pageSettings"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/GridControlBarButton"
+        }
       ]
     },
     "GridNewButton": {
@@ -2299,7 +2711,7 @@
         },
         "entity": {
           "type": "string",
-          "description": "domainmodels.schema.json#/definitions/IEntity"
+          "description": "ByNameReferenceProperty: domainmodels.schema.json#/definitions/Entity"
         },
         "editLocation": {
           "type": "string",
@@ -2317,6 +2729,11 @@
         "$ID",
         "$Type",
         "pageSettings"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/GridControlBarButton"
+        }
       ]
     },
     "GridSearchButton": {
@@ -2333,6 +2750,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/GridControlBarButton"
+        }
       ]
     },
     "GridSelectAllButton": {
@@ -2356,6 +2778,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/GridControlBarButton"
+        }
       ]
     },
     "GridSortBar": {
@@ -2418,12 +2845,18 @@
           "const": "Pages$GridXPathSource"
         },
         "xPathConstraint": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         }
       },
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/GridBaseSource"
+        }
       ]
     },
     "GroupBox": {
@@ -2469,6 +2902,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ConditionallyVisibleWidget"
+        }
       ]
     },
     "Header": {
@@ -2497,6 +2935,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/Widget"
+        }
       ]
     },
     "SplitPane": {
@@ -2509,6 +2952,18 @@
           "type": "string",
           "const": "Pages$SplitPane"
         },
+        "animatedResize": {
+          "type": "boolean",
+          "default": false
+        },
+        "height": {
+          "type": "integer",
+          "default": 0
+        },
+        "position": {
+          "type": "integer",
+          "default": 50
+        },
         "firstWidgets": {
           "type": "array",
           "items": {
@@ -2520,20 +2975,16 @@
           "items": {
             "$ref": "#/definitions/Widget"
           }
-        },
-        "animatedResize": {
-          "type": "boolean"
-        },
-        "height": {
-          "type": "string"
-        },
-        "position": {
-          "type": "string"
         }
       },
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/Widget"
+        }
       ]
     },
     "HorizontalSplitPane": {
@@ -2550,6 +3001,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/SplitPane"
+        }
       ]
     },
     "IconCollectionIcon": {
@@ -2564,13 +3020,18 @@
         },
         "image": {
           "type": "string",
-          "description": "customicons.schema.json#/definitions/ICustomIcon"
+          "description": "ByNameReferenceProperty: customicons.schema.json#/definitions/CustomIcon"
         }
       },
       "required": [
         "$ID",
         "$Type",
         "image"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/Icon"
+        }
       ]
     },
     "ImageIcon": {
@@ -2585,13 +3046,18 @@
         },
         "image": {
           "type": "string",
-          "description": "images.schema.json#/definitions/IImage"
+          "description": "ByNameReferenceProperty: images.schema.json#/definitions/Image"
         }
       },
       "required": [
         "$ID",
         "$Type",
         "image"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/Icon"
+        }
       ]
     },
     "ImageUploader": {
@@ -2605,18 +3071,29 @@
           "const": "Pages$ImageUploader"
         },
         "allowedExtensions": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "thumbnailSize": {
-          "type": "string"
+          "$ref": "../common.schema.json#/definitions/Size",
+          "default": {
+            "width": 100,
+            "height": 75
+          }
         },
         "maxFileSize": {
-          "type": "string"
+          "type": "integer",
+          "default": 5
         }
       },
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/InputWidget"
+        }
       ]
     },
     "ImageViewerSource": {
@@ -2633,6 +3110,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/EntityPathSource"
+        }
       ]
     },
     "InputReferenceSetSelector": {
@@ -2649,6 +3131,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/AssociationWidget"
+        }
       ]
     },
     "Label": {
@@ -2669,6 +3156,11 @@
         "$ID",
         "$Type",
         "caption"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ConditionallyVisibleWidget"
+        }
       ]
     },
     "Layout": {
@@ -2693,6 +3185,11 @@
         "$Type",
         "content",
         "appearance"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/FormBase"
+        }
       ]
     },
     "LayoutCall": {
@@ -2707,7 +3204,7 @@
         },
         "layout": {
           "type": "string",
-          "description": "#/definitions/Layout"
+          "description": "ByNameReferenceProperty: #/definitions/Layout"
         },
         "arguments": {
           "type": "array",
@@ -2734,7 +3231,7 @@
         },
         "parameter": {
           "type": "string",
-          "description": "#/definitions/LayoutParameter"
+          "description": "ByNameReferenceProperty: #/definitions/LayoutParameter"
         },
         "widgets": {
           "type": "array",
@@ -2792,6 +3289,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ConditionallyVisibleWidget"
+        }
       ]
     },
     "LayoutGridColumn": {
@@ -2805,16 +3307,20 @@
           "const": "Pages$LayoutGridColumn"
         },
         "weight": {
-          "type": "string"
+          "type": "integer",
+          "default": 1
         },
         "tabletWeight": {
-          "type": "string"
+          "type": "integer",
+          "default": -1
         },
         "phoneWeight": {
-          "type": "string"
+          "type": "integer",
+          "default": -1
         },
         "previewWidth": {
-          "type": "string"
+          "type": "integer",
+          "default": -1
         },
         "widgets": {
           "type": "array",
@@ -2851,6 +3357,10 @@
           "type": "string",
           "const": "Pages$LayoutGridRow"
         },
+        "spacingBetweenColumns": {
+          "type": "boolean",
+          "default": true
+        },
         "columns": {
           "type": "array",
           "items": {
@@ -2880,9 +3390,6 @@
             "Center",
             "End"
           ]
-        },
-        "spacingBetweenColumns": {
-          "type": "boolean"
         }
       },
       "required": [
@@ -2902,7 +3409,8 @@
           "const": "Pages$LayoutParameter"
         },
         "name": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         }
       },
       "required": [
@@ -2937,6 +3445,11 @@
         "$ID",
         "$Type",
         "address"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/Button"
+        }
       ]
     },
     "ListView": {
@@ -2949,20 +3462,26 @@
           "type": "string",
           "const": "Pages$ListView"
         },
+        "pageSize": {
+          "type": "integer",
+          "default": 10
+        },
+        "editable": {
+          "type": "boolean",
+          "default": false
+        },
+        "numberOfColumns": {
+          "type": "integer",
+          "default": 1
+        },
         "widgets": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/Widget"
           }
         },
-        "pageSize": {
-          "type": "string"
-        },
         "clickAction": {
           "$ref": "#/definitions/ClientAction"
-        },
-        "editable": {
-          "type": "boolean"
         },
         "templates": {
           "type": "array",
@@ -2977,9 +3496,6 @@
             "Horizontal"
           ]
         },
-        "numberOfColumns": {
-          "type": "string"
-        },
         "pullDownAction": {
           "$ref": "#/definitions/ClientAction"
         }
@@ -2989,6 +3505,11 @@
         "$Type",
         "clickAction",
         "pullDownAction"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ListenTargetWidget"
+        }
       ]
     },
     "ListViewDatabaseSource": {
@@ -3009,6 +3530,11 @@
         "$ID",
         "$Type",
         "search"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/DatabaseSourceBase"
+        }
       ]
     },
     "ListViewSearch": {
@@ -3045,7 +3571,7 @@
         },
         "specialization": {
           "type": "string",
-          "description": "domainmodels.schema.json#/definitions/IEntity"
+          "description": "ByNameReferenceProperty: domainmodels.schema.json#/definitions/Entity"
         },
         "widgets": {
           "type": "array",
@@ -3071,12 +3597,18 @@
           "const": "Pages$XPathSourceBase"
         },
         "xPathConstraint": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         }
       },
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/SortableEntityPathSource"
+        }
       ]
     },
     "ListViewXPathSource": {
@@ -3097,6 +3629,11 @@
         "$ID",
         "$Type",
         "search"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/XPathSourceBase"
+        }
       ]
     },
     "ListenTargetSource": {
@@ -3110,12 +3647,18 @@
           "const": "Pages$ListenTargetSource"
         },
         "listenTarget": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         }
       },
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataSource"
+        }
       ]
     },
     "LocalVariable": {
@@ -3129,7 +3672,8 @@
           "const": "Pages$LocalVariable"
         },
         "name": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "variableType": {
           "$ref": "datatypes.schema.json#/definitions/DataType"
@@ -3152,12 +3696,18 @@
           "const": "Pages$LoginButton"
         },
         "validationMessageWidget": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         }
       },
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/Button"
+        }
       ]
     },
     "LoginTextBox": {
@@ -3170,11 +3720,12 @@
           "type": "string",
           "const": "Pages$LoginTextBox"
         },
+        "labelWidth": {
+          "type": "integer",
+          "default": 3
+        },
         "label": {
           "$ref": "texts.schema.json#/definitions/Text"
-        },
-        "labelWidth": {
-          "type": "string"
         },
         "placeholder": {
           "$ref": "texts.schema.json#/definitions/Text"
@@ -3184,6 +3735,11 @@
         "$ID",
         "$Type",
         "placeholder"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/Widget"
+        }
       ]
     },
     "LoginIdTextBox": {
@@ -3200,6 +3756,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/LoginTextBox"
+        }
       ]
     },
     "LogoutButton": {
@@ -3216,6 +3777,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/Button"
+        }
       ]
     },
     "MasterDetail": {
@@ -3240,6 +3806,11 @@
         "$Type",
         "master",
         "detail"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/Widget"
+        }
       ]
     },
     "MasterDetailRegion": {
@@ -3252,14 +3823,16 @@
           "type": "string",
           "const": "Pages$MasterDetailRegion"
         },
-        "widget": {
-          "$ref": "#/definitions/Widget"
-        },
         "class": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "style": {
-          "type": "string"
+          "type": "string",
+          "default": ""
+        },
+        "widget": {
+          "$ref": "#/definitions/Widget"
         }
       },
       "required": [
@@ -3278,10 +3851,12 @@
           "const": "Pages$MasterDetailDetailRegion"
         },
         "responsiveWeight": {
-          "type": "string"
+          "type": "integer",
+          "default": 9
         },
         "tabletWeight": {
-          "type": "string"
+          "type": "integer",
+          "default": 9
         },
         "title": {
           "$ref": "texts.schema.json#/definitions/Text"
@@ -3291,6 +3866,11 @@
         "$ID",
         "$Type",
         "title"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/MasterDetailRegion"
+        }
       ]
     },
     "MasterDetailMasterRegion": {
@@ -3304,15 +3884,22 @@
           "const": "Pages$MasterDetailMasterRegion"
         },
         "responsiveWeight": {
-          "type": "string"
+          "type": "integer",
+          "default": 3
         },
         "tabletWeight": {
-          "type": "string"
+          "type": "integer",
+          "default": 3
         }
       },
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/MasterDetailRegion"
+        }
       ]
     },
     "MenuWidget": {
@@ -3333,6 +3920,11 @@
         "$ID",
         "$Type",
         "menuSource"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/Widget"
+        }
       ]
     },
     "MenuBar": {
@@ -3349,6 +3941,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/MenuWidget"
+        }
       ]
     },
     "MenuSource": {
@@ -3379,12 +3976,17 @@
         },
         "menu": {
           "type": "string",
-          "description": "menus.schema.json#/definitions/IMenuDocument"
+          "description": "ByNameReferenceProperty: menus.schema.json#/definitions/MenuDocument"
         }
       },
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/MenuSource"
+        }
       ]
     },
     "MicroflowClientAction": {
@@ -3405,6 +4007,11 @@
         "$ID",
         "$Type",
         "microflowSettings"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ClientAction"
+        }
       ]
     },
     "MicroflowParameterMapping": {
@@ -3417,12 +4024,13 @@
           "type": "string",
           "const": "Pages$MicroflowParameterMapping"
         },
+        "expression": {
+          "type": "string",
+          "default": ""
+        },
         "parameter": {
           "type": "string",
-          "description": "microflows.schema.json#/definitions/IMicroflowParameter"
-        },
-        "expression": {
-          "type": "string"
+          "description": "ByNameReferenceProperty: microflows.schema.json#/definitions/MicroflowParameter"
         },
         "variable": {
           "$ref": "#/definitions/PageVariable"
@@ -3444,9 +4052,13 @@
           "type": "string",
           "const": "Pages$MicroflowSettings"
         },
+        "asynchronous": {
+          "type": "boolean",
+          "default": false
+        },
         "microflow": {
           "type": "string",
-          "description": "microflows.schema.json#/definitions/IMicroflow"
+          "description": "ByNameReferenceProperty: microflows.schema.json#/definitions/Microflow"
         },
         "parameterMappings": {
           "type": "array",
@@ -3464,9 +4076,6 @@
         },
         "progressMessage": {
           "$ref": "texts.schema.json#/definitions/Text"
-        },
-        "asynchronous": {
-          "type": "boolean"
         },
         "formValidations": {
           "type": "string",
@@ -3503,6 +4112,11 @@
         "$ID",
         "$Type",
         "microflowSettings"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataSource"
+        }
       ]
     },
     "NamedValue": {
@@ -3516,10 +4130,12 @@
           "const": "Pages$NamedValue"
         },
         "name": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "value": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         }
       },
       "required": [
@@ -3537,12 +4153,13 @@
           "type": "string",
           "const": "Pages$NanoflowParameterMapping"
         },
+        "expression": {
+          "type": "string",
+          "default": ""
+        },
         "parameter": {
           "type": "string",
-          "description": "microflows.schema.json#/definitions/INanoflowParameter"
-        },
-        "expression": {
-          "type": "string"
+          "description": "ByNameReferenceProperty: microflows.schema.json#/definitions/NanoflowParameter"
         },
         "variable": {
           "$ref": "#/definitions/PageVariable"
@@ -3566,7 +4183,7 @@
         },
         "nanoflow": {
           "type": "string",
-          "description": "microflows.schema.json#/definitions/INanoflow"
+          "description": "ByNameReferenceProperty: microflows.schema.json#/definitions/Nanoflow"
         },
         "parameterMappings": {
           "type": "array",
@@ -3578,6 +4195,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataSource"
+        }
       ]
     },
     "NativeLayoutContent": {
@@ -3589,6 +4211,14 @@
         "$Type": {
           "type": "string",
           "const": "Pages$NativeLayoutContent"
+        },
+        "showBottomBar": {
+          "type": "boolean",
+          "default": true
+        },
+        "sidebar": {
+          "type": "boolean",
+          "default": false
         },
         "layoutType": {
           "type": "string",
@@ -3607,12 +4237,6 @@
         "rightHeaderPlaceholder": {
           "$ref": "#/definitions/Placeholder"
         },
-        "showBottomBar": {
-          "type": "boolean"
-        },
-        "sidebar": {
-          "type": "boolean"
-        },
         "sidebarWidgets": {
           "type": "array",
           "items": {
@@ -3623,6 +4247,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/LayoutContent"
+        }
       ]
     },
     "NavigationList": {
@@ -3645,6 +4274,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ConditionallyVisibleWidget"
+        }
       ]
     },
     "NavigationListItem": {
@@ -3674,6 +4308,11 @@
         "$ID",
         "$Type",
         "appearance"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ActionItem"
+        }
       ]
     },
     "NavigationSource": {
@@ -3688,13 +4327,18 @@
         },
         "navigationProfile": {
           "type": "string",
-          "description": "navigation.schema.json#/definitions/INavigationProfile"
+          "description": "ByNameReferenceProperty: navigation.schema.json#/definitions/NavigationProfile"
         }
       },
       "required": [
         "$ID",
         "$Type",
         "navigationProfile"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/MenuSource"
+        }
       ]
     },
     "NavigationTree": {
@@ -3711,6 +4355,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/MenuWidget"
+        }
       ]
     },
     "NewButton": {
@@ -3734,6 +4383,11 @@
         "$ID",
         "$Type",
         "pageSettings"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/Button"
+        }
       ]
     },
     "NoClientAction": {
@@ -3750,6 +4404,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ClientAction"
+        }
       ]
     },
     "OfflineSchema": {
@@ -3764,7 +4423,7 @@
         },
         "role": {
           "type": "string",
-          "description": "security.schema.json#/definitions/IUserRole"
+          "description": "ByNameReferenceProperty: security.schema.json#/definitions/UserRole"
         },
         "tables": {
           "type": "string"
@@ -3786,10 +4445,12 @@
           "const": "Pages$OfflineSchemaFetchInstruction"
         },
         "tableName": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "xPath": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         }
       },
       "required": [
@@ -3827,6 +4488,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/OnClickBehavior"
+        }
       ]
     },
     "OnClickMicroflow": {
@@ -3847,6 +4513,11 @@
         "$ID",
         "$Type",
         "microflowSettings"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/OnClickBehavior"
+        }
       ]
     },
     "OnClickNothing": {
@@ -3863,6 +4534,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/OnClickBehavior"
+        }
       ]
     },
     "OpenLinkClientAction": {
@@ -3892,6 +4568,11 @@
         "$ID",
         "$Type",
         "address"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ClientAction"
+        }
       ]
     },
     "OpenUserTaskClientAction": {
@@ -3905,15 +4586,22 @@
           "const": "Pages$OpenUserTaskClientAction"
         },
         "assignOnOpen": {
-          "type": "boolean"
+          "type": "boolean",
+          "default": true
         },
         "openWhenAssigned": {
-          "type": "boolean"
+          "type": "boolean",
+          "default": false
         }
       },
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ClientAction"
+        }
       ]
     },
     "OpenWorkflowClientAction": {
@@ -3928,12 +4616,17 @@
         },
         "defaultPage": {
           "type": "string",
-          "description": "#/definitions/Page"
+          "description": "ByNameReferenceProperty: #/definitions/Page"
         }
       },
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ClientAction"
+        }
       ]
     },
     "OptionDesignPropertyValue": {
@@ -3947,12 +4640,18 @@
           "const": "Pages$OptionDesignPropertyValue"
         },
         "option": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         }
       },
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/AbstractDesignPropertyValue"
+        }
       ]
     },
     "Page": {
@@ -3964,6 +4663,30 @@
         "$Type": {
           "type": "string",
           "const": "Pages$Page"
+        },
+        "popupCloseAction": {
+          "type": "string",
+          "default": ""
+        },
+        "popupWidth": {
+          "type": "integer",
+          "default": 0
+        },
+        "popupHeight": {
+          "type": "integer",
+          "default": 0
+        },
+        "popupResizable": {
+          "type": "boolean",
+          "default": true
+        },
+        "markAsUsed": {
+          "type": "boolean",
+          "default": false
+        },
+        "url": {
+          "type": "string",
+          "default": ""
         },
         "parameters": {
           "type": "array",
@@ -3984,26 +4707,8 @@
           "type": "array",
           "items": {
             "type": "string",
-            "description": "security.schema.json#/definitions/IModuleRole"
+            "description": "ByNameReferenceListProperty: security.schema.json#/definitions/ModuleRole"
           }
-        },
-        "popupCloseAction": {
-          "type": "string"
-        },
-        "popupWidth": {
-          "type": "string"
-        },
-        "popupHeight": {
-          "type": "string"
-        },
-        "popupResizable": {
-          "type": "boolean"
-        },
-        "markAsUsed": {
-          "type": "boolean"
-        },
-        "url": {
-          "type": "string"
         },
         "variables": {
           "type": "array",
@@ -4018,6 +4723,11 @@
         "layoutCall",
         "title",
         "appearance"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/FormBase"
+        }
       ]
     },
     "PageClientAction": {
@@ -4030,6 +4740,10 @@
           "type": "string",
           "const": "Pages$PageClientAction"
         },
+        "numberOfPagesToClose2": {
+          "type": "string",
+          "default": ""
+        },
         "pageSettings": {
           "$ref": "#/definitions/PageSettings"
         },
@@ -4038,15 +4752,17 @@
           "items": {
             "$ref": "#/definitions/PageForSpecialization"
           }
-        },
-        "numberOfPagesToClose2": {
-          "type": "string"
         }
       },
       "required": [
         "$ID",
         "$Type",
         "pageSettings"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ClientAction"
+        }
       ]
     },
     "PageForSpecialization": {
@@ -4061,7 +4777,7 @@
         },
         "entity": {
           "type": "string",
-          "description": "domainmodels.schema.json#/definitions/IEntity"
+          "description": "ByNameReferenceProperty: domainmodels.schema.json#/definitions/Entity"
         },
         "pageSettings": {
           "$ref": "#/definitions/PageSettings"
@@ -4085,7 +4801,8 @@
           "const": "Pages$PageParameter"
         },
         "name": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "parameterType": {
           "$ref": "datatypes.schema.json#/definitions/DataType"
@@ -4107,15 +4824,16 @@
           "type": "string",
           "const": "Pages$PageParameterMapping"
         },
+        "argument": {
+          "type": "string",
+          "default": ""
+        },
         "parameter": {
           "type": "string",
-          "description": "#/definitions/PageParameter"
+          "description": "ByNameReferenceProperty: #/definitions/PageParameter"
         },
         "variable": {
           "$ref": "#/definitions/PageVariable"
-        },
-        "argument": {
-          "type": "string"
         }
       },
       "required": [
@@ -4137,7 +4855,7 @@
         },
         "page": {
           "type": "string",
-          "description": "#/definitions/Page"
+          "description": "ByNameReferenceProperty: #/definitions/Page"
         },
         "titleOverride": {
           "$ref": "microflows.schema.json#/definitions/TextTemplate"
@@ -4180,6 +4898,11 @@
         "layoutCall",
         "appearance",
         "templateType"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/TemplateFormBase"
+        }
       ]
     },
     "PageVariable": {
@@ -4192,6 +4915,10 @@
           "type": "string",
           "const": "Pages$PageVariable"
         },
+        "useAllPages": {
+          "type": "boolean",
+          "default": false
+        },
         "widget": {
           "type": "string"
         },
@@ -4203,9 +4930,6 @@
         },
         "localVariable": {
           "type": "string"
-        },
-        "useAllPages": {
-          "type": "boolean"
         }
       },
       "required": [
@@ -4228,7 +4952,7 @@
         },
         "attribute": {
           "type": "string",
-          "description": "domainmodels.schema.json#/definitions/IAttribute"
+          "description": "ByNameReferenceProperty: domainmodels.schema.json#/definitions/Attribute"
         }
       },
       "required": [
@@ -4236,6 +4960,11 @@
         "$Type",
         "pageParameter",
         "attribute"
+      ],
+      "allOf": [
+        {
+          "$ref": "url.schema.json#/definitions/UrlSegment"
+        }
       ]
     },
     "ParameterIdUrlSegment": {
@@ -4256,6 +4985,11 @@
         "$ID",
         "$Type",
         "pageParameter"
+      ],
+      "allOf": [
+        {
+          "$ref": "url.schema.json#/definitions/UrlSegment"
+        }
       ]
     },
     "PasswordTextBox": {
@@ -4272,6 +5006,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/LoginTextBox"
+        }
       ]
     },
     "Placeholder": {
@@ -4288,6 +5027,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/Widget"
+        }
       ]
     },
     "RadioButtonGroup": {
@@ -4301,12 +5045,18 @@
           "const": "Pages$RadioButtonGroup"
         },
         "renderHorizontal": {
-          "type": "boolean"
+          "type": "boolean",
+          "default": true
         }
       },
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/AttributeWidget"
+        }
       ]
     },
     "RangeSearchField": {
@@ -4319,22 +5069,29 @@
           "type": "string",
           "const": "Pages$RangeSearchField"
         },
+        "includeLower": {
+          "type": "boolean",
+          "default": false
+        },
+        "includeUpper": {
+          "type": "boolean",
+          "default": false
+        },
         "lowerBoundRef": {
           "$ref": "domainmodels.schema.json#/definitions/AttributeRef"
         },
         "upperBoundRef": {
           "$ref": "domainmodels.schema.json#/definitions/AttributeRef"
-        },
-        "includeLower": {
-          "type": "boolean"
-        },
-        "includeUpper": {
-          "type": "boolean"
         }
       },
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/SearchField"
+        }
       ]
     },
     "ReferenceSelector": {
@@ -4377,6 +5134,11 @@
         "gotoPageSettings",
         "formattingInfo",
         "emptyOptionCaption"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/AssociationWidget"
+        }
       ]
     },
     "ReferenceSetSelector": {
@@ -4389,6 +5151,10 @@
           "type": "string",
           "const": "Pages$ReferenceSetSelector"
         },
+        "xPathConstraint": {
+          "type": "string",
+          "default": ""
+        },
         "onChangeAction": {
           "$ref": "#/definitions/ClientAction"
         },
@@ -4397,15 +5163,17 @@
           "items": {
             "$ref": "domainmodels.schema.json#/definitions/EntityRef"
           }
-        },
-        "xPathConstraint": {
-          "type": "string"
         }
       },
       "required": [
         "$ID",
         "$Type",
         "onChangeAction"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ColumnGrid"
+        }
       ]
     },
     "ReferenceSetSource": {
@@ -4422,6 +5190,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/GridBaseSource"
+        }
       ]
     },
     "RegularPageTemplateType": {
@@ -4438,6 +5211,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/TemplateType"
+        }
       ]
     },
     "RetrievalQuery": {
@@ -4451,7 +5229,24 @@
           "const": "Pages$RetrievalQuery"
         },
         "queryId": {
-          "type": "string"
+          "type": "string",
+          "default": ""
+        },
+        "xPath": {
+          "type": "string",
+          "default": ""
+        },
+        "entityPath": {
+          "type": "string",
+          "default": ""
+        },
+        "pageName": {
+          "type": "string",
+          "default": ""
+        },
+        "widgetName": {
+          "type": "string",
+          "default": ""
         },
         "allowedUserRoleSets": {
           "type": "array",
@@ -4459,21 +5254,9 @@
             "$ref": "#/definitions/UserRoleSet"
           }
         },
-        "xPath": {
-          "type": "string"
-        },
         "microflow": {
           "type": "string",
-          "description": "microflows.schema.json#/definitions/IMicroflow"
-        },
-        "entityPath": {
-          "type": "string"
-        },
-        "pageName": {
-          "type": "string"
-        },
-        "widgetName": {
-          "type": "string"
+          "description": "ByNameReferenceProperty: microflows.schema.json#/definitions/Microflow"
         },
         "usedAssociations": {
           "type": "string"
@@ -4504,7 +5287,8 @@
           "const": "Pages$RetrievalQueryParameter"
         },
         "name": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "types": {
           "type": "string"
@@ -4525,10 +5309,11 @@
           "type": "string",
           "const": "Pages$RetrievalSchema"
         },
-        "usedAssociations": {
-          "type": "string"
-        },
         "widgetName": {
+          "type": "string",
+          "default": ""
+        },
+        "usedAssociations": {
           "type": "string"
         }
       },
@@ -4548,7 +5333,12 @@
           "const": "Pages$RuntimeOperation"
         },
         "operationId": {
-          "type": "string"
+          "type": "string",
+          "default": ""
+        },
+        "operationType": {
+          "type": "string",
+          "default": ""
         },
         "parameters": {
           "type": "array",
@@ -4561,9 +5351,6 @@
           "items": {
             "$ref": "#/definitions/NamedValue"
           }
-        },
-        "operationType": {
-          "type": "string"
         },
         "allowedUserRoleSets": {
           "type": "array",
@@ -4588,15 +5375,22 @@
           "const": "Pages$SaveButton"
         },
         "syncAutomatically": {
-          "type": "boolean"
+          "type": "boolean",
+          "default": false
         },
         "closePage": {
-          "type": "boolean"
+          "type": "boolean",
+          "default": true
         }
       },
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/Button"
+        }
       ]
     },
     "SaveChangesClientAction": {
@@ -4610,15 +5404,22 @@
           "const": "Pages$SaveChangesClientAction"
         },
         "syncAutomatically": {
-          "type": "boolean"
+          "type": "boolean",
+          "default": false
         },
         "closePage": {
-          "type": "boolean"
+          "type": "boolean",
+          "default": true
         }
       },
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ClientAction"
+        }
       ]
     },
     "ScrollContainer": {
@@ -4630,6 +5431,14 @@
         "$Type": {
           "type": "string",
           "const": "Pages$ScrollContainer"
+        },
+        "width": {
+          "type": "integer",
+          "default": 960
+        },
+        "nativeHideScrollbars": {
+          "type": "boolean",
+          "default": false
         },
         "center": {
           "$ref": "#/definitions/ScrollContainerRegion"
@@ -4661,9 +5470,6 @@
             "Percentage"
           ]
         },
-        "width": {
-          "type": "string"
-        },
         "alignment": {
           "type": "string",
           "enum": [
@@ -4678,15 +5484,17 @@
             "PerRegion",
             "FullWidget"
           ]
-        },
-        "nativeHideScrollbars": {
-          "type": "boolean"
         }
       },
       "required": [
         "$ID",
         "$Type",
         "center"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/Widget"
+        }
       ]
     },
     "ScrollContainerRegion": {
@@ -4698,6 +5506,10 @@
         "$Type": {
           "type": "string",
           "const": "Pages$ScrollContainerRegion"
+        },
+        "size": {
+          "type": "integer",
+          "default": 200
         },
         "widgets": {
           "type": "array",
@@ -4712,9 +5524,6 @@
             "Pixels",
             "Percentage"
           ]
-        },
-        "size": {
-          "type": "string"
         },
         "appearance": {
           "$ref": "#/definitions/Appearance"
@@ -4746,6 +5555,10 @@
           "type": "string",
           "const": "Pages$SearchBar"
         },
+        "waitForSearch": {
+          "type": "boolean",
+          "default": false
+        },
         "type": {
           "type": "string",
           "enum": [
@@ -4754,14 +5567,16 @@
             "FoldableClosed",
             "AlwaysOpen"
           ]
-        },
-        "waitForSearch": {
-          "type": "boolean"
         }
       },
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ControlBar"
+        }
       ]
     },
     "SelectButton": {
@@ -4778,6 +5593,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/GridControlBarButton"
+        }
       ]
     },
     "SelectPageTemplateType": {
@@ -4794,6 +5614,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/TemplateType"
+        }
       ]
     },
     "SelectorSource": {
@@ -4836,6 +5661,11 @@
         "$ID",
         "$Type",
         "sortBar"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/SelectorSource"
+        }
       ]
     },
     "SelectorMicroflowSource": {
@@ -4856,6 +5686,11 @@
         "$ID",
         "$Type",
         "dataSourceMicroflowSettings"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/SelectorSource"
+        }
       ]
     },
     "SelectorXPathSource": {
@@ -4868,11 +5703,12 @@
           "type": "string",
           "const": "Pages$SelectorXPathSource"
         },
+        "xPathConstraint": {
+          "type": "string",
+          "default": ""
+        },
         "sortBar": {
           "$ref": "#/definitions/GridSortBar"
-        },
-        "xPathConstraint": {
-          "type": "string"
         },
         "constrainedByRefs": {
           "type": "array",
@@ -4885,6 +5721,11 @@
         "$ID",
         "$Type",
         "sortBar"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/SelectorSource"
+        }
       ]
     },
     "SetTaskOutcomeClientAction": {
@@ -4898,18 +5739,26 @@
           "const": "Pages$SetTaskOutcomeClientAction"
         },
         "outcomeValue": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "closePage": {
-          "type": "boolean"
+          "type": "boolean",
+          "default": true
         },
         "commit": {
-          "type": "boolean"
+          "type": "boolean",
+          "default": true
         }
       },
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ClientAction"
+        }
       ]
     },
     "SidebarToggleButton": {
@@ -4926,6 +5775,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/Button"
+        }
       ]
     },
     "SignOutClientAction": {
@@ -4942,6 +5796,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ClientAction"
+        }
       ]
     },
     "SimpleMenuBar": {
@@ -4965,6 +5824,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/MenuWidget"
+        }
       ]
     },
     "Snippet": {
@@ -5006,6 +5870,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/FormBase"
+        }
       ]
     },
     "SnippetCall": {
@@ -5020,7 +5889,7 @@
         },
         "snippet": {
           "type": "string",
-          "description": "#/definitions/Snippet"
+          "description": "ByNameReferenceProperty: #/definitions/Snippet"
         },
         "parameterMappings": {
           "type": "array",
@@ -5052,6 +5921,11 @@
         "$ID",
         "$Type",
         "snippetCall"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/Widget"
+        }
       ]
     },
     "SnippetParameter": {
@@ -5065,7 +5939,8 @@
           "const": "Pages$SnippetParameter"
         },
         "name": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "parameterType": {
           "$ref": "datatypes.schema.json#/definitions/DataType"
@@ -5089,7 +5964,7 @@
         },
         "parameter": {
           "type": "string",
-          "description": "#/definitions/SnippetParameter"
+          "description": "ByNameReferenceProperty: #/definitions/SnippetParameter"
         },
         "variable": {
           "$ref": "#/definitions/PageVariable"
@@ -5112,9 +5987,21 @@
           "type": "string",
           "const": "Pages$StaticImageViewer"
         },
+        "width": {
+          "type": "integer",
+          "default": 0
+        },
+        "height": {
+          "type": "integer",
+          "default": 0
+        },
+        "responsive": {
+          "type": "boolean",
+          "default": true
+        },
         "image": {
           "type": "string",
-          "description": "images.schema.json#/definitions/IImage"
+          "description": "ByNameReferenceProperty: images.schema.json#/definitions/Image"
         },
         "widthUnit": {
           "type": "string",
@@ -5132,17 +6019,8 @@
             "Percentage"
           ]
         },
-        "width": {
-          "type": "string"
-        },
-        "height": {
-          "type": "string"
-        },
         "clickAction": {
           "$ref": "#/definitions/ClientAction"
-        },
-        "responsive": {
-          "type": "boolean"
         },
         "alternativeText": {
           "$ref": "#/definitions/ClientTemplate"
@@ -5156,6 +6034,11 @@
         "$Type",
         "clickAction",
         "alternativeText"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ConditionallyVisibleWidget"
+        }
       ]
     },
     "StaticOrDynamicString": {
@@ -5169,10 +6052,12 @@
           "const": "Pages$StaticOrDynamicString"
         },
         "isDynamic": {
-          "type": "boolean"
+          "type": "boolean",
+          "default": false
         },
         "value": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "attributeRef": {
           "$ref": "domainmodels.schema.json#/definitions/AttributeRef"
@@ -5210,12 +6095,18 @@
           "const": "Pages$StaticUrlSegment"
         },
         "segment": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         }
       },
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/UrlSegment"
+        }
       ]
     },
     "SyncButton": {
@@ -5232,6 +6123,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/Button"
+        }
       ]
     },
     "SyncClientAction": {
@@ -5248,6 +6144,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ClientAction"
+        }
       ]
     },
     "TabContainer": {
@@ -5280,6 +6181,11 @@
         "$ID",
         "$Type",
         "activePageOnChangeAction"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ConditionallyVisibleWidget"
+        }
       ]
     },
     "TabPage": {
@@ -5293,13 +6199,15 @@
           "const": "Pages$TabPage"
         },
         "name": {
-          "type": "string"
+          "type": "string",
+          "default": ""
+        },
+        "refreshOnShow": {
+          "type": "boolean",
+          "default": false
         },
         "caption": {
           "$ref": "texts.schema.json#/definitions/Text"
-        },
-        "refreshOnShow": {
-          "type": "boolean"
         },
         "conditionalVisibilitySettings": {
           "$ref": "#/definitions/ConditionalVisibilitySettings"
@@ -5359,6 +6267,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ConditionallyVisibleWidget"
+        }
       ]
     },
     "TableCell": {
@@ -5371,35 +6284,45 @@
           "type": "string",
           "const": "Pages$TableCell"
         },
+        "isHeader": {
+          "type": "boolean",
+          "default": false
+        },
+        "leftColumnIndex": {
+          "type": "integer",
+          "default": 0
+        },
+        "topRowIndex": {
+          "type": "integer",
+          "default": 0
+        },
+        "width": {
+          "type": "integer",
+          "default": 1
+        },
+        "height": {
+          "type": "integer",
+          "default": 1
+        },
         "appearance": {
           "$ref": "#/definitions/Appearance"
-        },
-        "isHeader": {
-          "type": "boolean"
         },
         "widgets": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/Widget"
           }
-        },
-        "leftColumnIndex": {
-          "type": "string"
-        },
-        "topRowIndex": {
-          "type": "string"
-        },
-        "width": {
-          "type": "string"
-        },
-        "height": {
-          "type": "string"
         }
       },
       "required": [
         "$ID",
         "$Type",
         "appearance"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/DropZone"
+        }
       ]
     },
     "TableColumn": {
@@ -5413,7 +6336,8 @@
           "const": "Pages$TableColumn"
         },
         "width": {
-          "type": "string"
+          "type": "integer",
+          "default": 0
         }
       },
       "required": [
@@ -5454,20 +6378,27 @@
           "type": "string",
           "const": "Pages$TemplateGrid"
         },
-        "contents": {
-          "$ref": "#/definitions/TemplateGridContents"
-        },
         "numberOfRows": {
-          "type": "string"
+          "type": "integer",
+          "default": 3
         },
         "numberOfColumns": {
-          "type": "string"
+          "type": "integer",
+          "default": 2
+        },
+        "contents": {
+          "$ref": "#/definitions/TemplateGridContents"
         }
       },
       "required": [
         "$ID",
         "$Type",
         "contents"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/Grid"
+        }
       ]
     },
     "TemplateGridContents": {
@@ -5490,6 +6421,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/DropZone"
+        }
       ]
     },
     "TemplatePlaceholder": {
@@ -5503,12 +6439,18 @@
           "const": "Pages$TemplatePlaceholder"
         },
         "type": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         }
       },
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/Widget"
+        }
       ]
     },
     "TextWidget": {
@@ -5522,15 +6464,22 @@
           "const": "Pages$TextWidget"
         },
         "maxLengthCode": {
-          "type": "string"
+          "type": "integer",
+          "default": -1
         },
         "autoFocus": {
-          "type": "boolean"
+          "type": "boolean",
+          "default": false
         }
       },
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/AttributeWidgetWithPlaceholder"
+        }
       ]
     },
     "TextArea": {
@@ -5544,7 +6493,16 @@
           "const": "Pages$TextArea"
         },
         "numberOfLines": {
-          "type": "string"
+          "type": "integer",
+          "default": 5
+        },
+        "autocomplete": {
+          "type": "boolean",
+          "default": true
+        },
+        "submitOnInputDelay": {
+          "type": "integer",
+          "default": 300
         },
         "counterMessage": {
           "$ref": "texts.schema.json#/definitions/Text"
@@ -5552,18 +6510,12 @@
         "textTooLongMessage": {
           "$ref": "texts.schema.json#/definitions/Text"
         },
-        "autocomplete": {
-          "type": "boolean"
-        },
         "submitBehaviour": {
           "type": "string",
           "enum": [
             "OnEndEditing",
             "WhileEditing"
           ]
-        },
-        "submitOnInputDelay": {
-          "type": "string"
         },
         "nativeAccessibilitySettings": {
           "$ref": "#/definitions/AccessibilitySettings"
@@ -5574,6 +6526,11 @@
         "$Type",
         "counterMessage",
         "textTooLongMessage"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/TextWidget"
+        }
       ]
     },
     "TextBox": {
@@ -5587,13 +6544,23 @@
           "const": "Pages$TextBox"
         },
         "inputMask": {
-          "type": "string"
+          "type": "string",
+          "default": ""
+        },
+        "isPasswordBox": {
+          "type": "boolean",
+          "default": false
+        },
+        "autocomplete": {
+          "type": "boolean",
+          "default": true
+        },
+        "submitOnInputDelay": {
+          "type": "integer",
+          "default": 300
         },
         "formattingInfo": {
           "$ref": "#/definitions/FormattingInfo"
-        },
-        "isPasswordBox": {
-          "type": "boolean"
         },
         "keyboardType": {
           "type": "string",
@@ -5608,9 +6575,6 @@
         },
         "onEnterKeyPressAction": {
           "$ref": "#/definitions/ClientAction"
-        },
-        "autocomplete": {
-          "type": "boolean"
         },
         "autocompletePurpose": {
           "type": "string",
@@ -5679,9 +6643,6 @@
             "WhileEditing"
           ]
         },
-        "submitOnInputDelay": {
-          "type": "string"
-        },
         "nativeAccessibilitySettings": {
           "$ref": "#/definitions/AccessibilitySettings"
         }
@@ -5691,6 +6652,11 @@
         "$Type",
         "formattingInfo",
         "onEnterKeyPressAction"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/TextWidget"
+        }
       ]
     },
     "Title": {
@@ -5710,6 +6676,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ConditionallyVisibleWidget"
+        }
       ]
     },
     "ToggleDesignPropertyValue": {
@@ -5726,6 +6697,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/AbstractDesignPropertyValue"
+        }
       ]
     },
     "UserRoleSet": {
@@ -5742,7 +6718,7 @@
           "type": "array",
           "items": {
             "type": "string",
-            "description": "security.schema.json#/definitions/IUserRole"
+            "description": "ByNameReferenceListProperty: security.schema.json#/definitions/UserRole"
           }
         }
       },
@@ -5765,6 +6741,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/TemplateType"
+        }
       ]
     },
     "UserTaskTemplateType": {
@@ -5781,6 +6762,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/WorkflowTemplateType"
+        }
       ]
     },
     "ValidationMessage": {
@@ -5797,6 +6783,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/Widget"
+        }
       ]
     },
     "VerticalFlow": {
@@ -5819,6 +6810,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/Widget"
+        }
       ]
     },
     "VerticalSplitPane": {
@@ -5835,6 +6831,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/SplitPane"
+        }
       ]
     },
     "WebLayoutContent": {
@@ -5871,6 +6872,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/LayoutContent"
+        }
       ]
     },
     "WidgetValidation": {
@@ -5884,7 +6890,8 @@
           "const": "Pages$WidgetValidation"
         },
         "expression": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "message": {
           "$ref": "texts.schema.json#/definitions/Text"
@@ -5910,6 +6917,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/WorkflowTemplateType"
+        }
       ]
     }
   }

@@ -7,7 +7,6 @@ const t = require("@babel/types");
 const fs = require("fs");
 const path = require("path");
 
-
 async function extractInterfaces(dtsCode: string): Promise<Set<string>> {
     const dtsAst = parser.parse(dtsCode, {
         sourceType: "module",
@@ -24,7 +23,36 @@ async function extractInterfaces(dtsCode: string): Promise<Set<string>> {
 
     return interfaceSet;
 }
-async function extractSchema(jsCode, dtsCode, interfaceSet) {
+
+// 新增函数：提取类的继承信息
+async function extractInheritanceInfo(jsCode: string): Promise<{ [className: string]: { module: string, superClass: string } }> {
+    const jsAst = parser.parse(jsCode, {
+        sourceType: "module",
+        plugins: ["typescript"],
+    });
+
+    const inheritanceInfo = {};
+
+    traverse(jsAst, {
+        ClassDeclaration(path) {
+            const className = path.node.id.name;
+            if (path.node.superClass && path.node.superClass.object && path.node.superClass.object.name !== 'internal') {
+                if (t.isMemberExpression(path.node.superClass) && t.isIdentifier(path.node.superClass.object) && t.isIdentifier(path.node.superClass.property)) {
+                    inheritanceInfo[className] = { module: path.node.superClass.object.name, superClass: path.node.superClass.property.name };
+                } else if (t.isMemberExpression(path.node.superClass) && t.isMemberExpression(path.node.superClass.object) && t.isIdentifier(path.node.superClass.object.property) && t.isIdentifier(path.node.superClass.property)) {
+                    inheritanceInfo[className] = { module: path.node.superClass.object.property.name, superClass: path.node.superClass.property.name };
+                }
+            }
+            if (t.isIdentifier(path.node.superClass)) {
+                inheritanceInfo[className] = { module: null, superClass: path.node.superClass.name };
+            }
+        },
+    });
+
+    return inheritanceInfo;
+}
+
+async function extractSchema(jsCode, dtsCode, interfaceSet, allInheritanceInfo) {
     const jsAst = parser.parse(jsCode, {
         sourceType: "module",
         plugins: ["typescript"],
@@ -144,7 +172,6 @@ async function extractSchema(jsCode, dtsCode, interfaceSet) {
         }
 
         return { type: "string" }; // Default to string if type is unknown or unhandled
-
 
         async function findRefType(typeName: string, internalName: string): Promise<string> {
             return new Promise((resolve, reject) => {
@@ -476,14 +503,22 @@ async function extractSchema(jsCode, dtsCode, interfaceSet) {
             tasks.push(path);
         },
     });
-    await Promise.all(tasks.map(async (path) => { // Use Promise.all to handle async operations
+    await Promise.all(tasks.map(async (path) => {
         if (
             t.isIdentifier(path.node.key) &&
             path.node.key.name === "constructor"
         ) {
             const className = path.findParent(t.isClassDeclaration).node.id.name;
             if (classToProperties[className]) {
-                schema.definitions[className] = {
+                const classDefinition: {
+                    type: string;
+                    properties: {
+                        $ID: { $ref: string };
+                        $Type: { type: string; const: any };
+                    };
+                    required: string[];
+                    allOf?: { $ref: string }[];
+                } = {
                     type: "object",
                     properties: {
                         "$ID": {
@@ -496,6 +531,22 @@ async function extractSchema(jsCode, dtsCode, interfaceSet) {
                     },
                     required: ["$ID", "$Type"],
                 };
+
+                // 如果有父类，且父类不是"internal.Element"，则添加allOf
+                const inheritanceInfo = allInheritanceInfo[className];
+                if (inheritanceInfo && inheritanceInfo.superClass !== "internal.Element") {
+                    if (inheritanceInfo.module) {
+                        classDefinition.allOf = [{
+                            "$ref": `${inheritanceInfo.module}.schema.json#/definitions/${inheritanceInfo.superClass}`
+                        }];
+                    } else {
+                        classDefinition.allOf = [{
+                            "$ref": `#/definitions/${inheritanceInfo.superClass}`
+                        }];
+                    }
+                }
+
+                schema.definitions[className] = classDefinition;
 
                 await Promise.all(classToProperties[className].map(async (propInfo) => {
                     const propertyName = propInfo.internalName;
@@ -525,7 +576,6 @@ async function extractSchema(jsCode, dtsCode, interfaceSet) {
 
     return schema;
 }
-
 
 async function main() {
     const genDir = "node_modules/mendixmodelsdk/src/gen";
@@ -558,6 +608,15 @@ async function main() {
         allInterfaces = new Set([...allInterfaces, ...interfaces]);
     }
 
+    // 收集所有 .js 文件中的继承信息
+    let allInheritanceInfo = {};
+    for (const baseName in filePairs) {
+        const pair = filePairs[baseName];
+        const jsCode = fs.readFileSync(path.join(genDir, pair.js), "utf-8");
+        const inheritanceInfo = await extractInheritanceInfo(jsCode);
+        allInheritanceInfo = { ...allInheritanceInfo, ...inheritanceInfo };
+    }
+
     // 处理每个文件对
     for (const baseName in filePairs) {
         const pair = filePairs[baseName];
@@ -565,7 +624,7 @@ async function main() {
         const jsCode = fs.readFileSync(path.join(genDir, pair.js), "utf-8");
         const tsCode = fs.readFileSync(path.join(genDir, pair.ts), "utf-8");
 
-        const schema = await extractSchema(jsCode, tsCode, allInterfaces);
+        const schema = await extractSchema(jsCode, tsCode, allInterfaces, allInheritanceInfo);
 
         const schemaFileName = path.join(schemaDir, `${baseName}.schema.json`);
         fs.writeFileSync(schemaFileName, JSON.stringify(schema, null, 2));

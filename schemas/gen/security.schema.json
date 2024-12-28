@@ -34,20 +34,22 @@
           "const": "Security$DemoUser"
         },
         "userName": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "password": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "entity": {
           "type": "string",
-          "description": "domainmodels.schema.json#/definitions/IEntity"
+          "description": "ByNameReferenceProperty: domainmodels.schema.json#/definitions/Entity"
         },
         "userRoles": {
           "type": "array",
           "items": {
             "type": "string",
-            "description": "#/definitions/UserRole"
+            "description": "ByNameReferenceListProperty: #/definitions/UserRole"
           }
         }
       },
@@ -70,6 +72,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/AccessRuleContainerBase"
+        }
       ]
     },
     "ImageAccessRuleContainer": {
@@ -86,6 +93,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/AccessRuleContainerBase"
+        }
       ]
     },
     "ModuleRole": {
@@ -99,10 +111,12 @@
           "const": "Security$ModuleRole"
         },
         "name": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "description": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         }
       },
       "required": [
@@ -130,6 +144,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "projects.schema.json#/definitions/ModuleDocument"
+        }
       ]
     },
     "PasswordPolicySettings": {
@@ -143,16 +162,20 @@
           "const": "Security$PasswordPolicySettings"
         },
         "minimumLength": {
-          "type": "string"
+          "type": "integer",
+          "default": 12
         },
         "requireMixedCase": {
-          "type": "boolean"
+          "type": "boolean",
+          "default": false
         },
         "requireSymbol": {
-          "type": "boolean"
+          "type": "boolean",
+          "default": false
         },
         "requireDigit": {
-          "type": "boolean"
+          "type": "boolean",
+          "default": false
         }
       },
       "required": [
@@ -170,6 +193,42 @@
           "type": "string",
           "const": "Security$ProjectSecurity"
         },
+        "checkSecurity": {
+          "type": "boolean",
+          "default": true
+        },
+        "strictPageUrlCheck": {
+          "type": "boolean",
+          "default": true
+        },
+        "adminUserName": {
+          "type": "string",
+          "default": "MxAdmin"
+        },
+        "adminPassword": {
+          "type": "string",
+          "default": ""
+        },
+        "adminUserRoleName": {
+          "type": "string",
+          "default": ""
+        },
+        "enableDemoUsers": {
+          "type": "boolean",
+          "default": false
+        },
+        "enableGuestAccess": {
+          "type": "boolean",
+          "default": false
+        },
+        "guestUserRoleName": {
+          "type": "string",
+          "default": ""
+        },
+        "strictMode": {
+          "type": "boolean",
+          "default": false
+        },
         "securityLevel": {
           "type": "string",
           "enum": [
@@ -178,41 +237,17 @@
             "CheckEverything"
           ]
         },
-        "checkSecurity": {
-          "type": "boolean"
-        },
-        "strictPageUrlCheck": {
-          "type": "boolean"
-        },
         "userRoles": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/UserRole"
           }
         },
-        "adminUserName": {
-          "type": "string"
-        },
-        "adminPassword": {
-          "type": "string"
-        },
-        "adminUserRoleName": {
-          "type": "string"
-        },
-        "enableDemoUsers": {
-          "type": "boolean"
-        },
         "demoUsers": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/DemoUser"
           }
-        },
-        "enableGuestAccess": {
-          "type": "boolean"
-        },
-        "guestUserRoleName": {
-          "type": "string"
         },
         "passwordPolicySettings": {
           "$ref": "#/definitions/PasswordPolicySettings"
@@ -222,9 +257,6 @@
         },
         "imageAccess": {
           "$ref": "#/definitions/ImageAccessRuleContainer"
-        },
-        "strictMode": {
-          "type": "boolean"
         }
       },
       "required": [
@@ -233,6 +265,11 @@
         "passwordPolicySettings",
         "fileDocumentAccess",
         "imageAccess"
+      ],
+      "allOf": [
+        {
+          "$ref": "projects.schema.json#/definitions/ProjectDocument"
+        }
       ]
     },
     "UserRole": {
@@ -246,36 +283,42 @@
           "const": "Security$UserRole"
         },
         "guid": {
-          "type": "string"
+          "$ref": "../common.schema.json#/definitions/GUID",
+          "default": ""
         },
         "name": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "description": {
-          "type": "string"
+          "type": "string",
+          "default": ""
+        },
+        "manageAllRoles": {
+          "type": "boolean",
+          "default": false
+        },
+        "manageUsersWithoutRoles": {
+          "type": "boolean",
+          "default": false
+        },
+        "checkSecurity": {
+          "type": "boolean",
+          "default": true
         },
         "moduleRoles": {
           "type": "array",
           "items": {
             "type": "string",
-            "description": "#/definitions/ModuleRole"
+            "description": "ByNameReferenceListProperty: #/definitions/ModuleRole"
           }
-        },
-        "manageAllRoles": {
-          "type": "boolean"
         },
         "manageableRoles": {
           "type": "array",
           "items": {
             "type": "string",
-            "description": "#/definitions/UserRole"
+            "description": "ByNameReferenceListProperty: #/definitions/UserRole"
           }
-        },
-        "manageUsersWithoutRoles": {
-          "type": "boolean"
-        },
-        "checkSecurity": {
-          "type": "boolean"
         }
       },
       "required": [

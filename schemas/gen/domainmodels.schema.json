@@ -11,6 +11,26 @@
           "type": "string",
           "const": "DomainModels$AccessRule"
         },
+        "documentation": {
+          "type": "string",
+          "default": ""
+        },
+        "allowCreate": {
+          "type": "boolean",
+          "default": false
+        },
+        "allowDelete": {
+          "type": "boolean",
+          "default": false
+        },
+        "xPathConstraintCaption": {
+          "type": "string",
+          "default": ""
+        },
+        "xPathConstraint": {
+          "type": "string",
+          "default": ""
+        },
         "memberAccesses": {
           "type": "array",
           "items": {
@@ -21,17 +41,8 @@
           "type": "array",
           "items": {
             "type": "string",
-            "description": "security.schema.json#/definitions/IModuleRole"
+            "description": "ByNameReferenceListProperty: security.schema.json#/definitions/ModuleRole"
           }
-        },
-        "documentation": {
-          "type": "string"
-        },
-        "allowCreate": {
-          "type": "boolean"
-        },
-        "allowDelete": {
-          "type": "boolean"
         },
         "defaultMemberAccessRights": {
           "type": "string",
@@ -40,12 +51,6 @@
             "ReadOnly",
             "ReadWrite"
           ]
-        },
-        "xPathConstraintCaption": {
-          "type": "string"
-        },
-        "xPathConstraint": {
-          "type": "string"
         }
       },
       "required": [
@@ -64,13 +69,19 @@
           "const": "DomainModels$Annotation"
         },
         "caption": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "location": {
-          "type": "string"
+          "$ref": "../common.schema.json#/definitions/Point",
+          "default": {
+            "x": 0,
+            "y": 0
+          }
         },
         "width": {
-          "type": "string"
+          "type": "integer",
+          "default": 250
         },
         "exportLevel": {
           "type": "string"
@@ -79,6 +90,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/MicroflowObject"
+        }
       ]
     },
     "AssociationBase": {
@@ -92,10 +108,16 @@
           "const": "DomainModels$AssociationBase"
         },
         "name": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "dataStorageGuid": {
-          "type": "string"
+          "$ref": "../common.schema.json#/definitions/GUID",
+          "default": ""
+        },
+        "documentation": {
+          "type": "string",
+          "default": ""
         },
         "type": {
           "type": "string",
@@ -113,9 +135,6 @@
         },
         "deleteBehavior": {
           "$ref": "#/definitions/AssociationDeleteBehavior"
-        },
-        "documentation": {
-          "type": "string"
         },
         "source": {
           "$ref": "#/definitions/AssociationSource"
@@ -141,15 +160,28 @@
           "const": "DomainModels$Association"
         },
         "parentConnection": {
-          "type": "string"
+          "$ref": "../common.schema.json#/definitions/Point",
+          "default": {
+            "x": 0,
+            "y": 0
+          }
         },
         "childConnection": {
-          "type": "string"
+          "$ref": "../common.schema.json#/definitions/Point",
+          "default": {
+            "x": 0,
+            "y": 0
+          }
         }
       },
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/AssociationBase"
+        }
       ]
     },
     "AssociationCapabilities": {
@@ -245,13 +277,18 @@
         },
         "association": {
           "type": "string",
-          "description": "#/definitions/AssociationBase"
+          "description": "ByNameReferenceProperty: #/definitions/AssociationBase"
         }
       },
       "required": [
         "$ID",
         "$Type",
         "association"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/MemberRef"
+        }
       ]
     },
     "AssociationSource": {
@@ -268,6 +305,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/EntityPathSource"
+        }
       ]
     },
     "Attribute": {
@@ -281,16 +323,19 @@
           "const": "DomainModels$Attribute"
         },
         "name": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "dataStorageGuid": {
-          "type": "string"
+          "$ref": "../common.schema.json#/definitions/GUID",
+          "default": ""
+        },
+        "documentation": {
+          "type": "string",
+          "default": ""
         },
         "type": {
           "$ref": "#/definitions/AttributeType"
-        },
-        "documentation": {
-          "type": "string"
         },
         "value": {
           "$ref": "#/definitions/ValueType"
@@ -317,10 +362,12 @@
           "const": "DomainModels$AttributeCapabilities"
         },
         "filterable": {
-          "type": "boolean"
+          "type": "boolean",
+          "default": true
         },
         "sortable": {
-          "type": "boolean"
+          "type": "boolean",
+          "default": true
         }
       },
       "required": [
@@ -340,13 +387,18 @@
         },
         "attribute": {
           "type": "string",
-          "description": "#/definitions/Attribute"
+          "description": "ByNameReferenceProperty: #/definitions/Attribute"
         }
       },
       "required": [
         "$ID",
         "$Type",
         "attribute"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/MemberRef"
+        }
       ]
     },
     "AttributeType": {
@@ -379,6 +431,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/AttributeType"
+        }
       ]
     },
     "IntegerAttributeTypeBase": {
@@ -395,6 +452,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/NumericAttributeTypeBase"
+        }
       ]
     },
     "AutoNumberAttributeType": {
@@ -411,6 +473,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/IntegerAttributeTypeBase"
+        }
       ]
     },
     "BinaryAttributeType": {
@@ -427,6 +494,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/AttributeType"
+        }
       ]
     },
     "BooleanAttributeType": {
@@ -443,6 +515,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/AttributeType"
+        }
       ]
     },
     "ValueType": {
@@ -472,12 +549,18 @@
           "const": "DomainModels$MappedValue"
         },
         "defaultValueDesignTime": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         }
       },
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ValueType"
+        }
       ]
     },
     "CachedMappedValue": {
@@ -494,6 +577,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/MappedValue"
+        }
       ]
     },
     "CalculatedValue": {
@@ -506,17 +594,23 @@
           "type": "string",
           "const": "DomainModels$CalculatedValue"
         },
+        "passEntity": {
+          "type": "boolean",
+          "default": true
+        },
         "microflow": {
           "type": "string",
-          "description": "microflows.schema.json#/definitions/IMicroflow"
-        },
-        "passEntity": {
-          "type": "boolean"
+          "description": "ByNameReferenceProperty: microflows.schema.json#/definitions/Microflow"
         }
       },
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ValueType"
+        }
       ]
     },
     "CrossAssociation": {
@@ -531,13 +625,18 @@
         },
         "child": {
           "type": "string",
-          "description": "#/definitions/Entity"
+          "description": "ByNameReferenceProperty: #/definitions/Entity"
         }
       },
       "required": [
         "$ID",
         "$Type",
         "child"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/AssociationBase"
+        }
       ]
     },
     "DecimalAttributeTypeBase": {
@@ -554,6 +653,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/NumericAttributeTypeBase"
+        }
       ]
     },
     "FloatAttributeTypeBase": {
@@ -570,6 +674,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/DecimalAttributeTypeBase"
+        }
       ]
     },
     "CurrencyAttributeType": {
@@ -586,6 +695,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/FloatAttributeTypeBase"
+        }
       ]
     },
     "DateTimeAttributeType": {
@@ -599,12 +713,18 @@
           "const": "DomainModels$DateTimeAttributeType"
         },
         "localizeDate": {
-          "type": "boolean"
+          "type": "boolean",
+          "default": true
         }
       },
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/AttributeType"
+        }
       ]
     },
     "DecimalAttributeType": {
@@ -621,6 +741,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/DecimalAttributeTypeBase"
+        }
       ]
     },
     "EntityRef": {
@@ -651,13 +776,18 @@
         },
         "entity": {
           "type": "string",
-          "description": "#/definitions/Entity"
+          "description": "ByNameReferenceProperty: #/definitions/Entity"
         }
       },
       "required": [
         "$ID",
         "$Type",
         "entity"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/EntityRef"
+        }
       ]
     },
     "DomainModel": {
@@ -671,7 +801,8 @@
           "const": "DomainModels$DomainModel"
         },
         "documentation": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "entities": {
           "type": "array",
@@ -701,6 +832,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "projects.schema.json#/definitions/ModuleDocument"
+        }
       ]
     },
     "Entity": {
@@ -714,16 +850,27 @@
           "const": "DomainModels$Entity"
         },
         "name": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "dataStorageGuid": {
-          "type": "string"
+          "$ref": "../common.schema.json#/definitions/GUID",
+          "default": ""
         },
         "location": {
-          "type": "string"
+          "$ref": "../common.schema.json#/definitions/Point",
+          "default": {
+            "x": 0,
+            "y": 0
+          }
         },
         "documentation": {
-          "type": "string"
+          "type": "string",
+          "default": ""
+        },
+        "imageData": {
+          "type": "string",
+          "contentEncoding": "base64"
         },
         "generalization": {
           "$ref": "#/definitions/GeneralizationBase"
@@ -760,10 +907,7 @@
         },
         "image": {
           "type": "string",
-          "description": "images.schema.json#/definitions/IImage"
-        },
-        "imageData": {
-          "type": "string"
+          "description": "ByNameReferenceProperty: images.schema.json#/definitions/Image"
         },
         "source": {
           "$ref": "#/definitions/EntitySource"
@@ -789,7 +933,8 @@
           "const": "DomainModels$EntityCapabilities"
         },
         "countable": {
-          "type": "boolean"
+          "type": "boolean",
+          "default": true
         }
       },
       "required": [
@@ -830,7 +975,8 @@
           "const": "DomainModels$EntityKeyPart"
         },
         "name": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "type": {
           "$ref": "#/definitions/AttributeType"
@@ -854,11 +1000,11 @@
         },
         "association": {
           "type": "string",
-          "description": "#/definitions/AssociationBase"
+          "description": "ByNameReferenceProperty: #/definitions/AssociationBase"
         },
         "destinationEntity": {
           "type": "string",
-          "description": "#/definitions/Entity"
+          "description": "ByNameReferenceProperty: #/definitions/Entity"
         }
       },
       "required": [
@@ -896,13 +1042,18 @@
         },
         "enumeration": {
           "type": "string",
-          "description": "enumerations.schema.json#/definitions/IEnumeration"
+          "description": "ByNameReferenceProperty: enumerations.schema.json#/definitions/Enumeration"
         }
       },
       "required": [
         "$ID",
         "$Type",
         "enumeration"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/AttributeType"
+        }
       ]
     },
     "RuleInfo": {
@@ -932,19 +1083,26 @@
           "const": "DomainModels$EqualsToRuleInfo"
         },
         "useValue": {
-          "type": "boolean"
+          "type": "boolean",
+          "default": true
         },
         "equalsToValue": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "equalsToAttribute": {
           "type": "string",
-          "description": "#/definitions/Attribute"
+          "description": "ByNameReferenceProperty: #/definitions/Attribute"
         }
       },
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/RuleInfo"
+        }
       ]
     },
     "EventHandler": {
@@ -956,6 +1114,14 @@
         "$Type": {
           "type": "string",
           "const": "DomainModels$EventHandler"
+        },
+        "raiseErrorOnFalse": {
+          "type": "boolean",
+          "default": true
+        },
+        "passEventObject": {
+          "type": "boolean",
+          "default": true
         },
         "moment": {
           "type": "string",
@@ -975,13 +1141,7 @@
         },
         "microflow": {
           "type": "string",
-          "description": "microflows.schema.json#/definitions/IMicroflow"
-        },
-        "raiseErrorOnFalse": {
-          "type": "boolean"
-        },
-        "passEventObject": {
-          "type": "boolean"
+          "description": "ByNameReferenceProperty: microflows.schema.json#/definitions/Microflow"
         }
       },
       "required": [
@@ -1003,6 +1163,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/FloatAttributeTypeBase"
+        }
       ]
     },
     "GeneralizationBase": {
@@ -1033,13 +1198,18 @@
         },
         "generalization": {
           "type": "string",
-          "description": "#/definitions/Entity"
+          "description": "ByNameReferenceProperty: #/definitions/Entity"
         }
       },
       "required": [
         "$ID",
         "$Type",
         "generalization"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/GeneralizationBase"
+        }
       ]
     },
     "HashedStringAttributeType": {
@@ -1056,6 +1226,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/AttributeType"
+        }
       ]
     },
     "Index": {
@@ -1069,16 +1244,18 @@
           "const": "DomainModels$Index"
         },
         "dataStorageGuid": {
-          "type": "string"
+          "$ref": "../common.schema.json#/definitions/GUID",
+          "default": ""
+        },
+        "includeInOffline": {
+          "type": "boolean",
+          "default": false
         },
         "attributes": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/IndexedAttribute"
           }
-        },
-        "includeInOffline": {
-          "type": "boolean"
         }
       },
       "required": [
@@ -1096,6 +1273,10 @@
           "type": "string",
           "const": "DomainModels$IndexedAttribute"
         },
+        "ascending": {
+          "type": "boolean",
+          "default": true
+        },
         "type": {
           "type": "string",
           "enum": [
@@ -1103,9 +1284,6 @@
             "CreatedDate",
             "ChangedDate"
           ]
-        },
-        "ascending": {
-          "type": "boolean"
         }
       },
       "required": [
@@ -1133,6 +1311,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/EntityRef"
+        }
       ]
     },
     "IntegerAttributeType": {
@@ -1149,6 +1332,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/IntegerAttributeTypeBase"
+        }
       ]
     },
     "LongAttributeType": {
@@ -1165,6 +1353,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/IntegerAttributeTypeBase"
+        }
       ]
     },
     "RemoteEntitySource": {
@@ -1181,6 +1374,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/EntitySource"
+        }
       ]
     },
     "MaterializedRemoteEntitySource": {
@@ -1197,6 +1395,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/RemoteEntitySource"
+        }
       ]
     },
     "MaxLengthRuleInfo": {
@@ -1210,12 +1413,18 @@
           "const": "DomainModels$MaxLengthRuleInfo"
         },
         "maxLength": {
-          "type": "string"
+          "type": "integer",
+          "default": 0
         }
       },
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/RuleInfo"
+        }
       ]
     },
     "MemberAccess": {
@@ -1230,11 +1439,11 @@
         },
         "attribute": {
           "type": "string",
-          "description": "#/definitions/Attribute"
+          "description": "ByNameReferenceProperty: #/definitions/Attribute"
         },
         "association": {
           "type": "string",
-          "description": "#/definitions/AssociationBase"
+          "description": "ByNameReferenceProperty: #/definitions/AssociationBase"
         },
         "accessRights": {
           "type": "string",
@@ -1264,6 +1473,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/AttributeType"
+        }
       ]
     },
     "NoGeneralization": {
@@ -1277,24 +1491,34 @@
           "const": "DomainModels$NoGeneralization"
         },
         "hasChangedDate": {
-          "type": "boolean"
+          "type": "boolean",
+          "default": false
         },
         "hasCreatedDate": {
-          "type": "boolean"
+          "type": "boolean",
+          "default": false
         },
         "hasOwner": {
-          "type": "boolean"
+          "type": "boolean",
+          "default": false
         },
         "hasChangedBy": {
-          "type": "boolean"
+          "type": "boolean",
+          "default": false
         },
         "persistable": {
-          "type": "boolean"
+          "type": "boolean",
+          "default": true
         }
       },
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/GeneralizationBase"
+        }
       ]
     },
     "OqlViewAssociationSource": {
@@ -1308,12 +1532,18 @@
           "const": "DomainModels$OqlViewAssociationSource"
         },
         "reference": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         }
       },
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/AssociationSource"
+        }
       ]
     },
     "ViewEntitySource": {
@@ -1330,6 +1560,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/EntitySource"
+        }
       ]
     },
     "OqlViewEntitySource": {
@@ -1343,12 +1578,18 @@
           "const": "DomainModels$OqlViewEntitySource"
         },
         "oql": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         }
       },
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ViewEntitySource"
+        }
       ]
     },
     "OqlViewValue": {
@@ -1362,12 +1603,18 @@
           "const": "DomainModels$OqlViewValue"
         },
         "reference": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         }
       },
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ValueType"
+        }
       ]
     },
     "QueryBasedRemoteEntitySource": {
@@ -1384,6 +1631,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/RemoteEntitySource"
+        }
       ]
     },
     "RangeRuleInfo": {
@@ -1396,6 +1648,22 @@
           "type": "string",
           "const": "DomainModels$RangeRuleInfo"
         },
+        "useMinValue": {
+          "type": "boolean",
+          "default": true
+        },
+        "useMaxValue": {
+          "type": "boolean",
+          "default": true
+        },
+        "minValue": {
+          "type": "string",
+          "default": ""
+        },
+        "maxValue": {
+          "type": "string",
+          "default": ""
+        },
         "typeOfRange": {
           "type": "string",
           "enum": [
@@ -1404,30 +1672,23 @@
             "Between"
           ]
         },
-        "useMinValue": {
-          "type": "boolean"
-        },
-        "useMaxValue": {
-          "type": "boolean"
-        },
-        "minValue": {
-          "type": "string"
-        },
-        "maxValue": {
-          "type": "string"
-        },
         "minAttribute": {
           "type": "string",
-          "description": "#/definitions/Attribute"
+          "description": "ByNameReferenceProperty: #/definitions/Attribute"
         },
         "maxAttribute": {
           "type": "string",
-          "description": "#/definitions/Attribute"
+          "description": "ByNameReferenceProperty: #/definitions/Attribute"
         }
       },
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/RuleInfo"
+        }
       ]
     },
     "RegExRuleInfo": {
@@ -1442,12 +1703,17 @@
         },
         "regularExpression": {
           "type": "string",
-          "description": "regularexpressions.schema.json#/definitions/IRegularExpression"
+          "description": "ByNameReferenceProperty: regularexpressions.schema.json#/definitions/RegularExpression"
         }
       },
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/RuleInfo"
+        }
       ]
     },
     "RemoteAssociationSource": {
@@ -1464,6 +1730,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/AssociationSource"
+        }
       ]
     },
     "RemoteEntitySourceDocument": {
@@ -1477,37 +1748,56 @@
           "const": "DomainModels$RemoteEntitySourceDocument"
         },
         "description": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "catalogUrl": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "icon": {
-          "type": "string"
+          "type": "string",
+          "contentEncoding": "base64"
         },
         "metadata": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "metadataUrl": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "serviceName": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "version": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "endpointId": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "minimumMxVersion": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "recommendedMxVersion": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "applicationId": {
-          "type": "string"
+          "type": "string",
+          "default": ""
+        },
+        "metadataHash": {
+          "type": "string",
+          "default": ""
+        },
+        "validated": {
+          "type": "boolean",
+          "default": false
         },
         "environmentType": {
           "type": "string",
@@ -1518,12 +1808,6 @@
             "Unknown"
           ]
         },
-        "metadataHash": {
-          "type": "string"
-        },
-        "validated": {
-          "type": "boolean"
-        },
         "validatedEntities": {
           "type": "string"
         }
@@ -1531,6 +1815,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "projects.schema.json#/definitions/Document"
+        }
       ]
     },
     "RequiredRuleInfo": {
@@ -1547,6 +1836,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/RuleInfo"
+        }
       ]
     },
     "StoredValue": {
@@ -1560,12 +1854,18 @@
           "const": "DomainModels$StoredValue"
         },
         "defaultValue": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         }
       },
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ValueType"
+        }
       ]
     },
     "StringAttributeType": {
@@ -1579,12 +1879,18 @@
           "const": "DomainModels$StringAttributeType"
         },
         "length": {
-          "type": "string"
+          "type": "integer",
+          "default": 200
         }
       },
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/AttributeType"
+        }
       ]
     },
     "UniqueRuleInfo": {
@@ -1601,6 +1907,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/RuleInfo"
+        }
       ]
     },
     "ValidationRule": {
@@ -1615,7 +1926,7 @@
         },
         "attribute": {
           "type": "string",
-          "description": "#/definitions/Attribute"
+          "description": "ByNameReferenceProperty: #/definitions/Attribute"
         },
         "errorMessage": {
           "$ref": "texts.schema.json#/definitions/Text"

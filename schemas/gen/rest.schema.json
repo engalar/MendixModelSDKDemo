@@ -39,6 +39,11 @@
         "$Type",
         "username",
         "password"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/AuthenticationScheme"
+        }
       ]
     },
     "Body": {
@@ -85,13 +90,18 @@
         },
         "microflow": {
           "type": "string",
-          "description": "microflows.schema.json#/definitions/IMicroflow"
+          "description": "ByNameReferenceProperty: microflows.schema.json#/definitions/Microflow"
         }
       },
       "required": [
         "$ID",
         "$Type",
         "microflow"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ChangeMode"
+        }
       ]
     },
     "ReadMode": {
@@ -122,12 +132,17 @@
         },
         "microflow": {
           "type": "string",
-          "description": "microflows.schema.json#/definitions/IMicroflow"
+          "description": "ByNameReferenceProperty: microflows.schema.json#/definitions/Microflow"
         }
       },
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ReadMode"
+        }
       ]
     },
     "ChangeNotSupported": {
@@ -144,6 +159,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ChangeMode"
+        }
       ]
     },
     "ChangeSource": {
@@ -160,6 +180,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ChangeMode"
+        }
       ]
     },
     "Value": {
@@ -190,13 +215,18 @@
         },
         "value": {
           "type": "string",
-          "description": "constants.schema.json#/definitions/IConstant"
+          "description": "ByNameReferenceProperty: constants.schema.json#/definitions/Constant"
         }
       },
       "required": [
         "$ID",
         "$Type",
         "value"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/Value"
+        }
       ]
     },
     "ConsumedODataService": {
@@ -209,6 +239,18 @@
           "type": "string",
           "const": "Rest$ConsumedODataService"
         },
+        "timeoutExpression": {
+          "type": "string",
+          "default": "300"
+        },
+        "lastUpdated": {
+          "type": "string",
+          "default": ""
+        },
+        "useQuerySegment": {
+          "type": "boolean",
+          "default": false
+        },
         "metadataReferences": {
           "type": "array",
           "items": {
@@ -220,29 +262,26 @@
         },
         "proxyHost": {
           "type": "string",
-          "description": "constants.schema.json#/definitions/IConstant"
+          "description": "ByNameReferenceProperty: constants.schema.json#/definitions/Constant"
         },
         "proxyPort": {
           "type": "string",
-          "description": "constants.schema.json#/definitions/IConstant"
+          "description": "ByNameReferenceProperty: constants.schema.json#/definitions/Constant"
         },
         "proxyUsername": {
           "type": "string",
-          "description": "constants.schema.json#/definitions/IConstant"
+          "description": "ByNameReferenceProperty: constants.schema.json#/definitions/Constant"
         },
         "proxyPassword": {
           "type": "string",
-          "description": "constants.schema.json#/definitions/IConstant"
+          "description": "ByNameReferenceProperty: constants.schema.json#/definitions/Constant"
         },
         "httpConfiguration": {
           "$ref": "microflows.schema.json#/definitions/HttpConfiguration"
         },
         "configurationMicroflow": {
           "type": "string",
-          "description": "microflows.schema.json#/definitions/IMicroflow"
-        },
-        "timeoutExpression": {
-          "type": "string"
+          "description": "ByNameReferenceProperty: microflows.schema.json#/definitions/Microflow"
         },
         "oDataVersion": {
           "type": "string",
@@ -252,21 +291,20 @@
             "OData4"
           ]
         },
-        "lastUpdated": {
-          "type": "string"
-        },
-        "useQuerySegment": {
-          "type": "boolean"
-        },
         "errorHandlingMicroflow": {
           "type": "string",
-          "description": "microflows.schema.json#/definitions/IMicroflow"
+          "description": "ByNameReferenceProperty: microflows.schema.json#/definitions/Microflow"
         }
       },
       "required": [
         "$ID",
         "$Type",
         "httpConfiguration"
+      ],
+      "allOf": [
+        {
+          "$ref": "domainmodels.schema.json#/definitions/RemoteEntitySourceDocument"
+        }
       ]
     },
     "ConsumedRestService": {
@@ -299,6 +337,11 @@
         "$ID",
         "$Type",
         "baseUrl"
+      ],
+      "allOf": [
+        {
+          "$ref": "projects.schema.json#/definitions/Document"
+        }
       ]
     },
     "CorsConfiguration": {
@@ -311,16 +354,17 @@
           "type": "string",
           "const": "Rest$CorsConfiguration"
         },
+        "allowAuthentication": {
+          "type": "boolean",
+          "default": true
+        },
         "allowedOrigins": {
           "type": "string",
-          "description": "constants.schema.json#/definitions/IConstant"
-        },
-        "allowAuthentication": {
-          "type": "boolean"
+          "description": "ByNameReferenceProperty: constants.schema.json#/definitions/Constant"
         },
         "maxAge": {
           "type": "string",
-          "description": "constants.schema.json#/definitions/IConstant"
+          "description": "ByNameReferenceProperty: constants.schema.json#/definitions/Constant"
         }
       },
       "required": [
@@ -339,7 +383,8 @@
           "const": "Rest$HeaderWithValueTemplate"
         },
         "name": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "value": {
           "$ref": "#/definitions/ValueTemplate"
@@ -373,6 +418,11 @@
         "$Type",
         "rootMappingElement",
         "testValue"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/Body"
+        }
       ]
     },
     "RestOperationResponseHandling": {
@@ -386,10 +436,12 @@
           "const": "Rest$RestOperationResponseHandling"
         },
         "statusCode": {
-          "type": "string"
+          "type": "integer",
+          "default": 200
         },
         "contentType": {
-          "type": "string"
+          "type": "string",
+          "default": "application/json"
         }
       },
       "required": [
@@ -415,6 +467,11 @@
         "$ID",
         "$Type",
         "rootMappingElement"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/RestOperationResponseHandling"
+        }
       ]
     },
     "MetadataReference": {
@@ -428,10 +485,12 @@
           "const": "Rest$MetadataReference"
         },
         "uri": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "metadata": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "metadataReferences": {
           "type": "array",
@@ -459,6 +518,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/RestOperationResponseHandling"
+        }
       ]
     },
     "ODataEntityTypeSource": {
@@ -471,12 +535,13 @@
           "type": "string",
           "const": "Rest$ODataEntityTypeSource"
         },
+        "entityTypeName": {
+          "type": "string",
+          "default": ""
+        },
         "sourceDocument": {
           "type": "string",
-          "description": "#/definitions/ConsumedODataService"
-        },
-        "entityTypeName": {
-          "type": "string"
+          "description": "ByNameReferenceProperty: #/definitions/ConsumedODataService"
         },
         "key": {
           "$ref": "#/definitions/ODataKey"
@@ -485,6 +550,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "domainmodels.schema.json#/definitions/RemoteEntitySource"
+        }
       ]
     },
     "ODataKey": {
@@ -520,19 +590,23 @@
           "const": "Rest$ODataKeyPart"
         },
         "name": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "entityKeyPartName": {
-          "type": "string"
+          "type": "string",
+          "default": ""
+        },
+        "remoteType": {
+          "type": "string",
+          "default": ""
+        },
+        "filterable": {
+          "type": "boolean",
+          "default": true
         },
         "type": {
           "$ref": "domainmodels.schema.json#/definitions/AttributeType"
-        },
-        "remoteType": {
-          "type": "string"
-        },
-        "filterable": {
-          "type": "boolean"
         }
       },
       "required": [
@@ -552,30 +626,42 @@
           "const": "Rest$ODataMappedValue"
         },
         "remoteName": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "remoteType": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "filterable": {
-          "type": "boolean"
+          "type": "boolean",
+          "default": true
         },
         "sortable": {
-          "type": "boolean"
+          "type": "boolean",
+          "default": true
         },
         "representsStream": {
-          "type": "boolean"
+          "type": "boolean",
+          "default": false
         },
         "updatable": {
-          "type": "boolean"
+          "type": "boolean",
+          "default": false
         },
         "creatable": {
-          "type": "boolean"
+          "type": "boolean",
+          "default": false
         }
       },
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "domainmodels.schema.json#/definitions/MappedValue"
+        }
       ]
     },
     "ODataRemoteAssociationSource": {
@@ -589,30 +675,41 @@
           "const": "Rest$ODataRemoteAssociationSource"
         },
         "remoteParentNavigationProperty": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "remoteChildNavigationProperty": {
-          "type": "string"
+          "type": "string",
+          "default": ""
+        },
+        "updatableFromChild": {
+          "type": "boolean",
+          "default": false
+        },
+        "updatableFromParent": {
+          "type": "boolean",
+          "default": false
+        },
+        "creatableFromChild": {
+          "type": "boolean",
+          "default": false
+        },
+        "creatableFromParent": {
+          "type": "boolean",
+          "default": false
         },
         "navigability2": {
           "type": "string"
-        },
-        "updatableFromChild": {
-          "type": "boolean"
-        },
-        "updatableFromParent": {
-          "type": "boolean"
-        },
-        "creatableFromChild": {
-          "type": "boolean"
-        },
-        "creatableFromParent": {
-          "type": "boolean"
         }
       },
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "domainmodels.schema.json#/definitions/RemoteAssociationSource"
+        }
       ]
     },
     "ODataRemoteEntitySource": {
@@ -625,41 +722,54 @@
           "type": "string",
           "const": "Rest$ODataRemoteEntitySource"
         },
-        "sourceDocument": {
-          "type": "string",
-          "description": "#/definitions/ConsumedODataService"
-        },
         "entityTypeName": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "entitySetName": {
-          "type": "string"
+          "type": "string",
+          "default": ""
+        },
+        "countable": {
+          "type": "boolean",
+          "default": true
+        },
+        "creatable": {
+          "type": "boolean",
+          "default": false
+        },
+        "deletable": {
+          "type": "boolean",
+          "default": false
+        },
+        "topSupported": {
+          "type": "boolean",
+          "default": true
+        },
+        "skipSupported": {
+          "type": "boolean",
+          "default": true
+        },
+        "createChangeLocally": {
+          "type": "boolean",
+          "default": false
+        },
+        "sourceDocument": {
+          "type": "string",
+          "description": "ByNameReferenceProperty: #/definitions/ConsumedODataService"
         },
         "key": {
           "$ref": "#/definitions/ODataKey"
-        },
-        "countable": {
-          "type": "boolean"
-        },
-        "creatable": {
-          "type": "boolean"
-        },
-        "deletable": {
-          "type": "boolean"
-        },
-        "topSupported": {
-          "type": "boolean"
-        },
-        "skipSupported": {
-          "type": "boolean"
-        },
-        "createChangeLocally": {
-          "type": "boolean"
         }
       },
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "domainmodels.schema.json#/definitions/QueryBasedRemoteEntitySource"
+        }
       ]
     },
     "ODataRemoteEnumerationSource": {
@@ -672,17 +782,23 @@
           "type": "string",
           "const": "Rest$ODataRemoteEnumerationSource"
         },
+        "remoteName": {
+          "type": "string",
+          "default": ""
+        },
         "consumedODataService": {
           "type": "string",
-          "description": "#/definitions/ConsumedODataService"
-        },
-        "remoteName": {
-          "type": "string"
+          "description": "ByNameReferenceProperty: #/definitions/ConsumedODataService"
         }
       },
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "enumerations.schema.json#/definitions/RemoteEnumerationSource"
+        }
       ]
     },
     "ODataRemoteEnumerationValue": {
@@ -696,12 +812,18 @@
           "const": "Rest$ODataRemoteEnumerationValue"
         },
         "remoteName": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         }
       },
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "enumerations.schema.json#/definitions/RemoteEnumerationValue"
+        }
       ]
     },
     "OperationParameter": {
@@ -715,7 +837,8 @@
           "const": "Rest$OperationParameter"
         },
         "name": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "dataType": {
           "$ref": "datatypes.schema.json#/definitions/DataType"
@@ -741,14 +864,16 @@
           "type": "string",
           "const": "Rest$PublishedODataContract"
         },
-        "serviceFeed": {
-          "$ref": "#/definitions/ServiceFeed"
-        },
         "metadata": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "openApi": {
-          "type": "string"
+          "type": "string",
+          "default": ""
+        },
+        "serviceFeed": {
+          "$ref": "#/definitions/ServiceFeed"
         }
       },
       "required": [
@@ -768,23 +893,26 @@
           "const": "Rest$PublishedODataEnumeration"
         },
         "exposedName": {
-          "type": "string"
+          "type": "string",
+          "default": ""
+        },
+        "summary": {
+          "type": "string",
+          "default": ""
+        },
+        "description": {
+          "type": "string",
+          "default": ""
         },
         "enumeration": {
           "type": "string",
-          "description": "enumerations.schema.json#/definitions/IEnumeration"
+          "description": "ByNameReferenceProperty: enumerations.schema.json#/definitions/Enumeration"
         },
         "values": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/PublishedODataEnumerationValue"
           }
-        },
-        "summary": {
-          "type": "string"
-        },
-        "description": {
-          "type": "string"
         }
       },
       "required": [
@@ -804,17 +932,20 @@
           "const": "Rest$PublishedODataEnumerationValue"
         },
         "exposedName": {
-          "type": "string"
+          "type": "string",
+          "default": ""
+        },
+        "summary": {
+          "type": "string",
+          "default": ""
+        },
+        "description": {
+          "type": "string",
+          "default": ""
         },
         "enumerationValue": {
           "type": "string",
-          "description": "enumerations.schema.json#/definitions/IEnumerationValue"
-        },
-        "summary": {
-          "type": "string"
-        },
-        "description": {
-          "type": "string"
+          "description": "ByNameReferenceProperty: enumerations.schema.json#/definitions/EnumerationValue"
         }
       },
       "required": [
@@ -834,11 +965,20 @@
           "const": "Rest$PublishedODataMicroflow"
         },
         "exposedName": {
-          "type": "string"
+          "type": "string",
+          "default": ""
+        },
+        "summary": {
+          "type": "string",
+          "default": ""
+        },
+        "description": {
+          "type": "string",
+          "default": ""
         },
         "microflow": {
           "type": "string",
-          "description": "microflows.schema.json#/definitions/IMicroflow"
+          "description": "ByNameReferenceProperty: microflows.schema.json#/definitions/Microflow"
         },
         "parameters": {
           "type": "array",
@@ -848,12 +988,6 @@
         },
         "returnType": {
           "$ref": "datatypes.schema.json#/definitions/DataType"
-        },
-        "summary": {
-          "type": "string"
-        },
-        "description": {
-          "type": "string"
         }
       },
       "required": [
@@ -874,23 +1008,27 @@
           "const": "Rest$PublishedODataMicroflowParameter"
         },
         "exposedName": {
-          "type": "string"
+          "type": "string",
+          "default": ""
+        },
+        "canBeEmpty": {
+          "type": "boolean",
+          "default": false
+        },
+        "summary": {
+          "type": "string",
+          "default": ""
+        },
+        "description": {
+          "type": "string",
+          "default": ""
         },
         "microflowParameter": {
           "type": "string",
-          "description": "microflows.schema.json#/definitions/IMicroflowParameter"
+          "description": "ByNameReferenceProperty: microflows.schema.json#/definitions/MicroflowParameter"
         },
         "dataType": {
           "$ref": "datatypes.schema.json#/definitions/DataType"
-        },
-        "canBeEmpty": {
-          "type": "boolean"
-        },
-        "summary": {
-          "type": "string"
-        },
-        "description": {
-          "type": "string"
         }
       },
       "required": [
@@ -911,20 +1049,47 @@
           "const": "Rest$PublishedODataService"
         },
         "namespace": {
-          "type": "string"
+          "type": "string",
+          "default": "DefaultNamespace"
         },
         "path": {
-          "type": "string"
+          "type": "string",
+          "default": ""
+        },
+        "serviceName": {
+          "type": "string",
+          "default": ""
+        },
+        "publishAssociations": {
+          "type": "boolean",
+          "default": true
+        },
+        "version": {
+          "type": "string",
+          "default": "1.0.0"
+        },
+        "summary": {
+          "type": "string",
+          "default": ""
+        },
+        "description": {
+          "type": "string",
+          "default": ""
+        },
+        "replaceIllegalChars": {
+          "type": "boolean",
+          "default": false
+        },
+        "useGeneralization": {
+          "type": "boolean",
+          "default": false
         },
         "allowedModuleRoles": {
           "type": "array",
           "items": {
             "type": "string",
-            "description": "security.schema.json#/definitions/IModuleRole"
+            "description": "ByNameReferenceListProperty: security.schema.json#/definitions/ModuleRole"
           }
-        },
-        "serviceName": {
-          "type": "string"
         },
         "resources": {
           "type": "array",
@@ -944,33 +1109,15 @@
             "$ref": "#/definitions/PublishedODataEnumeration"
           }
         },
-        "publishAssociations": {
-          "type": "boolean"
-        },
-        "version": {
-          "type": "string"
-        },
         "authenticationMicroflow": {
           "type": "string",
-          "description": "microflows.schema.json#/definitions/IMicroflow"
+          "description": "ByNameReferenceProperty: microflows.schema.json#/definitions/Microflow"
         },
         "authenticationTypes": {
           "type": "array",
           "items": {
             "type": "string"
           }
-        },
-        "summary": {
-          "type": "string"
-        },
-        "description": {
-          "type": "string"
-        },
-        "replaceIllegalChars": {
-          "type": "boolean"
-        },
-        "useGeneralization": {
-          "type": "boolean"
         },
         "oDataVersion": {
           "type": "string",
@@ -983,6 +1130,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "projects.schema.json#/definitions/Document"
+        }
       ]
     },
     "PublishedRestResource": {
@@ -996,22 +1148,28 @@
           "const": "Rest$PublishedRestResource"
         },
         "path": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "exposedName": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "summary": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "description": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "usePaging": {
-          "type": "boolean"
+          "type": "boolean",
+          "default": false
         },
         "pageSize": {
-          "type": "string"
+          "type": "integer",
+          "default": 10000
         },
         "updateMode": {
           "$ref": "#/definitions/ChangeMode"
@@ -1037,6 +1195,11 @@
         "deleteMode",
         "readMode",
         "queryOptions"
+      ],
+      "allOf": [
+        {
+          "$ref": "webservices.schema.json#/definitions/PublishedResource"
+        }
       ]
     },
     "PublishedRestService": {
@@ -1050,13 +1213,16 @@
           "const": "Rest$PublishedRestService"
         },
         "path": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "serviceName": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "version": {
-          "type": "string"
+          "type": "string",
+          "default": "1.0.0"
         },
         "authenticationTypes": {
           "type": "array",
@@ -1066,7 +1232,7 @@
         },
         "authenticationMicroflow": {
           "type": "string",
-          "description": "microflows.schema.json#/definitions/IMicroflow"
+          "description": "ByNameReferenceProperty: microflows.schema.json#/definitions/Microflow"
         },
         "corsConfiguration": {
           "$ref": "#/definitions/CorsConfiguration"
@@ -1075,7 +1241,7 @@
           "type": "array",
           "items": {
             "type": "string",
-            "description": "security.schema.json#/definitions/IModuleRole"
+            "description": "ByNameReferenceListProperty: security.schema.json#/definitions/ModuleRole"
           }
         },
         "resources": {
@@ -1094,6 +1260,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "projects.schema.json#/definitions/Document"
+        }
       ]
     },
     "PublishedRestServiceOperation": {
@@ -1107,16 +1278,20 @@
           "const": "Rest$PublishedRestServiceOperation"
         },
         "summary": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "documentation": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "path": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "deprecated": {
-          "type": "boolean"
+          "type": "boolean",
+          "default": false
         },
         "parameters": {
           "type": "array",
@@ -1129,15 +1304,15 @@
         },
         "microflow": {
           "type": "string",
-          "description": "microflows.schema.json#/definitions/IMicroflow"
+          "description": "ByNameReferenceProperty: microflows.schema.json#/definitions/Microflow"
         },
         "exportMapping": {
           "type": "string",
-          "description": "exportmappings.schema.json#/definitions/IExportMapping"
+          "description": "ByNameReferenceProperty: exportmappings.schema.json#/definitions/ExportMapping"
         },
         "importMapping": {
           "type": "string",
-          "description": "importmappings.schema.json#/definitions/IImportMapping"
+          "description": "ByNameReferenceProperty: importmappings.schema.json#/definitions/ImportMapping"
         },
         "objectHandlingBackup": {
           "type": "string"
@@ -1162,10 +1337,12 @@
           "const": "Rest$PublishedRestServiceResource"
         },
         "name": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "documentation": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "operations": {
           "type": "array",
@@ -1190,13 +1367,16 @@
           "const": "Rest$QueryOptions"
         },
         "countable": {
-          "type": "boolean"
+          "type": "boolean",
+          "default": true
         },
         "topSupported": {
-          "type": "boolean"
+          "type": "boolean",
+          "default": true
         },
         "skipSupported": {
-          "type": "boolean"
+          "type": "boolean",
+          "default": true
         }
       },
       "required": [
@@ -1218,6 +1398,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ReadMode"
+        }
       ]
     },
     "RestOperation": {
@@ -1231,16 +1416,18 @@
           "const": "Rest$RestOperation"
         },
         "name": {
-          "type": "string"
+          "type": "string",
+          "default": "Operation"
+        },
+        "timeout": {
+          "type": "integer",
+          "default": 300
         },
         "path": {
           "$ref": "#/definitions/ValueTemplate"
         },
         "method": {
           "$ref": "#/definitions/RestOperationMethod"
-        },
-        "timeout": {
-          "type": "string"
         },
         "headers": {
           "type": "array",
@@ -1303,6 +1490,11 @@
         "$ID",
         "$Type",
         "body"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/RestOperationMethod"
+        }
       ]
     },
     "RestOperationMethodWithoutBody": {
@@ -1319,6 +1511,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/RestOperationMethod"
+        }
       ]
     },
     "RestOperationParameter": {
@@ -1332,11 +1529,16 @@
           "const": "Rest$RestOperationParameter"
         },
         "name": {
-          "type": "string"
+          "type": "string",
+          "default": ""
+        },
+        "description": {
+          "type": "string",
+          "default": ""
         },
         "microflowParameter": {
           "type": "string",
-          "description": "microflows.schema.json#/definitions/IMicroflowParameter"
+          "description": "ByNameReferenceProperty: microflows.schema.json#/definitions/MicroflowParameter"
         },
         "type": {
           "$ref": "datatypes.schema.json#/definitions/DataType"
@@ -1350,9 +1552,6 @@
             "Header",
             "Form"
           ]
-        },
-        "description": {
-          "type": "string"
         }
       },
       "required": [
@@ -1372,7 +1571,8 @@
           "const": "Rest$RestParameter"
         },
         "name": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "dataType": {
           "$ref": "datatypes.schema.json#/definitions/DataType"
@@ -1399,10 +1599,12 @@
           "const": "Rest$ServiceFeed"
         },
         "xml": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "json": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         }
       },
       "required": [
@@ -1428,6 +1630,11 @@
         "$ID",
         "$Type",
         "valueTemplate"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/Body"
+        }
       ]
     },
     "StringValue": {
@@ -1441,12 +1648,18 @@
           "const": "Rest$StringValue"
         },
         "value": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         }
       },
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/Value"
+        }
       ]
     },
     "ValueTemplate": {
@@ -1460,7 +1673,8 @@
           "const": "Rest$ValueTemplate"
         },
         "value": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         }
       },
       "required": [

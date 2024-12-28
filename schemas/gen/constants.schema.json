@@ -11,20 +11,27 @@
           "type": "string",
           "const": "Constants$Constant"
         },
-        "type": {
-          "$ref": "datatypes.schema.json#/definitions/DataType"
-        },
         "defaultValue": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "exposedToClient": {
-          "type": "boolean"
+          "type": "boolean",
+          "default": false
+        },
+        "type": {
+          "$ref": "datatypes.schema.json#/definitions/DataType"
         }
       },
       "required": [
         "$ID",
         "$Type",
         "type"
+      ],
+      "allOf": [
+        {
+          "$ref": "projects.schema.json#/definitions/Document"
+        }
       ]
     }
   }

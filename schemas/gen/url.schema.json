@@ -28,12 +28,18 @@
           "const": "Url$StaticUrlSegment"
         },
         "segment": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         }
       },
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/UrlSegment"
+        }
       ]
     }
   }

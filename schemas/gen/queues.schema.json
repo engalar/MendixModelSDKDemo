@@ -28,15 +28,22 @@
           "const": "Queues$BasicQueueConfig"
         },
         "parallelismExpression": {
-          "type": "string"
+          "type": "string",
+          "default": "1"
         },
         "clusterWide": {
-          "type": "boolean"
+          "type": "boolean",
+          "default": false
         }
       },
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/QueueConfig"
+        }
       ]
     },
     "Queue": {
@@ -57,6 +64,11 @@
         "$ID",
         "$Type",
         "config"
+      ],
+      "allOf": [
+        {
+          "$ref": "projects.schema.json#/definitions/Document"
+        }
       ]
     },
     "QueueRetry": {
@@ -86,13 +98,16 @@
           "const": "Queues$QueueExponentialRetry"
         },
         "retries": {
-          "type": "string"
+          "type": "integer",
+          "default": 10
         },
         "initialInterval": {
-          "type": "string"
+          "type": "integer",
+          "default": 1
         },
         "maximumInterval": {
-          "type": "string"
+          "type": "integer",
+          "default": 86400
         },
         "intervalType": {
           "type": "string",
@@ -106,6 +121,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/QueueRetry"
+        }
       ]
     },
     "QueueFixedRetry": {
@@ -119,10 +139,12 @@
           "const": "Queues$QueueFixedRetry"
         },
         "retries": {
-          "type": "string"
+          "type": "integer",
+          "default": 3
         },
         "interval": {
-          "type": "string"
+          "type": "integer",
+          "default": 10
         },
         "intervalType": {
           "type": "string",
@@ -136,6 +158,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/QueueRetry"
+        }
       ]
     },
     "QueueSettings": {
@@ -150,7 +177,7 @@
         },
         "queue": {
           "type": "string",
-          "description": "#/definitions/Queue"
+          "description": "ByNameReferenceProperty: #/definitions/Queue"
         },
         "retry": {
           "$ref": "#/definitions/QueueRetry"

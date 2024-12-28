@@ -19,6 +19,11 @@
         "$ID",
         "$Type",
         "itemCollection"
+      ],
+      "allOf": [
+        {
+          "$ref": "projects.schema.json#/definitions/Document"
+        }
       ]
     },
     "MenuItemContainer": {
@@ -71,6 +76,11 @@
         "$Type",
         "caption",
         "action"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/MenuItemContainer"
+        }
       ]
     },
     "MenuItemCollection": {
@@ -87,6 +97,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/MenuItemContainer"
+        }
       ]
     }
   }

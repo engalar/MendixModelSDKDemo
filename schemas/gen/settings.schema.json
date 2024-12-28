@@ -12,7 +12,8 @@
           "const": "Settings$ActionActivityDefaultColor"
         },
         "actionActivityType": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "backgroundColor": {
           "type": "string"
@@ -33,15 +34,16 @@
           "type": "string",
           "const": "Settings$Certificate"
         },
+        "data": {
+          "type": "string",
+          "contentEncoding": "base64"
+        },
         "type": {
           "type": "string",
           "enum": [
             "Authority",
             "Client"
           ]
-        },
-        "data": {
-          "type": "string"
         }
       },
       "required": [
@@ -85,6 +87,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProjectSettingsPart"
+        }
       ]
     },
     "Configuration": {
@@ -98,28 +105,56 @@
           "const": "Settings$Configuration"
         },
         "name": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "applicationRootUrl": {
-          "type": "string"
+          "type": "string",
+          "default": "http://localhost:8080/"
         },
         "runtimePortNumber": {
-          "type": "string"
+          "type": "integer",
+          "default": 8080
         },
         "adminPortNumber": {
-          "type": "string"
+          "type": "integer",
+          "default": 8090
         },
         "runtimePortOnlyLocal": {
-          "type": "boolean"
+          "type": "boolean",
+          "default": false
         },
         "adminPortOnlyLocal": {
-          "type": "boolean"
+          "type": "boolean",
+          "default": true
         },
         "maxJavaHeapSize": {
-          "type": "string"
+          "type": "integer",
+          "default": 0
         },
         "extraJvmParameters": {
-          "type": "string"
+          "type": "string",
+          "default": ""
+        },
+        "databaseUrl": {
+          "type": "string",
+          "default": ""
+        },
+        "databaseName": {
+          "type": "string",
+          "default": "default"
+        },
+        "databaseUseIntegratedSecurity": {
+          "type": "boolean",
+          "default": false
+        },
+        "databaseUserName": {
+          "type": "string",
+          "default": ""
+        },
+        "databasePassword": {
+          "type": "string",
+          "default": ""
         },
         "databaseType": {
           "type": "string",
@@ -132,21 +167,6 @@
             "PostgreSql",
             "SapHana"
           ]
-        },
-        "databaseUrl": {
-          "type": "string"
-        },
-        "databaseName": {
-          "type": "string"
-        },
-        "databaseUseIntegratedSecurity": {
-          "type": "boolean"
-        },
-        "databaseUserName": {
-          "type": "string"
-        },
-        "databasePassword": {
-          "type": "string"
         },
         "customSettings": {
           "type": "array",
@@ -186,6 +206,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProjectSettingsPart"
+        }
       ]
     },
     "ConstantValue": {
@@ -200,7 +225,7 @@
         },
         "constant": {
           "type": "string",
-          "description": "constants.schema.json#/definitions/IConstant"
+          "description": "ByNameReferenceProperty: constants.schema.json#/definitions/Constant"
         },
         "sharedOrPrivateValue": {
           "$ref": "#/definitions/SharedOrPrivateValue"
@@ -211,6 +236,11 @@
         "$Type",
         "constant",
         "sharedOrPrivateValue"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/Value"
+        }
       ]
     },
     "CustomSetting": {
@@ -224,10 +254,12 @@
           "const": "Settings$CustomSetting"
         },
         "name": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "value": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         }
       },
       "required": [
@@ -246,18 +278,26 @@
           "const": "Settings$DistributionSettings"
         },
         "isDistributable": {
-          "type": "boolean"
+          "type": "boolean",
+          "default": false
         },
         "version": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "basedOnVersion": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         }
       },
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProjectSettingsPart"
+        }
       ]
     },
     "IntegrationProjectSettingsPart": {
@@ -274,6 +314,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProjectSettingsPart"
+        }
       ]
     },
     "JarDeploymentSettings": {
@@ -296,6 +341,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProjectSettingsPart"
+        }
       ]
     },
     "JarLocationBase": {
@@ -309,7 +359,8 @@
           "const": "Settings$JarLocationBase"
         },
         "jarFileName": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         }
       },
       "required": [
@@ -328,12 +379,18 @@
           "const": "Settings$JavaActionsSettings"
         },
         "generatePostfixesForParameters": {
-          "type": "boolean"
+          "type": "boolean",
+          "default": false
         }
       },
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProjectSettingsPart"
+        }
       ]
     },
     "Language": {
@@ -347,19 +404,24 @@
           "const": "Settings$Language"
         },
         "code": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "checkCompleteness": {
-          "type": "boolean"
+          "type": "boolean",
+          "default": false
         },
         "customDateFormat": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "customTimeFormat": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "customDateTimeFormat": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         }
       },
       "required": [
@@ -378,7 +440,8 @@
           "const": "Settings$LanguageSettings"
         },
         "defaultLanguageCode": {
-          "type": "string"
+          "type": "string",
+          "default": "en_US"
         },
         "languages": {
           "type": "array",
@@ -390,6 +453,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProjectSettingsPart"
+        }
       ]
     },
     "ModelerSettings": {
@@ -403,7 +471,8 @@
           "const": "Settings$ModelerSettings"
         },
         "lowerCaseMicroflowVariables": {
-          "type": "boolean"
+          "type": "boolean",
+          "default": false
         },
         "actionActivityDefaultColors": {
           "type": "array",
@@ -418,6 +487,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProjectSettingsPart"
+        }
       ]
     },
     "SharedOrPrivateValue": {
@@ -450,6 +524,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/SharedOrPrivateValue"
+        }
       ]
     },
     "ProjectSettings": {
@@ -472,6 +551,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "projects.schema.json#/definitions/ProjectDocument"
+        }
       ]
     },
     "ProtectedModuleJarLocation": {
@@ -485,12 +569,18 @@
           "const": "Settings$ProtectedModuleJarLocation"
         },
         "moduleName": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         }
       },
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/JarLocationBase"
+        }
       ]
     },
     "RuntimeSettings": {
@@ -503,17 +593,49 @@
           "type": "string",
           "const": "Settings$RuntimeSettings"
         },
+        "defaultTimeZoneCode": {
+          "type": "string",
+          "default": ""
+        },
+        "scheduledEventTimeZoneCode": {
+          "type": "string",
+          "default": "Etc/UTC"
+        },
+        "bcryptCost": {
+          "type": "integer",
+          "default": 12
+        },
+        "allowUserMultipleSessions": {
+          "type": "boolean",
+          "default": false
+        },
+        "enableDataStorageOptimisticLocking": {
+          "type": "boolean",
+          "default": true
+        },
+        "useSystemContextForBackgroundTasks": {
+          "type": "boolean",
+          "default": false
+        },
+        "useDatabaseForeignKeyConstraints": {
+          "type": "boolean",
+          "default": false
+        },
+        "useOQLVersion2": {
+          "type": "boolean",
+          "default": false
+        },
         "afterStartupMicroflow": {
           "type": "string",
-          "description": "microflows.schema.json#/definitions/IMicroflow"
+          "description": "ByNameReferenceProperty: microflows.schema.json#/definitions/Microflow"
         },
         "beforeShutdownMicroflow": {
           "type": "string",
-          "description": "microflows.schema.json#/definitions/IMicroflow"
+          "description": "ByNameReferenceProperty: microflows.schema.json#/definitions/Microflow"
         },
         "healthCheckMicroflow": {
           "type": "string",
-          "description": "microflows.schema.json#/definitions/IMicroflow"
+          "description": "ByNameReferenceProperty: microflows.schema.json#/definitions/Microflow"
         },
         "firstDayOfWeek": {
           "type": "string",
@@ -528,12 +650,6 @@
             "Saturday"
           ]
         },
-        "defaultTimeZoneCode": {
-          "type": "string"
-        },
-        "scheduledEventTimeZoneCode": {
-          "type": "string"
-        },
         "hashAlgorithm": {
           "type": "string",
           "enum": [
@@ -543,27 +659,12 @@
             "MD5"
           ]
         },
-        "bcryptCost": {
-          "type": "string"
-        },
         "roundingMode": {
           "type": "string",
           "enum": [
             "HalfUp",
             "HalfEven"
           ]
-        },
-        "allowUserMultipleSessions": {
-          "type": "boolean"
-        },
-        "enableDataStorageOptimisticLocking": {
-          "type": "boolean"
-        },
-        "useSystemContextForBackgroundTasks": {
-          "type": "boolean"
-        },
-        "useDatabaseForeignKeyConstraints": {
-          "type": "boolean"
         },
         "javaVersion": {
           "type": "string",
@@ -572,14 +673,16 @@
             "Java17",
             "Java21"
           ]
-        },
-        "useOQLVersion2": {
-          "type": "boolean"
         }
       },
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProjectSettingsPart"
+        }
       ]
     },
     "SharedValue": {
@@ -593,12 +696,18 @@
           "const": "Settings$SharedValue"
         },
         "value": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         }
       },
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/SharedOrPrivateValue"
+        }
       ]
     },
     "ThemeModuleEntry": {
@@ -612,7 +721,8 @@
           "const": "Settings$ThemeModuleEntry"
         },
         "moduleName": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         }
       },
       "required": [
@@ -634,6 +744,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/JarLocationBase"
+        }
       ]
     },
     "WebUIProjectSettingsPart": {
@@ -646,6 +761,22 @@
           "type": "string",
           "const": "Settings$WebUIProjectSettingsPart"
         },
+        "urlPrefix": {
+          "type": "string",
+          "default": "p"
+        },
+        "enableWidgetBundling": {
+          "type": "boolean",
+          "default": false
+        },
+        "enableMicroflowReachabilityAnalysis": {
+          "type": "boolean",
+          "default": true
+        },
+        "enableNewWidgetGeneration": {
+          "type": "boolean",
+          "default": true
+        },
         "useOptimizedClient": {
           "type": "string",
           "enum": [
@@ -654,28 +785,21 @@
             "MigrationMode"
           ]
         },
-        "urlPrefix": {
-          "type": "string"
-        },
-        "enableWidgetBundling": {
-          "type": "boolean"
-        },
-        "enableMicroflowReachabilityAnalysis": {
-          "type": "boolean"
-        },
         "themeModuleOrder": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/ThemeModuleEntry"
           }
-        },
-        "enableNewWidgetGeneration": {
-          "type": "boolean"
         }
       },
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProjectSettingsPart"
+        }
       ]
     },
     "WorkflowsProjectSettingsPart": {
@@ -688,15 +812,17 @@
           "type": "string",
           "const": "Settings$WorkflowsProjectSettingsPart"
         },
-        "userEntity": {
-          "type": "string",
-          "description": "domainmodels.schema.json#/definitions/IEntity"
-        },
         "workflowEngineParallelism": {
-          "type": "string"
+          "type": "integer",
+          "default": 5
         },
         "defaultTaskParallelism": {
-          "type": "string"
+          "type": "integer",
+          "default": 3
+        },
+        "userEntity": {
+          "type": "string",
+          "description": "ByNameReferenceProperty: domainmodels.schema.json#/definitions/Entity"
         },
         "workflowOnStateChangeEvent": {
           "$ref": "workflows.schema.json#/definitions/MicroflowEventHandler"
@@ -714,6 +840,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProjectSettingsPart"
+        }
       ]
     }
   }

@@ -11,17 +11,23 @@
           "type": "string",
           "const": "Reports$ReportWidget"
         },
+        "generateOnLoad": {
+          "type": "boolean",
+          "default": true
+        },
         "dataSet": {
           "type": "string",
-          "description": "datasets.schema.json#/definitions/IDataSet"
-        },
-        "generateOnLoad": {
-          "type": "boolean"
+          "description": "ByNameReferenceProperty: datasets.schema.json#/definitions/DataSet"
         }
       },
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "pages.schema.json#/definitions/Widget"
+        }
       ]
     },
     "BasicReport": {
@@ -33,6 +39,18 @@
         "$Type": {
           "type": "string",
           "const": "Reports$BasicReport"
+        },
+        "showExportButton": {
+          "type": "boolean",
+          "default": false
+        },
+        "isPagingEnabled": {
+          "type": "boolean",
+          "default": false
+        },
+        "pageSize": {
+          "type": "integer",
+          "default": 20
         },
         "columns": {
           "type": "array",
@@ -46,23 +64,19 @@
             "$ref": "#/definitions/BasicReportAggregate"
           }
         },
-        "showExportButton": {
-          "type": "boolean"
-        },
         "zoomInfo": {
           "$ref": "#/definitions/ReportZoomInfo"
-        },
-        "isPagingEnabled": {
-          "type": "boolean"
-        },
-        "pageSize": {
-          "type": "string"
         }
       },
       "required": [
         "$ID",
         "$Type",
         "zoomInfo"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ReportWidget"
+        }
       ]
     },
     "BasicReportAggregate": {
@@ -108,14 +122,16 @@
           "type": "string",
           "const": "Reports$BasicReportColumn"
         },
-        "caption": {
-          "$ref": "texts.schema.json#/definitions/Text"
-        },
         "dataSetColumnName": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "width": {
-          "type": "string"
+          "type": "integer",
+          "default": 1
+        },
+        "caption": {
+          "$ref": "texts.schema.json#/definitions/Text"
         },
         "alignment": {
           "type": "string"
@@ -153,6 +169,11 @@
         "$ID",
         "$Type",
         "caption"
+      ],
+      "allOf": [
+        {
+          "$ref": "pages.schema.json#/definitions/Widget"
+        }
       ]
     },
     "ReportChart": {
@@ -164,6 +185,26 @@
         "$Type": {
           "type": "string",
           "const": "Reports$ReportChart"
+        },
+        "xAxisColumn": {
+          "type": "string",
+          "default": ""
+        },
+        "yAxisPrecision": {
+          "type": "integer",
+          "default": 2
+        },
+        "yAxisUseMinMax": {
+          "type": "boolean",
+          "default": false
+        },
+        "yAxisMinimum": {
+          "type": "number",
+          "default": 0
+        },
+        "yAxisMaximum": {
+          "type": "number",
+          "default": 0
         },
         "type": {
           "type": "string",
@@ -187,9 +228,6 @@
         "yAxisCaption": {
           "$ref": "texts.schema.json#/definitions/Text"
         },
-        "xAxisColumn": {
-          "type": "string"
-        },
         "xAxisFormat": {
           "type": "string",
           "enum": [
@@ -197,18 +235,6 @@
             "MonthName",
             "WeekdayName"
           ]
-        },
-        "yAxisPrecision": {
-          "type": "string"
-        },
-        "yAxisUseMinMax": {
-          "type": "boolean"
-        },
-        "yAxisMinimum": {
-          "type": "string"
-        },
-        "yAxisMaximum": {
-          "type": "string"
         },
         "aspectRatio": {
           "type": "string",
@@ -228,6 +254,11 @@
         "$Type",
         "xAxisCaption",
         "yAxisCaption"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ReportWidget"
+        }
       ]
     },
     "ReportChartSeries": {
@@ -240,11 +271,12 @@
           "type": "string",
           "const": "Reports$ReportChartSeries"
         },
+        "dataSetColumn": {
+          "type": "string",
+          "default": ""
+        },
         "caption": {
           "$ref": "texts.schema.json#/definitions/Text"
-        },
-        "dataSetColumn": {
-          "type": "string"
         }
       },
       "required": [
@@ -295,12 +327,17 @@
         },
         "parameter": {
           "type": "string",
-          "description": "datasets.schema.json#/definitions/IDataSetParameter"
+          "description": "ByNameReferenceProperty: datasets.schema.json#/definitions/DataSetParameter"
         }
       },
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "pages.schema.json#/definitions/Widget"
+        }
       ]
     },
     "ReportDateRangeSelector": {
@@ -313,23 +350,27 @@
           "type": "string",
           "const": "Reports$ReportDateRangeSelector"
         },
+        "minYear": {
+          "type": "integer",
+          "default": 0
+        },
+        "maxYear": {
+          "type": "integer",
+          "default": 0
+        },
+        "fieldsPerRow": {
+          "type": "integer",
+          "default": 3
+        },
+        "showFromToRange": {
+          "type": "boolean",
+          "default": true
+        },
         "fields": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/ReportDateRangeField"
           }
-        },
-        "minYear": {
-          "type": "string"
-        },
-        "maxYear": {
-          "type": "string"
-        },
-        "fieldsPerRow": {
-          "type": "string"
-        },
-        "showFromToRange": {
-          "type": "boolean"
         },
         "fromCaption": {
           "$ref": "texts.schema.json#/definitions/Text"
@@ -343,6 +384,11 @@
         "$Type",
         "fromCaption",
         "toCaption"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ReportParameter"
+        }
       ]
     },
     "ReportDropDown": {
@@ -357,12 +403,17 @@
         },
         "attribute": {
           "type": "string",
-          "description": "domainmodels.schema.json#/definitions/IAttribute"
+          "description": "ByNameReferenceProperty: domainmodels.schema.json#/definitions/Attribute"
         }
       },
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ReportParameter"
+        }
       ]
     },
     "ReportPane": {
@@ -375,19 +426,25 @@
           "type": "string",
           "const": "Reports$ReportPane"
         },
+        "generateOnLoad": {
+          "type": "boolean",
+          "default": false
+        },
         "parameterWidget": {
           "$ref": "pages.schema.json#/definitions/Widget"
         },
         "reportWidget": {
           "$ref": "pages.schema.json#/definitions/Widget"
-        },
-        "generateOnLoad": {
-          "type": "boolean"
         }
       },
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "pages.schema.json#/definitions/Widget"
+        }
       ]
     },
     "ReportZoomInfo": {
@@ -402,7 +459,7 @@
         },
         "targetPage": {
           "type": "string",
-          "description": "pages.schema.json#/definitions/IPage"
+          "description": "ByNameReferenceProperty: pages.schema.json#/definitions/Page"
         },
         "mappings": {
           "type": "array",
@@ -427,10 +484,12 @@
           "const": "Reports$ReportZoomMapping"
         },
         "targetParameterName": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "sourceReportColumnName": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         }
       },
       "required": [

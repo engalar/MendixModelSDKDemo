@@ -12,16 +12,20 @@
           "const": "WebServices$DataMember"
         },
         "exposedName": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "isOptional": {
-          "type": "boolean"
+          "type": "boolean",
+          "default": false
         },
         "isNillable": {
-          "type": "boolean"
+          "type": "boolean",
+          "default": false
         },
         "isKey": {
-          "type": "boolean"
+          "type": "boolean",
+          "default": false
         }
       },
       "required": [
@@ -39,6 +43,10 @@
           "type": "string",
           "const": "WebServices$DataEntityBase"
         },
+        "exposedItemName": {
+          "type": "string",
+          "default": ""
+        },
         "childMembers": {
           "type": "array",
           "items": {
@@ -47,15 +55,17 @@
         },
         "entity": {
           "type": "string",
-          "description": "domainmodels.schema.json#/definitions/IEntity"
-        },
-        "exposedItemName": {
-          "type": "string"
+          "description": "ByNameReferenceProperty: domainmodels.schema.json#/definitions/Entity"
         }
       },
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataMember"
+        }
       ]
     },
     "DataAssociation": {
@@ -68,23 +78,31 @@
           "type": "string",
           "const": "WebServices$DataAssociation"
         },
-        "association": {
-          "type": "string",
-          "description": "domainmodels.schema.json#/definitions/IAssociationBase"
-        },
         "exposedAssociationName": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "summary": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "description": {
-          "type": "string"
+          "type": "string",
+          "default": ""
+        },
+        "association": {
+          "type": "string",
+          "description": "ByNameReferenceProperty: domainmodels.schema.json#/definitions/AssociationBase"
         }
       },
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataEntityBase"
+        }
       ]
     },
     "DataAttribute": {
@@ -97,29 +115,39 @@
           "type": "string",
           "const": "WebServices$DataAttribute"
         },
-        "attribute": {
-          "type": "string",
-          "description": "domainmodels.schema.json#/definitions/IAttribute"
-        },
         "summary": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "description": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "filterable": {
-          "type": "boolean"
+          "type": "boolean",
+          "default": true
         },
         "sortable": {
-          "type": "boolean"
+          "type": "boolean",
+          "default": true
         },
         "enumerationAsString": {
-          "type": "boolean"
+          "type": "boolean",
+          "default": false
+        },
+        "attribute": {
+          "type": "string",
+          "description": "ByNameReferenceProperty: domainmodels.schema.json#/definitions/Attribute"
         }
       },
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataMember"
+        }
       ]
     },
     "DataEntity": {
@@ -136,6 +164,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataEntityBase"
+        }
       ]
     },
     "ImportedWebService": {
@@ -148,19 +181,26 @@
           "type": "string",
           "const": "WebServices$ImportedWebService"
         },
-        "wsdlDescription": {
-          "$ref": "#/definitions/WsdlDescription"
-        },
         "wsdlUrl": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "useMtom": {
-          "type": "boolean"
+          "type": "boolean",
+          "default": true
+        },
+        "wsdlDescription": {
+          "$ref": "#/definitions/WsdlDescription"
         }
       },
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "projects.schema.json#/definitions/Document"
+        }
       ]
     },
     "OperationInfo": {
@@ -174,13 +214,36 @@
           "const": "WebServices$OperationInfo"
         },
         "name": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "documentation": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "soapAction": {
-          "type": "string"
+          "type": "string",
+          "default": ""
+        },
+        "requestHeaderElementName": {
+          "type": "string",
+          "default": ""
+        },
+        "requestHeaderEncoded": {
+          "type": "boolean",
+          "default": false
+        },
+        "requestBodyEncoded": {
+          "type": "boolean",
+          "default": false
+        },
+        "requestBodyElementName": {
+          "type": "string",
+          "default": ""
+        },
+        "responseBodyElementName": {
+          "type": "string",
+          "default": ""
         },
         "requestHeaderRpcElement": {
           "$ref": "#/definitions/RpcOperationElement"
@@ -191,29 +254,14 @@
         "responseBodyRpcElement": {
           "$ref": "#/definitions/RpcOperationElement"
         },
-        "requestHeaderElementName": {
-          "type": "string"
-        },
-        "requestHeaderEncoded": {
-          "type": "boolean"
-        },
         "requestHeaderPartEncoding": {
           "$ref": "#/definitions/PartEncoding"
-        },
-        "requestBodyEncoded": {
-          "type": "boolean"
-        },
-        "requestBodyElementName": {
-          "type": "string"
         },
         "requestBodyPartEncodings": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/PartEncoding"
           }
-        },
-        "responseBodyElementName": {
-          "type": "string"
         }
       },
       "required": [
@@ -235,10 +283,12 @@
           "const": "WebServices$PartEncoding"
         },
         "partName": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "partXsdType": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         }
       },
       "required": [
@@ -266,6 +316,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "projects.schema.json#/definitions/Document"
+        }
       ]
     },
     "PublishedAppService": {
@@ -282,6 +337,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/PublishedServiceBase"
+        }
       ]
     },
     "PublishedResource": {
@@ -315,21 +375,36 @@
           "const": "WebServices$PublishedOperation"
         },
         "name": {
-          "type": "string"
+          "type": "string",
+          "default": ""
+        },
+        "description": {
+          "type": "string",
+          "default": ""
+        },
+        "documentation": {
+          "type": "string",
+          "default": ""
+        },
+        "entityExposedName": {
+          "type": "string",
+          "default": "Result"
+        },
+        "returnTypeIsOptional": {
+          "type": "boolean",
+          "default": false
+        },
+        "returnTypeIsNillable": {
+          "type": "boolean",
+          "default": false
         },
         "image": {
           "type": "string",
-          "description": "images.schema.json#/definitions/IImage"
-        },
-        "description": {
-          "type": "string"
-        },
-        "documentation": {
-          "type": "string"
+          "description": "ByNameReferenceProperty: images.schema.json#/definitions/Image"
         },
         "microflow": {
           "type": "string",
-          "description": "microflows.schema.json#/definitions/IMicroflow"
+          "description": "ByNameReferenceProperty: microflows.schema.json#/definitions/Microflow"
         },
         "parameters": {
           "type": "array",
@@ -337,23 +412,19 @@
             "$ref": "#/definitions/PublishedParameter"
           }
         },
-        "entityExposedName": {
-          "type": "string"
-        },
         "operationReturnType": {
           "$ref": "datatypes.schema.json#/definitions/DataType"
-        },
-        "returnTypeIsOptional": {
-          "type": "boolean"
-        },
-        "returnTypeIsNillable": {
-          "type": "boolean"
         }
       },
       "required": [
         "$ID",
         "$Type",
         "operationReturnType"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/PublishedResource"
+        }
       ]
     },
     "PublishedParameter": {
@@ -366,21 +437,25 @@
           "type": "string",
           "const": "WebServices$PublishedParameter"
         },
-        "parameter": {
-          "type": "string",
-          "description": "microflows.schema.json#/definitions/IMicroflowParameter"
-        },
         "entityExposedName": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "isOptional": {
-          "type": "boolean"
+          "type": "boolean",
+          "default": false
         },
         "isNillable": {
-          "type": "boolean"
+          "type": "boolean",
+          "default": false
         },
         "entityExposedItemName": {
-          "type": "string"
+          "type": "string",
+          "default": ""
+        },
+        "parameter": {
+          "type": "string",
+          "description": "ByNameReferenceProperty: microflows.schema.json#/definitions/MicroflowParameter"
         },
         "parameterType": {
           "$ref": "datatypes.schema.json#/definitions/DataType"
@@ -410,6 +485,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/PublishedServiceBase"
+        }
       ]
     },
     "RpcMessagePartElement": {
@@ -423,13 +503,16 @@
           "const": "WebServices$RpcMessagePartElement"
         },
         "partName": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "typeName": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "elementName": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         }
       },
       "required": [
@@ -448,7 +531,8 @@
           "const": "WebServices$RpcOperationElement"
         },
         "name": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "messagePartElements": {
           "type": "array",
@@ -473,16 +557,24 @@
           "const": "WebServices$ServiceInfo"
         },
         "name": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "documentation": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "portName": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "location": {
-          "type": "string"
+          "type": "string",
+          "default": ""
+        },
+        "usingAddressing": {
+          "type": "boolean",
+          "default": false
         },
         "soapVersion": {
           "type": "string",
@@ -493,16 +585,13 @@
         },
         "locationConstant": {
           "type": "string",
-          "description": "constants.schema.json#/definitions/IConstant"
+          "description": "ByNameReferenceProperty: constants.schema.json#/definitions/Constant"
         },
         "operations": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/OperationInfo"
           }
-        },
-        "usingAddressing": {
-          "type": "boolean"
         }
       },
       "required": [
@@ -520,20 +609,27 @@
           "type": "string",
           "const": "WebServices$SystemIdDataAttribute"
         },
-        "entity": {
-          "type": "string",
-          "description": "domainmodels.schema.json#/definitions/IEntity"
-        },
         "summary": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "description": {
-          "type": "string"
+          "type": "string",
+          "default": ""
+        },
+        "entity": {
+          "type": "string",
+          "description": "ByNameReferenceProperty: domainmodels.schema.json#/definitions/Entity"
         }
       },
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataMember"
+        }
       ]
     },
     "VersionedService": {
@@ -547,10 +643,32 @@
           "const": "WebServices$VersionedService"
         },
         "documentation": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "targetNamespace": {
-          "type": "string"
+          "type": "string",
+          "default": "http://www.example.com/"
+        },
+        "optimizedXml": {
+          "type": "boolean",
+          "default": true
+        },
+        "versionNumber": {
+          "type": "integer",
+          "default": 0
+        },
+        "caption": {
+          "type": "string",
+          "default": ""
+        },
+        "description": {
+          "type": "string",
+          "default": ""
+        },
+        "validate": {
+          "type": "boolean",
+          "default": false
         },
         "headerAuthentication": {
           "type": "string",
@@ -566,35 +684,20 @@
             "$ref": "#/definitions/PublishedOperation"
           }
         },
-        "optimizedXml": {
-          "type": "boolean"
-        },
         "headerImportMapping": {
           "type": "string",
-          "description": "importmappings.schema.json#/definitions/IImportMapping"
+          "description": "ByNameReferenceProperty: importmappings.schema.json#/definitions/ImportMapping"
         },
         "objectHandlingBackup": {
           "type": "string"
         },
         "headerMicroflow": {
           "type": "string",
-          "description": "microflows.schema.json#/definitions/IMicroflow"
-        },
-        "versionNumber": {
-          "type": "string"
-        },
-        "caption": {
-          "type": "string"
-        },
-        "description": {
-          "type": "string"
+          "description": "ByNameReferenceProperty: microflows.schema.json#/definitions/Microflow"
         },
         "image": {
           "type": "string",
-          "description": "images.schema.json#/definitions/IImage"
-        },
-        "validate": {
-          "type": "boolean"
+          "description": "ByNameReferenceProperty: images.schema.json#/definitions/Image"
         }
       },
       "required": [
@@ -611,6 +714,14 @@
         "$Type": {
           "type": "string",
           "const": "WebServices$WsdlDescription"
+        },
+        "targetNamespace": {
+          "type": "string",
+          "default": ""
+        },
+        "importsHaveLocations": {
+          "type": "boolean",
+          "default": false
         },
         "wsdlEntries": {
           "type": "array",
@@ -629,12 +740,6 @@
           "items": {
             "$ref": "#/definitions/ServiceInfo"
           }
-        },
-        "targetNamespace": {
-          "type": "string"
-        },
-        "importsHaveLocations": {
-          "type": "boolean"
         }
       },
       "required": [
@@ -653,16 +758,20 @@
           "const": "WebServices$WsdlEntry"
         },
         "location": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "contents": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "localizedLocationFormat": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "localizedContentsFormat": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         }
       },
       "required": [

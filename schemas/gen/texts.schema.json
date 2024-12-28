@@ -11,11 +11,12 @@
           "type": "string",
           "const": "Texts$SystemText"
         },
+        "key": {
+          "type": "string",
+          "default": ""
+        },
         "text": {
           "$ref": "#/definitions/Text"
-        },
-        "key": {
-          "type": "string"
         }
       },
       "required": [
@@ -44,6 +45,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "projects.schema.json#/definitions/ProjectDocument"
+        }
       ]
     },
     "Text": {
@@ -79,10 +85,12 @@
           "const": "Texts$Translation"
         },
         "languageCode": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "text": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         }
       },
       "required": [

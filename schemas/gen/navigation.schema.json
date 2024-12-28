@@ -13,11 +13,11 @@
         },
         "page": {
           "type": "string",
-          "description": "pages.schema.json#/definitions/IPage"
+          "description": "ByNameReferenceProperty: pages.schema.json#/definitions/Page"
         },
         "microflow": {
           "type": "string",
-          "description": "microflows.schema.json#/definitions/IMicroflow"
+          "description": "ByNameReferenceProperty: microflows.schema.json#/definitions/Microflow"
         }
       },
       "required": [
@@ -39,6 +39,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/HomePageBase"
+        }
       ]
     },
     "NativeHomePageBase": {
@@ -53,11 +58,11 @@
         },
         "homePagePage": {
           "type": "string",
-          "description": "pages.schema.json#/definitions/IPage"
+          "description": "ByNameReferenceProperty: pages.schema.json#/definitions/Page"
         },
         "homePageNanoflow": {
           "type": "string",
-          "description": "microflows.schema.json#/definitions/INanoflow"
+          "description": "ByNameReferenceProperty: microflows.schema.json#/definitions/Nanoflow"
         }
       },
       "required": [
@@ -79,6 +84,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/NativeHomePageBase"
+        }
       ]
     },
     "NavigationProfileBase": {
@@ -92,7 +102,8 @@
           "const": "Navigation$NavigationProfileBase"
         },
         "name": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "offlineEntityConfigs": {
           "type": "array",
@@ -116,6 +127,30 @@
           "type": "string",
           "const": "Navigation$NativeNavigationProfile"
         },
+        "otaEnabled": {
+          "type": "boolean",
+          "default": false
+        },
+        "loggingEnabled": {
+          "type": "boolean",
+          "default": false
+        },
+        "encryptionDbEnabled": {
+          "type": "boolean",
+          "default": false
+        },
+        "localFileEncryptionEnabled": {
+          "type": "boolean",
+          "default": false
+        },
+        "applyScreenTransition": {
+          "type": "boolean",
+          "default": false
+        },
+        "hermesEnabled": {
+          "type": "boolean",
+          "default": false
+        },
         "nativeHomePage": {
           "$ref": "#/definitions/NativeHomePage"
         },
@@ -130,18 +165,6 @@
           "items": {
             "$ref": "nativepages.schema.json#/definitions/BottomBarItem"
           }
-        },
-        "otaEnabled": {
-          "type": "boolean"
-        },
-        "loggingEnabled": {
-          "type": "boolean"
-        },
-        "encryptionDbEnabled": {
-          "type": "boolean"
-        },
-        "localFileEncryptionEnabled": {
-          "type": "boolean"
         },
         "screenNavigationTransition": {
           "type": "string",
@@ -158,18 +181,17 @@
             "ModalPresentationIOS",
             "BottomSheetAndroid"
           ]
-        },
-        "applyScreenTransition": {
-          "type": "boolean"
-        },
-        "hermesEnabled": {
-          "type": "boolean"
         }
       },
       "required": [
         "$ID",
         "$Type",
         "nativeHomePage"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/NavigationProfileBase"
+        }
       ]
     },
     "NavigationDocument": {
@@ -192,6 +214,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "projects.schema.json#/definitions/ProjectDocument"
+        }
       ]
     },
     "NavigationProfile": {
@@ -236,7 +263,7 @@
         },
         "appIcon": {
           "type": "string",
-          "description": "images.schema.json#/definitions/IImage"
+          "description": "ByNameReferenceProperty: images.schema.json#/definitions/Image"
         },
         "loginPageSettings": {
           "$ref": "pages.schema.json#/definitions/PageSettings"
@@ -258,6 +285,11 @@
         "appTitle",
         "loginPageSettings",
         "menuItemCollection"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/NavigationProfileBase"
+        }
       ]
     },
     "NotFoundHomePage": {
@@ -274,6 +306,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/HomePageBase"
+        }
       ]
     },
     "OfflineEntityConfig": {
@@ -286,9 +323,13 @@
           "type": "string",
           "const": "Navigation$OfflineEntityConfig"
         },
+        "constraint": {
+          "type": "string",
+          "default": ""
+        },
         "entity": {
           "type": "string",
-          "description": "domainmodels.schema.json#/definitions/IEntity"
+          "description": "ByNameReferenceProperty: domainmodels.schema.json#/definitions/Entity"
         },
         "syncMode": {
           "type": "string",
@@ -300,9 +341,6 @@
             "Never",
             "Online"
           ]
-        },
-        "constraint": {
-          "type": "string"
         }
       },
       "required": [
@@ -322,10 +360,12 @@
           "const": "Navigation$ProgressiveWebAppSettings"
         },
         "precaching": {
-          "type": "boolean"
+          "type": "boolean",
+          "default": false
         },
         "installPrompt": {
-          "type": "boolean"
+          "type": "boolean",
+          "default": true
         }
       },
       "required": [
@@ -345,12 +385,17 @@
         },
         "userRole": {
           "type": "string",
-          "description": "security.schema.json#/definitions/IUserRole"
+          "description": "ByNameReferenceProperty: security.schema.json#/definitions/UserRole"
         }
       },
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/HomePageBase"
+        }
       ]
     },
     "RoleBasedNativeHomePage": {
@@ -365,12 +410,17 @@
         },
         "userRole": {
           "type": "string",
-          "description": "security.schema.json#/definitions/IUserRole"
+          "description": "ByNameReferenceProperty: security.schema.json#/definitions/UserRole"
         }
       },
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/NativeHomePageBase"
+        }
       ]
     }
   }

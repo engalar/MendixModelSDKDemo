@@ -35,6 +35,11 @@
         "$ID",
         "$Type",
         "type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ParameterType"
+        }
       ]
     },
     "Type": {
@@ -67,6 +72,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/Type"
+        }
       ]
     },
     "BooleanType": {
@@ -83,6 +93,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/PrimitiveType"
+        }
       ]
     },
     "EntityType": {
@@ -99,6 +114,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/Type"
+        }
       ]
     },
     "ConcreteEntityType": {
@@ -113,13 +133,18 @@
         },
         "entity": {
           "type": "string",
-          "description": "domainmodels.schema.json#/definitions/IEntity"
+          "description": "ByNameReferenceProperty: domainmodels.schema.json#/definitions/Entity"
         }
       },
       "required": [
         "$ID",
         "$Type",
         "entity"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/EntityType"
+        }
       ]
     },
     "DateTimeType": {
@@ -136,6 +161,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/PrimitiveType"
+        }
       ]
     },
     "DecimalType": {
@@ -152,6 +182,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/PrimitiveType"
+        }
       ]
     },
     "EntityTypeParameterType": {
@@ -168,6 +203,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ParameterType"
+        }
       ]
     },
     "EnumerationType": {
@@ -182,13 +222,18 @@
         },
         "enumeration": {
           "type": "string",
-          "description": "enumerations.schema.json#/definitions/IEnumeration"
+          "description": "ByNameReferenceProperty: enumerations.schema.json#/definitions/Enumeration"
         }
       },
       "required": [
         "$ID",
         "$Type",
         "enumeration"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/Type"
+        }
       ]
     },
     "ExportMappingJavaActionParameterType": {
@@ -205,6 +250,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "codeactions.schema.json#/definitions/ParameterType"
+        }
       ]
     },
     "ExportMappingParameterType": {
@@ -221,6 +271,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ParameterType"
+        }
       ]
     },
     "FloatType": {
@@ -237,6 +292,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/PrimitiveType"
+        }
       ]
     },
     "ImportMappingJavaActionParameterType": {
@@ -253,6 +313,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "codeactions.schema.json#/definitions/ParameterType"
+        }
       ]
     },
     "ImportMappingParameterType": {
@@ -269,6 +334,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ParameterType"
+        }
       ]
     },
     "IntegerType": {
@@ -285,6 +355,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/PrimitiveType"
+        }
       ]
     },
     "JavaAction": {
@@ -301,6 +376,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "codeactions.schema.json#/definitions/CodeAction"
+        }
       ]
     },
     "JavaActionParameter": {
@@ -317,6 +397,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "codeactions.schema.json#/definitions/CodeActionParameter"
+        }
       ]
     },
     "ListType": {
@@ -337,6 +422,11 @@
         "$ID",
         "$Type",
         "parameter"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/Type"
+        }
       ]
     },
     "MicroflowActionInfo": {
@@ -350,14 +440,16 @@
           "const": "JavaActions$MicroflowActionInfo"
         },
         "caption": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "category": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "icon": {
           "type": "string",
-          "description": "images.schema.json#/definitions/IImage"
+          "description": "ByNameReferenceProperty: images.schema.json#/definitions/Image"
         }
       },
       "required": [
@@ -379,6 +471,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "codeactions.schema.json#/definitions/ParameterType"
+        }
       ]
     },
     "MicroflowParameterType": {
@@ -395,6 +492,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ParameterType"
+        }
       ]
     },
     "ParameterizedEntityType": {
@@ -411,6 +513,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/EntityType"
+        }
       ]
     },
     "StringType": {
@@ -427,6 +534,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/PrimitiveType"
+        }
       ]
     },
     "TypeParameter": {
@@ -440,7 +552,8 @@
           "const": "JavaActions$TypeParameter"
         },
         "name": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         }
       },
       "required": [

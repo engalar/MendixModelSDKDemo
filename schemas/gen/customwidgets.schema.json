@@ -33,6 +33,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "pages.schema.json#/definitions/Widget"
+        }
       ]
     },
     "CustomWidgetDatabaseSource": {
@@ -49,6 +54,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "pages.schema.json#/definitions/DatabaseSourceBase"
+        }
       ]
     },
     "CustomWidgetType": {
@@ -62,37 +72,46 @@
           "const": "CustomWidgets$CustomWidgetType"
         },
         "widgetId": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "needsEntityContext": {
-          "type": "boolean"
+          "type": "boolean",
+          "default": false
         },
         "pluginWidget": {
-          "type": "boolean"
+          "type": "boolean",
+          "default": false
         },
         "name": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "description": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "studioProCategory": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "studioCategory": {
-          "type": "string"
+          "type": "string",
+          "default": ""
+        },
+        "offlineCapable": {
+          "type": "boolean",
+          "default": false
+        },
+        "helpUrl": {
+          "type": "string",
+          "default": ""
         },
         "supportedPlatform": {
           "type": "string"
         },
-        "offlineCapable": {
-          "type": "boolean"
-        },
         "objectType": {
           "$ref": "#/definitions/WidgetObjectType"
-        },
-        "helpUrl": {
-          "type": "string"
         }
       },
       "required": [
@@ -115,6 +134,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "pages.schema.json#/definitions/XPathSourceBase"
+        }
       ]
     },
     "WidgetEnumerationValue": {
@@ -128,10 +152,12 @@
           "const": "CustomWidgets$WidgetEnumerationValue"
         },
         "key": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "caption": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         }
       },
       "required": [
@@ -213,19 +239,24 @@
           "const": "CustomWidgets$WidgetPropertyType"
         },
         "key": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "category": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "caption": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "description": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "isDefault": {
-          "type": "boolean"
+          "type": "boolean",
+          "default": false
         },
         "valueType": {
           "$ref": "#/definitions/WidgetValueType"
@@ -246,6 +277,18 @@
           "type": "string",
           "const": "CustomWidgets$WidgetReturnType"
         },
+        "isList": {
+          "type": "boolean",
+          "default": false
+        },
+        "entityProperty": {
+          "type": "string",
+          "default": ""
+        },
+        "assignableTo": {
+          "type": "string",
+          "default": ""
+        },
         "type": {
           "type": "string",
           "enum": [
@@ -259,15 +302,6 @@
             "Object",
             "Decimal"
           ]
-        },
-        "isList": {
-          "type": "boolean"
-        },
-        "entityProperty": {
-          "type": "string"
-        },
-        "assignableTo": {
-          "type": "string"
         }
       },
       "required": [
@@ -286,10 +320,12 @@
           "const": "CustomWidgets$WidgetTranslation"
         },
         "languageCode": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "text": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         }
       },
       "required": [
@@ -308,7 +344,16 @@
           "const": "CustomWidgets$WidgetValue"
         },
         "primitiveValue": {
-          "type": "string"
+          "type": "string",
+          "default": ""
+        },
+        "xPathConstraint": {
+          "type": "string",
+          "default": ""
+        },
+        "expression": {
+          "type": "string",
+          "default": ""
         },
         "entityRef": {
           "$ref": "domainmodels.schema.json#/definitions/EntityRef"
@@ -318,31 +363,28 @@
         },
         "page": {
           "type": "string",
-          "description": "pages.schema.json#/definitions/IPage"
+          "description": "ByNameReferenceProperty: pages.schema.json#/definitions/Page"
         },
         "microflow": {
           "type": "string",
-          "description": "microflows.schema.json#/definitions/IMicroflow"
+          "description": "ByNameReferenceProperty: microflows.schema.json#/definitions/Microflow"
         },
         "nanoflow": {
           "type": "string",
-          "description": "microflows.schema.json#/definitions/INanoflow"
+          "description": "ByNameReferenceProperty: microflows.schema.json#/definitions/Nanoflow"
         },
         "icon": {
           "$ref": "pages.schema.json#/definitions/Icon"
         },
         "image": {
           "type": "string",
-          "description": "images.schema.json#/definitions/IImage"
+          "description": "ByNameReferenceProperty: images.schema.json#/definitions/Image"
         },
         "translatableValue": {
           "$ref": "texts.schema.json#/definitions/Text"
         },
         "textTemplate": {
           "$ref": "pages.schema.json#/definitions/ClientTemplate"
-        },
-        "xPathConstraint": {
-          "type": "string"
         },
         "objects": {
           "type": "array",
@@ -352,9 +394,6 @@
         },
         "action": {
           "$ref": "pages.schema.json#/definitions/ClientAction"
-        },
-        "expression": {
-          "type": "string"
         },
         "widgets": {
           "type": "array",
@@ -393,6 +432,58 @@
           "type": "string",
           "const": "CustomWidgets$WidgetValueType"
         },
+        "isList": {
+          "type": "boolean",
+          "default": false
+        },
+        "isLinked": {
+          "type": "boolean",
+          "default": false
+        },
+        "isMetaData": {
+          "type": "boolean",
+          "default": false
+        },
+        "entityProperty": {
+          "type": "string",
+          "default": ""
+        },
+        "allowNonPersistableEntities": {
+          "type": "boolean",
+          "default": false
+        },
+        "parameterIsList": {
+          "type": "boolean",
+          "default": false
+        },
+        "multiline": {
+          "type": "boolean",
+          "default": false
+        },
+        "defaultValue": {
+          "type": "string",
+          "default": ""
+        },
+        "required": {
+          "type": "boolean",
+          "default": false
+        },
+        "onChangeProperty": {
+          "type": "string",
+          "default": ""
+        },
+        "dataSourceProperty": {
+          "type": "string",
+          "default": ""
+        },
+        "selectableObjectsProperty": {
+          "type": "string",
+          "default": ""
+        },
+        "setLabel": {
+          "type": "boolean",
+          "default": false
+        },
         "type": {
           "type": "string",
           "enum": [
@@ -422,21 +513,6 @@
             "Widgets"
           ]
         },
-        "isList": {
-          "type": "boolean"
-        },
-        "isLinked": {
-          "type": "boolean"
-        },
-        "isMetaData": {
-          "type": "boolean"
-        },
-        "entityProperty": {
-          "type": "string"
-        },
-        "allowNonPersistableEntities": {
-          "type": "boolean"
-        },
         "isPath": {
           "type": "string",
           "enum": [
@@ -452,27 +528,6 @@
             "Reference",
             "ReferenceSet"
           ]
-        },
-        "parameterIsList": {
-          "type": "boolean"
-        },
-        "multiline": {
-          "type": "boolean"
-        },
-        "defaultValue": {
-          "type": "string"
-        },
-        "required": {
-          "type": "boolean"
-        },
-        "onChangeProperty": {
-          "type": "string"
-        },
-        "dataSourceProperty": {
-          "type": "string"
-        },
-        "selectableObjectsProperty": {
-          "type": "string"
         },
         "attributeTypes": {
           "type": "array",
@@ -509,9 +564,6 @@
           "items": {
             "$ref": "#/definitions/WidgetTranslation"
           }
-        },
-        "setLabel": {
-          "type": "boolean"
         },
         "defaultType": {
           "type": "string",

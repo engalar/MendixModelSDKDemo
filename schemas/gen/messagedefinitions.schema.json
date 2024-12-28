@@ -15,6 +15,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "mappings.schema.json#/definitions/Element"
+        }
       ]
     },
     "AttributeElement": {
@@ -31,6 +36,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "mappings.schema.json#/definitions/Element"
+        }
       ]
     },
     "EntityElement": {
@@ -47,6 +57,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "mappings.schema.json#/definitions/Element"
+        }
       ]
     },
     "MessageDefinition": {
@@ -60,10 +75,12 @@
           "const": "MessageDefinitions$MessageDefinition"
         },
         "name": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "documentation": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         }
       },
       "required": [
@@ -88,6 +105,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/MessageDefinition"
+        }
       ]
     },
     "ExposedMember": {
@@ -101,18 +123,26 @@
           "const": "MessageDefinitions$ExposedMember"
         },
         "originalName": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "documentation": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "example": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         }
       },
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "mappings.schema.json#/definitions/Element"
+        }
       ]
     },
     "ExposedEntityBase": {
@@ -127,13 +157,18 @@
         },
         "entity": {
           "type": "string",
-          "description": "domainmodels.schema.json#/definitions/IEntity"
+          "description": "ByNameReferenceProperty: domainmodels.schema.json#/definitions/Entity"
         }
       },
       "required": [
         "$ID",
         "$Type",
         "entity"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ExposedMember"
+        }
       ]
     },
     "ExposedAssociation": {
@@ -148,13 +183,18 @@
         },
         "association": {
           "type": "string",
-          "description": "domainmodels.schema.json#/definitions/IAssociationBase"
+          "description": "ByNameReferenceProperty: domainmodels.schema.json#/definitions/AssociationBase"
         }
       },
       "required": [
         "$ID",
         "$Type",
         "association"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ExposedEntityBase"
+        }
       ]
     },
     "ExposedAttribute": {
@@ -169,13 +209,18 @@
         },
         "attribute": {
           "type": "string",
-          "description": "domainmodels.schema.json#/definitions/IAttribute"
+          "description": "ByNameReferenceProperty: domainmodels.schema.json#/definitions/Attribute"
         }
       },
       "required": [
         "$ID",
         "$Type",
         "attribute"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ExposedMember"
+        }
       ]
     },
     "ExposedEntity": {
@@ -192,6 +237,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ExposedEntityBase"
+        }
       ]
     },
     "MessageDefinitionCollection": {
@@ -214,6 +264,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "projects.schema.json#/definitions/Document"
+        }
       ]
     }
   }

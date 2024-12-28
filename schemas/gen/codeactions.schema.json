@@ -35,6 +35,11 @@
         "$ID",
         "$Type",
         "type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ParameterType"
+        }
       ]
     },
     "Type": {
@@ -67,6 +72,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/Type"
+        }
       ]
     },
     "BooleanType": {
@@ -83,6 +93,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/PrimitiveType"
+        }
       ]
     },
     "CodeAction": {
@@ -95,6 +110,10 @@
           "type": "string",
           "const": "CodeActions$CodeAction"
         },
+        "actionDefaultReturnName": {
+          "type": "string",
+          "default": "ReturnValueName"
+        },
         "actionTypeParameters": {
           "type": "array",
           "items": {
@@ -103,9 +122,6 @@
         },
         "actionReturnType": {
           "$ref": "#/definitions/Type"
-        },
-        "actionDefaultReturnName": {
-          "type": "string"
         },
         "modelerActionInfo": {
           "$ref": "#/definitions/MicroflowActionInfo"
@@ -121,6 +137,11 @@
         "$ID",
         "$Type",
         "actionReturnType"
+      ],
+      "allOf": [
+        {
+          "$ref": "projects.schema.json#/definitions/Document"
+        }
       ]
     },
     "CodeActionParameter": {
@@ -134,19 +155,23 @@
           "const": "CodeActions$CodeActionParameter"
         },
         "name": {
-          "type": "string"
+          "type": "string",
+          "default": ""
+        },
+        "description": {
+          "type": "string",
+          "default": ""
+        },
+        "category": {
+          "type": "string",
+          "default": ""
+        },
+        "isRequired": {
+          "type": "boolean",
+          "default": true
         },
         "actionParameterType": {
           "$ref": "#/definitions/ParameterType"
-        },
-        "description": {
-          "type": "string"
-        },
-        "category": {
-          "type": "string"
-        },
-        "isRequired": {
-          "type": "boolean"
         }
       },
       "required": [
@@ -169,6 +194,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/Type"
+        }
       ]
     },
     "ConcreteEntityType": {
@@ -183,13 +213,18 @@
         },
         "entity": {
           "type": "string",
-          "description": "domainmodels.schema.json#/definitions/IEntity"
+          "description": "ByNameReferenceProperty: domainmodels.schema.json#/definitions/Entity"
         }
       },
       "required": [
         "$ID",
         "$Type",
         "entity"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/EntityType"
+        }
       ]
     },
     "DateTimeType": {
@@ -206,6 +241,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/PrimitiveType"
+        }
       ]
     },
     "DecimalType": {
@@ -222,6 +262,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/PrimitiveType"
+        }
       ]
     },
     "EntityTypeParameterType": {
@@ -238,6 +283,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ParameterType"
+        }
       ]
     },
     "EnumerationType": {
@@ -252,13 +302,18 @@
         },
         "enumeration": {
           "type": "string",
-          "description": "enumerations.schema.json#/definitions/IEnumeration"
+          "description": "ByNameReferenceProperty: enumerations.schema.json#/definitions/Enumeration"
         }
       },
       "required": [
         "$ID",
         "$Type",
         "enumeration"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/Type"
+        }
       ]
     },
     "FloatType": {
@@ -275,6 +330,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/PrimitiveType"
+        }
       ]
     },
     "IntegerType": {
@@ -291,6 +351,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/PrimitiveType"
+        }
       ]
     },
     "ListType": {
@@ -311,6 +376,11 @@
         "$ID",
         "$Type",
         "parameter"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/Type"
+        }
       ]
     },
     "MicroflowActionInfo": {
@@ -324,22 +394,28 @@
           "const": "CodeActions$MicroflowActionInfo"
         },
         "caption": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "category": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "iconData": {
-          "type": "string"
+          "type": "string",
+          "contentEncoding": "base64"
         },
         "iconDataDark": {
-          "type": "string"
+          "type": "string",
+          "contentEncoding": "base64"
         },
         "imageData": {
-          "type": "string"
+          "type": "string",
+          "contentEncoding": "base64"
         },
         "imageDataDark": {
-          "type": "string"
+          "type": "string",
+          "contentEncoding": "base64"
         }
       },
       "required": [
@@ -361,6 +437,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/EntityType"
+        }
       ]
     },
     "StringTemplateParameterType": {
@@ -384,6 +465,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ParameterType"
+        }
       ]
     },
     "StringType": {
@@ -400,6 +486,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/PrimitiveType"
+        }
       ]
     },
     "TypeParameter": {
@@ -413,7 +504,8 @@
           "const": "CodeActions$TypeParameter"
         },
         "name": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         }
       },
       "required": [
@@ -435,6 +527,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataType"
+        }
       ]
     }
   }

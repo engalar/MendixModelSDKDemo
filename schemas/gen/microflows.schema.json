@@ -28,7 +28,8 @@
           "const": "Microflows$AbortOperation"
         },
         "workflowVariable": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "reason": {
           "$ref": "#/definitions/StringTemplate"
@@ -38,6 +39,11 @@
         "$ID",
         "$Type",
         "reason"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/WorkflowOperation"
+        }
       ]
     },
     "MicroflowObject": {
@@ -51,10 +57,18 @@
           "const": "Microflows$MicroflowObject"
         },
         "relativeMiddlePoint": {
-          "type": "string"
+          "$ref": "../common.schema.json#/definitions/Point",
+          "default": {
+            "x": 0,
+            "y": 0
+          }
         },
         "size": {
-          "type": "string"
+          "$ref": "../common.schema.json#/definitions/Size",
+          "default": {
+            "width": 0,
+            "height": 0
+          }
         }
       },
       "required": [
@@ -76,6 +90,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/MicroflowObject"
+        }
       ]
     },
     "ActionActivity": {
@@ -88,17 +107,24 @@
           "type": "string",
           "const": "Microflows$ActionActivity"
         },
-        "action": {
-          "$ref": "#/definitions/MicroflowAction"
-        },
         "disabled": {
-          "type": "boolean"
+          "type": "boolean",
+          "default": false
         },
         "caption": {
-          "type": "string"
+          "type": "string",
+          "default": "Activity"
         },
         "autoGenerateCaption": {
-          "type": "boolean"
+          "type": "boolean",
+          "default": true
+        },
+        "documentation": {
+          "type": "string",
+          "default": ""
+        },
+        "action": {
+          "$ref": "#/definitions/MicroflowAction"
         },
         "backgroundColor": {
           "type": "string",
@@ -113,14 +139,16 @@
             "Red",
             "Yellow"
           ]
-        },
-        "documentation": {
-          "type": "string"
         }
       },
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/Activity"
+        }
       ]
     },
     "RequestHandling": {
@@ -166,6 +194,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/RequestHandling"
+        }
       ]
     },
     "MicroflowAction": {
@@ -205,17 +238,28 @@
           "const": "Microflows$AggregateListAction"
         },
         "inputListVariableName": {
-          "type": "string"
+          "type": "string",
+          "default": ""
+        },
+        "expression": {
+          "type": "string",
+          "default": ""
+        },
+        "useExpression": {
+          "type": "boolean",
+          "default": false
+        },
+        "outputVariableName": {
+          "type": "string",
+          "default": ""
+        },
+        "reduceInitialValueExpression": {
+          "type": "string",
+          "default": ""
         },
         "attribute": {
           "type": "string",
-          "description": "domainmodels.schema.json#/definitions/IAttribute"
-        },
-        "expression": {
-          "type": "string"
-        },
-        "useExpression": {
-          "type": "boolean"
+          "description": "ByNameReferenceProperty: domainmodels.schema.json#/definitions/Attribute"
         },
         "aggregateFunction": {
           "type": "string",
@@ -230,20 +274,19 @@
             "Reduce"
           ]
         },
-        "outputVariableName": {
-          "type": "string"
-        },
         "reduceReturnDataType": {
           "$ref": "datatypes.schema.json#/definitions/DataType"
-        },
-        "reduceInitialValueExpression": {
-          "type": "string"
         }
       },
       "required": [
         "$ID",
         "$Type",
         "reduceReturnDataType"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/MicroflowAction"
+        }
       ]
     },
     "Annotation": {
@@ -257,12 +300,18 @@
           "const": "Microflows$Annotation"
         },
         "caption": {
-          "type": "string"
+          "type": "string",
+          "default": "Add your annotation here."
         }
       },
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/MicroflowObject"
+        }
       ]
     },
     "Flow": {
@@ -276,10 +325,12 @@
           "const": "Microflows$Flow"
         },
         "originConnectionIndex": {
-          "type": "string"
+          "type": "integer",
+          "default": 0
         },
         "destinationConnectionIndex": {
-          "type": "string"
+          "type": "integer",
+          "default": 0
         },
         "line": {
           "$ref": "#/definitions/Line"
@@ -305,6 +356,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/Flow"
+        }
       ]
     },
     "AppServiceCallAction": {
@@ -317,26 +373,33 @@
           "type": "string",
           "const": "Microflows$AppServiceCallAction"
         },
+        "useVariable": {
+          "type": "boolean",
+          "default": true
+        },
+        "outputVariableName": {
+          "type": "string",
+          "default": ""
+        },
         "appServiceAction": {
           "type": "string",
-          "description": "appservices.schema.json#/definitions/IAppServiceAction"
+          "description": "ByNameReferenceProperty: appservices.schema.json#/definitions/AppServiceAction"
         },
         "parameterMappings": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/AppServiceCallParameterMapping"
           }
-        },
-        "useVariable": {
-          "type": "boolean"
-        },
-        "outputVariableName": {
-          "type": "string"
         }
       },
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/MicroflowAction"
+        }
       ]
     },
     "AppServiceCallParameterMapping": {
@@ -349,12 +412,13 @@
           "type": "string",
           "const": "Microflows$AppServiceCallParameterMapping"
         },
+        "argument": {
+          "type": "string",
+          "default": ""
+        },
         "parameter": {
           "type": "string",
-          "description": "appservices.schema.json#/definitions/IAppServiceActionParameter"
-        },
-        "argument": {
-          "type": "string"
+          "description": "ByNameReferenceProperty: appservices.schema.json#/definitions/AppServiceActionParameter"
         },
         "argumentModel": {
           "$ref": "expressions.schema.json#/definitions/Expression"
@@ -377,15 +441,22 @@
           "const": "Microflows$ApplyJumpToOptionAction"
         },
         "workflowJumpToDetailsVariable": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "outputVariableName": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         }
       },
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/MicroflowAction"
+        }
       ]
     },
     "RetrieveSource": {
@@ -415,16 +486,22 @@
           "const": "Microflows$AssociationRetrieveSource"
         },
         "startVariableName": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "association": {
           "type": "string",
-          "description": "domainmodels.schema.json#/definitions/IAssociationBase"
+          "description": "ByNameReferenceProperty: domainmodels.schema.json#/definitions/AssociationBase"
         }
       },
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/RetrieveSource"
+        }
       ]
     },
     "CodeActionParameterValue": {
@@ -457,6 +534,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/CodeActionParameterValue"
+        }
       ]
     },
     "BasicCodeActionParameterValue": {
@@ -470,12 +552,18 @@
           "const": "Microflows$BasicCodeActionParameterValue"
         },
         "argument": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         }
       },
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ExpressionBasedCodeActionParameterValue"
+        }
       ]
     },
     "JavaActionParameterValue": {
@@ -505,7 +593,8 @@
           "const": "Microflows$BasicJavaActionParameterValue"
         },
         "argument": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "argumentModel": {
           "$ref": "expressions.schema.json#/definitions/Expression"
@@ -515,6 +604,11 @@
         "$ID",
         "$Type",
         "argumentModel"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/JavaActionParameterValue"
+        }
       ]
     },
     "Line": {
@@ -544,15 +638,28 @@
           "const": "Microflows$BezierCurve"
         },
         "originControlVector": {
-          "type": "string"
+          "$ref": "../common.schema.json#/definitions/Size",
+          "default": {
+            "width": 0,
+            "height": 0
+          }
         },
         "destinationControlVector": {
-          "type": "string"
+          "$ref": "../common.schema.json#/definitions/Size",
+          "default": {
+            "width": 0,
+            "height": 0
+          }
         }
       },
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/Line"
+        }
       ]
     },
     "ListOperation": {
@@ -566,7 +673,8 @@
           "const": "Microflows$ListOperation"
         },
         "listVariableName": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         }
       },
       "required": [
@@ -585,12 +693,18 @@
           "const": "Microflows$BinaryListOperation"
         },
         "secondListOrObjectVariableName": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         }
       },
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ListOperation"
+        }
       ]
     },
     "BinaryRequestHandling": {
@@ -604,12 +718,18 @@
           "const": "Microflows$BinaryRequestHandling"
         },
         "expression": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         }
       },
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/RequestHandling"
+        }
       ]
     },
     "BodyVariable": {
@@ -623,7 +743,8 @@
           "const": "Microflows$BodyVariable"
         },
         "variableName": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         }
       },
       "required": [
@@ -645,6 +766,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/MicroflowObject"
+        }
       ]
     },
     "CallExternalAction": {
@@ -657,21 +783,23 @@
           "type": "string",
           "const": "Microflows$CallExternalAction"
         },
+        "name": {
+          "type": "string",
+          "default": ""
+        },
+        "variableName": {
+          "type": "string",
+          "default": ""
+        },
         "consumedODataService": {
           "type": "string",
-          "description": "rest.schema.json#/definitions/IConsumedODataService"
-        },
-        "name": {
-          "type": "string"
+          "description": "ByNameReferenceProperty: rest.schema.json#/definitions/ConsumedODataService"
         },
         "parameterMappings": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/ExternalActionParameterMapping"
           }
-        },
-        "variableName": {
-          "type": "string"
         },
         "variableDataType": {
           "$ref": "datatypes.schema.json#/definitions/DataType"
@@ -687,6 +815,11 @@
         "$ID",
         "$Type",
         "variableDataType"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/MicroflowAction"
+        }
       ]
     },
     "CaseValue": {
@@ -716,12 +849,18 @@
           "const": "Microflows$CastAction"
         },
         "outputVariableName": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         }
       },
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/MicroflowAction"
+        }
       ]
     },
     "ChangeListAction": {
@@ -735,10 +874,12 @@
           "const": "Microflows$ChangeListAction"
         },
         "changeVariableName": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "value": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "type": {
           "type": "string",
@@ -753,6 +894,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/MicroflowAction"
+        }
       ]
     },
     "ChangeMembersAction": {
@@ -765,14 +911,15 @@
           "type": "string",
           "const": "Microflows$ChangeMembersAction"
         },
+        "refreshInClient": {
+          "type": "boolean",
+          "default": false
+        },
         "items": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/MemberChange"
           }
-        },
-        "refreshInClient": {
-          "type": "boolean"
         },
         "commit": {
           "type": "string",
@@ -786,6 +933,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/MicroflowAction"
+        }
       ]
     },
     "ChangeObjectAction": {
@@ -799,12 +951,18 @@
           "const": "Microflows$ChangeObjectAction"
         },
         "changeVariableName": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         }
       },
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ChangeMembersAction"
+        }
       ]
     },
     "ChangeVariableAction": {
@@ -818,15 +976,22 @@
           "const": "Microflows$ChangeVariableAction"
         },
         "changeVariableName": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "value": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         }
       },
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/MicroflowAction"
+        }
       ]
     },
     "ClearFromClientAction": {
@@ -841,12 +1006,17 @@
         },
         "entity": {
           "type": "string",
-          "description": "domainmodels.schema.json#/definitions/IEntity"
+          "description": "ByNameReferenceProperty: domainmodels.schema.json#/definitions/Entity"
         }
       },
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/MicroflowAction"
+        }
       ]
     },
     "CloseFormAction": {
@@ -860,12 +1030,18 @@
           "const": "Microflows$CloseFormAction"
         },
         "numberOfPagesToClose": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         }
       },
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/MicroflowAction"
+        }
       ]
     },
     "CodeActionParameterMapping": {
@@ -895,18 +1071,26 @@
           "const": "Microflows$CommitAction"
         },
         "withEvents": {
-          "type": "boolean"
+          "type": "boolean",
+          "default": true
         },
         "commitVariableName": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "refreshInClient": {
-          "type": "boolean"
+          "type": "boolean",
+          "default": false
         }
       },
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/MicroflowAction"
+        }
       ]
     },
     "Range": {
@@ -936,12 +1120,18 @@
           "const": "Microflows$ConstantRange"
         },
         "singleObject": {
-          "type": "boolean"
+          "type": "boolean",
+          "default": false
         }
       },
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/Range"
+        }
       ]
     },
     "Contains": {
@@ -958,6 +1148,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/BinaryListOperation"
+        }
       ]
     },
     "ContinueEvent": {
@@ -974,6 +1169,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/MicroflowObject"
+        }
       ]
     },
     "ContinueOperation": {
@@ -987,12 +1187,18 @@
           "const": "Microflows$ContinueOperation"
         },
         "workflowVariable": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         }
       },
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/WorkflowOperation"
+        }
       ]
     },
     "MeterAction": {
@@ -1006,10 +1212,12 @@
           "const": "Microflows$MeterAction"
         },
         "name": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "description": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "tags": {
           "type": "array",
@@ -1021,6 +1229,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/MicroflowAction"
+        }
       ]
     },
     "CounterMeterAction": {
@@ -1034,12 +1247,18 @@
           "const": "Microflows$CounterMeterAction"
         },
         "value": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         }
       },
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/MeterAction"
+        }
       ]
     },
     "CreateListAction": {
@@ -1052,17 +1271,23 @@
           "type": "string",
           "const": "Microflows$CreateListAction"
         },
+        "outputVariableName": {
+          "type": "string",
+          "default": ""
+        },
         "entity": {
           "type": "string",
-          "description": "domainmodels.schema.json#/definitions/IEntity"
-        },
-        "outputVariableName": {
-          "type": "string"
+          "description": "ByNameReferenceProperty: domainmodels.schema.json#/definitions/Entity"
         }
       },
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/MicroflowAction"
+        }
       ]
     },
     "CreateObjectAction": {
@@ -1075,17 +1300,23 @@
           "type": "string",
           "const": "Microflows$CreateObjectAction"
         },
+        "outputVariableName": {
+          "type": "string",
+          "default": ""
+        },
         "entity": {
           "type": "string",
-          "description": "domainmodels.schema.json#/definitions/IEntity"
-        },
-        "outputVariableName": {
-          "type": "string"
+          "description": "ByNameReferenceProperty: domainmodels.schema.json#/definitions/Entity"
         }
       },
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ChangeMembersAction"
+        }
       ]
     },
     "CreateVariableAction": {
@@ -1099,19 +1330,26 @@
           "const": "Microflows$CreateVariableAction"
         },
         "variableName": {
-          "type": "string"
+          "type": "string",
+          "default": ""
+        },
+        "initialValue": {
+          "type": "string",
+          "default": ""
         },
         "variableType": {
           "$ref": "datatypes.schema.json#/definitions/DataType"
-        },
-        "initialValue": {
-          "type": "string"
         }
       },
       "required": [
         "$ID",
         "$Type",
         "variableType"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/MicroflowAction"
+        }
       ]
     },
     "CustomRange": {
@@ -1125,15 +1363,22 @@
           "const": "Microflows$CustomRange"
         },
         "limitExpression": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "offsetExpression": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         }
       },
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/Range"
+        }
       ]
     },
     "CustomRequestHandling": {
@@ -1154,6 +1399,11 @@
         "$ID",
         "$Type",
         "template"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/RequestHandling"
+        }
       ]
     },
     "DatabaseRetrieveSource": {
@@ -1166,15 +1416,16 @@
           "type": "string",
           "const": "Microflows$DatabaseRetrieveSource"
         },
+        "xPathConstraint": {
+          "type": "string",
+          "default": ""
+        },
         "entity": {
           "type": "string",
-          "description": "domainmodels.schema.json#/definitions/IEntity"
+          "description": "ByNameReferenceProperty: domainmodels.schema.json#/definitions/Entity"
         },
         "range": {
           "$ref": "#/definitions/Range"
-        },
-        "xPathConstraint": {
-          "type": "string"
         },
         "sortItemList": {
           "$ref": "#/definitions/SortItemList"
@@ -1185,6 +1436,11 @@
         "$Type",
         "range",
         "sortItemList"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/RetrieveSource"
+        }
       ]
     },
     "DeleteAction": {
@@ -1198,15 +1454,22 @@
           "const": "Microflows$DeleteAction"
         },
         "deleteVariableName": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "refreshInClient": {
-          "type": "boolean"
+          "type": "boolean",
+          "default": false
         }
       },
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/MicroflowAction"
+        }
       ]
     },
     "DeleteExternalObject": {
@@ -1220,15 +1483,22 @@
           "const": "Microflows$DeleteExternalObject"
         },
         "deleteVariableName": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "refreshInClient": {
-          "type": "boolean"
+          "type": "boolean",
+          "default": false
         }
       },
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/MicroflowAction"
+        }
       ]
     },
     "DocumentTemplateParameterMapping": {
@@ -1242,10 +1512,12 @@
           "const": "Microflows$DocumentTemplateParameterMapping"
         },
         "widgetName": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "argument": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         }
       },
       "required": [
@@ -1264,15 +1536,22 @@
           "const": "Microflows$DownloadFileAction"
         },
         "fileDocumentVariableName": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "showFileInBrowser": {
-          "type": "boolean"
+          "type": "boolean",
+          "default": false
         }
       },
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/MicroflowAction"
+        }
       ]
     },
     "EndEvent": {
@@ -1286,15 +1565,22 @@
           "const": "Microflows$EndEvent"
         },
         "returnValue": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "documentation": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         }
       },
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/MicroflowObject"
+        }
       ]
     },
     "EntityTypeCodeActionParameterValue": {
@@ -1309,12 +1595,17 @@
         },
         "entity": {
           "type": "string",
-          "description": "domainmodels.schema.json#/definitions/IEntity"
+          "description": "ByNameReferenceProperty: domainmodels.schema.json#/definitions/Entity"
         }
       },
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ExpressionBasedCodeActionParameterValue"
+        }
       ]
     },
     "EntityTypeJavaActionParameterValue": {
@@ -1329,12 +1620,17 @@
         },
         "entity": {
           "type": "string",
-          "description": "domainmodels.schema.json#/definitions/IEntity"
+          "description": "ByNameReferenceProperty: domainmodels.schema.json#/definitions/Entity"
         }
       },
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/JavaActionParameterValue"
+        }
       ]
     },
     "EnumerationCase": {
@@ -1348,12 +1644,18 @@
           "const": "Microflows$EnumerationCase"
         },
         "value": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         }
       },
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/CaseValue"
+        }
       ]
     },
     "ErrorEvent": {
@@ -1370,6 +1672,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/MicroflowObject"
+        }
       ]
     },
     "ExclusiveMerge": {
@@ -1386,6 +1693,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/MicroflowObject"
+        }
       ]
     },
     "ExclusiveSplit": {
@@ -1398,11 +1710,16 @@
           "type": "string",
           "const": "Microflows$ExclusiveSplit"
         },
+        "caption": {
+          "type": "string",
+          "default": ""
+        },
+        "documentation": {
+          "type": "string",
+          "default": ""
+        },
         "splitCondition": {
           "$ref": "#/definitions/SplitCondition"
-        },
-        "caption": {
-          "type": "string"
         },
         "errorHandlingType": {
           "type": "string",
@@ -1413,15 +1730,17 @@
             "Continue",
             "Abort"
           ]
-        },
-        "documentation": {
-          "type": "string"
         }
       },
       "required": [
         "$ID",
         "$Type",
         "splitCondition"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/MicroflowObject"
+        }
       ]
     },
     "ExportMappingJavaActionParameterValue": {
@@ -1436,12 +1755,17 @@
         },
         "exportMapping": {
           "type": "string",
-          "description": "exportmappings.schema.json#/definitions/IExportMapping"
+          "description": "ByNameReferenceProperty: exportmappings.schema.json#/definitions/ExportMapping"
         }
       },
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/JavaActionParameterValue"
+        }
       ]
     },
     "ExportMappingParameterValue": {
@@ -1456,12 +1780,17 @@
         },
         "exportMapping": {
           "type": "string",
-          "description": "exportmappings.schema.json#/definitions/IExportMapping"
+          "description": "ByNameReferenceProperty: exportmappings.schema.json#/definitions/ExportMapping"
         }
       },
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ExpressionBasedCodeActionParameterValue"
+        }
       ]
     },
     "ExportXmlAction": {
@@ -1474,14 +1803,15 @@
           "type": "string",
           "const": "Microflows$ExportXmlAction"
         },
+        "isValidationRequired": {
+          "type": "boolean",
+          "default": false
+        },
         "resultHandling": {
           "$ref": "#/definitions/MappingRequestHandling"
         },
         "outputMethod": {
           "$ref": "#/definitions/OutputMethod"
-        },
-        "isValidationRequired": {
-          "type": "boolean"
         }
       },
       "required": [
@@ -1489,6 +1819,11 @@
         "$Type",
         "resultHandling",
         "outputMethod"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/MicroflowAction"
+        }
       ]
     },
     "ExpressionListOperation": {
@@ -1502,12 +1837,18 @@
           "const": "Microflows$ExpressionListOperation"
         },
         "expression": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         }
       },
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ListOperation"
+        }
       ]
     },
     "SplitCondition": {
@@ -1537,12 +1878,18 @@
           "const": "Microflows$ExpressionSplitCondition"
         },
         "expression": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         }
       },
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/SplitCondition"
+        }
       ]
     },
     "ExternalActionParameterMapping": {
@@ -1556,16 +1903,19 @@
           "const": "Microflows$ExternalActionParameterMapping"
         },
         "parameterName": {
-          "type": "string"
+          "type": "string",
+          "default": ""
+        },
+        "canBeEmpty": {
+          "type": "boolean",
+          "default": false
+        },
+        "argument": {
+          "type": "string",
+          "default": ""
         },
         "parameterType": {
           "$ref": "datatypes.schema.json#/definitions/DataType"
-        },
-        "canBeEmpty": {
-          "type": "boolean"
-        },
-        "argument": {
-          "type": "string"
         },
         "includedAssociations": {
           "type": "array",
@@ -1607,12 +1957,18 @@
           "const": "Microflows$FileDocumentExport"
         },
         "targetDocumentVariableName": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         }
       },
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/OutputMethod"
+        }
       ]
     },
     "InspectAttribute": {
@@ -1626,20 +1982,26 @@
           "const": "Microflows$InspectAttribute"
         },
         "expression": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "attribute": {
           "type": "string",
-          "description": "domainmodels.schema.json#/definitions/IAttribute"
+          "description": "ByNameReferenceProperty: domainmodels.schema.json#/definitions/Attribute"
         },
         "association": {
           "type": "string",
-          "description": "domainmodels.schema.json#/definitions/IAssociationBase"
+          "description": "ByNameReferenceProperty: domainmodels.schema.json#/definitions/AssociationBase"
         }
       },
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ListOperation"
+        }
       ]
     },
     "Filter": {
@@ -1656,6 +2018,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/InspectAttribute"
+        }
       ]
     },
     "FilterByExpression": {
@@ -1672,6 +2039,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ExpressionListOperation"
+        }
       ]
     },
     "Find": {
@@ -1688,6 +2060,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/InspectAttribute"
+        }
       ]
     },
     "FindByExpression": {
@@ -1704,6 +2081,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ExpressionListOperation"
+        }
       ]
     },
     "FormDataPart": {
@@ -1717,10 +2099,12 @@
           "const": "Microflows$FormDataPart"
         },
         "key": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "value": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "headerEntries": {
           "type": "array",
@@ -1754,6 +2138,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/RequestHandling"
+        }
       ]
     },
     "GaugeMeterAction": {
@@ -1767,12 +2156,18 @@
           "const": "Microflows$GaugeMeterAction"
         },
         "value": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         }
       },
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/MeterAction"
+        }
       ]
     },
     "GenerateDocumentAction": {
@@ -1786,10 +2181,44 @@
           "const": "Microflows$GenerateDocumentAction"
         },
         "fileVariableName": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "languageVariableName": {
-          "type": "string"
+          "type": "string",
+          "default": ""
+        },
+        "overrideTopMargin": {
+          "type": "boolean",
+          "default": false
+        },
+        "overrideBottomMargin": {
+          "type": "boolean",
+          "default": false
+        },
+        "overrideLeftMargin": {
+          "type": "boolean",
+          "default": false
+        },
+        "overrideRightMargin": {
+          "type": "boolean",
+          "default": false
+        },
+        "marginLeftInInch": {
+          "type": "string",
+          "default": "0"
+        },
+        "marginRightInInch": {
+          "type": "string",
+          "default": "0"
+        },
+        "marginTopInInch": {
+          "type": "string",
+          "default": "0"
+        },
+        "marginBottomInInch": {
+          "type": "string",
+          "default": "0"
         },
         "documentType": {
           "type": "string",
@@ -1812,42 +2241,23 @@
         },
         "documentTemplate": {
           "type": "string",
-          "description": "documenttemplates.schema.json#/definitions/IDocumentTemplate"
+          "description": "ByNameReferenceProperty: documenttemplates.schema.json#/definitions/DocumentTemplate"
         },
         "parameterMappings": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/DocumentTemplateParameterMapping"
           }
-        },
-        "overrideTopMargin": {
-          "type": "boolean"
-        },
-        "overrideBottomMargin": {
-          "type": "boolean"
-        },
-        "overrideLeftMargin": {
-          "type": "boolean"
-        },
-        "overrideRightMargin": {
-          "type": "boolean"
-        },
-        "marginLeftInInch": {
-          "type": "string"
-        },
-        "marginRightInInch": {
-          "type": "string"
-        },
-        "marginTopInInch": {
-          "type": "string"
-        },
-        "marginBottomInInch": {
-          "type": "string"
         }
       },
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/MicroflowAction"
+        }
       ]
     },
     "GenerateJumpToOptionsAction": {
@@ -1861,15 +2271,22 @@
           "const": "Microflows$GenerateJumpToOptionsAction"
         },
         "workflowVariable": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "outputVariableName": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         }
       },
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/MicroflowAction"
+        }
       ]
     },
     "GetWorkflowActivityRecordsAction": {
@@ -1883,15 +2300,22 @@
           "const": "Microflows$GetWorkflowActivityRecordsAction"
         },
         "workflowVariable": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "outputVariableName": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         }
       },
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/MicroflowAction"
+        }
       ]
     },
     "GetWorkflowDataAction": {
@@ -1905,19 +2329,26 @@
           "const": "Microflows$GetWorkflowDataAction"
         },
         "workflowVariable": {
-          "type": "string"
+          "type": "string",
+          "default": ""
+        },
+        "outputVariableName": {
+          "type": "string",
+          "default": ""
         },
         "workflow": {
           "type": "string",
-          "description": "workflows.schema.json#/definitions/IWorkflow"
-        },
-        "outputVariableName": {
-          "type": "string"
+          "description": "ByNameReferenceProperty: workflows.schema.json#/definitions/Workflow"
         }
       },
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/MicroflowAction"
+        }
       ]
     },
     "GetWorkflowsAction": {
@@ -1931,15 +2362,22 @@
           "const": "Microflows$GetWorkflowsAction"
         },
         "workflowContextVariableName": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "outputVariableName": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         }
       },
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/MicroflowAction"
+        }
       ]
     },
     "Head": {
@@ -1956,6 +2394,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ListOperation"
+        }
       ]
     },
     "HttpConfiguration": {
@@ -1969,22 +2412,31 @@
           "const": "Microflows$HttpConfiguration"
         },
         "overrideLocation": {
-          "type": "boolean"
+          "type": "boolean",
+          "default": false
         },
         "customLocation": {
-          "type": "string"
+          "type": "string",
+          "default": ""
+        },
+        "useAuthentication": {
+          "type": "boolean",
+          "default": false
+        },
+        "httpAuthenticationUserName": {
+          "type": "string",
+          "default": ""
+        },
+        "authenticationPassword": {
+          "type": "string",
+          "default": ""
+        },
+        "clientCertificate": {
+          "type": "string",
+          "default": ""
         },
         "customLocationTemplate": {
           "$ref": "#/definitions/StringTemplate"
-        },
-        "useAuthentication": {
-          "type": "boolean"
-        },
-        "httpAuthenticationUserName": {
-          "type": "string"
-        },
-        "authenticationPassword": {
-          "type": "string"
         },
         "headerEntries": {
           "type": "array",
@@ -1993,9 +2445,6 @@
           }
         },
         "newHttpMethod": {
-          "type": "string"
-        },
-        "clientCertificate": {
           "type": "string"
         }
       },
@@ -2015,10 +2464,12 @@
           "const": "Microflows$HttpHeaderEntry"
         },
         "key": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "value": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         }
       },
       "required": [
@@ -2036,9 +2487,17 @@
           "type": "string",
           "const": "Microflows$ImportMappingCall"
         },
+        "mappingArgumentVariableName": {
+          "type": "string",
+          "default": ""
+        },
+        "forceSingleOccurrence": {
+          "type": "boolean",
+          "default": false
+        },
         "mapping": {
           "type": "string",
-          "description": "importmappings.schema.json#/definitions/IImportMapping"
+          "description": "ByNameReferenceProperty: importmappings.schema.json#/definitions/ImportMapping"
         },
         "objectHandlingBackup": {
           "type": "string"
@@ -2051,9 +2510,6 @@
             "No"
           ]
         },
-        "mappingArgumentVariableName": {
-          "type": "string"
-        },
         "range": {
           "$ref": "#/definitions/Range"
         },
@@ -2063,9 +2519,6 @@
             "Xml",
             "Json"
           ]
-        },
-        "forceSingleOccurrence": {
-          "type": "boolean"
         }
       },
       "required": [
@@ -2086,12 +2539,17 @@
         },
         "importMapping": {
           "type": "string",
-          "description": "importmappings.schema.json#/definitions/IImportMapping"
+          "description": "ByNameReferenceProperty: importmappings.schema.json#/definitions/ImportMapping"
         }
       },
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/JavaActionParameterValue"
+        }
       ]
     },
     "ImportMappingParameterValue": {
@@ -2106,12 +2564,17 @@
         },
         "importMapping": {
           "type": "string",
-          "description": "importmappings.schema.json#/definitions/IImportMapping"
+          "description": "ByNameReferenceProperty: importmappings.schema.json#/definitions/ImportMapping"
         }
       },
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ExpressionBasedCodeActionParameterValue"
+        }
       ]
     },
     "ImportXmlAction": {
@@ -2125,19 +2588,26 @@
           "const": "Microflows$ImportXmlAction"
         },
         "xmlDocumentVariableName": {
-          "type": "string"
+          "type": "string",
+          "default": ""
+        },
+        "isValidationRequired": {
+          "type": "boolean",
+          "default": false
         },
         "resultHandling": {
           "$ref": "#/definitions/ResultHandling"
-        },
-        "isValidationRequired": {
-          "type": "boolean"
         }
       },
       "required": [
         "$ID",
         "$Type",
         "resultHandling"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/MicroflowAction"
+        }
       ]
     },
     "IncludedAssociation": {
@@ -2150,12 +2620,13 @@
           "type": "string",
           "const": "Microflows$IncludedAssociation"
         },
+        "isParent": {
+          "type": "boolean",
+          "default": false
+        },
         "association": {
           "type": "string",
-          "description": "domainmodels.schema.json#/definitions/IAssociationBase"
-        },
-        "isParent": {
-          "type": "boolean"
+          "description": "ByNameReferenceProperty: domainmodels.schema.json#/definitions/AssociationBase"
         },
         "includedAssociations": {
           "type": "array",
@@ -2184,6 +2655,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/MeterAction"
+        }
       ]
     },
     "InheritanceCase": {
@@ -2198,12 +2674,17 @@
         },
         "value": {
           "type": "string",
-          "description": "domainmodels.schema.json#/definitions/IEntity"
+          "description": "ByNameReferenceProperty: domainmodels.schema.json#/definitions/Entity"
         }
       },
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/CaseValue"
+        }
       ]
     },
     "InheritanceSplit": {
@@ -2217,18 +2698,26 @@
           "const": "Microflows$InheritanceSplit"
         },
         "splitVariableName": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "caption": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "documentation": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         }
       },
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/MicroflowObject"
+        }
       ]
     },
     "Intersect": {
@@ -2245,6 +2734,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/BinaryListOperation"
+        }
       ]
     },
     "LoopSource": {
@@ -2274,15 +2768,22 @@
           "const": "Microflows$IterableList"
         },
         "listVariableName": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "variableName": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         }
       },
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/LoopSource"
+        }
       ]
     },
     "JavaActionCallAction": {
@@ -2295,9 +2796,17 @@
           "type": "string",
           "const": "Microflows$JavaActionCallAction"
         },
+        "useReturnVariable": {
+          "type": "boolean",
+          "default": true
+        },
+        "outputVariableName": {
+          "type": "string",
+          "default": ""
+        },
         "javaAction": {
           "type": "string",
-          "description": "javaactions.schema.json#/definitions/IJavaAction"
+          "description": "ByNameReferenceProperty: javaactions.schema.json#/definitions/JavaAction"
         },
         "queueSettings": {
           "$ref": "queues.schema.json#/definitions/QueueSettings"
@@ -2307,17 +2816,16 @@
           "items": {
             "$ref": "#/definitions/JavaActionParameterMapping"
           }
-        },
-        "useReturnVariable": {
-          "type": "boolean"
-        },
-        "outputVariableName": {
-          "type": "string"
         }
       },
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/MicroflowAction"
+        }
       ]
     },
     "JavaActionParameterMapping": {
@@ -2332,7 +2840,7 @@
         },
         "parameter": {
           "type": "string",
-          "description": "javaactions.schema.json#/definitions/IJavaActionParameter"
+          "description": "ByNameReferenceProperty: javaactions.schema.json#/definitions/JavaActionParameter"
         },
         "parameterValue": {
           "$ref": "#/definitions/CodeActionParameterValue"
@@ -2343,6 +2851,11 @@
         "$Type",
         "parameter",
         "parameterValue"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/CodeActionParameterMapping"
+        }
       ]
     },
     "JavaScriptActionCallAction": {
@@ -2355,26 +2868,33 @@
           "type": "string",
           "const": "Microflows$JavaScriptActionCallAction"
         },
+        "useReturnVariable": {
+          "type": "boolean",
+          "default": true
+        },
+        "outputVariableName": {
+          "type": "string",
+          "default": ""
+        },
         "javaScriptAction": {
           "type": "string",
-          "description": "javascriptactions.schema.json#/definitions/IJavaScriptAction"
+          "description": "ByNameReferenceProperty: javascriptactions.schema.json#/definitions/JavaScriptAction"
         },
         "parameterMappings": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/JavaScriptActionParameterMapping"
           }
-        },
-        "useReturnVariable": {
-          "type": "boolean"
-        },
-        "outputVariableName": {
-          "type": "string"
         }
       },
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/MicroflowAction"
+        }
       ]
     },
     "JavaScriptActionParameterMapping": {
@@ -2389,7 +2909,7 @@
         },
         "parameter": {
           "type": "string",
-          "description": "javascriptactions.schema.json#/definitions/IJavaScriptActionParameter"
+          "description": "ByNameReferenceProperty: javascriptactions.schema.json#/definitions/JavaScriptActionParameter"
         },
         "parameterValue": {
           "$ref": "#/definitions/CodeActionParameterValue"
@@ -2400,6 +2920,11 @@
         "$Type",
         "parameter",
         "parameterValue"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/CodeActionParameterMapping"
+        }
       ]
     },
     "ListEquals": {
@@ -2416,6 +2941,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/BinaryListOperation"
+        }
       ]
     },
     "ListOperationAction": {
@@ -2428,17 +2958,23 @@
           "type": "string",
           "const": "Microflows$ListOperationAction"
         },
+        "outputVariableName": {
+          "type": "string",
+          "default": ""
+        },
         "operation": {
           "$ref": "#/definitions/ListOperation"
-        },
-        "outputVariableName": {
-          "type": "string"
         }
       },
       "required": [
         "$ID",
         "$Type",
         "operation"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/MicroflowAction"
+        }
       ]
     },
     "ListRange": {
@@ -2459,6 +2995,11 @@
         "$ID",
         "$Type",
         "customRange"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ListOperation"
+        }
       ]
     },
     "LockWorkflowAction": {
@@ -2471,16 +3012,22 @@
           "type": "string",
           "const": "Microflows$LockWorkflowAction"
         },
+        "pauseAllWorkflows": {
+          "type": "boolean",
+          "default": true
+        },
         "workflowSelection": {
           "$ref": "workflows.schema.json#/definitions/WorkflowDefinitionSelection"
-        },
-        "pauseAllWorkflows": {
-          "type": "boolean"
         }
       },
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/MicroflowAction"
+        }
       ]
     },
     "LogMessageAction": {
@@ -2493,6 +3040,14 @@
           "type": "string",
           "const": "Microflows$LogMessageAction"
         },
+        "node": {
+          "type": "string",
+          "default": ""
+        },
+        "includeLatestStackTrace": {
+          "type": "boolean",
+          "default": false
+        },
         "level": {
           "type": "string",
           "enum": [
@@ -2504,20 +3059,19 @@
             "Critical"
           ]
         },
-        "node": {
-          "type": "string"
-        },
         "messageTemplate": {
           "$ref": "#/definitions/StringTemplate"
-        },
-        "includeLatestStackTrace": {
-          "type": "boolean"
         }
       },
       "required": [
         "$ID",
         "$Type",
         "messageTemplate"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/MicroflowAction"
+        }
       ]
     },
     "LoopedActivity": {
@@ -2529,6 +3083,10 @@
         "$Type": {
           "type": "string",
           "const": "Microflows$LoopedActivity"
+        },
+        "documentation": {
+          "type": "string",
+          "default": ""
         },
         "objectCollection": {
           "$ref": "#/definitions/MicroflowObjectCollection"
@@ -2543,9 +3101,6 @@
             "Abort"
           ]
         },
-        "documentation": {
-          "type": "string"
-        },
         "loopSource": {
           "$ref": "#/definitions/LoopSource"
         }
@@ -2555,6 +3110,11 @@
         "$Type",
         "objectCollection",
         "loopSource"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/Activity"
+        }
       ]
     },
     "MLModelCall": {
@@ -2568,11 +3128,12 @@
           "const": "Microflows$MLModelCall"
         },
         "modelReference": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "mlMappingDocument": {
           "type": "string",
-          "description": "mlmappings.schema.json#/definitions/IMLMappingDocument"
+          "description": "ByNameReferenceProperty: mlmappings.schema.json#/definitions/MLMappingDocument"
         },
         "parameterMappings": {
           "type": "array",
@@ -2596,20 +3157,27 @@
           "type": "string",
           "const": "Microflows$MLModelCallAction"
         },
-        "mlMappingDocument": {
-          "type": "string",
-          "description": "mlmappings.schema.json#/definitions/IMLMappingDocument"
-        },
         "inputVariableName": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "outputVariableName": {
-          "type": "string"
+          "type": "string",
+          "default": ""
+        },
+        "mlMappingDocument": {
+          "type": "string",
+          "description": "ByNameReferenceProperty: mlmappings.schema.json#/definitions/MLMappingDocument"
         }
       },
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/MicroflowAction"
+        }
       ]
     },
     "MLModelCallParameterMapping": {
@@ -2623,16 +3191,19 @@
           "const": "Microflows$MLModelCallParameterMapping"
         },
         "parameterName": {
-          "type": "string"
+          "type": "string",
+          "default": ""
+        },
+        "initialValue": {
+          "type": "string",
+          "default": ""
+        },
+        "initialValueModel": {
+          "type": "string",
+          "default": ""
         },
         "parameterType": {
           "$ref": "datatypes.schema.json#/definitions/DataType"
-        },
-        "initialValue": {
-          "type": "string"
-        },
-        "initialValueModel": {
-          "type": "string"
         }
       },
       "required": [
@@ -2651,12 +3222,13 @@
           "type": "string",
           "const": "Microflows$MappingRequestHandling"
         },
+        "mappingArgumentVariableName": {
+          "type": "string",
+          "default": ""
+        },
         "mapping": {
           "type": "string",
-          "description": "exportmappings.schema.json#/definitions/IExportMapping"
-        },
-        "mappingArgumentVariableName": {
-          "type": "string"
+          "description": "ByNameReferenceProperty: exportmappings.schema.json#/definitions/ExportMapping"
         },
         "contentType": {
           "type": "string",
@@ -2669,6 +3241,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/RequestHandling"
+        }
       ]
     },
     "MemberChange": {
@@ -2681,13 +3258,17 @@
           "type": "string",
           "const": "Microflows$MemberChange"
         },
+        "value": {
+          "type": "string",
+          "default": ""
+        },
         "attribute": {
           "type": "string",
-          "description": "domainmodels.schema.json#/definitions/IAttribute"
+          "description": "ByNameReferenceProperty: domainmodels.schema.json#/definitions/Attribute"
         },
         "association": {
           "type": "string",
-          "description": "domainmodels.schema.json#/definitions/IAssociationBase"
+          "description": "ByNameReferenceProperty: domainmodels.schema.json#/definitions/AssociationBase"
         },
         "type": {
           "type": "string",
@@ -2696,9 +3277,6 @@
             "Add",
             "Remove"
           ]
-        },
-        "value": {
-          "type": "string"
         }
       },
       "required": [
@@ -2717,10 +3295,12 @@
           "const": "Microflows$MeterTagMapping"
         },
         "key": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "value": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         }
       },
       "required": [
@@ -2738,6 +3318,14 @@
           "type": "string",
           "const": "Microflows$MicroflowBase"
         },
+        "markAsUsed": {
+          "type": "boolean",
+          "default": false
+        },
+        "returnVariableName": {
+          "type": "string",
+          "default": ""
+        },
         "objectCollection": {
           "$ref": "#/definitions/MicroflowObjectCollection"
         },
@@ -2749,12 +3337,6 @@
         },
         "microflowReturnType": {
           "$ref": "datatypes.schema.json#/definitions/DataType"
-        },
-        "markAsUsed": {
-          "type": "boolean"
-        },
-        "returnVariableName": {
-          "type": "string"
         }
       },
       "required": [
@@ -2762,6 +3344,11 @@
         "$Type",
         "objectCollection",
         "microflowReturnType"
+      ],
+      "allOf": [
+        {
+          "$ref": "projects.schema.json#/definitions/Document"
+        }
       ]
     },
     "ServerSideMicroflow": {
@@ -2775,12 +3362,18 @@
           "const": "Microflows$ServerSideMicroflow"
         },
         "applyEntityAccess": {
-          "type": "boolean"
+          "type": "boolean",
+          "default": false
         }
       },
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/MicroflowBase"
+        }
       ]
     },
     "Microflow": {
@@ -2793,11 +3386,23 @@
           "type": "string",
           "const": "Microflows$Microflow"
         },
+        "allowConcurrentExecution": {
+          "type": "boolean",
+          "default": true
+        },
+        "url": {
+          "type": "string",
+          "default": ""
+        },
+        "stableId": {
+          "$ref": "../common.schema.json#/definitions/GUID",
+          "default": ""
+        },
         "allowedModuleRoles": {
           "type": "array",
           "items": {
             "type": "string",
-            "description": "security.schema.json#/definitions/IModuleRole"
+            "description": "ByNameReferenceListProperty: security.schema.json#/definitions/ModuleRole"
           }
         },
         "microflowActionInfo": {
@@ -2806,34 +3411,30 @@
         "workflowActionInfo": {
           "$ref": "codeactions.schema.json#/definitions/MicroflowActionInfo"
         },
-        "allowConcurrentExecution": {
-          "type": "boolean"
-        },
         "concurrencyErrorMessage": {
           "$ref": "texts.schema.json#/definitions/Text"
         },
         "concurrencyErrorMicroflow": {
           "type": "string",
-          "description": "#/definitions/Microflow"
-        },
-        "url": {
-          "type": "string"
+          "description": "ByNameReferenceProperty: #/definitions/Microflow"
         },
         "urlSearchParameters": {
           "type": "array",
           "items": {
             "type": "string",
-            "description": "#/definitions/MicroflowParameter"
+            "description": "ByNameReferenceListProperty: #/definitions/MicroflowParameter"
           }
-        },
-        "stableId": {
-          "type": "string"
         }
       },
       "required": [
         "$ID",
         "$Type",
         "concurrencyErrorMessage"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ServerSideMicroflow"
+        }
       ]
     },
     "MicroflowCall": {
@@ -2848,7 +3449,7 @@
         },
         "microflow": {
           "type": "string",
-          "description": "#/definitions/Microflow"
+          "description": "ByNameReferenceProperty: #/definitions/Microflow"
         },
         "queueSettings": {
           "$ref": "queues.schema.json#/definitions/QueueSettings"
@@ -2875,20 +3476,27 @@
           "type": "string",
           "const": "Microflows$MicroflowCallAction"
         },
-        "microflowCall": {
-          "$ref": "#/definitions/MicroflowCall"
-        },
         "useReturnVariable": {
-          "type": "boolean"
+          "type": "boolean",
+          "default": true
         },
         "outputVariableName": {
-          "type": "string"
+          "type": "string",
+          "default": ""
+        },
+        "microflowCall": {
+          "$ref": "#/definitions/MicroflowCall"
         }
       },
       "required": [
         "$ID",
         "$Type",
         "microflowCall"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/MicroflowAction"
+        }
       ]
     },
     "MicroflowCallParameterMapping": {
@@ -2901,12 +3509,13 @@
           "type": "string",
           "const": "Microflows$MicroflowCallParameterMapping"
         },
+        "argument": {
+          "type": "string",
+          "default": ""
+        },
         "parameter": {
           "type": "string",
-          "description": "#/definitions/MicroflowParameter"
-        },
-        "argument": {
-          "type": "string"
+          "description": "ByNameReferenceProperty: #/definitions/MicroflowParameter"
         }
       },
       "required": [
@@ -2927,12 +3536,17 @@
         },
         "microflow": {
           "type": "string",
-          "description": "#/definitions/Microflow"
+          "description": "ByNameReferenceProperty: #/definitions/Microflow"
         }
       },
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/JavaActionParameterValue"
+        }
       ]
     },
     "MicroflowObjectCollection": {
@@ -2968,7 +3582,8 @@
           "const": "Microflows$MicroflowParameterBase"
         },
         "name": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "parameterType": {
           "$ref": "datatypes.schema.json#/definitions/DataType"
@@ -2994,6 +3609,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/MicroflowParameterBase"
+        }
       ]
     },
     "MicroflowParameterAttributeUrlSegment": {
@@ -3011,7 +3631,7 @@
         },
         "attribute": {
           "type": "string",
-          "description": "domainmodels.schema.json#/definitions/IAttribute"
+          "description": "ByNameReferenceProperty: domainmodels.schema.json#/definitions/Attribute"
         }
       },
       "required": [
@@ -3019,6 +3639,11 @@
         "$Type",
         "microflowParameter",
         "attribute"
+      ],
+      "allOf": [
+        {
+          "$ref": "url.schema.json#/definitions/UrlSegment"
+        }
       ]
     },
     "MicroflowParameterObject": {
@@ -3032,28 +3657,38 @@
           "const": "Microflows$MicroflowParameterObject"
         },
         "name": {
-          "type": "string"
+          "type": "string",
+          "default": ""
+        },
+        "documentation": {
+          "type": "string",
+          "default": ""
+        },
+        "hasVariableNameBeenChanged": {
+          "type": "boolean",
+          "default": false
+        },
+        "isRequired": {
+          "type": "boolean",
+          "default": true
+        },
+        "defaultValue": {
+          "type": "string",
+          "default": ""
         },
         "variableType": {
           "$ref": "datatypes.schema.json#/definitions/DataType"
-        },
-        "documentation": {
-          "type": "string"
-        },
-        "hasVariableNameBeenChanged": {
-          "type": "boolean"
-        },
-        "isRequired": {
-          "type": "boolean"
-        },
-        "defaultValue": {
-          "type": "string"
         }
       },
       "required": [
         "$ID",
         "$Type",
         "variableType"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/MicroflowObject"
+        }
       ]
     },
     "MicroflowParameterValue": {
@@ -3068,12 +3703,17 @@
         },
         "microflow": {
           "type": "string",
-          "description": "#/definitions/Microflow"
+          "description": "ByNameReferenceProperty: #/definitions/Microflow"
         }
       },
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ExpressionBasedCodeActionParameterValue"
+        }
       ]
     },
     "MicroflowPrimitiveParameterUrlSegment": {
@@ -3094,6 +3734,11 @@
         "$ID",
         "$Type",
         "microflowParameter"
+      ],
+      "allOf": [
+        {
+          "$ref": "url.schema.json#/definitions/UrlSegment"
+        }
       ]
     },
     "Nanoflow": {
@@ -3110,13 +3755,18 @@
           "type": "array",
           "items": {
             "type": "string",
-            "description": "security.schema.json#/definitions/IModuleRole"
+            "description": "ByNameReferenceListProperty: security.schema.json#/definitions/ModuleRole"
           }
         }
       },
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/MicroflowBase"
+        }
       ]
     },
     "NanoflowCall": {
@@ -3131,7 +3781,7 @@
         },
         "nanoflow": {
           "type": "string",
-          "description": "#/definitions/Nanoflow"
+          "description": "ByNameReferenceProperty: #/definitions/Nanoflow"
         },
         "parameterMappings": {
           "type": "array",
@@ -3155,20 +3805,27 @@
           "type": "string",
           "const": "Microflows$NanoflowCallAction"
         },
-        "nanoflowCall": {
-          "$ref": "#/definitions/NanoflowCall"
-        },
         "useReturnVariable": {
-          "type": "boolean"
+          "type": "boolean",
+          "default": true
         },
         "outputVariableName": {
-          "type": "string"
+          "type": "string",
+          "default": ""
+        },
+        "nanoflowCall": {
+          "$ref": "#/definitions/NanoflowCall"
         }
       },
       "required": [
         "$ID",
         "$Type",
         "nanoflowCall"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/MicroflowAction"
+        }
       ]
     },
     "NanoflowCallParameterMapping": {
@@ -3181,12 +3838,13 @@
           "type": "string",
           "const": "Microflows$NanoflowCallParameterMapping"
         },
+        "argument": {
+          "type": "string",
+          "default": ""
+        },
         "parameter": {
           "type": "string",
-          "description": "#/definitions/NanoflowParameter"
-        },
-        "argument": {
-          "type": "string"
+          "description": "ByNameReferenceProperty: #/definitions/NanoflowParameter"
         }
       },
       "required": [
@@ -3209,6 +3867,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/MicroflowParameterBase"
+        }
       ]
     },
     "NoCase": {
@@ -3225,6 +3888,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/CaseValue"
+        }
       ]
     },
     "NotifyWorkflowAction": {
@@ -3238,19 +3906,26 @@
           "const": "Microflows$NotifyWorkflowAction"
         },
         "workflowVariable": {
-          "type": "string"
+          "type": "string",
+          "default": ""
+        },
+        "outputVariableName": {
+          "type": "string",
+          "default": ""
         },
         "activity": {
           "type": "string",
-          "description": "workflows.schema.json#/definitions/IWaitForNotificationActivity"
-        },
-        "outputVariableName": {
-          "type": "string"
+          "description": "ByNameReferenceProperty: workflows.schema.json#/definitions/WaitForNotificationActivity"
         }
       },
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/MicroflowAction"
+        }
       ]
     },
     "OpenUserTaskAction": {
@@ -3264,18 +3939,26 @@
           "const": "Microflows$OpenUserTaskAction"
         },
         "userTaskVariable": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "assignOnOpen": {
-          "type": "boolean"
+          "type": "boolean",
+          "default": true
         },
         "openWhenAssigned": {
-          "type": "boolean"
+          "type": "boolean",
+          "default": false
         }
       },
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/MicroflowAction"
+        }
       ]
     },
     "OpenWorkflowAction": {
@@ -3289,12 +3972,18 @@
           "const": "Microflows$OpenWorkflowAction"
         },
         "workflowVariable": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         }
       },
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/MicroflowAction"
+        }
       ]
     },
     "OrthogonalPath": {
@@ -3314,6 +4003,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/Line"
+        }
       ]
     },
     "OutputVariable": {
@@ -3327,7 +4021,8 @@
           "const": "Microflows$OutputVariable"
         },
         "variableName": {
-          "type": "string"
+          "type": "string",
+          "default": "Variable"
         }
       },
       "required": [
@@ -3353,6 +4048,11 @@
         "$ID",
         "$Type",
         "microflowParameter"
+      ],
+      "allOf": [
+        {
+          "$ref": "url.schema.json#/definitions/UrlSegment"
+        }
       ]
     },
     "PauseOperation": {
@@ -3366,12 +4066,18 @@
           "const": "Microflows$PauseOperation"
         },
         "workflowVariable": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         }
       },
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/WorkflowOperation"
+        }
       ]
     },
     "TypedTemplateArgument": {
@@ -3401,7 +4107,8 @@
           "const": "Microflows$PrimitiveTypedTemplateArgument"
         },
         "expression": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "type": {
           "type": "string",
@@ -3417,6 +4124,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/TypedTemplateArgument"
+        }
       ]
     },
     "ProxyConfiguration": {
@@ -3430,19 +4142,24 @@
           "const": "Microflows$ProxyConfiguration"
         },
         "usernameExpression": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "passwordExpression": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "hostExpression": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "portExpression": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "useConfigurationExpression": {
-          "type": "string"
+          "type": "string",
+          "default": "true"
         }
       },
       "required": [
@@ -3461,12 +4178,18 @@
           "const": "Microflows$PushToClientAction"
         },
         "dataVariableName": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         }
       },
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/MicroflowAction"
+        }
       ]
     },
     "RestCallAction": {
@@ -3478,6 +4201,14 @@
         "$Type": {
           "type": "string",
           "const": "Microflows$RestCallAction"
+        },
+        "useRequestTimeOut": {
+          "type": "boolean",
+          "default": true
+        },
+        "timeOutExpression": {
+          "type": "string",
+          "default": "300"
         },
         "httpConfiguration": {
           "$ref": "#/definitions/HttpConfiguration"
@@ -3516,12 +4247,6 @@
             "None"
           ]
         },
-        "useRequestTimeOut": {
-          "type": "boolean"
-        },
-        "timeOutExpression": {
-          "type": "string"
-        },
         "requestProxyType": {
           "type": "string",
           "enum": [
@@ -3540,6 +4265,11 @@
         "httpConfiguration",
         "requestHandling",
         "resultHandling"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/MicroflowAction"
+        }
       ]
     },
     "RestOperationCallAction": {
@@ -3554,7 +4284,7 @@
         },
         "operation": {
           "type": "string",
-          "description": "rest.schema.json#/definitions/IRestOperation"
+          "description": "ByNameReferenceProperty: rest.schema.json#/definitions/RestOperation"
         },
         "baseUrlParameterMapping": {
           "$ref": "#/definitions/RestParameterMapping"
@@ -3575,6 +4305,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/MicroflowAction"
+        }
       ]
     },
     "RestOperationParameterMapping": {
@@ -3587,12 +4322,13 @@
           "type": "string",
           "const": "Microflows$RestOperationParameterMapping"
         },
+        "value": {
+          "type": "string",
+          "default": ""
+        },
         "parameter": {
           "type": "string",
-          "description": "rest.schema.json#/definitions/IOperationParameter"
-        },
-        "value": {
-          "type": "string"
+          "description": "ByNameReferenceProperty: rest.schema.json#/definitions/OperationParameter"
         }
       },
       "required": [
@@ -3611,12 +4347,13 @@
           "type": "string",
           "const": "Microflows$RestParameterMapping"
         },
+        "value": {
+          "type": "string",
+          "default": ""
+        },
         "parameter": {
           "type": "string",
-          "description": "rest.schema.json#/definitions/IRestParameter"
-        },
-        "value": {
-          "type": "string"
+          "description": "ByNameReferenceProperty: rest.schema.json#/definitions/RestParameter"
         }
       },
       "required": [
@@ -3636,12 +4373,18 @@
           "const": "Microflows$RestartOperation"
         },
         "workflowVariable": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         }
       },
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/WorkflowOperation"
+        }
       ]
     },
     "ResultHandling": {
@@ -3654,14 +4397,16 @@
           "type": "string",
           "const": "Microflows$ResultHandling"
         },
-        "importMappingCall": {
-          "$ref": "#/definitions/ImportMappingCall"
-        },
         "storeInVariable": {
-          "type": "boolean"
+          "type": "boolean",
+          "default": false
         },
         "outputVariableName": {
-          "type": "string"
+          "type": "string",
+          "default": ""
+        },
+        "importMappingCall": {
+          "$ref": "#/definitions/ImportMappingCall"
         },
         "variableType": {
           "$ref": "datatypes.schema.json#/definitions/DataType"
@@ -3684,12 +4429,18 @@
           "const": "Microflows$ResumeOperation"
         },
         "workflowVariable": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         }
       },
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/WorkflowOperation"
+        }
       ]
     },
     "RetrieveAction": {
@@ -3702,17 +4453,23 @@
           "type": "string",
           "const": "Microflows$RetrieveAction"
         },
+        "outputVariableName": {
+          "type": "string",
+          "default": ""
+        },
         "retrieveSource": {
           "$ref": "#/definitions/RetrieveSource"
-        },
-        "outputVariableName": {
-          "type": "string"
         }
       },
       "required": [
         "$ID",
         "$Type",
         "retrieveSource"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/MicroflowAction"
+        }
       ]
     },
     "RetryOperation": {
@@ -3726,12 +4483,18 @@
           "const": "Microflows$RetryOperation"
         },
         "workflowVariable": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         }
       },
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/WorkflowOperation"
+        }
       ]
     },
     "RollbackAction": {
@@ -3745,15 +4508,22 @@
           "const": "Microflows$RollbackAction"
         },
         "rollbackVariableName": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "refreshInClient": {
-          "type": "boolean"
+          "type": "boolean",
+          "default": false
         }
       },
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/MicroflowAction"
+        }
       ]
     },
     "Rule": {
@@ -3770,6 +4540,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ServerSideMicroflow"
+        }
       ]
     },
     "RuleCall": {
@@ -3784,7 +4559,7 @@
         },
         "rule": {
           "type": "string",
-          "description": "#/definitions/Rule"
+          "description": "ByNameReferenceProperty: #/definitions/Rule"
         },
         "parameterMappings": {
           "type": "array",
@@ -3808,12 +4583,13 @@
           "type": "string",
           "const": "Microflows$RuleCallParameterMapping"
         },
+        "argument": {
+          "type": "string",
+          "default": ""
+        },
         "parameter": {
           "type": "string",
-          "description": "#/definitions/RuleParameter"
-        },
-        "argument": {
-          "type": "string"
+          "description": "ByNameReferenceProperty: #/definitions/RuleParameter"
         }
       },
       "required": [
@@ -3836,6 +4612,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/MicroflowParameterBase"
+        }
       ]
     },
     "RuleSplitCondition": {
@@ -3856,6 +4637,11 @@
         "$ID",
         "$Type",
         "ruleCall"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/SplitCondition"
+        }
       ]
     },
     "SendExternalObject": {
@@ -3869,15 +4655,22 @@
           "const": "Microflows$SendExternalObject"
         },
         "variableNameToBeSent": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "refreshInClient": {
-          "type": "boolean"
+          "type": "boolean",
+          "default": false
         }
       },
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/MicroflowAction"
+        }
       ]
     },
     "SequenceFlow": {
@@ -3890,19 +4683,25 @@
           "type": "string",
           "const": "Microflows$SequenceFlow"
         },
+        "isErrorHandler": {
+          "type": "boolean",
+          "default": false
+        },
         "caseValues": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/CaseValue"
           }
-        },
-        "isErrorHandler": {
-          "type": "boolean"
         }
       },
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/Flow"
+        }
       ]
     },
     "SetTaskOutcomeAction": {
@@ -3916,15 +4715,22 @@
           "const": "Microflows$SetTaskOutcomeAction"
         },
         "workflowTaskVariable": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "outcomeValue": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         }
       },
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/MicroflowAction"
+        }
       ]
     },
     "ShowHomePageAction": {
@@ -3941,6 +4747,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/MicroflowAction"
+        }
       ]
     },
     "ShowMessageAction": {
@@ -3953,6 +4764,10 @@
           "type": "string",
           "const": "Microflows$ShowMessageAction"
         },
+        "blocking": {
+          "type": "boolean",
+          "default": true
+        },
         "template": {
           "$ref": "#/definitions/TextTemplate"
         },
@@ -3963,15 +4778,17 @@
             "Warning",
             "Error"
           ]
-        },
-        "blocking": {
-          "type": "boolean"
         }
       },
       "required": [
         "$ID",
         "$Type",
         "template"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/MicroflowAction"
+        }
       ]
     },
     "ShowPageAction": {
@@ -3984,17 +4801,23 @@
           "type": "string",
           "const": "Microflows$ShowPageAction"
         },
+        "numberOfPagesToClose": {
+          "type": "string",
+          "default": ""
+        },
         "pageSettings": {
           "$ref": "pages.schema.json#/definitions/PageSettings"
-        },
-        "numberOfPagesToClose": {
-          "type": "string"
         }
       },
       "required": [
         "$ID",
         "$Type",
         "pageSettings"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/MicroflowAction"
+        }
       ]
     },
     "SimpleRequestHandling": {
@@ -4024,6 +4847,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/RequestHandling"
+        }
       ]
     },
     "Sort": {
@@ -4044,6 +4872,11 @@
         "$ID",
         "$Type",
         "sortItemList"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ListOperation"
+        }
       ]
     },
     "SortItem": {
@@ -4109,6 +4942,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/MicroflowObject"
+        }
       ]
     },
     "Template": {
@@ -4131,6 +4969,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "mappings.schema.json#/definitions/MappingSourceDocument"
+        }
       ]
     },
     "StringTemplate": {
@@ -4144,12 +4987,18 @@
           "const": "Microflows$StringTemplate"
         },
         "text": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         }
       },
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/Template"
+        }
       ]
     },
     "StringTemplateParameterValue": {
@@ -4170,6 +5019,11 @@
         "$ID",
         "$Type",
         "typedTemplate"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/CodeActionParameterValue"
+        }
       ]
     },
     "Subtract": {
@@ -4186,6 +5040,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/BinaryListOperation"
+        }
       ]
     },
     "SynchronizeAction": {
@@ -4213,6 +5072,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/MicroflowAction"
+        }
       ]
     },
     "Tail": {
@@ -4229,6 +5093,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ListOperation"
+        }
       ]
     },
     "TemplateArgument": {
@@ -4242,7 +5111,8 @@
           "const": "Microflows$TemplateArgument"
         },
         "expression": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         }
       },
       "required": [
@@ -4268,6 +5138,11 @@
         "$ID",
         "$Type",
         "text"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/Template"
+        }
       ]
     },
     "TypedTemplate": {
@@ -4281,7 +5156,8 @@
           "const": "Microflows$TypedTemplate"
         },
         "text": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "arguments": {
           "type": "array",
@@ -4309,6 +5185,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/BinaryListOperation"
+        }
       ]
     },
     "UnlockWorkflowAction": {
@@ -4321,16 +5202,22 @@
           "type": "string",
           "const": "Microflows$UnlockWorkflowAction"
         },
+        "resumeAllPausedWorkflows": {
+          "type": "boolean",
+          "default": true
+        },
         "workflowSelection": {
           "$ref": "workflows.schema.json#/definitions/WorkflowDefinitionSelection"
-        },
-        "resumeAllPausedWorkflows": {
-          "type": "boolean"
         }
       },
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/MicroflowAction"
+        }
       ]
     },
     "UnpauseOperation": {
@@ -4344,12 +5231,18 @@
           "const": "Microflows$UnpauseOperation"
         },
         "workflowVariable": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         }
       },
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/WorkflowOperation"
+        }
       ]
     },
     "ValidationFeedbackAction": {
@@ -4362,25 +5255,31 @@
           "type": "string",
           "const": "Microflows$ValidationFeedbackAction"
         },
+        "objectVariableName": {
+          "type": "string",
+          "default": ""
+        },
         "feedbackTemplate": {
           "$ref": "#/definitions/TextTemplate"
         },
-        "objectVariableName": {
-          "type": "string"
-        },
         "attribute": {
           "type": "string",
-          "description": "domainmodels.schema.json#/definitions/IAttribute"
+          "description": "ByNameReferenceProperty: domainmodels.schema.json#/definitions/Attribute"
         },
         "association": {
           "type": "string",
-          "description": "domainmodels.schema.json#/definitions/IAssociationBase"
+          "description": "ByNameReferenceProperty: domainmodels.schema.json#/definitions/AssociationBase"
         }
       },
       "required": [
         "$ID",
         "$Type",
         "feedbackTemplate"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/MicroflowAction"
+        }
       ]
     },
     "VariableExport": {
@@ -4394,12 +5293,18 @@
           "const": "Microflows$VariableExport"
         },
         "outputVariableName": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         }
       },
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/OutputMethod"
+        }
       ]
     },
     "WebServiceCallAction": {
@@ -4412,21 +5317,29 @@
           "type": "string",
           "const": "Microflows$WebServiceCallAction"
         },
-        "importedWebService": {
-          "type": "string",
-          "description": "webservices.schema.json#/definitions/IImportedWebService"
-        },
         "serviceName": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "operationName": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "useRequestTimeOut": {
-          "type": "boolean"
+          "type": "boolean",
+          "default": true
         },
         "timeOutExpression": {
-          "type": "string"
+          "type": "string",
+          "default": "300"
+        },
+        "isValidationRequired": {
+          "type": "boolean",
+          "default": false
+        },
+        "importedWebService": {
+          "type": "string",
+          "description": "ByNameReferenceProperty: webservices.schema.json#/definitions/ImportedWebService"
         },
         "requestHeaderHandling": {
           "$ref": "#/definitions/RequestHandling"
@@ -4439,9 +5352,6 @@
         },
         "httpConfiguration": {
           "$ref": "#/definitions/HttpConfiguration"
-        },
-        "isValidationRequired": {
-          "type": "boolean"
         },
         "requestProxyType": {
           "type": "string",
@@ -4462,6 +5372,11 @@
         "requestBodyHandling",
         "resultHandling",
         "httpConfiguration"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/MicroflowAction"
+        }
       ]
     },
     "WebServiceOperationParameterMapping": {
@@ -4475,13 +5390,16 @@
           "const": "Microflows$WebServiceOperationParameterMapping"
         },
         "isChecked": {
-          "type": "boolean"
+          "type": "boolean",
+          "default": true
         },
         "parameterName": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "argument": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         }
       },
       "required": [
@@ -4499,17 +5417,23 @@
           "type": "string",
           "const": "Microflows$WebServiceOperationAdvancedParameterMapping"
         },
+        "mappingArgumentVariableName": {
+          "type": "string",
+          "default": ""
+        },
         "mapping": {
           "type": "string",
-          "description": "exportmappings.schema.json#/definitions/IExportMapping"
-        },
-        "mappingArgumentVariableName": {
-          "type": "string"
+          "description": "ByNameReferenceProperty: exportmappings.schema.json#/definitions/ExportMapping"
         }
       },
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/WebServiceOperationParameterMapping"
+        }
       ]
     },
     "WebServiceOperationSimpleParameterMapping": {
@@ -4523,12 +5447,18 @@
           "const": "Microflows$WebServiceOperationSimpleParameterMapping"
         },
         "parameterPath": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         }
       },
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/WebServiceOperationParameterMapping"
+        }
       ]
     },
     "WhileLoopCondition": {
@@ -4542,15 +5472,22 @@
           "const": "Microflows$WhileLoopCondition"
         },
         "whileExpression": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "caption": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         }
       },
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/LoopSource"
+        }
       ]
     },
     "WorkflowCallAction": {
@@ -4563,23 +5500,31 @@
           "type": "string",
           "const": "Microflows$WorkflowCallAction"
         },
-        "workflow": {
-          "type": "string",
-          "description": "workflows.schema.json#/definitions/IWorkflow"
-        },
         "workflowContextVariable": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "useReturnVariable": {
-          "type": "boolean"
+          "type": "boolean",
+          "default": true
         },
         "outputVariableName": {
-          "type": "string"
+          "type": "string",
+          "default": ""
+        },
+        "workflow": {
+          "type": "string",
+          "description": "ByNameReferenceProperty: workflows.schema.json#/definitions/Workflow"
         }
       },
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/MicroflowAction"
+        }
       ]
     },
     "WorkflowOperationAction": {
@@ -4600,6 +5545,11 @@
         "$ID",
         "$Type",
         "operation"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/MicroflowAction"
+        }
       ]
     }
   }

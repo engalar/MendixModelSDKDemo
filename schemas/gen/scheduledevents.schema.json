@@ -28,15 +28,22 @@
           "const": "ScheduledEvents$DaySchedule"
         },
         "hourOfDay": {
-          "type": "string"
+          "type": "integer",
+          "default": 0
         },
         "minuteOfHour": {
-          "type": "string"
+          "type": "integer",
+          "default": 0
         }
       },
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/Schedule"
+        }
       ]
     },
     "HourSchedule": {
@@ -50,15 +57,22 @@
           "const": "ScheduledEvents$HourSchedule"
         },
         "multiplier": {
-          "type": "string"
+          "type": "integer",
+          "default": 1
         },
         "minuteOffset": {
-          "type": "string"
+          "type": "integer",
+          "default": 0
         }
       },
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/Schedule"
+        }
       ]
     },
     "MinuteSchedule": {
@@ -72,12 +86,18 @@
           "const": "ScheduledEvents$MinuteSchedule"
         },
         "multiplier": {
-          "type": "string"
+          "type": "integer",
+          "default": 1
         }
       },
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/Schedule"
+        }
       ]
     },
     "MonthSchedule": {
@@ -91,21 +111,30 @@
           "const": "ScheduledEvents$MonthSchedule"
         },
         "multiplier": {
-          "type": "string"
+          "type": "integer",
+          "default": 1
         },
         "monthOffset": {
-          "type": "string"
+          "type": "integer",
+          "default": 0
         },
         "hourOfDay": {
-          "type": "string"
+          "type": "integer",
+          "default": 0
         },
         "minuteOfHour": {
-          "type": "string"
+          "type": "integer",
+          "default": 0
         }
       },
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/Schedule"
+        }
       ]
     },
     "MonthDateSchedule": {
@@ -119,12 +148,18 @@
           "const": "ScheduledEvents$MonthDateSchedule"
         },
         "dayOfMonth": {
-          "type": "string"
+          "type": "integer",
+          "default": 1
         }
       },
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/MonthSchedule"
+        }
       ]
     },
     "MonthWeekdaySchedule": {
@@ -163,6 +198,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/MonthSchedule"
+        }
       ]
     },
     "ScheduledEvent": {
@@ -176,7 +216,17 @@
           "const": "ScheduledEvents$ScheduledEvent"
         },
         "startDateTime": {
-          "type": "string"
+          "type": "string",
+          "format": "date-time",
+          "default": ""
+        },
+        "interval": {
+          "type": "integer",
+          "default": 0
+        },
+        "enabled": {
+          "type": "boolean",
+          "default": false
         },
         "timeZone": {
           "type": "string",
@@ -195,9 +245,6 @@
             "DelayNext"
           ]
         },
-        "interval": {
-          "type": "string"
-        },
         "intervalType": {
           "type": "string",
           "enum": [
@@ -212,15 +259,17 @@
         },
         "microflow": {
           "type": "string",
-          "description": "microflows.schema.json#/definitions/IMicroflow"
-        },
-        "enabled": {
-          "type": "boolean"
+          "description": "ByNameReferenceProperty: microflows.schema.json#/definitions/Microflow"
         }
       },
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "projects.schema.json#/definitions/Document"
+        }
       ]
     },
     "WeekSchedule": {
@@ -234,36 +283,50 @@
           "const": "ScheduledEvents$WeekSchedule"
         },
         "sunday": {
-          "type": "boolean"
+          "type": "boolean",
+          "default": false
         },
         "monday": {
-          "type": "boolean"
+          "type": "boolean",
+          "default": false
         },
         "tuesday": {
-          "type": "boolean"
+          "type": "boolean",
+          "default": false
         },
         "wednesday": {
-          "type": "boolean"
+          "type": "boolean",
+          "default": false
         },
         "thursday": {
-          "type": "boolean"
+          "type": "boolean",
+          "default": false
         },
         "friday": {
-          "type": "boolean"
+          "type": "boolean",
+          "default": false
         },
         "saturday": {
-          "type": "boolean"
+          "type": "boolean",
+          "default": false
         },
         "hourOfDay": {
-          "type": "string"
+          "type": "integer",
+          "default": 0
         },
         "minuteOfHour": {
-          "type": "string"
+          "type": "integer",
+          "default": 0
         }
       },
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/Schedule"
+        }
       ]
     },
     "YearSchedule": {
@@ -277,18 +340,26 @@
           "const": "ScheduledEvents$YearSchedule"
         },
         "month": {
-          "type": "string"
+          "type": "integer",
+          "default": 1
         },
         "hourOfDay": {
-          "type": "string"
+          "type": "integer",
+          "default": 0
         },
         "minuteOfHour": {
-          "type": "string"
+          "type": "integer",
+          "default": 0
         }
       },
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/Schedule"
+        }
       ]
     },
     "YearDateSchedule": {
@@ -302,12 +373,18 @@
           "const": "ScheduledEvents$YearDateSchedule"
         },
         "dayOfMonth": {
-          "type": "string"
+          "type": "integer",
+          "default": 1
         }
       },
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/YearSchedule"
+        }
       ]
     },
     "YearWeekdaySchedule": {
@@ -346,6 +423,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/YearSchedule"
+        }
       ]
     }
   }

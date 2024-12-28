@@ -28,12 +28,18 @@
           "const": "Workflows$AbsoluteAmountUserInput"
         },
         "amount": {
-          "type": "string"
+          "type": "integer",
+          "default": 2
         }
       },
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/TargetUserInput"
+        }
       ]
     },
     "AllUserInput": {
@@ -50,6 +56,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/TargetUserInput"
+        }
       ]
     },
     "Annotation": {
@@ -63,12 +74,18 @@
           "const": "Workflows$Annotation"
         },
         "description": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         }
       },
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/MicroflowObject"
+        }
       ]
     },
     "Outcome": {
@@ -105,6 +122,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/Outcome"
+        }
       ]
     },
     "BooleanConditionOutcome": {
@@ -118,12 +140,18 @@
           "const": "Workflows$BooleanConditionOutcome"
         },
         "value": {
-          "type": "boolean"
+          "type": "boolean",
+          "default": false
         }
       },
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ConditionOutcome"
+        }
       ]
     },
     "BoundaryEvent": {
@@ -136,17 +164,19 @@
           "type": "string",
           "const": "Workflows$BoundaryEvent"
         },
+        "caption": {
+          "type": "string",
+          "default": ""
+        },
+        "isInterrupting": {
+          "type": "boolean",
+          "default": false
+        },
         "flow": {
           "$ref": "#/definitions/Flow"
         },
-        "caption": {
-          "type": "string"
-        },
         "annotation": {
           "$ref": "#/definitions/Annotation"
-        },
-        "isInterrupting": {
-          "type": "boolean"
         }
       },
       "required": [
@@ -166,10 +196,12 @@
           "const": "Workflows$WorkflowActivity"
         },
         "name": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "caption": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "annotation": {
           "$ref": "#/definitions/Annotation"
@@ -200,6 +232,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/WorkflowActivity"
+        }
       ]
     },
     "CallMicroflowTask": {
@@ -214,7 +251,7 @@
         },
         "microflow": {
           "type": "string",
-          "description": "microflows.schema.json#/definitions/IMicroflow"
+          "description": "ByNameReferenceProperty: microflows.schema.json#/definitions/Microflow"
         },
         "parameterMappings": {
           "type": "array",
@@ -232,6 +269,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ConditionOutcomeActivity"
+        }
       ]
     },
     "CallWorkflowActivity": {
@@ -244,9 +286,13 @@
           "type": "string",
           "const": "Workflows$CallWorkflowActivity"
         },
+        "executeAsync": {
+          "type": "boolean",
+          "default": false
+        },
         "workflow": {
           "type": "string",
-          "description": "#/definitions/Workflow"
+          "description": "ByNameReferenceProperty: #/definitions/Workflow"
         },
         "parameterMappings": {
           "type": "array",
@@ -259,14 +305,16 @@
           "items": {
             "$ref": "#/definitions/BoundaryEvent"
           }
-        },
-        "executeAsync": {
-          "type": "boolean"
         }
       },
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/WorkflowActivity"
+        }
       ]
     },
     "UserTaskCompletionCriteria": {
@@ -299,6 +347,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/UserTaskCompletionCriteria"
+        }
       ]
     },
     "UserSource": {
@@ -331,6 +384,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/UserSource"
+        }
       ]
     },
     "EndOfBoundaryEventPathActivity": {
@@ -347,6 +405,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/WorkflowActivity"
+        }
       ]
     },
     "EndWorkflowActivity": {
@@ -363,6 +426,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/WorkflowActivity"
+        }
       ]
     },
     "EnumerationValueConditionOutcome": {
@@ -377,12 +445,17 @@
         },
         "value": {
           "type": "string",
-          "description": "enumerations.schema.json#/definitions/IEnumerationValue"
+          "description": "ByNameReferenceProperty: enumerations.schema.json#/definitions/EnumerationValue"
         }
       },
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ConditionOutcome"
+        }
       ]
     },
     "ExclusiveSplitActivity": {
@@ -396,12 +469,18 @@
           "const": "Workflows$ExclusiveSplitActivity"
         },
         "expression": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         }
       },
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ConditionOutcomeActivity"
+        }
       ]
     },
     "Flow": {
@@ -443,6 +522,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/WorkflowActivity"
+        }
       ]
     },
     "MajorityCompletionCriteria": {
@@ -466,6 +550,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/UserTaskCompletionCriteria"
+        }
       ]
     },
     "UserTaskEvent": {
@@ -496,12 +585,17 @@
         },
         "microflow": {
           "type": "string",
-          "description": "microflows.schema.json#/definitions/IMicroflow"
+          "description": "ByNameReferenceProperty: microflows.schema.json#/definitions/Microflow"
         }
       },
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/UserTaskEvent"
+        }
       ]
     },
     "MicroflowBasedUserSource": {
@@ -516,12 +610,17 @@
         },
         "microflow": {
           "type": "string",
-          "description": "microflows.schema.json#/definitions/IMicroflow"
+          "description": "ByNameReferenceProperty: microflows.schema.json#/definitions/Microflow"
         }
       },
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/UserSource"
+        }
       ]
     },
     "MicroflowCallParameterMapping": {
@@ -534,12 +633,13 @@
           "type": "string",
           "const": "Workflows$MicroflowCallParameterMapping"
         },
+        "expression": {
+          "type": "string",
+          "default": ""
+        },
         "parameter": {
           "type": "string",
-          "description": "microflows.schema.json#/definitions/IMicroflowParameter"
-        },
-        "expression": {
-          "type": "string"
+          "description": "ByNameReferenceProperty: microflows.schema.json#/definitions/MicroflowParameter"
         }
       },
       "required": [
@@ -560,12 +660,17 @@
         },
         "microflow": {
           "type": "string",
-          "description": "microflows.schema.json#/definitions/IMicroflow"
+          "description": "ByNameReferenceProperty: microflows.schema.json#/definitions/Microflow"
         }
       },
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/UserTaskCompletionCriteria"
+        }
       ]
     },
     "MicroflowEventHandler": {
@@ -580,7 +685,7 @@
         },
         "microflow": {
           "type": "string",
-          "description": "microflows.schema.json#/definitions/IMicroflow"
+          "description": "ByNameReferenceProperty: microflows.schema.json#/definitions/Microflow"
         }
       },
       "required": [
@@ -614,14 +719,15 @@
           "type": "string",
           "const": "Workflows$MultiInputCompletion"
         },
+        "awaitAllUsers": {
+          "type": "boolean",
+          "default": false
+        },
         "targetUserInput": {
           "$ref": "#/definitions/TargetUserInput"
         },
         "completionCriteria": {
           "$ref": "#/definitions/UserTaskCompletionCriteria"
-        },
-        "awaitAllUsers": {
-          "type": "boolean"
         }
       },
       "required": [
@@ -629,6 +735,11 @@
         "$Type",
         "targetUserInput",
         "completionCriteria"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/UserTaskCompletion"
+        }
       ]
     },
     "UserTaskActivity": {
@@ -641,6 +752,14 @@
           "type": "string",
           "const": "Workflows$UserTaskActivity"
         },
+        "dueDate": {
+          "type": "string",
+          "default": ""
+        },
+        "autoAssignSingleTargetUser": {
+          "type": "boolean",
+          "default": false
+        },
         "taskPage": {
           "$ref": "#/definitions/PageReference"
         },
@@ -649,9 +768,6 @@
         },
         "taskDescription": {
           "$ref": "microflows.schema.json#/definitions/StringTemplate"
-        },
-        "dueDate": {
-          "type": "string"
         },
         "userSource": {
           "$ref": "#/definitions/UserSource"
@@ -670,9 +786,6 @@
         },
         "onCreatedEvent": {
           "$ref": "#/definitions/UserTaskEvent"
-        },
-        "autoAssignSingleTargetUser": {
-          "type": "boolean"
         }
       },
       "required": [
@@ -683,6 +796,11 @@
         "taskDescription",
         "userSource",
         "onCreatedEvent"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/WorkflowActivity"
+        }
       ]
     },
     "MultiUserTaskActivity": {
@@ -695,14 +813,15 @@
           "type": "string",
           "const": "Workflows$MultiUserTaskActivity"
         },
+        "awaitAllUsers": {
+          "type": "boolean",
+          "default": false
+        },
         "targetUserInput": {
           "$ref": "#/definitions/TargetUserInput"
         },
         "completionCriteria": {
           "$ref": "#/definitions/UserTaskCompletionCriteria"
-        },
-        "awaitAllUsers": {
-          "type": "boolean"
         }
       },
       "required": [
@@ -710,6 +829,11 @@
         "$Type",
         "targetUserInput",
         "completionCriteria"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/UserTaskActivity"
+        }
       ]
     },
     "NoEvent": {
@@ -726,6 +850,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/UserTaskEvent"
+        }
       ]
     },
     "PageParameterMapping": {
@@ -738,12 +867,13 @@
           "type": "string",
           "const": "Workflows$PageParameterMapping"
         },
+        "expression": {
+          "type": "string",
+          "default": ""
+        },
         "parameter": {
           "type": "string",
-          "description": "pages.schema.json#/definitions/IPageParameter"
-        },
-        "expression": {
-          "type": "string"
+          "description": "ByNameReferenceProperty: pages.schema.json#/definitions/PageParameter"
         }
       },
       "required": [
@@ -764,7 +894,7 @@
         },
         "page": {
           "type": "string",
-          "description": "pages.schema.json#/definitions/IPage"
+          "description": "ByNameReferenceProperty: pages.schema.json#/definitions/Page"
         }
       },
       "required": [
@@ -792,6 +922,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/WorkflowActivity"
+        }
       ]
     },
     "ParallelSplitOutcome": {
@@ -808,6 +943,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/Outcome"
+        }
       ]
     },
     "Parameter": {
@@ -820,12 +960,13 @@
           "type": "string",
           "const": "Workflows$Parameter"
         },
+        "name": {
+          "type": "string",
+          "default": "WorkflowContext"
+        },
         "entity": {
           "type": "string",
-          "description": "domainmodels.schema.json#/definitions/IEntity"
-        },
-        "name": {
-          "type": "string"
+          "description": "ByNameReferenceProperty: domainmodels.schema.json#/definitions/Entity"
         }
       },
       "required": [
@@ -844,12 +985,18 @@
           "const": "Workflows$PercentageAmountUserInput"
         },
         "percentage": {
-          "type": "string"
+          "type": "integer",
+          "default": 100
         }
       },
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/TargetUserInput"
+        }
       ]
     },
     "SingleInputCompletion": {
@@ -866,6 +1013,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/UserTaskCompletion"
+        }
       ]
     },
     "SingleUserTaskActivity": {
@@ -882,6 +1034,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/UserTaskActivity"
+        }
       ]
     },
     "ThresholdCompletionCriteria": {
@@ -894,20 +1051,26 @@
           "type": "string",
           "const": "Workflows$ThresholdCompletionCriteria"
         },
+        "threshold": {
+          "type": "integer",
+          "default": 50
+        },
         "completionType": {
           "type": "string",
           "enum": [
             "Relative",
             "Absolute"
           ]
-        },
-        "threshold": {
-          "type": "string"
         }
       },
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/UserTaskCompletionCriteria"
+        }
       ]
     },
     "TimerBoundaryEvent": {
@@ -921,12 +1084,18 @@
           "const": "Workflows$TimerBoundaryEvent"
         },
         "delay": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         }
       },
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/BoundaryEvent"
+        }
       ]
     },
     "UserTask": {
@@ -939,6 +1108,14 @@
           "type": "string",
           "const": "Workflows$UserTask"
         },
+        "dueDate": {
+          "type": "string",
+          "default": ""
+        },
+        "autoAssignSingleTargetUser": {
+          "type": "boolean",
+          "default": false
+        },
         "taskPage": {
           "$ref": "#/definitions/PageReference"
         },
@@ -947,9 +1124,6 @@
         },
         "taskDescription": {
           "$ref": "microflows.schema.json#/definitions/StringTemplate"
-        },
-        "dueDate": {
-          "type": "string"
         },
         "userSource": {
           "$ref": "#/definitions/UserSource"
@@ -962,9 +1136,6 @@
         },
         "onCreatedEvent": {
           "$ref": "#/definitions/UserTaskEvent"
-        },
-        "autoAssignSingleTargetUser": {
-          "type": "boolean"
         },
         "userTaskCompletion": {
           "$ref": "#/definitions/UserTaskCompletion"
@@ -979,6 +1150,11 @@
         "userSource",
         "onCreatedEvent",
         "userTaskCompletion"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/WorkflowActivity"
+        }
       ]
     },
     "UserTaskOutcome": {
@@ -992,12 +1168,18 @@
           "const": "Workflows$UserTaskOutcome"
         },
         "value": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         }
       },
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/Outcome"
+        }
       ]
     },
     "VetoCompletionCriteria": {
@@ -1014,6 +1196,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/UserTaskCompletionCriteria"
+        }
       ]
     },
     "VoidConditionOutcome": {
@@ -1030,6 +1217,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ConditionOutcome"
+        }
       ]
     },
     "WaitForNotificationActivity": {
@@ -1052,6 +1244,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/WorkflowActivity"
+        }
       ]
     },
     "WaitForTimerActivity": {
@@ -1065,12 +1262,18 @@
           "const": "Workflows$WaitForTimerActivity"
         },
         "delay": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         }
       },
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/WorkflowActivity"
+        }
       ]
     },
     "Workflow": {
@@ -1084,7 +1287,12 @@
           "const": "Workflows$Workflow"
         },
         "title": {
-          "type": "string"
+          "type": "string",
+          "default": ""
+        },
+        "dueDate": {
+          "type": "string",
+          "default": ""
         },
         "parameter": {
           "$ref": "#/definitions/Parameter"
@@ -1100,9 +1308,6 @@
         },
         "workflowDescription": {
           "$ref": "microflows.schema.json#/definitions/StringTemplate"
-        },
-        "dueDate": {
-          "type": "string"
         },
         "workflowOnStateChangeEvent": {
           "$ref": "#/definitions/MicroflowEventHandler"
@@ -1127,6 +1332,11 @@
         "flow",
         "workflowName",
         "workflowDescription"
+      ],
+      "allOf": [
+        {
+          "$ref": "projects.schema.json#/definitions/Document"
+        }
       ]
     },
     "WorkflowCallParameterMapping": {
@@ -1139,12 +1349,13 @@
           "type": "string",
           "const": "Workflows$WorkflowCallParameterMapping"
         },
+        "expression": {
+          "type": "string",
+          "default": ""
+        },
         "parameter": {
           "type": "string",
-          "description": "#/definitions/Parameter"
-        },
-        "expression": {
-          "type": "string"
+          "description": "ByNameReferenceProperty: #/definitions/Parameter"
         }
       },
       "required": [
@@ -1181,13 +1392,18 @@
         },
         "workflow": {
           "type": "string",
-          "description": "#/definitions/Workflow"
+          "description": "ByNameReferenceProperty: #/definitions/Workflow"
         }
       },
       "required": [
         "$ID",
         "$Type",
         "workflow"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/WorkflowDefinitionSelection"
+        }
       ]
     },
     "WorkflowDefinitionObjectSelection": {
@@ -1201,12 +1417,18 @@
           "const": "Workflows$WorkflowDefinitionObjectSelection"
         },
         "workflowDefinitionVariable": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         }
       },
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/WorkflowDefinitionSelection"
+        }
       ]
     },
     "WorkflowEventHandler": {
@@ -1220,7 +1442,12 @@
           "const": "Workflows$WorkflowEventHandler"
         },
         "description": {
-          "type": "string"
+          "type": "string",
+          "default": ""
+        },
+        "documentation": {
+          "type": "string",
+          "default": ""
         },
         "microflowEventHandler": {
           "$ref": "#/definitions/MicroflowEventHandler"
@@ -1230,9 +1457,6 @@
           "items": {
             "type": "string"
           }
-        },
-        "documentation": {
-          "type": "string"
         }
       },
       "required": [
@@ -1252,7 +1476,7 @@
         },
         "entity": {
           "type": "string",
-          "description": "domainmodels.schema.json#/definitions/IEntity"
+          "description": "ByNameReferenceProperty: domainmodels.schema.json#/definitions/Entity"
         }
       },
       "required": [
@@ -1271,12 +1495,18 @@
           "const": "Workflows$XPathBasedUserSource"
         },
         "xPathConstraint": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         }
       },
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/UserSource"
+        }
       ]
     }
   }

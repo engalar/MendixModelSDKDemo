@@ -12,10 +12,12 @@
           "const": "Enumerations$Condition"
         },
         "attributeValue": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "editableVisible": {
-          "type": "boolean"
+          "type": "boolean",
+          "default": true
         }
       },
       "required": [
@@ -46,6 +48,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "projects.schema.json#/definitions/Document"
+        }
       ]
     },
     "EnumerationValue": {
@@ -59,14 +66,15 @@
           "const": "Enumerations$EnumerationValue"
         },
         "name": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "caption": {
           "$ref": "texts.schema.json#/definitions/Text"
         },
         "image": {
           "type": "string",
-          "description": "images.schema.json#/definitions/IImage"
+          "description": "ByNameReferenceProperty: images.schema.json#/definitions/Image"
         },
         "remoteValue": {
           "$ref": "#/definitions/RemoteEnumerationValue"

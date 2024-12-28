@@ -12,7 +12,8 @@
           "const": "MLMappings$MLMappingDocument"
         },
         "mlModelFileName": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "mlModelMetadata": {
           "type": "array",
@@ -27,6 +28,11 @@
       "required": [
         "$ID",
         "$Type"
+      ],
+      "allOf": [
+        {
+          "$ref": "projects.schema.json#/definitions/Document"
+        }
       ]
     },
     "MLModelEntityMappings": {
@@ -41,7 +47,7 @@
         },
         "entity": {
           "type": "string",
-          "description": "domainmodels.schema.json#/definitions/IEntity"
+          "description": "ByNameReferenceProperty: domainmodels.schema.json#/definitions/Entity"
         },
         "mappings": {
           "type": "array",
@@ -88,10 +94,12 @@
           "const": "MLMappings$MLModelMetadata"
         },
         "name": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "value": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         }
       },
       "required": [
@@ -110,7 +118,8 @@
           "const": "MLMappings$TensorDimension"
         },
         "dimension": {
-          "type": "string"
+          "type": "integer",
+          "default": -1
         }
       },
       "required": [
@@ -129,7 +138,8 @@
           "const": "MLMappings$TensorMappingElement"
         },
         "tensorName": {
-          "type": "string"
+          "type": "string",
+          "default": ""
         },
         "tensorType": {
           "type": "string",
@@ -164,7 +174,7 @@
         },
         "attribute": {
           "type": "string",
-          "description": "domainmodels.schema.json#/definitions/IAttribute"
+          "description": "ByNameReferenceProperty: domainmodels.schema.json#/definitions/Attribute"
         }
       },
       "required": [
