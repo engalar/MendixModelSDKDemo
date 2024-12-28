@@ -47,20 +47,15 @@ async function extractSchema(jsCode, dtsCode, interfaceSet) {
 
     // Helper function to determine the type
     async function determineType(propInfo, dtsAst) {
-        const propertyType = propInfo.propertyType;
-        const type = propInfo.type;
-        const internalName = propInfo.internalName;
-        let targetTypeName = (await findRefType(type, internalName)).replace('internal$', '');
-        if (interfaceSet.has(targetTypeName)) {
-            targetTypeName = targetTypeName.slice(1);
-        }
+        const { propertyType, type, internalName, primitiveTypeEnum, defaultValue } = propInfo;
+
         const primitiveTypeMap = {
             Integer: { type: "integer" },
             String: { type: "string" },
             Boolean: { type: "boolean" },
             Double: { type: "number" }, // Assuming Double maps to number
             DateTime: { type: "string", format: "date-time" },
-            Guid: { type: "string", format: "uuid" },
+            Guid: { $ref: "../common.schema.json#/definitions/GUID" },
             Point: { $ref: "../common.schema.json#/definitions/Point" },
             Size: { $ref: "../common.schema.json#/definitions/Size" },
             Color: { $ref: "../common.schema.json#/definitions/Color" },
@@ -69,9 +64,25 @@ async function extractSchema(jsCode, dtsCode, interfaceSet) {
 
         // Handle PrimitiveProperty types directly
         if (propertyType === "PrimitiveProperty") {
-            if (primitiveTypeMap[targetTypeName]) {
-                return primitiveTypeMap[targetTypeName];
+            if (primitiveTypeMap[primitiveTypeEnum]) {
+                if (defaultValue != undefined) {
+                    return { ...primitiveTypeMap[primitiveTypeEnum], default: defaultValue };
+                } else {
+                    return primitiveTypeMap[primitiveTypeEnum];
+                }
             }
+        }
+        let targetTypeName = (await findRefType(type, internalName)).replace('internal$', '');
+        let _rightType = targetTypeName.includes("$") ? targetTypeName.split('$')[1] : targetTypeName;
+
+        if (interfaceSet.has(_rightType)) {
+            _rightType = _rightType.slice(1);
+        }
+
+        if (targetTypeName.includes("$")) {
+            targetTypeName = `${targetTypeName.split('$')[0]}$${_rightType}`;
+        } else {
+            targetTypeName = _rightType;
         }
 
         // Handle EnumProperty and EnumListProperty
@@ -106,16 +117,14 @@ async function extractSchema(jsCode, dtsCode, interfaceSet) {
             let typeName = type;
 
             if (propertyType === "ByIdReferenceProperty") {
-                refType = { "$ref": "../common.schema.json#/definitions/Identifiable" }
-            } else if (propertyType === "ByNameReferenceProperty") {
                 refType = {
                     type: "string",
-                    description: transformRef(targetTypeName)
-                }
-            } else if (propertyType === "ByNameReferenceListProperty") {
+                    description: `ByIdReferenceProperty: ${transformRef(targetTypeName)};Unique identifier. use for placeholer uniqe identifier for human readable name and later will replace with guid by model sdk`
+                };
+            } else if (propertyType.startsWith("ByNameReference")) {
                 refType = {
                     type: "string",
-                    description: transformRef(targetTypeName)
+                    description: `${propertyType}: ${transformRef(targetTypeName)}`
                 }
             } else if (propertyType === "LocalByNameReferenceProperty") {
                 refType = { type: "string" };
@@ -348,6 +357,7 @@ async function extractSchema(jsCode, dtsCode, interfaceSet) {
                                                 let reference = false;
                                                 let isList = false;
                                                 let enumValues = undefined;
+                                                let defaultValue, primitiveTypeEnum;
 
                                                 // Handle specific types based on property type
                                                 if (propertyType.includes("Reference")) {
@@ -372,6 +382,37 @@ async function extractSchema(jsCode, dtsCode, interfaceSet) {
                                                     isList = true;
                                                 }
 
+                                                if (propertyType == "PrimitiveProperty") {
+                                                    // String Boolean Number
+                                                    if (["StringLiteral", "BooleanLiteral", "NumericLiteral"].includes(args[3].type)) {
+                                                        defaultValue = args[3].value;
+                                                    }
+
+                                                    // Number -1
+                                                    else if (args[3].type == "UnaryExpression" && args[3].prefix && args[3].argument.type == "NumericLiteral") { defaultValue = args[3].operator == '-' ? args[3].argument.value * -1 : args[3].argument.value }
+
+                                                    // Color
+                                                    else if (t.isMemberExpression(args[4]) && ["Color", "Size", "Point"].includes(args[4].property.name)) {
+                                                        defaultValue = args[3].properties.reduce((obj, prop) => {
+                                                            if (prop.key.type === 'Identifier' && prop.value.type === 'NumericLiteral') {
+                                                                obj[prop.key.name] = prop.value.value;
+                                                            }
+                                                            return obj;
+                                                        }, {});
+                                                    }
+
+                                                    else if (args[3].type == "NullLiteral") { defaultValue = null } else {
+                                                        const code = generator(assignPath.node).code;
+                                                        debugger
+                                                    }
+
+                                                    if (args[4].type == "MemberExpression" && args[4].object.type == "MemberExpression" &&
+                                                        args[4].object.property.name == "PrimitiveTypeEnum"
+                                                    ) {//internal.PrimitiveTypeEnum.Guid
+                                                        primitiveTypeEnum = args[4].property.name;//Guid
+                                                    }
+                                                }
+
                                                 classToProperties[className].push({
                                                     name: propertyName,
                                                     internalName: internalName,
@@ -379,6 +420,7 @@ async function extractSchema(jsCode, dtsCode, interfaceSet) {
                                                     type: type,
                                                     reference: reference,
                                                     isList: isList,
+                                                    defaultValue, primitiveTypeEnum,
                                                     enum: propertyType.includes("Enum"),
                                                     enumValues: enumValues,
                                                 });
@@ -500,7 +542,7 @@ async function main() {
         const ext = path.extname(file);
 
         // 只处理 .js 文件
-        if (ext === ".js" && !file.startsWith("all-model-classes")) {
+        if (ext === ".js" && !file.startsWith("all-model-classes") && !file.startsWith("base-model")) {
             const baseName = path.basename(file, ext);
             filePairs[baseName] = { js: file, ts: baseName + '.d.ts' }; // 直接拼接 .ts 文件名
         }
