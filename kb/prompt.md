@@ -37,3 +37,6 @@
 
 思考从domainmodels.js和domainmodels.d.ts.txt（实际上是typescript typing）用AST提取出domain.schema.json
 ```
+
+# temp
+如果code为"internal.IList<MemberAccess>"则通过p.typeParameters.params[0].typeName.name取得结果为MemberAccess
