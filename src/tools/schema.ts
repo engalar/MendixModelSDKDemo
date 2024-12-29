@@ -1,14 +1,45 @@
+// schema.ts
+
 import { resolve } from "path";
+import * as t from "@babel/types";
+import * as fs from "fs";
+import * as path from "path";
+import { parse } from "@babel/parser";
+import generator from "@babel/generator";
+import traverse from "@babel/traverse";
 
-const parser = require("@babel/parser");
-const traverse = require("@babel/traverse").default;
-const generator = require("@babel/generator").default;
-const t = require("@babel/types");
-const fs = require("fs");
-const path = require("path");
+export interface InheritanceInfo {
+    module: string | null;
+    superClass: string;
+}
 
-async function extractInterfaces(dtsCode: string): Promise<Set<string>> {
-    const dtsAst = parser.parse(dtsCode, {
+export interface PropertyInfo {
+    name: string;
+    internalName: string;
+    propertyType: string;
+    type: string;
+    reference: boolean;
+    isList: boolean;
+    defaultValue?: any;
+    primitiveTypeEnum?: string;
+    enum?: boolean;
+    enumValues?: string[];
+}
+
+export interface ClassInfo {
+    properties: PropertyInfo[];
+    required: string[];
+    versionInfo: Record<string, any>;
+    structureTypeName: string;
+}
+
+export interface Schema {
+    $schema: string;
+    definitions: Record<string, any>;
+}
+
+export async function extractInterfaces(dtsCode: string): Promise<Set<string>> {
+    const dtsAst = parse(dtsCode, {
         sourceType: "module",
         plugins: ["typescript"],
     });
@@ -21,17 +52,17 @@ async function extractInterfaces(dtsCode: string): Promise<Set<string>> {
         },
     });
 
+    console.log(`Extracted interfaces: ${Array.from(interfaceSet).join(", ")}`);
     return interfaceSet;
 }
 
-// 新增函数：提取类的继承信息
-async function extractInheritanceInfo(jsCode: string): Promise<{ [className: string]: { module: string, superClass: string } }> {
-    const jsAst = parser.parse(jsCode, {
+export async function extractInheritanceInfo(jsCode: string): Promise<Record<string, InheritanceInfo>> {
+    const jsAst = parse(jsCode, {
         sourceType: "module",
         plugins: ["typescript"],
     });
 
-    const inheritanceInfo = {};
+    const inheritanceInfo: Record<string, InheritanceInfo> = {};
 
     traverse(jsAst, {
         ClassDeclaration(path) {
@@ -49,35 +80,37 @@ async function extractInheritanceInfo(jsCode: string): Promise<{ [className: str
         },
     });
 
+    console.log(`Extracted inheritance info: ${JSON.stringify(inheritanceInfo, null, 2)}`);
     return inheritanceInfo;
 }
 
-async function extractSchema(jsCode, dtsCode, interfaceSet, allInheritanceInfo) {
-    const jsAst = parser.parse(jsCode, {
+export async function extractSchema(jsCode: string, dtsCode: string, interfaceSet: Set<string>, allInheritanceInfo: Record<string, InheritanceInfo>): Promise<Schema> {
+    const jsAst = parse(jsCode, {
         sourceType: "module",
         plugins: ["typescript"],
     });
 
-    const dtsAst = parser.parse(dtsCode, {
+    const dtsAst = parse(dtsCode, {
         sourceType: "module",
         plugins: ["typescript"],
     });
 
-    const schema = {
+    const schema: Schema = {
         "$schema": "http://json-schema.org/draft-07/schema#",
         "definitions": {},
     };
 
-    const classToProperties = {};
-    const classToRequired = {};
-    const classToVersionInfo = {};
-    const classToStructureTypeName = {};
+    const classToProperties: Record<string, PropertyInfo[]> = {};
+    const classToRequired: Record<string, string[]> = {};
+    const classToVersionInfo: Record<string, Record<string, any>> = {};
+    const classToStructureTypeName: Record<string, string> = {};
 
-    // Helper function to determine the type
-    async function determineType(propInfo, dtsAst) {
+    //#region Helper functions and traversal logic
+    //#region 确定属性类型
+    async function determineType(propInfo: PropertyInfo, dtsAst: any): Promise<any> {
         const { propertyType, type, internalName, primitiveTypeEnum, defaultValue } = propInfo;
 
-        const primitiveTypeMap = {
+        const primitiveTypeMap: Record<string, any> = {
             Integer: { type: "integer" },
             String: { type: "string" },
             Boolean: { type: "boolean" },
@@ -100,6 +133,7 @@ async function extractSchema(jsCode, dtsCode, interfaceSet, allInheritanceInfo) 
                 }
             }
         }
+
         let targetTypeName = (await findRefType(type, internalName)).replace('internal$', '');
         let _rightType = targetTypeName.includes("$") ? targetTypeName.split('$')[1] : targetTypeName;
 
@@ -123,7 +157,7 @@ async function extractSchema(jsCode, dtsCode, interfaceSet, allInheritanceInfo) 
         }
 
         // Handle reference properties
-        function transformRef(input) {
+        function transformRef(input: string): string {
             const pattern = /^(?:([a-zA-Z]+)\$)?([a-zA-Z]+)$/; // 匹配 "{module_name}${class_name}" 和 "{class_name}"
             const match = input.match(pattern);
 
@@ -140,6 +174,7 @@ async function extractSchema(jsCode, dtsCode, interfaceSet, allInheritanceInfo) 
                 return `#/definitions/${className}`;
             }
         }
+
         if (propertyType.includes("Reference") || propertyType.includes("Part")) {
             let refType = null;
             let typeName = type;
@@ -172,91 +207,90 @@ async function extractSchema(jsCode, dtsCode, interfaceSet, allInheritanceInfo) 
         }
 
         return { type: "string" }; // Default to string if type is unknown or unhandled
+    }
 
-        async function findRefType(typeName: string, internalName: string): Promise<string> {
-            return new Promise((resolve, reject) => {
-                traverse(dtsAst, {
-                    ClassDeclaration(path) {
-                        if (path.node.id.name === typeName) {
-                            const propList = path.node.body.body.filter(n => n.kind == 'get' && !n.static && n.type == "TSDeclareMethod" && n.key.name == internalName).map(n => n.returnType.typeAnnotation);
-                            for (const p of propList) {
-                                const result = processTypeAnnotation(p);
-                                if (result) {
-                                    path.stop();
-                                    resolve(result);
-                                    return;
-                                }
+    async function findRefType(typeName: string, internalName: string): Promise<string> {
+        return new Promise((resolve, reject) => {
+            traverse(dtsAst, {
+                ClassDeclaration(path) {
+                    if (path.node.id.name === typeName) {
+                        const propList = path.node.body.body.filter(n => n.kind == 'get' && !n.static && n.type == "TSDeclareMethod" && n.key.name == internalName).map(n => n.returnType.typeAnnotation);
+                        for (const p of propList) {
+                            const result = processTypeAnnotation(p);
+                            if (result) {
+                                path.stop();
+                                resolve(result);
+                                return;
                             }
-                            path.stop();
-                            resolve(undefined);
                         }
+                        path.stop();
+                        resolve(undefined);
                     }
-                },
-                    () => reject(`can not find ${typeName}.${internalName} in .d.ts`)
-                );
-            });
-        }
-
-        function processTypeAnnotation(p: any): string | undefined {
-            switch (p.type) {
-                case "TSTypeReference":
-                    return processTSTypeReference(p);
-                case "TSBooleanKeyword":
-                    return "Boolean";
-                case "TSStringKeyword":
-                    return "String";
-                case "TSNumberKeyword":
-                    return "Number";
-                case "TSArrayType":
-                    return processTSArrayType(p);
-                case "TSUnionType":
-                    return processTSUnionType(p);
-                default:
-                    return undefined;
-            }
-        }
-
-        function processTSTypeReference(p: any): string | undefined {
-            if (p.typeParameters) {
-                const typeParam = p.typeParameters.params[0];
-                let innerType = processTypeAnnotation(typeParam);
-                if (!innerType) return undefined;
-
-                if (p.typeName.type === "TSQualifiedName") {
-                    innerType = `${p.typeName.left.name}$${innerType}`;
                 }
-                return innerType;
-            } else {
-                if (p.typeName.type === "TSQualifiedName") {
-                    return `${p.typeName.left.name}$${p.typeName.right.name}`;
-                } else if (p.typeName.type === "Identifier") {
-                    return p.typeName.name;
-                }
-            }
-            return undefined;
-        }
+            },
+                () => reject(`can not find ${typeName}.${internalName} in .d.ts`)
+            );
+        });
+    }
 
-        function processTSArrayType(p: any): string | undefined {
-            const elementType = processTypeAnnotation(p.elementType);
-            // Consider if you want to represent array types differently, e.g., "Array<elementType>" or "elementType[]"
-            // For now, we'll just return the elementType
-            return elementType;
-        }
-
-        function processTSUnionType(p: any): string | undefined {
-            const isNullable = p.types.some(t => t.type === "TSNullKeyword");
-            const nonNullType = p.types.find(t => t.type !== "TSNullKeyword");
-
-            if (isNullable && nonNullType) {
-                return processTypeAnnotation(nonNullType);
-            }
-            return undefined;
+    function processTypeAnnotation(p: any): string | undefined {
+        switch (p.type) {
+            case "TSTypeReference":
+                return processTSTypeReference(p);
+            case "TSBooleanKeyword":
+                return "Boolean";
+            case "TSStringKeyword":
+                return "String";
+            case "TSNumberKeyword":
+                return "Number";
+            case "TSArrayType":
+                return processTSArrayType(p);
+            case "TSUnionType":
+                return processTSUnionType(p);
+            default:
+                return undefined;
         }
     }
 
-    // Helper function to extract version info
-    function extractVersionInfo(className, jsAst) {
-        let versionInfo = {};
+    function processTSTypeReference(p: any): string | undefined {
+        if (p.typeParameters) {
+            const typeParam = p.typeParameters.params[0];
+            let innerType = processTypeAnnotation(typeParam);
+            if (!innerType) return undefined;
+
+            if (p.typeName.type === "TSQualifiedName") {
+                innerType = `${p.typeName.left.name}$${innerType}`;
+            }
+            return innerType;
+        } else {
+            if (p.typeName.type === "TSQualifiedName") {
+                return `${p.typeName.left.name}$${p.typeName.right.name}`;
+            } else if (p.typeName.type === "Identifier") {
+                return p.typeName.name;
+            }
+        }
+        return undefined;
+    }
+
+    function processTSArrayType(p: any): string | undefined {
+        const elementType = processTypeAnnotation(p.elementType);
+        return elementType;
+    }
+
+    function processTSUnionType(p: any): string | undefined {
+        const isNullable = p.types.some(t => t.type === "TSNullKeyword");
+        const nonNullType = p.types.find(t => t.type !== "TSNullKeyword");
+
+        if (isNullable && nonNullType) {
+            return processTypeAnnotation(nonNullType);
+        }
+        return undefined;
+    }
+    //#endregion
+
+    //#region 提取版本信息
+    function extractVersionInfo(className: string, jsAst: any): Record<string, any> {
+        let versionInfo: Record<string, any> = {};
 
         traverse(jsAst, {
             ExpressionStatement(path) {
@@ -276,7 +310,9 @@ async function extractSchema(jsCode, dtsCode, interfaceSet, allInheritanceInfo) 
                             (prop) => t.isObjectProperty(prop) && t.isIdentifier(prop.key, { name: "properties" })
                         );
 
+                        //@ts-ignore
                         if (propertiesObject && t.isObjectExpression(propertiesObject.value)) {
+                            //@ts-ignore
                             propertiesObject.value.properties.forEach((prop) => {
                                 if (t.isObjectProperty(prop) && t.isIdentifier(prop.key)) {
                                     const propName = prop.key.name;
@@ -291,7 +327,7 @@ async function extractSchema(jsCode, dtsCode, interfaceSet, allInheritanceInfo) 
                                                 if (t.isStringLiteral(innerProp.value)) {
                                                     versionInfo[propName][innerPropName] = innerProp.value.value;
                                                 } else if (t.isObjectExpression(innerProp.value)) {
-                                                    const innerPropValue = {};
+                                                    const innerPropValue: Record<string, boolean> = {};
                                                     innerProp.value.properties.forEach(innerMostProp => {
                                                         if (t.isObjectProperty(innerMostProp) && t.isIdentifier(innerMostProp.key) && t.isBooleanLiteral(innerMostProp.value)) {
                                                             innerPropValue[innerMostProp.key.name] = innerMostProp.value.value
@@ -310,11 +346,14 @@ async function extractSchema(jsCode, dtsCode, interfaceSet, allInheritanceInfo) 
             },
         });
 
+        console.log(`Extracted version info for ${className}: ${JSON.stringify(versionInfo, null, 2)}`);
         return versionInfo;
     }
+    //#endregion
 
-    // Helper function to extract structure type name
-    function extractStructureTypeName(className, jsAst) {
+
+    //#region 提取结构类型名称
+    function extractStructureTypeName(className: string, jsAst: any): string {
         let structureTypeName = "";
 
         traverse(jsAst, {
@@ -332,9 +371,50 @@ async function extractSchema(jsCode, dtsCode, interfaceSet, allInheritanceInfo) 
             },
         });
 
+        console.log(`Extracted structure type name for ${className}: ${structureTypeName}`);
         return structureTypeName;
     }
+    //#endregion
 
+    //#region 查找枚举定义
+    function findEnumDefinition(dtsAst: any, enumName: string): { name: string; members: string[] } | null {
+        let foundEnum = null;
+
+        traverse(dtsAst, {
+            ClassDeclaration(path) {
+                if (
+                    path.node.id.name === enumName &&
+                    path.node.superClass &&
+                    t.isMemberExpression(path.node.superClass) &&
+                    t.isIdentifier(path.node.superClass.property) &&
+                    path.node.superClass.property.name === "AbstractEnum"
+                ) {
+                    foundEnum = {
+                        name: enumName,
+                        members: [],
+                    };
+                    path.traverse({
+                        ClassProperty(memberPath) {
+                            if (
+                                memberPath.node.static &&
+                                t.isIdentifier(memberPath.node.key)
+                            ) {
+                                foundEnum.members.push(memberPath.node.key.name);
+                            }
+                        },
+                    });
+                    path.stop();
+                }
+            },
+        });
+
+        console.log(`Found enum definition for ${enumName}: ${JSON.stringify(foundEnum, null, 2)}`);
+        return foundEnum;
+    }
+    //#endregion
+
+
+    //#region 遍历逻辑
     // First, traverse the JS AST to find class constructors, their properties, version info, and structure type names
     traverse(jsAst, {
         ClassDeclaration(path) {
@@ -380,6 +460,7 @@ async function extractSchema(jsCode, dtsCode, interfaceSet, allInheritanceInfo) 
                                                 t.isStringLiteral(args[2])
                                             ) {
                                                 const internalName = args[2].value;
+                                                //@ts-ignore
                                                 let type = args[0].name;
                                                 let reference = false;
                                                 let isList = false;
@@ -393,14 +474,13 @@ async function extractSchema(jsCode, dtsCode, interfaceSet, allInheritanceInfo) 
 
                                                 if (propertyType.includes("Enum")) {
                                                     // Extract enum values from the corresponding enum in the dts
+                                                    //@ts-ignore
                                                     const enumName = propertyType === "EnumProperty" ? args[4].name : args[0].name;
-                                                    const enumDefinition = findEnumDefinition(
-                                                        dtsAst,
-                                                        enumName
-                                                    );
+                                                    const enumDefinition = findEnumDefinition(dtsAst, enumName);
                                                     if (enumDefinition) {
                                                         enumValues = enumDefinition.members;
                                                     }
+                                                    //@ts-ignore
                                                     type = args[0].name;
                                                     reference = false;
                                                 }
@@ -412,6 +492,7 @@ async function extractSchema(jsCode, dtsCode, interfaceSet, allInheritanceInfo) 
                                                 if (propertyType == "PrimitiveProperty") {
                                                     // String Boolean Number
                                                     if (["StringLiteral", "BooleanLiteral", "NumericLiteral"].includes(args[3].type)) {
+                                                        //@ts-ignore
                                                         defaultValue = args[3].value;
                                                     }
 
@@ -419,7 +500,9 @@ async function extractSchema(jsCode, dtsCode, interfaceSet, allInheritanceInfo) 
                                                     else if (args[3].type == "UnaryExpression" && args[3].prefix && args[3].argument.type == "NumericLiteral") { defaultValue = args[3].operator == '-' ? args[3].argument.value * -1 : args[3].argument.value }
 
                                                     // Color
+                                                    //@ts-ignore
                                                     else if (t.isMemberExpression(args[4]) && ["Color", "Size", "Point"].includes(args[4].property.name)) {
+                                                        //@ts-ignore
                                                         defaultValue = args[3].properties.reduce((obj, prop) => {
                                                             if (prop.key.type === 'Identifier' && prop.value.type === 'NumericLiteral') {
                                                                 obj[prop.key.name] = prop.value.value;
@@ -434,8 +517,10 @@ async function extractSchema(jsCode, dtsCode, interfaceSet, allInheritanceInfo) 
                                                     }
 
                                                     if (args[4].type == "MemberExpression" && args[4].object.type == "MemberExpression" &&
+                                                        //@ts-ignore
                                                         args[4].object.property.name == "PrimitiveTypeEnum"
                                                     ) {//internal.PrimitiveTypeEnum.Guid
+                                                        //@ts-ignore
                                                         primitiveTypeEnum = args[4].property.name;//Guid
                                                     }
                                                 }
@@ -463,46 +548,14 @@ async function extractSchema(jsCode, dtsCode, interfaceSet, allInheritanceInfo) 
         },
     });
 
-    // Helper function to find enum definition in dtsAst
-    function findEnumDefinition(dtsAst, enumName) {
-        let foundEnum = null;
-        traverse(dtsAst, {
-            ClassDeclaration(path) {
-                if (
-                    path.node.id.name === enumName &&
-                    path.node.superClass &&
-                    t.isMemberExpression(path.node.superClass) &&
-                    t.isIdentifier(path.node.superClass.property) &&
-                    path.node.superClass.property.name === "AbstractEnum"
-                ) {
-                    foundEnum = {
-                        name: enumName,
-                        members: [],
-                    };
-                    path.traverse({
-                        ClassProperty(memberPath) {
-                            if (
-                                memberPath.node.static &&
-                                t.isIdentifier(memberPath.node.key)
-                            ) {
-                                foundEnum.members.push(memberPath.node.key.name);
-                            }
-                        },
-                    });
-                    path.stop();
-                }
-            },
-        });
-        return foundEnum;
-    }
-
     // Then, traverse the TS AST to build the schema based on class properties and version info
-    const tasks = [];
+    const tasks: any[] = [];
     traverse(dtsAst, {
         TSDeclareMethod(path) {
             tasks.push(path);
         },
     });
+
     await Promise.all(tasks.map(async (path) => {
         if (
             t.isIdentifier(path.node.key) &&
@@ -573,43 +626,41 @@ async function extractSchema(jsCode, dtsCode, interfaceSet, allInheritanceInfo) 
             }
         }
     }));
+    //#endregion
 
+
+    //#endregion
+
+    console.log(`Generated schema for ${Object.keys(schema.definitions).length} classes`);
     return schema;
 }
 
-async function main() {
+export async function main(): Promise<void> {
     const genDir = "node_modules/mendixmodelsdk/src/gen";
     const schemaDir = "schemas/gen";
 
-    // 确保 schema 目录存在
     fs.mkdirSync(schemaDir, { recursive: true });
 
     const files = fs.readdirSync(genDir);
-    const filePairs: { [key: string]: { js: string; ts: string } } = {}; // 移除 ts 的可选属性
+    const filePairs: Record<string, { js: string; ts: string }> = {};
 
-    // 遍历 .js 文件并构建 baseName
     for (const file of files) {
         const ext = path.extname(file);
-
-        // 只处理 .js 文件
         if (ext === ".js" && !file.startsWith("all-model-classes") && !file.startsWith("base-model")) {
             const baseName = path.basename(file, ext);
-            filePairs[baseName] = { js: file, ts: baseName + '.d.ts' }; // 直接拼接 .ts 文件名
+            filePairs[baseName] = { js: file, ts: baseName + '.d.ts' };
         }
     }
 
-    // 收集所有 .ts 文件中的接口
     let allInterfaces = new Set<string>();
     for (const baseName in filePairs) {
         const pair = filePairs[baseName];
-        // 直接读取 ts 文件，无需判断是否存在
         const tsCode = fs.readFileSync(path.join(genDir, pair.ts), "utf-8");
         const interfaces = await extractInterfaces(tsCode);
         allInterfaces = new Set([...allInterfaces, ...interfaces]);
     }
 
-    // 收集所有 .js 文件中的继承信息
-    let allInheritanceInfo = {};
+    let allInheritanceInfo: Record<string, InheritanceInfo> = {};
     for (const baseName in filePairs) {
         const pair = filePairs[baseName];
         const jsCode = fs.readFileSync(path.join(genDir, pair.js), "utf-8");
@@ -617,10 +668,8 @@ async function main() {
         allInheritanceInfo = { ...allInheritanceInfo, ...inheritanceInfo };
     }
 
-    // 处理每个文件对
     for (const baseName in filePairs) {
         const pair = filePairs[baseName];
-        // 直接读取 js 和 ts 文件，无需判断是否存在
         const jsCode = fs.readFileSync(path.join(genDir, pair.js), "utf-8");
         const tsCode = fs.readFileSync(path.join(genDir, pair.ts), "utf-8");
 
