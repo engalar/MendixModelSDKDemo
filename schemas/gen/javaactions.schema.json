@@ -28,7 +28,23 @@
           "const": "JavaActions$BasicParameterType"
         },
         "type": {
-          "$ref": "#/definitions/Type"
+          "onOf": [
+            {
+              "$ref": "#/definitions/Type"
+            },
+            {
+              "$ref": "#/definitions/PrimitiveType"
+            },
+            {
+              "$ref": "#/definitions/EntityType"
+            },
+            {
+              "$ref": "#/definitions/EnumerationType"
+            },
+            {
+              "$ref": "#/definitions/ListType"
+            }
+          ]
         }
       },
       "required": [
@@ -415,7 +431,17 @@
           "const": "JavaActions$ListType"
         },
         "parameter": {
-          "$ref": "#/definitions/EntityType"
+          "onOf": [
+            {
+              "$ref": "#/definitions/EntityType"
+            },
+            {
+              "$ref": "#/definitions/ConcreteEntityType"
+            },
+            {
+              "$ref": "#/definitions/ParameterizedEntityType"
+            }
+          ]
         }
       },
       "required": [

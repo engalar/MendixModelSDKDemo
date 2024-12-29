@@ -104,7 +104,17 @@
           "const": "ExcelDataImporter$ColumnAttributeMapping"
         },
         "reference": {
-          "$ref": "#/definitions/Reference"
+          "onOf": [
+            {
+              "$ref": "#/definitions/Reference"
+            },
+            {
+              "$ref": "#/definitions/IndexReference"
+            },
+            {
+              "$ref": "#/definitions/NameReference"
+            }
+          ]
         },
         "attribute": {
           "type": "string",
@@ -187,7 +197,17 @@
           "default": 1
         },
         "reference": {
-          "$ref": "#/definitions/Reference"
+          "onOf": [
+            {
+              "$ref": "#/definitions/Reference"
+            },
+            {
+              "$ref": "#/definitions/IndexReference"
+            },
+            {
+              "$ref": "#/definitions/NameReference"
+            }
+          ]
         },
         "entity": {
           "type": "string",
@@ -386,7 +406,17 @@
           "default": 1
         },
         "reference": {
-          "$ref": "#/definitions/Reference"
+          "onOf": [
+            {
+              "$ref": "#/definitions/Reference"
+            },
+            {
+              "$ref": "#/definitions/IndexReference"
+            },
+            {
+              "$ref": "#/definitions/NameReference"
+            }
+          ]
         },
         "entity": {
           "type": "string",
@@ -429,7 +459,17 @@
           "default": false
         },
         "contents": {
-          "$ref": "#/definitions/TemplateContents"
+          "onOf": [
+            {
+              "$ref": "#/definitions/TemplateContents"
+            },
+            {
+              "$ref": "#/definitions/CSVTemplateContents"
+            },
+            {
+              "$ref": "#/definitions/ExcelTemplateContents"
+            }
+          ]
         }
       },
       "required": [

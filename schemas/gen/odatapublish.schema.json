@@ -153,16 +153,65 @@
           "default": 10000
         },
         "updateMode": {
-          "$ref": "#/definitions/ChangeMode"
+          "onOf": [
+            {
+              "$ref": "#/definitions/ChangeMode"
+            },
+            {
+              "$ref": "#/definitions/CallMicroflowToChange"
+            },
+            {
+              "$ref": "#/definitions/ChangeNotSupported"
+            },
+            {
+              "$ref": "#/definitions/ChangeSource"
+            }
+          ]
         },
         "insertMode": {
-          "$ref": "#/definitions/ChangeMode"
+          "onOf": [
+            {
+              "$ref": "#/definitions/ChangeMode"
+            },
+            {
+              "$ref": "#/definitions/CallMicroflowToChange"
+            },
+            {
+              "$ref": "#/definitions/ChangeNotSupported"
+            },
+            {
+              "$ref": "#/definitions/ChangeSource"
+            }
+          ]
         },
         "deleteMode": {
-          "$ref": "#/definitions/ChangeMode"
+          "onOf": [
+            {
+              "$ref": "#/definitions/ChangeMode"
+            },
+            {
+              "$ref": "#/definitions/CallMicroflowToChange"
+            },
+            {
+              "$ref": "#/definitions/ChangeNotSupported"
+            },
+            {
+              "$ref": "#/definitions/ChangeSource"
+            }
+          ]
         },
         "readMode": {
-          "$ref": "#/definitions/ReadMode"
+          "onOf": [
+            {
+              "$ref": "#/definitions/ReadMode"
+            },
+            {
+              "$ref": "#/definitions/CallMicroflowToRead"
+            },
+            {
+              "$ref": "#/definitions/ReadSource"
+            }
+          ]
         },
         "queryOptions": {
           "$ref": "#/definitions/QueryOptions"
@@ -207,7 +256,20 @@
         "childMembers": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/PublishedMember"
+            "onOf": [
+              {
+                "$ref": "#/definitions/PublishedMember"
+              },
+              {
+                "$ref": "#/definitions/PublishedAssociationEnd"
+              },
+              {
+                "$ref": "#/definitions/PublishedAttribute"
+              },
+              {
+                "$ref": "#/definitions/PublishedId"
+              }
+            ]
           }
         }
       },

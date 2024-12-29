@@ -16,7 +16,17 @@
           "default": ""
         },
         "value": {
-          "$ref": "#/definitions/AdditionalPropertyValue"
+          "onOf": [
+            {
+              "$ref": "#/definitions/AdditionalPropertyValue"
+            },
+            {
+              "$ref": "#/definitions/ValueAsConstant"
+            },
+            {
+              "$ref": "#/definitions/ValueAsString"
+            }
+          ]
         }
       },
       "required": [
@@ -55,7 +65,17 @@
           "default": ""
         },
         "sqlDataType": {
-          "$ref": "#/definitions/SqlDataType"
+          "onOf": [
+            {
+              "$ref": "#/definitions/SqlDataType"
+            },
+            {
+              "$ref": "#/definitions/LimitedLengthSqlDataType"
+            },
+            {
+              "$ref": "#/definitions/SimpleSqlDataType"
+            }
+          ]
         },
         "attribute": {
           "type": "string",
@@ -185,7 +205,17 @@
           "default": ""
         },
         "connectionInput": {
-          "$ref": "#/definitions/ConnectionInput"
+          "onOf": [
+            {
+              "$ref": "#/definitions/ConnectionInput"
+            },
+            {
+              "$ref": "#/definitions/ConnectionParts"
+            },
+            {
+              "$ref": "#/definitions/ConnectionString"
+            }
+          ]
         },
         "connectionString": {
           "type": "string",
@@ -373,7 +403,17 @@
           "default": false
         },
         "sqlDataType": {
-          "$ref": "#/definitions/SqlDataType"
+          "onOf": [
+            {
+              "$ref": "#/definitions/SqlDataType"
+            },
+            {
+              "$ref": "#/definitions/LimitedLengthSqlDataType"
+            },
+            {
+              "$ref": "#/definitions/SimpleSqlDataType"
+            }
+          ]
         },
         "dataType": {
           "$ref": "datatypes.schema.json#/definitions/DataType"

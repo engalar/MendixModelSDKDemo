@@ -48,10 +48,84 @@
           ]
         },
         "left": {
-          "$ref": "#/definitions/Expression"
+          "onOf": [
+            {
+              "$ref": "#/definitions/Expression"
+            },
+            {
+              "$ref": "#/definitions/BinaryExpression"
+            },
+            {
+              "$ref": "#/definitions/LiteralExpression"
+            },
+            {
+              "$ref": "#/definitions/ConstantRefExpression"
+            },
+            {
+              "$ref": "#/definitions/EnumerationValueRefExpression"
+            },
+            {
+              "$ref": "#/definitions/FunctionCallExpression"
+            },
+            {
+              "$ref": "#/definitions/IfExpression"
+            },
+            {
+              "$ref": "#/definitions/NoExpression"
+            },
+            {
+              "$ref": "#/definitions/ParenthesisExpression"
+            },
+            {
+              "$ref": "#/definitions/UnaryExpression"
+            },
+            {
+              "$ref": "#/definitions/UnparsableExpression"
+            },
+            {
+              "$ref": "#/definitions/VariableRefExpression"
+            }
+          ]
         },
         "right": {
-          "$ref": "#/definitions/Expression"
+          "onOf": [
+            {
+              "$ref": "#/definitions/Expression"
+            },
+            {
+              "$ref": "#/definitions/BinaryExpression"
+            },
+            {
+              "$ref": "#/definitions/LiteralExpression"
+            },
+            {
+              "$ref": "#/definitions/ConstantRefExpression"
+            },
+            {
+              "$ref": "#/definitions/EnumerationValueRefExpression"
+            },
+            {
+              "$ref": "#/definitions/FunctionCallExpression"
+            },
+            {
+              "$ref": "#/definitions/IfExpression"
+            },
+            {
+              "$ref": "#/definitions/NoExpression"
+            },
+            {
+              "$ref": "#/definitions/ParenthesisExpression"
+            },
+            {
+              "$ref": "#/definitions/UnaryExpression"
+            },
+            {
+              "$ref": "#/definitions/UnparsableExpression"
+            },
+            {
+              "$ref": "#/definitions/VariableRefExpression"
+            }
+          ]
         }
       },
       "required": [
@@ -227,7 +301,44 @@
         "arguments": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/Expression"
+            "onOf": [
+              {
+                "$ref": "#/definitions/Expression"
+              },
+              {
+                "$ref": "#/definitions/BinaryExpression"
+              },
+              {
+                "$ref": "#/definitions/LiteralExpression"
+              },
+              {
+                "$ref": "#/definitions/ConstantRefExpression"
+              },
+              {
+                "$ref": "#/definitions/EnumerationValueRefExpression"
+              },
+              {
+                "$ref": "#/definitions/FunctionCallExpression"
+              },
+              {
+                "$ref": "#/definitions/IfExpression"
+              },
+              {
+                "$ref": "#/definitions/NoExpression"
+              },
+              {
+                "$ref": "#/definitions/ParenthesisExpression"
+              },
+              {
+                "$ref": "#/definitions/UnaryExpression"
+              },
+              {
+                "$ref": "#/definitions/UnparsableExpression"
+              },
+              {
+                "$ref": "#/definitions/VariableRefExpression"
+              }
+            ]
           }
         }
       },
@@ -293,13 +404,124 @@
           "const": "Expressions$IfExpression"
         },
         "condition": {
-          "$ref": "#/definitions/Expression"
+          "onOf": [
+            {
+              "$ref": "#/definitions/Expression"
+            },
+            {
+              "$ref": "#/definitions/BinaryExpression"
+            },
+            {
+              "$ref": "#/definitions/LiteralExpression"
+            },
+            {
+              "$ref": "#/definitions/ConstantRefExpression"
+            },
+            {
+              "$ref": "#/definitions/EnumerationValueRefExpression"
+            },
+            {
+              "$ref": "#/definitions/FunctionCallExpression"
+            },
+            {
+              "$ref": "#/definitions/IfExpression"
+            },
+            {
+              "$ref": "#/definitions/NoExpression"
+            },
+            {
+              "$ref": "#/definitions/ParenthesisExpression"
+            },
+            {
+              "$ref": "#/definitions/UnaryExpression"
+            },
+            {
+              "$ref": "#/definitions/UnparsableExpression"
+            },
+            {
+              "$ref": "#/definitions/VariableRefExpression"
+            }
+          ]
         },
         "ifTrue": {
-          "$ref": "#/definitions/Expression"
+          "onOf": [
+            {
+              "$ref": "#/definitions/Expression"
+            },
+            {
+              "$ref": "#/definitions/BinaryExpression"
+            },
+            {
+              "$ref": "#/definitions/LiteralExpression"
+            },
+            {
+              "$ref": "#/definitions/ConstantRefExpression"
+            },
+            {
+              "$ref": "#/definitions/EnumerationValueRefExpression"
+            },
+            {
+              "$ref": "#/definitions/FunctionCallExpression"
+            },
+            {
+              "$ref": "#/definitions/IfExpression"
+            },
+            {
+              "$ref": "#/definitions/NoExpression"
+            },
+            {
+              "$ref": "#/definitions/ParenthesisExpression"
+            },
+            {
+              "$ref": "#/definitions/UnaryExpression"
+            },
+            {
+              "$ref": "#/definitions/UnparsableExpression"
+            },
+            {
+              "$ref": "#/definitions/VariableRefExpression"
+            }
+          ]
         },
         "ifFalse": {
-          "$ref": "#/definitions/Expression"
+          "onOf": [
+            {
+              "$ref": "#/definitions/Expression"
+            },
+            {
+              "$ref": "#/definitions/BinaryExpression"
+            },
+            {
+              "$ref": "#/definitions/LiteralExpression"
+            },
+            {
+              "$ref": "#/definitions/ConstantRefExpression"
+            },
+            {
+              "$ref": "#/definitions/EnumerationValueRefExpression"
+            },
+            {
+              "$ref": "#/definitions/FunctionCallExpression"
+            },
+            {
+              "$ref": "#/definitions/IfExpression"
+            },
+            {
+              "$ref": "#/definitions/NoExpression"
+            },
+            {
+              "$ref": "#/definitions/ParenthesisExpression"
+            },
+            {
+              "$ref": "#/definitions/UnaryExpression"
+            },
+            {
+              "$ref": "#/definitions/UnparsableExpression"
+            },
+            {
+              "$ref": "#/definitions/VariableRefExpression"
+            }
+          ]
         }
       },
       "required": [
@@ -393,7 +615,44 @@
           "const": "Expressions$ParenthesisExpression"
         },
         "expression": {
-          "$ref": "#/definitions/Expression"
+          "onOf": [
+            {
+              "$ref": "#/definitions/Expression"
+            },
+            {
+              "$ref": "#/definitions/BinaryExpression"
+            },
+            {
+              "$ref": "#/definitions/LiteralExpression"
+            },
+            {
+              "$ref": "#/definitions/ConstantRefExpression"
+            },
+            {
+              "$ref": "#/definitions/EnumerationValueRefExpression"
+            },
+            {
+              "$ref": "#/definitions/FunctionCallExpression"
+            },
+            {
+              "$ref": "#/definitions/IfExpression"
+            },
+            {
+              "$ref": "#/definitions/NoExpression"
+            },
+            {
+              "$ref": "#/definitions/ParenthesisExpression"
+            },
+            {
+              "$ref": "#/definitions/UnaryExpression"
+            },
+            {
+              "$ref": "#/definitions/UnparsableExpression"
+            },
+            {
+              "$ref": "#/definitions/VariableRefExpression"
+            }
+          ]
         }
       },
       "required": [
@@ -450,7 +709,44 @@
           ]
         },
         "expression": {
-          "$ref": "#/definitions/Expression"
+          "onOf": [
+            {
+              "$ref": "#/definitions/Expression"
+            },
+            {
+              "$ref": "#/definitions/BinaryExpression"
+            },
+            {
+              "$ref": "#/definitions/LiteralExpression"
+            },
+            {
+              "$ref": "#/definitions/ConstantRefExpression"
+            },
+            {
+              "$ref": "#/definitions/EnumerationValueRefExpression"
+            },
+            {
+              "$ref": "#/definitions/FunctionCallExpression"
+            },
+            {
+              "$ref": "#/definitions/IfExpression"
+            },
+            {
+              "$ref": "#/definitions/NoExpression"
+            },
+            {
+              "$ref": "#/definitions/ParenthesisExpression"
+            },
+            {
+              "$ref": "#/definitions/UnaryExpression"
+            },
+            {
+              "$ref": "#/definitions/UnparsableExpression"
+            },
+            {
+              "$ref": "#/definitions/VariableRefExpression"
+            }
+          ]
         }
       },
       "required": [
@@ -500,7 +796,17 @@
           "const": "Expressions$VariableRefExpression"
         },
         "variable": {
-          "$ref": "#/definitions/VariableRef"
+          "onOf": [
+            {
+              "$ref": "#/definitions/VariableRef"
+            },
+            {
+              "$ref": "#/definitions/GlobalVariableRef"
+            },
+            {
+              "$ref": "#/definitions/NoVariableRef"
+            }
+          ]
         },
         "member": {
           "$ref": "domainmodels.schema.json#/definitions/MemberRef"

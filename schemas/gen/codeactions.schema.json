@@ -28,7 +28,23 @@
           "const": "CodeActions$BasicParameterType"
         },
         "type": {
-          "$ref": "#/definitions/Type"
+          "onOf": [
+            {
+              "$ref": "#/definitions/Type"
+            },
+            {
+              "$ref": "#/definitions/PrimitiveType"
+            },
+            {
+              "$ref": "#/definitions/EntityType"
+            },
+            {
+              "$ref": "#/definitions/EnumerationType"
+            },
+            {
+              "$ref": "#/definitions/ListType"
+            }
+          ]
         }
       },
       "required": [
@@ -121,7 +137,23 @@
           }
         },
         "actionReturnType": {
-          "$ref": "#/definitions/Type"
+          "onOf": [
+            {
+              "$ref": "#/definitions/Type"
+            },
+            {
+              "$ref": "#/definitions/PrimitiveType"
+            },
+            {
+              "$ref": "#/definitions/EntityType"
+            },
+            {
+              "$ref": "#/definitions/EnumerationType"
+            },
+            {
+              "$ref": "#/definitions/ListType"
+            }
+          ]
         },
         "modelerActionInfo": {
           "$ref": "#/definitions/MicroflowActionInfo"
@@ -171,7 +203,20 @@
           "default": true
         },
         "actionParameterType": {
-          "$ref": "#/definitions/ParameterType"
+          "onOf": [
+            {
+              "$ref": "#/definitions/ParameterType"
+            },
+            {
+              "$ref": "#/definitions/BasicParameterType"
+            },
+            {
+              "$ref": "#/definitions/EntityTypeParameterType"
+            },
+            {
+              "$ref": "#/definitions/StringTemplateParameterType"
+            }
+          ]
         }
       },
       "required": [
@@ -369,7 +414,17 @@
           "const": "CodeActions$ListType"
         },
         "parameter": {
-          "$ref": "#/definitions/EntityType"
+          "onOf": [
+            {
+              "$ref": "#/definitions/EntityType"
+            },
+            {
+              "$ref": "#/definitions/ConcreteEntityType"
+            },
+            {
+              "$ref": "#/definitions/ParameterizedEntityType"
+            }
+          ]
         }
       },
       "required": [

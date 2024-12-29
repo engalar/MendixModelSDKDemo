@@ -137,7 +137,17 @@
           "$ref": "#/definitions/AssociationDeleteBehavior"
         },
         "source": {
-          "$ref": "#/definitions/AssociationSource"
+          "onOf": [
+            {
+              "$ref": "#/definitions/AssociationSource"
+            },
+            {
+              "$ref": "#/definitions/OqlViewAssociationSource"
+            },
+            {
+              "$ref": "#/definitions/RemoteAssociationSource"
+            }
+          ]
         },
         "exportLevel": {
           "type": "string"
@@ -277,7 +287,7 @@
         },
         "association": {
           "type": "string",
-          "description": "ByNameReferenceProperty: #/definitions/AssociationBase"
+          "description": "ByNameReferenceProperty: #/definitions/AssociationBase or #/definitions/Association or #/definitions/CrossAssociation"
         }
       },
       "required": [
@@ -335,10 +345,54 @@
           "default": ""
         },
         "type": {
-          "$ref": "#/definitions/AttributeType"
+          "onOf": [
+            {
+              "$ref": "#/definitions/AttributeType"
+            },
+            {
+              "$ref": "#/definitions/NumericAttributeTypeBase"
+            },
+            {
+              "$ref": "#/definitions/BinaryAttributeType"
+            },
+            {
+              "$ref": "#/definitions/BooleanAttributeType"
+            },
+            {
+              "$ref": "#/definitions/DateTimeAttributeType"
+            },
+            {
+              "$ref": "#/definitions/EnumerationAttributeType"
+            },
+            {
+              "$ref": "#/definitions/HashedStringAttributeType"
+            },
+            {
+              "$ref": "#/definitions/MultiLanguageAttributeType"
+            },
+            {
+              "$ref": "#/definitions/StringAttributeType"
+            }
+          ]
         },
         "value": {
-          "$ref": "#/definitions/ValueType"
+          "onOf": [
+            {
+              "$ref": "#/definitions/ValueType"
+            },
+            {
+              "$ref": "#/definitions/MappedValue"
+            },
+            {
+              "$ref": "#/definitions/CalculatedValue"
+            },
+            {
+              "$ref": "#/definitions/OqlViewValue"
+            },
+            {
+              "$ref": "#/definitions/StoredValue"
+            }
+          ]
         },
         "exportLevel": {
           "type": "string"
@@ -873,7 +927,17 @@
           "contentEncoding": "base64"
         },
         "generalization": {
-          "$ref": "#/definitions/GeneralizationBase"
+          "onOf": [
+            {
+              "$ref": "#/definitions/GeneralizationBase"
+            },
+            {
+              "$ref": "#/definitions/Generalization"
+            },
+            {
+              "$ref": "#/definitions/NoGeneralization"
+            }
+          ]
         },
         "attributes": {
           "type": "array",
@@ -910,7 +974,17 @@
           "description": "ByNameReferenceProperty: images.schema.json#/definitions/Image"
         },
         "source": {
-          "$ref": "#/definitions/EntitySource"
+          "onOf": [
+            {
+              "$ref": "#/definitions/EntitySource"
+            },
+            {
+              "$ref": "#/definitions/RemoteEntitySource"
+            },
+            {
+              "$ref": "#/definitions/ViewEntitySource"
+            }
+          ]
         },
         "exportLevel": {
           "type": "string"
@@ -979,7 +1053,35 @@
           "default": ""
         },
         "type": {
-          "$ref": "#/definitions/AttributeType"
+          "onOf": [
+            {
+              "$ref": "#/definitions/AttributeType"
+            },
+            {
+              "$ref": "#/definitions/NumericAttributeTypeBase"
+            },
+            {
+              "$ref": "#/definitions/BinaryAttributeType"
+            },
+            {
+              "$ref": "#/definitions/BooleanAttributeType"
+            },
+            {
+              "$ref": "#/definitions/DateTimeAttributeType"
+            },
+            {
+              "$ref": "#/definitions/EnumerationAttributeType"
+            },
+            {
+              "$ref": "#/definitions/HashedStringAttributeType"
+            },
+            {
+              "$ref": "#/definitions/MultiLanguageAttributeType"
+            },
+            {
+              "$ref": "#/definitions/StringAttributeType"
+            }
+          ]
         }
       },
       "required": [
@@ -1000,7 +1102,7 @@
         },
         "association": {
           "type": "string",
-          "description": "ByNameReferenceProperty: #/definitions/AssociationBase"
+          "description": "ByNameReferenceProperty: #/definitions/AssociationBase or #/definitions/Association or #/definitions/CrossAssociation"
         },
         "destinationEntity": {
           "type": "string",
@@ -1443,7 +1545,7 @@
         },
         "association": {
           "type": "string",
-          "description": "ByNameReferenceProperty: #/definitions/AssociationBase"
+          "description": "ByNameReferenceProperty: #/definitions/AssociationBase or #/definitions/Association or #/definitions/CrossAssociation"
         },
         "accessRights": {
           "type": "string",
@@ -1932,7 +2034,29 @@
           "$ref": "texts.schema.json#/definitions/Text"
         },
         "ruleInfo": {
-          "$ref": "#/definitions/RuleInfo"
+          "onOf": [
+            {
+              "$ref": "#/definitions/RuleInfo"
+            },
+            {
+              "$ref": "#/definitions/EqualsToRuleInfo"
+            },
+            {
+              "$ref": "#/definitions/MaxLengthRuleInfo"
+            },
+            {
+              "$ref": "#/definitions/RangeRuleInfo"
+            },
+            {
+              "$ref": "#/definitions/RegExRuleInfo"
+            },
+            {
+              "$ref": "#/definitions/RequiredRuleInfo"
+            },
+            {
+              "$ref": "#/definitions/UniqueRuleInfo"
+            }
+          ]
         }
       },
       "required": [

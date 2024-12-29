@@ -57,7 +57,14 @@
           "const": "Queues$Queue"
         },
         "config": {
-          "$ref": "#/definitions/QueueConfig"
+          "onOf": [
+            {
+              "$ref": "#/definitions/QueueConfig"
+            },
+            {
+              "$ref": "#/definitions/BasicQueueConfig"
+            }
+          ]
         }
       },
       "required": [
@@ -180,7 +187,17 @@
           "description": "ByNameReferenceProperty: #/definitions/Queue"
         },
         "retry": {
-          "$ref": "#/definitions/QueueRetry"
+          "onOf": [
+            {
+              "$ref": "#/definitions/QueueRetry"
+            },
+            {
+              "$ref": "#/definitions/QueueExponentialRetry"
+            },
+            {
+              "$ref": "#/definitions/QueueFixedRetry"
+            }
+          ]
         }
       },
       "required": [

@@ -225,7 +225,20 @@
         "outcomes": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/ConditionOutcome"
+            "onOf": [
+              {
+                "$ref": "#/definitions/ConditionOutcome"
+              },
+              {
+                "$ref": "#/definitions/BooleanConditionOutcome"
+              },
+              {
+                "$ref": "#/definitions/EnumerationValueConditionOutcome"
+              },
+              {
+                "$ref": "#/definitions/VoidConditionOutcome"
+              }
+            ]
           }
         }
       },
@@ -262,7 +275,14 @@
         "boundaryEvents": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/BoundaryEvent"
+            "onOf": [
+              {
+                "$ref": "#/definitions/BoundaryEvent"
+              },
+              {
+                "$ref": "#/definitions/TimerBoundaryEvent"
+              }
+            ]
           }
         }
       },
@@ -303,7 +323,14 @@
         "boundaryEvents": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/BoundaryEvent"
+            "onOf": [
+              {
+                "$ref": "#/definitions/BoundaryEvent"
+              },
+              {
+                "$ref": "#/definitions/TimerBoundaryEvent"
+              }
+            ]
           }
         }
       },
@@ -496,7 +523,41 @@
         "activities": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/WorkflowActivity"
+            "onOf": [
+              {
+                "$ref": "#/definitions/WorkflowActivity"
+              },
+              {
+                "$ref": "#/definitions/ConditionOutcomeActivity"
+              },
+              {
+                "$ref": "#/definitions/CallWorkflowActivity"
+              },
+              {
+                "$ref": "#/definitions/EndOfBoundaryEventPathActivity"
+              },
+              {
+                "$ref": "#/definitions/EndWorkflowActivity"
+              },
+              {
+                "$ref": "#/definitions/JumpToActivity"
+              },
+              {
+                "$ref": "#/definitions/UserTaskActivity"
+              },
+              {
+                "$ref": "#/definitions/ParallelSplitActivity"
+              },
+              {
+                "$ref": "#/definitions/UserTask"
+              },
+              {
+                "$ref": "#/definitions/WaitForNotificationActivity"
+              },
+              {
+                "$ref": "#/definitions/WaitForTimerActivity"
+              }
+            ]
           }
         }
       },
@@ -724,10 +785,42 @@
           "default": false
         },
         "targetUserInput": {
-          "$ref": "#/definitions/TargetUserInput"
+          "onOf": [
+            {
+              "$ref": "#/definitions/TargetUserInput"
+            },
+            {
+              "$ref": "#/definitions/AbsoluteAmountUserInput"
+            },
+            {
+              "$ref": "#/definitions/AllUserInput"
+            },
+            {
+              "$ref": "#/definitions/PercentageAmountUserInput"
+            }
+          ]
         },
         "completionCriteria": {
-          "$ref": "#/definitions/UserTaskCompletionCriteria"
+          "onOf": [
+            {
+              "$ref": "#/definitions/UserTaskCompletionCriteria"
+            },
+            {
+              "$ref": "#/definitions/ConsensusCompletionCriteria"
+            },
+            {
+              "$ref": "#/definitions/MajorityCompletionCriteria"
+            },
+            {
+              "$ref": "#/definitions/MicroflowCompletionCriteria"
+            },
+            {
+              "$ref": "#/definitions/ThresholdCompletionCriteria"
+            },
+            {
+              "$ref": "#/definitions/VetoCompletionCriteria"
+            }
+          ]
         }
       },
       "required": [
@@ -770,7 +863,20 @@
           "$ref": "microflows.schema.json#/definitions/StringTemplate"
         },
         "userSource": {
-          "$ref": "#/definitions/UserSource"
+          "onOf": [
+            {
+              "$ref": "#/definitions/UserSource"
+            },
+            {
+              "$ref": "#/definitions/EmptyUserSource"
+            },
+            {
+              "$ref": "#/definitions/MicroflowBasedUserSource"
+            },
+            {
+              "$ref": "#/definitions/XPathBasedUserSource"
+            }
+          ]
         },
         "outcomes": {
           "type": "array",
@@ -781,11 +887,28 @@
         "boundaryEvents": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/BoundaryEvent"
+            "onOf": [
+              {
+                "$ref": "#/definitions/BoundaryEvent"
+              },
+              {
+                "$ref": "#/definitions/TimerBoundaryEvent"
+              }
+            ]
           }
         },
         "onCreatedEvent": {
-          "$ref": "#/definitions/UserTaskEvent"
+          "onOf": [
+            {
+              "$ref": "#/definitions/UserTaskEvent"
+            },
+            {
+              "$ref": "#/definitions/MicroflowBasedEvent"
+            },
+            {
+              "$ref": "#/definitions/NoEvent"
+            }
+          ]
         }
       },
       "required": [
@@ -818,10 +941,42 @@
           "default": false
         },
         "targetUserInput": {
-          "$ref": "#/definitions/TargetUserInput"
+          "onOf": [
+            {
+              "$ref": "#/definitions/TargetUserInput"
+            },
+            {
+              "$ref": "#/definitions/AbsoluteAmountUserInput"
+            },
+            {
+              "$ref": "#/definitions/AllUserInput"
+            },
+            {
+              "$ref": "#/definitions/PercentageAmountUserInput"
+            }
+          ]
         },
         "completionCriteria": {
-          "$ref": "#/definitions/UserTaskCompletionCriteria"
+          "onOf": [
+            {
+              "$ref": "#/definitions/UserTaskCompletionCriteria"
+            },
+            {
+              "$ref": "#/definitions/ConsensusCompletionCriteria"
+            },
+            {
+              "$ref": "#/definitions/MajorityCompletionCriteria"
+            },
+            {
+              "$ref": "#/definitions/MicroflowCompletionCriteria"
+            },
+            {
+              "$ref": "#/definitions/ThresholdCompletionCriteria"
+            },
+            {
+              "$ref": "#/definitions/VetoCompletionCriteria"
+            }
+          ]
         }
       },
       "required": [
@@ -1126,7 +1281,20 @@
           "$ref": "microflows.schema.json#/definitions/StringTemplate"
         },
         "userSource": {
-          "$ref": "#/definitions/UserSource"
+          "onOf": [
+            {
+              "$ref": "#/definitions/UserSource"
+            },
+            {
+              "$ref": "#/definitions/EmptyUserSource"
+            },
+            {
+              "$ref": "#/definitions/MicroflowBasedUserSource"
+            },
+            {
+              "$ref": "#/definitions/XPathBasedUserSource"
+            }
+          ]
         },
         "outcomes": {
           "type": "array",
@@ -1135,10 +1303,30 @@
           }
         },
         "onCreatedEvent": {
-          "$ref": "#/definitions/UserTaskEvent"
+          "onOf": [
+            {
+              "$ref": "#/definitions/UserTaskEvent"
+            },
+            {
+              "$ref": "#/definitions/MicroflowBasedEvent"
+            },
+            {
+              "$ref": "#/definitions/NoEvent"
+            }
+          ]
         },
         "userTaskCompletion": {
-          "$ref": "#/definitions/UserTaskCompletion"
+          "onOf": [
+            {
+              "$ref": "#/definitions/UserTaskCompletion"
+            },
+            {
+              "$ref": "#/definitions/MultiInputCompletion"
+            },
+            {
+              "$ref": "#/definitions/SingleInputCompletion"
+            }
+          ]
         }
       },
       "required": [
@@ -1237,7 +1425,14 @@
         "boundaryEvents": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/BoundaryEvent"
+            "onOf": [
+              {
+                "$ref": "#/definitions/BoundaryEvent"
+              },
+              {
+                "$ref": "#/definitions/TimerBoundaryEvent"
+              }
+            ]
           }
         }
       },

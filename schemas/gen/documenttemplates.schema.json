@@ -264,7 +264,35 @@
           "const": "DocumentTemplates$DropZone"
         },
         "widget": {
-          "$ref": "#/definitions/Widget"
+          "onOf": [
+            {
+              "$ref": "#/definitions/Widget"
+            },
+            {
+              "$ref": "#/definitions/AttributeWidget"
+            },
+            {
+              "$ref": "#/definitions/EntityWidget"
+            },
+            {
+              "$ref": "#/definitions/LineBreak"
+            },
+            {
+              "$ref": "#/definitions/PageBreak"
+            },
+            {
+              "$ref": "#/definitions/StaticImageViewer"
+            },
+            {
+              "$ref": "#/definitions/StaticLabel"
+            },
+            {
+              "$ref": "#/definitions/Table"
+            },
+            {
+              "$ref": "#/definitions/Title"
+            }
+          ]
         }
       },
       "required": [
@@ -342,7 +370,35 @@
         "toplevels": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/Widget"
+            "onOf": [
+              {
+                "$ref": "#/definitions/Widget"
+              },
+              {
+                "$ref": "#/definitions/AttributeWidget"
+              },
+              {
+                "$ref": "#/definitions/EntityWidget"
+              },
+              {
+                "$ref": "#/definitions/LineBreak"
+              },
+              {
+                "$ref": "#/definitions/PageBreak"
+              },
+              {
+                "$ref": "#/definitions/StaticImageViewer"
+              },
+              {
+                "$ref": "#/definitions/StaticLabel"
+              },
+              {
+                "$ref": "#/definitions/Table"
+              },
+              {
+                "$ref": "#/definitions/Title"
+              }
+            ]
           }
         },
         "style": {

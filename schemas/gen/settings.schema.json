@@ -228,7 +228,17 @@
           "description": "ByNameReferenceProperty: constants.schema.json#/definitions/Constant"
         },
         "sharedOrPrivateValue": {
-          "$ref": "#/definitions/SharedOrPrivateValue"
+          "onOf": [
+            {
+              "$ref": "#/definitions/SharedOrPrivateValue"
+            },
+            {
+              "$ref": "#/definitions/PrivateValue"
+            },
+            {
+              "$ref": "#/definitions/SharedValue"
+            }
+          ]
         }
       },
       "required": [
@@ -334,7 +344,17 @@
         "exclusions": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/JarLocationBase"
+            "onOf": [
+              {
+                "$ref": "#/definitions/JarLocationBase"
+              },
+              {
+                "$ref": "#/definitions/ProtectedModuleJarLocation"
+              },
+              {
+                "$ref": "#/definitions/UserLibJarLocation"
+              }
+            ]
           }
         }
       },
@@ -544,7 +564,44 @@
         "settingsParts": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/ProjectSettingsPart"
+            "onOf": [
+              {
+                "$ref": "#/definitions/ProjectSettingsPart"
+              },
+              {
+                "$ref": "#/definitions/CertificateSettings"
+              },
+              {
+                "$ref": "#/definitions/ConfigurationSettings"
+              },
+              {
+                "$ref": "#/definitions/DistributionSettings"
+              },
+              {
+                "$ref": "#/definitions/IntegrationProjectSettingsPart"
+              },
+              {
+                "$ref": "#/definitions/JarDeploymentSettings"
+              },
+              {
+                "$ref": "#/definitions/JavaActionsSettings"
+              },
+              {
+                "$ref": "#/definitions/LanguageSettings"
+              },
+              {
+                "$ref": "#/definitions/ModelerSettings"
+              },
+              {
+                "$ref": "#/definitions/RuntimeSettings"
+              },
+              {
+                "$ref": "#/definitions/WebUIProjectSettingsPart"
+              },
+              {
+                "$ref": "#/definitions/WorkflowsProjectSettingsPart"
+              }
+            ]
           }
         }
       },

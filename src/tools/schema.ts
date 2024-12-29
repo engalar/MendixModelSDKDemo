@@ -185,15 +185,26 @@ export async function extractSchema(jsCode: string, dtsCode: string, interfaceSe
                     description: `ByIdReferenceProperty: ${transformRef(targetTypeName)};Unique identifier. use for placeholer uniqe identifier for human readable name and later will replace with guid by model sdk`
                 };
             } else if (propertyType.startsWith("ByNameReference")) {
+                // 检查是否存在子类
+                const subClasses = findSubClasses(targetTypeName, dtsAst);
                 refType = {
                     type: "string",
-                    description: `${propertyType}: ${transformRef(targetTypeName)}`
-                }
+                    description: `${propertyType}: ${[targetTypeName, ...subClasses].map(transformRef).join(" or ")}`
+                };
             } else if (propertyType === "LocalByNameReferenceProperty") {
                 refType = { type: "string" };
             } else if (propertyType === "PartListProperty" || propertyType === "PartProperty") {
-                refType = {
-                    $ref: transformRef(targetTypeName)
+                const subClasses = findSubClasses(targetTypeName, dtsAst);
+                if (subClasses.length > 0) {
+                    refType = {
+                        onOf: [targetTypeName, ...subClasses].map(c => ({
+                            $ref: transformRef(c)
+                        }))
+                    };
+                } else {
+                    refType = {
+                        $ref: transformRef(targetTypeName)
+                    };
                 }
             }
 
@@ -207,6 +218,23 @@ export async function extractSchema(jsCode: string, dtsCode: string, interfaceSe
         }
 
         return { type: "string" }; // Default to string if type is unknown or unhandled
+    }
+    function findSubClasses(className: string, dtsAst: any): string[] {
+        const subClasses: string[] = [];
+
+        traverse(dtsAst, {
+            ClassDeclaration(path) {
+                if (
+                    path.node.superClass &&
+                    t.isIdentifier(path.node.superClass) &&
+                    path.node.superClass.name === className
+                ) {
+                    subClasses.push(path.node.id.name);
+                }
+            }
+        });
+
+        return subClasses;
     }
 
     async function findRefType(typeName: string, internalName: string): Promise<string> {

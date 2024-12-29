@@ -12,7 +12,17 @@
           "const": "DataSets$DataSet"
         },
         "source": {
-          "$ref": "#/definitions/DataSetSource"
+          "onOf": [
+            {
+              "$ref": "#/definitions/DataSetSource"
+            },
+            {
+              "$ref": "#/definitions/JavaDataSetSource"
+            },
+            {
+              "$ref": "#/definitions/OqlDataSetSource"
+            }
+          ]
         },
         "parameters": {
           "type": "array",
@@ -281,7 +291,20 @@
         "constraints": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/DataSetParameterConstraint"
+            "onOf": [
+              {
+                "$ref": "#/definitions/DataSetParameterConstraint"
+              },
+              {
+                "$ref": "#/definitions/DataSetDateTimeConstraint"
+              },
+              {
+                "$ref": "#/definitions/DataSetNumericConstraint"
+              },
+              {
+                "$ref": "#/definitions/DataSetObjectConstraint"
+              }
+            ]
           }
         }
       },

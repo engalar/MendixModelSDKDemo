@@ -50,7 +50,20 @@
         "childMembers": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/DataMember"
+            "onOf": [
+              {
+                "$ref": "#/definitions/DataMember"
+              },
+              {
+                "$ref": "#/definitions/DataEntityBase"
+              },
+              {
+                "$ref": "#/definitions/DataAttribute"
+              },
+              {
+                "$ref": "#/definitions/SystemIdDataAttribute"
+              }
+            ]
           }
         },
         "entity": {

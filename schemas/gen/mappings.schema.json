@@ -349,7 +349,17 @@
         "children": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/MappingElement"
+            "onOf": [
+              {
+                "$ref": "#/definitions/MappingElement"
+              },
+              {
+                "$ref": "#/definitions/ObjectMappingElement"
+              },
+              {
+                "$ref": "#/definitions/ValueMappingElement"
+              }
+            ]
           }
         },
         "entity": {

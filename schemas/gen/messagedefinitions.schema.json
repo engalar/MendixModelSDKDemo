@@ -257,7 +257,14 @@
         "messageDefinitions": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/MessageDefinition"
+            "onOf": [
+              {
+                "$ref": "#/definitions/MessageDefinition"
+              },
+              {
+                "$ref": "#/definitions/EntityMessageDefinition"
+              }
+            ]
           }
         }
       },

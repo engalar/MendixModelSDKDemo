@@ -28,10 +28,30 @@
           "const": "Rest$BasicAuthenticationScheme"
         },
         "username": {
-          "$ref": "#/definitions/Value"
+          "onOf": [
+            {
+              "$ref": "#/definitions/Value"
+            },
+            {
+              "$ref": "#/definitions/ConstantValue"
+            },
+            {
+              "$ref": "#/definitions/StringValue"
+            }
+          ]
         },
         "password": {
-          "$ref": "#/definitions/Value"
+          "onOf": [
+            {
+              "$ref": "#/definitions/Value"
+            },
+            {
+              "$ref": "#/definitions/ConstantValue"
+            },
+            {
+              "$ref": "#/definitions/StringValue"
+            }
+          ]
         }
       },
       "required": [
@@ -321,7 +341,14 @@
           "$ref": "#/definitions/ValueTemplate"
         },
         "authenticationScheme": {
-          "$ref": "#/definitions/AuthenticationScheme"
+          "onOf": [
+            {
+              "$ref": "#/definitions/AuthenticationScheme"
+            },
+            {
+              "$ref": "#/definitions/BasicAuthenticationScheme"
+            }
+          ]
         },
         "operations": {
           "type": "array",
@@ -410,7 +437,17 @@
           "$ref": "exportmappings.schema.json#/definitions/ExportObjectMappingElement"
         },
         "testValue": {
-          "$ref": "#/definitions/Value"
+          "onOf": [
+            {
+              "$ref": "#/definitions/Value"
+            },
+            {
+              "$ref": "#/definitions/ConstantValue"
+            },
+            {
+              "$ref": "#/definitions/StringValue"
+            }
+          ]
         }
       },
       "required": [
@@ -844,7 +881,17 @@
           "$ref": "datatypes.schema.json#/definitions/DataType"
         },
         "testValue": {
-          "$ref": "#/definitions/Value"
+          "onOf": [
+            {
+              "$ref": "#/definitions/Value"
+            },
+            {
+              "$ref": "#/definitions/ConstantValue"
+            },
+            {
+              "$ref": "#/definitions/StringValue"
+            }
+          ]
         }
       },
       "required": [
@@ -1172,16 +1219,65 @@
           "default": 10000
         },
         "updateMode": {
-          "$ref": "#/definitions/ChangeMode"
+          "onOf": [
+            {
+              "$ref": "#/definitions/ChangeMode"
+            },
+            {
+              "$ref": "#/definitions/CallMicroflowToChange"
+            },
+            {
+              "$ref": "#/definitions/ChangeNotSupported"
+            },
+            {
+              "$ref": "#/definitions/ChangeSource"
+            }
+          ]
         },
         "insertMode": {
-          "$ref": "#/definitions/ChangeMode"
+          "onOf": [
+            {
+              "$ref": "#/definitions/ChangeMode"
+            },
+            {
+              "$ref": "#/definitions/CallMicroflowToChange"
+            },
+            {
+              "$ref": "#/definitions/ChangeNotSupported"
+            },
+            {
+              "$ref": "#/definitions/ChangeSource"
+            }
+          ]
         },
         "deleteMode": {
-          "$ref": "#/definitions/ChangeMode"
+          "onOf": [
+            {
+              "$ref": "#/definitions/ChangeMode"
+            },
+            {
+              "$ref": "#/definitions/CallMicroflowToChange"
+            },
+            {
+              "$ref": "#/definitions/ChangeNotSupported"
+            },
+            {
+              "$ref": "#/definitions/ChangeSource"
+            }
+          ]
         },
         "readMode": {
-          "$ref": "#/definitions/ReadMode"
+          "onOf": [
+            {
+              "$ref": "#/definitions/ReadMode"
+            },
+            {
+              "$ref": "#/definitions/CallMicroflowToRead"
+            },
+            {
+              "$ref": "#/definitions/ReadSource"
+            }
+          ]
         },
         "queryOptions": {
           "$ref": "#/definitions/QueryOptions"
@@ -1427,7 +1523,17 @@
           "$ref": "#/definitions/ValueTemplate"
         },
         "method": {
-          "$ref": "#/definitions/RestOperationMethod"
+          "onOf": [
+            {
+              "$ref": "#/definitions/RestOperationMethod"
+            },
+            {
+              "$ref": "#/definitions/RestOperationMethodWithBody"
+            },
+            {
+              "$ref": "#/definitions/RestOperationMethodWithoutBody"
+            }
+          ]
         },
         "headers": {
           "type": "array",
@@ -1442,7 +1548,17 @@
           }
         },
         "responseHandling": {
-          "$ref": "#/definitions/RestOperationResponseHandling"
+          "onOf": [
+            {
+              "$ref": "#/definitions/RestOperationResponseHandling"
+            },
+            {
+              "$ref": "#/definitions/ImplicitMappingResponseHandling"
+            },
+            {
+              "$ref": "#/definitions/NoResponseHandling"
+            }
+          ]
         }
       },
       "required": [
@@ -1483,7 +1599,17 @@
           "const": "Rest$RestOperationMethodWithBody"
         },
         "body": {
-          "$ref": "#/definitions/Body"
+          "onOf": [
+            {
+              "$ref": "#/definitions/Body"
+            },
+            {
+              "$ref": "#/definitions/ImplicitMappingBody"
+            },
+            {
+              "$ref": "#/definitions/StringBody"
+            }
+          ]
         }
       },
       "required": [
@@ -1578,7 +1704,17 @@
           "$ref": "datatypes.schema.json#/definitions/DataType"
         },
         "testValue": {
-          "$ref": "#/definitions/Value"
+          "onOf": [
+            {
+              "$ref": "#/definitions/Value"
+            },
+            {
+              "$ref": "#/definitions/ConstantValue"
+            },
+            {
+              "$ref": "#/definitions/StringValue"
+            }
+          ]
         }
       },
       "required": [
