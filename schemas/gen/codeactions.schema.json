@@ -28,23 +28,7 @@
           "const": "CodeActions$BasicParameterType"
         },
         "type": {
-          "onOf": [
-            {
-              "$ref": "#/definitions/Type"
-            },
-            {
-              "$ref": "#/definitions/PrimitiveType"
-            },
-            {
-              "$ref": "#/definitions/EntityType"
-            },
-            {
-              "$ref": "#/definitions/EnumerationType"
-            },
-            {
-              "$ref": "#/definitions/ListType"
-            }
-          ]
+          "$ref": "#/definitions/TypeWithSubclasses"
         }
       },
       "required": [
@@ -137,23 +121,7 @@
           }
         },
         "actionReturnType": {
-          "onOf": [
-            {
-              "$ref": "#/definitions/Type"
-            },
-            {
-              "$ref": "#/definitions/PrimitiveType"
-            },
-            {
-              "$ref": "#/definitions/EntityType"
-            },
-            {
-              "$ref": "#/definitions/EnumerationType"
-            },
-            {
-              "$ref": "#/definitions/ListType"
-            }
-          ]
+          "$ref": "#/definitions/TypeWithSubclasses"
         },
         "modelerActionInfo": {
           "$ref": "#/definitions/MicroflowActionInfo"
@@ -203,20 +171,7 @@
           "default": true
         },
         "actionParameterType": {
-          "onOf": [
-            {
-              "$ref": "#/definitions/ParameterType"
-            },
-            {
-              "$ref": "#/definitions/BasicParameterType"
-            },
-            {
-              "$ref": "#/definitions/EntityTypeParameterType"
-            },
-            {
-              "$ref": "#/definitions/StringTemplateParameterType"
-            }
-          ]
+          "$ref": "#/definitions/ParameterTypeWithSubclasses"
         }
       },
       "required": [
@@ -414,17 +369,7 @@
           "const": "CodeActions$ListType"
         },
         "parameter": {
-          "onOf": [
-            {
-              "$ref": "#/definitions/EntityType"
-            },
-            {
-              "$ref": "#/definitions/ConcreteEntityType"
-            },
-            {
-              "$ref": "#/definitions/ParameterizedEntityType"
-            }
-          ]
+          "$ref": "#/definitions/EntityTypeWithSubclasses"
         }
       },
       "required": [
@@ -586,6 +531,57 @@
       "allOf": [
         {
           "$ref": "#/definitions/DataType"
+        }
+      ]
+    },
+    "TypeWithSubclasses": {
+      "type": "object",
+      "oneOf": [
+        {
+          "$ref": "#/definitions/Type"
+        },
+        {
+          "$ref": "#/definitions/PrimitiveType"
+        },
+        {
+          "$ref": "#/definitions/EntityType"
+        },
+        {
+          "$ref": "#/definitions/EnumerationType"
+        },
+        {
+          "$ref": "#/definitions/ListType"
+        }
+      ]
+    },
+    "ParameterTypeWithSubclasses": {
+      "type": "object",
+      "oneOf": [
+        {
+          "$ref": "#/definitions/ParameterType"
+        },
+        {
+          "$ref": "#/definitions/BasicParameterType"
+        },
+        {
+          "$ref": "#/definitions/EntityTypeParameterType"
+        },
+        {
+          "$ref": "#/definitions/StringTemplateParameterType"
+        }
+      ]
+    },
+    "EntityTypeWithSubclasses": {
+      "type": "object",
+      "oneOf": [
+        {
+          "$ref": "#/definitions/EntityType"
+        },
+        {
+          "$ref": "#/definitions/ConcreteEntityType"
+        },
+        {
+          "$ref": "#/definitions/ParameterizedEntityType"
         }
       ]
     }

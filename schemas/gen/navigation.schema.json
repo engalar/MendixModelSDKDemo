@@ -207,17 +207,7 @@
         "profiles": {
           "type": "array",
           "items": {
-            "onOf": [
-              {
-                "$ref": "#/definitions/NavigationProfileBase"
-              },
-              {
-                "$ref": "#/definitions/NativeNavigationProfile"
-              },
-              {
-                "$ref": "#/definitions/NavigationProfile"
-              }
-            ]
+            "$ref": "#/definitions/NavigationProfileBaseWithSubclasses"
           }
         }
       },
@@ -430,6 +420,20 @@
       "allOf": [
         {
           "$ref": "#/definitions/NativeHomePageBase"
+        }
+      ]
+    },
+    "NavigationProfileBaseWithSubclasses": {
+      "type": "object",
+      "oneOf": [
+        {
+          "$ref": "#/definitions/NavigationProfileBase"
+        },
+        {
+          "$ref": "#/definitions/NativeNavigationProfile"
+        },
+        {
+          "$ref": "#/definitions/NavigationProfile"
         }
       ]
     }

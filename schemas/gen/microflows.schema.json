@@ -124,164 +124,7 @@
           "default": ""
         },
         "action": {
-          "onOf": [
-            {
-              "$ref": "#/definitions/MicroflowAction"
-            },
-            {
-              "$ref": "#/definitions/AggregateListAction"
-            },
-            {
-              "$ref": "#/definitions/AppServiceCallAction"
-            },
-            {
-              "$ref": "#/definitions/ApplyJumpToOptionAction"
-            },
-            {
-              "$ref": "#/definitions/CallExternalAction"
-            },
-            {
-              "$ref": "#/definitions/CastAction"
-            },
-            {
-              "$ref": "#/definitions/ChangeListAction"
-            },
-            {
-              "$ref": "#/definitions/ChangeMembersAction"
-            },
-            {
-              "$ref": "#/definitions/ChangeVariableAction"
-            },
-            {
-              "$ref": "#/definitions/ClearFromClientAction"
-            },
-            {
-              "$ref": "#/definitions/CloseFormAction"
-            },
-            {
-              "$ref": "#/definitions/CommitAction"
-            },
-            {
-              "$ref": "#/definitions/MeterAction"
-            },
-            {
-              "$ref": "#/definitions/CreateListAction"
-            },
-            {
-              "$ref": "#/definitions/CreateVariableAction"
-            },
-            {
-              "$ref": "#/definitions/DeleteAction"
-            },
-            {
-              "$ref": "#/definitions/DeleteExternalObject"
-            },
-            {
-              "$ref": "#/definitions/DownloadFileAction"
-            },
-            {
-              "$ref": "#/definitions/ExportXmlAction"
-            },
-            {
-              "$ref": "#/definitions/GenerateDocumentAction"
-            },
-            {
-              "$ref": "#/definitions/GenerateJumpToOptionsAction"
-            },
-            {
-              "$ref": "#/definitions/GetWorkflowActivityRecordsAction"
-            },
-            {
-              "$ref": "#/definitions/GetWorkflowDataAction"
-            },
-            {
-              "$ref": "#/definitions/GetWorkflowsAction"
-            },
-            {
-              "$ref": "#/definitions/ImportXmlAction"
-            },
-            {
-              "$ref": "#/definitions/JavaActionCallAction"
-            },
-            {
-              "$ref": "#/definitions/JavaScriptActionCallAction"
-            },
-            {
-              "$ref": "#/definitions/ListOperationAction"
-            },
-            {
-              "$ref": "#/definitions/LockWorkflowAction"
-            },
-            {
-              "$ref": "#/definitions/LogMessageAction"
-            },
-            {
-              "$ref": "#/definitions/MLModelCallAction"
-            },
-            {
-              "$ref": "#/definitions/MicroflowCallAction"
-            },
-            {
-              "$ref": "#/definitions/NanoflowCallAction"
-            },
-            {
-              "$ref": "#/definitions/NotifyWorkflowAction"
-            },
-            {
-              "$ref": "#/definitions/OpenUserTaskAction"
-            },
-            {
-              "$ref": "#/definitions/OpenWorkflowAction"
-            },
-            {
-              "$ref": "#/definitions/PushToClientAction"
-            },
-            {
-              "$ref": "#/definitions/RestCallAction"
-            },
-            {
-              "$ref": "#/definitions/RestOperationCallAction"
-            },
-            {
-              "$ref": "#/definitions/RetrieveAction"
-            },
-            {
-              "$ref": "#/definitions/RollbackAction"
-            },
-            {
-              "$ref": "#/definitions/SendExternalObject"
-            },
-            {
-              "$ref": "#/definitions/SetTaskOutcomeAction"
-            },
-            {
-              "$ref": "#/definitions/ShowHomePageAction"
-            },
-            {
-              "$ref": "#/definitions/ShowMessageAction"
-            },
-            {
-              "$ref": "#/definitions/ShowPageAction"
-            },
-            {
-              "$ref": "#/definitions/SynchronizeAction"
-            },
-            {
-              "$ref": "#/definitions/UnlockWorkflowAction"
-            },
-            {
-              "$ref": "#/definitions/ValidationFeedbackAction"
-            },
-            {
-              "$ref": "#/definitions/WebServiceCallAction"
-            },
-            {
-              "$ref": "#/definitions/WorkflowCallAction"
-            },
-            {
-              "$ref": "#/definitions/WorkflowOperationAction"
-            }
-          ]
+          "$ref": "#/definitions/MicroflowActionWithSubclasses"
         },
         "backgroundColor": {
           "type": "string",
@@ -490,17 +333,7 @@
           "default": 0
         },
         "line": {
-          "onOf": [
-            {
-              "$ref": "#/definitions/Line"
-            },
-            {
-              "$ref": "#/definitions/BezierCurve"
-            },
-            {
-              "$ref": "#/definitions/OrthogonalPath"
-            }
-          ]
+          "$ref": "#/definitions/LineWithSubclasses"
         }
       },
       "required": [
@@ -1592,17 +1425,7 @@
           "description": "ByNameReferenceProperty: domainmodels.schema.json#/definitions/Entity"
         },
         "range": {
-          "onOf": [
-            {
-              "$ref": "#/definitions/Range"
-            },
-            {
-              "$ref": "#/definitions/ConstantRange"
-            },
-            {
-              "$ref": "#/definitions/CustomRange"
-            }
-          ]
+          "$ref": "#/definitions/RangeWithSubclasses"
         },
         "sortItemList": {
           "$ref": "#/definitions/SortItemList"
@@ -1896,17 +1719,7 @@
           "default": ""
         },
         "splitCondition": {
-          "onOf": [
-            {
-              "$ref": "#/definitions/SplitCondition"
-            },
-            {
-              "$ref": "#/definitions/ExpressionSplitCondition"
-            },
-            {
-              "$ref": "#/definitions/RuleSplitCondition"
-            }
-          ]
+          "$ref": "#/definitions/SplitConditionWithSubclasses"
         },
         "errorHandlingType": {
           "type": "string",
@@ -1998,17 +1811,7 @@
           "$ref": "#/definitions/MappingRequestHandling"
         },
         "outputMethod": {
-          "onOf": [
-            {
-              "$ref": "#/definitions/OutputMethod"
-            },
-            {
-              "$ref": "#/definitions/FileDocumentExport"
-            },
-            {
-              "$ref": "#/definitions/VariableExport"
-            }
-          ]
+          "$ref": "#/definitions/OutputMethodWithSubclasses"
         }
       },
       "required": [
@@ -2708,17 +2511,7 @@
           ]
         },
         "range": {
-          "onOf": [
-            {
-              "$ref": "#/definitions/Range"
-            },
-            {
-              "$ref": "#/definitions/ConstantRange"
-            },
-            {
-              "$ref": "#/definitions/CustomRange"
-            }
-          ]
+          "$ref": "#/definitions/RangeWithSubclasses"
         },
         "contentType": {
           "type": "string",
@@ -3050,17 +2843,7 @@
           "description": "ByNameReferenceProperty: javaactions.schema.json#/definitions/JavaActionParameter"
         },
         "parameterValue": {
-          "onOf": [
-            {
-              "$ref": "#/definitions/CodeActionParameterValue"
-            },
-            {
-              "$ref": "#/definitions/ExpressionBasedCodeActionParameterValue"
-            },
-            {
-              "$ref": "#/definitions/StringTemplateParameterValue"
-            }
-          ]
+          "$ref": "#/definitions/CodeActionParameterValueWithSubclasses"
         }
       },
       "required": [
@@ -3129,17 +2912,7 @@
           "description": "ByNameReferenceProperty: javascriptactions.schema.json#/definitions/JavaScriptActionParameter"
         },
         "parameterValue": {
-          "onOf": [
-            {
-              "$ref": "#/definitions/CodeActionParameterValue"
-            },
-            {
-              "$ref": "#/definitions/ExpressionBasedCodeActionParameterValue"
-            },
-            {
-              "$ref": "#/definitions/StringTemplateParameterValue"
-            }
-          ]
+          "$ref": "#/definitions/CodeActionParameterValueWithSubclasses"
         }
       },
       "required": [
@@ -3190,32 +2963,7 @@
           "default": ""
         },
         "operation": {
-          "onOf": [
-            {
-              "$ref": "#/definitions/ListOperation"
-            },
-            {
-              "$ref": "#/definitions/BinaryListOperation"
-            },
-            {
-              "$ref": "#/definitions/ExpressionListOperation"
-            },
-            {
-              "$ref": "#/definitions/InspectAttribute"
-            },
-            {
-              "$ref": "#/definitions/Head"
-            },
-            {
-              "$ref": "#/definitions/ListRange"
-            },
-            {
-              "$ref": "#/definitions/Sort"
-            },
-            {
-              "$ref": "#/definitions/Tail"
-            }
-          ]
+          "$ref": "#/definitions/ListOperationWithSubclasses"
         }
       },
       "required": [
@@ -3354,17 +3102,7 @@
           ]
         },
         "loopSource": {
-          "onOf": [
-            {
-              "$ref": "#/definitions/LoopSource"
-            },
-            {
-              "$ref": "#/definitions/IterableList"
-            },
-            {
-              "$ref": "#/definitions/WhileLoopCondition"
-            }
-          ]
+          "$ref": "#/definitions/LoopSourceWithSubclasses"
         }
       },
       "required": [
@@ -3594,17 +3332,7 @@
         "flows": {
           "type": "array",
           "items": {
-            "onOf": [
-              {
-                "$ref": "#/definitions/Flow"
-              },
-              {
-                "$ref": "#/definitions/AnnotationFlow"
-              },
-              {
-                "$ref": "#/definitions/SequenceFlow"
-              }
-            ]
+            "$ref": "#/definitions/FlowWithSubclasses"
           }
         },
         "microflowReturnType": {
@@ -3834,44 +3562,7 @@
         "objects": {
           "type": "array",
           "items": {
-            "onOf": [
-              {
-                "$ref": "#/definitions/MicroflowObject"
-              },
-              {
-                "$ref": "#/definitions/Activity"
-              },
-              {
-                "$ref": "#/definitions/Annotation"
-              },
-              {
-                "$ref": "#/definitions/BreakEvent"
-              },
-              {
-                "$ref": "#/definitions/ContinueEvent"
-              },
-              {
-                "$ref": "#/definitions/EndEvent"
-              },
-              {
-                "$ref": "#/definitions/ErrorEvent"
-              },
-              {
-                "$ref": "#/definitions/ExclusiveMerge"
-              },
-              {
-                "$ref": "#/definitions/ExclusiveSplit"
-              },
-              {
-                "$ref": "#/definitions/InheritanceSplit"
-              },
-              {
-                "$ref": "#/definitions/MicroflowParameterObject"
-              },
-              {
-                "$ref": "#/definitions/StartEvent"
-              }
-            ]
+            "$ref": "#/definitions/MicroflowObjectWithSubclasses"
           }
         }
       },
@@ -4523,29 +4214,7 @@
           "$ref": "#/definitions/HttpConfiguration"
         },
         "requestHandling": {
-          "onOf": [
-            {
-              "$ref": "#/definitions/RequestHandling"
-            },
-            {
-              "$ref": "#/definitions/AdvancedRequestHandling"
-            },
-            {
-              "$ref": "#/definitions/BinaryRequestHandling"
-            },
-            {
-              "$ref": "#/definitions/CustomRequestHandling"
-            },
-            {
-              "$ref": "#/definitions/FormDataRequestHandling"
-            },
-            {
-              "$ref": "#/definitions/MappingRequestHandling"
-            },
-            {
-              "$ref": "#/definitions/SimpleRequestHandling"
-            }
-          ]
+          "$ref": "#/definitions/RequestHandlingWithSubclasses"
         },
         "requestHandlingType": {
           "type": "string",
@@ -4789,17 +4458,7 @@
           "default": ""
         },
         "retrieveSource": {
-          "onOf": [
-            {
-              "$ref": "#/definitions/RetrieveSource"
-            },
-            {
-              "$ref": "#/definitions/AssociationRetrieveSource"
-            },
-            {
-              "$ref": "#/definitions/DatabaseRetrieveSource"
-            }
-          ]
+          "$ref": "#/definitions/RetrieveSourceWithSubclasses"
         }
       },
       "required": [
@@ -5031,20 +4690,7 @@
         "caseValues": {
           "type": "array",
           "items": {
-            "onOf": [
-              {
-                "$ref": "#/definitions/CaseValue"
-              },
-              {
-                "$ref": "#/definitions/EnumerationCase"
-              },
-              {
-                "$ref": "#/definitions/InheritanceCase"
-              },
-              {
-                "$ref": "#/definitions/NoCase"
-              }
-            ]
+            "$ref": "#/definitions/CaseValueWithSubclasses"
           }
         }
       },
@@ -5516,14 +5162,7 @@
         "arguments": {
           "type": "array",
           "items": {
-            "onOf": [
-              {
-                "$ref": "#/definitions/TypedTemplateArgument"
-              },
-              {
-                "$ref": "#/definitions/PrimitiveTypedTemplateArgument"
-              }
-            ]
+            "$ref": "#/definitions/TypedTemplateArgumentWithSubclasses"
           }
         }
       },
@@ -5703,54 +5342,10 @@
           "description": "ByNameReferenceProperty: webservices.schema.json#/definitions/ImportedWebService"
         },
         "requestHeaderHandling": {
-          "onOf": [
-            {
-              "$ref": "#/definitions/RequestHandling"
-            },
-            {
-              "$ref": "#/definitions/AdvancedRequestHandling"
-            },
-            {
-              "$ref": "#/definitions/BinaryRequestHandling"
-            },
-            {
-              "$ref": "#/definitions/CustomRequestHandling"
-            },
-            {
-              "$ref": "#/definitions/FormDataRequestHandling"
-            },
-            {
-              "$ref": "#/definitions/MappingRequestHandling"
-            },
-            {
-              "$ref": "#/definitions/SimpleRequestHandling"
-            }
-          ]
+          "$ref": "#/definitions/RequestHandlingWithSubclasses"
         },
         "requestBodyHandling": {
-          "onOf": [
-            {
-              "$ref": "#/definitions/RequestHandling"
-            },
-            {
-              "$ref": "#/definitions/AdvancedRequestHandling"
-            },
-            {
-              "$ref": "#/definitions/BinaryRequestHandling"
-            },
-            {
-              "$ref": "#/definitions/CustomRequestHandling"
-            },
-            {
-              "$ref": "#/definitions/FormDataRequestHandling"
-            },
-            {
-              "$ref": "#/definitions/MappingRequestHandling"
-            },
-            {
-              "$ref": "#/definitions/SimpleRequestHandling"
-            }
-          ]
+          "$ref": "#/definitions/RequestHandlingWithSubclasses"
         },
         "resultHandling": {
           "$ref": "#/definitions/ResultHandling"
@@ -5943,32 +5538,7 @@
           "const": "Microflows$WorkflowOperationAction"
         },
         "operation": {
-          "onOf": [
-            {
-              "$ref": "#/definitions/WorkflowOperation"
-            },
-            {
-              "$ref": "#/definitions/AbortOperation"
-            },
-            {
-              "$ref": "#/definitions/ContinueOperation"
-            },
-            {
-              "$ref": "#/definitions/PauseOperation"
-            },
-            {
-              "$ref": "#/definitions/RestartOperation"
-            },
-            {
-              "$ref": "#/definitions/ResumeOperation"
-            },
-            {
-              "$ref": "#/definitions/RetryOperation"
-            },
-            {
-              "$ref": "#/definitions/UnpauseOperation"
-            }
-          ]
+          "$ref": "#/definitions/WorkflowOperationWithSubclasses"
         }
       },
       "required": [
@@ -5979,6 +5549,432 @@
       "allOf": [
         {
           "$ref": "#/definitions/MicroflowAction"
+        }
+      ]
+    },
+    "MicroflowActionWithSubclasses": {
+      "type": "object",
+      "oneOf": [
+        {
+          "$ref": "#/definitions/MicroflowAction"
+        },
+        {
+          "$ref": "#/definitions/AggregateListAction"
+        },
+        {
+          "$ref": "#/definitions/AppServiceCallAction"
+        },
+        {
+          "$ref": "#/definitions/ApplyJumpToOptionAction"
+        },
+        {
+          "$ref": "#/definitions/CallExternalAction"
+        },
+        {
+          "$ref": "#/definitions/CastAction"
+        },
+        {
+          "$ref": "#/definitions/ChangeListAction"
+        },
+        {
+          "$ref": "#/definitions/ChangeMembersAction"
+        },
+        {
+          "$ref": "#/definitions/ChangeVariableAction"
+        },
+        {
+          "$ref": "#/definitions/ClearFromClientAction"
+        },
+        {
+          "$ref": "#/definitions/CloseFormAction"
+        },
+        {
+          "$ref": "#/definitions/CommitAction"
+        },
+        {
+          "$ref": "#/definitions/MeterAction"
+        },
+        {
+          "$ref": "#/definitions/CreateListAction"
+        },
+        {
+          "$ref": "#/definitions/CreateVariableAction"
+        },
+        {
+          "$ref": "#/definitions/DeleteAction"
+        },
+        {
+          "$ref": "#/definitions/DeleteExternalObject"
+        },
+        {
+          "$ref": "#/definitions/DownloadFileAction"
+        },
+        {
+          "$ref": "#/definitions/ExportXmlAction"
+        },
+        {
+          "$ref": "#/definitions/GenerateDocumentAction"
+        },
+        {
+          "$ref": "#/definitions/GenerateJumpToOptionsAction"
+        },
+        {
+          "$ref": "#/definitions/GetWorkflowActivityRecordsAction"
+        },
+        {
+          "$ref": "#/definitions/GetWorkflowDataAction"
+        },
+        {
+          "$ref": "#/definitions/GetWorkflowsAction"
+        },
+        {
+          "$ref": "#/definitions/ImportXmlAction"
+        },
+        {
+          "$ref": "#/definitions/JavaActionCallAction"
+        },
+        {
+          "$ref": "#/definitions/JavaScriptActionCallAction"
+        },
+        {
+          "$ref": "#/definitions/ListOperationAction"
+        },
+        {
+          "$ref": "#/definitions/LockWorkflowAction"
+        },
+        {
+          "$ref": "#/definitions/LogMessageAction"
+        },
+        {
+          "$ref": "#/definitions/MLModelCallAction"
+        },
+        {
+          "$ref": "#/definitions/MicroflowCallAction"
+        },
+        {
+          "$ref": "#/definitions/NanoflowCallAction"
+        },
+        {
+          "$ref": "#/definitions/NotifyWorkflowAction"
+        },
+        {
+          "$ref": "#/definitions/OpenUserTaskAction"
+        },
+        {
+          "$ref": "#/definitions/OpenWorkflowAction"
+        },
+        {
+          "$ref": "#/definitions/PushToClientAction"
+        },
+        {
+          "$ref": "#/definitions/RestCallAction"
+        },
+        {
+          "$ref": "#/definitions/RestOperationCallAction"
+        },
+        {
+          "$ref": "#/definitions/RetrieveAction"
+        },
+        {
+          "$ref": "#/definitions/RollbackAction"
+        },
+        {
+          "$ref": "#/definitions/SendExternalObject"
+        },
+        {
+          "$ref": "#/definitions/SetTaskOutcomeAction"
+        },
+        {
+          "$ref": "#/definitions/ShowHomePageAction"
+        },
+        {
+          "$ref": "#/definitions/ShowMessageAction"
+        },
+        {
+          "$ref": "#/definitions/ShowPageAction"
+        },
+        {
+          "$ref": "#/definitions/SynchronizeAction"
+        },
+        {
+          "$ref": "#/definitions/UnlockWorkflowAction"
+        },
+        {
+          "$ref": "#/definitions/ValidationFeedbackAction"
+        },
+        {
+          "$ref": "#/definitions/WebServiceCallAction"
+        },
+        {
+          "$ref": "#/definitions/WorkflowCallAction"
+        },
+        {
+          "$ref": "#/definitions/WorkflowOperationAction"
+        }
+      ]
+    },
+    "LineWithSubclasses": {
+      "type": "object",
+      "oneOf": [
+        {
+          "$ref": "#/definitions/Line"
+        },
+        {
+          "$ref": "#/definitions/BezierCurve"
+        },
+        {
+          "$ref": "#/definitions/OrthogonalPath"
+        }
+      ]
+    },
+    "RangeWithSubclasses": {
+      "type": "object",
+      "oneOf": [
+        {
+          "$ref": "#/definitions/Range"
+        },
+        {
+          "$ref": "#/definitions/ConstantRange"
+        },
+        {
+          "$ref": "#/definitions/CustomRange"
+        }
+      ]
+    },
+    "SplitConditionWithSubclasses": {
+      "type": "object",
+      "oneOf": [
+        {
+          "$ref": "#/definitions/SplitCondition"
+        },
+        {
+          "$ref": "#/definitions/ExpressionSplitCondition"
+        },
+        {
+          "$ref": "#/definitions/RuleSplitCondition"
+        }
+      ]
+    },
+    "OutputMethodWithSubclasses": {
+      "type": "object",
+      "oneOf": [
+        {
+          "$ref": "#/definitions/OutputMethod"
+        },
+        {
+          "$ref": "#/definitions/FileDocumentExport"
+        },
+        {
+          "$ref": "#/definitions/VariableExport"
+        }
+      ]
+    },
+    "CodeActionParameterValueWithSubclasses": {
+      "type": "object",
+      "oneOf": [
+        {
+          "$ref": "#/definitions/CodeActionParameterValue"
+        },
+        {
+          "$ref": "#/definitions/ExpressionBasedCodeActionParameterValue"
+        },
+        {
+          "$ref": "#/definitions/StringTemplateParameterValue"
+        }
+      ]
+    },
+    "ListOperationWithSubclasses": {
+      "type": "object",
+      "oneOf": [
+        {
+          "$ref": "#/definitions/ListOperation"
+        },
+        {
+          "$ref": "#/definitions/BinaryListOperation"
+        },
+        {
+          "$ref": "#/definitions/ExpressionListOperation"
+        },
+        {
+          "$ref": "#/definitions/InspectAttribute"
+        },
+        {
+          "$ref": "#/definitions/Head"
+        },
+        {
+          "$ref": "#/definitions/ListRange"
+        },
+        {
+          "$ref": "#/definitions/Sort"
+        },
+        {
+          "$ref": "#/definitions/Tail"
+        }
+      ]
+    },
+    "LoopSourceWithSubclasses": {
+      "type": "object",
+      "oneOf": [
+        {
+          "$ref": "#/definitions/LoopSource"
+        },
+        {
+          "$ref": "#/definitions/IterableList"
+        },
+        {
+          "$ref": "#/definitions/WhileLoopCondition"
+        }
+      ]
+    },
+    "FlowWithSubclasses": {
+      "type": "object",
+      "oneOf": [
+        {
+          "$ref": "#/definitions/Flow"
+        },
+        {
+          "$ref": "#/definitions/AnnotationFlow"
+        },
+        {
+          "$ref": "#/definitions/SequenceFlow"
+        }
+      ]
+    },
+    "MicroflowObjectWithSubclasses": {
+      "type": "object",
+      "oneOf": [
+        {
+          "$ref": "#/definitions/MicroflowObject"
+        },
+        {
+          "$ref": "#/definitions/Activity"
+        },
+        {
+          "$ref": "#/definitions/Annotation"
+        },
+        {
+          "$ref": "#/definitions/BreakEvent"
+        },
+        {
+          "$ref": "#/definitions/ContinueEvent"
+        },
+        {
+          "$ref": "#/definitions/EndEvent"
+        },
+        {
+          "$ref": "#/definitions/ErrorEvent"
+        },
+        {
+          "$ref": "#/definitions/ExclusiveMerge"
+        },
+        {
+          "$ref": "#/definitions/ExclusiveSplit"
+        },
+        {
+          "$ref": "#/definitions/InheritanceSplit"
+        },
+        {
+          "$ref": "#/definitions/MicroflowParameterObject"
+        },
+        {
+          "$ref": "#/definitions/StartEvent"
+        }
+      ]
+    },
+    "RequestHandlingWithSubclasses": {
+      "type": "object",
+      "oneOf": [
+        {
+          "$ref": "#/definitions/RequestHandling"
+        },
+        {
+          "$ref": "#/definitions/AdvancedRequestHandling"
+        },
+        {
+          "$ref": "#/definitions/BinaryRequestHandling"
+        },
+        {
+          "$ref": "#/definitions/CustomRequestHandling"
+        },
+        {
+          "$ref": "#/definitions/FormDataRequestHandling"
+        },
+        {
+          "$ref": "#/definitions/MappingRequestHandling"
+        },
+        {
+          "$ref": "#/definitions/SimpleRequestHandling"
+        }
+      ]
+    },
+    "RetrieveSourceWithSubclasses": {
+      "type": "object",
+      "oneOf": [
+        {
+          "$ref": "#/definitions/RetrieveSource"
+        },
+        {
+          "$ref": "#/definitions/AssociationRetrieveSource"
+        },
+        {
+          "$ref": "#/definitions/DatabaseRetrieveSource"
+        }
+      ]
+    },
+    "CaseValueWithSubclasses": {
+      "type": "object",
+      "oneOf": [
+        {
+          "$ref": "#/definitions/CaseValue"
+        },
+        {
+          "$ref": "#/definitions/EnumerationCase"
+        },
+        {
+          "$ref": "#/definitions/InheritanceCase"
+        },
+        {
+          "$ref": "#/definitions/NoCase"
+        }
+      ]
+    },
+    "TypedTemplateArgumentWithSubclasses": {
+      "type": "object",
+      "oneOf": [
+        {
+          "$ref": "#/definitions/TypedTemplateArgument"
+        },
+        {
+          "$ref": "#/definitions/PrimitiveTypedTemplateArgument"
+        }
+      ]
+    },
+    "WorkflowOperationWithSubclasses": {
+      "type": "object",
+      "oneOf": [
+        {
+          "$ref": "#/definitions/WorkflowOperation"
+        },
+        {
+          "$ref": "#/definitions/AbortOperation"
+        },
+        {
+          "$ref": "#/definitions/ContinueOperation"
+        },
+        {
+          "$ref": "#/definitions/PauseOperation"
+        },
+        {
+          "$ref": "#/definitions/RestartOperation"
+        },
+        {
+          "$ref": "#/definitions/ResumeOperation"
+        },
+        {
+          "$ref": "#/definitions/RetryOperation"
+        },
+        {
+          "$ref": "#/definitions/UnpauseOperation"
         }
       ]
     }

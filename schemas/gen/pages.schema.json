@@ -110,20 +110,7 @@
           "$ref": "texts.schema.json#/definitions/Text"
         },
         "icon": {
-          "onOf": [
-            {
-              "$ref": "#/definitions/Icon"
-            },
-            {
-              "$ref": "#/definitions/GlyphIcon"
-            },
-            {
-              "$ref": "#/definitions/IconCollectionIcon"
-            },
-            {
-              "$ref": "#/definitions/ImageIcon"
-            }
-          ]
+          "$ref": "#/definitions/IconWithSubclasses"
         },
         "renderType": {
           "type": "string",
@@ -168,59 +155,7 @@
           "const": "Pages$ActionButton"
         },
         "action": {
-          "onOf": [
-            {
-              "$ref": "#/definitions/ClientAction"
-            },
-            {
-              "$ref": "#/definitions/CallNanoflowClientAction"
-            },
-            {
-              "$ref": "#/definitions/CallWorkflowClientAction"
-            },
-            {
-              "$ref": "#/definitions/CancelChangesClientAction"
-            },
-            {
-              "$ref": "#/definitions/ClosePageClientAction"
-            },
-            {
-              "$ref": "#/definitions/CreateObjectClientAction"
-            },
-            {
-              "$ref": "#/definitions/DeleteClientAction"
-            },
-            {
-              "$ref": "#/definitions/MicroflowClientAction"
-            },
-            {
-              "$ref": "#/definitions/NoClientAction"
-            },
-            {
-              "$ref": "#/definitions/OpenLinkClientAction"
-            },
-            {
-              "$ref": "#/definitions/OpenUserTaskClientAction"
-            },
-            {
-              "$ref": "#/definitions/OpenWorkflowClientAction"
-            },
-            {
-              "$ref": "#/definitions/PageClientAction"
-            },
-            {
-              "$ref": "#/definitions/SaveChangesClientAction"
-            },
-            {
-              "$ref": "#/definitions/SetTaskOutcomeClientAction"
-            },
-            {
-              "$ref": "#/definitions/SignOutClientAction"
-            },
-            {
-              "$ref": "#/definitions/SyncClientAction"
-            }
-          ]
+          "$ref": "#/definitions/ClientActionWithSubclasses"
         },
         "ariaRole": {
           "type": "string",
@@ -264,59 +199,7 @@
           "const": "Pages$ActionItem"
         },
         "action": {
-          "onOf": [
-            {
-              "$ref": "#/definitions/ClientAction"
-            },
-            {
-              "$ref": "#/definitions/CallNanoflowClientAction"
-            },
-            {
-              "$ref": "#/definitions/CallWorkflowClientAction"
-            },
-            {
-              "$ref": "#/definitions/CancelChangesClientAction"
-            },
-            {
-              "$ref": "#/definitions/ClosePageClientAction"
-            },
-            {
-              "$ref": "#/definitions/CreateObjectClientAction"
-            },
-            {
-              "$ref": "#/definitions/DeleteClientAction"
-            },
-            {
-              "$ref": "#/definitions/MicroflowClientAction"
-            },
-            {
-              "$ref": "#/definitions/NoClientAction"
-            },
-            {
-              "$ref": "#/definitions/OpenLinkClientAction"
-            },
-            {
-              "$ref": "#/definitions/OpenUserTaskClientAction"
-            },
-            {
-              "$ref": "#/definitions/OpenWorkflowClientAction"
-            },
-            {
-              "$ref": "#/definitions/PageClientAction"
-            },
-            {
-              "$ref": "#/definitions/SaveChangesClientAction"
-            },
-            {
-              "$ref": "#/definitions/SetTaskOutcomeClientAction"
-            },
-            {
-              "$ref": "#/definitions/SignOutClientAction"
-            },
-            {
-              "$ref": "#/definitions/SyncClientAction"
-            }
-          ]
+          "$ref": "#/definitions/ClientActionWithSubclasses"
         }
       },
       "required": [
@@ -529,78 +412,13 @@
           "const": "Pages$AssociationWidget"
         },
         "selectorSource": {
-          "onOf": [
-            {
-              "$ref": "#/definitions/SelectorSource"
-            },
-            {
-              "$ref": "#/definitions/SelectorDatabaseSource"
-            },
-            {
-              "$ref": "#/definitions/SelectorMicroflowSource"
-            },
-            {
-              "$ref": "#/definitions/SelectorXPathSource"
-            }
-          ]
+          "$ref": "#/definitions/SelectorSourceWithSubclasses"
         },
         "selectPageSettings": {
           "$ref": "#/definitions/PageSettings"
         },
         "onChangeAction": {
-          "onOf": [
-            {
-              "$ref": "#/definitions/ClientAction"
-            },
-            {
-              "$ref": "#/definitions/CallNanoflowClientAction"
-            },
-            {
-              "$ref": "#/definitions/CallWorkflowClientAction"
-            },
-            {
-              "$ref": "#/definitions/CancelChangesClientAction"
-            },
-            {
-              "$ref": "#/definitions/ClosePageClientAction"
-            },
-            {
-              "$ref": "#/definitions/CreateObjectClientAction"
-            },
-            {
-              "$ref": "#/definitions/DeleteClientAction"
-            },
-            {
-              "$ref": "#/definitions/MicroflowClientAction"
-            },
-            {
-              "$ref": "#/definitions/NoClientAction"
-            },
-            {
-              "$ref": "#/definitions/OpenLinkClientAction"
-            },
-            {
-              "$ref": "#/definitions/OpenUserTaskClientAction"
-            },
-            {
-              "$ref": "#/definitions/OpenWorkflowClientAction"
-            },
-            {
-              "$ref": "#/definitions/PageClientAction"
-            },
-            {
-              "$ref": "#/definitions/SaveChangesClientAction"
-            },
-            {
-              "$ref": "#/definitions/SetTaskOutcomeClientAction"
-            },
-            {
-              "$ref": "#/definitions/SignOutClientAction"
-            },
-            {
-              "$ref": "#/definitions/SyncClientAction"
-            }
-          ]
+          "$ref": "#/definitions/ClientActionWithSubclasses"
         },
         "sourceVariable": {
           "$ref": "#/definitions/PageVariable"
@@ -637,169 +455,13 @@
           "$ref": "#/definitions/WidgetValidation"
         },
         "onChangeAction": {
-          "onOf": [
-            {
-              "$ref": "#/definitions/ClientAction"
-            },
-            {
-              "$ref": "#/definitions/CallNanoflowClientAction"
-            },
-            {
-              "$ref": "#/definitions/CallWorkflowClientAction"
-            },
-            {
-              "$ref": "#/definitions/CancelChangesClientAction"
-            },
-            {
-              "$ref": "#/definitions/ClosePageClientAction"
-            },
-            {
-              "$ref": "#/definitions/CreateObjectClientAction"
-            },
-            {
-              "$ref": "#/definitions/DeleteClientAction"
-            },
-            {
-              "$ref": "#/definitions/MicroflowClientAction"
-            },
-            {
-              "$ref": "#/definitions/NoClientAction"
-            },
-            {
-              "$ref": "#/definitions/OpenLinkClientAction"
-            },
-            {
-              "$ref": "#/definitions/OpenUserTaskClientAction"
-            },
-            {
-              "$ref": "#/definitions/OpenWorkflowClientAction"
-            },
-            {
-              "$ref": "#/definitions/PageClientAction"
-            },
-            {
-              "$ref": "#/definitions/SaveChangesClientAction"
-            },
-            {
-              "$ref": "#/definitions/SetTaskOutcomeClientAction"
-            },
-            {
-              "$ref": "#/definitions/SignOutClientAction"
-            },
-            {
-              "$ref": "#/definitions/SyncClientAction"
-            }
-          ]
+          "$ref": "#/definitions/ClientActionWithSubclasses"
         },
         "onEnterAction": {
-          "onOf": [
-            {
-              "$ref": "#/definitions/ClientAction"
-            },
-            {
-              "$ref": "#/definitions/CallNanoflowClientAction"
-            },
-            {
-              "$ref": "#/definitions/CallWorkflowClientAction"
-            },
-            {
-              "$ref": "#/definitions/CancelChangesClientAction"
-            },
-            {
-              "$ref": "#/definitions/ClosePageClientAction"
-            },
-            {
-              "$ref": "#/definitions/CreateObjectClientAction"
-            },
-            {
-              "$ref": "#/definitions/DeleteClientAction"
-            },
-            {
-              "$ref": "#/definitions/MicroflowClientAction"
-            },
-            {
-              "$ref": "#/definitions/NoClientAction"
-            },
-            {
-              "$ref": "#/definitions/OpenLinkClientAction"
-            },
-            {
-              "$ref": "#/definitions/OpenUserTaskClientAction"
-            },
-            {
-              "$ref": "#/definitions/OpenWorkflowClientAction"
-            },
-            {
-              "$ref": "#/definitions/PageClientAction"
-            },
-            {
-              "$ref": "#/definitions/SaveChangesClientAction"
-            },
-            {
-              "$ref": "#/definitions/SetTaskOutcomeClientAction"
-            },
-            {
-              "$ref": "#/definitions/SignOutClientAction"
-            },
-            {
-              "$ref": "#/definitions/SyncClientAction"
-            }
-          ]
+          "$ref": "#/definitions/ClientActionWithSubclasses"
         },
         "onLeaveAction": {
-          "onOf": [
-            {
-              "$ref": "#/definitions/ClientAction"
-            },
-            {
-              "$ref": "#/definitions/CallNanoflowClientAction"
-            },
-            {
-              "$ref": "#/definitions/CallWorkflowClientAction"
-            },
-            {
-              "$ref": "#/definitions/CancelChangesClientAction"
-            },
-            {
-              "$ref": "#/definitions/ClosePageClientAction"
-            },
-            {
-              "$ref": "#/definitions/CreateObjectClientAction"
-            },
-            {
-              "$ref": "#/definitions/DeleteClientAction"
-            },
-            {
-              "$ref": "#/definitions/MicroflowClientAction"
-            },
-            {
-              "$ref": "#/definitions/NoClientAction"
-            },
-            {
-              "$ref": "#/definitions/OpenLinkClientAction"
-            },
-            {
-              "$ref": "#/definitions/OpenUserTaskClientAction"
-            },
-            {
-              "$ref": "#/definitions/OpenWorkflowClientAction"
-            },
-            {
-              "$ref": "#/definitions/PageClientAction"
-            },
-            {
-              "$ref": "#/definitions/SaveChangesClientAction"
-            },
-            {
-              "$ref": "#/definitions/SetTaskOutcomeClientAction"
-            },
-            {
-              "$ref": "#/definitions/SignOutClientAction"
-            },
-            {
-              "$ref": "#/definitions/SyncClientAction"
-            }
-          ]
+          "$ref": "#/definitions/ClientActionWithSubclasses"
         },
         "sourceVariable": {
           "$ref": "#/definitions/PageVariable"
@@ -948,47 +610,7 @@
         "widgets": {
           "type": "array",
           "items": {
-            "onOf": [
-              {
-                "$ref": "#/definitions/Widget"
-              },
-              {
-                "$ref": "#/definitions/ConditionallyVisibleWidget"
-              },
-              {
-                "$ref": "#/definitions/Header"
-              },
-              {
-                "$ref": "#/definitions/SplitPane"
-              },
-              {
-                "$ref": "#/definitions/LoginTextBox"
-              },
-              {
-                "$ref": "#/definitions/MasterDetail"
-              },
-              {
-                "$ref": "#/definitions/MenuWidget"
-              },
-              {
-                "$ref": "#/definitions/Placeholder"
-              },
-              {
-                "$ref": "#/definitions/ScrollContainer"
-              },
-              {
-                "$ref": "#/definitions/SnippetCallWidget"
-              },
-              {
-                "$ref": "#/definitions/TemplatePlaceholder"
-              },
-              {
-                "$ref": "#/definitions/ValidationMessage"
-              },
-              {
-                "$ref": "#/definitions/VerticalFlow"
-              }
-            ]
+            "$ref": "#/definitions/WidgetWithSubclasses"
           }
         },
         "platform": {
@@ -1291,23 +913,7 @@
           "const": "Pages$EntityWidget"
         },
         "dataSource": {
-          "onOf": [
-            {
-              "$ref": "#/definitions/DataSource"
-            },
-            {
-              "$ref": "#/definitions/EntityPathSource"
-            },
-            {
-              "$ref": "#/definitions/ListenTargetSource"
-            },
-            {
-              "$ref": "#/definitions/MicroflowSource"
-            },
-            {
-              "$ref": "#/definitions/NanoflowSource"
-            }
-          ]
+          "$ref": "#/definitions/DataSourceWithSubclasses"
         }
       },
       "required": [
@@ -1727,17 +1333,7 @@
         "items": {
           "type": "array",
           "items": {
-            "onOf": [
-              {
-                "$ref": "#/definitions/ControlBarItem"
-              },
-              {
-                "$ref": "#/definitions/SearchField"
-              },
-              {
-                "$ref": "#/definitions/ControlBarButton"
-              }
-            ]
+            "$ref": "#/definitions/ControlBarItemWithSubclasses"
           }
         }
       },
@@ -1763,20 +1359,7 @@
           "$ref": "texts.schema.json#/definitions/Text"
         },
         "icon": {
-          "onOf": [
-            {
-              "$ref": "#/definitions/Icon"
-            },
-            {
-              "$ref": "#/definitions/GlyphIcon"
-            },
-            {
-              "$ref": "#/definitions/IconCollectionIcon"
-            },
-            {
-              "$ref": "#/definitions/ImageIcon"
-            }
-          ]
+          "$ref": "#/definitions/IconWithSubclasses"
         },
         "appearance": {
           "$ref": "#/definitions/Appearance"
@@ -2054,93 +1637,13 @@
         "widgets": {
           "type": "array",
           "items": {
-            "onOf": [
-              {
-                "$ref": "#/definitions/Widget"
-              },
-              {
-                "$ref": "#/definitions/ConditionallyVisibleWidget"
-              },
-              {
-                "$ref": "#/definitions/Header"
-              },
-              {
-                "$ref": "#/definitions/SplitPane"
-              },
-              {
-                "$ref": "#/definitions/LoginTextBox"
-              },
-              {
-                "$ref": "#/definitions/MasterDetail"
-              },
-              {
-                "$ref": "#/definitions/MenuWidget"
-              },
-              {
-                "$ref": "#/definitions/Placeholder"
-              },
-              {
-                "$ref": "#/definitions/ScrollContainer"
-              },
-              {
-                "$ref": "#/definitions/SnippetCallWidget"
-              },
-              {
-                "$ref": "#/definitions/TemplatePlaceholder"
-              },
-              {
-                "$ref": "#/definitions/ValidationMessage"
-              },
-              {
-                "$ref": "#/definitions/VerticalFlow"
-              }
-            ]
+            "$ref": "#/definitions/WidgetWithSubclasses"
           }
         },
         "footerWidgets": {
           "type": "array",
           "items": {
-            "onOf": [
-              {
-                "$ref": "#/definitions/Widget"
-              },
-              {
-                "$ref": "#/definitions/ConditionallyVisibleWidget"
-              },
-              {
-                "$ref": "#/definitions/Header"
-              },
-              {
-                "$ref": "#/definitions/SplitPane"
-              },
-              {
-                "$ref": "#/definitions/LoginTextBox"
-              },
-              {
-                "$ref": "#/definitions/MasterDetail"
-              },
-              {
-                "$ref": "#/definitions/MenuWidget"
-              },
-              {
-                "$ref": "#/definitions/Placeholder"
-              },
-              {
-                "$ref": "#/definitions/ScrollContainer"
-              },
-              {
-                "$ref": "#/definitions/SnippetCallWidget"
-              },
-              {
-                "$ref": "#/definitions/TemplatePlaceholder"
-              },
-              {
-                "$ref": "#/definitions/ValidationMessage"
-              },
-              {
-                "$ref": "#/definitions/VerticalFlow"
-              }
-            ]
+            "$ref": "#/definitions/WidgetWithSubclasses"
           }
         },
         "editability": {
@@ -2212,59 +1715,7 @@
           "const": "Pages$DataViewActionButton"
         },
         "action": {
-          "onOf": [
-            {
-              "$ref": "#/definitions/ClientAction"
-            },
-            {
-              "$ref": "#/definitions/CallNanoflowClientAction"
-            },
-            {
-              "$ref": "#/definitions/CallWorkflowClientAction"
-            },
-            {
-              "$ref": "#/definitions/CancelChangesClientAction"
-            },
-            {
-              "$ref": "#/definitions/ClosePageClientAction"
-            },
-            {
-              "$ref": "#/definitions/CreateObjectClientAction"
-            },
-            {
-              "$ref": "#/definitions/DeleteClientAction"
-            },
-            {
-              "$ref": "#/definitions/MicroflowClientAction"
-            },
-            {
-              "$ref": "#/definitions/NoClientAction"
-            },
-            {
-              "$ref": "#/definitions/OpenLinkClientAction"
-            },
-            {
-              "$ref": "#/definitions/OpenUserTaskClientAction"
-            },
-            {
-              "$ref": "#/definitions/OpenWorkflowClientAction"
-            },
-            {
-              "$ref": "#/definitions/PageClientAction"
-            },
-            {
-              "$ref": "#/definitions/SaveChangesClientAction"
-            },
-            {
-              "$ref": "#/definitions/SetTaskOutcomeClientAction"
-            },
-            {
-              "$ref": "#/definitions/SignOutClientAction"
-            },
-            {
-              "$ref": "#/definitions/SyncClientAction"
-            }
-          ]
+          "$ref": "#/definitions/ClientActionWithSubclasses"
         }
       },
       "required": [
@@ -2547,23 +1998,7 @@
           "default": ""
         },
         "value": {
-          "onOf": [
-            {
-              "$ref": "#/definitions/AbstractDesignPropertyValue"
-            },
-            {
-              "$ref": "#/definitions/CompoundDesignPropertyValue"
-            },
-            {
-              "$ref": "#/definitions/CustomDesignPropertyValue"
-            },
-            {
-              "$ref": "#/definitions/OptionDesignPropertyValue"
-            },
-            {
-              "$ref": "#/definitions/ToggleDesignPropertyValue"
-            }
-          ]
+          "$ref": "#/definitions/AbstractDesignPropertyValueWithSubclasses"
         }
       },
       "required": [
@@ -2588,47 +2023,7 @@
         "widgets": {
           "type": "array",
           "items": {
-            "onOf": [
-              {
-                "$ref": "#/definitions/Widget"
-              },
-              {
-                "$ref": "#/definitions/ConditionallyVisibleWidget"
-              },
-              {
-                "$ref": "#/definitions/Header"
-              },
-              {
-                "$ref": "#/definitions/SplitPane"
-              },
-              {
-                "$ref": "#/definitions/LoginTextBox"
-              },
-              {
-                "$ref": "#/definitions/MasterDetail"
-              },
-              {
-                "$ref": "#/definitions/MenuWidget"
-              },
-              {
-                "$ref": "#/definitions/Placeholder"
-              },
-              {
-                "$ref": "#/definitions/ScrollContainer"
-              },
-              {
-                "$ref": "#/definitions/SnippetCallWidget"
-              },
-              {
-                "$ref": "#/definitions/TemplatePlaceholder"
-              },
-              {
-                "$ref": "#/definitions/ValidationMessage"
-              },
-              {
-                "$ref": "#/definitions/VerticalFlow"
-              }
-            ]
+            "$ref": "#/definitions/WidgetWithSubclasses"
           }
         },
         "renderMode": {
@@ -2647,59 +2042,7 @@
           ]
         },
         "onClickAction": {
-          "onOf": [
-            {
-              "$ref": "#/definitions/ClientAction"
-            },
-            {
-              "$ref": "#/definitions/CallNanoflowClientAction"
-            },
-            {
-              "$ref": "#/definitions/CallWorkflowClientAction"
-            },
-            {
-              "$ref": "#/definitions/CancelChangesClientAction"
-            },
-            {
-              "$ref": "#/definitions/ClosePageClientAction"
-            },
-            {
-              "$ref": "#/definitions/CreateObjectClientAction"
-            },
-            {
-              "$ref": "#/definitions/DeleteClientAction"
-            },
-            {
-              "$ref": "#/definitions/MicroflowClientAction"
-            },
-            {
-              "$ref": "#/definitions/NoClientAction"
-            },
-            {
-              "$ref": "#/definitions/OpenLinkClientAction"
-            },
-            {
-              "$ref": "#/definitions/OpenUserTaskClientAction"
-            },
-            {
-              "$ref": "#/definitions/OpenWorkflowClientAction"
-            },
-            {
-              "$ref": "#/definitions/PageClientAction"
-            },
-            {
-              "$ref": "#/definitions/SaveChangesClientAction"
-            },
-            {
-              "$ref": "#/definitions/SetTaskOutcomeClientAction"
-            },
-            {
-              "$ref": "#/definitions/SignOutClientAction"
-            },
-            {
-              "$ref": "#/definitions/SyncClientAction"
-            }
-          ]
+          "$ref": "#/definitions/ClientActionWithSubclasses"
         },
         "nativeAccessibilitySettings": {
           "$ref": "#/definitions/AccessibilitySettings"
@@ -2884,59 +2227,7 @@
           ]
         },
         "clickAction": {
-          "onOf": [
-            {
-              "$ref": "#/definitions/ClientAction"
-            },
-            {
-              "$ref": "#/definitions/CallNanoflowClientAction"
-            },
-            {
-              "$ref": "#/definitions/CallWorkflowClientAction"
-            },
-            {
-              "$ref": "#/definitions/CancelChangesClientAction"
-            },
-            {
-              "$ref": "#/definitions/ClosePageClientAction"
-            },
-            {
-              "$ref": "#/definitions/CreateObjectClientAction"
-            },
-            {
-              "$ref": "#/definitions/DeleteClientAction"
-            },
-            {
-              "$ref": "#/definitions/MicroflowClientAction"
-            },
-            {
-              "$ref": "#/definitions/NoClientAction"
-            },
-            {
-              "$ref": "#/definitions/OpenLinkClientAction"
-            },
-            {
-              "$ref": "#/definitions/OpenUserTaskClientAction"
-            },
-            {
-              "$ref": "#/definitions/OpenWorkflowClientAction"
-            },
-            {
-              "$ref": "#/definitions/PageClientAction"
-            },
-            {
-              "$ref": "#/definitions/SaveChangesClientAction"
-            },
-            {
-              "$ref": "#/definitions/SetTaskOutcomeClientAction"
-            },
-            {
-              "$ref": "#/definitions/SignOutClientAction"
-            },
-            {
-              "$ref": "#/definitions/SyncClientAction"
-            }
-          ]
+          "$ref": "#/definitions/ClientActionWithSubclasses"
         },
         "alternativeText": {
           "$ref": "#/definitions/ClientTemplate"
@@ -3188,59 +2479,7 @@
           "default": false
         },
         "action": {
-          "onOf": [
-            {
-              "$ref": "#/definitions/ClientAction"
-            },
-            {
-              "$ref": "#/definitions/CallNanoflowClientAction"
-            },
-            {
-              "$ref": "#/definitions/CallWorkflowClientAction"
-            },
-            {
-              "$ref": "#/definitions/CancelChangesClientAction"
-            },
-            {
-              "$ref": "#/definitions/ClosePageClientAction"
-            },
-            {
-              "$ref": "#/definitions/CreateObjectClientAction"
-            },
-            {
-              "$ref": "#/definitions/DeleteClientAction"
-            },
-            {
-              "$ref": "#/definitions/MicroflowClientAction"
-            },
-            {
-              "$ref": "#/definitions/NoClientAction"
-            },
-            {
-              "$ref": "#/definitions/OpenLinkClientAction"
-            },
-            {
-              "$ref": "#/definitions/OpenUserTaskClientAction"
-            },
-            {
-              "$ref": "#/definitions/OpenWorkflowClientAction"
-            },
-            {
-              "$ref": "#/definitions/PageClientAction"
-            },
-            {
-              "$ref": "#/definitions/SaveChangesClientAction"
-            },
-            {
-              "$ref": "#/definitions/SetTaskOutcomeClientAction"
-            },
-            {
-              "$ref": "#/definitions/SignOutClientAction"
-            },
-            {
-              "$ref": "#/definitions/SyncClientAction"
-            }
-          ]
+          "$ref": "#/definitions/ClientActionWithSubclasses"
         }
       },
       "required": [
@@ -3656,47 +2895,7 @@
         "widgets": {
           "type": "array",
           "items": {
-            "onOf": [
-              {
-                "$ref": "#/definitions/Widget"
-              },
-              {
-                "$ref": "#/definitions/ConditionallyVisibleWidget"
-              },
-              {
-                "$ref": "#/definitions/Header"
-              },
-              {
-                "$ref": "#/definitions/SplitPane"
-              },
-              {
-                "$ref": "#/definitions/LoginTextBox"
-              },
-              {
-                "$ref": "#/definitions/MasterDetail"
-              },
-              {
-                "$ref": "#/definitions/MenuWidget"
-              },
-              {
-                "$ref": "#/definitions/Placeholder"
-              },
-              {
-                "$ref": "#/definitions/ScrollContainer"
-              },
-              {
-                "$ref": "#/definitions/SnippetCallWidget"
-              },
-              {
-                "$ref": "#/definitions/TemplatePlaceholder"
-              },
-              {
-                "$ref": "#/definitions/ValidationMessage"
-              },
-              {
-                "$ref": "#/definitions/VerticalFlow"
-              }
-            ]
+            "$ref": "#/definitions/WidgetWithSubclasses"
           }
         }
       },
@@ -3723,93 +2922,13 @@
         "leftWidgets": {
           "type": "array",
           "items": {
-            "onOf": [
-              {
-                "$ref": "#/definitions/Widget"
-              },
-              {
-                "$ref": "#/definitions/ConditionallyVisibleWidget"
-              },
-              {
-                "$ref": "#/definitions/Header"
-              },
-              {
-                "$ref": "#/definitions/SplitPane"
-              },
-              {
-                "$ref": "#/definitions/LoginTextBox"
-              },
-              {
-                "$ref": "#/definitions/MasterDetail"
-              },
-              {
-                "$ref": "#/definitions/MenuWidget"
-              },
-              {
-                "$ref": "#/definitions/Placeholder"
-              },
-              {
-                "$ref": "#/definitions/ScrollContainer"
-              },
-              {
-                "$ref": "#/definitions/SnippetCallWidget"
-              },
-              {
-                "$ref": "#/definitions/TemplatePlaceholder"
-              },
-              {
-                "$ref": "#/definitions/ValidationMessage"
-              },
-              {
-                "$ref": "#/definitions/VerticalFlow"
-              }
-            ]
+            "$ref": "#/definitions/WidgetWithSubclasses"
           }
         },
         "rightWidgets": {
           "type": "array",
           "items": {
-            "onOf": [
-              {
-                "$ref": "#/definitions/Widget"
-              },
-              {
-                "$ref": "#/definitions/ConditionallyVisibleWidget"
-              },
-              {
-                "$ref": "#/definitions/Header"
-              },
-              {
-                "$ref": "#/definitions/SplitPane"
-              },
-              {
-                "$ref": "#/definitions/LoginTextBox"
-              },
-              {
-                "$ref": "#/definitions/MasterDetail"
-              },
-              {
-                "$ref": "#/definitions/MenuWidget"
-              },
-              {
-                "$ref": "#/definitions/Placeholder"
-              },
-              {
-                "$ref": "#/definitions/ScrollContainer"
-              },
-              {
-                "$ref": "#/definitions/SnippetCallWidget"
-              },
-              {
-                "$ref": "#/definitions/TemplatePlaceholder"
-              },
-              {
-                "$ref": "#/definitions/ValidationMessage"
-              },
-              {
-                "$ref": "#/definitions/VerticalFlow"
-              }
-            ]
+            "$ref": "#/definitions/WidgetWithSubclasses"
           }
         }
       },
@@ -3848,93 +2967,13 @@
         "firstWidgets": {
           "type": "array",
           "items": {
-            "onOf": [
-              {
-                "$ref": "#/definitions/Widget"
-              },
-              {
-                "$ref": "#/definitions/ConditionallyVisibleWidget"
-              },
-              {
-                "$ref": "#/definitions/Header"
-              },
-              {
-                "$ref": "#/definitions/SplitPane"
-              },
-              {
-                "$ref": "#/definitions/LoginTextBox"
-              },
-              {
-                "$ref": "#/definitions/MasterDetail"
-              },
-              {
-                "$ref": "#/definitions/MenuWidget"
-              },
-              {
-                "$ref": "#/definitions/Placeholder"
-              },
-              {
-                "$ref": "#/definitions/ScrollContainer"
-              },
-              {
-                "$ref": "#/definitions/SnippetCallWidget"
-              },
-              {
-                "$ref": "#/definitions/TemplatePlaceholder"
-              },
-              {
-                "$ref": "#/definitions/ValidationMessage"
-              },
-              {
-                "$ref": "#/definitions/VerticalFlow"
-              }
-            ]
+            "$ref": "#/definitions/WidgetWithSubclasses"
           }
         },
         "secondWidgets": {
           "type": "array",
           "items": {
-            "onOf": [
-              {
-                "$ref": "#/definitions/Widget"
-              },
-              {
-                "$ref": "#/definitions/ConditionallyVisibleWidget"
-              },
-              {
-                "$ref": "#/definitions/Header"
-              },
-              {
-                "$ref": "#/definitions/SplitPane"
-              },
-              {
-                "$ref": "#/definitions/LoginTextBox"
-              },
-              {
-                "$ref": "#/definitions/MasterDetail"
-              },
-              {
-                "$ref": "#/definitions/MenuWidget"
-              },
-              {
-                "$ref": "#/definitions/Placeholder"
-              },
-              {
-                "$ref": "#/definitions/ScrollContainer"
-              },
-              {
-                "$ref": "#/definitions/SnippetCallWidget"
-              },
-              {
-                "$ref": "#/definitions/TemplatePlaceholder"
-              },
-              {
-                "$ref": "#/definitions/ValidationMessage"
-              },
-              {
-                "$ref": "#/definitions/VerticalFlow"
-              }
-            ]
+            "$ref": "#/definitions/WidgetWithSubclasses"
           }
         }
       },
@@ -4135,17 +3174,7 @@
           "const": "Pages$Layout"
         },
         "content": {
-          "onOf": [
-            {
-              "$ref": "#/definitions/LayoutContent"
-            },
-            {
-              "$ref": "#/definitions/NativeLayoutContent"
-            },
-            {
-              "$ref": "#/definitions/WebLayoutContent"
-            }
-          ]
+          "$ref": "#/definitions/LayoutContentWithSubclasses"
         },
         "appearance": {
           "$ref": "#/definitions/Appearance"
@@ -4207,47 +3236,7 @@
         "widgets": {
           "type": "array",
           "items": {
-            "onOf": [
-              {
-                "$ref": "#/definitions/Widget"
-              },
-              {
-                "$ref": "#/definitions/ConditionallyVisibleWidget"
-              },
-              {
-                "$ref": "#/definitions/Header"
-              },
-              {
-                "$ref": "#/definitions/SplitPane"
-              },
-              {
-                "$ref": "#/definitions/LoginTextBox"
-              },
-              {
-                "$ref": "#/definitions/MasterDetail"
-              },
-              {
-                "$ref": "#/definitions/MenuWidget"
-              },
-              {
-                "$ref": "#/definitions/Placeholder"
-              },
-              {
-                "$ref": "#/definitions/ScrollContainer"
-              },
-              {
-                "$ref": "#/definitions/SnippetCallWidget"
-              },
-              {
-                "$ref": "#/definitions/TemplatePlaceholder"
-              },
-              {
-                "$ref": "#/definitions/ValidationMessage"
-              },
-              {
-                "$ref": "#/definitions/VerticalFlow"
-              }
-            ]
+            "$ref": "#/definitions/WidgetWithSubclasses"
           }
         }
       },
@@ -4336,47 +3325,7 @@
         "widgets": {
           "type": "array",
           "items": {
-            "onOf": [
-              {
-                "$ref": "#/definitions/Widget"
-              },
-              {
-                "$ref": "#/definitions/ConditionallyVisibleWidget"
-              },
-              {
-                "$ref": "#/definitions/Header"
-              },
-              {
-                "$ref": "#/definitions/SplitPane"
-              },
-              {
-                "$ref": "#/definitions/LoginTextBox"
-              },
-              {
-                "$ref": "#/definitions/MasterDetail"
-              },
-              {
-                "$ref": "#/definitions/MenuWidget"
-              },
-              {
-                "$ref": "#/definitions/Placeholder"
-              },
-              {
-                "$ref": "#/definitions/ScrollContainer"
-              },
-              {
-                "$ref": "#/definitions/SnippetCallWidget"
-              },
-              {
-                "$ref": "#/definitions/TemplatePlaceholder"
-              },
-              {
-                "$ref": "#/definitions/ValidationMessage"
-              },
-              {
-                "$ref": "#/definitions/VerticalFlow"
-              }
-            ]
+            "$ref": "#/definitions/WidgetWithSubclasses"
           }
         },
         "appearance": {
@@ -4528,103 +3477,11 @@
         "widgets": {
           "type": "array",
           "items": {
-            "onOf": [
-              {
-                "$ref": "#/definitions/Widget"
-              },
-              {
-                "$ref": "#/definitions/ConditionallyVisibleWidget"
-              },
-              {
-                "$ref": "#/definitions/Header"
-              },
-              {
-                "$ref": "#/definitions/SplitPane"
-              },
-              {
-                "$ref": "#/definitions/LoginTextBox"
-              },
-              {
-                "$ref": "#/definitions/MasterDetail"
-              },
-              {
-                "$ref": "#/definitions/MenuWidget"
-              },
-              {
-                "$ref": "#/definitions/Placeholder"
-              },
-              {
-                "$ref": "#/definitions/ScrollContainer"
-              },
-              {
-                "$ref": "#/definitions/SnippetCallWidget"
-              },
-              {
-                "$ref": "#/definitions/TemplatePlaceholder"
-              },
-              {
-                "$ref": "#/definitions/ValidationMessage"
-              },
-              {
-                "$ref": "#/definitions/VerticalFlow"
-              }
-            ]
+            "$ref": "#/definitions/WidgetWithSubclasses"
           }
         },
         "clickAction": {
-          "onOf": [
-            {
-              "$ref": "#/definitions/ClientAction"
-            },
-            {
-              "$ref": "#/definitions/CallNanoflowClientAction"
-            },
-            {
-              "$ref": "#/definitions/CallWorkflowClientAction"
-            },
-            {
-              "$ref": "#/definitions/CancelChangesClientAction"
-            },
-            {
-              "$ref": "#/definitions/ClosePageClientAction"
-            },
-            {
-              "$ref": "#/definitions/CreateObjectClientAction"
-            },
-            {
-              "$ref": "#/definitions/DeleteClientAction"
-            },
-            {
-              "$ref": "#/definitions/MicroflowClientAction"
-            },
-            {
-              "$ref": "#/definitions/NoClientAction"
-            },
-            {
-              "$ref": "#/definitions/OpenLinkClientAction"
-            },
-            {
-              "$ref": "#/definitions/OpenUserTaskClientAction"
-            },
-            {
-              "$ref": "#/definitions/OpenWorkflowClientAction"
-            },
-            {
-              "$ref": "#/definitions/PageClientAction"
-            },
-            {
-              "$ref": "#/definitions/SaveChangesClientAction"
-            },
-            {
-              "$ref": "#/definitions/SetTaskOutcomeClientAction"
-            },
-            {
-              "$ref": "#/definitions/SignOutClientAction"
-            },
-            {
-              "$ref": "#/definitions/SyncClientAction"
-            }
-          ]
+          "$ref": "#/definitions/ClientActionWithSubclasses"
         },
         "templates": {
           "type": "array",
@@ -4640,59 +3497,7 @@
           ]
         },
         "pullDownAction": {
-          "onOf": [
-            {
-              "$ref": "#/definitions/ClientAction"
-            },
-            {
-              "$ref": "#/definitions/CallNanoflowClientAction"
-            },
-            {
-              "$ref": "#/definitions/CallWorkflowClientAction"
-            },
-            {
-              "$ref": "#/definitions/CancelChangesClientAction"
-            },
-            {
-              "$ref": "#/definitions/ClosePageClientAction"
-            },
-            {
-              "$ref": "#/definitions/CreateObjectClientAction"
-            },
-            {
-              "$ref": "#/definitions/DeleteClientAction"
-            },
-            {
-              "$ref": "#/definitions/MicroflowClientAction"
-            },
-            {
-              "$ref": "#/definitions/NoClientAction"
-            },
-            {
-              "$ref": "#/definitions/OpenLinkClientAction"
-            },
-            {
-              "$ref": "#/definitions/OpenUserTaskClientAction"
-            },
-            {
-              "$ref": "#/definitions/OpenWorkflowClientAction"
-            },
-            {
-              "$ref": "#/definitions/PageClientAction"
-            },
-            {
-              "$ref": "#/definitions/SaveChangesClientAction"
-            },
-            {
-              "$ref": "#/definitions/SetTaskOutcomeClientAction"
-            },
-            {
-              "$ref": "#/definitions/SignOutClientAction"
-            },
-            {
-              "$ref": "#/definitions/SyncClientAction"
-            }
-          ]
+          "$ref": "#/definitions/ClientActionWithSubclasses"
         }
       },
       "required": [
@@ -4771,47 +3576,7 @@
         "widgets": {
           "type": "array",
           "items": {
-            "onOf": [
-              {
-                "$ref": "#/definitions/Widget"
-              },
-              {
-                "$ref": "#/definitions/ConditionallyVisibleWidget"
-              },
-              {
-                "$ref": "#/definitions/Header"
-              },
-              {
-                "$ref": "#/definitions/SplitPane"
-              },
-              {
-                "$ref": "#/definitions/LoginTextBox"
-              },
-              {
-                "$ref": "#/definitions/MasterDetail"
-              },
-              {
-                "$ref": "#/definitions/MenuWidget"
-              },
-              {
-                "$ref": "#/definitions/Placeholder"
-              },
-              {
-                "$ref": "#/definitions/ScrollContainer"
-              },
-              {
-                "$ref": "#/definitions/SnippetCallWidget"
-              },
-              {
-                "$ref": "#/definitions/TemplatePlaceholder"
-              },
-              {
-                "$ref": "#/definitions/ValidationMessage"
-              },
-              {
-                "$ref": "#/definitions/VerticalFlow"
-              }
-            ]
+            "$ref": "#/definitions/WidgetWithSubclasses"
           }
         }
       },
@@ -5067,47 +3832,7 @@
           "default": ""
         },
         "widget": {
-          "onOf": [
-            {
-              "$ref": "#/definitions/Widget"
-            },
-            {
-              "$ref": "#/definitions/ConditionallyVisibleWidget"
-            },
-            {
-              "$ref": "#/definitions/Header"
-            },
-            {
-              "$ref": "#/definitions/SplitPane"
-            },
-            {
-              "$ref": "#/definitions/LoginTextBox"
-            },
-            {
-              "$ref": "#/definitions/MasterDetail"
-            },
-            {
-              "$ref": "#/definitions/MenuWidget"
-            },
-            {
-              "$ref": "#/definitions/Placeholder"
-            },
-            {
-              "$ref": "#/definitions/ScrollContainer"
-            },
-            {
-              "$ref": "#/definitions/SnippetCallWidget"
-            },
-            {
-              "$ref": "#/definitions/TemplatePlaceholder"
-            },
-            {
-              "$ref": "#/definitions/ValidationMessage"
-            },
-            {
-              "$ref": "#/definitions/VerticalFlow"
-            }
-          ]
+          "$ref": "#/definitions/WidgetWithSubclasses"
         }
       },
       "required": [
@@ -5188,17 +3913,7 @@
           "const": "Pages$MenuWidget"
         },
         "menuSource": {
-          "onOf": [
-            {
-              "$ref": "#/definitions/MenuSource"
-            },
-            {
-              "$ref": "#/definitions/MenuDocumentSource"
-            },
-            {
-              "$ref": "#/definitions/NavigationSource"
-            }
-          ]
+          "$ref": "#/definitions/MenuSourceWithSubclasses"
         }
       },
       "required": [
@@ -5516,47 +4231,7 @@
         "widgets": {
           "type": "array",
           "items": {
-            "onOf": [
-              {
-                "$ref": "#/definitions/Widget"
-              },
-              {
-                "$ref": "#/definitions/ConditionallyVisibleWidget"
-              },
-              {
-                "$ref": "#/definitions/Header"
-              },
-              {
-                "$ref": "#/definitions/SplitPane"
-              },
-              {
-                "$ref": "#/definitions/LoginTextBox"
-              },
-              {
-                "$ref": "#/definitions/MasterDetail"
-              },
-              {
-                "$ref": "#/definitions/MenuWidget"
-              },
-              {
-                "$ref": "#/definitions/Placeholder"
-              },
-              {
-                "$ref": "#/definitions/ScrollContainer"
-              },
-              {
-                "$ref": "#/definitions/SnippetCallWidget"
-              },
-              {
-                "$ref": "#/definitions/TemplatePlaceholder"
-              },
-              {
-                "$ref": "#/definitions/ValidationMessage"
-              },
-              {
-                "$ref": "#/definitions/VerticalFlow"
-              }
-            ]
+            "$ref": "#/definitions/WidgetWithSubclasses"
           }
         },
         "rightHeaderPlaceholder": {
@@ -5565,47 +4240,7 @@
         "sidebarWidgets": {
           "type": "array",
           "items": {
-            "onOf": [
-              {
-                "$ref": "#/definitions/Widget"
-              },
-              {
-                "$ref": "#/definitions/ConditionallyVisibleWidget"
-              },
-              {
-                "$ref": "#/definitions/Header"
-              },
-              {
-                "$ref": "#/definitions/SplitPane"
-              },
-              {
-                "$ref": "#/definitions/LoginTextBox"
-              },
-              {
-                "$ref": "#/definitions/MasterDetail"
-              },
-              {
-                "$ref": "#/definitions/MenuWidget"
-              },
-              {
-                "$ref": "#/definitions/Placeholder"
-              },
-              {
-                "$ref": "#/definitions/ScrollContainer"
-              },
-              {
-                "$ref": "#/definitions/SnippetCallWidget"
-              },
-              {
-                "$ref": "#/definitions/TemplatePlaceholder"
-              },
-              {
-                "$ref": "#/definitions/ValidationMessage"
-              },
-              {
-                "$ref": "#/definitions/VerticalFlow"
-              }
-            ]
+            "$ref": "#/definitions/WidgetWithSubclasses"
           }
         }
       },
@@ -5659,47 +4294,7 @@
         "widgets": {
           "type": "array",
           "items": {
-            "onOf": [
-              {
-                "$ref": "#/definitions/Widget"
-              },
-              {
-                "$ref": "#/definitions/ConditionallyVisibleWidget"
-              },
-              {
-                "$ref": "#/definitions/Header"
-              },
-              {
-                "$ref": "#/definitions/SplitPane"
-              },
-              {
-                "$ref": "#/definitions/LoginTextBox"
-              },
-              {
-                "$ref": "#/definitions/MasterDetail"
-              },
-              {
-                "$ref": "#/definitions/MenuWidget"
-              },
-              {
-                "$ref": "#/definitions/Placeholder"
-              },
-              {
-                "$ref": "#/definitions/ScrollContainer"
-              },
-              {
-                "$ref": "#/definitions/SnippetCallWidget"
-              },
-              {
-                "$ref": "#/definitions/TemplatePlaceholder"
-              },
-              {
-                "$ref": "#/definitions/ValidationMessage"
-              },
-              {
-                "$ref": "#/definitions/VerticalFlow"
-              }
-            ]
+            "$ref": "#/definitions/WidgetWithSubclasses"
           }
         },
         "appearance": {
@@ -6294,23 +4889,7 @@
           "$ref": "#/definitions/Appearance"
         },
         "templateType": {
-          "onOf": [
-            {
-              "$ref": "#/definitions/TemplateType"
-            },
-            {
-              "$ref": "#/definitions/EditPageTemplateType"
-            },
-            {
-              "$ref": "#/definitions/RegularPageTemplateType"
-            },
-            {
-              "$ref": "#/definitions/SelectPageTemplateType"
-            },
-            {
-              "$ref": "#/definitions/WorkflowTemplateType"
-            }
-          ]
+          "$ref": "#/definitions/TemplateTypeWithSubclasses"
         }
       },
       "required": [
@@ -6577,59 +5156,7 @@
           "default": ""
         },
         "onChangeAction": {
-          "onOf": [
-            {
-              "$ref": "#/definitions/ClientAction"
-            },
-            {
-              "$ref": "#/definitions/CallNanoflowClientAction"
-            },
-            {
-              "$ref": "#/definitions/CallWorkflowClientAction"
-            },
-            {
-              "$ref": "#/definitions/CancelChangesClientAction"
-            },
-            {
-              "$ref": "#/definitions/ClosePageClientAction"
-            },
-            {
-              "$ref": "#/definitions/CreateObjectClientAction"
-            },
-            {
-              "$ref": "#/definitions/DeleteClientAction"
-            },
-            {
-              "$ref": "#/definitions/MicroflowClientAction"
-            },
-            {
-              "$ref": "#/definitions/NoClientAction"
-            },
-            {
-              "$ref": "#/definitions/OpenLinkClientAction"
-            },
-            {
-              "$ref": "#/definitions/OpenUserTaskClientAction"
-            },
-            {
-              "$ref": "#/definitions/OpenWorkflowClientAction"
-            },
-            {
-              "$ref": "#/definitions/PageClientAction"
-            },
-            {
-              "$ref": "#/definitions/SaveChangesClientAction"
-            },
-            {
-              "$ref": "#/definitions/SetTaskOutcomeClientAction"
-            },
-            {
-              "$ref": "#/definitions/SignOutClientAction"
-            },
-            {
-              "$ref": "#/definitions/SyncClientAction"
-            }
-          ]
+          "$ref": "#/definitions/ClientActionWithSubclasses"
         },
         "constrainedByRefs": {
           "type": "array",
@@ -6987,47 +5514,7 @@
         "widgets": {
           "type": "array",
           "items": {
-            "onOf": [
-              {
-                "$ref": "#/definitions/Widget"
-              },
-              {
-                "$ref": "#/definitions/ConditionallyVisibleWidget"
-              },
-              {
-                "$ref": "#/definitions/Header"
-              },
-              {
-                "$ref": "#/definitions/SplitPane"
-              },
-              {
-                "$ref": "#/definitions/LoginTextBox"
-              },
-              {
-                "$ref": "#/definitions/MasterDetail"
-              },
-              {
-                "$ref": "#/definitions/MenuWidget"
-              },
-              {
-                "$ref": "#/definitions/Placeholder"
-              },
-              {
-                "$ref": "#/definitions/ScrollContainer"
-              },
-              {
-                "$ref": "#/definitions/SnippetCallWidget"
-              },
-              {
-                "$ref": "#/definitions/TemplatePlaceholder"
-              },
-              {
-                "$ref": "#/definitions/ValidationMessage"
-              },
-              {
-                "$ref": "#/definitions/VerticalFlow"
-              }
-            ]
+            "$ref": "#/definitions/WidgetWithSubclasses"
           }
         },
         "sizeMode": {
@@ -7357,47 +5844,7 @@
         "widgets": {
           "type": "array",
           "items": {
-            "onOf": [
-              {
-                "$ref": "#/definitions/Widget"
-              },
-              {
-                "$ref": "#/definitions/ConditionallyVisibleWidget"
-              },
-              {
-                "$ref": "#/definitions/Header"
-              },
-              {
-                "$ref": "#/definitions/SplitPane"
-              },
-              {
-                "$ref": "#/definitions/LoginTextBox"
-              },
-              {
-                "$ref": "#/definitions/MasterDetail"
-              },
-              {
-                "$ref": "#/definitions/MenuWidget"
-              },
-              {
-                "$ref": "#/definitions/Placeholder"
-              },
-              {
-                "$ref": "#/definitions/ScrollContainer"
-              },
-              {
-                "$ref": "#/definitions/SnippetCallWidget"
-              },
-              {
-                "$ref": "#/definitions/TemplatePlaceholder"
-              },
-              {
-                "$ref": "#/definitions/ValidationMessage"
-              },
-              {
-                "$ref": "#/definitions/VerticalFlow"
-              }
-            ]
+            "$ref": "#/definitions/WidgetWithSubclasses"
           }
         },
         "type": {
@@ -7573,59 +6020,7 @@
           ]
         },
         "clickAction": {
-          "onOf": [
-            {
-              "$ref": "#/definitions/ClientAction"
-            },
-            {
-              "$ref": "#/definitions/CallNanoflowClientAction"
-            },
-            {
-              "$ref": "#/definitions/CallWorkflowClientAction"
-            },
-            {
-              "$ref": "#/definitions/CancelChangesClientAction"
-            },
-            {
-              "$ref": "#/definitions/ClosePageClientAction"
-            },
-            {
-              "$ref": "#/definitions/CreateObjectClientAction"
-            },
-            {
-              "$ref": "#/definitions/DeleteClientAction"
-            },
-            {
-              "$ref": "#/definitions/MicroflowClientAction"
-            },
-            {
-              "$ref": "#/definitions/NoClientAction"
-            },
-            {
-              "$ref": "#/definitions/OpenLinkClientAction"
-            },
-            {
-              "$ref": "#/definitions/OpenUserTaskClientAction"
-            },
-            {
-              "$ref": "#/definitions/OpenWorkflowClientAction"
-            },
-            {
-              "$ref": "#/definitions/PageClientAction"
-            },
-            {
-              "$ref": "#/definitions/SaveChangesClientAction"
-            },
-            {
-              "$ref": "#/definitions/SetTaskOutcomeClientAction"
-            },
-            {
-              "$ref": "#/definitions/SignOutClientAction"
-            },
-            {
-              "$ref": "#/definitions/SyncClientAction"
-            }
-          ]
+          "$ref": "#/definitions/ClientActionWithSubclasses"
         },
         "alternativeText": {
           "$ref": "#/definitions/ClientTemplate"
@@ -7779,59 +6174,7 @@
           "$ref": "#/definitions/PageVariable"
         },
         "activePageOnChangeAction": {
-          "onOf": [
-            {
-              "$ref": "#/definitions/ClientAction"
-            },
-            {
-              "$ref": "#/definitions/CallNanoflowClientAction"
-            },
-            {
-              "$ref": "#/definitions/CallWorkflowClientAction"
-            },
-            {
-              "$ref": "#/definitions/CancelChangesClientAction"
-            },
-            {
-              "$ref": "#/definitions/ClosePageClientAction"
-            },
-            {
-              "$ref": "#/definitions/CreateObjectClientAction"
-            },
-            {
-              "$ref": "#/definitions/DeleteClientAction"
-            },
-            {
-              "$ref": "#/definitions/MicroflowClientAction"
-            },
-            {
-              "$ref": "#/definitions/NoClientAction"
-            },
-            {
-              "$ref": "#/definitions/OpenLinkClientAction"
-            },
-            {
-              "$ref": "#/definitions/OpenUserTaskClientAction"
-            },
-            {
-              "$ref": "#/definitions/OpenWorkflowClientAction"
-            },
-            {
-              "$ref": "#/definitions/PageClientAction"
-            },
-            {
-              "$ref": "#/definitions/SaveChangesClientAction"
-            },
-            {
-              "$ref": "#/definitions/SetTaskOutcomeClientAction"
-            },
-            {
-              "$ref": "#/definitions/SignOutClientAction"
-            },
-            {
-              "$ref": "#/definitions/SyncClientAction"
-            }
-          ]
+          "$ref": "#/definitions/ClientActionWithSubclasses"
         }
       },
       "required": [
@@ -7872,47 +6215,7 @@
         "widgets": {
           "type": "array",
           "items": {
-            "onOf": [
-              {
-                "$ref": "#/definitions/Widget"
-              },
-              {
-                "$ref": "#/definitions/ConditionallyVisibleWidget"
-              },
-              {
-                "$ref": "#/definitions/Header"
-              },
-              {
-                "$ref": "#/definitions/SplitPane"
-              },
-              {
-                "$ref": "#/definitions/LoginTextBox"
-              },
-              {
-                "$ref": "#/definitions/MasterDetail"
-              },
-              {
-                "$ref": "#/definitions/MenuWidget"
-              },
-              {
-                "$ref": "#/definitions/Placeholder"
-              },
-              {
-                "$ref": "#/definitions/ScrollContainer"
-              },
-              {
-                "$ref": "#/definitions/SnippetCallWidget"
-              },
-              {
-                "$ref": "#/definitions/TemplatePlaceholder"
-              },
-              {
-                "$ref": "#/definitions/ValidationMessage"
-              },
-              {
-                "$ref": "#/definitions/VerticalFlow"
-              }
-            ]
+            "$ref": "#/definitions/WidgetWithSubclasses"
           }
         },
         "badge": {
@@ -8007,47 +6310,7 @@
         "widgets": {
           "type": "array",
           "items": {
-            "onOf": [
-              {
-                "$ref": "#/definitions/Widget"
-              },
-              {
-                "$ref": "#/definitions/ConditionallyVisibleWidget"
-              },
-              {
-                "$ref": "#/definitions/Header"
-              },
-              {
-                "$ref": "#/definitions/SplitPane"
-              },
-              {
-                "$ref": "#/definitions/LoginTextBox"
-              },
-              {
-                "$ref": "#/definitions/MasterDetail"
-              },
-              {
-                "$ref": "#/definitions/MenuWidget"
-              },
-              {
-                "$ref": "#/definitions/Placeholder"
-              },
-              {
-                "$ref": "#/definitions/ScrollContainer"
-              },
-              {
-                "$ref": "#/definitions/SnippetCallWidget"
-              },
-              {
-                "$ref": "#/definitions/TemplatePlaceholder"
-              },
-              {
-                "$ref": "#/definitions/ValidationMessage"
-              },
-              {
-                "$ref": "#/definitions/VerticalFlow"
-              }
-            ]
+            "$ref": "#/definitions/WidgetWithSubclasses"
           }
         }
       },
@@ -8151,47 +6414,7 @@
         "widgets": {
           "type": "array",
           "items": {
-            "onOf": [
-              {
-                "$ref": "#/definitions/Widget"
-              },
-              {
-                "$ref": "#/definitions/ConditionallyVisibleWidget"
-              },
-              {
-                "$ref": "#/definitions/Header"
-              },
-              {
-                "$ref": "#/definitions/SplitPane"
-              },
-              {
-                "$ref": "#/definitions/LoginTextBox"
-              },
-              {
-                "$ref": "#/definitions/MasterDetail"
-              },
-              {
-                "$ref": "#/definitions/MenuWidget"
-              },
-              {
-                "$ref": "#/definitions/Placeholder"
-              },
-              {
-                "$ref": "#/definitions/ScrollContainer"
-              },
-              {
-                "$ref": "#/definitions/SnippetCallWidget"
-              },
-              {
-                "$ref": "#/definitions/TemplatePlaceholder"
-              },
-              {
-                "$ref": "#/definitions/ValidationMessage"
-              },
-              {
-                "$ref": "#/definitions/VerticalFlow"
-              }
-            ]
+            "$ref": "#/definitions/WidgetWithSubclasses"
           }
         }
       },
@@ -8351,59 +6574,7 @@
           ]
         },
         "onEnterKeyPressAction": {
-          "onOf": [
-            {
-              "$ref": "#/definitions/ClientAction"
-            },
-            {
-              "$ref": "#/definitions/CallNanoflowClientAction"
-            },
-            {
-              "$ref": "#/definitions/CallWorkflowClientAction"
-            },
-            {
-              "$ref": "#/definitions/CancelChangesClientAction"
-            },
-            {
-              "$ref": "#/definitions/ClosePageClientAction"
-            },
-            {
-              "$ref": "#/definitions/CreateObjectClientAction"
-            },
-            {
-              "$ref": "#/definitions/DeleteClientAction"
-            },
-            {
-              "$ref": "#/definitions/MicroflowClientAction"
-            },
-            {
-              "$ref": "#/definitions/NoClientAction"
-            },
-            {
-              "$ref": "#/definitions/OpenLinkClientAction"
-            },
-            {
-              "$ref": "#/definitions/OpenUserTaskClientAction"
-            },
-            {
-              "$ref": "#/definitions/OpenWorkflowClientAction"
-            },
-            {
-              "$ref": "#/definitions/PageClientAction"
-            },
-            {
-              "$ref": "#/definitions/SaveChangesClientAction"
-            },
-            {
-              "$ref": "#/definitions/SetTaskOutcomeClientAction"
-            },
-            {
-              "$ref": "#/definitions/SignOutClientAction"
-            },
-            {
-              "$ref": "#/definitions/SyncClientAction"
-            }
-          ]
+          "$ref": "#/definitions/ClientActionWithSubclasses"
         },
         "autocompletePurpose": {
           "type": "string",
@@ -8632,47 +6803,7 @@
         "widgets": {
           "type": "array",
           "items": {
-            "onOf": [
-              {
-                "$ref": "#/definitions/Widget"
-              },
-              {
-                "$ref": "#/definitions/ConditionallyVisibleWidget"
-              },
-              {
-                "$ref": "#/definitions/Header"
-              },
-              {
-                "$ref": "#/definitions/SplitPane"
-              },
-              {
-                "$ref": "#/definitions/LoginTextBox"
-              },
-              {
-                "$ref": "#/definitions/MasterDetail"
-              },
-              {
-                "$ref": "#/definitions/MenuWidget"
-              },
-              {
-                "$ref": "#/definitions/Placeholder"
-              },
-              {
-                "$ref": "#/definitions/ScrollContainer"
-              },
-              {
-                "$ref": "#/definitions/SnippetCallWidget"
-              },
-              {
-                "$ref": "#/definitions/TemplatePlaceholder"
-              },
-              {
-                "$ref": "#/definitions/ValidationMessage"
-              },
-              {
-                "$ref": "#/definitions/VerticalFlow"
-              }
-            ]
+            "$ref": "#/definitions/WidgetWithSubclasses"
           }
         }
       },
@@ -8734,47 +6865,7 @@
         "widgets": {
           "type": "array",
           "items": {
-            "onOf": [
-              {
-                "$ref": "#/definitions/Widget"
-              },
-              {
-                "$ref": "#/definitions/ConditionallyVisibleWidget"
-              },
-              {
-                "$ref": "#/definitions/Header"
-              },
-              {
-                "$ref": "#/definitions/SplitPane"
-              },
-              {
-                "$ref": "#/definitions/LoginTextBox"
-              },
-              {
-                "$ref": "#/definitions/MasterDetail"
-              },
-              {
-                "$ref": "#/definitions/MenuWidget"
-              },
-              {
-                "$ref": "#/definitions/Placeholder"
-              },
-              {
-                "$ref": "#/definitions/ScrollContainer"
-              },
-              {
-                "$ref": "#/definitions/SnippetCallWidget"
-              },
-              {
-                "$ref": "#/definitions/TemplatePlaceholder"
-              },
-              {
-                "$ref": "#/definitions/ValidationMessage"
-              },
-              {
-                "$ref": "#/definitions/VerticalFlow"
-              }
-            ]
+            "$ref": "#/definitions/WidgetWithSubclasses"
           }
         }
       },
@@ -8828,6 +6919,242 @@
         "$Type"
       ],
       "allOf": [
+        {
+          "$ref": "#/definitions/WorkflowTemplateType"
+        }
+      ]
+    },
+    "IconWithSubclasses": {
+      "type": "object",
+      "oneOf": [
+        {
+          "$ref": "#/definitions/Icon"
+        },
+        {
+          "$ref": "#/definitions/GlyphIcon"
+        },
+        {
+          "$ref": "#/definitions/IconCollectionIcon"
+        },
+        {
+          "$ref": "#/definitions/ImageIcon"
+        }
+      ]
+    },
+    "ClientActionWithSubclasses": {
+      "type": "object",
+      "oneOf": [
+        {
+          "$ref": "#/definitions/ClientAction"
+        },
+        {
+          "$ref": "#/definitions/CallNanoflowClientAction"
+        },
+        {
+          "$ref": "#/definitions/CallWorkflowClientAction"
+        },
+        {
+          "$ref": "#/definitions/CancelChangesClientAction"
+        },
+        {
+          "$ref": "#/definitions/ClosePageClientAction"
+        },
+        {
+          "$ref": "#/definitions/CreateObjectClientAction"
+        },
+        {
+          "$ref": "#/definitions/DeleteClientAction"
+        },
+        {
+          "$ref": "#/definitions/MicroflowClientAction"
+        },
+        {
+          "$ref": "#/definitions/NoClientAction"
+        },
+        {
+          "$ref": "#/definitions/OpenLinkClientAction"
+        },
+        {
+          "$ref": "#/definitions/OpenUserTaskClientAction"
+        },
+        {
+          "$ref": "#/definitions/OpenWorkflowClientAction"
+        },
+        {
+          "$ref": "#/definitions/PageClientAction"
+        },
+        {
+          "$ref": "#/definitions/SaveChangesClientAction"
+        },
+        {
+          "$ref": "#/definitions/SetTaskOutcomeClientAction"
+        },
+        {
+          "$ref": "#/definitions/SignOutClientAction"
+        },
+        {
+          "$ref": "#/definitions/SyncClientAction"
+        }
+      ]
+    },
+    "SelectorSourceWithSubclasses": {
+      "type": "object",
+      "oneOf": [
+        {
+          "$ref": "#/definitions/SelectorSource"
+        },
+        {
+          "$ref": "#/definitions/SelectorDatabaseSource"
+        },
+        {
+          "$ref": "#/definitions/SelectorMicroflowSource"
+        },
+        {
+          "$ref": "#/definitions/SelectorXPathSource"
+        }
+      ]
+    },
+    "WidgetWithSubclasses": {
+      "type": "object",
+      "oneOf": [
+        {
+          "$ref": "#/definitions/Widget"
+        },
+        {
+          "$ref": "#/definitions/ConditionallyVisibleWidget"
+        },
+        {
+          "$ref": "#/definitions/Header"
+        },
+        {
+          "$ref": "#/definitions/SplitPane"
+        },
+        {
+          "$ref": "#/definitions/LoginTextBox"
+        },
+        {
+          "$ref": "#/definitions/MasterDetail"
+        },
+        {
+          "$ref": "#/definitions/MenuWidget"
+        },
+        {
+          "$ref": "#/definitions/Placeholder"
+        },
+        {
+          "$ref": "#/definitions/ScrollContainer"
+        },
+        {
+          "$ref": "#/definitions/SnippetCallWidget"
+        },
+        {
+          "$ref": "#/definitions/TemplatePlaceholder"
+        },
+        {
+          "$ref": "#/definitions/ValidationMessage"
+        },
+        {
+          "$ref": "#/definitions/VerticalFlow"
+        }
+      ]
+    },
+    "DataSourceWithSubclasses": {
+      "type": "object",
+      "oneOf": [
+        {
+          "$ref": "#/definitions/DataSource"
+        },
+        {
+          "$ref": "#/definitions/EntityPathSource"
+        },
+        {
+          "$ref": "#/definitions/ListenTargetSource"
+        },
+        {
+          "$ref": "#/definitions/MicroflowSource"
+        },
+        {
+          "$ref": "#/definitions/NanoflowSource"
+        }
+      ]
+    },
+    "ControlBarItemWithSubclasses": {
+      "type": "object",
+      "oneOf": [
+        {
+          "$ref": "#/definitions/ControlBarItem"
+        },
+        {
+          "$ref": "#/definitions/SearchField"
+        },
+        {
+          "$ref": "#/definitions/ControlBarButton"
+        }
+      ]
+    },
+    "AbstractDesignPropertyValueWithSubclasses": {
+      "type": "object",
+      "oneOf": [
+        {
+          "$ref": "#/definitions/AbstractDesignPropertyValue"
+        },
+        {
+          "$ref": "#/definitions/CompoundDesignPropertyValue"
+        },
+        {
+          "$ref": "#/definitions/CustomDesignPropertyValue"
+        },
+        {
+          "$ref": "#/definitions/OptionDesignPropertyValue"
+        },
+        {
+          "$ref": "#/definitions/ToggleDesignPropertyValue"
+        }
+      ]
+    },
+    "LayoutContentWithSubclasses": {
+      "type": "object",
+      "oneOf": [
+        {
+          "$ref": "#/definitions/LayoutContent"
+        },
+        {
+          "$ref": "#/definitions/NativeLayoutContent"
+        },
+        {
+          "$ref": "#/definitions/WebLayoutContent"
+        }
+      ]
+    },
+    "MenuSourceWithSubclasses": {
+      "type": "object",
+      "oneOf": [
+        {
+          "$ref": "#/definitions/MenuSource"
+        },
+        {
+          "$ref": "#/definitions/MenuDocumentSource"
+        },
+        {
+          "$ref": "#/definitions/NavigationSource"
+        }
+      ]
+    },
+    "TemplateTypeWithSubclasses": {
+      "type": "object",
+      "oneOf": [
+        {
+          "$ref": "#/definitions/TemplateType"
+        },
+        {
+          "$ref": "#/definitions/EditPageTemplateType"
+        },
+        {
+          "$ref": "#/definitions/RegularPageTemplateType"
+        },
+        {
+          "$ref": "#/definitions/SelectPageTemplateType"
+        },
         {
           "$ref": "#/definitions/WorkflowTemplateType"
         }

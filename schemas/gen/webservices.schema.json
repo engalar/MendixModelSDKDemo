@@ -50,20 +50,7 @@
         "childMembers": {
           "type": "array",
           "items": {
-            "onOf": [
-              {
-                "$ref": "#/definitions/DataMember"
-              },
-              {
-                "$ref": "#/definitions/DataEntityBase"
-              },
-              {
-                "$ref": "#/definitions/DataAttribute"
-              },
-              {
-                "$ref": "#/definitions/SystemIdDataAttribute"
-              }
-            ]
+            "$ref": "#/definitions/DataMemberWithSubclasses"
           }
         },
         "entity": {
@@ -790,6 +777,23 @@
       "required": [
         "$ID",
         "$Type"
+      ]
+    },
+    "DataMemberWithSubclasses": {
+      "type": "object",
+      "oneOf": [
+        {
+          "$ref": "#/definitions/DataMember"
+        },
+        {
+          "$ref": "#/definitions/DataEntityBase"
+        },
+        {
+          "$ref": "#/definitions/DataAttribute"
+        },
+        {
+          "$ref": "#/definitions/SystemIdDataAttribute"
+        }
       ]
     }
   }

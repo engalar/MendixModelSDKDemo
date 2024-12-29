@@ -236,29 +236,7 @@
           ]
         },
         "schedule": {
-          "onOf": [
-            {
-              "$ref": "#/definitions/Schedule"
-            },
-            {
-              "$ref": "#/definitions/DaySchedule"
-            },
-            {
-              "$ref": "#/definitions/HourSchedule"
-            },
-            {
-              "$ref": "#/definitions/MinuteSchedule"
-            },
-            {
-              "$ref": "#/definitions/MonthSchedule"
-            },
-            {
-              "$ref": "#/definitions/WeekSchedule"
-            },
-            {
-              "$ref": "#/definitions/YearSchedule"
-            }
-          ]
+          "$ref": "#/definitions/ScheduleWithSubclasses"
         },
         "onOverlap": {
           "type": "string",
@@ -447,6 +425,32 @@
         "$Type"
       ],
       "allOf": [
+        {
+          "$ref": "#/definitions/YearSchedule"
+        }
+      ]
+    },
+    "ScheduleWithSubclasses": {
+      "type": "object",
+      "oneOf": [
+        {
+          "$ref": "#/definitions/Schedule"
+        },
+        {
+          "$ref": "#/definitions/DaySchedule"
+        },
+        {
+          "$ref": "#/definitions/HourSchedule"
+        },
+        {
+          "$ref": "#/definitions/MinuteSchedule"
+        },
+        {
+          "$ref": "#/definitions/MonthSchedule"
+        },
+        {
+          "$ref": "#/definitions/WeekSchedule"
+        },
         {
           "$ref": "#/definitions/YearSchedule"
         }

@@ -84,7 +84,12 @@ export async function extractInheritanceInfo(jsCode: string): Promise<Record<str
     return inheritanceInfo;
 }
 
-export async function extractSchema(jsCode: string, dtsCode: string, interfaceSet: Set<string>, allInheritanceInfo: Record<string, InheritanceInfo>): Promise<Schema> {
+export async function extractSchema(
+    jsCode: string,
+    dtsCode: string,
+    interfaceSet: Set<string>,
+    allInheritanceInfo: Record<string, InheritanceInfo>
+): Promise<Schema> {
     const jsAst = parse(jsCode, {
         sourceType: "module",
         plugins: ["typescript"],
@@ -96,8 +101,8 @@ export async function extractSchema(jsCode: string, dtsCode: string, interfaceSe
     });
 
     const schema: Schema = {
-        "$schema": "http://json-schema.org/draft-07/schema#",
-        "definitions": {},
+        $schema: "http://json-schema.org/draft-07/schema#",
+        definitions: {},
     };
 
     const classToProperties: Record<string, PropertyInfo[]> = {};
@@ -106,8 +111,51 @@ export async function extractSchema(jsCode: string, dtsCode: string, interfaceSe
     const classToStructureTypeName: Record<string, string> = {};
 
     //#region Helper functions and traversal logic
-    //#region 确定属性类型
-    async function determineType(propInfo: PropertyInfo, dtsAst: any): Promise<any> {
+
+    // 查找目标类型的所有子类
+    function findSubClasses(className: string, dtsAst: any): string[] {
+        const subClasses: string[] = [];
+
+        traverse(dtsAst, {
+            ClassDeclaration(path) {
+                if (
+                    path.node.superClass &&
+                    t.isIdentifier(path.node.superClass) &&
+                    path.node.superClass.name === className
+                ) {
+                    subClasses.push(path.node.id.name);
+                }
+            },
+        });
+
+        return subClasses;
+    }
+
+    // 生成 WithSubclasses 类型
+    function generateWithSubclassesType(
+        className: string,
+        subClasses: string[]
+    ): any {
+        const oneOf = subClasses.map((subClass) => ({
+            $ref: `#/definitions/${subClass}`,
+        }));
+
+        // 添加父类本身
+        oneOf.unshift({
+            $ref: `#/definitions/${className}`,
+        });
+
+        return {
+            type: "object",
+            oneOf: oneOf,
+        };
+    }
+
+    // 确定属性类型
+    async function determineType(
+        propInfo: PropertyInfo,
+        dtsAst: any
+    ): Promise<any> {
         const { propertyType, type, internalName, primitiveTypeEnum, defaultValue } = propInfo;
 
         const primitiveTypeMap: Record<string, any> = {
@@ -120,7 +168,7 @@ export async function extractSchema(jsCode: string, dtsCode: string, interfaceSe
             Point: { $ref: "../common.schema.json#/definitions/Point" },
             Size: { $ref: "../common.schema.json#/definitions/Size" },
             Color: { $ref: "../common.schema.json#/definitions/Color" },
-            Blob: { type: "string", contentEncoding: "base64" }
+            Blob: { type: "string", contentEncoding: "base64" },
         };
 
         // Handle PrimitiveProperty types directly
@@ -134,15 +182,15 @@ export async function extractSchema(jsCode: string, dtsCode: string, interfaceSe
             }
         }
 
-        let targetTypeName = (await findRefType(type, internalName)).replace('internal$', '');
-        let _rightType = targetTypeName.includes("$") ? targetTypeName.split('$')[1] : targetTypeName;
+        let targetTypeName = (await findRefType(type, internalName)).replace("internal$", "");
+        let _rightType = targetTypeName.includes("$") ? targetTypeName.split("$")[1] : targetTypeName;
 
         if (interfaceSet.has(_rightType)) {
             _rightType = _rightType.slice(1);
         }
 
         if (targetTypeName.includes("$")) {
-            targetTypeName = `${targetTypeName.split('$')[0]}$${_rightType}`;
+            targetTypeName = `${targetTypeName.split("$")[0]}$${_rightType}`;
         } else {
             targetTypeName = _rightType;
         }
@@ -182,28 +230,30 @@ export async function extractSchema(jsCode: string, dtsCode: string, interfaceSe
             if (propertyType === "ByIdReferenceProperty") {
                 refType = {
                     type: "string",
-                    description: `ByIdReferenceProperty: ${transformRef(targetTypeName)};Unique identifier. use for placeholer uniqe identifier for human readable name and later will replace with guid by model sdk`
+                    description: `ByIdReferenceProperty: ${transformRef(targetTypeName)};Unique identifier. use for placeholer uniqe identifier for human readable name and later will replace with guid by model sdk`,
                 };
             } else if (propertyType.startsWith("ByNameReference")) {
                 // 检查是否存在子类
                 const subClasses = findSubClasses(targetTypeName, dtsAst);
                 refType = {
                     type: "string",
-                    description: `${propertyType}: ${[targetTypeName, ...subClasses].map(transformRef).join(" or ")}`
+                    description: `${propertyType}: ${[targetTypeName, ...subClasses].map(transformRef).join(" or ")}`,
                 };
             } else if (propertyType === "LocalByNameReferenceProperty") {
                 refType = { type: "string" };
             } else if (propertyType === "PartListProperty" || propertyType === "PartProperty") {
                 const subClasses = findSubClasses(targetTypeName, dtsAst);
                 if (subClasses.length > 0) {
+                    // 如果目标类型有子类，生成 WithSubclasses 类型
+                    const withSubclassesTypeName = `${targetTypeName}WithSubclasses`;
+                    schema.definitions[withSubclassesTypeName] = generateWithSubclassesType(targetTypeName, subClasses);
+
                     refType = {
-                        onOf: [targetTypeName, ...subClasses].map(c => ({
-                            $ref: transformRef(c)
-                        }))
+                        $ref: `#/definitions/${withSubclassesTypeName}`,
                     };
                 } else {
                     refType = {
-                        $ref: transformRef(targetTypeName)
+                        $ref: transformRef(targetTypeName),
                     };
                 }
             }
@@ -218,23 +268,6 @@ export async function extractSchema(jsCode: string, dtsCode: string, interfaceSe
         }
 
         return { type: "string" }; // Default to string if type is unknown or unhandled
-    }
-    function findSubClasses(className: string, dtsAst: any): string[] {
-        const subClasses: string[] = [];
-
-        traverse(dtsAst, {
-            ClassDeclaration(path) {
-                if (
-                    path.node.superClass &&
-                    t.isIdentifier(path.node.superClass) &&
-                    path.node.superClass.name === className
-                ) {
-                    subClasses.push(path.node.id.name);
-                }
-            }
-        });
-
-        return subClasses;
     }
 
     async function findRefType(typeName: string, internalName: string): Promise<string> {

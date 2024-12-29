@@ -257,14 +257,7 @@
         "messageDefinitions": {
           "type": "array",
           "items": {
-            "onOf": [
-              {
-                "$ref": "#/definitions/MessageDefinition"
-              },
-              {
-                "$ref": "#/definitions/EntityMessageDefinition"
-              }
-            ]
+            "$ref": "#/definitions/MessageDefinitionWithSubclasses"
           }
         }
       },
@@ -275,6 +268,17 @@
       "allOf": [
         {
           "$ref": "projects.schema.json#/definitions/Document"
+        }
+      ]
+    },
+    "MessageDefinitionWithSubclasses": {
+      "type": "object",
+      "oneOf": [
+        {
+          "$ref": "#/definitions/MessageDefinition"
+        },
+        {
+          "$ref": "#/definitions/EntityMessageDefinition"
         }
       ]
     }

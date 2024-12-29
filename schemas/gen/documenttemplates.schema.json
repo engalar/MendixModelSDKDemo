@@ -264,35 +264,7 @@
           "const": "DocumentTemplates$DropZone"
         },
         "widget": {
-          "onOf": [
-            {
-              "$ref": "#/definitions/Widget"
-            },
-            {
-              "$ref": "#/definitions/AttributeWidget"
-            },
-            {
-              "$ref": "#/definitions/EntityWidget"
-            },
-            {
-              "$ref": "#/definitions/LineBreak"
-            },
-            {
-              "$ref": "#/definitions/PageBreak"
-            },
-            {
-              "$ref": "#/definitions/StaticImageViewer"
-            },
-            {
-              "$ref": "#/definitions/StaticLabel"
-            },
-            {
-              "$ref": "#/definitions/Table"
-            },
-            {
-              "$ref": "#/definitions/Title"
-            }
-          ]
+          "$ref": "#/definitions/WidgetWithSubclasses"
         }
       },
       "required": [
@@ -370,35 +342,7 @@
         "toplevels": {
           "type": "array",
           "items": {
-            "onOf": [
-              {
-                "$ref": "#/definitions/Widget"
-              },
-              {
-                "$ref": "#/definitions/AttributeWidget"
-              },
-              {
-                "$ref": "#/definitions/EntityWidget"
-              },
-              {
-                "$ref": "#/definitions/LineBreak"
-              },
-              {
-                "$ref": "#/definitions/PageBreak"
-              },
-              {
-                "$ref": "#/definitions/StaticImageViewer"
-              },
-              {
-                "$ref": "#/definitions/StaticLabel"
-              },
-              {
-                "$ref": "#/definitions/Table"
-              },
-              {
-                "$ref": "#/definitions/Title"
-              }
-            ]
+            "$ref": "#/definitions/WidgetWithSubclasses"
           }
         },
         "style": {
@@ -1073,6 +1017,38 @@
       "allOf": [
         {
           "$ref": "#/definitions/ConditionallyVisibleWidget"
+        }
+      ]
+    },
+    "WidgetWithSubclasses": {
+      "type": "object",
+      "oneOf": [
+        {
+          "$ref": "#/definitions/Widget"
+        },
+        {
+          "$ref": "#/definitions/AttributeWidget"
+        },
+        {
+          "$ref": "#/definitions/EntityWidget"
+        },
+        {
+          "$ref": "#/definitions/LineBreak"
+        },
+        {
+          "$ref": "#/definitions/PageBreak"
+        },
+        {
+          "$ref": "#/definitions/StaticImageViewer"
+        },
+        {
+          "$ref": "#/definitions/StaticLabel"
+        },
+        {
+          "$ref": "#/definitions/Table"
+        },
+        {
+          "$ref": "#/definitions/Title"
         }
       ]
     }

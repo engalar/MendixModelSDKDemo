@@ -225,20 +225,7 @@
         "outcomes": {
           "type": "array",
           "items": {
-            "onOf": [
-              {
-                "$ref": "#/definitions/ConditionOutcome"
-              },
-              {
-                "$ref": "#/definitions/BooleanConditionOutcome"
-              },
-              {
-                "$ref": "#/definitions/EnumerationValueConditionOutcome"
-              },
-              {
-                "$ref": "#/definitions/VoidConditionOutcome"
-              }
-            ]
+            "$ref": "#/definitions/ConditionOutcomeWithSubclasses"
           }
         }
       },
@@ -275,14 +262,7 @@
         "boundaryEvents": {
           "type": "array",
           "items": {
-            "onOf": [
-              {
-                "$ref": "#/definitions/BoundaryEvent"
-              },
-              {
-                "$ref": "#/definitions/TimerBoundaryEvent"
-              }
-            ]
+            "$ref": "#/definitions/BoundaryEventWithSubclasses"
           }
         }
       },
@@ -323,14 +303,7 @@
         "boundaryEvents": {
           "type": "array",
           "items": {
-            "onOf": [
-              {
-                "$ref": "#/definitions/BoundaryEvent"
-              },
-              {
-                "$ref": "#/definitions/TimerBoundaryEvent"
-              }
-            ]
+            "$ref": "#/definitions/BoundaryEventWithSubclasses"
           }
         }
       },
@@ -523,41 +496,7 @@
         "activities": {
           "type": "array",
           "items": {
-            "onOf": [
-              {
-                "$ref": "#/definitions/WorkflowActivity"
-              },
-              {
-                "$ref": "#/definitions/ConditionOutcomeActivity"
-              },
-              {
-                "$ref": "#/definitions/CallWorkflowActivity"
-              },
-              {
-                "$ref": "#/definitions/EndOfBoundaryEventPathActivity"
-              },
-              {
-                "$ref": "#/definitions/EndWorkflowActivity"
-              },
-              {
-                "$ref": "#/definitions/JumpToActivity"
-              },
-              {
-                "$ref": "#/definitions/UserTaskActivity"
-              },
-              {
-                "$ref": "#/definitions/ParallelSplitActivity"
-              },
-              {
-                "$ref": "#/definitions/UserTask"
-              },
-              {
-                "$ref": "#/definitions/WaitForNotificationActivity"
-              },
-              {
-                "$ref": "#/definitions/WaitForTimerActivity"
-              }
-            ]
+            "$ref": "#/definitions/WorkflowActivityWithSubclasses"
           }
         }
       },
@@ -785,42 +724,10 @@
           "default": false
         },
         "targetUserInput": {
-          "onOf": [
-            {
-              "$ref": "#/definitions/TargetUserInput"
-            },
-            {
-              "$ref": "#/definitions/AbsoluteAmountUserInput"
-            },
-            {
-              "$ref": "#/definitions/AllUserInput"
-            },
-            {
-              "$ref": "#/definitions/PercentageAmountUserInput"
-            }
-          ]
+          "$ref": "#/definitions/TargetUserInputWithSubclasses"
         },
         "completionCriteria": {
-          "onOf": [
-            {
-              "$ref": "#/definitions/UserTaskCompletionCriteria"
-            },
-            {
-              "$ref": "#/definitions/ConsensusCompletionCriteria"
-            },
-            {
-              "$ref": "#/definitions/MajorityCompletionCriteria"
-            },
-            {
-              "$ref": "#/definitions/MicroflowCompletionCriteria"
-            },
-            {
-              "$ref": "#/definitions/ThresholdCompletionCriteria"
-            },
-            {
-              "$ref": "#/definitions/VetoCompletionCriteria"
-            }
-          ]
+          "$ref": "#/definitions/UserTaskCompletionCriteriaWithSubclasses"
         }
       },
       "required": [
@@ -863,20 +770,7 @@
           "$ref": "microflows.schema.json#/definitions/StringTemplate"
         },
         "userSource": {
-          "onOf": [
-            {
-              "$ref": "#/definitions/UserSource"
-            },
-            {
-              "$ref": "#/definitions/EmptyUserSource"
-            },
-            {
-              "$ref": "#/definitions/MicroflowBasedUserSource"
-            },
-            {
-              "$ref": "#/definitions/XPathBasedUserSource"
-            }
-          ]
+          "$ref": "#/definitions/UserSourceWithSubclasses"
         },
         "outcomes": {
           "type": "array",
@@ -887,28 +781,11 @@
         "boundaryEvents": {
           "type": "array",
           "items": {
-            "onOf": [
-              {
-                "$ref": "#/definitions/BoundaryEvent"
-              },
-              {
-                "$ref": "#/definitions/TimerBoundaryEvent"
-              }
-            ]
+            "$ref": "#/definitions/BoundaryEventWithSubclasses"
           }
         },
         "onCreatedEvent": {
-          "onOf": [
-            {
-              "$ref": "#/definitions/UserTaskEvent"
-            },
-            {
-              "$ref": "#/definitions/MicroflowBasedEvent"
-            },
-            {
-              "$ref": "#/definitions/NoEvent"
-            }
-          ]
+          "$ref": "#/definitions/UserTaskEventWithSubclasses"
         }
       },
       "required": [
@@ -941,42 +818,10 @@
           "default": false
         },
         "targetUserInput": {
-          "onOf": [
-            {
-              "$ref": "#/definitions/TargetUserInput"
-            },
-            {
-              "$ref": "#/definitions/AbsoluteAmountUserInput"
-            },
-            {
-              "$ref": "#/definitions/AllUserInput"
-            },
-            {
-              "$ref": "#/definitions/PercentageAmountUserInput"
-            }
-          ]
+          "$ref": "#/definitions/TargetUserInputWithSubclasses"
         },
         "completionCriteria": {
-          "onOf": [
-            {
-              "$ref": "#/definitions/UserTaskCompletionCriteria"
-            },
-            {
-              "$ref": "#/definitions/ConsensusCompletionCriteria"
-            },
-            {
-              "$ref": "#/definitions/MajorityCompletionCriteria"
-            },
-            {
-              "$ref": "#/definitions/MicroflowCompletionCriteria"
-            },
-            {
-              "$ref": "#/definitions/ThresholdCompletionCriteria"
-            },
-            {
-              "$ref": "#/definitions/VetoCompletionCriteria"
-            }
-          ]
+          "$ref": "#/definitions/UserTaskCompletionCriteriaWithSubclasses"
         }
       },
       "required": [
@@ -1281,20 +1126,7 @@
           "$ref": "microflows.schema.json#/definitions/StringTemplate"
         },
         "userSource": {
-          "onOf": [
-            {
-              "$ref": "#/definitions/UserSource"
-            },
-            {
-              "$ref": "#/definitions/EmptyUserSource"
-            },
-            {
-              "$ref": "#/definitions/MicroflowBasedUserSource"
-            },
-            {
-              "$ref": "#/definitions/XPathBasedUserSource"
-            }
-          ]
+          "$ref": "#/definitions/UserSourceWithSubclasses"
         },
         "outcomes": {
           "type": "array",
@@ -1303,30 +1135,10 @@
           }
         },
         "onCreatedEvent": {
-          "onOf": [
-            {
-              "$ref": "#/definitions/UserTaskEvent"
-            },
-            {
-              "$ref": "#/definitions/MicroflowBasedEvent"
-            },
-            {
-              "$ref": "#/definitions/NoEvent"
-            }
-          ]
+          "$ref": "#/definitions/UserTaskEventWithSubclasses"
         },
         "userTaskCompletion": {
-          "onOf": [
-            {
-              "$ref": "#/definitions/UserTaskCompletion"
-            },
-            {
-              "$ref": "#/definitions/MultiInputCompletion"
-            },
-            {
-              "$ref": "#/definitions/SingleInputCompletion"
-            }
-          ]
+          "$ref": "#/definitions/UserTaskCompletionWithSubclasses"
         }
       },
       "required": [
@@ -1425,14 +1237,7 @@
         "boundaryEvents": {
           "type": "array",
           "items": {
-            "onOf": [
-              {
-                "$ref": "#/definitions/BoundaryEvent"
-              },
-              {
-                "$ref": "#/definitions/TimerBoundaryEvent"
-              }
-            ]
+            "$ref": "#/definitions/BoundaryEventWithSubclasses"
           }
         }
       },
@@ -1701,6 +1506,157 @@
       "allOf": [
         {
           "$ref": "#/definitions/UserSource"
+        }
+      ]
+    },
+    "ConditionOutcomeWithSubclasses": {
+      "type": "object",
+      "oneOf": [
+        {
+          "$ref": "#/definitions/ConditionOutcome"
+        },
+        {
+          "$ref": "#/definitions/BooleanConditionOutcome"
+        },
+        {
+          "$ref": "#/definitions/EnumerationValueConditionOutcome"
+        },
+        {
+          "$ref": "#/definitions/VoidConditionOutcome"
+        }
+      ]
+    },
+    "BoundaryEventWithSubclasses": {
+      "type": "object",
+      "oneOf": [
+        {
+          "$ref": "#/definitions/BoundaryEvent"
+        },
+        {
+          "$ref": "#/definitions/TimerBoundaryEvent"
+        }
+      ]
+    },
+    "WorkflowActivityWithSubclasses": {
+      "type": "object",
+      "oneOf": [
+        {
+          "$ref": "#/definitions/WorkflowActivity"
+        },
+        {
+          "$ref": "#/definitions/ConditionOutcomeActivity"
+        },
+        {
+          "$ref": "#/definitions/CallWorkflowActivity"
+        },
+        {
+          "$ref": "#/definitions/EndOfBoundaryEventPathActivity"
+        },
+        {
+          "$ref": "#/definitions/EndWorkflowActivity"
+        },
+        {
+          "$ref": "#/definitions/JumpToActivity"
+        },
+        {
+          "$ref": "#/definitions/UserTaskActivity"
+        },
+        {
+          "$ref": "#/definitions/ParallelSplitActivity"
+        },
+        {
+          "$ref": "#/definitions/UserTask"
+        },
+        {
+          "$ref": "#/definitions/WaitForNotificationActivity"
+        },
+        {
+          "$ref": "#/definitions/WaitForTimerActivity"
+        }
+      ]
+    },
+    "TargetUserInputWithSubclasses": {
+      "type": "object",
+      "oneOf": [
+        {
+          "$ref": "#/definitions/TargetUserInput"
+        },
+        {
+          "$ref": "#/definitions/AbsoluteAmountUserInput"
+        },
+        {
+          "$ref": "#/definitions/AllUserInput"
+        },
+        {
+          "$ref": "#/definitions/PercentageAmountUserInput"
+        }
+      ]
+    },
+    "UserTaskCompletionCriteriaWithSubclasses": {
+      "type": "object",
+      "oneOf": [
+        {
+          "$ref": "#/definitions/UserTaskCompletionCriteria"
+        },
+        {
+          "$ref": "#/definitions/ConsensusCompletionCriteria"
+        },
+        {
+          "$ref": "#/definitions/MajorityCompletionCriteria"
+        },
+        {
+          "$ref": "#/definitions/MicroflowCompletionCriteria"
+        },
+        {
+          "$ref": "#/definitions/ThresholdCompletionCriteria"
+        },
+        {
+          "$ref": "#/definitions/VetoCompletionCriteria"
+        }
+      ]
+    },
+    "UserSourceWithSubclasses": {
+      "type": "object",
+      "oneOf": [
+        {
+          "$ref": "#/definitions/UserSource"
+        },
+        {
+          "$ref": "#/definitions/EmptyUserSource"
+        },
+        {
+          "$ref": "#/definitions/MicroflowBasedUserSource"
+        },
+        {
+          "$ref": "#/definitions/XPathBasedUserSource"
+        }
+      ]
+    },
+    "UserTaskEventWithSubclasses": {
+      "type": "object",
+      "oneOf": [
+        {
+          "$ref": "#/definitions/UserTaskEvent"
+        },
+        {
+          "$ref": "#/definitions/MicroflowBasedEvent"
+        },
+        {
+          "$ref": "#/definitions/NoEvent"
+        }
+      ]
+    },
+    "UserTaskCompletionWithSubclasses": {
+      "type": "object",
+      "oneOf": [
+        {
+          "$ref": "#/definitions/UserTaskCompletion"
+        },
+        {
+          "$ref": "#/definitions/MultiInputCompletion"
+        },
+        {
+          "$ref": "#/definitions/SingleInputCompletion"
         }
       ]
     }

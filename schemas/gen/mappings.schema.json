@@ -349,17 +349,7 @@
         "children": {
           "type": "array",
           "items": {
-            "onOf": [
-              {
-                "$ref": "#/definitions/MappingElement"
-              },
-              {
-                "$ref": "#/definitions/ObjectMappingElement"
-              },
-              {
-                "$ref": "#/definitions/ValueMappingElement"
-              }
-            ]
+            "$ref": "#/definitions/MappingElementWithSubclasses"
           }
         },
         "entity": {
@@ -459,6 +449,20 @@
       "allOf": [
         {
           "$ref": "#/definitions/MappingElement"
+        }
+      ]
+    },
+    "MappingElementWithSubclasses": {
+      "type": "object",
+      "oneOf": [
+        {
+          "$ref": "#/definitions/MappingElement"
+        },
+        {
+          "$ref": "#/definitions/ObjectMappingElement"
+        },
+        {
+          "$ref": "#/definitions/ValueMappingElement"
         }
       ]
     }

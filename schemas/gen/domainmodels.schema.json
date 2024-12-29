@@ -137,17 +137,7 @@
           "$ref": "#/definitions/AssociationDeleteBehavior"
         },
         "source": {
-          "onOf": [
-            {
-              "$ref": "#/definitions/AssociationSource"
-            },
-            {
-              "$ref": "#/definitions/OqlViewAssociationSource"
-            },
-            {
-              "$ref": "#/definitions/RemoteAssociationSource"
-            }
-          ]
+          "$ref": "#/definitions/AssociationSourceWithSubclasses"
         },
         "exportLevel": {
           "type": "string"
@@ -345,54 +335,10 @@
           "default": ""
         },
         "type": {
-          "onOf": [
-            {
-              "$ref": "#/definitions/AttributeType"
-            },
-            {
-              "$ref": "#/definitions/NumericAttributeTypeBase"
-            },
-            {
-              "$ref": "#/definitions/BinaryAttributeType"
-            },
-            {
-              "$ref": "#/definitions/BooleanAttributeType"
-            },
-            {
-              "$ref": "#/definitions/DateTimeAttributeType"
-            },
-            {
-              "$ref": "#/definitions/EnumerationAttributeType"
-            },
-            {
-              "$ref": "#/definitions/HashedStringAttributeType"
-            },
-            {
-              "$ref": "#/definitions/MultiLanguageAttributeType"
-            },
-            {
-              "$ref": "#/definitions/StringAttributeType"
-            }
-          ]
+          "$ref": "#/definitions/AttributeTypeWithSubclasses"
         },
         "value": {
-          "onOf": [
-            {
-              "$ref": "#/definitions/ValueType"
-            },
-            {
-              "$ref": "#/definitions/MappedValue"
-            },
-            {
-              "$ref": "#/definitions/CalculatedValue"
-            },
-            {
-              "$ref": "#/definitions/OqlViewValue"
-            },
-            {
-              "$ref": "#/definitions/StoredValue"
-            }
-          ]
+          "$ref": "#/definitions/ValueTypeWithSubclasses"
         },
         "exportLevel": {
           "type": "string"
@@ -927,17 +873,7 @@
           "contentEncoding": "base64"
         },
         "generalization": {
-          "onOf": [
-            {
-              "$ref": "#/definitions/GeneralizationBase"
-            },
-            {
-              "$ref": "#/definitions/Generalization"
-            },
-            {
-              "$ref": "#/definitions/NoGeneralization"
-            }
-          ]
+          "$ref": "#/definitions/GeneralizationBaseWithSubclasses"
         },
         "attributes": {
           "type": "array",
@@ -974,17 +910,7 @@
           "description": "ByNameReferenceProperty: images.schema.json#/definitions/Image"
         },
         "source": {
-          "onOf": [
-            {
-              "$ref": "#/definitions/EntitySource"
-            },
-            {
-              "$ref": "#/definitions/RemoteEntitySource"
-            },
-            {
-              "$ref": "#/definitions/ViewEntitySource"
-            }
-          ]
+          "$ref": "#/definitions/EntitySourceWithSubclasses"
         },
         "exportLevel": {
           "type": "string"
@@ -1053,35 +979,7 @@
           "default": ""
         },
         "type": {
-          "onOf": [
-            {
-              "$ref": "#/definitions/AttributeType"
-            },
-            {
-              "$ref": "#/definitions/NumericAttributeTypeBase"
-            },
-            {
-              "$ref": "#/definitions/BinaryAttributeType"
-            },
-            {
-              "$ref": "#/definitions/BooleanAttributeType"
-            },
-            {
-              "$ref": "#/definitions/DateTimeAttributeType"
-            },
-            {
-              "$ref": "#/definitions/EnumerationAttributeType"
-            },
-            {
-              "$ref": "#/definitions/HashedStringAttributeType"
-            },
-            {
-              "$ref": "#/definitions/MultiLanguageAttributeType"
-            },
-            {
-              "$ref": "#/definitions/StringAttributeType"
-            }
-          ]
+          "$ref": "#/definitions/AttributeTypeWithSubclasses"
         }
       },
       "required": [
@@ -2034,29 +1932,7 @@
           "$ref": "texts.schema.json#/definitions/Text"
         },
         "ruleInfo": {
-          "onOf": [
-            {
-              "$ref": "#/definitions/RuleInfo"
-            },
-            {
-              "$ref": "#/definitions/EqualsToRuleInfo"
-            },
-            {
-              "$ref": "#/definitions/MaxLengthRuleInfo"
-            },
-            {
-              "$ref": "#/definitions/RangeRuleInfo"
-            },
-            {
-              "$ref": "#/definitions/RegExRuleInfo"
-            },
-            {
-              "$ref": "#/definitions/RequiredRuleInfo"
-            },
-            {
-              "$ref": "#/definitions/UniqueRuleInfo"
-            }
-          ]
+          "$ref": "#/definitions/RuleInfoWithSubclasses"
         }
       },
       "required": [
@@ -2065,6 +1941,126 @@
         "attribute",
         "errorMessage",
         "ruleInfo"
+      ]
+    },
+    "AssociationSourceWithSubclasses": {
+      "type": "object",
+      "oneOf": [
+        {
+          "$ref": "#/definitions/AssociationSource"
+        },
+        {
+          "$ref": "#/definitions/OqlViewAssociationSource"
+        },
+        {
+          "$ref": "#/definitions/RemoteAssociationSource"
+        }
+      ]
+    },
+    "AttributeTypeWithSubclasses": {
+      "type": "object",
+      "oneOf": [
+        {
+          "$ref": "#/definitions/AttributeType"
+        },
+        {
+          "$ref": "#/definitions/NumericAttributeTypeBase"
+        },
+        {
+          "$ref": "#/definitions/BinaryAttributeType"
+        },
+        {
+          "$ref": "#/definitions/BooleanAttributeType"
+        },
+        {
+          "$ref": "#/definitions/DateTimeAttributeType"
+        },
+        {
+          "$ref": "#/definitions/EnumerationAttributeType"
+        },
+        {
+          "$ref": "#/definitions/HashedStringAttributeType"
+        },
+        {
+          "$ref": "#/definitions/MultiLanguageAttributeType"
+        },
+        {
+          "$ref": "#/definitions/StringAttributeType"
+        }
+      ]
+    },
+    "ValueTypeWithSubclasses": {
+      "type": "object",
+      "oneOf": [
+        {
+          "$ref": "#/definitions/ValueType"
+        },
+        {
+          "$ref": "#/definitions/MappedValue"
+        },
+        {
+          "$ref": "#/definitions/CalculatedValue"
+        },
+        {
+          "$ref": "#/definitions/OqlViewValue"
+        },
+        {
+          "$ref": "#/definitions/StoredValue"
+        }
+      ]
+    },
+    "GeneralizationBaseWithSubclasses": {
+      "type": "object",
+      "oneOf": [
+        {
+          "$ref": "#/definitions/GeneralizationBase"
+        },
+        {
+          "$ref": "#/definitions/Generalization"
+        },
+        {
+          "$ref": "#/definitions/NoGeneralization"
+        }
+      ]
+    },
+    "EntitySourceWithSubclasses": {
+      "type": "object",
+      "oneOf": [
+        {
+          "$ref": "#/definitions/EntitySource"
+        },
+        {
+          "$ref": "#/definitions/RemoteEntitySource"
+        },
+        {
+          "$ref": "#/definitions/ViewEntitySource"
+        }
+      ]
+    },
+    "RuleInfoWithSubclasses": {
+      "type": "object",
+      "oneOf": [
+        {
+          "$ref": "#/definitions/RuleInfo"
+        },
+        {
+          "$ref": "#/definitions/EqualsToRuleInfo"
+        },
+        {
+          "$ref": "#/definitions/MaxLengthRuleInfo"
+        },
+        {
+          "$ref": "#/definitions/RangeRuleInfo"
+        },
+        {
+          "$ref": "#/definitions/RegExRuleInfo"
+        },
+        {
+          "$ref": "#/definitions/RequiredRuleInfo"
+        },
+        {
+          "$ref": "#/definitions/UniqueRuleInfo"
+        }
       ]
     }
   }

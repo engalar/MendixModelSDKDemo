@@ -153,65 +153,16 @@
           "default": 10000
         },
         "updateMode": {
-          "onOf": [
-            {
-              "$ref": "#/definitions/ChangeMode"
-            },
-            {
-              "$ref": "#/definitions/CallMicroflowToChange"
-            },
-            {
-              "$ref": "#/definitions/ChangeNotSupported"
-            },
-            {
-              "$ref": "#/definitions/ChangeSource"
-            }
-          ]
+          "$ref": "#/definitions/ChangeModeWithSubclasses"
         },
         "insertMode": {
-          "onOf": [
-            {
-              "$ref": "#/definitions/ChangeMode"
-            },
-            {
-              "$ref": "#/definitions/CallMicroflowToChange"
-            },
-            {
-              "$ref": "#/definitions/ChangeNotSupported"
-            },
-            {
-              "$ref": "#/definitions/ChangeSource"
-            }
-          ]
+          "$ref": "#/definitions/ChangeModeWithSubclasses"
         },
         "deleteMode": {
-          "onOf": [
-            {
-              "$ref": "#/definitions/ChangeMode"
-            },
-            {
-              "$ref": "#/definitions/CallMicroflowToChange"
-            },
-            {
-              "$ref": "#/definitions/ChangeNotSupported"
-            },
-            {
-              "$ref": "#/definitions/ChangeSource"
-            }
-          ]
+          "$ref": "#/definitions/ChangeModeWithSubclasses"
         },
         "readMode": {
-          "onOf": [
-            {
-              "$ref": "#/definitions/ReadMode"
-            },
-            {
-              "$ref": "#/definitions/CallMicroflowToRead"
-            },
-            {
-              "$ref": "#/definitions/ReadSource"
-            }
-          ]
+          "$ref": "#/definitions/ReadModeWithSubclasses"
         },
         "queryOptions": {
           "$ref": "#/definitions/QueryOptions"
@@ -256,20 +207,7 @@
         "childMembers": {
           "type": "array",
           "items": {
-            "onOf": [
-              {
-                "$ref": "#/definitions/PublishedMember"
-              },
-              {
-                "$ref": "#/definitions/PublishedAssociationEnd"
-              },
-              {
-                "$ref": "#/definitions/PublishedAttribute"
-              },
-              {
-                "$ref": "#/definitions/PublishedId"
-              }
-            ]
+            "$ref": "#/definitions/PublishedMemberWithSubclasses"
           }
         }
       },
@@ -800,6 +738,54 @@
       "required": [
         "$ID",
         "$Type"
+      ]
+    },
+    "ChangeModeWithSubclasses": {
+      "type": "object",
+      "oneOf": [
+        {
+          "$ref": "#/definitions/ChangeMode"
+        },
+        {
+          "$ref": "#/definitions/CallMicroflowToChange"
+        },
+        {
+          "$ref": "#/definitions/ChangeNotSupported"
+        },
+        {
+          "$ref": "#/definitions/ChangeSource"
+        }
+      ]
+    },
+    "ReadModeWithSubclasses": {
+      "type": "object",
+      "oneOf": [
+        {
+          "$ref": "#/definitions/ReadMode"
+        },
+        {
+          "$ref": "#/definitions/CallMicroflowToRead"
+        },
+        {
+          "$ref": "#/definitions/ReadSource"
+        }
+      ]
+    },
+    "PublishedMemberWithSubclasses": {
+      "type": "object",
+      "oneOf": [
+        {
+          "$ref": "#/definitions/PublishedMember"
+        },
+        {
+          "$ref": "#/definitions/PublishedAssociationEnd"
+        },
+        {
+          "$ref": "#/definitions/PublishedAttribute"
+        },
+        {
+          "$ref": "#/definitions/PublishedId"
+        }
       ]
     }
   }

@@ -57,14 +57,7 @@
           "const": "Queues$Queue"
         },
         "config": {
-          "onOf": [
-            {
-              "$ref": "#/definitions/QueueConfig"
-            },
-            {
-              "$ref": "#/definitions/BasicQueueConfig"
-            }
-          ]
+          "$ref": "#/definitions/QueueConfigWithSubclasses"
         }
       },
       "required": [
@@ -187,22 +180,37 @@
           "description": "ByNameReferenceProperty: #/definitions/Queue"
         },
         "retry": {
-          "onOf": [
-            {
-              "$ref": "#/definitions/QueueRetry"
-            },
-            {
-              "$ref": "#/definitions/QueueExponentialRetry"
-            },
-            {
-              "$ref": "#/definitions/QueueFixedRetry"
-            }
-          ]
+          "$ref": "#/definitions/QueueRetryWithSubclasses"
         }
       },
       "required": [
         "$ID",
         "$Type"
+      ]
+    },
+    "QueueConfigWithSubclasses": {
+      "type": "object",
+      "oneOf": [
+        {
+          "$ref": "#/definitions/QueueConfig"
+        },
+        {
+          "$ref": "#/definitions/BasicQueueConfig"
+        }
+      ]
+    },
+    "QueueRetryWithSubclasses": {
+      "type": "object",
+      "oneOf": [
+        {
+          "$ref": "#/definitions/QueueRetry"
+        },
+        {
+          "$ref": "#/definitions/QueueExponentialRetry"
+        },
+        {
+          "$ref": "#/definitions/QueueFixedRetry"
+        }
       ]
     }
   }

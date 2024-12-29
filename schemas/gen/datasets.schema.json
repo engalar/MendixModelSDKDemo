@@ -12,17 +12,7 @@
           "const": "DataSets$DataSet"
         },
         "source": {
-          "onOf": [
-            {
-              "$ref": "#/definitions/DataSetSource"
-            },
-            {
-              "$ref": "#/definitions/JavaDataSetSource"
-            },
-            {
-              "$ref": "#/definitions/OqlDataSetSource"
-            }
-          ]
+          "$ref": "#/definitions/DataSetSourceWithSubclasses"
         },
         "parameters": {
           "type": "array",
@@ -291,20 +281,7 @@
         "constraints": {
           "type": "array",
           "items": {
-            "onOf": [
-              {
-                "$ref": "#/definitions/DataSetParameterConstraint"
-              },
-              {
-                "$ref": "#/definitions/DataSetDateTimeConstraint"
-              },
-              {
-                "$ref": "#/definitions/DataSetNumericConstraint"
-              },
-              {
-                "$ref": "#/definitions/DataSetObjectConstraint"
-              }
-            ]
+            "$ref": "#/definitions/DataSetParameterConstraintWithSubclasses"
           }
         }
       },
@@ -409,6 +386,37 @@
       "allOf": [
         {
           "$ref": "#/definitions/DataSetSource"
+        }
+      ]
+    },
+    "DataSetSourceWithSubclasses": {
+      "type": "object",
+      "oneOf": [
+        {
+          "$ref": "#/definitions/DataSetSource"
+        },
+        {
+          "$ref": "#/definitions/JavaDataSetSource"
+        },
+        {
+          "$ref": "#/definitions/OqlDataSetSource"
+        }
+      ]
+    },
+    "DataSetParameterConstraintWithSubclasses": {
+      "type": "object",
+      "oneOf": [
+        {
+          "$ref": "#/definitions/DataSetParameterConstraint"
+        },
+        {
+          "$ref": "#/definitions/DataSetDateTimeConstraint"
+        },
+        {
+          "$ref": "#/definitions/DataSetNumericConstraint"
+        },
+        {
+          "$ref": "#/definitions/DataSetObjectConstraint"
         }
       ]
     }

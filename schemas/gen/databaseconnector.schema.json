@@ -16,17 +16,7 @@
           "default": ""
         },
         "value": {
-          "onOf": [
-            {
-              "$ref": "#/definitions/AdditionalPropertyValue"
-            },
-            {
-              "$ref": "#/definitions/ValueAsConstant"
-            },
-            {
-              "$ref": "#/definitions/ValueAsString"
-            }
-          ]
+          "$ref": "#/definitions/AdditionalPropertyValueWithSubclasses"
         }
       },
       "required": [
@@ -65,17 +55,7 @@
           "default": ""
         },
         "sqlDataType": {
-          "onOf": [
-            {
-              "$ref": "#/definitions/SqlDataType"
-            },
-            {
-              "$ref": "#/definitions/LimitedLengthSqlDataType"
-            },
-            {
-              "$ref": "#/definitions/SimpleSqlDataType"
-            }
-          ]
+          "$ref": "#/definitions/SqlDataTypeWithSubclasses"
         },
         "attribute": {
           "type": "string",
@@ -205,17 +185,7 @@
           "default": ""
         },
         "connectionInput": {
-          "onOf": [
-            {
-              "$ref": "#/definitions/ConnectionInput"
-            },
-            {
-              "$ref": "#/definitions/ConnectionParts"
-            },
-            {
-              "$ref": "#/definitions/ConnectionString"
-            }
-          ]
+          "$ref": "#/definitions/ConnectionInputWithSubclasses"
         },
         "connectionString": {
           "type": "string",
@@ -403,17 +373,7 @@
           "default": false
         },
         "sqlDataType": {
-          "onOf": [
-            {
-              "$ref": "#/definitions/SqlDataType"
-            },
-            {
-              "$ref": "#/definitions/LimitedLengthSqlDataType"
-            },
-            {
-              "$ref": "#/definitions/SimpleSqlDataType"
-            }
-          ]
+          "$ref": "#/definitions/SqlDataTypeWithSubclasses"
         },
         "dataType": {
           "$ref": "datatypes.schema.json#/definitions/DataType"
@@ -557,6 +517,48 @@
       "allOf": [
         {
           "$ref": "#/definitions/AdditionalPropertyValue"
+        }
+      ]
+    },
+    "AdditionalPropertyValueWithSubclasses": {
+      "type": "object",
+      "oneOf": [
+        {
+          "$ref": "#/definitions/AdditionalPropertyValue"
+        },
+        {
+          "$ref": "#/definitions/ValueAsConstant"
+        },
+        {
+          "$ref": "#/definitions/ValueAsString"
+        }
+      ]
+    },
+    "SqlDataTypeWithSubclasses": {
+      "type": "object",
+      "oneOf": [
+        {
+          "$ref": "#/definitions/SqlDataType"
+        },
+        {
+          "$ref": "#/definitions/LimitedLengthSqlDataType"
+        },
+        {
+          "$ref": "#/definitions/SimpleSqlDataType"
+        }
+      ]
+    },
+    "ConnectionInputWithSubclasses": {
+      "type": "object",
+      "oneOf": [
+        {
+          "$ref": "#/definitions/ConnectionInput"
+        },
+        {
+          "$ref": "#/definitions/ConnectionParts"
+        },
+        {
+          "$ref": "#/definitions/ConnectionString"
         }
       ]
     }

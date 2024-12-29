@@ -104,17 +104,7 @@
           "const": "ExcelDataImporter$ColumnAttributeMapping"
         },
         "reference": {
-          "onOf": [
-            {
-              "$ref": "#/definitions/Reference"
-            },
-            {
-              "$ref": "#/definitions/IndexReference"
-            },
-            {
-              "$ref": "#/definitions/NameReference"
-            }
-          ]
+          "$ref": "#/definitions/ReferenceWithSubclasses"
         },
         "attribute": {
           "type": "string",
@@ -197,17 +187,7 @@
           "default": 1
         },
         "reference": {
-          "onOf": [
-            {
-              "$ref": "#/definitions/Reference"
-            },
-            {
-              "$ref": "#/definitions/IndexReference"
-            },
-            {
-              "$ref": "#/definitions/NameReference"
-            }
-          ]
+          "$ref": "#/definitions/ReferenceWithSubclasses"
         },
         "entity": {
           "type": "string",
@@ -406,17 +386,7 @@
           "default": 1
         },
         "reference": {
-          "onOf": [
-            {
-              "$ref": "#/definitions/Reference"
-            },
-            {
-              "$ref": "#/definitions/IndexReference"
-            },
-            {
-              "$ref": "#/definitions/NameReference"
-            }
-          ]
+          "$ref": "#/definitions/ReferenceWithSubclasses"
         },
         "entity": {
           "type": "string",
@@ -459,17 +429,7 @@
           "default": false
         },
         "contents": {
-          "onOf": [
-            {
-              "$ref": "#/definitions/TemplateContents"
-            },
-            {
-              "$ref": "#/definitions/CSVTemplateContents"
-            },
-            {
-              "$ref": "#/definitions/ExcelTemplateContents"
-            }
-          ]
+          "$ref": "#/definitions/TemplateContentsWithSubclasses"
         }
       },
       "required": [
@@ -479,6 +439,34 @@
       "allOf": [
         {
           "$ref": "mappings.schema.json#/definitions/MappingSourceDocument"
+        }
+      ]
+    },
+    "ReferenceWithSubclasses": {
+      "type": "object",
+      "oneOf": [
+        {
+          "$ref": "#/definitions/Reference"
+        },
+        {
+          "$ref": "#/definitions/IndexReference"
+        },
+        {
+          "$ref": "#/definitions/NameReference"
+        }
+      ]
+    },
+    "TemplateContentsWithSubclasses": {
+      "type": "object",
+      "oneOf": [
+        {
+          "$ref": "#/definitions/TemplateContents"
+        },
+        {
+          "$ref": "#/definitions/CSVTemplateContents"
+        },
+        {
+          "$ref": "#/definitions/ExcelTemplateContents"
         }
       ]
     }
