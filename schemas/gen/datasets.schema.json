@@ -32,7 +32,17 @@
       ],
       "allOf": [
         {
-          "$ref": "projects.schema.json#/definitions/Document"
+          "$merge": {
+            "source": {
+              "$ref": "projects.schema.json#/definitions/Document"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "DataSets$DataSet"
+              }
+            }
+          }
         }
       ]
     },
@@ -161,7 +171,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/DataSetParameterConstraint"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/DataSetParameterConstraint"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "DataSets$DataSetDateTimeConstraint"
+              }
+            }
+          }
         }
       ]
     },
@@ -224,7 +244,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/DataSetParameterConstraint"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/DataSetParameterConstraint"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "DataSets$DataSetNumericConstraint"
+              }
+            }
+          }
         }
       ]
     },
@@ -253,7 +283,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/DataSetParameterConstraint"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/DataSetParameterConstraint"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "DataSets$DataSetObjectConstraint"
+              }
+            }
+          }
         }
       ]
     },
@@ -356,7 +396,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/DataSetSource"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/DataSetSource"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "DataSets$JavaDataSetSource"
+              }
+            }
+          }
         }
       ]
     },
@@ -385,7 +435,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/DataSetSource"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/DataSetSource"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "DataSets$OqlDataSetSource"
+              }
+            }
+          }
         }
       ]
     },

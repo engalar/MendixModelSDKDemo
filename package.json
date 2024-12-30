@@ -1,6 +1,8 @@
 {
     "scripts": {
-        "start": "ts-node src/cli/index.ts"
+        "start": "ts-node src/tool/schema.ts",
+        "test": "jest",
+        "test:watch": "jest --watch"
     },
     "dependencies": {
         "@babel/parser": "^7.26.3",
@@ -15,9 +17,12 @@
         "yargs": "^17.7.2"
     },
     "devDependencies": {
+        "@types/jest": "^29.5.14",
         "@types/node": "^22.10.2",
         "@types/node-persist": "^3.1.8",
         "@types/yargs": "^17.0.33",
+        "jest": "^29.7.0",
+        "ts-jest": "^29.2.5",
         "ts-node": "^10.9.2",
         "typescript": "^5.7.2"
     }

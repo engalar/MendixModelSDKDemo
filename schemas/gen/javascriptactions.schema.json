@@ -21,7 +21,17 @@
       ],
       "allOf": [
         {
-          "$ref": "codeactions.schema.json#/definitions/CodeAction"
+          "$merge": {
+            "source": {
+              "$ref": "codeactions.schema.json#/definitions/CodeAction"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "JavaScriptActions$JavaScriptAction"
+              }
+            }
+          }
         }
       ]
     },
@@ -42,7 +52,17 @@
       ],
       "allOf": [
         {
-          "$ref": "codeactions.schema.json#/definitions/CodeActionParameter"
+          "$merge": {
+            "source": {
+              "$ref": "codeactions.schema.json#/definitions/CodeActionParameter"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "JavaScriptActions$JavaScriptActionParameter"
+              }
+            }
+          }
         }
       ]
     },
@@ -63,7 +83,17 @@
       ],
       "allOf": [
         {
-          "$ref": "codeactions.schema.json#/definitions/ParameterType"
+          "$merge": {
+            "source": {
+              "$ref": "codeactions.schema.json#/definitions/ParameterType"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "JavaScriptActions$NanoflowJavaScriptActionParameterType"
+              }
+            }
+          }
         }
       ]
     }

@@ -41,7 +41,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/MemberWidget"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/MemberWidget"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "DocumentTemplates$AttributeWidget"
+              }
+            }
+          }
         }
       ]
     },
@@ -91,7 +101,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/ConditionallyVisibleWidget"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/ConditionallyVisibleWidget"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "DocumentTemplates$EntityWidget"
+              }
+            }
+          }
         }
       ]
     },
@@ -132,7 +152,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/ListenTargetWidget"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/ListenTargetWidget"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "DocumentTemplates$Grid"
+              }
+            }
+          }
         }
       ]
     },
@@ -162,7 +192,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/ColumnGrid"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/ColumnGrid"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "DocumentTemplates$DataGrid"
+              }
+            }
+          }
         }
       ]
     },
@@ -249,7 +289,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/EntityWidget"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/EntityWidget"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "DocumentTemplates$DataView"
+              }
+            }
+          }
         }
       ]
     },
@@ -289,7 +339,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/DropZone"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/DropZone"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "DocumentTemplates$DataViewContents"
+              }
+            }
+          }
         }
       ]
     },
@@ -362,7 +422,17 @@
       ],
       "allOf": [
         {
-          "$ref": "projects.schema.json#/definitions/Document"
+          "$merge": {
+            "source": {
+              "$ref": "projects.schema.json#/definitions/Document"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "DocumentTemplates$DocumentTemplate"
+              }
+            }
+          }
         }
       ]
     },
@@ -423,7 +493,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/EntityWidget"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/EntityWidget"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "DocumentTemplates$DynamicImageViewer"
+              }
+            }
+          }
         }
       ]
     },
@@ -456,7 +536,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/AttributeWidget"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/AttributeWidget"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "DocumentTemplates$DynamicLabel"
+              }
+            }
+          }
         }
       ]
     },
@@ -481,7 +571,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/DropZone"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/DropZone"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "DocumentTemplates$Footer"
+              }
+            }
+          }
         }
       ]
     },
@@ -551,7 +651,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/Widget"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/Widget"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "DocumentTemplates$Header"
+              }
+            }
+          }
         }
       ]
     },
@@ -572,7 +682,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/Widget"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/Widget"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "DocumentTemplates$LineBreak"
+              }
+            }
+          }
         }
       ]
     },
@@ -593,7 +713,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/Widget"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/Widget"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "DocumentTemplates$PageBreak"
+              }
+            }
+          }
         }
       ]
     },
@@ -626,7 +756,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/ConditionallyVisibleWidget"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/ConditionallyVisibleWidget"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "DocumentTemplates$StaticImageViewer"
+              }
+            }
+          }
         }
       ]
     },
@@ -655,7 +795,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/Widget"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/Widget"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "DocumentTemplates$StaticLabel"
+              }
+            }
+          }
         }
       ]
     },
@@ -871,7 +1021,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/ConditionallyVisibleWidget"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/ConditionallyVisibleWidget"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "DocumentTemplates$Table"
+              }
+            }
+          }
         }
       ]
     },
@@ -908,7 +1068,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/DropZone"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/DropZone"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "DocumentTemplates$TableCell"
+              }
+            }
+          }
         }
       ]
     },
@@ -966,7 +1136,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/Grid"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/Grid"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "DocumentTemplates$TemplateGrid"
+              }
+            }
+          }
         }
       ]
     },
@@ -987,7 +1167,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/DropZone"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/DropZone"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "DocumentTemplates$TemplateGridContents"
+              }
+            }
+          }
         }
       ]
     },
@@ -1016,7 +1206,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/ConditionallyVisibleWidget"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/ConditionallyVisibleWidget"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "DocumentTemplates$Title"
+              }
+            }
+          }
         }
       ]
     },
@@ -1027,10 +1227,10 @@
           "$ref": "#/definitions/Widget"
         },
         {
-          "$ref": "#/definitions/AttributeWidget"
+          "$ref": "pages.schema.json#/definitions/CustomWidget"
         },
         {
-          "$ref": "#/definitions/EntityWidget"
+          "$ref": "#/definitions/Header"
         },
         {
           "$ref": "#/definitions/LineBreak"
@@ -1039,16 +1239,55 @@
           "$ref": "#/definitions/PageBreak"
         },
         {
-          "$ref": "#/definitions/StaticImageViewer"
-        },
-        {
           "$ref": "#/definitions/StaticLabel"
         },
         {
-          "$ref": "#/definitions/Table"
+          "$ref": "pages.schema.json#/definitions/NativePlaceholder"
         },
         {
-          "$ref": "#/definitions/Title"
+          "$ref": "#/definitions/ConditionallyVisibleWidget"
+        },
+        {
+          "$ref": "#/definitions/SplitPane"
+        },
+        {
+          "$ref": "#/definitions/LoginTextBox"
+        },
+        {
+          "$ref": "#/definitions/MasterDetail"
+        },
+        {
+          "$ref": "#/definitions/MenuWidget"
+        },
+        {
+          "$ref": "#/definitions/Placeholder"
+        },
+        {
+          "$ref": "#/definitions/ScrollContainer"
+        },
+        {
+          "$ref": "#/definitions/SnippetCallWidget"
+        },
+        {
+          "$ref": "#/definitions/TemplatePlaceholder"
+        },
+        {
+          "$ref": "#/definitions/ValidationMessage"
+        },
+        {
+          "$ref": "#/definitions/VerticalFlow"
+        },
+        {
+          "$ref": "pages.schema.json#/definitions/ReportWidget"
+        },
+        {
+          "$ref": "pages.schema.json#/definitions/ReportButton"
+        },
+        {
+          "$ref": "pages.schema.json#/definitions/ReportParameter"
+        },
+        {
+          "$ref": "pages.schema.json#/definitions/ReportPane"
         }
       ]
     }

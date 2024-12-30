@@ -40,7 +40,17 @@
       ],
       "allOf": [
         {
-          "$ref": "domainmodels.schema.json#/definitions/RemoteEntitySourceDocument"
+          "$merge": {
+            "source": {
+              "$ref": "domainmodels.schema.json#/definitions/RemoteEntitySourceDocument"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Kafka$ConsumedKafkaService"
+              }
+            }
+          }
         }
       ]
     },
@@ -65,7 +75,17 @@
       ],
       "allOf": [
         {
-          "$ref": "domainmodels.schema.json#/definitions/CachedMappedValue"
+          "$merge": {
+            "source": {
+              "$ref": "domainmodels.schema.json#/definitions/CachedMappedValue"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Kafka$KafkaMappedValue"
+              }
+            }
+          }
         }
       ]
     },
@@ -89,7 +109,7 @@
         },
         "sourceDocument": {
           "type": "string",
-          "description": "ByNameReferenceProperty: #/definitions/ConsumedKafkaService"
+          "description": "ByNameReferenceProperty: domainmodels.schema.json#/definitions/ConsumedKafkaService"
         }
       },
       "required": [
@@ -98,7 +118,17 @@
       ],
       "allOf": [
         {
-          "$ref": "domainmodels.schema.json#/definitions/MaterializedRemoteEntitySource"
+          "$merge": {
+            "source": {
+              "$ref": "domainmodels.schema.json#/definitions/MaterializedRemoteEntitySource"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Kafka$KafkaRemoteEntitySource"
+              }
+            }
+          }
         }
       ]
     },
@@ -237,7 +267,17 @@
       ],
       "allOf": [
         {
-          "$ref": "projects.schema.json#/definitions/Document"
+          "$merge": {
+            "source": {
+              "$ref": "projects.schema.json#/definitions/Document"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Kafka$PublishedKafkaService"
+              }
+            }
+          }
         }
       ]
     }

@@ -141,7 +141,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/ConnectionInput"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/ConnectionInput"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "DatabaseConnector$ConnectionParts"
+              }
+            }
+          }
         }
       ]
     },
@@ -166,7 +176,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/ConnectionInput"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/ConnectionInput"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "DatabaseConnector$ConnectionString"
+              }
+            }
+          }
         }
       ]
     },
@@ -222,7 +242,17 @@
       ],
       "allOf": [
         {
-          "$ref": "projects.schema.json#/definitions/Document"
+          "$merge": {
+            "source": {
+              "$ref": "projects.schema.json#/definitions/Document"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "DatabaseConnector$DatabaseConnection"
+              }
+            }
+          }
         }
       ]
     },
@@ -297,7 +327,17 @@
       ],
       "allOf": [
         {
-          "$ref": "microflows.schema.json#/definitions/MicroflowAction"
+          "$merge": {
+            "source": {
+              "$ref": "microflows.schema.json#/definitions/MicroflowAction"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "DatabaseConnector$ExecuteDatabaseQueryAction"
+              }
+            }
+          }
         }
       ]
     },
@@ -342,7 +382,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/SqlDataType"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/SqlDataType"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "DatabaseConnector$LimitedLengthSqlDataType"
+              }
+            }
+          }
         }
       ]
     },
@@ -435,7 +485,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/SqlDataType"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/SqlDataType"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "DatabaseConnector$SimpleSqlDataType"
+              }
+            }
+          }
         }
       ]
     },
@@ -491,7 +551,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/AdditionalPropertyValue"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/AdditionalPropertyValue"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "DatabaseConnector$ValueAsConstant"
+              }
+            }
+          }
         }
       ]
     },
@@ -516,7 +586,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/AdditionalPropertyValue"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/AdditionalPropertyValue"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "DatabaseConnector$ValueAsString"
+              }
+            }
+          }
         }
       ]
     },

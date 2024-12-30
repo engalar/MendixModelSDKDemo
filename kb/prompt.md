@@ -39,4 +39,19 @@
 ```
 
 # temp
-如果code为"internal.IList<MemberAccess>"则通过p.typeParameters.params[0].typeName.name取得结果为MemberAccess
+{schema.ts}
+{pages.schema.json}
+解决如下问题，要求给出修改部分，方便我新增和替换（方便定位，并保持前后整个布局不变）。先给出修改前后的算法描述，再给出修改步骤。
+# 问题：当类为模块外部时无法正确处理并列出其目标类的所有子类
+PageParameter/parameterType  is datatypes.schema.json#/definitions/DataType
+tsAst中：
+class PageParameter extends internal.Element<IModel> implements IPageParameter {
+        static structureTypeName: string;
+        static versionInfo: StructureVersionInfo;
+        get containerAsPage(): Page;
+        get name(): string;
+        set name(newValue: string);
+        get parameterType(): datatypes.DataType;
+
+## 提示
+- 无论是类是否为当前模块都要缓存模块名，以便在生成另外模块的schema时能够正确处理是否需要保留模块名。例如 在扫描M1/C1时，如果不缓存M1，那么当在M2被引用时，就有可能误认为是M2的类。

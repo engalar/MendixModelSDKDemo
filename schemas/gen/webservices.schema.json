@@ -64,7 +64,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/DataMember"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/DataMember"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "WebServices$DataEntityBase"
+              }
+            }
+          }
         }
       ]
     },
@@ -101,7 +111,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/DataEntityBase"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/DataEntityBase"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "WebServices$DataAssociation"
+              }
+            }
+          }
         }
       ]
     },
@@ -146,7 +166,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/DataMember"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/DataMember"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "WebServices$DataAttribute"
+              }
+            }
+          }
         }
       ]
     },
@@ -167,7 +197,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/DataEntityBase"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/DataEntityBase"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "WebServices$DataEntity"
+              }
+            }
+          }
         }
       ]
     },
@@ -199,7 +239,17 @@
       ],
       "allOf": [
         {
-          "$ref": "projects.schema.json#/definitions/Document"
+          "$merge": {
+            "source": {
+              "$ref": "projects.schema.json#/definitions/Document"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "WebServices$ImportedWebService"
+              }
+            }
+          }
         }
       ]
     },
@@ -319,7 +369,17 @@
       ],
       "allOf": [
         {
-          "$ref": "projects.schema.json#/definitions/Document"
+          "$merge": {
+            "source": {
+              "$ref": "projects.schema.json#/definitions/Document"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "WebServices$PublishedServiceBase"
+              }
+            }
+          }
         }
       ]
     },
@@ -340,7 +400,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/PublishedServiceBase"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/PublishedServiceBase"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "WebServices$PublishedAppService"
+              }
+            }
+          }
         }
       ]
     },
@@ -423,7 +493,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/PublishedResource"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/PublishedResource"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "WebServices$PublishedOperation"
+              }
+            }
+          }
         }
       ]
     },
@@ -488,7 +568,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/PublishedServiceBase"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/PublishedServiceBase"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "WebServices$PublishedWebService"
+              }
+            }
+          }
         }
       ]
     },
@@ -628,7 +718,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/DataMember"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/DataMember"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "WebServices$SystemIdDataAttribute"
+              }
+            }
+          }
         }
       ]
     },

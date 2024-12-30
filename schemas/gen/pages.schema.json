@@ -89,7 +89,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/Widget"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/Widget"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Pages$ConditionallyVisibleWidget"
+              }
+            }
+          }
         }
       ]
     },
@@ -140,7 +150,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/ConditionallyVisibleWidget"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/ConditionallyVisibleWidget"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Pages$Button"
+              }
+            }
+          }
         }
       ]
     },
@@ -184,7 +204,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/Button"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/Button"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Pages$ActionButton"
+              }
+            }
+          }
         }
       ]
     },
@@ -285,7 +315,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/DataSource"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/DataSource"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Pages$EntityPathSource"
+              }
+            }
+          }
         }
       ]
     },
@@ -306,7 +346,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/EntityPathSource"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/EntityPathSource"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Pages$AssociationSource"
+              }
+            }
+          }
         }
       ]
     },
@@ -338,7 +388,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/ConditionallyVisibleWidget"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/ConditionallyVisibleWidget"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Pages$ConditionallyEditableWidget"
+              }
+            }
+          }
         }
       ]
     },
@@ -365,7 +425,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/ConditionallyEditableWidget"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/ConditionallyEditableWidget"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Pages$InputWidget"
+              }
+            }
+          }
         }
       ]
     },
@@ -397,7 +467,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/InputWidget"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/InputWidget"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Pages$MemberWidget"
+              }
+            }
+          }
         }
       ]
     },
@@ -433,7 +513,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/MemberWidget"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/MemberWidget"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Pages$AssociationWidget"
+              }
+            }
+          }
         }
       ]
     },
@@ -477,7 +567,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/MemberWidget"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/MemberWidget"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Pages$AttributeWidget"
+              }
+            }
+          }
         }
       ]
     },
@@ -502,7 +602,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/AttributeWidget"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/AttributeWidget"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Pages$AttributeWidgetWithPlaceholder"
+              }
+            }
+          }
         }
       ]
     },
@@ -523,7 +633,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/Button"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/Button"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Pages$BackButton"
+              }
+            }
+          }
         }
       ]
     },
@@ -552,7 +672,17 @@
       ],
       "allOf": [
         {
-          "$ref": "projects.schema.json#/definitions/Document"
+          "$merge": {
+            "source": {
+              "$ref": "projects.schema.json#/definitions/Document"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Pages$FormBase"
+              }
+            }
+          }
         }
       ]
     },
@@ -593,7 +723,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/FormBase"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/FormBase"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Pages$TemplateFormBase"
+              }
+            }
+          }
         }
       ]
     },
@@ -627,7 +767,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/TemplateFormBase"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/TemplateFormBase"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Pages$BuildingBlock"
+              }
+            }
+          }
         }
       ]
     },
@@ -692,7 +842,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/ClientAction"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/ClientAction"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Pages$CallNanoflowClientAction"
+              }
+            }
+          }
         }
       ]
     },
@@ -724,7 +884,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/ClientAction"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/ClientAction"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Pages$CallWorkflowClientAction"
+              }
+            }
+          }
         }
       ]
     },
@@ -749,7 +919,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/Button"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/Button"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Pages$CancelButton"
+              }
+            }
+          }
         }
       ]
     },
@@ -774,7 +954,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/ClientAction"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/ClientAction"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Pages$CancelChangesClientAction"
+              }
+            }
+          }
         }
       ]
     },
@@ -813,7 +1003,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/AttributeWidget"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/AttributeWidget"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Pages$CheckBox"
+              }
+            }
+          }
         }
       ]
     },
@@ -898,7 +1098,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/ClientAction"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/ClientAction"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Pages$ClosePageClientAction"
+              }
+            }
+          }
         }
       ]
     },
@@ -923,7 +1133,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/ConditionallyVisibleWidget"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/ConditionallyVisibleWidget"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Pages$EntityWidget"
+              }
+            }
+          }
         }
       ]
     },
@@ -944,7 +1164,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/EntityWidget"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/EntityWidget"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Pages$ListenTargetWidget"
+              }
+            }
+          }
         }
       ]
     },
@@ -1006,7 +1236,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/ListenTargetWidget"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/ListenTargetWidget"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Pages$Grid"
+              }
+            }
+          }
         }
       ]
     },
@@ -1052,7 +1292,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/Grid"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/Grid"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Pages$ColumnGrid"
+              }
+            }
+          }
         }
       ]
     },
@@ -1117,7 +1367,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/ControlBarItem"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/ControlBarItem"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Pages$SearchField"
+              }
+            }
+          }
         }
       ]
     },
@@ -1154,7 +1414,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/SearchField"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/SearchField"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Pages$SingleSearchField"
+              }
+            }
+          }
         }
       ]
     },
@@ -1175,7 +1445,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/SingleSearchField"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/SingleSearchField"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Pages$ComparisonSearchField"
+              }
+            }
+          }
         }
       ]
     },
@@ -1202,7 +1482,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/AbstractDesignPropertyValue"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/AbstractDesignPropertyValue"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Pages$CompoundDesignPropertyValue"
+              }
+            }
+          }
         }
       ]
     },
@@ -1256,7 +1546,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/ConditionalSettings"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/ConditionalSettings"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Pages$ConditionalEditabilitySettings"
+              }
+            }
+          }
         }
       ]
     },
@@ -1288,7 +1588,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/ConditionalSettings"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/ConditionalSettings"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Pages$ConditionalVisibilitySettings"
+              }
+            }
+          }
         }
       ]
     },
@@ -1389,7 +1699,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/ControlBarItem"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/ControlBarItem"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Pages$ControlBarButton"
+              }
+            }
+          }
         }
       ]
     },
@@ -1421,7 +1741,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/ClientAction"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/ClientAction"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Pages$CreateObjectClientAction"
+              }
+            }
+          }
         }
       ]
     },
@@ -1446,7 +1776,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/AbstractDesignPropertyValue"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/AbstractDesignPropertyValue"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Pages$CustomDesignPropertyValue"
+              }
+            }
+          }
         }
       ]
     },
@@ -1471,7 +1811,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/ColumnGrid"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/ColumnGrid"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Pages$DataGrid"
+              }
+            }
+          }
         }
       ]
     },
@@ -1492,7 +1842,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/ControlBarButton"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/ControlBarButton"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Pages$GridControlBarButton"
+              }
+            }
+          }
         }
       ]
     },
@@ -1517,7 +1877,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/GridControlBarButton"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/GridControlBarButton"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Pages$DataGridAddButton"
+              }
+            }
+          }
         }
       ]
     },
@@ -1562,7 +1932,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/GridControlBarButton"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/GridControlBarButton"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Pages$DataGridExportToCSVButton"
+              }
+            }
+          }
         }
       ]
     },
@@ -1591,7 +1971,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/GridControlBarButton"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/GridControlBarButton"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Pages$DataGridExportToExcelButton"
+              }
+            }
+          }
         }
       ]
     },
@@ -1612,7 +2002,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/GridControlBarButton"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/GridControlBarButton"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Pages$DataGridRemoveButton"
+              }
+            }
+          }
         }
       ]
     },
@@ -1675,7 +2075,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/EntityWidget"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/EntityWidget"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Pages$DataView"
+              }
+            }
+          }
         }
       ]
     },
@@ -1700,7 +2110,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/ControlBarButton"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/ControlBarButton"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Pages$DataViewControlBarButton"
+              }
+            }
+          }
         }
       ]
     },
@@ -1725,7 +2145,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/DataViewControlBarButton"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/DataViewControlBarButton"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Pages$DataViewActionButton"
+              }
+            }
+          }
         }
       ]
     },
@@ -1746,7 +2176,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/DataViewControlBarButton"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/DataViewControlBarButton"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Pages$DataViewCancelButton"
+              }
+            }
+          }
         }
       ]
     },
@@ -1767,7 +2207,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/DataViewControlBarButton"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/DataViewControlBarButton"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Pages$DataViewCloseButton"
+              }
+            }
+          }
         }
       ]
     },
@@ -1788,7 +2238,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/ControlBar"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/ControlBar"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Pages$DataViewControlBar"
+              }
+            }
+          }
         }
       ]
     },
@@ -1813,7 +2273,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/DataViewControlBarButton"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/DataViewControlBarButton"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Pages$DataViewSaveButton"
+              }
+            }
+          }
         }
       ]
     },
@@ -1834,7 +2304,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/EntityPathSource"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/EntityPathSource"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Pages$DataViewSource"
+              }
+            }
+          }
         }
       ]
     },
@@ -1896,7 +2376,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/EntityPathSource"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/EntityPathSource"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Pages$SortableEntityPathSource"
+              }
+            }
+          }
         }
       ]
     },
@@ -1923,7 +2413,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/SortableEntityPathSource"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/SortableEntityPathSource"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Pages$DatabaseSourceBase"
+              }
+            }
+          }
         }
       ]
     },
@@ -1951,7 +2451,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/AttributeWidgetWithPlaceholder"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/AttributeWidgetWithPlaceholder"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Pages$DatePicker"
+              }
+            }
+          }
         }
       ]
     },
@@ -1979,7 +2489,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/ClientAction"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/ClientAction"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Pages$DeleteClientAction"
+              }
+            }
+          }
         }
       ]
     },
@@ -2055,7 +2575,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/ConditionallyVisibleWidget"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/ConditionallyVisibleWidget"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Pages$DivContainer"
+              }
+            }
+          }
         }
       ]
     },
@@ -2083,7 +2613,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/AttributeWidget"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/AttributeWidget"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Pages$DropDown"
+              }
+            }
+          }
         }
       ]
     },
@@ -2110,7 +2650,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/Button"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/Button"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Pages$DropDownButton"
+              }
+            }
+          }
         }
       ]
     },
@@ -2139,7 +2689,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/ActionItem"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/ActionItem"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Pages$DropDownButtonItem"
+              }
+            }
+          }
         }
       ]
     },
@@ -2172,7 +2732,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/SingleSearchField"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/SingleSearchField"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Pages$DropDownSearchField"
+              }
+            }
+          }
         }
       ]
     },
@@ -2244,7 +2814,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/EntityWidget"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/EntityWidget"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Pages$DynamicImageViewer"
+              }
+            }
+          }
         }
       ]
     },
@@ -2297,7 +2877,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/ConditionallyVisibleWidget"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/ConditionallyVisibleWidget"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Pages$DynamicText"
+              }
+            }
+          }
         }
       ]
     },
@@ -2334,7 +2924,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/TemplateType"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/TemplateType"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Pages$EditPageTemplateType"
+              }
+            }
+          }
         }
       ]
     },
@@ -2375,7 +2975,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/InputWidget"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/InputWidget"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Pages$FileManager"
+              }
+            }
+          }
         }
       ]
     },
@@ -2460,7 +3070,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/Icon"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/Icon"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Pages$GlyphIcon"
+              }
+            }
+          }
         }
       ]
     },
@@ -2489,7 +3109,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/GridControlBarButton"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/GridControlBarButton"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Pages$GridActionButton"
+              }
+            }
+          }
         }
       ]
     },
@@ -2514,7 +3144,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/SortableEntityPathSource"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/SortableEntityPathSource"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Pages$GridBaseSource"
+              }
+            }
+          }
         }
       ]
     },
@@ -2597,7 +3237,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/ControlBar"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/ControlBar"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Pages$GridControlBar"
+              }
+            }
+          }
         }
       ]
     },
@@ -2622,7 +3272,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/DatabaseSourceBase"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/DatabaseSourceBase"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Pages$GridDatabaseSource"
+              }
+            }
+          }
         }
       ]
     },
@@ -2643,7 +3303,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/GridControlBarButton"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/GridControlBarButton"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Pages$GridDeleteButton"
+              }
+            }
+          }
         }
       ]
     },
@@ -2664,7 +3334,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/GridControlBarButton"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/GridControlBarButton"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Pages$GridDeselectAllButton"
+              }
+            }
+          }
         }
       ]
     },
@@ -2695,7 +3375,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/GridControlBarButton"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/GridControlBarButton"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Pages$GridEditButton"
+              }
+            }
+          }
         }
       ]
     },
@@ -2732,7 +3422,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/GridControlBarButton"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/GridControlBarButton"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Pages$GridNewButton"
+              }
+            }
+          }
         }
       ]
     },
@@ -2753,7 +3453,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/GridControlBarButton"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/GridControlBarButton"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Pages$GridSearchButton"
+              }
+            }
+          }
         }
       ]
     },
@@ -2781,7 +3491,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/GridControlBarButton"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/GridControlBarButton"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Pages$GridSelectAllButton"
+              }
+            }
+          }
         }
       ]
     },
@@ -2855,7 +3575,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/GridBaseSource"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/GridBaseSource"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Pages$GridXPathSource"
+              }
+            }
+          }
         }
       ]
     },
@@ -2905,7 +3635,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/ConditionallyVisibleWidget"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/ConditionallyVisibleWidget"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Pages$GroupBox"
+              }
+            }
+          }
         }
       ]
     },
@@ -2938,7 +3678,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/Widget"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/Widget"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Pages$Header"
+              }
+            }
+          }
         }
       ]
     },
@@ -2983,7 +3733,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/Widget"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/Widget"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Pages$SplitPane"
+              }
+            }
+          }
         }
       ]
     },
@@ -3004,7 +3764,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/SplitPane"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/SplitPane"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Pages$HorizontalSplitPane"
+              }
+            }
+          }
         }
       ]
     },
@@ -3030,7 +3800,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/Icon"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/Icon"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Pages$IconCollectionIcon"
+              }
+            }
+          }
         }
       ]
     },
@@ -3056,7 +3836,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/Icon"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/Icon"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Pages$ImageIcon"
+              }
+            }
+          }
         }
       ]
     },
@@ -3092,7 +3882,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/InputWidget"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/InputWidget"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Pages$ImageUploader"
+              }
+            }
+          }
         }
       ]
     },
@@ -3113,7 +3913,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/EntityPathSource"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/EntityPathSource"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Pages$ImageViewerSource"
+              }
+            }
+          }
         }
       ]
     },
@@ -3134,7 +3944,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/AssociationWidget"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/AssociationWidget"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Pages$InputReferenceSetSelector"
+              }
+            }
+          }
         }
       ]
     },
@@ -3159,7 +3979,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/ConditionallyVisibleWidget"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/ConditionallyVisibleWidget"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Pages$Label"
+              }
+            }
+          }
         }
       ]
     },
@@ -3188,7 +4018,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/FormBase"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/FormBase"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Pages$Layout"
+              }
+            }
+          }
         }
       ]
     },
@@ -3292,7 +4132,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/ConditionallyVisibleWidget"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/ConditionallyVisibleWidget"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Pages$LayoutGrid"
+              }
+            }
+          }
         }
       ]
     },
@@ -3448,7 +4298,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/Button"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/Button"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Pages$LinkButton"
+              }
+            }
+          }
         }
       ]
     },
@@ -3508,7 +4368,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/ListenTargetWidget"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/ListenTargetWidget"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Pages$ListView"
+              }
+            }
+          }
         }
       ]
     },
@@ -3533,7 +4403,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/DatabaseSourceBase"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/DatabaseSourceBase"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Pages$ListViewDatabaseSource"
+              }
+            }
+          }
         }
       ]
     },
@@ -3607,7 +4487,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/SortableEntityPathSource"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/SortableEntityPathSource"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Pages$XPathSourceBase"
+              }
+            }
+          }
         }
       ]
     },
@@ -3632,7 +4522,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/XPathSourceBase"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/XPathSourceBase"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Pages$ListViewXPathSource"
+              }
+            }
+          }
         }
       ]
     },
@@ -3657,7 +4557,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/DataSource"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/DataSource"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Pages$ListenTargetSource"
+              }
+            }
+          }
         }
       ]
     },
@@ -3706,7 +4616,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/Button"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/Button"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Pages$LoginButton"
+              }
+            }
+          }
         }
       ]
     },
@@ -3738,7 +4658,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/Widget"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/Widget"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Pages$LoginTextBox"
+              }
+            }
+          }
         }
       ]
     },
@@ -3759,7 +4689,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/LoginTextBox"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/LoginTextBox"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Pages$LoginIdTextBox"
+              }
+            }
+          }
         }
       ]
     },
@@ -3780,7 +4720,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/Button"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/Button"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Pages$LogoutButton"
+              }
+            }
+          }
         }
       ]
     },
@@ -3809,7 +4759,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/Widget"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/Widget"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Pages$MasterDetail"
+              }
+            }
+          }
         }
       ]
     },
@@ -3869,7 +4829,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/MasterDetailRegion"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/MasterDetailRegion"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Pages$MasterDetailDetailRegion"
+              }
+            }
+          }
         }
       ]
     },
@@ -3898,7 +4868,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/MasterDetailRegion"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/MasterDetailRegion"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Pages$MasterDetailMasterRegion"
+              }
+            }
+          }
         }
       ]
     },
@@ -3923,7 +4903,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/Widget"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/Widget"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Pages$MenuWidget"
+              }
+            }
+          }
         }
       ]
     },
@@ -3944,7 +4934,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/MenuWidget"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/MenuWidget"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Pages$MenuBar"
+              }
+            }
+          }
         }
       ]
     },
@@ -3985,7 +4985,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/MenuSource"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/MenuSource"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Pages$MenuDocumentSource"
+              }
+            }
+          }
         }
       ]
     },
@@ -4010,7 +5020,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/ClientAction"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/ClientAction"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Pages$MicroflowClientAction"
+              }
+            }
+          }
         }
       ]
     },
@@ -4115,7 +5135,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/DataSource"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/DataSource"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Pages$MicroflowSource"
+              }
+            }
+          }
         }
       ]
     },
@@ -4198,7 +5228,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/DataSource"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/DataSource"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Pages$NanoflowSource"
+              }
+            }
+          }
         }
       ]
     },
@@ -4250,7 +5290,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/LayoutContent"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/LayoutContent"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Pages$NativeLayoutContent"
+              }
+            }
+          }
         }
       ]
     },
@@ -4277,7 +5327,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/ConditionallyVisibleWidget"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/ConditionallyVisibleWidget"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Pages$NavigationList"
+              }
+            }
+          }
         }
       ]
     },
@@ -4311,7 +5371,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/ActionItem"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/ActionItem"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Pages$NavigationListItem"
+              }
+            }
+          }
         }
       ]
     },
@@ -4337,7 +5407,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/MenuSource"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/MenuSource"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Pages$NavigationSource"
+              }
+            }
+          }
         }
       ]
     },
@@ -4358,7 +5438,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/MenuWidget"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/MenuWidget"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Pages$NavigationTree"
+              }
+            }
+          }
         }
       ]
     },
@@ -4386,7 +5476,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/Button"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/Button"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Pages$NewButton"
+              }
+            }
+          }
         }
       ]
     },
@@ -4407,7 +5507,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/ClientAction"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/ClientAction"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Pages$NoClientAction"
+              }
+            }
+          }
         }
       ]
     },
@@ -4491,7 +5601,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/OnClickBehavior"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/OnClickBehavior"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Pages$OnClickEnlarge"
+              }
+            }
+          }
         }
       ]
     },
@@ -4516,7 +5636,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/OnClickBehavior"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/OnClickBehavior"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Pages$OnClickMicroflow"
+              }
+            }
+          }
         }
       ]
     },
@@ -4537,7 +5667,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/OnClickBehavior"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/OnClickBehavior"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Pages$OnClickNothing"
+              }
+            }
+          }
         }
       ]
     },
@@ -4571,7 +5711,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/ClientAction"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/ClientAction"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Pages$OpenLinkClientAction"
+              }
+            }
+          }
         }
       ]
     },
@@ -4600,7 +5750,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/ClientAction"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/ClientAction"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Pages$OpenUserTaskClientAction"
+              }
+            }
+          }
         }
       ]
     },
@@ -4625,7 +5785,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/ClientAction"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/ClientAction"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Pages$OpenWorkflowClientAction"
+              }
+            }
+          }
         }
       ]
     },
@@ -4650,7 +5820,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/AbstractDesignPropertyValue"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/AbstractDesignPropertyValue"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Pages$OptionDesignPropertyValue"
+              }
+            }
+          }
         }
       ]
     },
@@ -4726,7 +5906,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/FormBase"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/FormBase"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Pages$Page"
+              }
+            }
+          }
         }
       ]
     },
@@ -4761,7 +5951,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/ClientAction"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/ClientAction"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Pages$PageClientAction"
+              }
+            }
+          }
         }
       ]
     },
@@ -4901,7 +6101,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/TemplateFormBase"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/TemplateFormBase"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Pages$PageTemplate"
+              }
+            }
+          }
         }
       ]
     },
@@ -4963,7 +6173,17 @@
       ],
       "allOf": [
         {
-          "$ref": "url.schema.json#/definitions/UrlSegment"
+          "$merge": {
+            "source": {
+              "$ref": "url.schema.json#/definitions/UrlSegment"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Pages$ParameterAttributeUrlSegment"
+              }
+            }
+          }
         }
       ]
     },
@@ -4988,7 +6208,17 @@
       ],
       "allOf": [
         {
-          "$ref": "url.schema.json#/definitions/UrlSegment"
+          "$merge": {
+            "source": {
+              "$ref": "url.schema.json#/definitions/UrlSegment"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Pages$ParameterIdUrlSegment"
+              }
+            }
+          }
         }
       ]
     },
@@ -5009,7 +6239,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/LoginTextBox"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/LoginTextBox"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Pages$PasswordTextBox"
+              }
+            }
+          }
         }
       ]
     },
@@ -5030,7 +6270,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/Widget"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/Widget"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Pages$Placeholder"
+              }
+            }
+          }
         }
       ]
     },
@@ -5055,7 +6305,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/AttributeWidget"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/AttributeWidget"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Pages$RadioButtonGroup"
+              }
+            }
+          }
         }
       ]
     },
@@ -5090,7 +6350,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/SearchField"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/SearchField"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Pages$RangeSearchField"
+              }
+            }
+          }
         }
       ]
     },
@@ -5137,7 +6407,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/AssociationWidget"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/AssociationWidget"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Pages$ReferenceSelector"
+              }
+            }
+          }
         }
       ]
     },
@@ -5172,7 +6452,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/ColumnGrid"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/ColumnGrid"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Pages$ReferenceSetSelector"
+              }
+            }
+          }
         }
       ]
     },
@@ -5193,7 +6483,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/GridBaseSource"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/GridBaseSource"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Pages$ReferenceSetSource"
+              }
+            }
+          }
         }
       ]
     },
@@ -5214,7 +6514,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/TemplateType"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/TemplateType"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Pages$RegularPageTemplateType"
+              }
+            }
+          }
         }
       ]
     },
@@ -5389,7 +6699,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/Button"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/Button"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Pages$SaveButton"
+              }
+            }
+          }
         }
       ]
     },
@@ -5418,7 +6738,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/ClientAction"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/ClientAction"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Pages$SaveChangesClientAction"
+              }
+            }
+          }
         }
       ]
     },
@@ -5493,7 +6823,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/Widget"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/Widget"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Pages$ScrollContainer"
+              }
+            }
+          }
         }
       ]
     },
@@ -5575,7 +6915,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/ControlBar"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/ControlBar"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Pages$SearchBar"
+              }
+            }
+          }
         }
       ]
     },
@@ -5596,7 +6946,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/GridControlBarButton"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/GridControlBarButton"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Pages$SelectButton"
+              }
+            }
+          }
         }
       ]
     },
@@ -5617,7 +6977,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/TemplateType"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/TemplateType"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Pages$SelectPageTemplateType"
+              }
+            }
+          }
         }
       ]
     },
@@ -5664,7 +7034,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/SelectorSource"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/SelectorSource"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Pages$SelectorDatabaseSource"
+              }
+            }
+          }
         }
       ]
     },
@@ -5689,7 +7069,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/SelectorSource"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/SelectorSource"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Pages$SelectorMicroflowSource"
+              }
+            }
+          }
         }
       ]
     },
@@ -5724,7 +7114,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/SelectorSource"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/SelectorSource"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Pages$SelectorXPathSource"
+              }
+            }
+          }
         }
       ]
     },
@@ -5757,7 +7157,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/ClientAction"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/ClientAction"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Pages$SetTaskOutcomeClientAction"
+              }
+            }
+          }
         }
       ]
     },
@@ -5778,7 +7188,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/Button"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/Button"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Pages$SidebarToggleButton"
+              }
+            }
+          }
         }
       ]
     },
@@ -5799,7 +7219,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/ClientAction"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/ClientAction"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Pages$SignOutClientAction"
+              }
+            }
+          }
         }
       ]
     },
@@ -5827,7 +7257,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/MenuWidget"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/MenuWidget"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Pages$SimpleMenuBar"
+              }
+            }
+          }
         }
       ]
     },
@@ -5873,7 +7313,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/FormBase"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/FormBase"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Pages$Snippet"
+              }
+            }
+          }
         }
       ]
     },
@@ -5924,7 +7374,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/Widget"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/Widget"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Pages$SnippetCallWidget"
+              }
+            }
+          }
         }
       ]
     },
@@ -6037,7 +7497,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/ConditionallyVisibleWidget"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/ConditionallyVisibleWidget"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Pages$StaticImageViewer"
+              }
+            }
+          }
         }
       ]
     },
@@ -6105,7 +7575,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/UrlSegment"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/UrlSegment"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Pages$StaticUrlSegment"
+              }
+            }
+          }
         }
       ]
     },
@@ -6126,7 +7606,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/Button"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/Button"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Pages$SyncButton"
+              }
+            }
+          }
         }
       ]
     },
@@ -6147,7 +7637,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/ClientAction"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/ClientAction"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Pages$SyncClientAction"
+              }
+            }
+          }
         }
       ]
     },
@@ -6184,7 +7684,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/ConditionallyVisibleWidget"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/ConditionallyVisibleWidget"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Pages$TabContainer"
+              }
+            }
+          }
         }
       ]
     },
@@ -6270,7 +7780,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/ConditionallyVisibleWidget"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/ConditionallyVisibleWidget"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Pages$Table"
+              }
+            }
+          }
         }
       ]
     },
@@ -6321,7 +7841,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/DropZone"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/DropZone"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Pages$TableCell"
+              }
+            }
+          }
         }
       ]
     },
@@ -6397,7 +7927,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/Grid"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/Grid"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Pages$TemplateGrid"
+              }
+            }
+          }
         }
       ]
     },
@@ -6424,7 +7964,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/DropZone"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/DropZone"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Pages$TemplateGridContents"
+              }
+            }
+          }
         }
       ]
     },
@@ -6449,7 +7999,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/Widget"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/Widget"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Pages$TemplatePlaceholder"
+              }
+            }
+          }
         }
       ]
     },
@@ -6478,7 +8038,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/AttributeWidgetWithPlaceholder"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/AttributeWidgetWithPlaceholder"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Pages$TextWidget"
+              }
+            }
+          }
         }
       ]
     },
@@ -6529,7 +8099,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/TextWidget"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/TextWidget"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Pages$TextArea"
+              }
+            }
+          }
         }
       ]
     },
@@ -6655,7 +8235,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/TextWidget"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/TextWidget"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Pages$TextBox"
+              }
+            }
+          }
         }
       ]
     },
@@ -6679,7 +8269,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/ConditionallyVisibleWidget"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/ConditionallyVisibleWidget"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Pages$Title"
+              }
+            }
+          }
         }
       ]
     },
@@ -6700,7 +8300,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/AbstractDesignPropertyValue"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/AbstractDesignPropertyValue"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Pages$ToggleDesignPropertyValue"
+              }
+            }
+          }
         }
       ]
     },
@@ -6744,7 +8354,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/TemplateType"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/TemplateType"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Pages$WorkflowTemplateType"
+              }
+            }
+          }
         }
       ]
     },
@@ -6765,7 +8385,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/WorkflowTemplateType"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/WorkflowTemplateType"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Pages$UserTaskTemplateType"
+              }
+            }
+          }
         }
       ]
     },
@@ -6786,7 +8416,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/Widget"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/Widget"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Pages$ValidationMessage"
+              }
+            }
+          }
         }
       ]
     },
@@ -6813,7 +8453,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/Widget"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/Widget"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Pages$VerticalFlow"
+              }
+            }
+          }
         }
       ]
     },
@@ -6834,7 +8484,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/SplitPane"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/SplitPane"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Pages$VerticalSplitPane"
+              }
+            }
+          }
         }
       ]
     },
@@ -6875,7 +8535,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/LayoutContent"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/LayoutContent"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Pages$WebLayoutContent"
+              }
+            }
+          }
         }
       ]
     },
@@ -6920,7 +8590,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/WorkflowTemplateType"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/WorkflowTemplateType"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Pages$WorkflowOverviewTemplateType"
+              }
+            }
+          }
         }
       ]
     },
@@ -6946,6 +8626,9 @@
       "oneOf": [
         {
           "$ref": "#/definitions/ClientAction"
+        },
+        {
+          "$ref": "pages.schema.json#/definitions/NativePageClientAction"
         },
         {
           "$ref": "#/definitions/CallNanoflowClientAction"
@@ -7021,10 +8704,25 @@
           "$ref": "#/definitions/Widget"
         },
         {
-          "$ref": "#/definitions/ConditionallyVisibleWidget"
+          "$ref": "pages.schema.json#/definitions/CustomWidget"
         },
         {
           "$ref": "#/definitions/Header"
+        },
+        {
+          "$ref": "#/definitions/LineBreak"
+        },
+        {
+          "$ref": "#/definitions/PageBreak"
+        },
+        {
+          "$ref": "#/definitions/StaticLabel"
+        },
+        {
+          "$ref": "pages.schema.json#/definitions/NativePlaceholder"
+        },
+        {
+          "$ref": "#/definitions/ConditionallyVisibleWidget"
         },
         {
           "$ref": "#/definitions/SplitPane"
@@ -7055,6 +8753,18 @@
         },
         {
           "$ref": "#/definitions/VerticalFlow"
+        },
+        {
+          "$ref": "pages.schema.json#/definitions/ReportWidget"
+        },
+        {
+          "$ref": "pages.schema.json#/definitions/ReportButton"
+        },
+        {
+          "$ref": "pages.schema.json#/definitions/ReportParameter"
+        },
+        {
+          "$ref": "pages.schema.json#/definitions/ReportPane"
         }
       ]
     },

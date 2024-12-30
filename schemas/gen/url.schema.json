@@ -38,7 +38,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/UrlSegment"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/UrlSegment"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Url$StaticUrlSegment"
+              }
+            }
+          }
         }
       ]
     }

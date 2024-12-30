@@ -1,0 +1,18 @@
+[
+    {
+        "className": "EntityCapabilities",
+        "parentClass": "internal.Element",
+        "properties": [
+            "countable"
+        ]
+    },
+    {
+        "className": "ValidationRule",
+        "parentClass": "internal.Element",
+        "properties": [
+            "attribute",
+            "errorMessage",
+            "ruleInfo"
+        ]
+    }
+]

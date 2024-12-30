@@ -29,7 +29,17 @@
       ],
       "allOf": [
         {
-          "$ref": "mappings.schema.json#/definitions/MappingDocument"
+          "$merge": {
+            "source": {
+              "$ref": "mappings.schema.json#/definitions/MappingDocument"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "ExportMappings$ExportMapping"
+              }
+            }
+          }
         }
       ]
     },
@@ -50,7 +60,17 @@
       ],
       "allOf": [
         {
-          "$ref": "mappings.schema.json#/definitions/ObjectMappingElement"
+          "$merge": {
+            "source": {
+              "$ref": "mappings.schema.json#/definitions/ObjectMappingElement"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "ExportMappings$ExportObjectMappingElement"
+              }
+            }
+          }
         }
       ]
     },
@@ -71,7 +91,17 @@
       ],
       "allOf": [
         {
-          "$ref": "mappings.schema.json#/definitions/ValueMappingElement"
+          "$merge": {
+            "source": {
+              "$ref": "mappings.schema.json#/definitions/ValueMappingElement"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "ExportMappings$ExportValueMappingElement"
+              }
+            }
+          }
         }
       ]
     }

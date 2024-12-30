@@ -42,7 +42,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/QueueConfig"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/QueueConfig"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Queues$BasicQueueConfig"
+              }
+            }
+          }
         }
       ]
     },
@@ -67,7 +77,17 @@
       ],
       "allOf": [
         {
-          "$ref": "projects.schema.json#/definitions/Document"
+          "$merge": {
+            "source": {
+              "$ref": "projects.schema.json#/definitions/Document"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Queues$Queue"
+              }
+            }
+          }
         }
       ]
     },
@@ -124,7 +144,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/QueueRetry"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/QueueRetry"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Queues$QueueExponentialRetry"
+              }
+            }
+          }
         }
       ]
     },
@@ -161,7 +191,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/QueueRetry"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/QueueRetry"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Queues$QueueFixedRetry"
+              }
+            }
+          }
         }
       ]
     },
@@ -177,7 +217,7 @@
         },
         "queue": {
           "type": "string",
-          "description": "ByNameReferenceProperty: #/definitions/Queue"
+          "description": "ByNameReferenceProperty: projects.schema.json#/definitions/Queue"
         },
         "retry": {
           "$ref": "#/definitions/QueueRetryWithSubclasses"

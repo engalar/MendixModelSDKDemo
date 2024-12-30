@@ -36,7 +36,17 @@
       ],
       "allOf": [
         {
-          "$ref": "pages.schema.json#/definitions/Widget"
+          "$merge": {
+            "source": {
+              "$ref": "pages.schema.json#/definitions/Widget"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "CustomWidgets$CustomWidget"
+              }
+            }
+          }
         }
       ]
     },
@@ -57,7 +67,17 @@
       ],
       "allOf": [
         {
-          "$ref": "pages.schema.json#/definitions/DatabaseSourceBase"
+          "$merge": {
+            "source": {
+              "$ref": "pages.schema.json#/definitions/DatabaseSourceBase"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "CustomWidgets$CustomWidgetDatabaseSource"
+              }
+            }
+          }
         }
       ]
     },
@@ -137,7 +157,17 @@
       ],
       "allOf": [
         {
-          "$ref": "pages.schema.json#/definitions/XPathSourceBase"
+          "$merge": {
+            "source": {
+              "$ref": "pages.schema.json#/definitions/XPathSourceBase"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "CustomWidgets$CustomWidgetXPathSource"
+              }
+            }
+          }
         }
       ]
     },

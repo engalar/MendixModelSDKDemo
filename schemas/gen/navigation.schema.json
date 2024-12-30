@@ -42,7 +42,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/HomePageBase"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/HomePageBase"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Navigation$HomePage"
+              }
+            }
+          }
         }
       ]
     },
@@ -87,7 +97,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/NativeHomePageBase"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/NativeHomePageBase"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Navigation$NativeHomePage"
+              }
+            }
+          }
         }
       ]
     },
@@ -190,7 +210,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/NavigationProfileBase"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/NavigationProfileBase"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Navigation$NativeNavigationProfile"
+              }
+            }
+          }
         }
       ]
     },
@@ -217,7 +247,17 @@
       ],
       "allOf": [
         {
-          "$ref": "projects.schema.json#/definitions/ProjectDocument"
+          "$merge": {
+            "source": {
+              "$ref": "projects.schema.json#/definitions/ProjectDocument"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Navigation$NavigationDocument"
+              }
+            }
+          }
         }
       ]
     },
@@ -288,7 +328,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/NavigationProfileBase"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/NavigationProfileBase"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Navigation$NavigationProfile"
+              }
+            }
+          }
         }
       ]
     },
@@ -309,7 +359,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/HomePageBase"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/HomePageBase"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Navigation$NotFoundHomePage"
+              }
+            }
+          }
         }
       ]
     },
@@ -394,7 +454,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/HomePageBase"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/HomePageBase"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Navigation$RoleBasedHomePage"
+              }
+            }
+          }
         }
       ]
     },
@@ -419,7 +489,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/NativeHomePageBase"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/NativeHomePageBase"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Navigation$RoleBasedNativeHomePage"
+              }
+            }
+          }
         }
       ]
     },

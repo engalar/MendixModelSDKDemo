@@ -93,7 +93,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/MicroflowObject"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/MicroflowObject"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "DomainModels$Annotation"
+              }
+            }
+          }
         }
       ]
     },
@@ -180,7 +190,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/AssociationBase"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/AssociationBase"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "DomainModels$Association"
+              }
+            }
+          }
         }
       ]
     },
@@ -287,7 +307,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/MemberRef"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/MemberRef"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "DomainModels$AssociationRef"
+              }
+            }
+          }
         }
       ]
     },
@@ -308,7 +338,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/EntityPathSource"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/EntityPathSource"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "DomainModels$AssociationSource"
+              }
+            }
+          }
         }
       ]
     },
@@ -397,7 +437,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/MemberRef"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/MemberRef"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "DomainModels$AttributeRef"
+              }
+            }
+          }
         }
       ]
     },
@@ -434,7 +484,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/AttributeType"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/AttributeType"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "DomainModels$NumericAttributeTypeBase"
+              }
+            }
+          }
         }
       ]
     },
@@ -455,7 +515,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/NumericAttributeTypeBase"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/NumericAttributeTypeBase"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "DomainModels$IntegerAttributeTypeBase"
+              }
+            }
+          }
         }
       ]
     },
@@ -476,7 +546,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/IntegerAttributeTypeBase"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/IntegerAttributeTypeBase"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "DomainModels$AutoNumberAttributeType"
+              }
+            }
+          }
         }
       ]
     },
@@ -497,7 +577,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/AttributeType"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/AttributeType"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "DomainModels$BinaryAttributeType"
+              }
+            }
+          }
         }
       ]
     },
@@ -518,7 +608,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/AttributeType"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/AttributeType"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "DomainModels$BooleanAttributeType"
+              }
+            }
+          }
         }
       ]
     },
@@ -559,7 +659,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/ValueType"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/ValueType"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "DomainModels$MappedValue"
+              }
+            }
+          }
         }
       ]
     },
@@ -580,7 +690,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/MappedValue"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/MappedValue"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "DomainModels$CachedMappedValue"
+              }
+            }
+          }
         }
       ]
     },
@@ -609,7 +729,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/ValueType"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/ValueType"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "DomainModels$CalculatedValue"
+              }
+            }
+          }
         }
       ]
     },
@@ -635,7 +765,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/AssociationBase"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/AssociationBase"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "DomainModels$CrossAssociation"
+              }
+            }
+          }
         }
       ]
     },
@@ -656,7 +796,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/NumericAttributeTypeBase"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/NumericAttributeTypeBase"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "DomainModels$DecimalAttributeTypeBase"
+              }
+            }
+          }
         }
       ]
     },
@@ -677,7 +827,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/DecimalAttributeTypeBase"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/DecimalAttributeTypeBase"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "DomainModels$FloatAttributeTypeBase"
+              }
+            }
+          }
         }
       ]
     },
@@ -698,7 +858,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/FloatAttributeTypeBase"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/FloatAttributeTypeBase"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "DomainModels$CurrencyAttributeType"
+              }
+            }
+          }
         }
       ]
     },
@@ -723,7 +893,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/AttributeType"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/AttributeType"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "DomainModels$DateTimeAttributeType"
+              }
+            }
+          }
         }
       ]
     },
@@ -744,7 +924,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/DecimalAttributeTypeBase"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/DecimalAttributeTypeBase"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "DomainModels$DecimalAttributeType"
+              }
+            }
+          }
         }
       ]
     },
@@ -786,7 +976,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/EntityRef"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/EntityRef"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "DomainModels$DirectEntityRef"
+              }
+            }
+          }
         }
       ]
     },
@@ -835,7 +1035,17 @@
       ],
       "allOf": [
         {
-          "$ref": "projects.schema.json#/definitions/ModuleDocument"
+          "$merge": {
+            "source": {
+              "$ref": "projects.schema.json#/definitions/ModuleDocument"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "DomainModels$DomainModel"
+              }
+            }
+          }
         }
       ]
     },
@@ -1052,7 +1262,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/AttributeType"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/AttributeType"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "DomainModels$EnumerationAttributeType"
+              }
+            }
+          }
         }
       ]
     },
@@ -1101,7 +1321,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/RuleInfo"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/RuleInfo"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "DomainModels$EqualsToRuleInfo"
+              }
+            }
+          }
         }
       ]
     },
@@ -1166,7 +1396,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/FloatAttributeTypeBase"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/FloatAttributeTypeBase"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "DomainModels$FloatAttributeType"
+              }
+            }
+          }
         }
       ]
     },
@@ -1208,7 +1448,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/GeneralizationBase"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/GeneralizationBase"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "DomainModels$Generalization"
+              }
+            }
+          }
         }
       ]
     },
@@ -1229,7 +1479,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/AttributeType"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/AttributeType"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "DomainModels$HashedStringAttributeType"
+              }
+            }
+          }
         }
       ]
     },
@@ -1314,7 +1574,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/EntityRef"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/EntityRef"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "DomainModels$IndirectEntityRef"
+              }
+            }
+          }
         }
       ]
     },
@@ -1335,7 +1605,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/IntegerAttributeTypeBase"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/IntegerAttributeTypeBase"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "DomainModels$IntegerAttributeType"
+              }
+            }
+          }
         }
       ]
     },
@@ -1356,7 +1636,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/IntegerAttributeTypeBase"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/IntegerAttributeTypeBase"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "DomainModels$LongAttributeType"
+              }
+            }
+          }
         }
       ]
     },
@@ -1377,7 +1667,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/EntitySource"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/EntitySource"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "DomainModels$RemoteEntitySource"
+              }
+            }
+          }
         }
       ]
     },
@@ -1398,7 +1698,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/RemoteEntitySource"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/RemoteEntitySource"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "DomainModels$MaterializedRemoteEntitySource"
+              }
+            }
+          }
         }
       ]
     },
@@ -1423,7 +1733,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/RuleInfo"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/RuleInfo"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "DomainModels$MaxLengthRuleInfo"
+              }
+            }
+          }
         }
       ]
     },
@@ -1476,7 +1796,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/AttributeType"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/AttributeType"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "DomainModels$MultiLanguageAttributeType"
+              }
+            }
+          }
         }
       ]
     },
@@ -1517,7 +1847,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/GeneralizationBase"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/GeneralizationBase"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "DomainModels$NoGeneralization"
+              }
+            }
+          }
         }
       ]
     },
@@ -1542,7 +1882,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/AssociationSource"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/AssociationSource"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "DomainModels$OqlViewAssociationSource"
+              }
+            }
+          }
         }
       ]
     },
@@ -1563,7 +1913,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/EntitySource"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/EntitySource"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "DomainModels$ViewEntitySource"
+              }
+            }
+          }
         }
       ]
     },
@@ -1588,7 +1948,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/ViewEntitySource"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/ViewEntitySource"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "DomainModels$OqlViewEntitySource"
+              }
+            }
+          }
         }
       ]
     },
@@ -1613,7 +1983,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/ValueType"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/ValueType"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "DomainModels$OqlViewValue"
+              }
+            }
+          }
         }
       ]
     },
@@ -1634,7 +2014,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/RemoteEntitySource"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/RemoteEntitySource"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "DomainModels$QueryBasedRemoteEntitySource"
+              }
+            }
+          }
         }
       ]
     },
@@ -1687,7 +2077,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/RuleInfo"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/RuleInfo"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "DomainModels$RangeRuleInfo"
+              }
+            }
+          }
         }
       ]
     },
@@ -1712,7 +2112,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/RuleInfo"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/RuleInfo"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "DomainModels$RegExRuleInfo"
+              }
+            }
+          }
         }
       ]
     },
@@ -1733,7 +2143,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/AssociationSource"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/AssociationSource"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "DomainModels$RemoteAssociationSource"
+              }
+            }
+          }
         }
       ]
     },
@@ -1818,7 +2238,17 @@
       ],
       "allOf": [
         {
-          "$ref": "projects.schema.json#/definitions/Document"
+          "$merge": {
+            "source": {
+              "$ref": "projects.schema.json#/definitions/Document"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "DomainModels$RemoteEntitySourceDocument"
+              }
+            }
+          }
         }
       ]
     },
@@ -1839,7 +2269,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/RuleInfo"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/RuleInfo"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "DomainModels$RequiredRuleInfo"
+              }
+            }
+          }
         }
       ]
     },
@@ -1864,7 +2304,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/ValueType"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/ValueType"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "DomainModels$StoredValue"
+              }
+            }
+          }
         }
       ]
     },
@@ -1889,7 +2339,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/AttributeType"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/AttributeType"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "DomainModels$StringAttributeType"
+              }
+            }
+          }
         }
       ]
     },
@@ -1910,7 +2370,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/RuleInfo"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/RuleInfo"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "DomainModels$UniqueRuleInfo"
+              }
+            }
+          }
         }
       ]
     },

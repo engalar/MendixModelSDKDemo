@@ -38,7 +38,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/ParameterType"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/ParameterType"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "JavaActions$BasicParameterType"
+              }
+            }
+          }
         }
       ]
     },
@@ -75,7 +85,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/Type"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/Type"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "JavaActions$PrimitiveType"
+              }
+            }
+          }
         }
       ]
     },
@@ -96,7 +116,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/PrimitiveType"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/PrimitiveType"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "JavaActions$BooleanType"
+              }
+            }
+          }
         }
       ]
     },
@@ -117,7 +147,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/Type"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/Type"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "JavaActions$EntityType"
+              }
+            }
+          }
         }
       ]
     },
@@ -143,7 +183,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/EntityType"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/EntityType"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "JavaActions$ConcreteEntityType"
+              }
+            }
+          }
         }
       ]
     },
@@ -164,7 +214,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/PrimitiveType"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/PrimitiveType"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "JavaActions$DateTimeType"
+              }
+            }
+          }
         }
       ]
     },
@@ -185,7 +245,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/PrimitiveType"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/PrimitiveType"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "JavaActions$DecimalType"
+              }
+            }
+          }
         }
       ]
     },
@@ -206,7 +276,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/ParameterType"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/ParameterType"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "JavaActions$EntityTypeParameterType"
+              }
+            }
+          }
         }
       ]
     },
@@ -232,7 +312,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/Type"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/Type"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "JavaActions$EnumerationType"
+              }
+            }
+          }
         }
       ]
     },
@@ -253,7 +343,17 @@
       ],
       "allOf": [
         {
-          "$ref": "codeactions.schema.json#/definitions/ParameterType"
+          "$merge": {
+            "source": {
+              "$ref": "codeactions.schema.json#/definitions/ParameterType"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "JavaActions$ExportMappingJavaActionParameterType"
+              }
+            }
+          }
         }
       ]
     },
@@ -274,7 +374,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/ParameterType"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/ParameterType"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "JavaActions$ExportMappingParameterType"
+              }
+            }
+          }
         }
       ]
     },
@@ -295,7 +405,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/PrimitiveType"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/PrimitiveType"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "JavaActions$FloatType"
+              }
+            }
+          }
         }
       ]
     },
@@ -316,7 +436,17 @@
       ],
       "allOf": [
         {
-          "$ref": "codeactions.schema.json#/definitions/ParameterType"
+          "$merge": {
+            "source": {
+              "$ref": "codeactions.schema.json#/definitions/ParameterType"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "JavaActions$ImportMappingJavaActionParameterType"
+              }
+            }
+          }
         }
       ]
     },
@@ -337,7 +467,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/ParameterType"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/ParameterType"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "JavaActions$ImportMappingParameterType"
+              }
+            }
+          }
         }
       ]
     },
@@ -358,7 +498,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/PrimitiveType"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/PrimitiveType"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "JavaActions$IntegerType"
+              }
+            }
+          }
         }
       ]
     },
@@ -379,7 +529,17 @@
       ],
       "allOf": [
         {
-          "$ref": "codeactions.schema.json#/definitions/CodeAction"
+          "$merge": {
+            "source": {
+              "$ref": "codeactions.schema.json#/definitions/CodeAction"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "JavaActions$JavaAction"
+              }
+            }
+          }
         }
       ]
     },
@@ -400,7 +560,17 @@
       ],
       "allOf": [
         {
-          "$ref": "codeactions.schema.json#/definitions/CodeActionParameter"
+          "$merge": {
+            "source": {
+              "$ref": "codeactions.schema.json#/definitions/CodeActionParameter"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "JavaActions$JavaActionParameter"
+              }
+            }
+          }
         }
       ]
     },
@@ -425,7 +595,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/Type"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/Type"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "JavaActions$ListType"
+              }
+            }
+          }
         }
       ]
     },
@@ -474,7 +654,17 @@
       ],
       "allOf": [
         {
-          "$ref": "codeactions.schema.json#/definitions/ParameterType"
+          "$merge": {
+            "source": {
+              "$ref": "codeactions.schema.json#/definitions/ParameterType"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "JavaActions$MicroflowJavaActionParameterType"
+              }
+            }
+          }
         }
       ]
     },
@@ -495,7 +685,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/ParameterType"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/ParameterType"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "JavaActions$MicroflowParameterType"
+              }
+            }
+          }
         }
       ]
     },
@@ -516,7 +716,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/EntityType"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/EntityType"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "JavaActions$ParameterizedEntityType"
+              }
+            }
+          }
         }
       ]
     },
@@ -537,7 +747,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/PrimitiveType"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/PrimitiveType"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "JavaActions$StringType"
+              }
+            }
+          }
         }
       ]
     },
@@ -592,6 +812,9 @@
         },
         {
           "$ref": "#/definitions/ParameterizedEntityType"
+        },
+        {
+          "$ref": "#/definitions/ObjectType"
         }
       ]
     }

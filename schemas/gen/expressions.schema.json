@@ -62,7 +62,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/Expression"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/Expression"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Expressions$BinaryExpression"
+              }
+            }
+          }
         }
       ]
     },
@@ -83,7 +93,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/Expression"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/Expression"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Expressions$LiteralExpression"
+              }
+            }
+          }
         }
       ]
     },
@@ -108,7 +128,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/LiteralExpression"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/LiteralExpression"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Expressions$BooleanLiteral"
+              }
+            }
+          }
         }
       ]
     },
@@ -134,7 +164,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/Expression"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/Expression"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Expressions$ConstantRefExpression"
+              }
+            }
+          }
         }
       ]
     },
@@ -155,7 +195,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/LiteralExpression"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/LiteralExpression"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Expressions$EmptyLiteral"
+              }
+            }
+          }
         }
       ]
     },
@@ -181,7 +231,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/Expression"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/Expression"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Expressions$EnumerationValueRefExpression"
+              }
+            }
+          }
         }
       ]
     },
@@ -206,7 +266,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/LiteralExpression"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/LiteralExpression"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Expressions$FloatLiteral"
+              }
+            }
+          }
         }
       ]
     },
@@ -237,7 +307,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/Expression"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/Expression"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Expressions$FunctionCallExpression"
+              }
+            }
+          }
         }
       ]
     },
@@ -278,7 +358,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/VariableRef"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/VariableRef"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Expressions$GlobalVariableRef"
+              }
+            }
+          }
         }
       ]
     },
@@ -311,7 +401,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/Expression"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/Expression"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Expressions$IfExpression"
+              }
+            }
+          }
         }
       ]
     },
@@ -336,7 +436,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/LiteralExpression"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/LiteralExpression"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Expressions$IntegerLiteral"
+              }
+            }
+          }
         }
       ]
     },
@@ -357,7 +467,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/Expression"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/Expression"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Expressions$NoExpression"
+              }
+            }
+          }
         }
       ]
     },
@@ -378,7 +498,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/VariableRef"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/VariableRef"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Expressions$NoVariableRef"
+              }
+            }
+          }
         }
       ]
     },
@@ -403,7 +533,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/Expression"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/Expression"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Expressions$ParenthesisExpression"
+              }
+            }
+          }
         }
       ]
     },
@@ -428,7 +568,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/LiteralExpression"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/LiteralExpression"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Expressions$StringLiteral"
+              }
+            }
+          }
         }
       ]
     },
@@ -460,7 +610,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/Expression"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/Expression"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Expressions$UnaryExpression"
+              }
+            }
+          }
         }
       ]
     },
@@ -485,7 +645,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/Expression"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/Expression"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Expressions$UnparsableExpression"
+              }
+            }
+          }
         }
       ]
     },
@@ -513,7 +683,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/Expression"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/Expression"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Expressions$VariableRefExpression"
+              }
+            }
+          }
         }
       ]
     },

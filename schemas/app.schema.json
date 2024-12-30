@@ -89,7 +89,7 @@
                         "description": "Documentation of the module"
                     },
                     "domainModel": {
-                        "$ref": "domain.schema.json#",
+                        "$ref": "gen/domainmodels.schema.json#/definitions/DomainModel",
                         "description": "The domain model for this module."
                     },
                     "children": {

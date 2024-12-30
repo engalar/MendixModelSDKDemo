@@ -111,7 +111,17 @@
       ],
       "allOf": [
         {
-          "$ref": "projects.schema.json#/definitions/Document"
+          "$merge": {
+            "source": {
+              "$ref": "projects.schema.json#/definitions/Document"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "BusinessEvents$BusinessEventService"
+              }
+            }
+          }
         }
       ]
     },
@@ -210,7 +220,17 @@
       ],
       "allOf": [
         {
-          "$ref": "projects.schema.json#/definitions/Document"
+          "$merge": {
+            "source": {
+              "$ref": "projects.schema.json#/definitions/Document"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "BusinessEvents$ConsumedBusinessEventService"
+              }
+            }
+          }
         }
       ]
     },
@@ -326,7 +346,17 @@
       ],
       "allOf": [
         {
-          "$ref": "projects.schema.json#/definitions/Document"
+          "$merge": {
+            "source": {
+              "$ref": "projects.schema.json#/definitions/Document"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "BusinessEvents$PublishedBusinessEventService"
+              }
+            }
+          }
         }
       ]
     },

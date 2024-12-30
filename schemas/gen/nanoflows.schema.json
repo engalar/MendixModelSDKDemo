@@ -22,7 +22,17 @@
       ],
       "allOf": [
         {
-          "$ref": "microflows.schema.json#/definitions/CodeActionParameterValue"
+          "$merge": {
+            "source": {
+              "$ref": "microflows.schema.json#/definitions/CodeActionParameterValue"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Nanoflows$NanoflowParameterValue"
+              }
+            }
+          }
         }
       ]
     }

@@ -80,7 +80,7 @@
         "children": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/Element"
+            "$ref": "#/definitions/ElementWithSubclasses"
           }
         }
       },
@@ -118,7 +118,7 @@
         "rootMappingElements": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/ObjectMappingElement"
+            "$ref": "#/definitions/ObjectMappingElementWithSubclasses"
           }
         },
         "xmlSchema": {
@@ -138,7 +138,7 @@
           "description": "ByNameReferenceProperty: messagedefinitions.schema.json#/definitions/MessageDefinition"
         },
         "mappingSourceReference": {
-          "$ref": "#/definitions/MappingSourceReference"
+          "$ref": "#/definitions/MappingSourceReferenceWithSubclasses"
         }
       },
       "required": [
@@ -147,7 +147,17 @@
       ],
       "allOf": [
         {
-          "$ref": "projects.schema.json#/definitions/Document"
+          "$merge": {
+            "source": {
+              "$ref": "projects.schema.json#/definitions/Document"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Mappings$MappingDocument"
+              }
+            }
+          }
         }
       ]
     },
@@ -305,7 +315,17 @@
       ],
       "allOf": [
         {
-          "$ref": "projects.schema.json#/definitions/Document"
+          "$merge": {
+            "source": {
+              "$ref": "projects.schema.json#/definitions/Document"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Mappings$MappingSourceDocument"
+              }
+            }
+          }
         }
       ]
     },
@@ -384,7 +404,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/MappingElement"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/MappingElement"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Mappings$ObjectMappingElement"
+              }
+            }
+          }
         }
       ]
     },
@@ -448,7 +478,74 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/MappingElement"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/MappingElement"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Mappings$ValueMappingElement"
+              }
+            }
+          }
+        }
+      ]
+    },
+    "ElementWithSubclasses": {
+      "type": "object",
+      "oneOf": [
+        {
+          "$ref": "#/definitions/Element"
+        },
+        {
+          "$ref": "mappings.schema.json#/definitions/DataImporterElement"
+        },
+        {
+          "$ref": "mappings.schema.json#/definitions/JsonElement"
+        },
+        {
+          "$ref": "mappings.schema.json#/definitions/AssociationElement"
+        },
+        {
+          "$ref": "mappings.schema.json#/definitions/AttributeElement"
+        },
+        {
+          "$ref": "mappings.schema.json#/definitions/EntityElement"
+        },
+        {
+          "$ref": "mappings.schema.json#/definitions/ExposedMember"
+        },
+        {
+          "$ref": "mappings.schema.json#/definitions/XmlElement"
+        }
+      ]
+    },
+    "ObjectMappingElementWithSubclasses": {
+      "type": "object",
+      "oneOf": [
+        {
+          "$ref": "#/definitions/ObjectMappingElement"
+        },
+        {
+          "$ref": "mappings.schema.json#/definitions/ExportObjectMappingElement"
+        },
+        {
+          "$ref": "mappings.schema.json#/definitions/ImportObjectMappingElement"
+        }
+      ]
+    },
+    "MappingSourceReferenceWithSubclasses": {
+      "type": "object",
+      "oneOf": [
+        {
+          "$ref": "#/definitions/MappingSourceReference"
+        },
+        {
+          "$ref": "mappings.schema.json#/definitions/CsvSheetMappingSourceReference"
+        },
+        {
+          "$ref": "mappings.schema.json#/definitions/ExcelSheetMappingSourceReference"
         }
       ]
     },

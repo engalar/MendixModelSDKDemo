@@ -39,7 +39,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/ChangeMode"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/ChangeMode"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "ODataPublish$CallMicroflowToChange"
+              }
+            }
+          }
         }
       ]
     },
@@ -80,7 +90,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/ReadMode"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/ReadMode"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "ODataPublish$CallMicroflowToRead"
+              }
+            }
+          }
         }
       ]
     },
@@ -101,7 +121,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/ChangeMode"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/ChangeMode"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "ODataPublish$ChangeNotSupported"
+              }
+            }
+          }
         }
       ]
     },
@@ -122,7 +152,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/ChangeMode"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/ChangeMode"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "ODataPublish$ChangeSource"
+              }
+            }
+          }
         }
       ]
     },
@@ -218,7 +258,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/Type"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/Type"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "ODataPublish$EntityType"
+              }
+            }
+          }
         }
       ]
     },
@@ -284,7 +334,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/PublishedMember"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/PublishedMember"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "ODataPublish$PublishedAssociationEnd"
+              }
+            }
+          }
         }
       ]
     },
@@ -333,7 +393,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/PublishedMember"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/PublishedMember"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "ODataPublish$PublishedAttribute"
+              }
+            }
+          }
         }
       ]
     },
@@ -462,7 +532,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/PublishedMember"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/PublishedMember"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "ODataPublish$PublishedId"
+              }
+            }
+          }
         }
       ]
     },
@@ -618,7 +698,7 @@
         "entityTypes": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/EntityType"
+            "$ref": "#/definitions/EntityTypeWithSubclasses"
           }
         },
         "entitySets": {
@@ -663,7 +743,17 @@
       ],
       "allOf": [
         {
-          "$ref": "projects.schema.json#/definitions/Document"
+          "$merge": {
+            "source": {
+              "$ref": "projects.schema.json#/definitions/Document"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "ODataPublish$PublishedODataService2"
+              }
+            }
+          }
         }
       ]
     },
@@ -712,7 +802,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/ReadMode"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/ReadMode"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "ODataPublish$ReadSource"
+              }
+            }
+          }
         }
       ]
     },
@@ -785,6 +885,23 @@
         },
         {
           "$ref": "#/definitions/PublishedId"
+        }
+      ]
+    },
+    "EntityTypeWithSubclasses": {
+      "type": "object",
+      "oneOf": [
+        {
+          "$ref": "#/definitions/EntityType"
+        },
+        {
+          "$ref": "#/definitions/ConcreteEntityType"
+        },
+        {
+          "$ref": "#/definitions/ParameterizedEntityType"
+        },
+        {
+          "$ref": "#/definitions/ObjectType"
         }
       ]
     }

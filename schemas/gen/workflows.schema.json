@@ -38,7 +38,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/TargetUserInput"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/TargetUserInput"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Workflows$AbsoluteAmountUserInput"
+              }
+            }
+          }
         }
       ]
     },
@@ -59,7 +69,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/TargetUserInput"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/TargetUserInput"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Workflows$AllUserInput"
+              }
+            }
+          }
         }
       ]
     },
@@ -84,7 +104,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/MicroflowObject"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/MicroflowObject"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Workflows$Annotation"
+              }
+            }
+          }
         }
       ]
     },
@@ -99,7 +129,7 @@
           "const": "Workflows$Outcome"
         },
         "flow": {
-          "$ref": "#/definitions/Flow"
+          "$ref": "#/definitions/FlowWithSubclasses"
         }
       },
       "required": [
@@ -125,7 +155,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/Outcome"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/Outcome"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Workflows$ConditionOutcome"
+              }
+            }
+          }
         }
       ]
     },
@@ -150,7 +190,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/ConditionOutcome"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/ConditionOutcome"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Workflows$BooleanConditionOutcome"
+              }
+            }
+          }
         }
       ]
     },
@@ -173,7 +223,7 @@
           "default": false
         },
         "flow": {
-          "$ref": "#/definitions/Flow"
+          "$ref": "#/definitions/FlowWithSubclasses"
         },
         "annotation": {
           "$ref": "#/definitions/Annotation"
@@ -235,7 +285,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/WorkflowActivity"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/WorkflowActivity"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Workflows$ConditionOutcomeActivity"
+              }
+            }
+          }
         }
       ]
     },
@@ -272,7 +332,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/ConditionOutcomeActivity"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/ConditionOutcomeActivity"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Workflows$CallMicroflowTask"
+              }
+            }
+          }
         }
       ]
     },
@@ -292,7 +362,7 @@
         },
         "workflow": {
           "type": "string",
-          "description": "ByNameReferenceProperty: #/definitions/Workflow"
+          "description": "ByNameReferenceProperty: projects.schema.json#/definitions/Workflow"
         },
         "parameterMappings": {
           "type": "array",
@@ -313,7 +383,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/WorkflowActivity"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/WorkflowActivity"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Workflows$CallWorkflowActivity"
+              }
+            }
+          }
         }
       ]
     },
@@ -350,7 +430,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/UserTaskCompletionCriteria"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/UserTaskCompletionCriteria"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Workflows$ConsensusCompletionCriteria"
+              }
+            }
+          }
         }
       ]
     },
@@ -387,7 +477,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/UserSource"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/UserSource"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Workflows$EmptyUserSource"
+              }
+            }
+          }
         }
       ]
     },
@@ -408,7 +508,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/WorkflowActivity"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/WorkflowActivity"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Workflows$EndOfBoundaryEventPathActivity"
+              }
+            }
+          }
         }
       ]
     },
@@ -429,7 +539,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/WorkflowActivity"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/WorkflowActivity"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Workflows$EndWorkflowActivity"
+              }
+            }
+          }
         }
       ]
     },
@@ -454,7 +574,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/ConditionOutcome"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/ConditionOutcome"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Workflows$EnumerationValueConditionOutcome"
+              }
+            }
+          }
         }
       ]
     },
@@ -479,7 +609,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/ConditionOutcomeActivity"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/ConditionOutcomeActivity"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Workflows$ExclusiveSplitActivity"
+              }
+            }
+          }
         }
       ]
     },
@@ -525,7 +665,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/WorkflowActivity"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/WorkflowActivity"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Workflows$JumpToActivity"
+              }
+            }
+          }
         }
       ]
     },
@@ -553,7 +703,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/UserTaskCompletionCriteria"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/UserTaskCompletionCriteria"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Workflows$MajorityCompletionCriteria"
+              }
+            }
+          }
         }
       ]
     },
@@ -594,7 +754,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/UserTaskEvent"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/UserTaskEvent"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Workflows$MicroflowBasedEvent"
+              }
+            }
+          }
         }
       ]
     },
@@ -619,7 +789,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/UserSource"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/UserSource"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Workflows$MicroflowBasedUserSource"
+              }
+            }
+          }
         }
       ]
     },
@@ -669,7 +849,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/UserTaskCompletionCriteria"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/UserTaskCompletionCriteria"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Workflows$MicroflowCompletionCriteria"
+              }
+            }
+          }
         }
       ]
     },
@@ -738,7 +928,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/UserTaskCompletion"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/UserTaskCompletion"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Workflows$MultiInputCompletion"
+              }
+            }
+          }
         }
       ]
     },
@@ -799,7 +999,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/WorkflowActivity"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/WorkflowActivity"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Workflows$UserTaskActivity"
+              }
+            }
+          }
         }
       ]
     },
@@ -832,7 +1042,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/UserTaskActivity"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/UserTaskActivity"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Workflows$MultiUserTaskActivity"
+              }
+            }
+          }
         }
       ]
     },
@@ -853,7 +1073,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/UserTaskEvent"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/UserTaskEvent"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Workflows$NoEvent"
+              }
+            }
+          }
         }
       ]
     },
@@ -925,7 +1155,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/WorkflowActivity"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/WorkflowActivity"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Workflows$ParallelSplitActivity"
+              }
+            }
+          }
         }
       ]
     },
@@ -946,7 +1186,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/Outcome"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/Outcome"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Workflows$ParallelSplitOutcome"
+              }
+            }
+          }
         }
       ]
     },
@@ -995,7 +1245,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/TargetUserInput"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/TargetUserInput"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Workflows$PercentageAmountUserInput"
+              }
+            }
+          }
         }
       ]
     },
@@ -1016,7 +1276,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/UserTaskCompletion"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/UserTaskCompletion"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Workflows$SingleInputCompletion"
+              }
+            }
+          }
         }
       ]
     },
@@ -1037,7 +1307,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/UserTaskActivity"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/UserTaskActivity"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Workflows$SingleUserTaskActivity"
+              }
+            }
+          }
         }
       ]
     },
@@ -1069,7 +1349,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/UserTaskCompletionCriteria"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/UserTaskCompletionCriteria"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Workflows$ThresholdCompletionCriteria"
+              }
+            }
+          }
         }
       ]
     },
@@ -1094,7 +1384,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/BoundaryEvent"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/BoundaryEvent"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Workflows$TimerBoundaryEvent"
+              }
+            }
+          }
         }
       ]
     },
@@ -1153,7 +1453,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/WorkflowActivity"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/WorkflowActivity"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Workflows$UserTask"
+              }
+            }
+          }
         }
       ]
     },
@@ -1178,7 +1488,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/Outcome"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/Outcome"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Workflows$UserTaskOutcome"
+              }
+            }
+          }
         }
       ]
     },
@@ -1199,7 +1519,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/UserTaskCompletionCriteria"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/UserTaskCompletionCriteria"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Workflows$VetoCompletionCriteria"
+              }
+            }
+          }
         }
       ]
     },
@@ -1220,7 +1550,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/ConditionOutcome"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/ConditionOutcome"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Workflows$VoidConditionOutcome"
+              }
+            }
+          }
         }
       ]
     },
@@ -1247,7 +1587,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/WorkflowActivity"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/WorkflowActivity"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Workflows$WaitForNotificationActivity"
+              }
+            }
+          }
         }
       ]
     },
@@ -1272,7 +1622,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/WorkflowActivity"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/WorkflowActivity"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Workflows$WaitForTimerActivity"
+              }
+            }
+          }
         }
       ]
     },
@@ -1301,7 +1661,7 @@
           "$ref": "#/definitions/PageReference"
         },
         "flow": {
-          "$ref": "#/definitions/Flow"
+          "$ref": "#/definitions/FlowWithSubclasses"
         },
         "workflowName": {
           "$ref": "microflows.schema.json#/definitions/StringTemplate"
@@ -1335,7 +1695,17 @@
       ],
       "allOf": [
         {
-          "$ref": "projects.schema.json#/definitions/Document"
+          "$merge": {
+            "source": {
+              "$ref": "projects.schema.json#/definitions/Document"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Workflows$Workflow"
+              }
+            }
+          }
         }
       ]
     },
@@ -1392,7 +1762,7 @@
         },
         "workflow": {
           "type": "string",
-          "description": "ByNameReferenceProperty: #/definitions/Workflow"
+          "description": "ByNameReferenceProperty: projects.schema.json#/definitions/Workflow"
         }
       },
       "required": [
@@ -1402,7 +1772,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/WorkflowDefinitionSelection"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/WorkflowDefinitionSelection"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Workflows$WorkflowDefinitionNameSelection"
+              }
+            }
+          }
         }
       ]
     },
@@ -1427,7 +1807,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/WorkflowDefinitionSelection"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/WorkflowDefinitionSelection"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Workflows$WorkflowDefinitionObjectSelection"
+              }
+            }
+          }
         }
       ]
     },
@@ -1505,7 +1895,31 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/UserSource"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/UserSource"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Workflows$XPathBasedUserSource"
+              }
+            }
+          }
+        }
+      ]
+    },
+    "FlowWithSubclasses": {
+      "type": "object",
+      "oneOf": [
+        {
+          "$ref": "#/definitions/Flow"
+        },
+        {
+          "$ref": "#/definitions/AnnotationFlow"
+        },
+        {
+          "$ref": "#/definitions/SequenceFlow"
         }
       ]
     },

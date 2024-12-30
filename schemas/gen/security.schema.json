@@ -75,7 +75,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/AccessRuleContainerBase"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/AccessRuleContainerBase"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Security$FileDocumentAccessRuleContainer"
+              }
+            }
+          }
         }
       ]
     },
@@ -96,7 +106,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/AccessRuleContainerBase"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/AccessRuleContainerBase"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Security$ImageAccessRuleContainer"
+              }
+            }
+          }
         }
       ]
     },
@@ -147,7 +167,17 @@
       ],
       "allOf": [
         {
-          "$ref": "projects.schema.json#/definitions/ModuleDocument"
+          "$merge": {
+            "source": {
+              "$ref": "projects.schema.json#/definitions/ModuleDocument"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Security$ModuleSecurity"
+              }
+            }
+          }
         }
       ]
     },
@@ -268,7 +298,17 @@
       ],
       "allOf": [
         {
-          "$ref": "projects.schema.json#/definitions/ProjectDocument"
+          "$merge": {
+            "source": {
+              "$ref": "projects.schema.json#/definitions/ProjectDocument"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Security$ProjectSecurity"
+              }
+            }
+          }
         }
       ]
     },

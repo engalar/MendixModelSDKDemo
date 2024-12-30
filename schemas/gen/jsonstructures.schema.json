@@ -22,7 +22,17 @@
       ],
       "allOf": [
         {
-          "$ref": "mappings.schema.json#/definitions/Element"
+          "$merge": {
+            "source": {
+              "$ref": "mappings.schema.json#/definitions/Element"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "JsonStructures$JsonElement"
+              }
+            }
+          }
         }
       ]
     },
@@ -53,7 +63,17 @@
       ],
       "allOf": [
         {
-          "$ref": "xmlschemas.schema.json#/definitions/MxSchema"
+          "$merge": {
+            "source": {
+              "$ref": "xmlschemas.schema.json#/definitions/MxSchema"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "JsonStructures$JsonStructure"
+              }
+            }
+          }
         }
       ]
     }

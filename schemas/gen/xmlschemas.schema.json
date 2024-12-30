@@ -18,7 +18,17 @@
       ],
       "allOf": [
         {
-          "$ref": "projects.schema.json#/definitions/Document"
+          "$merge": {
+            "source": {
+              "$ref": "projects.schema.json#/definitions/Document"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "XmlSchemas$MxSchema"
+              }
+            }
+          }
         }
       ]
     },
@@ -39,7 +49,17 @@
       ],
       "allOf": [
         {
-          "$ref": "mappings.schema.json#/definitions/Element"
+          "$merge": {
+            "source": {
+              "$ref": "mappings.schema.json#/definitions/Element"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "XmlSchemas$XmlElement"
+              }
+            }
+          }
         }
       ]
     },
@@ -70,7 +90,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/MxSchema"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/MxSchema"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "XmlSchemas$XmlSchema"
+              }
+            }
+          }
         }
       ]
     },

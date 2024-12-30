@@ -42,7 +42,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/Schedule"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/Schedule"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "ScheduledEvents$DaySchedule"
+              }
+            }
+          }
         }
       ]
     },
@@ -71,7 +81,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/Schedule"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/Schedule"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "ScheduledEvents$HourSchedule"
+              }
+            }
+          }
         }
       ]
     },
@@ -96,7 +116,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/Schedule"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/Schedule"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "ScheduledEvents$MinuteSchedule"
+              }
+            }
+          }
         }
       ]
     },
@@ -133,7 +163,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/Schedule"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/Schedule"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "ScheduledEvents$MonthSchedule"
+              }
+            }
+          }
         }
       ]
     },
@@ -158,7 +198,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/MonthSchedule"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/MonthSchedule"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "ScheduledEvents$MonthDateSchedule"
+              }
+            }
+          }
         }
       ]
     },
@@ -201,7 +251,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/MonthSchedule"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/MonthSchedule"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "ScheduledEvents$MonthWeekdaySchedule"
+              }
+            }
+          }
         }
       ]
     },
@@ -268,7 +328,17 @@
       ],
       "allOf": [
         {
-          "$ref": "projects.schema.json#/definitions/Document"
+          "$merge": {
+            "source": {
+              "$ref": "projects.schema.json#/definitions/Document"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "ScheduledEvents$ScheduledEvent"
+              }
+            }
+          }
         }
       ]
     },
@@ -325,7 +395,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/Schedule"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/Schedule"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "ScheduledEvents$WeekSchedule"
+              }
+            }
+          }
         }
       ]
     },
@@ -358,7 +438,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/Schedule"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/Schedule"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "ScheduledEvents$YearSchedule"
+              }
+            }
+          }
         }
       ]
     },
@@ -383,7 +473,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/YearSchedule"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/YearSchedule"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "ScheduledEvents$YearDateSchedule"
+              }
+            }
+          }
         }
       ]
     },
@@ -426,7 +526,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/YearSchedule"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/YearSchedule"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "ScheduledEvents$YearWeekdaySchedule"
+              }
+            }
+          }
         }
       ]
     },

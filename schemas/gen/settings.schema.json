@@ -90,7 +90,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/ProjectSettingsPart"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/ProjectSettingsPart"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Settings$CertificateSettings"
+              }
+            }
+          }
         }
       ]
     },
@@ -209,7 +219,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/ProjectSettingsPart"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/ProjectSettingsPart"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Settings$ConfigurationSettings"
+              }
+            }
+          }
         }
       ]
     },
@@ -239,7 +259,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/Value"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/Value"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Settings$ConstantValue"
+              }
+            }
+          }
         }
       ]
     },
@@ -296,7 +326,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/ProjectSettingsPart"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/ProjectSettingsPart"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Settings$DistributionSettings"
+              }
+            }
+          }
         }
       ]
     },
@@ -317,7 +357,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/ProjectSettingsPart"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/ProjectSettingsPart"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Settings$IntegrationProjectSettingsPart"
+              }
+            }
+          }
         }
       ]
     },
@@ -344,7 +394,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/ProjectSettingsPart"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/ProjectSettingsPart"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Settings$JarDeploymentSettings"
+              }
+            }
+          }
         }
       ]
     },
@@ -389,7 +449,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/ProjectSettingsPart"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/ProjectSettingsPart"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Settings$JavaActionsSettings"
+              }
+            }
+          }
         }
       ]
     },
@@ -456,7 +526,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/ProjectSettingsPart"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/ProjectSettingsPart"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Settings$LanguageSettings"
+              }
+            }
+          }
         }
       ]
     },
@@ -490,7 +570,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/ProjectSettingsPart"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/ProjectSettingsPart"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Settings$ModelerSettings"
+              }
+            }
+          }
         }
       ]
     },
@@ -527,7 +617,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/SharedOrPrivateValue"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/SharedOrPrivateValue"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Settings$PrivateValue"
+              }
+            }
+          }
         }
       ]
     },
@@ -554,7 +654,17 @@
       ],
       "allOf": [
         {
-          "$ref": "projects.schema.json#/definitions/ProjectDocument"
+          "$merge": {
+            "source": {
+              "$ref": "projects.schema.json#/definitions/ProjectDocument"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Settings$ProjectSettings"
+              }
+            }
+          }
         }
       ]
     },
@@ -579,7 +689,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/JarLocationBase"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/JarLocationBase"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Settings$ProtectedModuleJarLocation"
+              }
+            }
+          }
         }
       ]
     },
@@ -681,7 +801,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/ProjectSettingsPart"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/ProjectSettingsPart"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Settings$RuntimeSettings"
+              }
+            }
+          }
         }
       ]
     },
@@ -706,7 +836,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/SharedOrPrivateValue"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/SharedOrPrivateValue"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Settings$SharedValue"
+              }
+            }
+          }
         }
       ]
     },
@@ -747,7 +887,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/JarLocationBase"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/JarLocationBase"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Settings$UserLibJarLocation"
+              }
+            }
+          }
         }
       ]
     },
@@ -798,7 +948,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/ProjectSettingsPart"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/ProjectSettingsPart"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Settings$WebUIProjectSettingsPart"
+              }
+            }
+          }
         }
       ]
     },
@@ -843,7 +1003,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/ProjectSettingsPart"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/ProjectSettingsPart"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Settings$WorkflowsProjectSettingsPart"
+              }
+            }
+          }
         }
       ]
     },

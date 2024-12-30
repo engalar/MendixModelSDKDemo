@@ -53,7 +53,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/ModuleDocument"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/ModuleDocument"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Projects$Document"
+              }
+            }
+          }
         }
       ]
     },
@@ -94,7 +104,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/FolderBase"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/FolderBase"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Projects$Folder"
+              }
+            }
+          }
         }
       ]
     },
@@ -209,7 +229,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/FolderBase"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/FolderBase"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Projects$Module"
+              }
+            }
+          }
         }
       ]
     },
@@ -266,7 +296,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/ModuleDocument"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/ModuleDocument"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Projects$ModuleSettings"
+              }
+            }
+          }
         }
       ]
     },

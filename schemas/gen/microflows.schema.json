@@ -42,7 +42,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/WorkflowOperation"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/WorkflowOperation"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Microflows$AbortOperation"
+              }
+            }
+          }
         }
       ]
     },
@@ -93,7 +103,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/MicroflowObject"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/MicroflowObject"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Microflows$Activity"
+              }
+            }
+          }
         }
       ]
     },
@@ -147,7 +167,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/Activity"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/Activity"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Microflows$ActionActivity"
+              }
+            }
+          }
         }
       ]
     },
@@ -197,7 +227,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/RequestHandling"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/RequestHandling"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Microflows$AdvancedRequestHandling"
+              }
+            }
+          }
         }
       ]
     },
@@ -285,7 +325,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/MicroflowAction"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/MicroflowAction"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Microflows$AggregateListAction"
+              }
+            }
+          }
         }
       ]
     },
@@ -310,7 +360,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/MicroflowObject"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/MicroflowObject"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Microflows$Annotation"
+              }
+            }
+          }
         }
       ]
     },
@@ -359,7 +419,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/Flow"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/Flow"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Microflows$AnnotationFlow"
+              }
+            }
+          }
         }
       ]
     },
@@ -398,7 +468,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/MicroflowAction"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/MicroflowAction"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Microflows$AppServiceCallAction"
+              }
+            }
+          }
         }
       ]
     },
@@ -455,7 +535,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/MicroflowAction"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/MicroflowAction"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Microflows$ApplyJumpToOptionAction"
+              }
+            }
+          }
         }
       ]
     },
@@ -500,7 +590,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/RetrieveSource"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/RetrieveSource"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Microflows$AssociationRetrieveSource"
+              }
+            }
+          }
         }
       ]
     },
@@ -537,7 +637,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/CodeActionParameterValue"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/CodeActionParameterValue"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Microflows$ExpressionBasedCodeActionParameterValue"
+              }
+            }
+          }
         }
       ]
     },
@@ -562,7 +672,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/ExpressionBasedCodeActionParameterValue"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/ExpressionBasedCodeActionParameterValue"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Microflows$BasicCodeActionParameterValue"
+              }
+            }
+          }
         }
       ]
     },
@@ -607,7 +727,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/JavaActionParameterValue"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/JavaActionParameterValue"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Microflows$BasicJavaActionParameterValue"
+              }
+            }
+          }
         }
       ]
     },
@@ -658,7 +788,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/Line"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/Line"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Microflows$BezierCurve"
+              }
+            }
+          }
         }
       ]
     },
@@ -703,7 +843,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/ListOperation"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/ListOperation"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Microflows$BinaryListOperation"
+              }
+            }
+          }
         }
       ]
     },
@@ -728,7 +878,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/RequestHandling"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/RequestHandling"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Microflows$BinaryRequestHandling"
+              }
+            }
+          }
         }
       ]
     },
@@ -769,7 +929,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/MicroflowObject"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/MicroflowObject"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Microflows$BreakEvent"
+              }
+            }
+          }
         }
       ]
     },
@@ -818,7 +988,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/MicroflowAction"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/MicroflowAction"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Microflows$CallExternalAction"
+              }
+            }
+          }
         }
       ]
     },
@@ -859,7 +1039,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/MicroflowAction"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/MicroflowAction"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Microflows$CastAction"
+              }
+            }
+          }
         }
       ]
     },
@@ -897,7 +1087,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/MicroflowAction"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/MicroflowAction"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Microflows$ChangeListAction"
+              }
+            }
+          }
         }
       ]
     },
@@ -936,7 +1136,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/MicroflowAction"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/MicroflowAction"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Microflows$ChangeMembersAction"
+              }
+            }
+          }
         }
       ]
     },
@@ -961,7 +1171,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/ChangeMembersAction"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/ChangeMembersAction"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Microflows$ChangeObjectAction"
+              }
+            }
+          }
         }
       ]
     },
@@ -990,7 +1210,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/MicroflowAction"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/MicroflowAction"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Microflows$ChangeVariableAction"
+              }
+            }
+          }
         }
       ]
     },
@@ -1015,7 +1245,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/MicroflowAction"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/MicroflowAction"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Microflows$ClearFromClientAction"
+              }
+            }
+          }
         }
       ]
     },
@@ -1040,7 +1280,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/MicroflowAction"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/MicroflowAction"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Microflows$CloseFormAction"
+              }
+            }
+          }
         }
       ]
     },
@@ -1089,7 +1339,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/MicroflowAction"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/MicroflowAction"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Microflows$CommitAction"
+              }
+            }
+          }
         }
       ]
     },
@@ -1130,7 +1390,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/Range"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/Range"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Microflows$ConstantRange"
+              }
+            }
+          }
         }
       ]
     },
@@ -1151,7 +1421,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/BinaryListOperation"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/BinaryListOperation"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Microflows$Contains"
+              }
+            }
+          }
         }
       ]
     },
@@ -1172,7 +1452,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/MicroflowObject"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/MicroflowObject"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Microflows$ContinueEvent"
+              }
+            }
+          }
         }
       ]
     },
@@ -1197,7 +1487,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/WorkflowOperation"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/WorkflowOperation"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Microflows$ContinueOperation"
+              }
+            }
+          }
         }
       ]
     },
@@ -1232,7 +1532,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/MicroflowAction"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/MicroflowAction"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Microflows$MeterAction"
+              }
+            }
+          }
         }
       ]
     },
@@ -1257,7 +1567,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/MeterAction"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/MeterAction"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Microflows$CounterMeterAction"
+              }
+            }
+          }
         }
       ]
     },
@@ -1286,7 +1606,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/MicroflowAction"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/MicroflowAction"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Microflows$CreateListAction"
+              }
+            }
+          }
         }
       ]
     },
@@ -1315,7 +1645,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/ChangeMembersAction"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/ChangeMembersAction"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Microflows$CreateObjectAction"
+              }
+            }
+          }
         }
       ]
     },
@@ -1348,7 +1688,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/MicroflowAction"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/MicroflowAction"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Microflows$CreateVariableAction"
+              }
+            }
+          }
         }
       ]
     },
@@ -1377,7 +1727,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/Range"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/Range"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Microflows$CustomRange"
+              }
+            }
+          }
         }
       ]
     },
@@ -1402,7 +1762,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/RequestHandling"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/RequestHandling"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Microflows$CustomRequestHandling"
+              }
+            }
+          }
         }
       ]
     },
@@ -1439,7 +1809,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/RetrieveSource"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/RetrieveSource"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Microflows$DatabaseRetrieveSource"
+              }
+            }
+          }
         }
       ]
     },
@@ -1468,7 +1848,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/MicroflowAction"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/MicroflowAction"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Microflows$DeleteAction"
+              }
+            }
+          }
         }
       ]
     },
@@ -1497,7 +1887,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/MicroflowAction"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/MicroflowAction"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Microflows$DeleteExternalObject"
+              }
+            }
+          }
         }
       ]
     },
@@ -1550,7 +1950,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/MicroflowAction"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/MicroflowAction"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Microflows$DownloadFileAction"
+              }
+            }
+          }
         }
       ]
     },
@@ -1579,7 +1989,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/MicroflowObject"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/MicroflowObject"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Microflows$EndEvent"
+              }
+            }
+          }
         }
       ]
     },
@@ -1604,7 +2024,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/ExpressionBasedCodeActionParameterValue"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/ExpressionBasedCodeActionParameterValue"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Microflows$EntityTypeCodeActionParameterValue"
+              }
+            }
+          }
         }
       ]
     },
@@ -1629,7 +2059,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/JavaActionParameterValue"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/JavaActionParameterValue"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Microflows$EntityTypeJavaActionParameterValue"
+              }
+            }
+          }
         }
       ]
     },
@@ -1654,7 +2094,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/CaseValue"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/CaseValue"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Microflows$EnumerationCase"
+              }
+            }
+          }
         }
       ]
     },
@@ -1675,7 +2125,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/MicroflowObject"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/MicroflowObject"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Microflows$ErrorEvent"
+              }
+            }
+          }
         }
       ]
     },
@@ -1696,7 +2156,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/MicroflowObject"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/MicroflowObject"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Microflows$ExclusiveMerge"
+              }
+            }
+          }
         }
       ]
     },
@@ -1739,7 +2209,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/MicroflowObject"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/MicroflowObject"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Microflows$ExclusiveSplit"
+              }
+            }
+          }
         }
       ]
     },
@@ -1764,7 +2244,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/JavaActionParameterValue"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/JavaActionParameterValue"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Microflows$ExportMappingJavaActionParameterValue"
+              }
+            }
+          }
         }
       ]
     },
@@ -1789,7 +2279,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/ExpressionBasedCodeActionParameterValue"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/ExpressionBasedCodeActionParameterValue"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Microflows$ExportMappingParameterValue"
+              }
+            }
+          }
         }
       ]
     },
@@ -1822,7 +2322,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/MicroflowAction"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/MicroflowAction"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Microflows$ExportXmlAction"
+              }
+            }
+          }
         }
       ]
     },
@@ -1847,7 +2357,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/ListOperation"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/ListOperation"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Microflows$ExpressionListOperation"
+              }
+            }
+          }
         }
       ]
     },
@@ -1888,7 +2408,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/SplitCondition"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/SplitCondition"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Microflows$ExpressionSplitCondition"
+              }
+            }
+          }
         }
       ]
     },
@@ -1967,7 +2497,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/OutputMethod"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/OutputMethod"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Microflows$FileDocumentExport"
+              }
+            }
+          }
         }
       ]
     },
@@ -2000,7 +2540,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/ListOperation"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/ListOperation"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Microflows$InspectAttribute"
+              }
+            }
+          }
         }
       ]
     },
@@ -2021,7 +2571,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/InspectAttribute"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/InspectAttribute"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Microflows$Filter"
+              }
+            }
+          }
         }
       ]
     },
@@ -2042,7 +2602,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/ExpressionListOperation"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/ExpressionListOperation"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Microflows$FilterByExpression"
+              }
+            }
+          }
         }
       ]
     },
@@ -2063,7 +2633,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/InspectAttribute"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/InspectAttribute"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Microflows$Find"
+              }
+            }
+          }
         }
       ]
     },
@@ -2084,7 +2664,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/ExpressionListOperation"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/ExpressionListOperation"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Microflows$FindByExpression"
+              }
+            }
+          }
         }
       ]
     },
@@ -2141,7 +2731,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/RequestHandling"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/RequestHandling"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Microflows$FormDataRequestHandling"
+              }
+            }
+          }
         }
       ]
     },
@@ -2166,7 +2766,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/MeterAction"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/MeterAction"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Microflows$GaugeMeterAction"
+              }
+            }
+          }
         }
       ]
     },
@@ -2256,7 +2866,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/MicroflowAction"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/MicroflowAction"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Microflows$GenerateDocumentAction"
+              }
+            }
+          }
         }
       ]
     },
@@ -2285,7 +2905,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/MicroflowAction"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/MicroflowAction"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Microflows$GenerateJumpToOptionsAction"
+              }
+            }
+          }
         }
       ]
     },
@@ -2314,7 +2944,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/MicroflowAction"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/MicroflowAction"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Microflows$GetWorkflowActivityRecordsAction"
+              }
+            }
+          }
         }
       ]
     },
@@ -2347,7 +2987,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/MicroflowAction"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/MicroflowAction"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Microflows$GetWorkflowDataAction"
+              }
+            }
+          }
         }
       ]
     },
@@ -2376,7 +3026,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/MicroflowAction"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/MicroflowAction"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Microflows$GetWorkflowsAction"
+              }
+            }
+          }
         }
       ]
     },
@@ -2397,7 +3057,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/ListOperation"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/ListOperation"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Microflows$Head"
+              }
+            }
+          }
         }
       ]
     },
@@ -2548,7 +3218,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/JavaActionParameterValue"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/JavaActionParameterValue"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Microflows$ImportMappingJavaActionParameterValue"
+              }
+            }
+          }
         }
       ]
     },
@@ -2573,7 +3253,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/ExpressionBasedCodeActionParameterValue"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/ExpressionBasedCodeActionParameterValue"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Microflows$ImportMappingParameterValue"
+              }
+            }
+          }
         }
       ]
     },
@@ -2606,7 +3296,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/MicroflowAction"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/MicroflowAction"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Microflows$ImportXmlAction"
+              }
+            }
+          }
         }
       ]
     },
@@ -2658,7 +3358,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/MeterAction"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/MeterAction"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Microflows$IncrementCounterMeterAction"
+              }
+            }
+          }
         }
       ]
     },
@@ -2683,7 +3393,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/CaseValue"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/CaseValue"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Microflows$InheritanceCase"
+              }
+            }
+          }
         }
       ]
     },
@@ -2716,7 +3436,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/MicroflowObject"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/MicroflowObject"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Microflows$InheritanceSplit"
+              }
+            }
+          }
         }
       ]
     },
@@ -2737,7 +3467,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/BinaryListOperation"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/BinaryListOperation"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Microflows$Intersect"
+              }
+            }
+          }
         }
       ]
     },
@@ -2782,7 +3522,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/LoopSource"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/LoopSource"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Microflows$IterableList"
+              }
+            }
+          }
         }
       ]
     },
@@ -2824,7 +3574,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/MicroflowAction"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/MicroflowAction"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Microflows$JavaActionCallAction"
+              }
+            }
+          }
         }
       ]
     },
@@ -2854,7 +3614,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/CodeActionParameterMapping"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/CodeActionParameterMapping"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Microflows$JavaActionParameterMapping"
+              }
+            }
+          }
         }
       ]
     },
@@ -2893,7 +3663,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/MicroflowAction"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/MicroflowAction"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Microflows$JavaScriptActionCallAction"
+              }
+            }
+          }
         }
       ]
     },
@@ -2923,7 +3703,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/CodeActionParameterMapping"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/CodeActionParameterMapping"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Microflows$JavaScriptActionParameterMapping"
+              }
+            }
+          }
         }
       ]
     },
@@ -2944,7 +3734,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/BinaryListOperation"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/BinaryListOperation"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Microflows$ListEquals"
+              }
+            }
+          }
         }
       ]
     },
@@ -2973,7 +3773,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/MicroflowAction"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/MicroflowAction"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Microflows$ListOperationAction"
+              }
+            }
+          }
         }
       ]
     },
@@ -2998,7 +3808,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/ListOperation"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/ListOperation"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Microflows$ListRange"
+              }
+            }
+          }
         }
       ]
     },
@@ -3026,7 +3846,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/MicroflowAction"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/MicroflowAction"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Microflows$LockWorkflowAction"
+              }
+            }
+          }
         }
       ]
     },
@@ -3070,7 +3900,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/MicroflowAction"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/MicroflowAction"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Microflows$LogMessageAction"
+              }
+            }
+          }
         }
       ]
     },
@@ -3113,7 +3953,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/Activity"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/Activity"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Microflows$LoopedActivity"
+              }
+            }
+          }
         }
       ]
     },
@@ -3176,7 +4026,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/MicroflowAction"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/MicroflowAction"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Microflows$MLModelCallAction"
+              }
+            }
+          }
         }
       ]
     },
@@ -3244,7 +4104,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/RequestHandling"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/RequestHandling"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Microflows$MappingRequestHandling"
+              }
+            }
+          }
         }
       ]
     },
@@ -3347,7 +4217,17 @@
       ],
       "allOf": [
         {
-          "$ref": "projects.schema.json#/definitions/Document"
+          "$merge": {
+            "source": {
+              "$ref": "projects.schema.json#/definitions/Document"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Microflows$MicroflowBase"
+              }
+            }
+          }
         }
       ]
     },
@@ -3372,7 +4252,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/MicroflowBase"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/MicroflowBase"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Microflows$ServerSideMicroflow"
+              }
+            }
+          }
         }
       ]
     },
@@ -3433,7 +4323,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/ServerSideMicroflow"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/ServerSideMicroflow"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Microflows$Microflow"
+              }
+            }
+          }
         }
       ]
     },
@@ -3495,7 +4395,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/MicroflowAction"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/MicroflowAction"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Microflows$MicroflowCallAction"
+              }
+            }
+          }
         }
       ]
     },
@@ -3545,7 +4455,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/JavaActionParameterValue"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/JavaActionParameterValue"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Microflows$MicroflowJavaActionParameterValue"
+              }
+            }
+          }
         }
       ]
     },
@@ -3612,7 +4532,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/MicroflowParameterBase"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/MicroflowParameterBase"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Microflows$MicroflowParameter"
+              }
+            }
+          }
         }
       ]
     },
@@ -3642,7 +4572,17 @@
       ],
       "allOf": [
         {
-          "$ref": "url.schema.json#/definitions/UrlSegment"
+          "$merge": {
+            "source": {
+              "$ref": "url.schema.json#/definitions/UrlSegment"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Microflows$MicroflowParameterAttributeUrlSegment"
+              }
+            }
+          }
         }
       ]
     },
@@ -3687,7 +4627,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/MicroflowObject"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/MicroflowObject"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Microflows$MicroflowParameterObject"
+              }
+            }
+          }
         }
       ]
     },
@@ -3712,7 +4662,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/ExpressionBasedCodeActionParameterValue"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/ExpressionBasedCodeActionParameterValue"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Microflows$MicroflowParameterValue"
+              }
+            }
+          }
         }
       ]
     },
@@ -3737,7 +4697,17 @@
       ],
       "allOf": [
         {
-          "$ref": "url.schema.json#/definitions/UrlSegment"
+          "$merge": {
+            "source": {
+              "$ref": "url.schema.json#/definitions/UrlSegment"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Microflows$MicroflowPrimitiveParameterUrlSegment"
+              }
+            }
+          }
         }
       ]
     },
@@ -3765,7 +4735,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/MicroflowBase"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/MicroflowBase"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Microflows$Nanoflow"
+              }
+            }
+          }
         }
       ]
     },
@@ -3824,7 +4804,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/MicroflowAction"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/MicroflowAction"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Microflows$NanoflowCallAction"
+              }
+            }
+          }
         }
       ]
     },
@@ -3870,7 +4860,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/MicroflowParameterBase"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/MicroflowParameterBase"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Microflows$NanoflowParameter"
+              }
+            }
+          }
         }
       ]
     },
@@ -3891,7 +4891,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/CaseValue"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/CaseValue"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Microflows$NoCase"
+              }
+            }
+          }
         }
       ]
     },
@@ -3924,7 +4934,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/MicroflowAction"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/MicroflowAction"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Microflows$NotifyWorkflowAction"
+              }
+            }
+          }
         }
       ]
     },
@@ -3957,7 +4977,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/MicroflowAction"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/MicroflowAction"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Microflows$OpenUserTaskAction"
+              }
+            }
+          }
         }
       ]
     },
@@ -3982,7 +5012,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/MicroflowAction"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/MicroflowAction"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Microflows$OpenWorkflowAction"
+              }
+            }
+          }
         }
       ]
     },
@@ -4006,7 +5046,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/Line"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/Line"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Microflows$OrthogonalPath"
+              }
+            }
+          }
         }
       ]
     },
@@ -4051,7 +5101,17 @@
       ],
       "allOf": [
         {
-          "$ref": "url.schema.json#/definitions/UrlSegment"
+          "$merge": {
+            "source": {
+              "$ref": "url.schema.json#/definitions/UrlSegment"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Microflows$ParameterIdUrlSegment"
+              }
+            }
+          }
         }
       ]
     },
@@ -4076,7 +5136,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/WorkflowOperation"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/WorkflowOperation"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Microflows$PauseOperation"
+              }
+            }
+          }
         }
       ]
     },
@@ -4127,7 +5197,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/TypedTemplateArgument"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/TypedTemplateArgument"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Microflows$PrimitiveTypedTemplateArgument"
+              }
+            }
+          }
         }
       ]
     },
@@ -4188,7 +5268,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/MicroflowAction"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/MicroflowAction"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Microflows$PushToClientAction"
+              }
+            }
+          }
         }
       ]
     },
@@ -4268,7 +5358,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/MicroflowAction"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/MicroflowAction"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Microflows$RestCallAction"
+              }
+            }
+          }
         }
       ]
     },
@@ -4308,7 +5408,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/MicroflowAction"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/MicroflowAction"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Microflows$RestOperationCallAction"
+              }
+            }
+          }
         }
       ]
     },
@@ -4383,7 +5493,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/WorkflowOperation"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/WorkflowOperation"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Microflows$RestartOperation"
+              }
+            }
+          }
         }
       ]
     },
@@ -4439,7 +5559,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/WorkflowOperation"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/WorkflowOperation"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Microflows$ResumeOperation"
+              }
+            }
+          }
         }
       ]
     },
@@ -4468,7 +5598,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/MicroflowAction"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/MicroflowAction"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Microflows$RetrieveAction"
+              }
+            }
+          }
         }
       ]
     },
@@ -4493,7 +5633,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/WorkflowOperation"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/WorkflowOperation"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Microflows$RetryOperation"
+              }
+            }
+          }
         }
       ]
     },
@@ -4522,7 +5672,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/MicroflowAction"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/MicroflowAction"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Microflows$RollbackAction"
+              }
+            }
+          }
         }
       ]
     },
@@ -4543,7 +5703,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/ServerSideMicroflow"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/ServerSideMicroflow"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Microflows$Rule"
+              }
+            }
+          }
         }
       ]
     },
@@ -4615,7 +5785,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/MicroflowParameterBase"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/MicroflowParameterBase"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Microflows$RuleParameter"
+              }
+            }
+          }
         }
       ]
     },
@@ -4640,7 +5820,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/SplitCondition"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/SplitCondition"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Microflows$RuleSplitCondition"
+              }
+            }
+          }
         }
       ]
     },
@@ -4669,7 +5859,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/MicroflowAction"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/MicroflowAction"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Microflows$SendExternalObject"
+              }
+            }
+          }
         }
       ]
     },
@@ -4700,7 +5900,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/Flow"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/Flow"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Microflows$SequenceFlow"
+              }
+            }
+          }
         }
       ]
     },
@@ -4729,7 +5939,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/MicroflowAction"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/MicroflowAction"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Microflows$SetTaskOutcomeAction"
+              }
+            }
+          }
         }
       ]
     },
@@ -4750,7 +5970,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/MicroflowAction"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/MicroflowAction"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Microflows$ShowHomePageAction"
+              }
+            }
+          }
         }
       ]
     },
@@ -4787,7 +6017,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/MicroflowAction"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/MicroflowAction"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Microflows$ShowMessageAction"
+              }
+            }
+          }
         }
       ]
     },
@@ -4816,7 +6056,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/MicroflowAction"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/MicroflowAction"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Microflows$ShowPageAction"
+              }
+            }
+          }
         }
       ]
     },
@@ -4850,7 +6100,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/RequestHandling"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/RequestHandling"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Microflows$SimpleRequestHandling"
+              }
+            }
+          }
         }
       ]
     },
@@ -4875,7 +6135,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/ListOperation"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/ListOperation"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Microflows$Sort"
+              }
+            }
+          }
         }
       ]
     },
@@ -4945,7 +6215,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/MicroflowObject"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/MicroflowObject"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Microflows$StartEvent"
+              }
+            }
+          }
         }
       ]
     },
@@ -4972,7 +6252,17 @@
       ],
       "allOf": [
         {
-          "$ref": "mappings.schema.json#/definitions/MappingSourceDocument"
+          "$merge": {
+            "source": {
+              "$ref": "mappings.schema.json#/definitions/MappingSourceDocument"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Microflows$Template"
+              }
+            }
+          }
         }
       ]
     },
@@ -4997,7 +6287,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/Template"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/Template"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Microflows$StringTemplate"
+              }
+            }
+          }
         }
       ]
     },
@@ -5022,7 +6322,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/CodeActionParameterValue"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/CodeActionParameterValue"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Microflows$StringTemplateParameterValue"
+              }
+            }
+          }
         }
       ]
     },
@@ -5043,7 +6353,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/BinaryListOperation"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/BinaryListOperation"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Microflows$Subtract"
+              }
+            }
+          }
         }
       ]
     },
@@ -5075,7 +6395,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/MicroflowAction"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/MicroflowAction"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Microflows$SynchronizeAction"
+              }
+            }
+          }
         }
       ]
     },
@@ -5096,7 +6426,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/ListOperation"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/ListOperation"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Microflows$Tail"
+              }
+            }
+          }
         }
       ]
     },
@@ -5141,7 +6481,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/Template"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/Template"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Microflows$TextTemplate"
+              }
+            }
+          }
         }
       ]
     },
@@ -5188,7 +6538,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/BinaryListOperation"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/BinaryListOperation"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Microflows$Union"
+              }
+            }
+          }
         }
       ]
     },
@@ -5216,7 +6576,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/MicroflowAction"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/MicroflowAction"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Microflows$UnlockWorkflowAction"
+              }
+            }
+          }
         }
       ]
     },
@@ -5241,7 +6611,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/WorkflowOperation"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/WorkflowOperation"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Microflows$UnpauseOperation"
+              }
+            }
+          }
         }
       ]
     },
@@ -5278,7 +6658,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/MicroflowAction"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/MicroflowAction"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Microflows$ValidationFeedbackAction"
+              }
+            }
+          }
         }
       ]
     },
@@ -5303,7 +6693,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/OutputMethod"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/OutputMethod"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Microflows$VariableExport"
+              }
+            }
+          }
         }
       ]
     },
@@ -5375,7 +6775,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/MicroflowAction"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/MicroflowAction"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Microflows$WebServiceCallAction"
+              }
+            }
+          }
         }
       ]
     },
@@ -5432,7 +6842,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/WebServiceOperationParameterMapping"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/WebServiceOperationParameterMapping"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Microflows$WebServiceOperationAdvancedParameterMapping"
+              }
+            }
+          }
         }
       ]
     },
@@ -5457,7 +6877,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/WebServiceOperationParameterMapping"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/WebServiceOperationParameterMapping"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Microflows$WebServiceOperationSimpleParameterMapping"
+              }
+            }
+          }
         }
       ]
     },
@@ -5486,7 +6916,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/LoopSource"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/LoopSource"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Microflows$WhileLoopCondition"
+              }
+            }
+          }
         }
       ]
     },
@@ -5523,7 +6963,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/MicroflowAction"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/MicroflowAction"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Microflows$WorkflowCallAction"
+              }
+            }
+          }
         }
       ]
     },
@@ -5548,7 +6998,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/MicroflowAction"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/MicroflowAction"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Microflows$WorkflowOperationAction"
+              }
+            }
+          }
         }
       ]
     },
@@ -5557,6 +7017,12 @@
       "oneOf": [
         {
           "$ref": "#/definitions/MicroflowAction"
+        },
+        {
+          "$ref": "microflows.schema.json#/definitions/ExecuteDatabaseQueryAction"
+        },
+        {
+          "$ref": "microflows.schema.json#/definitions/ImportExcelDataAction"
         },
         {
           "$ref": "#/definitions/AggregateListAction"
@@ -5780,6 +7246,9 @@
         },
         {
           "$ref": "#/definitions/StringTemplateParameterValue"
+        },
+        {
+          "$ref": "microflows.schema.json#/definitions/NanoflowParameterValue"
         }
       ]
     },

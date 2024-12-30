@@ -38,7 +38,7 @@
           }
         },
         "csvRootElement": {
-          "$ref": "#/definitions/DataImporterElement"
+          "$ref": "mappings.schema.json#/definitions/DataImporterElement"
         }
       },
       "required": [
@@ -48,7 +48,17 @@
       ],
       "allOf": [
         {
-          "$ref": "mappings.schema.json#/definitions/MappingSource"
+          "$merge": {
+            "source": {
+              "$ref": "mappings.schema.json#/definitions/MappingSource"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "ExcelDataImporter$CSVSheet"
+              }
+            }
+          }
         }
       ]
     },
@@ -79,7 +89,7 @@
           "const": "ExcelDataImporter$CSVTemplateContents"
         },
         "sheet": {
-          "$ref": "#/definitions/CSVSheet"
+          "$ref": "mappings.schema.json#/definitions/CSVSheet"
         }
       },
       "required": [
@@ -89,7 +99,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/TemplateContents"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/TemplateContents"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "ExcelDataImporter$CSVTemplateContents"
+              }
+            }
+          }
         }
       ]
     },
@@ -130,7 +150,7 @@
         },
         "csvSheet": {
           "type": "string",
-          "description": "ByNameReferenceProperty: #/definitions/CSVSheet"
+          "description": "ByNameReferenceProperty: mappings.schema.json#/definitions/CSVSheet"
         }
       },
       "required": [
@@ -140,7 +160,17 @@
       ],
       "allOf": [
         {
-          "$ref": "mappings.schema.json#/definitions/MappingSourceReference"
+          "$merge": {
+            "source": {
+              "$ref": "mappings.schema.json#/definitions/MappingSourceReference"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "ExcelDataImporter$CsvSheetMappingSourceReference"
+              }
+            }
+          }
         }
       ]
     },
@@ -164,7 +194,17 @@
       ],
       "allOf": [
         {
-          "$ref": "mappings.schema.json#/definitions/Element"
+          "$merge": {
+            "source": {
+              "$ref": "mappings.schema.json#/definitions/Element"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "ExcelDataImporter$DataImporterElement"
+              }
+            }
+          }
         }
       ]
     },
@@ -200,7 +240,7 @@
           }
         },
         "excelRootElement": {
-          "$ref": "#/definitions/DataImporterElement"
+          "$ref": "mappings.schema.json#/definitions/DataImporterElement"
         }
       },
       "required": [
@@ -211,7 +251,17 @@
       ],
       "allOf": [
         {
-          "$ref": "mappings.schema.json#/definitions/MappingSource"
+          "$merge": {
+            "source": {
+              "$ref": "mappings.schema.json#/definitions/MappingSource"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "ExcelDataImporter$ExcelSheet"
+              }
+            }
+          }
         }
       ]
     },
@@ -227,7 +277,7 @@
         },
         "excelSheet": {
           "type": "string",
-          "description": "ByNameReferenceProperty: #/definitions/ExcelSheet"
+          "description": "ByNameReferenceProperty: mappings.schema.json#/definitions/ExcelSheet"
         }
       },
       "required": [
@@ -237,7 +287,17 @@
       ],
       "allOf": [
         {
-          "$ref": "mappings.schema.json#/definitions/MappingSourceReference"
+          "$merge": {
+            "source": {
+              "$ref": "mappings.schema.json#/definitions/MappingSourceReference"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "ExcelDataImporter$ExcelSheetMappingSourceReference"
+              }
+            }
+          }
         }
       ]
     },
@@ -254,7 +314,7 @@
         "sheets": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/ExcelSheet"
+            "$ref": "mappings.schema.json#/definitions/ExcelSheet"
           }
         }
       },
@@ -264,7 +324,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/TemplateContents"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/TemplateContents"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "ExcelDataImporter$ExcelTemplateContents"
+              }
+            }
+          }
         }
       ]
     },
@@ -288,7 +358,7 @@
         },
         "template": {
           "type": "string",
-          "description": "ByNameReferenceProperty: #/definitions/Template"
+          "description": "ByNameReferenceProperty: mappings.schema.json#/definitions/Template or #/definitions/StringTemplate or #/definitions/TextTemplate"
         }
       },
       "required": [
@@ -297,7 +367,17 @@
       ],
       "allOf": [
         {
-          "$ref": "microflows.schema.json#/definitions/MicroflowAction"
+          "$merge": {
+            "source": {
+              "$ref": "microflows.schema.json#/definitions/MicroflowAction"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "ExcelDataImporter$ImportExcelDataAction"
+              }
+            }
+          }
         }
       ]
     },
@@ -338,7 +418,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/Reference"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/Reference"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "ExcelDataImporter$IndexReference"
+              }
+            }
+          }
         }
       ]
     },
@@ -363,7 +453,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/Reference"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/Reference"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "ExcelDataImporter$NameReference"
+              }
+            }
+          }
         }
       ]
     },
@@ -438,7 +538,17 @@
       ],
       "allOf": [
         {
-          "$ref": "mappings.schema.json#/definitions/MappingSourceDocument"
+          "$merge": {
+            "source": {
+              "$ref": "mappings.schema.json#/definitions/MappingSourceDocument"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "ExcelDataImporter$Template"
+              }
+            }
+          }
         }
       ]
     },

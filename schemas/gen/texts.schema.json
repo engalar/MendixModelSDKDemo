@@ -48,7 +48,17 @@
       ],
       "allOf": [
         {
-          "$ref": "projects.schema.json#/definitions/ProjectDocument"
+          "$merge": {
+            "source": {
+              "$ref": "projects.schema.json#/definitions/ProjectDocument"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Texts$SystemTextCollection"
+              }
+            }
+          }
         }
       ]
     },

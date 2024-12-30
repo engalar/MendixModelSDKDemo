@@ -42,7 +42,7 @@
           }
         },
         "remoteSource": {
-          "$ref": "#/definitions/RemoteEnumerationSource"
+          "$ref": "#/definitions/RemoteEnumerationSourceWithSubclasses"
         }
       },
       "required": [
@@ -51,7 +51,17 @@
       ],
       "allOf": [
         {
-          "$ref": "projects.schema.json#/definitions/Document"
+          "$merge": {
+            "source": {
+              "$ref": "projects.schema.json#/definitions/Document"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Enumerations$Enumeration"
+              }
+            }
+          }
         }
       ]
     },
@@ -77,7 +87,7 @@
           "description": "ByNameReferenceProperty: images.schema.json#/definitions/Image"
         },
         "remoteValue": {
-          "$ref": "#/definitions/RemoteEnumerationValue"
+          "$ref": "#/definitions/RemoteEnumerationValueWithSubclasses"
         }
       },
       "required": [
@@ -116,6 +126,28 @@
       "required": [
         "$ID",
         "$Type"
+      ]
+    },
+    "RemoteEnumerationSourceWithSubclasses": {
+      "type": "object",
+      "oneOf": [
+        {
+          "$ref": "#/definitions/RemoteEnumerationSource"
+        },
+        {
+          "$ref": "enumerations.schema.json#/definitions/ODataRemoteEnumerationSource"
+        }
+      ]
+    },
+    "RemoteEnumerationValueWithSubclasses": {
+      "type": "object",
+      "oneOf": [
+        {
+          "$ref": "#/definitions/RemoteEnumerationValue"
+        },
+        {
+          "$ref": "enumerations.schema.json#/definitions/ODataRemoteEnumerationValue"
+        }
       ]
     }
   }

@@ -42,7 +42,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/AuthenticationScheme"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/AuthenticationScheme"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Rest$BasicAuthenticationScheme"
+              }
+            }
+          }
         }
       ]
     },
@@ -100,7 +110,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/ChangeMode"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/ChangeMode"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Rest$CallMicroflowToChange"
+              }
+            }
+          }
         }
       ]
     },
@@ -141,7 +161,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/ReadMode"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/ReadMode"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Rest$CallMicroflowToRead"
+              }
+            }
+          }
         }
       ]
     },
@@ -162,7 +192,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/ChangeMode"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/ChangeMode"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Rest$ChangeNotSupported"
+              }
+            }
+          }
         }
       ]
     },
@@ -183,7 +223,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/ChangeMode"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/ChangeMode"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Rest$ChangeSource"
+              }
+            }
+          }
         }
       ]
     },
@@ -225,7 +275,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/Value"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/Value"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Rest$ConstantValue"
+              }
+            }
+          }
         }
       ]
     },
@@ -303,7 +363,17 @@
       ],
       "allOf": [
         {
-          "$ref": "domainmodels.schema.json#/definitions/RemoteEntitySourceDocument"
+          "$merge": {
+            "source": {
+              "$ref": "domainmodels.schema.json#/definitions/RemoteEntitySourceDocument"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Rest$ConsumedODataService"
+              }
+            }
+          }
         }
       ]
     },
@@ -340,7 +410,17 @@
       ],
       "allOf": [
         {
-          "$ref": "projects.schema.json#/definitions/Document"
+          "$merge": {
+            "source": {
+              "$ref": "projects.schema.json#/definitions/Document"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Rest$ConsumedRestService"
+              }
+            }
+          }
         }
       ]
     },
@@ -421,7 +501,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/Body"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/Body"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Rest$ImplicitMappingBody"
+              }
+            }
+          }
         }
       ]
     },
@@ -470,7 +560,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/RestOperationResponseHandling"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/RestOperationResponseHandling"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Rest$ImplicitMappingResponseHandling"
+              }
+            }
+          }
         }
       ]
     },
@@ -521,7 +621,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/RestOperationResponseHandling"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/RestOperationResponseHandling"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Rest$NoResponseHandling"
+              }
+            }
+          }
         }
       ]
     },
@@ -541,7 +651,7 @@
         },
         "sourceDocument": {
           "type": "string",
-          "description": "ByNameReferenceProperty: #/definitions/ConsumedODataService"
+          "description": "ByNameReferenceProperty: domainmodels.schema.json#/definitions/ConsumedODataService"
         },
         "key": {
           "$ref": "#/definitions/ODataKey"
@@ -553,7 +663,17 @@
       ],
       "allOf": [
         {
-          "$ref": "domainmodels.schema.json#/definitions/RemoteEntitySource"
+          "$merge": {
+            "source": {
+              "$ref": "domainmodels.schema.json#/definitions/RemoteEntitySource"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Rest$ODataEntityTypeSource"
+              }
+            }
+          }
         }
       ]
     },
@@ -660,7 +780,17 @@
       ],
       "allOf": [
         {
-          "$ref": "domainmodels.schema.json#/definitions/MappedValue"
+          "$merge": {
+            "source": {
+              "$ref": "domainmodels.schema.json#/definitions/MappedValue"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Rest$ODataMappedValue"
+              }
+            }
+          }
         }
       ]
     },
@@ -708,7 +838,17 @@
       ],
       "allOf": [
         {
-          "$ref": "domainmodels.schema.json#/definitions/RemoteAssociationSource"
+          "$merge": {
+            "source": {
+              "$ref": "domainmodels.schema.json#/definitions/RemoteAssociationSource"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Rest$ODataRemoteAssociationSource"
+              }
+            }
+          }
         }
       ]
     },
@@ -756,7 +896,7 @@
         },
         "sourceDocument": {
           "type": "string",
-          "description": "ByNameReferenceProperty: #/definitions/ConsumedODataService"
+          "description": "ByNameReferenceProperty: domainmodels.schema.json#/definitions/ConsumedODataService"
         },
         "key": {
           "$ref": "#/definitions/ODataKey"
@@ -768,7 +908,17 @@
       ],
       "allOf": [
         {
-          "$ref": "domainmodels.schema.json#/definitions/QueryBasedRemoteEntitySource"
+          "$merge": {
+            "source": {
+              "$ref": "domainmodels.schema.json#/definitions/QueryBasedRemoteEntitySource"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Rest$ODataRemoteEntitySource"
+              }
+            }
+          }
         }
       ]
     },
@@ -788,7 +938,7 @@
         },
         "consumedODataService": {
           "type": "string",
-          "description": "ByNameReferenceProperty: #/definitions/ConsumedODataService"
+          "description": "ByNameReferenceProperty: domainmodels.schema.json#/definitions/ConsumedODataService"
         }
       },
       "required": [
@@ -797,7 +947,17 @@
       ],
       "allOf": [
         {
-          "$ref": "enumerations.schema.json#/definitions/RemoteEnumerationSource"
+          "$merge": {
+            "source": {
+              "$ref": "enumerations.schema.json#/definitions/RemoteEnumerationSource"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Rest$ODataRemoteEnumerationSource"
+              }
+            }
+          }
         }
       ]
     },
@@ -822,7 +982,17 @@
       ],
       "allOf": [
         {
-          "$ref": "enumerations.schema.json#/definitions/RemoteEnumerationValue"
+          "$merge": {
+            "source": {
+              "$ref": "enumerations.schema.json#/definitions/RemoteEnumerationValue"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Rest$ODataRemoteEnumerationValue"
+              }
+            }
+          }
         }
       ]
     },
@@ -1094,7 +1264,7 @@
         "resources": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/PublishedRestResource"
+            "$ref": "webservices.schema.json#/definitions/PublishedRestResource"
           }
         },
         "microflows": {
@@ -1133,7 +1303,17 @@
       ],
       "allOf": [
         {
-          "$ref": "projects.schema.json#/definitions/Document"
+          "$merge": {
+            "source": {
+              "$ref": "projects.schema.json#/definitions/Document"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Rest$PublishedODataService"
+              }
+            }
+          }
         }
       ]
     },
@@ -1198,7 +1378,17 @@
       ],
       "allOf": [
         {
-          "$ref": "webservices.schema.json#/definitions/PublishedResource"
+          "$merge": {
+            "source": {
+              "$ref": "webservices.schema.json#/definitions/PublishedResource"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Rest$PublishedRestResource"
+              }
+            }
+          }
         }
       ]
     },
@@ -1263,7 +1453,17 @@
       ],
       "allOf": [
         {
-          "$ref": "projects.schema.json#/definitions/Document"
+          "$merge": {
+            "source": {
+              "$ref": "projects.schema.json#/definitions/Document"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Rest$PublishedRestService"
+              }
+            }
+          }
         }
       ]
     },
@@ -1401,7 +1601,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/ReadMode"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/ReadMode"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Rest$ReadSource"
+              }
+            }
+          }
         }
       ]
     },
@@ -1493,7 +1703,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/RestOperationMethod"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/RestOperationMethod"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Rest$RestOperationMethodWithBody"
+              }
+            }
+          }
         }
       ]
     },
@@ -1514,7 +1734,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/RestOperationMethod"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/RestOperationMethod"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Rest$RestOperationMethodWithoutBody"
+              }
+            }
+          }
         }
       ]
     },
@@ -1633,7 +1863,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/Body"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/Body"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Rest$StringBody"
+              }
+            }
+          }
         }
       ]
     },
@@ -1658,7 +1898,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/Value"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/Value"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Rest$StringValue"
+              }
+            }
+          }
         }
       ]
     },

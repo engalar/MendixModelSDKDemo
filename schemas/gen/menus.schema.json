@@ -22,7 +22,17 @@
       ],
       "allOf": [
         {
-          "$ref": "projects.schema.json#/definitions/Document"
+          "$merge": {
+            "source": {
+              "$ref": "projects.schema.json#/definitions/Document"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Menus$MenuDocument"
+              }
+            }
+          }
         }
       ]
     },
@@ -79,7 +89,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/MenuItemContainer"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/MenuItemContainer"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Menus$MenuItem"
+              }
+            }
+          }
         }
       ]
     },
@@ -100,7 +120,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/MenuItemContainer"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/MenuItemContainer"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Menus$MenuItemCollection"
+              }
+            }
+          }
         }
       ]
     }

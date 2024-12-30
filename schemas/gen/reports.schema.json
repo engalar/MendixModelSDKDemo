@@ -26,7 +26,17 @@
       ],
       "allOf": [
         {
-          "$ref": "pages.schema.json#/definitions/Widget"
+          "$merge": {
+            "source": {
+              "$ref": "pages.schema.json#/definitions/Widget"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Reports$ReportWidget"
+              }
+            }
+          }
         }
       ]
     },
@@ -75,7 +85,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/ReportWidget"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/ReportWidget"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Reports$BasicReport"
+              }
+            }
+          }
         }
       ]
     },
@@ -172,7 +192,17 @@
       ],
       "allOf": [
         {
-          "$ref": "pages.schema.json#/definitions/Widget"
+          "$merge": {
+            "source": {
+              "$ref": "pages.schema.json#/definitions/Widget"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Reports$ReportButton"
+              }
+            }
+          }
         }
       ]
     },
@@ -257,7 +287,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/ReportWidget"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/ReportWidget"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Reports$ReportChart"
+              }
+            }
+          }
         }
       ]
     },
@@ -336,7 +376,17 @@
       ],
       "allOf": [
         {
-          "$ref": "pages.schema.json#/definitions/Widget"
+          "$merge": {
+            "source": {
+              "$ref": "pages.schema.json#/definitions/Widget"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Reports$ReportParameter"
+              }
+            }
+          }
         }
       ]
     },
@@ -387,7 +437,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/ReportParameter"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/ReportParameter"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Reports$ReportDateRangeSelector"
+              }
+            }
+          }
         }
       ]
     },
@@ -412,7 +472,17 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/ReportParameter"
+          "$merge": {
+            "source": {
+              "$ref": "#/definitions/ReportParameter"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Reports$ReportDropDown"
+              }
+            }
+          }
         }
       ]
     },
@@ -443,7 +513,17 @@
       ],
       "allOf": [
         {
-          "$ref": "pages.schema.json#/definitions/Widget"
+          "$merge": {
+            "source": {
+              "$ref": "pages.schema.json#/definitions/Widget"
+            },
+            "with": {
+              "$Type": {
+                "type": "string",
+                "const": "Reports$ReportPane"
+              }
+            }
+          }
         }
       ]
     },
