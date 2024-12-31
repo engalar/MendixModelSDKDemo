@@ -4,7 +4,26 @@
         "parentClass": "internal.Element",
         "properties": [
             "countable"
-        ]
+        ],
+        "structureTypeName": "DomainModels$EntityCapabilities",
+        "versionInfo": {
+            "introduced": "8.12.0",
+            "deleted": "9.0.1",
+            "deletionMessage": null,
+            "properties": {
+                "countable": {
+                    "public": {
+                        "currentValue": true,
+                        "changedIn": [
+                            "8.14.0"
+                        ]
+                    }
+                }
+            },
+            "public": {
+                "currentValue": true
+            }
+        }
     },
     {
         "className": "ValidationRule",
@@ -13,6 +32,26 @@
             "attribute",
             "errorMessage",
             "ruleInfo"
-        ]
+        ],
+        "structureTypeName": "DomainModels$ValidationRule",
+        "versionInfo": {
+            "properties": {
+                "attribute": {
+                    "required": {
+                        "currentValue": true
+                    }
+                },
+                "errorMessage": {
+                    "required": {
+                        "currentValue": true
+                    }
+                },
+                "ruleInfo": {
+                    "required": {
+                        "currentValue": true
+                    }
+                }
+            }
+        }
     }
 ]

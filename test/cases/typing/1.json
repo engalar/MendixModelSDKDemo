@@ -1,0 +1,20 @@
+{
+    "interface": {
+        "domainmodels.IEntityKey": {
+            "superClass": "internal.IElement",
+            "asLoaded": "domainmodels.EntityKey"
+        }
+    },
+    "clz": {
+        "domainmodels.ValidationRule": {
+            "superClass": "internal.Element<IModel>",
+            "getProperty": {
+                "containerAsEntity": "domainmodels.Entity",
+                "attribute": "domainmodels.IAttribute",
+                "attributeQualifiedName": "string",
+                "errorMessage": "texts.Text",
+                "ruleInfo": "domainmodels.RuleInfo"
+            }
+        }
+    }
+}
