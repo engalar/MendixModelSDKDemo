@@ -1,0 +1,15 @@
+[
+  {
+    "className": "domainmodels.AggregateFunction",
+    "parentClass": "internal.AbstractEnum",
+    "entries": [
+      "None",
+      "Average",
+      "Maximum",
+      "Minimum",
+      "Sum",
+      "Count"
+    ],
+    "module": "domainmodels"
+  }
+]

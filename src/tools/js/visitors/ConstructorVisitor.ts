@@ -1,4 +1,4 @@
-// src/tools/js/visitors/ConstructorVisitor.ts
+import { NodePath } from '@babel/traverse';
 import * as t from '@babel/types';
 
 export class ConstructorVisitor {
@@ -8,9 +8,9 @@ export class ConstructorVisitor {
     properties: string[];
   }> = [];
 
-  visit(path) {
+  visit(path: NodePath<t.ClassMethod>) {
     if (t.isClassMethod(path.node) && path.node.kind === 'constructor') {
-      const classDeclaration = path.findParent((p) => t.isClassDeclaration(p.node));
+      const classDeclaration = path.findParent((p) => t.isClassDeclaration(p.node)) as NodePath<t.ClassDeclaration>;
       if (classDeclaration) {
         const className = classDeclaration.node.id?.name || '';
 
@@ -27,9 +27,19 @@ export class ConstructorVisitor {
 
         // Extract properties starting with double underscores
         const properties = path.node.body.body
-          .filter((statement) => t.isExpressionStatement(statement) && t.isAssignmentExpression(statement.expression))
-          .map((statement) => statement.expression.left.property?.name)
-          .filter((propertyName) => propertyName && propertyName.startsWith('__'));
+          .filter((statement): statement is t.ExpressionStatement =>
+            t.isExpressionStatement(statement) &&
+            t.isAssignmentExpression(statement.expression) &&
+            t.isMemberExpression(statement.expression.left) &&
+            t.isIdentifier(statement.expression.left.property)
+          )
+          .map(statement => {
+            const assignmentExpression = statement.expression as t.AssignmentExpression;
+            const memberExpression = assignmentExpression.left as t.MemberExpression;
+            const identifier = memberExpression.property as t.Identifier;
+            return identifier.name;
+          })
+          .filter((propertyName): propertyName is string => propertyName && propertyName.startsWith('__'));
 
         if (properties.length > 0) {
           this.properties.push({

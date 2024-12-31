@@ -1,9 +1,9 @@
-import { extractDoubleUnderscoreProperties } from '../src/tools/js/extractor';
+import { extractPropertiesAndEnums } from '../src/tools/js/extractor';
 import * as fs from 'fs';
 import * as path from 'path';
 
 describe('extractDoubleUnderscoreProperties', () => {
-  const casesDir = path.join(__dirname, 'cases');
+  const casesDir = path.join(__dirname, 'cases/cls');
   const testCases = fs.readdirSync(casesDir)
     .filter(file => file.endsWith('.js'))
     .map(jsFile => {
@@ -23,8 +23,35 @@ describe('extractDoubleUnderscoreProperties', () => {
 
   testCases.forEach(({ description, code, expected }) => {
     it(description, () => {
-      const result = extractDoubleUnderscoreProperties(getDomainFramwork(code));
-      expect(result).toEqual(expected);
+      const result = extractPropertiesAndEnums(getDomainFramwork(code));
+      expect(result.doubleUnderscoreProperties).toEqual(expected);
+    });
+  });
+});
+
+describe('extractEnumClasses', () => {
+  const casesDir = path.join(__dirname, 'cases/enum');
+  const testCases = fs.readdirSync(casesDir)
+    .filter(file => file.endsWith('.js'))
+    .map(jsFile => {
+      const caseName = path.basename(jsFile, '.js');
+      const jsFilePath = path.join(casesDir, jsFile);
+      const expectJsonFilePath = path.join(casesDir, `${caseName}.json`);
+
+      const code = fs.readFileSync(jsFilePath, 'utf-8');
+      const expected = JSON.parse(fs.readFileSync(expectJsonFilePath, 'utf-8'));
+
+      return {
+        description: `should correctly extract enum classes for ${caseName}`,
+        code,
+        expected,
+      };
+    });
+
+  testCases.forEach(({ description, code, expected }) => {
+    it(description, () => {
+      const result = extractPropertiesAndEnums(getDomainFramwork(code));
+      expect(result.enumClasses).toEqual(expected);
     });
   });
 });
