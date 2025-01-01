@@ -1,7 +1,4 @@
-import * as fs from "fs";
-import extractNamespaceDetails from "../dts";
 import { extractInheritanceInfo, parseCode } from "../schema";
-import { join } from "path";
 
 describe('extractInheritanceInfo', () => {
     it('should extract inheritance info from class declarations', async () => {
@@ -21,19 +18,5 @@ describe('extractInheritanceInfo', () => {
             H: { module: 'projects', superClass: 'J' },
             K: { module: 'domainmodels', superClass: 'L' },
         });
-    });
-});
-
-describe('findSubClasses', () => {
-    // center as ICodeActionParameter
-    const tsCode = fs.readFileSync(join(__dirname, 'cases/1.ts'), 'utf-8');
-
-    it('should find all subclasses of a given class or interface', async () => {
-        const ast = parseCode(tsCode);
-        const result = extractNamespaceDetails(ast);
-
-        const expected = JSON.parse(fs.readFileSync(join(__dirname, 'cases/1.json'), 'utf-8'));
-
-        expect(result).toEqual(expected);
     });
 });

@@ -3,6 +3,7 @@ import * as t from '@babel/types';
 import traverse, { NodePath } from '@babel/traverse';
 import { DoubleUnderscoreStrategy } from './strategies/DoubleUnderscoreStrategy';
 import { ConstructorVisitor } from './visitors/ConstructorVisitor';
+import { getTypeAnnotation } from '../typing2';
 
 
 export function extractTypingInfo(code: string) {
@@ -25,21 +26,31 @@ export function extractTypingInfo(code: string) {
     // 处理接口
     TSInterfaceDeclaration(path: NodePath<t.TSInterfaceDeclaration>) {
       const interfaceName = path.node.id.name;
-      const superClass = path.node.extends?.[0]?.expression?.name || null;
+      let superClass;
       const properties: Record<string, string> = {};
+      if (path.node.extends?.length === 1) {//"TSExpressionWithTypeArguments"
+        const exp = path.node.extends?.[0]?.expression;//"TSQualifiedName"
+        if (t.isTSQualifiedName(exp) && t.isIdentifier(exp.left) && t.isIdentifier(exp.right)) {
+          superClass = `${exp.left.name}.${exp.right.name}`;
 
-      path.traverse({
-        TSPropertySignature(innerPath: NodePath<t.TSPropertySignature>) {
-          const propertyName = (innerPath.node.key as t.Identifier).name;
-          const propertyType = extractTypeAnnotation(innerPath.node.typeAnnotation);
-          properties[propertyName] = propertyType;
-        },
-      });
+          path.traverse({
+            TSPropertySignature(innerPath: NodePath<t.TSPropertySignature>) {
+              const propertyName = (innerPath.node.key as t.Identifier).name;
+              const propertyType = getTypeAnnotation(innerPath.node.typeAnnotation);
+              properties[propertyName] = propertyType;
+            },
+          });
 
-      result.interface[interfaceName] = {
-        superClass,
-        properties,
-      };
+          result.interface[interfaceName] = {
+            superClass,
+            properties,
+          };
+        }
+        return;
+      }
+      debugger
+
+
     },
 
     // 处理类
@@ -51,13 +62,18 @@ export function extractTypingInfo(code: string) {
       path.traverse({
         ClassProperty(innerPath: NodePath<t.ClassProperty>) {
           const propertyName = (innerPath.node.key as t.Identifier).name;
-          const propertyType = extractTypeAnnotation(innerPath.node.typeAnnotation);
-          properties[propertyName] = propertyType;
+          if (t.isTSTypeAnnotation(innerPath.node.typeAnnotation)) {
+            const propertyType = getTypeAnnotation(innerPath.node.typeAnnotation);
+            properties[propertyName] = propertyType;
+          } else {
+            debugger
+          }
         },
         ClassMethod(innerPath: NodePath<t.ClassMethod>) {
           if (innerPath.node.kind === 'get' || innerPath.node.kind === 'set') {
             const propertyName = (innerPath.node.key as t.Identifier).name;
-            const propertyType = extractTypeAnnotation(innerPath.node.returnType);
+            debugger
+            const propertyType = "";
             properties[propertyName] = propertyType;
           }
         },
@@ -72,7 +88,7 @@ export function extractTypingInfo(code: string) {
     // 处理类型别名
     TSTypeAliasDeclaration(path: NodePath<t.TSTypeAliasDeclaration>) {
       const aliasName = path.node.id.name;
-      const aliasType = extractTypeAnnotation(path.node.typeAnnotation);
+      const aliasType = getTypeAnnotation(path.node.typeAnnotation);
       result.typeAliases[aliasName] = aliasType;
     },
   });
@@ -80,42 +96,7 @@ export function extractTypingInfo(code: string) {
   return result;
 }
 
-// 提取类型注解
-function extractTypeAnnotation(typeAnnotation: t.TSTypeAnnotation | t.TSType | null): string {
-  if (!typeAnnotation) return 'any';
 
-  if (t.isTSTypeAnnotation(typeAnnotation)) {
-    return extractTypeAnnotation(typeAnnotation.typeAnnotation);
-  }
-
-  if (t.isTSStringKeyword(typeAnnotation)) return 'string';
-  if (t.isTSNumberKeyword(typeAnnotation)) return 'number';
-  if (t.isTSBooleanKeyword(typeAnnotation)) return 'boolean';
-  if (t.isTSAnyKeyword(typeAnnotation)) return 'any';
-  if (t.isTSVoidKeyword(typeAnnotation)) return 'void';
-  if (t.isTSNullKeyword(typeAnnotation)) return 'null';
-  if (t.isTSUndefinedKeyword(typeAnnotation)) return 'undefined';
-  if (t.isTSUnknownKeyword(typeAnnotation)) return 'unknown';
-  if (t.isTSNeverKeyword(typeAnnotation)) return 'never';
-
-  if (t.isTSTypeReference(typeAnnotation)) {
-    return typeAnnotation.typeName.name;
-  }
-
-  if (t.isTSArrayType(typeAnnotation)) {
-    return `${extractTypeAnnotation(typeAnnotation.elementType)}[]`;
-  }
-
-  if (t.isTSUnionType(typeAnnotation)) {
-    return typeAnnotation.types.map((t) => extractTypeAnnotation(t)).join(' | ');
-  }
-
-  if (t.isTSIntersectionType(typeAnnotation)) {
-    return typeAnnotation.types.map((t) => extractTypeAnnotation(t)).join(' & ');
-  }
-
-  return 'any';
-}
 export function extractPropertiesAndEnums(code) {
   const ast = parser.parse(code, {
     sourceType: 'module',

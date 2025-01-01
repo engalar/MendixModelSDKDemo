@@ -13,7 +13,7 @@ function extractMemberExpression(memberExpr: t.MemberExpression): string {
     const propertyName = t.isIdentifier(memberExpr.property) ? memberExpr.property.name : 'unknown';
     return `${objectName}.${propertyName}`;
 }
-function extractNamespaceDetails(ast: t.Node) {
+export function extractNamespaceDetails(ast: t.Node) {
     const result: Record<string, any> = {};
 
     traverse(ast, {
@@ -123,7 +123,7 @@ function extractNamespaceDetails(ast: t.Node) {
     return result;
 }
 
-function getTypeAnnotation(typeAnnotation: t.TSTypeAnnotation | t.TSType | null): string {
+export function getTypeAnnotation(typeAnnotation: any): string {
     if (!typeAnnotation) throw new Error('Missing type annotation');
     if (t.isTSTypeAnnotation(typeAnnotation)) {
         return getTypeAnnotation(typeAnnotation.typeAnnotation);
@@ -148,7 +148,15 @@ function getTypeAnnotation(typeAnnotation: t.TSTypeAnnotation | t.TSType | null)
             }
         }
     }
+    if (t.isTSStringKeyword(typeAnnotation)) {
+        return 'string';
+    }
+    if (t.isTSNumberKeyword(typeAnnotation)) {
+        return 'number';
+    }
+    if (t.isTSBooleanKeyword(typeAnnotation)) {
+        return 'boolean';
+    }
+    debugger
     throw new Error('Unknown type annotation');// internal.IList<ICodeActionParameter>
 }
-
-export default extractNamespaceDetails;
