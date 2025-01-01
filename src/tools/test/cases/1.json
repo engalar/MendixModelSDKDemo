@@ -1,0 +1,191 @@
+{
+    "codeactions": {
+        "interfaces": {
+            "ICodeActionParameter": {
+                "extends": [
+                    "internal.IElement",
+                    "internal.IByNameReferrable"
+                ],
+                "properties": []
+            },
+            "IParameterType": {
+                "extends": [
+                    "internal.IElement"
+                ],
+                "properties": [
+                    {
+                        "name": "containerAsCodeActionParameter",
+                        "type": "ICodeActionParameter"
+                    }
+                ]
+            },
+            "IBasicParameterType": {
+                "extends": [
+                    "IParameterType"
+                ],
+                "properties": [
+                    {
+                        "name": "containerAsCodeActionParameter",
+                        "type": "ICodeActionParameter"
+                    }
+                ]
+            },
+            "ICodeAction": {
+                "extends": [
+                    "projects.IDocument"
+                ],
+                "properties": [
+                    {
+                        "name": "actionParameters",
+                        "type": "internal.IList<ICodeActionParameter>"
+                    }
+                ]
+            },
+            "IEntityTypeParameterType": {
+                "extends": [
+                    "IParameterType"
+                ],
+                "properties": [
+                    {
+                        "name": "containerAsCodeActionParameter",
+                        "type": "ICodeActionParameter"
+                    }
+                ]
+            },
+            "IStringTemplateParameterType": {
+                "extends": [
+                    "IParameterType"
+                ],
+                "properties": [
+                    {
+                        "name": "containerAsCodeActionParameter",
+                        "type": "ICodeActionParameter"
+                    }
+                ]
+            }
+        },
+        "classes": {
+            "CodeActionParameter": {
+                "extends": [
+                    "internal.Element<IModel>"
+                ],
+                "implements": [
+                    "ICodeActionParameter"
+                ],
+                "properties": []
+            },
+            "ParameterType": {
+                "extends": [
+                    "internal.Element<IModel>"
+                ],
+                "implements": [
+                    "IParameterType"
+                ],
+                "properties": []
+            },
+            "BasicParameterType": {
+                "extends": [
+                    "ParameterType"
+                ],
+                "implements": [
+                    "IBasicParameterType"
+                ],
+                "properties": []
+            },
+            "CodeAction": {
+                "extends": [
+                    "projects.Document"
+                ],
+                "implements": [
+                    "ICodeAction"
+                ],
+                "properties": []
+            }
+        }
+    },
+    "javaactions": {
+        "interfaces": {
+            "IExportMappingJavaActionParameterType": {
+                "extends": [
+                    "codeactions.IParameterType"
+                ],
+                "properties": [
+                    {
+                        "name": "containerAsCodeActionParameter",
+                        "type": "codeactions.ICodeActionParameter"
+                    }
+                ]
+            },
+            "IImportMappingJavaActionParameterType": {
+                "extends": [
+                    "codeactions.IParameterType"
+                ],
+                "properties": [
+                    {
+                        "name": "containerAsCodeActionParameter",
+                        "type": "codeactions.ICodeActionParameter"
+                    }
+                ]
+            },
+            "IJavaActionParameter": {
+                "extends": [
+                    "codeactions.ICodeActionParameter"
+                ],
+                "properties": []
+            },
+            "IMicroflowJavaActionParameterType": {
+                "extends": [
+                    "codeactions.IParameterType"
+                ],
+                "properties": [
+                    {
+                        "name": "containerAsCodeActionParameter",
+                        "type": "codeactions.ICodeActionParameter"
+                    }
+                ]
+            }
+        },
+        "classes": {}
+    },
+    "javascriptactions": {
+        "interfaces": {
+            "IJavaScriptActionParameter": {
+                "extends": [
+                    "codeactions.ICodeActionParameter"
+                ],
+                "properties": []
+            },
+            "INanoflowJavaScriptActionParameterType": {
+                "extends": [
+                    "codeactions.IParameterType"
+                ],
+                "properties": [
+                    {
+                        "name": "containerAsCodeActionParameter",
+                        "type": "codeactions.ICodeActionParameter"
+                    }
+                ]
+            }
+        },
+        "classes": {
+            "JavaScriptActionParameter": {
+                "extends": [
+                    "codeactions.CodeActionParameter"
+                ],
+                "implements": [
+                    "IJavaScriptActionParameter"
+                ],
+                "properties": []
+            },
+            "NanoflowJavaScriptActionParameterType": {
+                "extends": [
+                    "codeactions.ParameterType"
+                ],
+                "implements": [
+                    "INanoflowJavaScriptActionParameterType"
+                ],
+                "properties": []
+            }
+        }
+    }
+}

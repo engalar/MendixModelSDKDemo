@@ -1,4 +1,4 @@
-import { extractPropertiesAndEnums, extractTypingInfo } from '../src/tools/js/extractor';
+import { extractPropertiesAndEnums, extractTypingInfo } from '../js/extractor';
 import * as fs from 'fs';
 import * as path from 'path';
 

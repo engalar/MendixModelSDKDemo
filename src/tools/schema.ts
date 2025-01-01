@@ -1,17 +1,15 @@
-//@ts-nocheck
-import { resolve } from "path";
 import * as t from "@babel/types";
 import * as fs from "fs";
 import * as path from "path";
-import { parse } from "@babel/parser";
+import { parse, ParseResult } from "@babel/parser";
 import generator from "@babel/generator";
-import traverse from "@babel/traverse";
+import traverse, { NodePath } from "@babel/traverse";
+import { ClassDeclaration } from "@babel/types";
 
 export interface InheritanceInfo {
     module: string | null;
     superClass: string;
 }
-
 interface ClassDefinition {
     type: "object";
     properties: {
@@ -67,58 +65,470 @@ export interface Schema {
     $schema: string;
     definitions: Record<string, any>;
 }
-
 const allInterfaces = new Set<string>();
 const allInheritanceInfo: Record<string, InheritanceInfo> = {};
 const classInfoCache: Record<string, ClassInfo> = {};
 
-function getModuleName(superClass: t.Expression): string | null {
-    if (t.isMemberExpression(superClass) && t.isIdentifier(superClass.object)) {
-        return superClass.object.name;
-    }
-    return null;
-}
+// 查找目标类型的所有子类
+export function findSubClasses(className: string, dtsAst: any): string[] {
+    const subClasses: string[] = [];
 
-function getSuperClassName(superClass: t.Expression): string {
-    if (t.isMemberExpression(superClass) && t.isIdentifier(superClass.property)) {
-        return superClass.property.name;
-    }
-    if (t.isIdentifier(superClass)) {
-        return superClass.name;
-    }
-    throw new Error("Invalid superClass type");
-}
-
-function extractInterfaces(tsAst: any): void {
-    traverse(tsAst, {
-        TSInterfaceDeclaration(path) {
-            allInterfaces.add(path.node.id.name);
+    traverse(dtsAst, {
+        ClassDeclaration(path) {
+            if (
+                path.node.superClass &&
+                t.isIdentifier(path.node.superClass) &&
+                path.node.superClass.name === className
+            ) {
+                subClasses.push(path.node.id.name);
+            }
         },
+    });
+
+    return subClasses;
+}
+
+export async function extractInterfaces(dtsCode: string): Promise<Set<string>> {
+    const dtsAst = parse(dtsCode, {
+        sourceType: "module",
+        plugins: ["typescript"],
+    });
+
+    const interfaceSet = new Set<string>();
+
+    traverse(dtsAst, {
+        TSInterfaceDeclaration(path) {
+            interfaceSet.add(path.node.id.name);
+        },
+    });
+
+    console.log(`Extracted interfaces: ${Array.from(interfaceSet).join(", ")}`);
+    return interfaceSet;
+}
+
+export function parseCode(jsCode: string) {
+    return parse(jsCode, {
+        sourceType: "module",
+        plugins: ["typescript"],
     });
 }
 
-function extractClassInfo(jsAst: any, tsAst: any): void {
+export function extractInheritanceInfoFromClass(path: NodePath<ClassDeclaration>, inheritanceInfo: Record<string, InheritanceInfo>) {
+    const className = path.node.id.name;
+    const superClass = path.node.superClass;
+
+    if (t.isMemberExpression(superClass) && t.isIdentifier(superClass.object) && t.isIdentifier(superClass.property)) {
+        // case: class BusinessEventService extends projects.Document {}
+        const moduleName = superClass.object.name;
+        inheritanceInfo[className] = { module: moduleName === "internal" ? null : superClass.object.name, superClass: moduleName === "internal" ? null : superClass.property.name };
+    } else if (t.isMemberExpression(superClass) && t.isMemberExpression(superClass.object) && t.isIdentifier(superClass.object.object) && t.isIdentifier(superClass.object.property) && t.isIdentifier(superClass.property)) {
+        // case: class BusinessEventService extends projects_1.projects.Document {}
+        // return projects.Document
+        inheritanceInfo[className] = { module: superClass.object.property.name, superClass: superClass.property.name };
+    }
+    else if (t.isIdentifier(superClass)) {
+        inheritanceInfo[className] = { module: null, superClass: superClass.name };
+    }
+}
+
+export async function extractInheritanceInfo(jsAst: ParseResult<t.File>): Promise<Record<string, InheritanceInfo>> {
+    const inheritanceInfo: Record<string, InheritanceInfo> = {};
+
+    traverse(jsAst, {
+        ClassDeclaration(path) {
+            extractInheritanceInfoFromClass(path, inheritanceInfo);
+        },
+    });
+
+    console.log(`Extracted inheritance info: ${JSON.stringify(inheritanceInfo, null, 2)}`);
+    return inheritanceInfo;
+}
+
+export async function extractSchema(
+    jsCode: string,
+    dtsCode: string,
+    interfaceSet: Set<string>,
+    allInheritanceInfo: Record<string, InheritanceInfo>
+): Promise<Schema> {
+    const jsAst = parse(jsCode, {
+        sourceType: "module",
+        plugins: ["typescript"],
+    });
+
+    const dtsAst = parse(dtsCode, {
+        sourceType: "module",
+        plugins: ["typescript"],
+    });
+
+    const schema: Schema = {
+        $schema: "http://json-schema.org/draft-07/schema#",
+        definitions: {},
+    };
+
+    const classToProperties: Record<string, PropertyInfo[]> = {};
+    const classToRequired: Record<string, string[]> = {};
+    const classToVersionInfo: Record<string, Record<string, any>> = {};
+    const classToStructureTypeName: Record<string, string> = {};
+
+    //#region Helper functions and traversal logic
+
+
+
+    // 生成 WithSubclasses 类型
+    function generateWithSubclassesType(
+        className: string,
+        subClasses: string[]
+    ): any {
+        const oneOf = subClasses.map((subClass) => ({
+            $ref: `#/definitions/${subClass}`,
+        }));
+
+        // 添加父类本身
+        oneOf.unshift({
+            $ref: `#/definitions/${className}`,
+        });
+
+        return {
+            type: "object",
+            oneOf: oneOf,
+        };
+    }
+
+    // 确定属性类型
+    async function determineType(
+        propInfo: PropertyInfo,
+        dtsAst: any
+    ): Promise<any> {
+        const { propertyType, type, internalName, primitiveTypeEnum, defaultValue } = propInfo;
+
+        const primitiveTypeMap: Record<string, any> = {
+            Integer: { type: "integer" },
+            String: { type: "string" },
+            Boolean: { type: "boolean" },
+            Double: { type: "number" }, // Assuming Double maps to number
+            DateTime: { type: "string", format: "date-time" },
+            Guid: { $ref: "../common.schema.json#/definitions/GUID" },
+            Point: { $ref: "../common.schema.json#/definitions/Point" },
+            Size: { $ref: "../common.schema.json#/definitions/Size" },
+            Color: { $ref: "../common.schema.json#/definitions/Color" },
+            Blob: { type: "string", contentEncoding: "base64" },
+        };
+
+        // Handle PrimitiveProperty types directly
+        if (propertyType === "PrimitiveProperty") {
+            if (primitiveTypeMap[primitiveTypeEnum]) {
+                if (defaultValue != undefined) {
+                    return { ...primitiveTypeMap[primitiveTypeEnum], default: defaultValue };
+                } else {
+                    return primitiveTypeMap[primitiveTypeEnum];
+                }
+            }
+        }
+
+        let targetTypeName = (await findRefType(type, internalName)).replace("internal$", "");
+        let _rightType = targetTypeName.includes("$") ? targetTypeName.split("$")[1] : targetTypeName;
+
+        if (interfaceSet.has(_rightType)) {
+            _rightType = _rightType.slice(1);
+        }
+
+        if (targetTypeName.includes("$")) {
+            targetTypeName = `${targetTypeName.split("$")[0]}$${_rightType}`;
+        } else {
+            targetTypeName = _rightType;
+        }
+
+        // Handle EnumProperty and EnumListProperty
+        if (propertyType.includes("Enum")) {
+            if (propertyType === "EnumListProperty") {
+                return { type: "array", items: { type: "string", enum: propInfo.enumValues } };
+            } else {
+                return { type: "string", enum: propInfo.enumValues };
+            }
+        }
+
+        // Handle reference properties
+        function transformRef(input: string): string {
+            const pattern = /^(?:([a-zA-Z]+)\$)?([a-zA-Z]+)$/; // 匹配 "{module_name}${class_name}" 和 "{class_name}"
+            const match = input.match(pattern);
+
+            if (!match) {
+                throw new Error("Invalid input format");
+            }
+
+            const moduleName = match[1]; // module_name 可选
+            const className = match[2]; // class_name 必须
+
+            if (moduleName) {
+                return `${moduleName.toLowerCase()}.schema.json#/definitions/${className}`;
+            } else {
+                return `#/definitions/${className}`;
+            }
+        }
+
+        if (propertyType.includes("Reference") || propertyType.includes("Part")) {
+            let refType = null;
+            let typeName = type;
+
+            if (propertyType === "ByIdReferenceProperty") {
+                refType = {
+                    type: "string",
+                    description: `ByIdReferenceProperty: ${transformRef(targetTypeName)};Unique identifier. use for placeholer uniqe identifier for human readable name and later will replace with guid by model sdk`,
+                };
+            } else if (propertyType.startsWith("ByNameReference")) {
+                // 检查是否存在子类
+                const subClasses = findSubClasses(targetTypeName, dtsAst);
+                refType = {
+                    type: "string",
+                    description: `${propertyType}: ${[targetTypeName, ...subClasses].map(transformRef).join(" or ")}`,
+                };
+            } else if (propertyType === "LocalByNameReferenceProperty") {
+                refType = { type: "string" };
+            } else if (propertyType === "PartListProperty" || propertyType === "PartProperty") {
+                const subClasses = findSubClasses(targetTypeName, dtsAst);
+                if (subClasses.length > 0) {
+                    // 如果目标类型有子类，生成 WithSubclasses 类型
+                    const withSubclassesTypeName = `${targetTypeName}WithSubclasses`;
+                    schema.definitions[withSubclassesTypeName] = generateWithSubclassesType(targetTypeName, subClasses);
+
+                    refType = {
+                        $ref: `#/definitions/${withSubclassesTypeName}`,
+                    };
+                } else {
+                    refType = {
+                        $ref: transformRef(targetTypeName),
+                    };
+                }
+            }
+
+            if (refType) {
+                if (propertyType.includes("List")) {
+                    return { type: "array", items: refType };
+                } else {
+                    return refType;
+                }
+            }
+        }
+
+        return { type: "string" }; // Default to string if type is unknown or unhandled
+    }
+
+    async function findRefType(typeName: string, internalName: string): Promise<string> {
+        return new Promise((resolve, reject) => {
+            traverse(dtsAst, {
+                ClassDeclaration(path) {
+                    const classNode = path.node;
+                    if (t.isIdentifier(classNode.id) && classNode.id.name === typeName) {
+                        const propList = classNode.body.body.filter(n => t.isTSDeclareMethod(n) && n.kind == 'get' && !n.static && t.isIdentifier(n.key) && n.key.name == internalName).map(n => ((n as t.TSDeclareMethod).returnType as t.TSTypeAnnotation).typeAnnotation);
+                        for (const p of propList) {
+                            const result = processTypeAnnotation(p);
+                            if (result) {
+                                path.stop();
+                                resolve(result);
+                                return;
+                            }
+                        }
+                        path.stop();
+                        resolve(undefined);
+                    }
+                }
+            }
+            );
+            reject(`can not find ${typeName}.${internalName} in .d.ts`)
+        });
+    }
+
+    function processTypeAnnotation(p: any): string | undefined {
+        switch (p.type) {
+            case "TSTypeReference":
+                return processTSTypeReference(p);
+            case "TSBooleanKeyword":
+                return "Boolean";
+            case "TSStringKeyword":
+                return "String";
+            case "TSNumberKeyword":
+                return "Number";
+            case "TSArrayType":
+                return processTSArrayType(p);
+            case "TSUnionType":
+                return processTSUnionType(p);
+            default:
+                return undefined;
+        }
+    }
+
+    function processTSTypeReference(p: any): string | undefined {
+        if (p.typeParameters) {
+            const typeParam = p.typeParameters.params[0];
+            let innerType = processTypeAnnotation(typeParam);
+            if (!innerType) return undefined;
+
+            if (p.typeName.type === "TSQualifiedName") {
+                innerType = `${p.typeName.left.name}$${innerType}`;
+            }
+            return innerType;
+        } else {
+            if (p.typeName.type === "TSQualifiedName") {
+                return `${p.typeName.left.name}$${p.typeName.right.name}`;
+            } else if (p.typeName.type === "Identifier") {
+                return p.typeName.name;
+            }
+        }
+        return undefined;
+    }
+
+    function processTSArrayType(p: any): string | undefined {
+        const elementType = processTypeAnnotation(p.elementType);
+        return elementType;
+    }
+
+    function processTSUnionType(p: any): string | undefined {
+        const isNullable = p.types.some(t => t.type === "TSNullKeyword");
+        const nonNullType = p.types.find(t => t.type !== "TSNullKeyword");
+
+        if (isNullable && nonNullType) {
+            return processTypeAnnotation(nonNullType);
+        }
+        return undefined;
+    }
+    //#endregion
+
+    //#region 提取版本信息
+    function extractVersionInfo(className: string, jsAst: any): Record<string, any> {
+        let versionInfo: Record<string, any> = {};
+
+        traverse(jsAst, {
+            ExpressionStatement(path) {
+                const expression = path.node.expression;
+                if (
+                    t.isAssignmentExpression(expression) &&
+                    t.isMemberExpression(expression.left) &&
+                    t.isIdentifier(expression.left.object, { name: className }) &&
+                    t.isIdentifier(expression.left.property, { name: "versionInfo" }) &&
+                    t.isNewExpression(expression.right) &&
+                    t.isMemberExpression(expression.right.callee) &&
+                    t.isIdentifier(expression.right.callee.property, { name: "StructureVersionInfo" })
+                ) {
+                    const args = expression.right.arguments;
+                    if (args.length > 0 && t.isObjectExpression(args[0])) {
+                        const propertiesObject = args[0].properties.find(
+                            (prop) => t.isObjectProperty(prop) && t.isIdentifier(prop.key, { name: "properties" })
+                        );
+
+                        //@ts-ignore
+                        if (propertiesObject && t.isObjectExpression(propertiesObject.value)) {
+                            //@ts-ignore
+                            propertiesObject.value.properties.forEach((prop) => {
+                                if (t.isObjectProperty(prop) && t.isIdentifier(prop.key)) {
+                                    const propName = prop.key.name;
+                                    versionInfo[propName] = {};
+                                    if (t.isObjectExpression(prop.value)) {
+                                        prop.value.properties.forEach((innerProp) => {
+                                            if (
+                                                t.isObjectProperty(innerProp) &&
+                                                t.isIdentifier(innerProp.key)
+                                            ) {
+                                                const innerPropName = innerProp.key.name;
+                                                if (t.isStringLiteral(innerProp.value)) {
+                                                    versionInfo[propName][innerPropName] = innerProp.value.value;
+                                                } else if (t.isObjectExpression(innerProp.value)) {
+                                                    const innerPropValue: Record<string, boolean> = {};
+                                                    innerProp.value.properties.forEach(innerMostProp => {
+                                                        if (t.isObjectProperty(innerMostProp) && t.isIdentifier(innerMostProp.key) && t.isBooleanLiteral(innerMostProp.value)) {
+                                                            innerPropValue[innerMostProp.key.name] = innerMostProp.value.value
+                                                        }
+                                                    })
+                                                    versionInfo[propName][innerPropName] = innerPropValue;
+                                                }
+                                            }
+                                        });
+                                    }
+                                }
+                            });
+                        }
+                    }
+                }
+            },
+        });
+
+        console.log(`Extracted version info for ${className}: ${JSON.stringify(versionInfo, null, 2)}`);
+        return versionInfo;
+    }
+    //#endregion
+
+
+    //#region 提取结构类型名称
+    function extractStructureTypeName(className: string, jsAst: any): string {
+        let structureTypeName = "";
+
+        traverse(jsAst, {
+            ExpressionStatement(path) {
+                const expression = path.node.expression;
+                if (
+                    t.isAssignmentExpression(expression) &&
+                    t.isMemberExpression(expression.left) &&
+                    t.isIdentifier(expression.left.object, { name: className }) &&
+                    t.isIdentifier(expression.left.property, { name: "structureTypeName" }) &&
+                    t.isStringLiteral(expression.right)
+                ) {
+                    structureTypeName = expression.right.value;
+                }
+            },
+        });
+
+        console.log(`Extracted structure type name for ${className}: ${structureTypeName}`);
+        return structureTypeName;
+    }
+    //#endregion
+
+    //#region 查找枚举定义
+    function findEnumDefinition(dtsAst: any, enumName: string): { name: string; members: string[] } | null {
+        let foundEnum = null;
+
+        traverse(dtsAst, {
+            ClassDeclaration(path) {
+                if (
+                    path.node.id.name === enumName &&
+                    path.node.superClass &&
+                    t.isMemberExpression(path.node.superClass) &&
+                    t.isIdentifier(path.node.superClass.property) &&
+                    path.node.superClass.property.name === "AbstractEnum"
+                ) {
+                    foundEnum = {
+                        name: enumName,
+                        members: [],
+                    };
+                    path.traverse({
+                        ClassProperty(memberPath) {
+                            if (
+                                memberPath.node.static &&
+                                t.isIdentifier(memberPath.node.key)
+                            ) {
+                                foundEnum.members.push(memberPath.node.key.name);
+                            }
+                        },
+                    });
+                    path.stop();
+                }
+            },
+        });
+
+        console.log(`Found enum definition for ${enumName}: ${JSON.stringify(foundEnum, null, 2)}`);
+        return foundEnum;
+    }
+    //#endregion
+
+
+    //#region 遍历逻辑
+    // First, traverse the JS AST to find class constructors, their properties, version info, and structure type names
     traverse(jsAst, {
         ClassDeclaration(path) {
             const className = path.node.id.name;
+            classToProperties[className] = [];
+            classToRequired[className] = [];
+            classToVersionInfo[className] = extractVersionInfo(className, jsAst);
+            classToStructureTypeName[className] = extractStructureTypeName(className, jsAst);
 
-            // Extract inheritance info
-            if (path.node.superClass) {
-                allInheritanceInfo[className] = {
-                    module: getModuleName(path.node.superClass),
-                    superClass: getSuperClassName(path.node.superClass),
-                };
-            }
-
-            // Initialize class info
-            classInfoCache[className] = {
-                properties: [],
-                required: [],
-                versionInfo: {},
-                structureTypeName: "",
-            };
-
-            // Extract properties
             path.traverse({
                 ClassMethod(methodPath) {
                     if (methodPath.node.kind === "constructor") {
@@ -155,23 +565,28 @@ function extractClassInfo(jsAst: any, tsAst: any): void {
                                                 t.isStringLiteral(args[2])
                                             ) {
                                                 const internalName = args[2].value;
-                                                let type = t.isIdentifier(args[0]) ? args[0].name : "";
+                                                //@ts-ignore
+                                                let type = args[0].name;
                                                 let reference = false;
                                                 let isList = false;
                                                 let enumValues = undefined;
                                                 let defaultValue, primitiveTypeEnum;
 
+                                                // Handle specific types based on property type
                                                 if (propertyType.includes("Reference")) {
                                                     reference = true;
                                                 }
 
                                                 if (propertyType.includes("Enum")) {
-                                                    const enumName = propertyType === "EnumProperty" && t.isIdentifier(args[4]) ? args[4].name : t.isIdentifier(args[0]) ? args[0].name : "";
-                                                    const enumDefinition = findEnumDefinition(tsAst, enumName);
+                                                    // Extract enum values from the corresponding enum in the dts
+                                                    //@ts-ignore
+                                                    const enumName = propertyType === "EnumProperty" ? args[4].name : args[0].name;
+                                                    const enumDefinition = findEnumDefinition(dtsAst, enumName);
                                                     if (enumDefinition) {
                                                         enumValues = enumDefinition.members;
                                                     }
-                                                    type = t.isIdentifier(args[0]) ? args[0].name : "";
+                                                    //@ts-ignore
+                                                    type = args[0].name;
                                                     reference = false;
                                                 }
 
@@ -179,38 +594,52 @@ function extractClassInfo(jsAst: any, tsAst: any): void {
                                                     isList = true;
                                                 }
 
-                                                if (propertyType === "PrimitiveProperty") {
-                                                    if (t.isStringLiteral(args[3]) || t.isBooleanLiteral(args[3]) || t.isNumericLiteral(args[3])) {
+                                                if (propertyType == "PrimitiveProperty") {
+                                                    // String Boolean Number
+                                                    if (["StringLiteral", "BooleanLiteral", "NumericLiteral"].includes(args[3].type)) {
+                                                        //@ts-ignore
                                                         defaultValue = args[3].value;
-                                                    } else if (t.isUnaryExpression(args[3]) && args[3].prefix && t.isNumericLiteral(args[3].argument)) {
-                                                        defaultValue = args[3].operator === '-' ? args[3].argument.value * -1 : args[3].argument.value;
-                                                    } else if (t.isObjectExpression(args[3]) && t.isMemberExpression(args[4]) && t.isIdentifier(args[4].property) && ["Color", "Size", "Point"].includes(args[4].property.name)) {
+                                                    }
+
+                                                    // Number -1
+                                                    else if (args[3].type == "UnaryExpression" && args[3].prefix && args[3].argument.type == "NumericLiteral") { defaultValue = args[3].operator == '-' ? args[3].argument.value * -1 : args[3].argument.value }
+
+                                                    // Color
+                                                    //@ts-ignore
+                                                    else if (t.isMemberExpression(args[4]) && ["Color", "Size", "Point"].includes(args[4].property.name)) {
+                                                        //@ts-ignore
                                                         defaultValue = args[3].properties.reduce((obj, prop) => {
-                                                            if (t.isObjectProperty(prop) && t.isIdentifier(prop.key) && t.isNumericLiteral(prop.value)) {
+                                                            if (prop.key.type === 'Identifier' && prop.value.type === 'NumericLiteral') {
                                                                 obj[prop.key.name] = prop.value.value;
                                                             }
                                                             return obj;
-                                                        }, {} as Record<string, number>);
-                                                    } else if (t.isNullLiteral(args[3])) {
-                                                        defaultValue = null;
+                                                        }, {});
                                                     }
 
-                                                    if (t.isMemberExpression(args[4]) && t.isMemberExpression(args[4].object) && t.isIdentifier(args[4].object.property) && args[4].object.property.name === "PrimitiveTypeEnum") {
-                                                        primitiveTypeEnum = t.isIdentifier(args[4].property) ? args[4].property.name : "";
+                                                    else if (args[3].type == "NullLiteral") { defaultValue = null } else {
+                                                        const code = generator(assignPath.node).code;
+                                                        debugger
+                                                    }
+
+                                                    if (args[4].type == "MemberExpression" && args[4].object.type == "MemberExpression" &&
+                                                        //@ts-ignore
+                                                        args[4].object.property.name == "PrimitiveTypeEnum"
+                                                    ) {//internal.PrimitiveTypeEnum.Guid
+                                                        //@ts-ignore
+                                                        primitiveTypeEnum = args[4].property.name;//Guid
                                                     }
                                                 }
 
-                                                classInfoCache[className].properties.push({
+                                                classToProperties[className].push({
                                                     name: propertyName,
                                                     internalName: internalName,
                                                     propertyType,
-                                                    type,
-                                                    reference,
-                                                    isList,
-                                                    defaultValue,
-                                                    primitiveTypeEnum,
+                                                    type: type,
+                                                    reference: reference,
+                                                    isList: isList,
+                                                    defaultValue, primitiveTypeEnum,
                                                     enum: propertyType.includes("Enum"),
-                                                    enumValues,
+                                                    enumValues: enumValues,
                                                 });
                                             }
                                         }
@@ -221,320 +650,113 @@ function extractClassInfo(jsAst: any, tsAst: any): void {
                     }
                 },
             });
-
-            // Extract structureTypeName and versionInfo
-            const classBody = path.getNextSibling();
-            if (classBody && t.isExpressionStatement(classBody.node)) {
-                const expression = classBody.node.expression;
-                if (t.isAssignmentExpression(expression)) {
-                    const left = expression.left;
-                    const right = expression.right;
-
-                    if (
-                        t.isMemberExpression(left) &&
-                        t.isIdentifier(left.property)
-                    ) {
-                        if (left.property.name === "structureTypeName" && t.isStringLiteral(right)) {
-                            classInfoCache[className].structureTypeName = right.value;
-                        } else if (left.property.name === "versionInfo" && t.isNewExpression(right)) {
-                            classInfoCache[className].versionInfo = extractVersionInfoFromExpression(right);
-                        }
-                    }
-                }
-            }
         },
     });
-}
 
-function findEnumDefinition(tsAst: any, enumName: string): { name: string; members: string[] } | null {
-    let foundEnum = null;
+    // Then, traverse the TS AST to build the schema based on class properties and version info
+    const tasks: any[] = [];
+    traverse(dtsAst, {
+        TSDeclareMethod(path) {
+            tasks.push(path);
+        },
+    });
 
-    traverse(tsAst, {
-        ClassDeclaration(path) {
-            if (
-                path.node.id.name === enumName &&
-                path.node.superClass &&
-                t.isMemberExpression(path.node.superClass) &&
-                t.isIdentifier(path.node.superClass.property) &&
-                path.node.superClass.property.name === "AbstractEnum"
-            ) {
-                foundEnum = {
-                    name: enumName,
-                    members: [],
-                };
-                path.traverse({
-                    ClassProperty(memberPath) {
-                        if (
-                            memberPath.node.static &&
-                            t.isIdentifier(memberPath.node.key)
-                        ) {
-                            foundEnum.members.push(memberPath.node.key.name);
+    await Promise.all(tasks.map(async (path) => {
+        if (
+            t.isIdentifier(path.node.key) &&
+            path.node.key.name === "constructor"
+        ) {
+            const className = path.findParent(t.isClassDeclaration).node.id.name;
+            if (classToProperties[className]) {
+                const classDefinition: ClassDefinition = {
+                    type: "object",
+                    properties: {
+                        "$ID": {
+                            "$ref": "../common.schema.json#/definitions/Identifiable"
+                        },
+                        "$Type": {
+                            "type": "string",
+                            "const": classToStructureTypeName[className] ? classToStructureTypeName[className] : ""
                         }
                     },
-                });
-                path.stop();
-            }
-        },
-    });
+                    required: ["$ID", "$Type"],
+                };
 
-    return foundEnum;
-}
-
-function extractVersionInfoFromExpression(expression: t.NewExpression): Record<string, any> {
-    const versionInfo: Record<string, any> = {};
-    if (expression.arguments.length > 0 && t.isObjectExpression(expression.arguments[0])) {
-        const propertiesObject = expression.arguments[0].properties.find(
-            (prop) => t.isObjectProperty(prop) && t.isIdentifier(prop.key, { name: "properties" })
-        );
-
-        if (propertiesObject && t.isObjectExpression(propertiesObject.value)) {
-            propertiesObject.value.properties.forEach((prop) => {
-                if (t.isObjectProperty(prop) && t.isIdentifier(prop.key)) {
-                    const propName = prop.key.name;
-                    versionInfo[propName] = {};
-                    if (t.isObjectExpression(prop.value)) {
-                        prop.value.properties.forEach((innerProp) => {
-                            if (
-                                t.isObjectProperty(innerProp) &&
-                                t.isIdentifier(innerProp.key)
-                            ) {
-                                const innerPropName = innerProp.key.name;
-                                if (t.isStringLiteral(innerProp.value)) {
-                                    versionInfo[propName][innerPropName] = innerProp.value.value;
-                                } else if (t.isObjectExpression(innerProp.value)) {
-                                    const innerPropValue: Record<string, boolean> = {};
-                                    innerProp.value.properties.forEach(innerMostProp => {
-                                        if (t.isObjectProperty(innerMostProp) && t.isIdentifier(innerMostProp.key) && t.isBooleanLiteral(innerMostProp.value)) {
-                                            innerPropValue[innerMostProp.key.name] = innerMostProp.value.value;
-                                        }
-                                    });
-                                    versionInfo[propName][innerPropName] = innerPropValue;
+                // 如果有父类，且父类不是"internal.Element"，则添加allOf
+                const inheritanceInfo = allInheritanceInfo[className];
+                if (inheritanceInfo && inheritanceInfo.superClass) {
+                    if (!classToStructureTypeName[className]) {
+                        throw new Error(`class ${className} not found in classToStructureTypeName`);
+                    }
+                    const structureTypeName = classToStructureTypeName[className];
+                    if (inheritanceInfo.module) {
+                        classDefinition.allOf = [{
+                            $merge: {
+                                source: {
+                                    $ref: `${inheritanceInfo.module}.schema.json#/definitions/${inheritanceInfo.superClass}`
+                                },
+                                with: {
+                                    $Type: {
+                                        type: "string",
+                                        const: structureTypeName
+                                    }
                                 }
                             }
-                        });
+                        }];
+                    } else {
+                        classDefinition.allOf = [{
+                            $merge: {
+                                source: {
+                                    $ref: `#/definitions/${inheritanceInfo.superClass}`
+                                },
+                                with: {
+                                    $Type: {
+                                        type: "string",
+                                        const: structureTypeName
+                                    }
+                                }
+                            }
+                        }];
                     }
                 }
-            });
-        }
-    }
-    return versionInfo;
-}
 
-function isEnumClass(path: any): boolean {
-    return (
-        path.node.superClass &&
-        t.isMemberExpression(path.node.superClass) &&
-        t.isIdentifier(path.node.superClass.property) &&
-        path.node.superClass.property.name === "AbstractEnum"
-    );
-}
+                schema.definitions[className] = classDefinition;
 
-function extractEnumValues(path: any): string[] {
-    const members: string[] = [];
-    path.traverse({
-        ClassProperty(memberPath) {
-            if (
-                memberPath.node.static &&
-                t.isIdentifier(memberPath.node.key)
-            ) {
-                members.push(memberPath.node.key.name);
-            }
-        },
-    });
-    return members;
-}
+                await Promise.all(classToProperties[className].map(async (propInfo) => {
+                    const propertyName = propInfo.internalName;
+                    const versionInfo = classToVersionInfo[className];
 
-function buildClassDefinition(classInfo: ClassInfo, inheritanceInfo: InheritanceInfo): ClassDefinition {
-    const classDefinition: ClassDefinition = {
-        type: "object",
-        properties: {
-            "$ID": {
-                "$ref": "../common.schema.json#/definitions/Identifiable"
-            },
-            "$Type": {
-                "type": "string",
-                "const": classInfo.structureTypeName || ""
-            }
-        },
-        required: ["$ID", "$Type"],
-    };
-
-    if (inheritanceInfo && inheritanceInfo.superClass !== "internal.Element") {
-        if (inheritanceInfo.module) {
-            classDefinition.allOf = [{
-                $merge: {
-                    source: {
-                        $ref: `${inheritanceInfo.module}.schema.json#/definitions/${inheritanceInfo.superClass}`
-                    },
-                    with: {
-                        $Type: {
-                            type: "string",
-                            const: classInfo.structureTypeName
-                        }
+                    // Check if the property is marked as deleted
+                    if (versionInfo && versionInfo[propertyName] && versionInfo[propertyName].deleted) {
+                        return; // Skip deleted properties, correctly exits the inner map callback
                     }
-                }
-            }];
-        } else {
-            classDefinition.allOf = [{
-                $merge: {
-                    source: {
-                        $ref: `#/definitions/${inheritanceInfo.superClass}`
-                    },
-                    with: {
-                        $Type: {
-                            type: "string",
-                            const: classInfo.structureTypeName
-                        }
+
+                    const propertyType = await determineType(propInfo, dtsAst);
+
+                    schema.definitions[className].properties[propertyName] = propertyType;
+
+                    // Check if the property is required
+                    if (
+                        versionInfo &&
+                        versionInfo[propertyName] &&
+                        versionInfo[propertyName].required?.currentValue === true
+                    ) {
+                        schema.definitions[className].required.push(propertyName);
                     }
-                }
-            }];
-        }
-    }
-
-    // Add properties to the class definition
-    for (const propInfo of classInfo.properties) {
-        const propertyName = propInfo.internalName;
-        const versionInfo = classInfo.versionInfo;
-
-        // Skip deleted properties
-        if (versionInfo && versionInfo[propertyName] && versionInfo[propertyName].deleted) {
-            continue;
-        }
-
-        // Determine the property type
-        const propertyType = determineType(propInfo, allInheritanceInfo);
-
-        // Add the property to the class definition
-        classDefinition.properties[propertyName] = propertyType;
-
-        // Mark the property as required if needed
-        if (
-            versionInfo &&
-            versionInfo[propertyName] &&
-            versionInfo[propertyName].required?.currentValue === true
-        ) {
-            classDefinition.required.push(propertyName);
-        }
-    }
-
-    return classDefinition;
-}
-
-function determineType(propInfo: PropertyInfo, allInheritanceInfo: Record<string, InheritanceInfo>): any {
-    const { propertyType, type, internalName, primitiveTypeEnum, defaultValue, enumValues } = propInfo;
-
-    const primitiveTypeMap: Record<string, any> = {
-        Integer: { type: "integer" },
-        String: { type: "string" },
-        Boolean: { type: "boolean" },
-        Double: { type: "number" }, // Assuming Double maps to number
-        DateTime: { type: "string", format: "date-time" },
-        Guid: { $ref: "../common.schema.json#/definitions/GUID" },
-        Point: { $ref: "../common.schema.json#/definitions/Point" },
-        Size: { $ref: "../common.schema.json#/definitions/Size" },
-        Color: { $ref: "../common.schema.json#/definitions/Color" },
-        Blob: { type: "string", contentEncoding: "base64" },
-    };
-
-    // Handle PrimitiveProperty types directly
-    if (propertyType === "PrimitiveProperty") {
-        if (primitiveTypeMap[primitiveTypeEnum]) {
-            if (defaultValue !== undefined) {
-                return { ...primitiveTypeMap[primitiveTypeEnum], default: defaultValue };
-            } else {
-                return primitiveTypeMap[primitiveTypeEnum];
+                }));
             }
         }
-    }
+    }));
+    //#endregion
 
-    // Handle EnumProperty and EnumListProperty
-    if (propertyType.includes("Enum")) {
-        if (propertyType === "EnumListProperty") {
-            return { type: "array", items: { type: "string", enum: enumValues } };
-        } else {
-            return { type: "string", enum: enumValues };
-        }
-    }
 
-    // Handle reference properties
-    if (propertyType.includes("Reference") || propertyType.includes("Part")) {
-        let refType = null;
-        let typeName = type;
+    //#endregion
 
-        if (propertyType === "ByIdReferenceProperty") {
-            refType = {
-                type: "string",
-                description: `ByIdReferenceProperty: ${transformRef(typeName)}; Unique identifier.`,
-            };
-        } else if (propertyType.startsWith("ByNameReference")) {
-            const subClasses = findSubClasses(typeName, allInheritanceInfo);
-            refType = {
-                type: "string",
-                description: `${propertyType}: ${[typeName, ...subClasses].map(transformRef).join(" or ")}`,
-            };
-        } else if (propertyType === "LocalByNameReferenceProperty") {
-            refType = { type: "string" };
-        } else if (propertyType === "PartListProperty" || propertyType === "PartProperty") {
-            const subClasses = findSubClasses(typeName, allInheritanceInfo);
-            if (subClasses.length > 0) {
-                const withSubclassesTypeName = `${typeName}WithSubclasses`;
-                return {
-                    type: "array",
-                    items: { $ref: `#/definitions/${withSubclassesTypeName}` },
-                };
-            } else {
-                refType = { $ref: transformRef(typeName) };
-            }
-        }
-
-        if (refType) {
-            if (propertyType.includes("List")) {
-                return { type: "array", items: refType };
-            } else {
-                return refType;
-            }
-        }
-    }
-
-    return { type: "string" }; // Default to string if type is unknown or unhandled
+    console.log(`Generated schema for ${Object.keys(schema.definitions).length} classes`);
+    return schema;
 }
 
-function transformRef(input: string): string {
-    const pattern = /^(?:([a-zA-Z]+)\$)?([a-zA-Z0-9]+)$/; // Match "{module_name}${class_name}" or "{class_name}"
-    const match = input.match(pattern);
-
-    if (!match) {
-        throw new Error("Invalid input format");
-    }
-
-    const moduleName = match[1]; // module_name is optional
-    const className = match[2]; // class_name is required
-
-    if (moduleName) {
-        return `${moduleName.toLowerCase()}.schema.json#/definitions/${className}`;
-    } else {
-        const inheritanceInfo = allInheritanceInfo[className];
-        if (inheritanceInfo && inheritanceInfo.module) {
-            return `${inheritanceInfo.module.toLowerCase()}.schema.json#/definitions/${className}`;
-        } else {
-            return `#/definitions/${className}`;
-        }
-    }
-}
-
-function findSubClasses(className: string, allInheritanceInfo: Record<string, InheritanceInfo>): string[] {
-    const subClasses: string[] = [];
-
-    for (const [subClass, info] of Object.entries(allInheritanceInfo)) {
-        if (info.superClass === className) {
-            subClasses.push(subClass);
-        }
-    }
-
-    return subClasses;
-}
-
-async function main(): Promise<void> {
+export async function main(): Promise<void> {
     const genDir = "node_modules/mendixmodelsdk/src/gen";
     const schemaDir = "schemas/gen";
 
@@ -551,80 +773,35 @@ async function main(): Promise<void> {
         }
     }
 
+    let allInterfaces = new Set<string>();
+    for (const baseName in filePairs) {
+        const pair = filePairs[baseName];
+        const tsCode = fs.readFileSync(path.join(genDir, pair.ts), "utf-8");
+        const interfaces = await extractInterfaces(tsCode);
+        allInterfaces = new Set([...allInterfaces, ...interfaces]);
+    }
+
+    let allInheritanceInfo: Record<string, InheritanceInfo> = {};
+    for (const baseName in filePairs) {
+        const pair = filePairs[baseName];
+        const jsCode = fs.readFileSync(path.join(genDir, pair.js), "utf-8");
+        const inheritanceInfo = await extractInheritanceInfo(parseCode(jsCode));
+        allInheritanceInfo = { ...allInheritanceInfo, ...inheritanceInfo };
+    }
+
     for (const baseName in filePairs) {
         const pair = filePairs[baseName];
         const jsCode = fs.readFileSync(path.join(genDir, pair.js), "utf-8");
         const tsCode = fs.readFileSync(path.join(genDir, pair.ts), "utf-8");
 
-        let jsAst = parse(jsCode, { sourceType: "module", plugins: ["typescript"] });
-        let tsAst = parse(tsCode, { sourceType: "module", plugins: ["typescript"] });
+        const schema = await extractSchema(jsCode, tsCode, allInterfaces, allInheritanceInfo);
 
-        extractInterfaces(tsAst);
-        extractClassInfo(jsAst, tsAst);
-
-        // Release AST
-        jsAst = null;
-        tsAst = null;
+        const schemaFileName = path.join(schemaDir, `${baseName}.schema.json`);
+        fs.writeFileSync(schemaFileName, JSON.stringify(schema, null, 2));
+        console.log(`Schema saved to: ${schemaFileName}`);
     }
-
-    const schema = generateSchema();
-    const schemaFileName = path.join(schemaDir, "schema.json");
-    fs.writeFileSync(schemaFileName, JSON.stringify(schema, null, 2));
-    console.log(`Schema saved to: ${schemaFileName}`);
 }
-function generateSchema(): Schema {
-    const schema: Schema = {
-        $schema: "http://json-schema.org/draft-07/schema#",
-        definitions: {},
-    };
 
-    // Iterate over all classes in the cache
-    for (const [className, classInfo] of Object.entries(classInfoCache)) {
-        const inheritanceInfo = allInheritanceInfo[className];
-
-        // Build the class definition
-        const classDefinition = buildClassDefinition(classInfo, inheritanceInfo);
-
-        // Add the class definition to the schema
-        schema.definitions[className] = classDefinition;
-
-        // If the class has subclasses, create a "WithSubclasses" definition
-        const subClasses = findSubClasses(className, allInheritanceInfo);
-        if (subClasses.length > 0) {
-            const withSubclassesDefinition: ClassDefinition = {
-                type: "object",
-                properties: {
-                    $Type: {
-                        type: "string",
-                        const: classInfo.structureTypeName,
-                    },
-                },
-                required: ["$Type"],
-                allOf: [
-                    {
-                        $merge: {
-                            source: {
-                                $ref: `#/definitions/${className}`,
-                            },
-                            with: {
-                                $Type: {
-                                    type: "string",
-                                    const: classInfo.structureTypeName,
-                                },
-                            },
-                        },
-                    },
-                    {
-                        oneOf: subClasses.map((subClass) => ({
-                            $ref: `#/definitions/${subClass}`,
-                        })),
-                    },
-                ],
-            };
-            schema.definitions[`${className}WithSubclasses`] = withSubclassesDefinition;
-        }
-    }
-
-    return schema;
+if (process.argv[2] === "gen") {
+    main().catch(console.error);
 }
-main().catch(console.error);
