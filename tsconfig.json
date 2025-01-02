@@ -4,10 +4,11 @@
         "outDir": "out",
         "skipLibCheck": true,
         "sourceMap": true,
-        "module" : "commonjs",
-		"target" : "es2020",
+        "module": "commonjs",
+        "target": "es2020",
         "typeRoots": ["./types", "./node_modules/@types"],
-        "types": ["global", "node", "jest"]
+        "types": ["node", "jest"]
     },
     "include": ["src/**/*", "types"]
 }
+
