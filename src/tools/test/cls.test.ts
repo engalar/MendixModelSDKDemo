@@ -23,6 +23,7 @@ describe('extractDoubleUnderscoreProperties', () => {
 
   testCases.forEach(({ description, code, expected }) => {
     it(description, () => {
+      // TODO: 重新写一个，或者找回以前的版本，提取版本信息。参考  3b09d3e L397
       const result = extractPropertiesAndEnums(getDomainFramwork(code));
       expect(result.doubleUnderscoreProperties).toEqual(expected);
     });

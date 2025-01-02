@@ -180,3 +180,66 @@ export function extractPropertiesAndEnums(code) {
     enumClasses,
   };
 }
+
+export //#region 提取版本信息
+  function extractVersionInfo(className: string, jsAst: any): Record<string, any> {
+  let versionInfo: Record<string, any> = {};
+
+  traverse(jsAst, {
+    ExpressionStatement(path) {
+      const expression = path.node.expression;
+      if (
+        t.isAssignmentExpression(expression) &&
+        t.isMemberExpression(expression.left) &&
+        t.isIdentifier(expression.left.object, { name: className }) &&
+        t.isIdentifier(expression.left.property, { name: "versionInfo" }) &&
+        t.isNewExpression(expression.right) &&
+        t.isMemberExpression(expression.right.callee) &&
+        t.isIdentifier(expression.right.callee.property, { name: "StructureVersionInfo" })
+      ) {
+        const args = expression.right.arguments;
+        if (args.length > 0 && t.isObjectExpression(args[0])) {
+          const propertiesObject = args[0].properties.find(
+            (prop) => t.isObjectProperty(prop) && t.isIdentifier(prop.key, { name: "properties" })
+          );
+
+          //@ts-ignore
+          if (propertiesObject && t.isObjectExpression(propertiesObject.value)) {
+            //@ts-ignore
+            propertiesObject.value.properties.forEach((prop) => {
+              if (t.isObjectProperty(prop) && t.isIdentifier(prop.key)) {
+                const propName = prop.key.name;
+                versionInfo[propName] = {};
+                if (t.isObjectExpression(prop.value)) {
+                  prop.value.properties.forEach((innerProp) => {
+                    if (
+                      t.isObjectProperty(innerProp) &&
+                      t.isIdentifier(innerProp.key)
+                    ) {
+                      const innerPropName = innerProp.key.name;
+                      if (t.isStringLiteral(innerProp.value)) {
+                        versionInfo[propName][innerPropName] = innerProp.value.value;
+                      } else if (t.isObjectExpression(innerProp.value)) {
+                        const innerPropValue: Record<string, boolean> = {};
+                        innerProp.value.properties.forEach(innerMostProp => {
+                          if (t.isObjectProperty(innerMostProp) && t.isIdentifier(innerMostProp.key) && t.isBooleanLiteral(innerMostProp.value)) {
+                            innerPropValue[innerMostProp.key.name] = innerMostProp.value.value
+                          }
+                        })
+                        versionInfo[propName][innerPropName] = innerPropValue;
+                      }
+                    }
+                  });
+                }
+              }
+            });
+          }
+        }
+      }
+    },
+  });
+
+  console.log(`Extracted version info for ${className}: ${JSON.stringify(versionInfo, null, 2)}`);
+  return versionInfo;
+}
+//#endregion
