@@ -14,7 +14,7 @@ import {
 } from "mendixplatformsdk";
 import * as fs from "fs";
 
-const appId = "b67d8b80-c748-4153-b9f1-d22e5a7f84ba"; // 你的 App ID
+const appId = "fe1d5201-7e2d-488b-a01b-5cad3d860caf"; // 你的 App ID
 
 async function main() {
     const client = new MendixPlatformClient();

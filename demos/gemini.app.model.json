@@ -1,5 +1,5 @@
 {
-    "$schema": "../schemas/app.schema.json",
+    "$schema": "../schema/app.schema.json",
     "modules": [
         {
             "$ID": "Module_StudentCourseSystem",
@@ -651,6 +651,756 @@
                                             "$Type": "Pages$LayoutCallArgument",
                                             "parameter": "Atlas_Core.Atlas_Default.Main",
                                             "widgets": [
+                                                {
+                                                    "$ID": "DataView_StudentInfo",
+                                                    "$Type": "Pages$DataView",
+                                                    "name": "DataView_StudentInfo",
+                                                    "appearance": {
+                                                        "$ID": "Appearance_DataView_StudentInfo",
+                                                        "$Type": "Pages$Appearance",
+                                                        "class": "",
+                                                        "style": "",
+                                                        "designProperties": [],
+                                                        "dynamicClasses": ""
+                                                    },
+                                                    "tabIndex": 0,
+                                                    "conditionalVisibilitySettings": null,
+                                                    "dataSource": {
+                                                        "$ID": "DataSource_DataView_StudentInfo",
+                                                        "$Type": "Pages$DataViewSource",
+                                                        "forceFullObjects": false,
+                                                        "sourceVariable": null
+                                                    },
+                                                    "widgets": [
+                                                        {
+                                                            "$ID": "LayoutGrid_StudentInfo",
+                                                            "$Type": "Pages$LayoutGrid",
+                                                            "name": "LayoutGrid_StudentInfo",
+                                                            "appearance": {
+                                                                "$ID": "Appearance_LayoutGrid_StudentInfo",
+                                                                "$Type": "Pages$Appearance",
+                                                                "class": "",
+                                                                "style": "",
+                                                                "designProperties": [],
+                                                                "dynamicClasses": ""
+                                                            },
+                                                            "tabIndex": 0,
+                                                            "conditionalVisibilitySettings": null,
+                                                            "width": "FullWidth",
+                                                            "rows": [
+                                                                {
+                                                                    "$ID": "LayoutGridRow_StudentInfo_1",
+                                                                    "appearance": {
+                                                                        "$ID": "LayoutGridRow_StudentInfo_1-appearance",
+                                                                        "$Type": "Pages$Appearance",
+                                                                        "class": "",
+                                                                        "style": "",
+                                                                        "designProperties": [],
+                                                                        "dynamicClasses": ""
+                                                                    },
+                                                                    "$Type": "Pages$LayoutGridRow",
+                                                                    "columns": [
+                                                                        {
+                                                                            "$ID": "LayoutGridColumn_StudentInfo_1_1",
+                                                                            "appearance": {
+                                                                                "$ID": "LayoutGridColumn_StudentInfo_1_1-appearance",
+                                                                                "$Type": "Pages$Appearance",
+                                                                                "class": "",
+                                                                                "style": "",
+                                                                                "designProperties": [],
+                                                                                "dynamicClasses": ""
+                                                                            },
+                                                                            "$Type": "Pages$LayoutGridColumn",
+                                                                            "weight": 2,
+                                                                            "tabletWeight": 12,
+                                                                            "phoneWeight": 12,
+                                                                            "previewWidth": 12,
+                                                                            "widgets": [
+                                                                                {
+                                                                                    "$ID": "Label_StudentName",
+                                                                                    "$Type": "Pages$Label",
+                                                                                    "name": "Label_StudentName",
+                                                                                    "appearance": {
+                                                                                        "$ID": "Appearance_Label_StudentName",
+                                                                                        "$Type": "Pages$Appearance",
+                                                                                        "class": "",
+                                                                                        "style": "",
+                                                                                        "designProperties": [],
+                                                                                        "dynamicClasses": ""
+                                                                                    },
+                                                                                    "tabIndex": 0,
+                                                                                    "conditionalVisibilitySettings": null,
+                                                                                    "caption": {
+                                                                                        "$ID": "Caption_Label_StudentName",
+                                                                                        "$Type": "Texts$Text",
+                                                                                        "translations": [
+                                                                                            {
+                                                                                                "$ID": "Translation_Label_StudentName_en_US",
+                                                                                                "$Type": "Texts$Translation",
+                                                                                                "languageCode": "en_US",
+                                                                                                "text": "Name:"
+                                                                                            }
+                                                                                        ]
+                                                                                    }
+                                                                                }
+                                                                            ]
+                                                                        },
+                                                                        {
+                                                                            "$ID": "LayoutGridColumn_StudentInfo_1_2",
+                                                                            "$Type": "Pages$LayoutGridColumn",
+                                                                            "appearance": {
+                                                                                "$ID": "LayoutGridColumn_StudentInfo_1_2-appearance",
+                                                                                "$Type": "Pages$Appearance",
+                                                                                "class": "",
+                                                                                "style": "",
+                                                                                "designProperties": [],
+                                                                                "dynamicClasses": ""
+                                                                            },
+                                                                            "weight": 4,
+                                                                            "tabletWeight": 12,
+                                                                            "phoneWeight": 12,
+                                                                            "previewWidth": 12,
+                                                                            "widgets": [
+                                                                                {
+                                                                                    "$ID": "TextBox_StudentName",
+                                                                                    "$Type": "Pages$TextBox",
+                                                                                    "name": "TextBox_StudentName",
+                                                                                    "appearance": {
+                                                                                        "$ID": "Appearance_TextBox_StudentName",
+                                                                                        "$Type": "Pages$Appearance",
+                                                                                        "class": "",
+                                                                                        "style": "",
+                                                                                        "designProperties": [],
+                                                                                        "dynamicClasses": ""
+                                                                                    },
+                                                                                    "tabIndex": 0,
+                                                                                    "conditionalVisibilitySettings": null,
+                                                                                    "conditionalEditabilitySettings": null,
+                                                                                    "editable": "Always",
+                                                                                    "labelTemplate": {
+                                                                                        "$ID": "LabelTemplate_TextBox_StudentName",
+                                                                                        "$Type": "Pages$ClientTemplate",
+                                                                                        "template": {
+                                                                                            "$ID": "Template_TextBox_StudentName",
+                                                                                            "$Type": "Texts$Text",
+                                                                                            "translations": []
+                                                                                        },
+                                                                                        "parameters": [],
+                                                                                        "fallback": {
+                                                                                            "$ID": "Fallback_TextBox_StudentName",
+                                                                                            "$Type": "Texts$Text",
+                                                                                            "translations": []
+                                                                                        }
+                                                                                    },
+                                                                                    "screenReaderLabel": null,
+                                                                                    "attributeRef": {
+                                                                                        "$ID": "AttributeRef_TextBox_StudentName",
+                                                                                        "$Type": "DomainModels$AttributeRef",
+                                                                                        "entityRef": null,
+                                                                                        "attribute": "StudentCourseSystem.Student.Name"
+                                                                                    },
+                                                                                    "readOnlyStyle": "Inherit",
+                                                                                    "validation": {
+                                                                                        "$ID": "Validation_TextBox_StudentName",
+                                                                                        "$Type": "Pages$WidgetValidation",
+                                                                                        "expression": "",
+                                                                                        "message": {
+                                                                                            "$ID": "Message_Validation_TextBox_StudentName",
+                                                                                            "$Type": "Texts$Text",
+                                                                                            "translations": []
+                                                                                        }
+                                                                                    },
+                                                                                    "onChangeAction": {
+                                                                                        "$ID": "OnChangeAction_TextBox_StudentName",
+                                                                                        "$Type": "Pages$NoClientAction",
+                                                                                        "disabledDuringExecution": false
+                                                                                    },
+                                                                                    "onEnterAction": {
+                                                                                        "$ID": "OnEnterAction_TextBox_StudentName",
+                                                                                        "$Type": "Pages$NoClientAction",
+                                                                                        "disabledDuringExecution": false
+                                                                                    },
+                                                                                    "onLeaveAction": {
+                                                                                        "$ID": "OnLeaveAction_TextBox_StudentName",
+                                                                                        "$Type": "Pages$NoClientAction",
+                                                                                        "disabledDuringExecution": false
+                                                                                    },
+                                                                                    "sourceVariable": {
+                                                                                        "$ID": "my_sv2",
+                                                                                        "$Type": "Pages$PageVariable",
+                                                                                        "widget": null,
+                                                                                        "pageParameter": "Account",
+                                                                                        "snippetParameter": null,
+                                                                                        "useAllPages": false
+                                                                                    },
+                                                                                    "ariaRequired": false,
+                                                                                    "placeholderTemplate": {
+                                                                                        "$ID": "PlaceholderTemplate_TextBox_StudentName",
+                                                                                        "$Type": "Pages$ClientTemplate",
+                                                                                        "template": {
+                                                                                            "$ID": "Template_PlaceholderTemplate_TextBox_StudentName",
+                                                                                            "$Type": "Texts$Text",
+                                                                                            "translations": []
+                                                                                        },
+                                                                                        "parameters": [],
+                                                                                        "fallback": {
+                                                                                            "$ID": "Fallback_PlaceholderTemplate_TextBox_StudentName",
+                                                                                            "$Type": "Texts$Text",
+                                                                                            "translations": []
+                                                                                        }
+                                                                                    },
+                                                                                    "maxLengthCode": 0,
+                                                                                    "autoFocus": false,
+                                                                                    "inputMask": "",
+                                                                                    "formattingInfo": {
+                                                                                        "$ID": "FormattingInfo_TextBox_StudentName",
+                                                                                        "$Type": "Pages$FormattingInfo",
+                                                                                        "decimalPrecision": -1,
+                                                                                        "groupDigits": false,
+                                                                                        "enumFormat": "Text",
+                                                                                        "dateFormat": "Date",
+                                                                                        "customDateFormat": ""
+                                                                                    },
+                                                                                    "isPasswordBox": false,
+                                                                                    "keyboardType": "Default",
+                                                                                    "onEnterKeyPressAction": {
+                                                                                        "$ID": "OnEnterKeyPressAction_TextBox_StudentName",
+                                                                                        "$Type": "Pages$NoClientAction",
+                                                                                        "disabledDuringExecution": false
+                                                                                    },
+                                                                                    "autocomplete": false,
+                                                                                    "autocompletePurpose": "On",
+                                                                                    "submitBehaviour": "OnEndEditing",
+                                                                                    "submitOnInputDelay": 0,
+                                                                                    "nativeAccessibilitySettings": null
+                                                                                }
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                },
+                                                                {
+                                                                    "$ID": "LayoutGridRow_StudentInfo_2",
+                                                                    "$Type": "Pages$LayoutGridRow",
+                                                                    "appearance": {
+                                                                        "$ID": "LayoutGridRow_StudentInfo_2-appearance",
+                                                                        "$Type": "Pages$Appearance",
+                                                                        "class": "",
+                                                                        "style": "",
+                                                                        "designProperties": [],
+                                                                        "dynamicClasses": ""
+                                                                    },
+                                                                    "columns": [
+                                                                        {
+                                                                            "$ID": "LayoutGridColumn_StudentInfo_2_1",
+                                                                            "$Type": "Pages$LayoutGridColumn",
+                                                                            "appearance": {
+                                                                                "$ID": "LayoutGridColumn_StudentInfo_2_1-appearance",
+                                                                                "$Type": "Pages$Appearance",
+                                                                                "class": "",
+                                                                                "style": "",
+                                                                                "designProperties": [],
+                                                                                "dynamicClasses": ""
+                                                                            },
+                                                                            "weight": 2,
+                                                                            "tabletWeight": 12,
+                                                                            "phoneWeight": 12,
+                                                                            "previewWidth": 12,
+                                                                            "widgets": [
+                                                                                {
+                                                                                    "$ID": "Label_StudentDepartment",
+                                                                                    "$Type": "Pages$Label",
+                                                                                    "name": "Label_StudentDepartment",
+                                                                                    "appearance": {
+                                                                                        "$ID": "Appearance_Label_StudentDepartment",
+                                                                                        "$Type": "Pages$Appearance",
+                                                                                        "class": "",
+                                                                                        "style": "",
+                                                                                        "designProperties": [],
+                                                                                        "dynamicClasses": ""
+                                                                                    },
+                                                                                    "tabIndex": 0,
+                                                                                    "conditionalVisibilitySettings": null,
+                                                                                    "caption": {
+                                                                                        "$ID": "Caption_Label_StudentDepartment",
+                                                                                        "$Type": "Texts$Text",
+                                                                                        "translations": [
+                                                                                            {
+                                                                                                "$ID": "Translation_Label_StudentDepartment_en_US",
+                                                                                                "$Type": "Texts$Translation",
+                                                                                                "languageCode": "en_US",
+                                                                                                "text": "Department:"
+                                                                                            }
+                                                                                        ]
+                                                                                    }
+                                                                                }
+                                                                            ]
+                                                                        },
+                                                                        {
+                                                                            "$ID": "LayoutGridColumn_StudentInfo_2_2",
+                                                                            "$Type": "Pages$LayoutGridColumn",
+                                                                            "appearance": {
+                                                                                "$ID": "LayoutGridColumn_StudentInfo_2_2-appearance",
+                                                                                "$Type": "Pages$Appearance",
+                                                                                "class": "",
+                                                                                "style": "",
+                                                                                "designProperties": [],
+                                                                                "dynamicClasses": ""
+                                                                            },
+                                                                            "weight": 4,
+                                                                            "tabletWeight": 12,
+                                                                            "phoneWeight": 12,
+                                                                            "previewWidth": 12,
+                                                                            "widgets": [
+                                                                                {
+                                                                                    "$ID": "TextBox_StudentDepartment",
+                                                                                    "$Type": "Pages$TextBox",
+                                                                                    "name": "TextBox_StudentDepartment",
+                                                                                    "appearance": {
+                                                                                        "$ID": "Appearance_TextBox_StudentDepartment",
+                                                                                        "$Type": "Pages$Appearance",
+                                                                                        "class": "",
+                                                                                        "style": "",
+                                                                                        "designProperties": [],
+                                                                                        "dynamicClasses": ""
+                                                                                    },
+                                                                                    "tabIndex": 0,
+                                                                                    "conditionalVisibilitySettings": null,
+                                                                                    "conditionalEditabilitySettings": null,
+                                                                                    "editable": "Always",
+                                                                                    "labelTemplate": {
+                                                                                        "$ID": "LabelTemplate_TextBox_StudentDepartment",
+                                                                                        "$Type": "Pages$ClientTemplate",
+                                                                                        "template": {
+                                                                                            "$ID": "Template_TextBox_StudentDepartment",
+                                                                                            "$Type": "Texts$Text",
+                                                                                            "translations": []
+                                                                                        },
+                                                                                        "parameters": [],
+                                                                                        "fallback": {
+                                                                                            "$ID": "Fallback_TextBox_StudentDepartment",
+                                                                                            "$Type": "Texts$Text",
+                                                                                            "translations": []
+                                                                                        }
+                                                                                    },
+                                                                                    "screenReaderLabel": null,
+                                                                                    "attributeRef": {
+                                                                                        "$ID": "AttributeRef_TextBox_StudentDepartment",
+                                                                                        "$Type": "DomainModels$AttributeRef",
+                                                                                        "entityRef": null,
+                                                                                        "attribute": "StudentCourseSystem.Student.Department"
+                                                                                    },
+                                                                                    "readOnlyStyle": "Inherit",
+                                                                                    "validation": {
+                                                                                        "$ID": "Validation_TextBox_StudentDepartment",
+                                                                                        "$Type": "Pages$WidgetValidation",
+                                                                                        "expression": "",
+                                                                                        "message": {
+                                                                                            "$ID": "Message_Validation_TextBox_StudentDepartment",
+                                                                                            "$Type": "Texts$Text",
+                                                                                            "translations": []
+                                                                                        }
+                                                                                    },
+                                                                                    "onChangeAction": {
+                                                                                        "$ID": "OnChangeAction_TextBox_StudentDepartment",
+                                                                                        "$Type": "Pages$NoClientAction",
+                                                                                        "disabledDuringExecution": false
+                                                                                    },
+                                                                                    "onEnterAction": {
+                                                                                        "$ID": "OnEnterAction_TextBox_StudentDepartment",
+                                                                                        "$Type": "Pages$NoClientAction",
+                                                                                        "disabledDuringExecution": false
+                                                                                    },
+                                                                                    "onLeaveAction": {
+                                                                                        "$ID": "OnLeaveAction_TextBox_StudentDepartment",
+                                                                                        "$Type": "Pages$NoClientAction",
+                                                                                        "disabledDuringExecution": false
+                                                                                    },
+                                                                                    "sourceVariable": {
+                                                                                        "$ID": "my_sv1",
+                                                                                        "$Type": "Pages$PageVariable",
+                                                                                        "widget": null,
+                                                                                        "pageParameter": "Account",
+                                                                                        "snippetParameter": null,
+                                                                                        "useAllPages": false
+                                                                                    },
+                                                                                    "ariaRequired": false,
+                                                                                    "placeholderTemplate": {
+                                                                                        "$ID": "PlaceholderTemplate_TextBox_StudentDepartment",
+                                                                                        "$Type": "Pages$ClientTemplate",
+                                                                                        "template": {
+                                                                                            "$ID": "Template_PlaceholderTemplate_TextBox_StudentDepartment",
+                                                                                            "$Type": "Texts$Text",
+                                                                                            "translations": []
+                                                                                        },
+                                                                                        "parameters": [],
+                                                                                        "fallback": {
+                                                                                            "$ID": "Fallback_PlaceholderTemplate_TextBox_StudentDepartment",
+                                                                                            "$Type": "Texts$Text",
+                                                                                            "translations": []
+                                                                                        }
+                                                                                    },
+                                                                                    "maxLengthCode": 0,
+                                                                                    "autoFocus": false,
+                                                                                    "inputMask": "",
+                                                                                    "formattingInfo": {
+                                                                                        "$ID": "FormattingInfo_TextBox_StudentDepartment",
+                                                                                        "$Type": "Pages$FormattingInfo",
+                                                                                        "decimalPrecision": -1,
+                                                                                        "groupDigits": false,
+                                                                                        "enumFormat": "Text",
+                                                                                        "dateFormat": "Date",
+                                                                                        "customDateFormat": ""
+                                                                                    },
+                                                                                    "isPasswordBox": false,
+                                                                                    "keyboardType": "Default",
+                                                                                    "onEnterKeyPressAction": {
+                                                                                        "$ID": "OnEnterKeyPressAction_TextBox_StudentDepartment",
+                                                                                        "$Type": "Pages$NoClientAction",
+                                                                                        "disabledDuringExecution": false
+                                                                                    },
+                                                                                    "autocomplete": false,
+                                                                                    "autocompletePurpose": "On",
+                                                                                    "submitBehaviour": "OnEndEditing",
+                                                                                    "submitOnInputDelay": 0,
+                                                                                    "nativeAccessibilitySettings": null
+                                                                                }
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "footerWidgets": [],
+                                                    "editability": "Always",
+                                                    "conditionalEditabilitySettings": null,
+                                                    "showFooter": false,
+                                                    "noEntityMessage": {
+                                                        "$ID": "NoEntityMessage_DataView_StudentInfo",
+                                                        "$Type": "Texts$Text",
+                                                        "translations": []
+                                                    },
+                                                    "labelWidth": 5,
+                                                    "readOnlyStyle": "Text"
+                                                },
+                                                {
+                                                    "$ID": "ListView_Courses",
+                                                    "$Type": "Pages$ListView",
+                                                    "name": "ListView_Courses",
+                                                    "appearance": {
+                                                        "$ID": "Appearance_ListView_Courses",
+                                                        "$Type": "Pages$Appearance",
+                                                        "class": "",
+                                                        "style": "",
+                                                        "designProperties": [],
+                                                        "dynamicClasses": ""
+                                                    },
+                                                    "tabIndex": 0,
+                                                    "conditionalVisibilitySettings": null,
+                                                    "dataSource": {
+                                                        "$ID": "DataSource_ListView_Courses",
+                                                        "$Type": "Pages$ListViewXPathSource",
+                                                        "forceFullObjects": false,
+                                                        "entityRef": {
+                                                            "$ID": "EntityRef_ListView_Courses",
+                                                            "$Type": "DomainModels$DirectEntityRef",
+                                                            "entity": "StudentCourseSystem.Course"
+                                                        },
+                                                        "sourceVariable": null,
+                                                        "sortBar": {
+                                                            "$ID": "SortBar_ListView_Courses",
+                                                            "$Type": "Pages$GridSortBar",
+                                                            "sortItems": []
+                                                        },
+                                                        "xPathConstraint": "",
+                                                        "search": {
+                                                            "$ID": "Search_ListView_Courses",
+                                                            "$Type": "Pages$ListViewSearch",
+                                                            "searchRefs": []
+                                                        }
+                                                    },
+                                                    "widgets": [
+                                                        {
+                                                            "$ID": "LayoutGrid_Course",
+                                                            "$Type": "Pages$LayoutGrid",
+                                                            "name": "LayoutGrid_Course",
+                                                            "appearance": {
+                                                                "$ID": "Appearance_LayoutGrid_Course",
+                                                                "$Type": "Pages$Appearance",
+                                                                "class": "",
+                                                                "style": "",
+                                                                "designProperties": [],
+                                                                "dynamicClasses": ""
+                                                            },
+                                                            "tabIndex": 0,
+                                                            "conditionalVisibilitySettings": null,
+                                                            "width": "FullWidth",
+                                                            "rows": [
+                                                                {
+                                                                    "$ID": "LayoutGridRow_Course_1",
+                                                                    "$Type": "Pages$LayoutGridRow",
+                                                                    "appearance": {
+                                                                        "$ID": "LayoutGridRow_Course_1-appearance",
+                                                                        "$Type": "Pages$Appearance",
+                                                                        "class": "",
+                                                                        "style": "",
+                                                                        "designProperties": [],
+                                                                        "dynamicClasses": ""
+                                                                    },
+                                                                    "columns": [
+                                                                        {
+                                                                            "$ID": "LayoutGridColumn_Course_1_1",
+                                                                            "$Type": "Pages$LayoutGridColumn",
+                                                                            "appearance": {
+                                                                                "$ID": "LayoutGridColumn_Course_1_1-appearance",
+                                                                                "$Type": "Pages$Appearance",
+                                                                                "class": "",
+                                                                                "style": "",
+                                                                                "designProperties": [],
+                                                                                "dynamicClasses": ""
+                                                                            },
+                                                                            "weight": 2,
+                                                                            "tabletWeight": 12,
+                                                                            "phoneWeight": 12,
+                                                                            "previewWidth": 12,
+                                                                            "widgets": [
+                                                                                {
+                                                                                    "$ID": "DynamicText_CourseName",
+                                                                                    "$Type": "Pages$DynamicText",
+                                                                                    "name": "DynamicText_CourseName",
+                                                                                    "appearance": {
+                                                                                        "$ID": "Appearance_DynamicText_CourseName",
+                                                                                        "$Type": "Pages$Appearance",
+                                                                                        "class": "",
+                                                                                        "style": "",
+                                                                                        "designProperties": [],
+                                                                                        "dynamicClasses": ""
+                                                                                    },
+                                                                                    "tabIndex": 0,
+                                                                                    "conditionalVisibilitySettings": null,
+                                                                                    "content": {
+                                                                                        "$ID": "Content_DynamicText_CourseName",
+                                                                                        "$Type": "Pages$ClientTemplate",
+                                                                                        "template": {
+                                                                                            "$ID": "Template_DynamicText_CourseName",
+                                                                                            "$Type": "Texts$Text",
+                                                                                            "translations": [
+                                                                                                {
+                                                                                                    "$ID": "Template_DynamicText_CourseName_en_US",
+                                                                                                    "$Type": "Texts$Translation",
+                                                                                                    "languageCode": "en_US",
+                                                                                                    "text": "{1}"
+                                                                                                }
+                                                                                            ]
+                                                                                        },
+                                                                                        "parameters": [
+                                                                                            {
+                                                                                                "$ID": "Parameter_DynamicText_CourseName_CourseName",
+                                                                                                "$Type": "Pages$ClientTemplateParameter",
+                                                                                                "formattingInfo": {
+                                                                                                    "$ID": "Parameter_DynamicText_CourseName_CourseName-formattingInfo",
+                                                                                                    "$Type": "Pages$FormattingInfo",
+                                                                                                    "decimalPrecision": 2,
+                                                                                                    "groupDigits": false,
+                                                                                                    "enumFormat": "Text",
+                                                                                                    "dateFormat": "Date",
+                                                                                                    "customDateFormat": ""
+                                                                                                },
+                                                                                                "attributeRef": {
+                                                                                                    "$ID": "AttributeRef_Parameter_DynamicText_CourseName",
+                                                                                                    "$Type": "DomainModels$AttributeRef",
+                                                                                                    "entityRef": null,
+                                                                                                    "attribute": "StudentCourseSystem.Course.Name"
+                                                                                                }
+                                                                                            }
+                                                                                        ],
+                                                                                        "fallback": {
+                                                                                            "$ID": "Fallback_Content_DynamicText_CourseName",
+                                                                                            "$Type": "Texts$Text",
+                                                                                            "translations": []
+                                                                                        }
+                                                                                    },
+                                                                                    "renderMode": "Text",
+                                                                                    "nativeTextStyle": "Text",
+                                                                                    "nativeAccessibilitySettings": null
+                                                                                }
+                                                                            ]
+                                                                        },
+                                                                        {
+                                                                            "$ID": "LayoutGridColumn_Course_1_2",
+                                                                            "$Type": "Pages$LayoutGridColumn",
+                                                                            "appearance": {
+                                                                                "$ID": "LayoutGridColumn_Course_1_2-appearance",
+                                                                                "$Type": "Pages$Appearance",
+                                                                                "class": "",
+                                                                                "style": "",
+                                                                                "designProperties": [],
+                                                                                "dynamicClasses": ""
+                                                                            },
+                                                                            "weight": 2,
+                                                                            "tabletWeight": 12,
+                                                                            "phoneWeight": 12,
+                                                                            "previewWidth": 12,
+                                                                            "widgets": [
+                                                                                {
+                                                                                    "$ID": "DynamicText_CourseTeacher",
+                                                                                    "$Type": "Pages$DynamicText",
+                                                                                    "name": "DynamicText_CourseTeacher",
+                                                                                    "appearance": {
+                                                                                        "$ID": "Appearance_DynamicText_CourseTeacher",
+                                                                                        "$Type": "Pages$Appearance",
+                                                                                        "class": "",
+                                                                                        "style": "",
+                                                                                        "designProperties": [],
+                                                                                        "dynamicClasses": ""
+                                                                                    },
+                                                                                    "tabIndex": 0,
+                                                                                    "conditionalVisibilitySettings": null,
+                                                                                    "content": {
+                                                                                        "$ID": "Content_DynamicText_CourseTeacher",
+                                                                                        "$Type": "Pages$ClientTemplate",
+                                                                                        "template": {
+                                                                                            "$ID": "Template_DynamicText_CourseTeacher",
+                                                                                            "$Type": "Texts$Text",
+                                                                                            "translations": [
+                                                                                                {
+                                                                                                    "$ID": "Template_DynamicText_CourseTeacher_en_US",
+                                                                                                    "$Type": "Texts$Translation",
+                                                                                                    "languageCode": "en_US",
+                                                                                                    "text": "{1}"
+                                                                                                }
+                                                                                            ]
+                                                                                        },
+                                                                                        "parameters": [
+                                                                                            {
+                                                                                                "$ID": "Parameter_DynamicText_CourseTeacher_TeacherName",
+                                                                                                "$Type": "Pages$ClientTemplateParameter",
+                                                                                                "formattingInfo": {
+                                                                                                    "$ID": "Parameter_DynamicText_CourseTeacher_TeacherName-formattingInfo",
+                                                                                                    "$Type": "Pages$FormattingInfo",
+                                                                                                    "decimalPrecision": 2,
+                                                                                                    "groupDigits": false,
+                                                                                                    "enumFormat": "Text",
+                                                                                                    "dateFormat": "Date",
+                                                                                                    "customDateFormat": ""
+                                                                                                },
+                                                                                                "attributeRef": {
+                                                                                                    "$ID": "AttributeRef_Parameter_DynamicText_CourseTeacher",
+                                                                                                    "$Type": "DomainModels$AttributeRef",
+                                                                                                    "entityRef": null,
+                                                                                                    "attribute": "StudentCourseSystem.Teacher.Name"
+                                                                                                }
+                                                                                            }
+                                                                                        ],
+                                                                                        "fallback": {
+                                                                                            "$ID": "Fallback_Content_DynamicText_CourseTeacher",
+                                                                                            "$Type": "Texts$Text",
+                                                                                            "translations": []
+                                                                                        }
+                                                                                    },
+                                                                                    "renderMode": "Text",
+                                                                                    "nativeTextStyle": "Text",
+                                                                                    "nativeAccessibilitySettings": null
+                                                                                }
+                                                                            ]
+                                                                        },
+                                                                        {
+                                                                            "$ID": "LayoutGridColumn_Course_1_3",
+                                                                            "$Type": "Pages$LayoutGridColumn",
+                                                                            "weight": 1,
+                                                                            "appearance": {
+                                                                                "$ID": "LayoutGridColumn_Course_1_3-appearance",
+                                                                                "$Type": "Pages$Appearance",
+                                                                                "class": "",
+                                                                                "style": "",
+                                                                                "designProperties": [],
+                                                                                "dynamicClasses": ""
+                                                                            },
+                                                                            "tabletWeight": 12,
+                                                                            "phoneWeight": 12,
+                                                                            "previewWidth": 12,
+                                                                            "widgets": [
+                                                                                {
+                                                                                    "$ID": "ActionButton_SelectCourse",
+                                                                                    "$Type": "Pages$ActionButton",
+                                                                                    "action": {
+                                                                                        "$ID": "ActionButton_SelectCourse-action",
+                                                                                        "$Type": "Pages$MicroflowClientAction",
+                                                                                        "disabledDuringExecution": false,
+                                                                                        "microflowSettings": {
+                                                                                            "$ID": "ActionButton_SelectCourse-action-microflowSettings",
+                                                                                            "$Type": "Pages$MicroflowSettings",
+                                                                                            "microflow": "Administration.ShowPasswordForm",
+                                                                                            "parameterMappings": [],
+                                                                                            "progressBar": "None",
+                                                                                            "progressMessage": null,
+                                                                                            "asynchronous": false,
+                                                                                            "formValidations": "None",
+                                                                                            "confirmationInfo": null
+                                                                                        }
+                                                                                    },
+                                                                                    "name": "ActionButton_SelectCourse",
+                                                                                    "appearance": {
+                                                                                        "$ID": "Appearance_ActionButton_SelectCourse",
+                                                                                        "$Type": "Pages$Appearance",
+                                                                                        "class": "",
+                                                                                        "style": "",
+                                                                                        "designProperties": [],
+                                                                                        "dynamicClasses": ""
+                                                                                    },
+                                                                                    "tabIndex": 0,
+                                                                                    "conditionalVisibilitySettings": null,
+                                                                                    "caption": {
+                                                                                        "$ID": "Caption_ActionButton_SelectCourse",
+                                                                                        "$Type": "Pages$ClientTemplate",
+                                                                                        "template": {
+                                                                                            "$ID": "Template_Caption_ActionButton_SelectCourse",
+                                                                                            "$Type": "Texts$Text",
+                                                                                            "translations": [
+                                                                                                {
+                                                                                                    "$ID": "Template_Caption_ActionButton_SelectCourse_en_US",
+                                                                                                    "$Type": "Texts$Translation",
+                                                                                                    "languageCode": "en_US",
+                                                                                                    "text": "Select"
+                                                                                                }
+                                                                                            ]
+                                                                                        },
+                                                                                        "parameters": [],
+                                                                                        "fallback": {
+                                                                                            "$ID": "Fallback_Caption_ActionButton_SelectCourse",
+                                                                                            "$Type": "Texts$Text",
+                                                                                            "translations": []
+                                                                                        }
+                                                                                    },
+                                                                                    "tooltip": {
+                                                                                        "$ID": "Tooltip_ActionButton_SelectCourse",
+                                                                                        "$Type": "Texts$Text",
+                                                                                        "translations": []
+                                                                                    }
+                                                                                }
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "pageSize": 10,
+                                                    "clickAction": {
+                                                        "$ID": "ClickAction_ListView_Courses",
+                                                        "$Type": "Pages$NoClientAction",
+                                                        "disabledDuringExecution": false
+                                                    },
+                                                    "editable": false,
+                                                    "templates": [],
+                                                    "scrollDirection": "Vertical",
+                                                    "numberOfColumns": 0,
+                                                    "pullDownAction": {
+                                                        "$ID": "PullDownAction_ListView_Courses",
+                                                        "$Type": "Pages$NoClientAction",
+                                                        "disabledDuringExecution": false
+                                                    }
+                                                }
                                             ]
                                         }
                                     ]
@@ -713,13 +1463,40 @@
                                 "layoutCall": {
                                     "$ID": "LayoutCall_Student_MyCourses",
                                     "$Type": "Pages$LayoutCall",
-                                    "layout": "Layout_Student",
+                                    "layout": "Atlas_Core.Atlas_Default",
                                     "arguments": [
                                         {
                                             "$ID": "LayoutCallArgument_Student_MyCourses_Main",
                                             "$Type": "Pages$LayoutCallArgument",
-                                            "parameter": "Layout_Student_Content",
+                                            "parameter": "Atlas_Core.Atlas_Default.Main",
                                             "widgets": [
+                                                {
+                                                    "$ID": "Label_MyCourses_Placeholder",
+                                                    "$Type": "Pages$Label",
+                                                    "name": "Label_MyCourses",
+                                                    "appearance": {
+                                                        "$ID": "Appearance_Label_MyCourses",
+                                                        "$Type": "Pages$Appearance",
+                                                        "class": "",
+                                                        "style": "",
+                                                        "designProperties": [],
+                                                        "dynamicClasses": ""
+                                                    },
+                                                    "tabIndex": 0,
+                                                    "conditionalVisibilitySettings": null,
+                                                    "caption": {
+                                                        "$ID": "Caption_Label_MyCourses",
+                                                        "$Type": "Texts$Text",
+                                                        "translations": [
+                                                            {
+                                                                "$ID": "Translation_Label_MyCourses_en_US",
+                                                                "$Type": "Texts$Translation",
+                                                                "languageCode": "en_US",
+                                                                "text": "My Courses - To be implemented"
+                                                            }
+                                                        ]
+                                                    }
+                                                }
                                             ]
                                         }
                                     ]

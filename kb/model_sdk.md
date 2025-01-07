@@ -45,7 +45,48 @@ const app = await client.createNewApp(name, {
 });
 ```
 
-模板 ID 可以从 Mendix Marketplace 获取，例如 `a2065e4a-bebd-4e13-ae5b-ef0bf89ebf4d` 对应的是 "Blank App" 模板。
+模板 ID 可以从 [Mendix Marketplace](https://marketplace.mendix.com/link/component/51830) 获取，例如 `a2065e4a-bebd-4e13-ae5b-ef0bf89ebf4d` 对应的是 "Blank App" 模板。
+
+## 删除和创建
+
+```ts
+import { MendixPlatformClient } from "mendixplatformsdk";
+
+async function deleteAndCreateApp(
+    appIdToDelete: string,
+    newAppName: string,
+    templateId?: string,
+) {
+    const client = new MendixPlatformClient();
+
+    try {
+        // 删除应用
+        console.log(`Deleting app with ID: ${appIdToDelete}`);
+        const appToDelete = await client.getApp(appIdToDelete);
+        await appToDelete.delete();
+        console.log(`App with ID ${appIdToDelete} deleted successfully.`);
+
+        // 创建新应用
+        console.log(`Creating new app with name: ${newAppName}`);
+        const newApp = await client.createNewApp(newAppName, { templateId });
+        console.log(`New app created with ID: ${newApp.appId}`);
+        console.log(`New app name: ${newAppName}`);
+        console.log(
+            `New app repository address: ${(await newApp.getRepository().getInfo()).url}`,
+        );
+    } catch (error) {
+        console.error("An error occurred:", error);
+    }
+}
+
+// 使用示例
+const appIdToDelete = "b67d8b80-c748-4153-b9f1-d22e5a7f84ba"; // 要删除的应用的 ID
+const newAppName = "_ModelSdkDemo250107"; // 新应用的名称
+
+// v10.12.9
+const templateId = "89a91e35-0f4f-4e27-81d9-d34ca76e31b9"; // 可选：模板 ID，例如 "Blank App"
+deleteAndCreateApp(appIdToDelete, newAppName, templateId);
+```
 
 ## 创建新模块
 
